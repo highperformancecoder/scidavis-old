@@ -157,15 +157,13 @@ void Convolution::addResultCurve()
   d_table->setColName(cols2, label);
   d_table->setColPlotDesignation(cols, SciDAVis::X);
 
-  MultiLayer *ml = app->newGraph(objectName() + tr("Plot"));
-  if (!ml)
-    return;
+  MultiLayer& ml = app->newGraph(objectName() + tr("Plot"));
 
   DataCurve *c = new DataCurve(d_table, d_table->colName(cols), d_table->colName(cols2));
   c->setData(x_temp, d_x, d_n);
   c->setPen(QPen(d_curveColor, 1));
-  ml->activeGraph()->insertPlotItem(c, Graph::Line);
-  ml->activeGraph()->updatePlot();
+  ml.activeGraph()->insertPlotItem(c, Graph::Line);
+  ml.activeGraph()->updatePlot();
 }
 
 void Convolution::convlv(double *sig, int n, double *dres, int m, int sign)

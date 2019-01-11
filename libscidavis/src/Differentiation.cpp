@@ -75,9 +75,9 @@ void Differentiation::output()
 	QString tableName = app->generateUniqueName(objectName());
 	QString curveTitle = d_curve->title().text();
 	Table& t = app->newHiddenTable(tableName, tr("Derivative") + " " + tr("of","Derivative of")  + " " + curveTitle, QList<Column *>() << xCol << yCol);
-	MultiLayer *ml = app->newGraph(tr("Plot")+tr("Derivative"));
-	ml->activeGraph()->insertCurve(&t, tableName + "_" + yCol->name(), 0);
-	Legend *l = ml->activeGraph()->legend();
+	MultiLayer& ml = app->newGraph(tr("Plot")+tr("Derivative"));
+	ml.activeGraph()->insertCurve(&t, tableName + "_" + yCol->name(), 0);
+	Legend *l = ml.activeGraph()->legend();
 	l->setText("\\c{1}" + tr("Derivative") + " " + tr("of","Derivative of") + " " + curveTitle);
 }
 

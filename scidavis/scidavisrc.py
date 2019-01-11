@@ -30,6 +30,7 @@
 
 from __future__ import print_function
 import __main__
+import scidavis
 
 def import_to_global(modname, attrs=None, math=False):
 	"""
@@ -54,34 +55,65 @@ def import_to_global(modname, attrs=None, math=False):
 # Import standard math functions and constants into global namespace.
 import_to_global("math", None, True)
 
-# make Qt API available (it gets imported in any case by the scidavis module)
-global QtGui, QtCore, Qt
-if (scidavis.app.qtVersion() >= 0x050000):
-	global QtWidgets
-	from PyQt5 import QtGui, QtWidgets, QtCore
-	from PyQt5.QtCore import Qt
-else:
-	from PyQt4 import QtGui, QtCore
-	from PyQt4.QtCore import Qt
-print("Using Qt", QtCore.QT_VERSION_STR)
+## make Qt API available (it gets imported in any case by the scidavis module)
+#global QtGui, QtCore, Qt
+#if (scidavis.app.qtVersion() >= 0x050000):
+#	global QtWidgets
+#	from PyQt5 import QtGui, QtWidgets, QtCore
+#	from PyQt5.QtCore import Qt
+#else:
+#	from PyQt4 import QtGui, QtCore
+#	from PyQt4.QtCore import Qt
+#print("Using Qt", QtCore.QT_VERSION_STR)
 
 # import SciDAVis' classes to the global namespace (particularly useful for fits)
-for name in dir(__main__.scidavis):
-	setattr(__main__, name, getattr(__main__.scidavis, name))
+for name in dir(scidavis):
+	setattr(__main__, name, getattr(scidavis, name))
 
 # import selected methods of ApplicationWindow into the global namespace
 appImports = (
-	"table", "newTable",
-	"matrix", "newMatrix",
-	"graph", "newGraph",
-	"note", "newNote",
-	"plot", "plotContour", "plotColorMap", "plotGrayScale",
-	"activeFolder", "rootFolder", "saveFolder",
-	"renameWindow", "clone",
-	"importImage"
+	"table", 
+	"matrix", 
+	"newGraph",
+	"newNote",
+	"plotContour", "plotColorMap", "plotGrayScale",
+	"saveFolder",
+	"renameWindow" 
 	)
 for name in appImports:
-	setattr(__main__,name,getattr(__main__.scidavis.app,name))
+	setattr(__main__,name,getattr(app,name))
+
+# overloaded functions defined here
+def newTable(*args):
+        if len(args)==0:
+                return app.newEmptyTable()
+        else:
+                rows=30
+                cols=2
+                if len(args)>1: rows=args[1]
+                if len(args)>2: cols=args[2]
+                return app.newTable(args[0],rows,cols)
+
+def newMatrix(*args):
+        if len(args)==0:
+                return app.newMatrix()
+        else:
+                rows=32
+                cols=32
+                if len(args)>1: rows=args[1]
+                if len(args)>2: cols=args[2]
+                return app.newCaptionedMatrix(args[0],rows,cols)
+
+def importImage(filename=""):
+        if (filename==""):
+                return app.importImageDialog()
+        else:
+                return app.importImage(filename)
+        
+graph=app.current_folder.graph
+note=app.current_folder.note
+def activeFolder(): return app.current_folder
+rootFolder=app.projectFolder
 
 # make Y columns indexable (using lookup in corresponding X column)
 def __column_getitem(self, index):

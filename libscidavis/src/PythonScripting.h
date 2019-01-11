@@ -89,9 +89,6 @@ public:
     return new PythonScript(this, code, context, name);
   }
 
-  bool setQObject(boost::python::object, const char*, PyObject *dict);
-  bool setQObject(const boost::python::object& val, const char *name)
-  { return setQObject(val,name,NULL); }
   bool setInt(int, const char*, PyObject *dict=NULL);
   bool setDouble(double, const char*, PyObject *dict=NULL);
 

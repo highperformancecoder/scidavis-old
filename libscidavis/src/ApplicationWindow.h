@@ -245,16 +245,16 @@ public slots:
                        double xl, double xr, double yl, double yr, double zl, double zr);
   //@}
   MultiLayer* plotSpectrogram(Matrix *m, Graph::CurveType type);
-  MultiLayer* plotGrayScale(Matrix *m);
-  MultiLayer* plotContour(Matrix *m);
-  MultiLayer* plotColorMap(Matrix *m);
+  MultiLayer& plotGrayScale(Matrix& m);
+  MultiLayer& plotContour(Matrix& m);
+  MultiLayer& plotColorMap(Matrix& m);
   FunctionDialog* functionDialog();
   //! Creates a new empty matrix
   Matrix* convertTableToMatrix();
   Table* convertMatrixToTable();
   QList<MyWidget*>* tableList();
-  Matrix* importImage();
-  Matrix* importImage(const QString& fn);
+  Matrix& importImageDialog();
+  Matrix& importImage(const QString& fn);
   Matrix* openMatrix(ApplicationWindow* app, const QStringList &flist);
   Table* openTable(ApplicationWindow* app, QTextStream &stream);
   TableStatistics* openTableStatistics(const QStringList &flist);
@@ -328,9 +328,9 @@ public slots:
   void deleteLayer();
 
   //! Creates a new spectrogram graph
-  void plotGrayScale();
-  void plotContour();
-  void plotColorMap();
+  void plotGrayScale_();
+  void plotContour_();
+  void plotColorMap_();
 
   //! Rearrange the layersin order to fit to the size of the plot window
   void autoArrangeLayers();
@@ -403,9 +403,9 @@ public slots:
   //@{
   /// @throws NoSuchObject if no such matrix exists
   Matrix& matrix(const QString& name);
-  Matrix& newMatrix(int rows = 32, int columns = 32);
+  Matrix& newMatrix(int rows = 32, int columns = 32) {return newCaptionedMatrix(tr("Matrix"),rows,columns);}
   //! To be used when opening a project file only!
-  Matrix& newMatrix(const QString& caption, int r, int c);
+  Matrix& newCaptionedMatrix(const QString& caption, int r, int c);
   void initMatrix(Matrix* m);
   void invertMatrix();
   void matrixDeterminant();
@@ -414,15 +414,16 @@ public slots:
   //! \name Tables
   //@{
   //! Creates an empty table
-  Table& newTable();
+  Table& newEmptyTable();
   //! Used when importing an ASCII file
-  Table& newTable(const QString& fname, const QString &sep, int lines,
+  Table& newTableAscii(const QString& fname, const QString &sep, int lines,
                   bool renameCols, bool stripSpaces, bool simplifySpaces,
                   bool convertToNumeric, QLocale numericLocale);
   //! Used when loading a table from a project file
-  Table& newTable(const QString& caption,int r, int c);
-  Table& newTable(int r, int c, const QString& name = QString(),const QString& legend = QString());
-  Table& newTable(const QString& name, const QString& legend, QList<Column *> columns);
+  Table& newTable(const std::string& caption,int r, int c);
+  Table& newTable_(int r, int c, const QString& name = QString(),const QString& legend = QString());
+  /// used when importing an ASCII file
+  Table& newTableAscii(const QString& name, const QString& legend, QList<Column *> columns);
   /**
    * \brief Create a Table which is initially hidden; used to return the result of an analysis operation.
    *
@@ -496,7 +497,7 @@ public slots:
   void renameActiveWindow();
 
   //!  Called when the user presses F2 and an item is selected in lv.
-  void renameWindow(QTreeWidgetItem *item, int, const QString &s);
+  void renameWindow_(QTreeWidgetItem *item, int, const QString &s);
 
   //!  Checks weather the new window name is valid and modifies the name.
   bool renameWindow(MyWidget *w, const QString &text);
@@ -569,7 +570,7 @@ public slots:
   void newProject();
 
   //! Creates a new empty multilayer plot
-  MultiLayer* newGraph(const QString& caption = tr("Graph"));
+  MultiLayer& newGraph(const QString& caption = tr("Graph"));
 
   //! \name Reading from a Project File
   //@{

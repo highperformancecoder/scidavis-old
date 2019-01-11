@@ -137,46 +137,44 @@ void Correlation::output()
 
 void Correlation::addResultCurve()
 {
-    ApplicationWindow *app = (ApplicationWindow *)parent();
-    if (!app)
-        return;
+  ApplicationWindow *app = (ApplicationWindow *)parent();
+  if (!app)
+    return;
 
-    int rows = d_table->numRows();
-	int cols = d_table->numCols();
-	int cols2 = cols+1;
-	d_table->addCol();
-	d_table->addCol();
-	int n = rows/2;
+  int rows = d_table->numRows();
+  int cols = d_table->numCols();
+  int cols2 = cols+1;
+  d_table->addCol();
+  d_table->addCol();
+  int n = rows/2;
 
-        std::vector<double> x_temp(rows), y_temp(rows);
-	for (int i = 0; i<rows; i++)
-	{
-        x_temp[i] = i - n;
+  std::vector<double> x_temp(rows), y_temp(rows);
+  for (int i = 0; i<rows; i++)
+    {
+      x_temp[i] = i - n;
 
-        if(i < n)
-			y_temp[i] = d_x[d_n - n + i];
-		else
-			y_temp[i] = d_x[i-n];
+      if(i < n)
+        y_temp[i] = d_x[d_n - n + i];
+      else
+        y_temp[i] = d_x[i-n];
 
-		d_table->column(cols)->setValueAt(i, x_temp[i]);
-		d_table->column(cols2)->setValueAt(i, y_temp[i]);
-	}
+      d_table->column(cols)->setValueAt(i, x_temp[i]);
+      d_table->column(cols2)->setValueAt(i, y_temp[i]);
+    }
 
-	QStringList l = d_table->colNames().filter(tr("Lag"));
-	QString id = QString::number((int)l.size()+1);
-	QString label = objectName() + id;
+  QStringList l = d_table->colNames().filter(tr("Lag"));
+  QString id = QString::number((int)l.size()+1);
+  QString label = objectName() + id;
 
-	d_table->setColName(cols, tr("Lag") + id);
-	d_table->setColName(cols2, label);
-	d_table->setColPlotDesignation(cols, SciDAVis::X);
+  d_table->setColName(cols, tr("Lag") + id);
+  d_table->setColName(cols2, label);
+  d_table->setColPlotDesignation(cols, SciDAVis::X);
 
-	MultiLayer *ml = app->newGraph(objectName() + tr("Plot"));
-	if (!ml)
-        return;
+  MultiLayer& ml = app->newGraph(objectName() + tr("Plot"));
 
-    DataCurve *c = new DataCurve(d_table, d_table->colName(cols), d_table->colName(cols2));
-	c->setData(&x_temp[0], &y_temp[0], rows);
-    c->setPen(QPen(d_curveColor, 1));
-	ml->activeGraph()->insertPlotItem(c, Graph::Line);
-	ml->activeGraph()->updatePlot();
+  DataCurve *c = new DataCurve(d_table, d_table->colName(cols), d_table->colName(cols2));
+  c->setData(&x_temp[0], &y_temp[0], rows);
+  c->setPen(QPen(d_curveColor, 1));
+  ml.activeGraph()->insertPlotItem(c, Graph::Line);
+  ml.activeGraph()->updatePlot();
 }

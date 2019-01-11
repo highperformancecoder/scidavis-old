@@ -65,175 +65,176 @@ class ApplicationWindow;
  */
 class MultiLayer: public MyWidget
 {
-	Q_OBJECT
+  Q_OBJECT
 
 public:
-	MultiLayer (const QString& label, QWidget* parent=0, const QString name=QString(), Qt::WindowFlags f=0);
-	QWidgetList graphPtrs(){return graphsList;};
-	Graph *layer(int num);
-	QWidgetList layerWidgets() const { return graphsList; }
-	LayerButton* addLayerButton();
-	void copy(ApplicationWindow * parent, MultiLayer* ml);
+  MultiLayer() {}
+  MultiLayer (const QString& label, QWidget* parent=0, const QString name=QString(), Qt::WindowFlags f=0);
+  QWidgetList graphPtrs(){return graphsList;};
+  Graph *layer(int num);
+  QWidgetList layerWidgets() const { return graphsList; }
+  LayerButton* addLayerButton();
+  void copy(ApplicationWindow * parent, MultiLayer* ml);
 
-	enum HorAlignement{HCenter, Left, Right};
-	enum VertAlignement{VCenter, Top, Bottom};
+  enum HorAlignement{HCenter, Left, Right};
+  enum VertAlignement{VCenter, Top, Bottom};
 
-	//! \name Event Handlers
-	//@{
-	void mousePressEvent(QMouseEvent *);
-	void contextMenuEvent(QContextMenuEvent *);
-	void wheelEvent(QWheelEvent *);
-	void keyPressEvent(QKeyEvent *);
-	bool eventFilter(QObject *object, QEvent *);
-	void releaseLayer();
+  //! \name Event Handlers
+  //@{
+  void mousePressEvent(QMouseEvent *);
+  void contextMenuEvent(QContextMenuEvent *);
+  void wheelEvent(QWheelEvent *);
+  void keyPressEvent(QKeyEvent *);
+  bool eventFilter(QObject *object, QEvent *);
+  void releaseLayer();
 
-	bool focusNextPrevChild ( bool next );
-	//@}
+  bool focusNextPrevChild ( bool next );
+  //@}
 
-	bool scaleLayersOnPrint(){return d_scale_on_print;};
-	void setScaleLayersOnPrint(bool on){d_scale_on_print = on;};
+  bool scaleLayersOnPrint(){return d_scale_on_print;};
+  void setScaleLayersOnPrint(bool on){d_scale_on_print = on;};
 
-	bool printCropmarksEnabled(){return d_print_cropmarks;};
-	void printCropmarks(bool on){d_print_cropmarks = on;};
+  bool printCropmarksEnabled(){return d_print_cropmarks;};
+  void printCropmarks(bool on){d_print_cropmarks = on;};
 
 public slots:
-	Graph* addLayer(int x = 0, int y = 0, int width = 0, int height = 0);
-	void setLayersNumber(int n);
+  Graph* addLayer(int x = 0, int y = 0, int width = 0, int height = 0);
+  void setLayersNumber(int n);
 
-	bool isEmpty();
-    void removeLayer();
-	void confirmRemoveLayer();
+  bool isEmpty();
+  void removeLayer();
+  void confirmRemoveLayer();
 
-	/*!\brief Start adding a text layer.
-	 *
-	 * This works by having #canvas grab the mouse, remembering that we are in the midst of adding
-	 * text in #addTextOn and dispatching the next mouse click to addTextLayer(const QPoint&) in eventFilter().
-	 *
-	 * \sa #defaultTextMarkerFont, #defaultTextMarkerFrame, #defaultTextMarkerColor, #defaultTextMarkerBackground
-	 */
-	void addTextLayer(int f, const QFont& font, const QColor& textCol, const QColor& backgroundCol);
-	/*!\brief Finish adding a text layer.
-	 *
-	 * An empty Graph is created and added to me.
-	 * Legend, title and axes are removed and a new Legend is added with a placeholder text.
-	 *
-	 * \sa #defaultTextMarkerFont, #defaultTextMarkerFrame, #defaultTextMarkerColor, #defaultTextMarkerBackground, addTextLayer(int,const QFont&,const QColor&,const QColor&)
-	 */
-	void addTextLayer(const QPoint& pos);
+  /*!\brief Start adding a text layer.
+   *
+   * This works by having #canvas grab the mouse, remembering that we are in the midst of adding
+   * text in #addTextOn and dispatching the next mouse click to addTextLayer(const QPoint&) in eventFilter().
+   *
+   * \sa #defaultTextMarkerFont, #defaultTextMarkerFrame, #defaultTextMarkerColor, #defaultTextMarkerBackground
+   */
+  void addTextLayer(int f, const QFont& font, const QColor& textCol, const QColor& backgroundCol);
+  /*!\brief Finish adding a text layer.
+   *
+   * An empty Graph is created and added to me.
+   * Legend, title and axes are removed and a new Legend is added with a placeholder text.
+   *
+   * \sa #defaultTextMarkerFont, #defaultTextMarkerFrame, #defaultTextMarkerColor, #defaultTextMarkerBackground, addTextLayer(int,const QFont&,const QColor&,const QColor&)
+   */
+  void addTextLayer(const QPoint& pos);
 
-	Graph* activeGraph(){return active_graph;};
-	void setActiveGraph(Graph* g);
-	void activateGraph(LayerButton* button);
+  Graph* activeGraph(){return active_graph;};
+  void setActiveGraph(Graph* g);
+  void activateGraph(LayerButton* button);
 
-	void setGraphGeometry(int x, int y, int w, int h);
+  void setGraphGeometry(int x, int y, int w, int h);
 
-	void findBestLayout(int &rows, int &cols);
+  void findBestLayout(int &rows, int &cols);
 
-	QSize arrangeLayers(bool userSize);
-	void arrangeLayers(bool fit, bool userSize);
+  QSize arrangeLayers(bool userSize);
+  void arrangeLayers(bool fit, bool userSize);
 
-	int getRows(){return rows;};
-	void setRows(int r);
+  int getRows(){return rows;};
+  void setRows(int r);
 
-	int getCols(){return cols;};
-	void setCols(int c);
+  int getCols(){return cols;};
+  void setCols(int c);
 
-	int colsSpacing(){return colsSpace;};
-	int rowsSpacing(){return rowsSpace;};
-	void setSpacing (int rgap, int cgap);
+  int colsSpacing(){return colsSpace;};
+  int rowsSpacing(){return rowsSpace;};
+  void setSpacing (int rgap, int cgap);
 
-	int leftMargin(){return left_margin;};
-	int rightMargin(){return right_margin;};
-	int topMargin(){return top_margin;};
-	int bottomMargin(){return bottom_margin;};
-	void setMargins (int lm, int rm, int tm, int bm);
+  int leftMargin(){return left_margin;};
+  int rightMargin(){return right_margin;};
+  int topMargin(){return top_margin;};
+  int bottomMargin(){return bottom_margin;};
+  void setMargins (int lm, int rm, int tm, int bm);
 
-	QSize layerCanvasSize(){return QSize(l_canvas_width, l_canvas_height);};
-	void setLayerCanvasSize (int w, int h);
+  QSize layerCanvasSize(){return QSize(l_canvas_width, l_canvas_height);};
+  void setLayerCanvasSize (int w, int h);
 
-	int horizontalAlignement(){return hor_align;};
-	int verticalAlignement(){return vert_align;};
-	void setAlignement (int ha, int va);
+  int horizontalAlignement(){return hor_align;};
+  int verticalAlignement(){return vert_align;};
+  void setAlignement (int ha, int va);
 
-	int layers(){return graphs;};
+  int layers(){return graphs;};
 
-	//! \name Print and Export
-	//@{
-	void exportToFile(const QString& fileName);
-	void exportImage(const QString& fileName, int quality = -1);
-	void exportSVG(const QString& fname);
-    void exportPDF(const QString& fname);
-	void exportVector(const QString& fileName, int res = 0, bool color = true,
+  //! \name Print and Export
+  //@{
+  void exportToFile(const QString& fileName);
+  void exportImage(const QString& fileName, int quality = -1);
+  void exportSVG(const QString& fname);
+  void exportPDF(const QString& fname);
+  void exportVector(const QString& fileName, int res = 0, bool color = true,
                     bool keepAspect = true, QPrinter::PageSize pageSize = QPrinter::Custom, 
-					QPrinter::Orientation orientation = QPrinter::Portrait);
-    void exportPainter(QPaintDevice &paintDevice, bool keepAspect = false, QRect rect = QRect());
-    void exportPainter(QPainter &painter, bool keepAspect = false, QRect rect = QRect(), QSize size = QSize());
+                    QPrinter::Orientation orientation = QPrinter::Portrait);
+  void exportPainter(QPaintDevice &paintDevice, bool keepAspect = false, QRect rect = QRect());
+  void exportPainter(QPainter &painter, bool keepAspect = false, QRect rect = QRect(), QSize size = QSize());
 
-	void copyAllLayers();
-	void print();
-	void printAllLayers(QPainter *painter);
-	void printActiveLayer();
-	//@}
+  void copyAllLayers();
+  void print();
+  void printAllLayers(QPainter *painter);
+  void printActiveLayer();
+  //@}
 
-	void setFonts(const QFont& titleFnt, const QFont& scaleFnt,
-							const QFont& numbersFnt, const QFont& legendFnt);
+  void setFonts(const QFont& titleFnt, const QFont& scaleFnt,
+                const QFont& numbersFnt, const QFont& legendFnt);
 
-	void connectLayer(Graph *g);
+  void connectLayer(Graph *g);
 
-	QString saveToString(const QString& geometry);
-	QString saveAsTemplate(const QString& geometryInfo);
+  QString saveToString(const QString& geometry);
+  QString saveAsTemplate(const QString& geometryInfo);
 
 signals:
-	void showTextDialog();
-	void showPlotDialog(int);
-	void showAxisDialog(int);
-	void showScaleDialog(int);
-	void showGraphContextMenu();
-	void showLayerButtonContextMenu();
-	void showCurveContextMenu(int);
-	void showWindowContextMenu();
-	void showCurvesDialog();
-	void drawTextOff();
-	void drawLineEnded(bool);
-	void showXAxisTitleDialog();
-	void showYAxisTitleDialog();
-	void showTopAxisTitleDialog();
-	void showRightAxisTitleDialog();
-	void showMarkerPopupMenu();
-	void modifiedPlot();
-	void cursorInfo(const QString&);
-	void showImageDialog();
-	void showLineDialog();
-	void viewTitleDialog();
-	void createTable(const QString&,const QString&,QList<Column*>);
-	void showGeometryDialog();
-	void pasteMarker();
-	void createIntensityTable(const QString&);
-	void setPointerCursor();
+  void showTextDialog();
+  void showPlotDialog(int);
+  void showAxisDialog(int);
+  void showScaleDialog(int);
+  void showGraphContextMenu();
+  void showLayerButtonContextMenu();
+  void showCurveContextMenu(int);
+  void showWindowContextMenu();
+  void showCurvesDialog();
+  void drawTextOff();
+  void drawLineEnded(bool);
+  void showXAxisTitleDialog();
+  void showYAxisTitleDialog();
+  void showTopAxisTitleDialog();
+  void showRightAxisTitleDialog();
+  void showMarkerPopupMenu();
+  void modifiedPlot();
+  void cursorInfo(const QString&);
+  void showImageDialog();
+  void showLineDialog();
+  void viewTitleDialog();
+  void createTable(const QString&,const QString&,QList<Column*>);
+  void showGeometryDialog();
+  void pasteMarker();
+  void createIntensityTable(const QString&);
+  void setPointerCursor();
 
 private:
-	void resizeLayers (const QResizeEvent *re);
-	void resizeLayers (const QSize& size, const QSize& oldSize, bool scaleFonts);
-	QSize lastSize; // workaround for resize layers after hide/minimize
+  void resizeLayers (const QResizeEvent *re);
+  void resizeLayers (const QSize& size, const QSize& oldSize, bool scaleFonts);
+  QSize lastSize; // workaround for resize layers after hide/minimize
 
-	Graph* active_graph;
-	//! Used for resizing of layers.
-	int graphs, cols, rows, graph_width, graph_height, colsSpace, rowsSpace;
-	int left_margin, right_margin, top_margin, bottom_margin;
-	int l_canvas_width, l_canvas_height, hor_align, vert_align;
-	bool addTextOn;
-	bool d_scale_on_print, d_print_cropmarks;
+  Graph* active_graph=nullptr;
+  //! Used for resizing of layers.
+  int graphs, cols, rows, graph_width, graph_height, colsSpace, rowsSpace;
+  int left_margin, right_margin, top_margin, bottom_margin;
+  int l_canvas_width, l_canvas_height, hor_align, vert_align;
+  bool addTextOn;
+  bool d_scale_on_print, d_print_cropmarks;
 
-	//! Used when adding text markers on new layers
-	int defaultTextMarkerFrame;
-	QFont defaultTextMarkerFont;
-	QColor defaultTextMarkerColor, defaultTextMarkerBackground;
+  //! Used when adding text markers on new layers
+  int defaultTextMarkerFrame;
+  QFont defaultTextMarkerFont;
+  QColor defaultTextMarkerColor, defaultTextMarkerBackground;
 
-    QWidgetList buttonsList, graphsList;
-	QHBoxLayout *layerButtonsBox;
-    QWidget *canvas;
+  QWidgetList buttonsList, graphsList;
+  QHBoxLayout *layerButtonsBox=nullptr;
+  QWidget *canvas=nullptr;
 
-	QPointer<SelectionMoveResizer> d_layers_selector;
+  QPointer<SelectionMoveResizer> d_layers_selector;
 };
 
 

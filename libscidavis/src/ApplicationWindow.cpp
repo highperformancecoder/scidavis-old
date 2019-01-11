@@ -161,6 +161,10 @@
 
 #include <zlib.h>
 
+#ifdef SCRIPTING_PYTHON
+#include <PythonScripting.h>
+#endif
+  
 #include <iostream>
 #include <memory>
 using namespace std;
@@ -2135,7 +2139,7 @@ void ApplicationWindow::initPlot3D(Graph3D *plot)
 	customToolBars(plot);
 }
 
-Matrix* ApplicationWindow::importImage()
+Matrix* ApplicationWindow::importImageDialog()
 {
 	QList<QByteArray> list = QImageReader::supportedImageFormats();
 	QString filter = tr("Images") + " (", aux1, aux2;
@@ -2223,22 +2227,20 @@ MultiLayer* ApplicationWindow::multilayerPlot(const QString& caption)
 	return ml;
 }
 
-MultiLayer* ApplicationWindow::newGraph(const QString& caption)
+MultiLayer& ApplicationWindow::newGraph(const QString& caption)
 {
-	MultiLayer *ml = multilayerPlot(generateUniqueName(caption));
-	if (ml)
-    {
-        Graph *g = ml->addLayer();
-		setPreferences(g);
-        g->newLegend();
-        g->setAutoscaleFonts(false);
-        g->setIgnoreResizeEvents(false);
-        ml->arrangeLayers(false, false);
-        g->setAutoscaleFonts(autoScaleFonts);//restore user defined fonts behaviour
-        g->setIgnoreResizeEvents(!autoResizeLayers);
-        customMenu(ml);
-    }
-	return ml;
+  MultiLayer *ml = multilayerPlot(generateUniqueName(caption));
+  assert(ml);
+  Graph *g = ml->addLayer();
+  setPreferences(g);
+  g->newLegend();
+  g->setAutoscaleFonts(false);
+  g->setIgnoreResizeEvents(false);
+  ml->arrangeLayers(false, false);
+  g->setAutoscaleFonts(autoScaleFonts);//restore user defined fonts behaviour
+  g->setIgnoreResizeEvents(!autoResizeLayers);
+  customMenu(ml);
+  return *ml; //TODO is ml owned by anything?
 }
 
 MultiLayer* ApplicationWindow::multilayerPlot(Table* w, const QStringList& colList, int style, int startRow, int endRow)
@@ -2251,8 +2253,7 @@ MultiLayer* ApplicationWindow::multilayerPlot(Table* w, const QStringList& colLi
 	initMultilayerPlot(g, generateUniqueName(tr("Graph")));
 
 	Graph *ag = g->addLayer();
-	if (!ag)
-		return 0;
+        assert(ag);
 
 	setPreferences(ag);
 	ag->insertCurvesList(w, colList, style, defaultCurveLineWidth, defaultSymbolSize, startRow, endRow);
@@ -2516,7 +2517,7 @@ void ApplicationWindow::setPreferences(Graph* g)
 
 void ApplicationWindow::newWrksheetPlot(const QString& name,const QString& label, QList<Column *> columns)
 {
-	Table& w = newTable(name, label, columns);
+	Table& w = newTableAscii(name, label, columns);
 	MultiLayer* plot=multilayerPlot(&w, QStringList(QString(w.name())+"_intensity"), 0);
 	Graph *g=(Graph*)plot->activeGraph();
 	if (g)
@@ -2530,7 +2531,7 @@ void ApplicationWindow::newWrksheetPlot(const QString& name,const QString& label
 /*
  *used when importing an ASCII file
  */
-Table& ApplicationWindow::newTable(const QString& fname, const QString &sep,
+Table& ApplicationWindow::newTableAscii(const QString& fname, const QString &sep,
 		int lines, bool renameCols, bool stripSpaces,
 		bool simplifySpaces, bool convertToNumeric, QLocale numericLocale)
 {
@@ -2548,7 +2549,7 @@ Table& ApplicationWindow::newTable(const QString& fname, const QString &sep,
 /*
  *creates a new empty table
  */
-Table& ApplicationWindow::newTable()
+Table& ApplicationWindow::newEmptyTable()
 {
 	Table* w = new Table(scriptEnv, 30, 2, "", &d_workspace, 0);
 	w->setName(generateUniqueName(tr("Table")));
@@ -2559,23 +2560,23 @@ Table& ApplicationWindow::newTable()
 /*
  *used when opening a project file
  */
-Table& ApplicationWindow::newTable(const QString& caption, int r, int c)
+Table& ApplicationWindow::newTable(const std::string& caption, int r, int c)
 {
   assert(scriptEnv);
 	Table* w = new Table(scriptEnv, r, c, "", &d_workspace, 0);
-	w->setName(caption);
+	w->setName(caption.c_str());
 	d_project->addChild(w->d_future_table);
-	if (w->name() != caption)//the table was renamed
+	if (w->name() != caption.c_str())//the table was renamed
 	{
-		renamedTables << caption << w->name();
-
-		QMessageBox:: warning(this, tr("Renamed Window"),
-				tr("The table '%1' already exists. It has been renamed '%2'.").arg(caption).arg(w->name()));
+          renamedTables << caption.c_str() << w->name();
+          QMessageBox:: warning(this, tr("Renamed Window"),
+				tr("The table '%1' already exists. It has been renamed '%2'.").
+                                arg(caption.c_str()).arg(w->name()));
 	}
 	return *w;
 }
 
-Table& ApplicationWindow::newTable(int r, int c, const QString& name, const QString& legend)
+Table& ApplicationWindow::newTable_(int r, int c, const QString& name, const QString& legend)
 {
   assert(scriptEnv);
 	Table* w = new Table(scriptEnv, r, c, legend, &d_workspace, 0);
@@ -2584,7 +2585,7 @@ Table& ApplicationWindow::newTable(int r, int c, const QString& name, const QStr
 	return *w;
 }
 
-Table& ApplicationWindow::newTable(const QString& name, const QString& legend, QList<Column *> columns)
+Table& ApplicationWindow::newTableAscii(const QString& name, const QString& legend, QList<Column *> columns)
 {
   assert(scriptEnv);
 	Table* w = new Table(scriptEnv, 0, 0, legend, &d_workspace, 0);
@@ -2596,7 +2597,7 @@ Table& ApplicationWindow::newTable(const QString& name, const QString& legend, Q
 
 Table& ApplicationWindow::newHiddenTable(const QString& name, const QString& label, QList<Column *> columns)
 {
-  auto& w=newTable(name,label,columns);
+  auto& w=newTableAscii(name,label,columns);
   hideWindow(&w);
   return w;
 }
@@ -2691,17 +2692,7 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 	emit modified();
 }
 
-Matrix& ApplicationWindow::newMatrix(int rows, int columns)
-{
-	Matrix* m = new Matrix(scriptEnv, rows, columns, "", 0, 0);
-	QString caption = generateUniqueName(tr("Matrix"));
-	while(alreadyUsedName(caption)) { caption = generateUniqueName(tr("Matrix")); }
-	m->setName(caption);
-	d_project->addChild(m->d_future_matrix);
-	return *m;
-}
-
-Matrix& ApplicationWindow::newMatrix(const QString& caption, int r, int c)
+Matrix& ApplicationWindow::newCaptionedMatrix(const QString& caption, int r, int c)
 {
 	Matrix* w = new Matrix(scriptEnv, r, c, "", 0 ,0);
 	QString name = caption;
@@ -3304,7 +3295,7 @@ ApplicationWindow* ApplicationWindow::plotFile(const QString& fn)
 	app->applyUserSettings();
 	app->showMaximized();
 
-	Table& t = app->newTable(fn, app->columnSeparator, 0, true, app->strip_spaces,
+	Table& t = app->newTableAscii(fn, app->columnSeparator, 0, true, app->strip_spaces,
 			app->simplify_spaces, app->d_convert_to_numeric, app->d_ASCII_import_locale);
 	t.setCaptionPolicy(MyWidget::Both);
 	app->multilayerPlot(&t, t.YColumns(),Graph::LineSymbols);
@@ -3356,7 +3347,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 		sorted_files.sort();
 		for (int i=0; i<sorted_files.size(); i++)
 		{
-			Table& w = newTable(sorted_files[i], local_column_separator, local_ignored_lines,
+			Table& w = newTableAscii(sorted_files[i], local_column_separator, local_ignored_lines,
 					local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric, local_numeric_locale);
 			w.setCaptionPolicy(MyWidget::Both);
 			setListViewLabel(w.name(), sorted_files[i]);
@@ -4160,7 +4151,7 @@ void ApplicationWindow::openTemplate()
               else
                 {
                   if (templateType == "<table>")
-                    w = &newTable(tr("Table1"), rows, cols);
+                    w = &newTable(tr("Table1").toStdString(), rows, cols);
                   else if (templateType == "<matrix>")
                     w = &newMatrix(rows, cols);
                   if (w)
@@ -5169,7 +5160,7 @@ void ApplicationWindow::renameActiveWindow()
 	rwd->exec();
 }
 
-void ApplicationWindow::renameWindow(QTreeWidgetItem *item, int, const QString &text)
+void ApplicationWindow::renameWindow_(QTreeWidgetItem *item, int, const QString &text)
 {
   if (auto wli=dynamic_cast<WindowListItem*>(item))
     if (auto w=wli->window())
@@ -7204,7 +7195,7 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
   } else if (w->inherits("Table")){
     Table *t = (Table *)w;
     QString caption = generateUniqueName(tr("Table"));
-    nw = &newTable(caption, t->numRows(), t->numCols());
+    nw = &newTable(caption.toStdString(), t->numRows(), t->numCols());
     ((Table *)nw)->copy(t);
   } else if (w->inherits("Graph3D")){
     Graph3D *g = (Graph3D *)w;
@@ -7602,7 +7593,7 @@ void ApplicationWindow::newProject()
 
 	ApplicationWindow *ed = new ApplicationWindow();
 	ed->applyUserSettings();
-	ed->newTable();
+	ed->newEmptyTable();
 
 	if (this->isMaximized())
 		ed->showMaximized();
@@ -8458,10 +8449,9 @@ void ApplicationWindow::updateFunctionLists(int type, QStringList &formulas)
 
 bool ApplicationWindow::newFunctionPlot(int type,QStringList &formulas, const QString& var, QList<double> &ranges, int points)
 {
-	MultiLayer *ml = newGraph();
-	if (!ml) return false;
+	MultiLayer& ml = newGraph();
 
-	if (!ml->activeGraph()->addFunctionCurve(this, type, formulas, var, ranges, points))
+	if (!ml.activeGraph()->addFunctionCurve(this, type, formulas, var, ranges, points))
 		return false;
 
 	updateFunctionLists(type, formulas);
@@ -9183,7 +9173,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 		int rows = list[1].toInt();
 		int cols = list[2].toInt();
 
-		Matrix& w = app->newMatrix(caption, rows, cols);
+		Matrix& w = app->newCaptionedMatrix(caption, rows, cols);
 		app->setListViewDate(caption,list[3]);
 		w.setBirthDate(list[3]);
 
@@ -9250,7 +9240,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 	}
 	else
 	{
-		Matrix& w = app->newMatrix("matrix", 1, 1);
+		Matrix& w = app->newCaptionedMatrix("matrix", 1, 1);
 		int length = flist.at(0).toInt();
 		int index = 1;
 		QString xml(flist.at(index++));
@@ -9298,7 +9288,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 		int rows = list[1].toInt();
 		int cols = list[2].toInt();
 
-		Table& w = app->newTable(caption, rows, cols);
+		Table& w = app->newTable(caption.toStdString(), rows, cols);
 		app->setListViewDate(caption, list[3]);
 		w.setBirthDate(list[3]);
 
@@ -11590,7 +11580,7 @@ void ApplicationWindow::plot3DMatrix(int style)
 	QApplication::restoreOverrideCursor();
 }
 
-void ApplicationWindow::plotGrayScale()
+void ApplicationWindow::plotGrayScale_()
 {
 	if (!d_workspace.activeSubWindow()|| !d_workspace.activeSubWindow()->inherits("Matrix"))
 		return;
@@ -11598,15 +11588,12 @@ void ApplicationWindow::plotGrayScale()
 	plotSpectrogram((Matrix*)d_workspace.activeSubWindow(), Graph::GrayMap);
 }
 
-MultiLayer* ApplicationWindow::plotGrayScale(Matrix *m)
+MultiLayer& ApplicationWindow::plotGrayScale(Matrix& m)
 {
-	if (!m)
-		return 0;
-
-	return plotSpectrogram(m, Graph::GrayMap);
+	return *plotSpectrogram(&m, Graph::GrayMap);
 }
 
-void ApplicationWindow::plotContour()
+void ApplicationWindow::plotContour_()
 {
 	if (!d_workspace.activeSubWindow()|| !d_workspace.activeSubWindow()->inherits("Matrix"))
 		return;
@@ -11614,15 +11601,12 @@ void ApplicationWindow::plotContour()
 	plotSpectrogram((Matrix*)d_workspace.activeSubWindow(), Graph::ContourMap);
 }
 
-MultiLayer* ApplicationWindow::plotContour(Matrix *m)
+MultiLayer& ApplicationWindow::plotContour(Matrix& m)
 {
-	if (!m)
-		return 0;
-
-	return plotSpectrogram(m, Graph::ContourMap);
+	return *plotSpectrogram(&m, Graph::ContourMap);
 }
 
-void ApplicationWindow::plotColorMap()
+void ApplicationWindow::plotColorMap_()
 {
 	if (!d_workspace.activeSubWindow()|| !d_workspace.activeSubWindow()->inherits("Matrix"))
 		return;
@@ -11630,12 +11614,9 @@ void ApplicationWindow::plotColorMap()
 	plotSpectrogram((Matrix*)d_workspace.activeSubWindow(), Graph::ColorMap);
 }
 
-MultiLayer* ApplicationWindow::plotColorMap(Matrix *m)
+MultiLayer& ApplicationWindow::plotColorMap(Matrix& m)
 {
-	if (!m)
-		return 0;
-
-	return plotSpectrogram(m, Graph::ColorMap);
+	return *plotSpectrogram(&m, Graph::ColorMap);
 }
 
 MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
@@ -13684,16 +13665,17 @@ void ApplicationWindow::cascade()
           app->setScriptingLangForBatch("muParser");
 	app->showMaximized();
 	Note& script_note = app->newNote(fn);
+#ifdef SCRIPTING_PYTHON
         if (isPython)
           {
             // copy any arguments into the sys.argv array
-            script_note.insert("import sys\n");
-            QString prologue="sys.argv=['"+fn+"'";
+            py::list argv;
+            argv.append(fn.toStdString());
             for (auto& a: args)
-              prologue+=",'"+a+"'";
-            prologue+="]\n";
-            script_note.insert(prologue);
+              argv.append(a.toStdString());
+            modDict("sys")["argv"]=argv;
           }
+#endif
 	script_note.importASCII(fn);
 	QApplication::restoreOverrideCursor();
 	if (execute)

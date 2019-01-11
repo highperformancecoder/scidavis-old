@@ -71,6 +71,8 @@ typedef struct _traceback {
 #include "QtEnums.cd"
 #include "Script.h"
 #include "Script.cd"
+#include "ArrowMarker.h"
+#include "ArrowMarker.cd"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -98,9 +100,9 @@ namespace classdesc_access
   struct access_python<QList<T>>:
     public classdesc::NullDescriptor<classdesc::python_t> {};
 
-  template <>
-  struct access_python<QStringList>:
-    public classdesc::NullDescriptor<classdesc::python_t> {};
+//  template <>
+//  struct access_python<QStringList>:
+//    public classdesc::NullDescriptor<classdesc::python_t> {};
 
   template <class E, class Q>
   struct access_python<QtEnumWrapper<E,Q>>
@@ -138,8 +140,10 @@ namespace classdesc
   DEF_TYPENAME(QSize);
   DEF_TYPENAME(QFont);
   DEF_TYPENAME(QPoint);
+  DEF_TYPENAME(QPointF);
   DEF_TYPENAME(QStringList);
   DEF_TYPENAME(QChar);
+  DEF_TYPENAME(QRect);
   DEF_TYPENAME(QRectF);
   DEF_TYPENAME(QVariant);
 
@@ -154,7 +158,8 @@ namespace classdesc
     static string name() {return mocTypeName<T>();}
   };
 
-
+  // generates list semantics for QStringList
+  template <> struct is_sequence<QStringList> {static const bool value=true;};
 }
 
 #include <classdesc_epilogue.h>
@@ -182,9 +187,10 @@ const char* PythonScripting::langName = "Python";
 BOOST_PYTHON_MODULE(scidavis)
 {
   classdesc::python_t p;
-  classdesc::python<ApplicationWindow>(p,"");
-  classdesc::python<PythonScripting>(p,"");
-  classdesc::python<PythonScript>(p,"");
+  p.defineClass<ApplicationWindow>();
+  p.defineClass<PythonScripting>();
+  p.defineClass<PythonScript>();
+  p.defineClass<ArrowMarker>();
 }
 
 QString PythonScripting::toString(PyObject *object, bool decref)
@@ -476,32 +482,6 @@ bool PythonScripting::loadInitFile(const QString &path)
 bool PythonScripting::isRunning() const
 {
 	return Py_IsInitialized();
-}
-
-bool PythonScripting::setQObject(boost::python::object val, const char *name, PyObject *dict)
-{
-//	if(!val) return false;
-//	PyObject *pyobj=NULL;
-//
-//	PyGILState_STATE state = PyGILState_Ensure();
-//
-//        //sipWrapperType * klass = sipFindClass(val->className());
-//        const sipTypeDef* klass=sipFindType(val->metaObject()->className());
-//	if (!klass) return false;
-//        //pyobj = sipConvertFromInstance(val, klass, NULL);
-//	pyobj = sipConvertFromType(val, klass, NULL);
-//	if (!pyobj) return false;
-//
-//  
-//	if (dict)
-//		PyDict_SetItemString(dict,name,&val);
-//	else
-//		PyDict_SetItemString(globals,name,&val);
-//        
-//	Py_DECREF(pyobj);
-//
-//	PyGILState_Release(state);
-	return true;
 }
 
 bool PythonScripting::setInt(int val, const char *name, PyObject *dict)

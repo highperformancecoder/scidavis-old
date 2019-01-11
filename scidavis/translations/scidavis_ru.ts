@@ -596,7 +596,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;: Неизвестный параметр командной строки или указанный файл не существует!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="+282"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="+286"/>
         <location line="+432"/>
         <source>Name</source>
         <translation type="unfinished">Имя</translation>
@@ -1011,12 +1011,12 @@ Do you want to overwrite it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+365"/>
+        <location line="+366"/>
         <source>Please select a Y column to plot!</source>
         <translation type="unfinished">Пожалуйста выберите колонку Y для отображения!</translation>
     </message>
     <message>
-        <location line="-12113"/>
+        <location line="-12114"/>
         <location line="+42"/>
         <location line="+876"/>
         <location line="+1"/>
@@ -1639,12 +1639,12 @@ Are you sure you want to continue?</source>
         <location line="+2"/>
         <location line="+2"/>
         <location line="+5082"/>
-        <location line="+1128"/>
+        <location line="+1129"/>
         <source>&amp;Properties...</source>
         <translation type="unfinished">&amp;Свойства...</translation>
     </message>
     <message>
-        <location line="-6202"/>
+        <location line="-6203"/>
         <source>Please use the project explorer to select a window!</source>
         <translation type="unfinished">Пожалуйста, используйте проводник проекта для выбора окна!</translation>
     </message>
@@ -1684,7 +1684,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">З&amp;ависимые 3D графики</translation>
     </message>
     <message>
-        <location line="+2475"/>
+        <location line="+2476"/>
         <location line="+18"/>
         <location line="+6"/>
         <source>D&amp;epends on</source>
@@ -1719,7 +1719,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">&amp;Вставить изображение</translation>
     </message>
     <message>
-        <location line="-5826"/>
+        <location line="-5827"/>
         <location line="+4"/>
         <location line="+5"/>
         <location line="+108"/>
@@ -3414,7 +3414,7 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">интенсивность точек (отн. ед.)</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+46"/>
         <source>The table &apos;%1&apos; already exists. It has been renamed &apos;%2&apos;.</source>
         <translation type="unfinished">Таблица &apos;%1&apos; уже существует. Она была переименована в &apos;%2&apos;.</translation>
     </message>
@@ -3423,7 +3423,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Матрица &apos;%1&apos; уже существует. Она была переименована в &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location line="+2617"/>
+        <location line="+2618"/>
         <location line="+7545"/>
         <source>Please enter a valid name!</source>
         <translation type="unfinished">Пожалуйста введите корректное название!</translation>
@@ -3945,7 +3945,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Детали &amp;построения...</translation>
     </message>
     <message>
-        <location line="+2736"/>
+        <location line="+2737"/>
         <source>D&amp;epending Graphs</source>
         <translation type="unfinished">&amp;Связанные графики</translation>
     </message>
@@ -3975,7 +3975,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Ctrl+Alt+O</translation>
     </message>
     <message>
-        <location line="-2785"/>
+        <location line="-2786"/>
         <location line="+390"/>
         <source>Ctrl+Return</source>
         <translation type="unfinished">Ctrl+Return</translation>
@@ -4808,18 +4808,18 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <location line="+503"/>
-        <location line="+12374"/>
+        <location line="+12375"/>
         <source>Please set a default X column for this table, first!</source>
         <translation type="unfinished">Пожалуйста установите сначала колонку X по умолчанию для данной таблицы!</translation>
     </message>
     <message>
-        <location line="-12364"/>
-        <location line="+12352"/>
+        <location line="-12365"/>
+        <location line="+12353"/>
         <source>Please select a column to plot!</source>
         <translation type="unfinished">Пожалуйста выберите колонку для отображения!</translation>
     </message>
     <message>
-        <location line="-12333"/>
+        <location line="-12334"/>
         <location line="+19"/>
         <source>Please select four columns for this operation!</source>
         <translation type="unfinished">Пожалуйста выберите четыре колонки для выполнения этой операции!</translation>
@@ -5248,7 +5248,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Введите столбец</translation>
     </message>
     <message>
-        <location line="+388"/>
+        <location line="+389"/>
         <location line="+37"/>
         <source>You need at least two columns for this operation!</source>
         <translation type="unfinished">Для выполнения этой операции необходимо как минимум две колонки!</translation>
@@ -5269,7 +5269,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Сначала необходимо задать колонку Y!</translation>
     </message>
     <message>
-        <location line="-13441"/>
+        <location line="-13442"/>
         <source>New Aspect</source>
         <translation type="unfinished">Новый ракурс</translation>
     </message>
@@ -5301,7 +5301,7 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+70"/>
         <location line="+1555"/>
         <location line="+46"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="+570"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="+573"/>
         <source>Graph</source>
         <translation type="unfinished">График</translation>
     </message>
@@ -5375,7 +5375,7 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+7"/>
         <location line="+757"/>
         <location line="+9"/>
-        <location line="+1114"/>
+        <location line="+1115"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+5"/>
@@ -5387,7 +5387,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location line="-12156"/>
+        <location line="-12157"/>
         <location line="+10"/>
         <location line="+63"/>
         <location line="+1073"/>
@@ -5452,12 +5452,12 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Загрузить изображение из файла</translation>
     </message>
     <message>
-        <location line="+403"/>
+        <location line="+402"/>
         <source>Renamed Window</source>
         <translation type="unfinished">Переименованное окно</translation>
     </message>
     <message>
-        <location line="+399"/>
+        <location line="+400"/>
         <source>Error bars error</source>
         <translation type="unfinished">Ошибка столбиков ошибки</translation>
     </message>
@@ -5604,7 +5604,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Загаловок верхней оси</translation>
     </message>
     <message>
-        <location line="+8534"/>
+        <location line="+8535"/>
         <source>Undo/Redo History</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5617,7 +5617,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Введите номер столбца</translation>
     </message>
     <message>
-        <location line="-8348"/>
+        <location line="-8349"/>
         <source>Column selection error</source>
         <translation type="unfinished">Ошибка выбора столбца</translation>
     </message>

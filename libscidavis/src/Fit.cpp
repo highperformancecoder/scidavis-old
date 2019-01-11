@@ -420,7 +420,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 Table* Fit::parametersTable(const QString& tableName)
 {
 	ApplicationWindow *app = (ApplicationWindow *)parent();
-	Table& t = app->newTable(tableName, d_p, 3);
+	Table& t = app->newTable(tableName.toStdString(), d_p, 3);
 	t.setHeader(QStringList() << tr("Parameter") << tr("Value") << tr ("Error"));
 	t.column(0)->setColumnMode(SciDAVis::Text);
 	t.column(1)->setColumnMode(SciDAVis::Numeric);
@@ -445,7 +445,7 @@ Table* Fit::parametersTable(const QString& tableName)
 Matrix* Fit::covarianceMatrix(const QString& matrixName)
 {
   ApplicationWindow *app = (ApplicationWindow *)parent();
-  Matrix& m = app->newMatrix(matrixName, d_p, d_p);
+  Matrix& m = app->newCaptionedMatrix(matrixName, d_p, d_p);
   for (unsigned i = 0; i < d_p; i++)
     {
       for (unsigned j = 0; j < d_p; j++)
