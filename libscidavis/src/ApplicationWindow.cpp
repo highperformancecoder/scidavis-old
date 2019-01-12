@@ -349,7 +349,7 @@ ApplicationWindow::ApplicationWindow()
 	connect(&lv, SIGNAL(addFolderItem()), this, SLOT(addFolder()));
 	connect(&lv, SIGNAL(deleteSelection()), this, SLOT(deleteSelectedItems()));
 	connect(&lv, SIGNAL(itemRenamed(QTreeWidgetItem *, int, const QString &)),
-			this, SLOT(renameWindow(QTreeWidgetItem *, int, const QString &)));
+			this, SLOT(renameWindow_(QTreeWidgetItem *, int, const QString &)));
 	connect(scriptEnv, SIGNAL(error(const QString&,const QString&,int)),
 			this, SLOT(scriptError(const QString&,const QString&,int)));
 	connect(scriptEnv, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
@@ -2139,7 +2139,7 @@ void ApplicationWindow::initPlot3D(Graph3D *plot)
 	customToolBars(plot);
 }
 
-Matrix* ApplicationWindow::importImageDialog()
+Matrix& ApplicationWindow::importImageDialog()
 {
 	QList<QByteArray> list = QImageReader::supportedImageFormats();
 	QString filter = tr("Images") + " (", aux1, aux2;
@@ -2156,7 +2156,11 @@ Matrix* ApplicationWindow::importImageDialog()
 		imagesDirPath = fi.absolutePath();
 		return importImage(fn);
 	}
-	else return 0;
+	else
+          {
+            static Matrix emptyMatrix;
+            return emptyMatrix;
+          }
 }
 
 void ApplicationWindow::loadImage()
@@ -9077,22 +9081,23 @@ void ApplicationWindow::intensityTable()
 		g->showIntensityTable();
 }
 
-Matrix* ApplicationWindow::importImage(const QString& fileName)
+Matrix& ApplicationWindow::importImage(const QString& fileName)
 {
+  static Matrix emptyMatrix; // TODO - use exceptions for error handling
   QImage image(fileName);
   if (image.isNull())
-    return NULL;
+    return emptyMatrix;
 
   Matrix* m = Matrix::fromImage(image, scriptEnv);
   if (!m) 
     {
       QMessageBox::information(0, tr("Error importing image"), tr("Import of image '%1' failed").arg(fileName));
-      return NULL;
+      return emptyMatrix;  
     }
   QString caption = generateUniqueName(tr("Matrix"));
   m->setName(caption);
   d_project->addChild(m->d_future_matrix);
-  return m;
+  return *m;
 }
 
 void ApplicationWindow::autoArrangeLayers()
@@ -10489,7 +10494,7 @@ void ApplicationWindow::createActions()
 
 	actionNewTable = new QAction(QIcon(QPixmap(":/table.xpm")), tr("New &Table"), this);
 	actionNewTable->setShortcut( tr("Ctrl+T") );
-	connect(actionNewTable, SIGNAL(triggered()), this, SLOT(newTable()));
+	connect(actionNewTable, SIGNAL(triggered()), this, SLOT(newEmptyTable()));
 
 	actionNewMatrix = new QAction(QIcon(QPixmap(":/new_matrix.xpm")), tr("New &Matrix"), this);
 	actionNewMatrix->setShortcut( tr("Ctrl+M") );
@@ -10513,7 +10518,7 @@ void ApplicationWindow::createActions()
 	connect(actionLoadImage, SIGNAL(triggered()), this, SLOT(loadImage()));
 
 	actionImportImage = new QAction(tr("Import I&mage..."), this);
-	connect(actionImportImage, SIGNAL(triggered()), this, SLOT(importImage()));
+	connect(actionImportImage, SIGNAL(triggered()), this, SLOT(importImageDialog()));
 
 	actionSaveProject = new QAction(QIcon(QPixmap(":/filesave.xpm")), tr("&Save Project"), this);
 	actionSaveProject->setShortcut( tr("Ctrl+S") );
@@ -10932,13 +10937,13 @@ void ApplicationWindow::createActions()
 	connect(actionPlot3DWireSurface, SIGNAL(triggered()), this, SLOT(plot3DWireSurface()));
 
 	actionColorMap = new QAction(QIcon(QPixmap(":/color_map.xpm")), tr("Contour - &Color Fill"), this);
-	connect(actionColorMap, SIGNAL(triggered()), this, SLOT(plotColorMap()));
+	connect(actionColorMap, SIGNAL(triggered()), this, SLOT(plotColorMap_()));
 
 	actionContourMap = new QAction(QIcon(QPixmap(":/contour_map.xpm")), tr("Contour &Lines"), this);
-	connect(actionContourMap, SIGNAL(triggered()), this, SLOT(plotContour()));
+	connect(actionContourMap, SIGNAL(triggered()), this, SLOT(plotContour_()));
 
 	actionGrayMap = new QAction(QIcon(QPixmap(":/gray_map.xpm")), tr("&Gray Scale Map"), this);
-	connect(actionGrayMap, SIGNAL(triggered()), this, SLOT(plotGrayScale()));
+	connect(actionGrayMap, SIGNAL(triggered()), this, SLOT(plotGrayScale_()));
 
 	actionCorrelate = new QAction(tr("Co&rrelate"), this);
 	connect(actionCorrelate, SIGNAL(triggered()), this, SLOT(correlate()));
