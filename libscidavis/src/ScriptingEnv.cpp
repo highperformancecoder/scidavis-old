@@ -38,7 +38,9 @@
 #ifdef SCRIPTING_PYTHON
 #include "PythonScript.h"
 #include "PythonScripting.h"
+#include <classdesc_epilogue.h>
 #endif
+
 
 	ScriptingEnv::ScriptingEnv(ApplicationWindow *parent, const char *langName)
 : QObject(0), d_parent(parent)

@@ -31,7 +31,6 @@
 
 #include "ScriptingEnv.h"
 #include "PythonScript.h"
-#include <boost/python.hpp>
 namespace py=boost::python;
 
 class QObject;

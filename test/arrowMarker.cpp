@@ -16,8 +16,8 @@ SUITE(ArrowMarker)
     {
       ArrowMarker arrow;
 
-      auto graph=newGraph();
-      auto layer=graph->activeGraph();
+      auto& graph=newGraph();
+      auto layer=graph.activeGraph();
       layer->addArrow(&arrow);
 
       arrow.attach(layer->d_plot);
@@ -37,7 +37,7 @@ SUITE(ArrowMarker)
       // test interaction with the mouse
       arrow.setEditable(true);
       layer->replot();
-      graph->exportImage("arrowEditable.png");
+      graph.exportImage("arrowEditable.png");
       auto oldr=bbox.right(), oldl=bbox.left(), oldt=bbox.top(), oldb=bbox.bottom();
       auto midx=(oldl+oldr)/2, midy=(oldb+oldt)/2;
       {

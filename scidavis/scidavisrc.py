@@ -72,7 +72,7 @@ for name in dir(scidavis):
 
 # import selected methods of ApplicationWindow into the global namespace
 appImports = (
-	"table", 
+	"table","newTable",
 	"matrix", 
 	"newGraph",
 	"newNote",
@@ -82,17 +82,6 @@ appImports = (
 	)
 for name in appImports:
 	setattr(__main__,name,getattr(app,name))
-
-# overloaded functions defined here
-def newTable(*args):
-        if len(args)==0:
-                return app.newEmptyTable()
-        else:
-                rows=30
-                cols=2
-                if len(args)>1: rows=args[1]
-                if len(args)>2: cols=args[2]
-                return app.newTable(args[0],rows,cols)
 
 def newMatrix(*args):
         if len(args)==0:
@@ -110,9 +99,9 @@ def importImage(filename=""):
         else:
                 return app.importImage(filename)
         
-graph=app.current_folder.graph
-note=app.current_folder.note
-def activeFolder(): return app.current_folder
+#graph=app.currentFolder().graph
+#note=app.currentFolder().note
+def activeFolder(): return app.currentFolder()
 rootFolder=app.projectFolder
 
 # make Y columns indexable (using lookup in corresponding X column)
@@ -134,7 +123,7 @@ def __column_getitem(self, index):
               return self.textAt(row)
           else:
               return self.dateTimeAt(row)
-__main__.scidavis.Column.__getitem__ = __column_getitem
+#__main__.scidavis.Column.__getitem__ = __column_getitem
 
 def __column_setitem(self, index, value):
   if self.plotDesignation() != "Y":
@@ -154,7 +143,7 @@ def __column_setitem(self, index, value):
               return self.setTextAt(row, value)
           else:
               return self.setDateTimeAt(row, value)
-__main__.scidavis.Column.__setitem__ = __column_setitem
+#__main__.scidavis.Column.__setitem__ = __column_setitem
 
 # import utility module
 import sys
