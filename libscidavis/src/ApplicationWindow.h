@@ -317,8 +317,13 @@ public slots:
 
   //! \name Multilayer Plots
   //@{
+  /// python use
+  MultiLayer& plot(Table& t,const std::string& col,int style=1,int colour=-1)
+  {return plot(t,std::vector<std::string>{col},style,colour);}
+  MultiLayer& plot(Table&,const std::vector<std::string>& colList,int style=1,int colour=-1);
+  ///used when plotting from the panel menu
   MultiLayer* multilayerPlot(int c, int r, int style);
-  MultiLayer* multilayerPlot(Table* w, const QStringList& colList, int style, int startRow = 0, int endRow = -1);
+  MultiLayer* multilayerPlot(Table* w, const QStringList& colList, int style=1, int startRow = 0, int endRow = -1);
   //! used when restoring a plot from a project file
   MultiLayer* multilayerPlot(const QString& caption);
   //! used by the plot wizard
@@ -403,9 +408,9 @@ public slots:
   //@{
   /// @throws NoSuchObject if no such matrix exists
   Matrix& matrix(const QString& name);
-  Matrix& newMatrix(int rows = 32, int columns = 32) {return newCaptionedMatrix(tr("Matrix"),rows,columns);}
+  Matrix& newDefaultMatrix(int r, int c) {return newMatrix(tr("Matrix"),r,c);}
   //! To be used when opening a project file only!
-  Matrix& newCaptionedMatrix(const QString& caption, int r, int c);
+  Matrix& newMatrix(const QString& caption=tr("Matrix"), int r=32, int c=32);
   void initMatrix(Matrix* m);
   void invertMatrix();
   void matrixDeterminant();

@@ -2247,6 +2247,17 @@ MultiLayer& ApplicationWindow::newGraph(const QString& caption)
   return *ml; //TODO is ml owned by anything?
 }
 
+MultiLayer& ApplicationWindow::plot(Table& table,const std::vector<std::string>& colList,int style,int colour)
+{
+  QStringList cl;
+  for (auto i: colList) cl<<i.c_str();
+  if (auto pl=multilayerPlot(&table,cl,style))
+    return *pl;
+  else
+    throw NoSuchObject();
+}
+
+
 MultiLayer* ApplicationWindow::multilayerPlot(Table* w, const QStringList& colList, int style, int startRow, int endRow)
 {//used when plotting selected columns
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -2696,7 +2707,7 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 	emit modified();
 }
 
-Matrix& ApplicationWindow::newCaptionedMatrix(const QString& caption, int r, int c)
+Matrix& ApplicationWindow::newMatrix(const QString& caption, int r, int c)
 {
 	Matrix* w = new Matrix(scriptEnv, r, c, "", 0 ,0);
 	QString name = caption;
@@ -4157,7 +4168,7 @@ void ApplicationWindow::openTemplate()
                   if (templateType == "<table>")
                     w = &newTable(tr("Table1").toStdString(), rows, cols);
                   else if (templateType == "<matrix>")
-                    w = &newMatrix(rows, cols);
+                    w = &newDefaultMatrix(rows, cols);
                   if (w)
                     {
                       QStringList lst;
@@ -7226,7 +7237,7 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
     ((Graph3D *)nw)->copy(g);
     customToolBars((MyWidget*)nw);
   } else if (w->inherits("Matrix")){
-    nw = &newMatrix(((Matrix *)w)->numRows(), ((Matrix *)w)->numCols());
+    nw = &newDefaultMatrix(((Matrix *)w)->numRows(), ((Matrix *)w)->numCols());
     ((Matrix *)nw)->copy((Matrix *)w);
   } else if (w->inherits("Note")){
     nw = &newNote();
@@ -9178,7 +9189,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 		int rows = list[1].toInt();
 		int cols = list[2].toInt();
 
-		Matrix& w = app->newCaptionedMatrix(caption, rows, cols);
+		Matrix& w = app->newMatrix(caption, rows, cols);
 		app->setListViewDate(caption,list[3]);
 		w.setBirthDate(list[3]);
 
@@ -9245,7 +9256,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 	}
 	else
 	{
-		Matrix& w = app->newCaptionedMatrix("matrix", 1, 1);
+		Matrix& w = app->newMatrix("matrix", 1, 1);
 		int length = flist.at(0).toInt();
 		int index = 1;
 		QString xml(flist.at(index++));
@@ -10494,7 +10505,7 @@ void ApplicationWindow::createActions()
 
 	actionNewTable = new QAction(QIcon(QPixmap(":/table.xpm")), tr("New &Table"), this);
 	actionNewTable->setShortcut( tr("Ctrl+T") );
-	connect(actionNewTable, SIGNAL(triggered()), this, SLOT(newEmptyTable()));
+	connect(actionNewTable, SIGNAL(triggered()), this, SLOT(newTable()));
 
 	actionNewMatrix = new QAction(QIcon(QPixmap(":/new_matrix.xpm")), tr("New &Matrix"), this);
 	actionNewMatrix->setShortcut( tr("Ctrl+M") );

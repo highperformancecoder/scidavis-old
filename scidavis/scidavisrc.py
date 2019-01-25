@@ -32,6 +32,7 @@ from __future__ import print_function
 import __main__
 import scidavis
 
+
 def import_to_global(modname, attrs=None, math=False):
 	"""
 		import_to_global(modname, (a,b,c,...), math): like "from modname import a,b,c,...",
@@ -54,7 +55,7 @@ def import_to_global(modname, attrs=None, math=False):
 
 # Import standard math functions and constants into global namespace.
 import_to_global("math", None, True)
-
+ 
 ## make Qt API available (it gets imported in any case by the scidavis module)
 #global QtGui, QtCore, Qt
 #if (scidavis.app.qtVersion() >= 0x050000):
@@ -73,31 +74,18 @@ for name in dir(scidavis):
 # import selected methods of ApplicationWindow into the global namespace
 appImports = (
 	"table","newTable",
-	"matrix", 
+	"matrix","newMatrix",
 	"newGraph",
 	"newNote",
+        "plot",
 	"plotContour", "plotColorMap", "plotGrayScale",
 	"saveFolder",
+        "importImage",
 	"renameWindow" 
 	)
 for name in appImports:
 	setattr(__main__,name,getattr(app,name))
 
-def newMatrix(*args):
-        if len(args)==0:
-                return app.newMatrix()
-        else:
-                rows=32
-                cols=32
-                if len(args)>1: rows=args[1]
-                if len(args)>2: cols=args[2]
-                return app.newCaptionedMatrix(args[0],rows,cols)
-
-def importImage(filename=""):
-        if (filename==""):
-                return app.importImageDialog()
-        else:
-                return app.importImage(filename)
         
 #graph=app.currentFolder().graph
 #note=app.currentFolder().note
@@ -353,3 +341,5 @@ try:
 		import_to_global("pygsl.sf", special_functions_doublets, True)
 		print("Loaded %d special functions from pygsl.sf." % (len(special_functions) + len(special_functions_doublets)))
 except(ImportError): pass
+
+from __main__ import *

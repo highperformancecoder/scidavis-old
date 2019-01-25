@@ -63,7 +63,7 @@ public:
   Table(ScriptingEnv *env, int r,int c, const QString &label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
 
   //! Sets the number of significant digits
-  void setNumericPrecision(int prec);
+  //void setNumericPrecision(int prec);
 
   //! Return the window name
   virtual QString name() { return d_future_table? d_future_table->name(): QString();} 

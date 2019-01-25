@@ -524,7 +524,7 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 			int columnCount = layer.columnCount;
 			int rowCount = layer.rowCount;
 			mw->setStatusBarText(QString("Matrix %1 / %2, sheet %3 / %4").arg(s+1).arg(opj.matrixCount()).arg(l+1).arg(layers));
-			Matrix& Matrix=mw->newCaptionedMatrix(matrix.name.c_str(), rowCount, columnCount);
+			Matrix& Matrix=mw->newMatrix(matrix.name.c_str(), rowCount, columnCount);
 			Matrix.setWindowLabel(matrix.label.c_str());
 			Matrix.setFormula(layer.command.c_str());
 			Matrix.setColumnsWidth(layer.width * SciDAVis_scaling_factor);

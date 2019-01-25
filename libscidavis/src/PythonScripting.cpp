@@ -73,6 +73,8 @@ typedef struct _traceback {
 #include "Script.cd"
 #include "ArrowMarker.h"
 #include "ArrowMarker.cd"
+#include "Table.h"
+#include "Table.cd"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -152,6 +154,16 @@ namespace classdesc
     static string name() {return "QList<"+typeName<T>()+">";}
   };
 
+  template <class T> struct tn<QPointer<T>>
+  {
+    static string name() {return "QPointer<"+typeName<T>()+">";}
+  };
+
+  template <class K, class V> struct tn<QMap<K,V>>
+  {
+    static string name() {return "QMap<"+typeName<K>()+","+typeName<V>()+">";}
+  };
+
 
   template <class T> struct tn
   {
@@ -184,7 +196,12 @@ namespace classdesc
 
 const char* PythonScripting::langName = "Python";
 
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newTablesii,newTable,1,3);
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newTableSII,newTable,1,3);
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newMatrixSII,newMatrix,0,3);
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newGraphS,newGraph,0,1);
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newNoteS,newNote,0,1);
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_plotTVSII,plot,2,4);
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_plotTSII,plot,2,4);
 
 BOOST_PYTHON_MODULE(scidavis)
 {
@@ -192,10 +209,20 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<ApplicationWindow>();
   // overload handling
   Table& (ApplicationWindow::*newTable)()=&ApplicationWindow::newTable;
-  Table& (ApplicationWindow::*newTablesii)(const std::string&,int,int)=&ApplicationWindow::newTable;
+  Table& (ApplicationWindow::*newTableSII)(const std::string&,int,int)=&ApplicationWindow::newTable;
+  MultiLayer& (ApplicationWindow::*plotTSII)(Table&,const std::string&, int, int)
+    =&ApplicationWindow::plot;
+  MultiLayer& (ApplicationWindow::*plotTVSII)(Table&,const std::vector<std::string>&, int, int)
+    =&ApplicationWindow::plot;
   p.getClass<ApplicationWindow>().
     overload("newTable",newTable).
-    overload("newTable",newTablesii,ApplicationWindow_newTablesii());
+    overload("newTable",newTableSII,ApplicationWindow_newTableSII()).
+    overload("newMatrix",&ApplicationWindow::newMatrix,ApplicationWindow_newMatrixSII()).
+    overload("newGraph",&ApplicationWindow::newGraph,ApplicationWindow_newGraphS()).
+    overload("newNote",&ApplicationWindow::newNote,ApplicationWindow_newNoteS()).
+    overload("plot",plotTSII,ApplicationWindow_plotTSII()).
+    overload("plot",plotTVSII,ApplicationWindow_plotTVSII());
+    
 
   p.defineClass<PythonScripting>();
   p.defineClass<PythonScript>();
@@ -421,7 +448,7 @@ bool PythonScripting::initialize()
   if(!initialized) initialized = loadInitFile("scidavisrc");
 
   //	PyEval_ReleaseLock();
-  return true;
+  return initialized;
 }
 
 PythonScripting::~PythonScripting()
@@ -437,7 +464,6 @@ PythonScripting::~PythonScripting()
 
 bool PythonScripting::loadInitFile(const QString &path)
 {
-  return true;
 	PyRun_SimpleString("import sys\nsys.path.append('" PYTHON_UTIL_PATH "')"); 
 	QFileInfo pyFile(path+".py"), pycFile(path+".pyc");
 	bool success = false;

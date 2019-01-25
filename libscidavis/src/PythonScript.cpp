@@ -64,7 +64,8 @@ PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *c
   modGlobalDict.update(modLocalDict);
   if (!py::exec(
            "import __main__\n"
-           "globals = __main__",
+           "globals = __main__\n"
+           "from __main__ import *",
            modGlobalDict, modLocalDict))
     PyErr_Print();
 

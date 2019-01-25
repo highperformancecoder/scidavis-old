@@ -445,7 +445,7 @@ Table* Fit::parametersTable(const QString& tableName)
 Matrix* Fit::covarianceMatrix(const QString& matrixName)
 {
   ApplicationWindow *app = (ApplicationWindow *)parent();
-  Matrix& m = app->newCaptionedMatrix(matrixName, d_p, d_p);
+  Matrix& m = app->newMatrix(matrixName, d_p, d_p);
   for (unsigned i = 0; i < d_p; i++)
     {
       for (unsigned j = 0; j < d_p; j++)
