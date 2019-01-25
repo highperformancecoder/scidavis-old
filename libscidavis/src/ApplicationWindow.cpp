@@ -2521,7 +2521,7 @@ void ApplicationWindow::setPreferences(Graph* g)
 
 void ApplicationWindow::newWrksheetPlot(const QString& name,const QString& label, QList<Column *> columns)
 {
-	Table& w = newTableAscii(name, label, columns);
+	Table& w = newTable(name, label, columns);
 	MultiLayer* plot=multilayerPlot(&w, QStringList(QString(w.name())+"_intensity"), 0);
 	Graph *g=(Graph*)plot->activeGraph();
 	if (g)
@@ -2535,7 +2535,7 @@ void ApplicationWindow::newWrksheetPlot(const QString& name,const QString& label
 /*
  *used when importing an ASCII file
  */
-Table& ApplicationWindow::newTableAscii(const QString& fname, const QString &sep,
+Table& ApplicationWindow::newTable(const QString& fname, const QString &sep,
 		int lines, bool renameCols, bool stripSpaces,
 		bool simplifySpaces, bool convertToNumeric, QLocale numericLocale)
 {
@@ -2550,38 +2550,10 @@ Table& ApplicationWindow::newTableAscii(const QString& fname, const QString &sep
 	return *w;
 }
 
-pyref<Table> ApplicationWindow::newTable(const pytuple& args, const pydict& kwargs)
-{
-  Q_UNUSED(args);
-  Q_UNUSED(kwargs);
-#ifdef SCRIPTING_PYTHON
-  switch (py::len(args))
-    {
-    case 0:
-      throw NoSuchObject();
-    case 1:
-      return py::ptr(&py::extract<ApplicationWindow&>(args[0])().newEmptyTable());
-    default:
-      {
-        int r=30, c=2;
-        if (len(args)>2)
-          r=py::extract<int>(args[2]);
-        if (len(args)>3)
-          c=py::extract<int>(args[3]);
-        return py::ptr(&py::extract<ApplicationWindow&>(args[0])().
-                       newTable_(py::extract<std::string>(args[1]), r, c));
-      }
-    }
-#else
-  throw NoSuchObject;
-#endif
-}
-
-
 /*
  *creates a new empty table
  */
-Table& ApplicationWindow::newEmptyTable()
+Table& ApplicationWindow::newTable()
 {
 	Table* w = new Table(scriptEnv, 30, 2, "", &d_workspace, 0);
 	w->setName(generateUniqueName(tr("Table")));
@@ -2592,7 +2564,7 @@ Table& ApplicationWindow::newEmptyTable()
 /*
  *used when opening a project file
  */
-Table& ApplicationWindow::newTable_(const std::string& caption, int r, int c)
+Table& ApplicationWindow::newTable(const std::string& caption, int r, int c)
 {
   assert(scriptEnv);
 	Table* w = new Table(scriptEnv, r, c, "", &d_workspace, 0);
@@ -2608,7 +2580,7 @@ Table& ApplicationWindow::newTable_(const std::string& caption, int r, int c)
 	return *w;
 }
 
-Table& ApplicationWindow::newTable_(int r, int c, const QString& name, const QString& legend)
+Table& ApplicationWindow::newTable(int r, int c, const QString& name, const QString& legend)
 {
   assert(scriptEnv);
 	Table* w = new Table(scriptEnv, r, c, legend, &d_workspace, 0);
@@ -2617,7 +2589,7 @@ Table& ApplicationWindow::newTable_(int r, int c, const QString& name, const QSt
 	return *w;
 }
 
-Table& ApplicationWindow::newTableAscii(const QString& name, const QString& legend, QList<Column *> columns)
+Table& ApplicationWindow::newTable(const QString& name, const QString& legend, QList<Column *> columns)
 {
   assert(scriptEnv);
 	Table* w = new Table(scriptEnv, 0, 0, legend, &d_workspace, 0);
@@ -2629,7 +2601,7 @@ Table& ApplicationWindow::newTableAscii(const QString& name, const QString& lege
 
 Table& ApplicationWindow::newHiddenTable(const QString& name, const QString& label, QList<Column *> columns)
 {
-  auto& w=newTableAscii(name,label,columns);
+  auto& w=newTable(name,label,columns);
   hideWindow(&w);
   return w;
 }
@@ -3327,7 +3299,7 @@ ApplicationWindow* ApplicationWindow::plotFile(const QString& fn)
 	app->applyUserSettings();
 	app->showMaximized();
 
-	Table& t = app->newTableAscii(fn, app->columnSeparator, 0, true, app->strip_spaces,
+	Table& t = app->newTable(fn, app->columnSeparator, 0, true, app->strip_spaces,
 			app->simplify_spaces, app->d_convert_to_numeric, app->d_ASCII_import_locale);
 	t.setCaptionPolicy(MyWidget::Both);
 	app->multilayerPlot(&t, t.YColumns(),Graph::LineSymbols);
@@ -3379,7 +3351,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 		sorted_files.sort();
 		for (int i=0; i<sorted_files.size(); i++)
 		{
-			Table& w = newTableAscii(sorted_files[i], local_column_separator, local_ignored_lines,
+			Table& w = newTable(sorted_files[i], local_column_separator, local_ignored_lines,
 					local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric, local_numeric_locale);
 			w.setCaptionPolicy(MyWidget::Both);
 			setListViewLabel(w.name(), sorted_files[i]);
@@ -4183,7 +4155,7 @@ void ApplicationWindow::openTemplate()
               else
                 {
                   if (templateType == "<table>")
-                    w = &newTable_(tr("Table1").toStdString(), rows, cols);
+                    w = &newTable(tr("Table1").toStdString(), rows, cols);
                   else if (templateType == "<matrix>")
                     w = &newMatrix(rows, cols);
                   if (w)
@@ -7227,7 +7199,7 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
   } else if (w->inherits("Table")){
     Table *t = (Table *)w;
     QString caption = generateUniqueName(tr("Table"));
-    nw = &newTable_(caption.toStdString(), t->numRows(), t->numCols());
+    nw = &newTable(caption.toStdString(), t->numRows(), t->numCols());
     ((Table *)nw)->copy(t);
   } else if (w->inherits("Graph3D")){
     Graph3D *g = (Graph3D *)w;
@@ -7625,7 +7597,7 @@ void ApplicationWindow::newProject()
 
 	ApplicationWindow *ed = new ApplicationWindow();
 	ed->applyUserSettings();
-	ed->newEmptyTable();
+	ed->newTable();
 
 	if (this->isMaximized())
 		ed->showMaximized();
@@ -9321,7 +9293,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 		int rows = list[1].toInt();
 		int cols = list[2].toInt();
 
-		Table& w = app->newTable_(caption.toStdString(), rows, cols);
+		Table& w = app->newTable(caption.toStdString(), rows, cols);
 		app->setListViewDate(caption, list[3]);
 		w.setBirthDate(list[3]);
 
@@ -9431,7 +9403,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 		if (tmp_file.isOpen())
 			reader.setDevice(&tmp_file);
 
-		Table& w = app->newTable_("table", 1, 1);
+		Table& w = app->newTable("table", 1, 1);
 		reader.readNext();
 		reader.readNext(); // read the start document
 		if (w.d_future_table->load(&reader) == false)

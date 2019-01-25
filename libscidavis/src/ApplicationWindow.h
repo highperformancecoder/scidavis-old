@@ -88,19 +88,6 @@ class AbstractAspect;
 using std::unique_ptr;
 using std::shared_ptr;
 
-#ifdef SCRIPTING_PYTHON
-#include <boost/python.hpp>
-typedef boost::python::tuple pytuple;
-typedef boost::python::dict pydict;
-template <class T> using pyref=boost::python::pointer_wrapper<T*>;
-#else
-// required for defining varargs Python methods
-struct pytuple;
-struct pydict;
-struct pyobject;
-template <class T> struct pyref;
-#endif
-
 #ifndef TS_PATH
 #define TS_PATH (qApp->applicationDirPath() + "/translations")
 #endif
@@ -426,20 +413,18 @@ public slots:
 
   //! \name Tables
   //@{
-  /// python interface
-  static pyref<Table> newTable(const pytuple& args, const pydict& kwargs);
 
   //! Creates an empty table
-  Table& newEmptyTable();
+  Table& newTable();
   //! Used when importing an ASCII file
-  Table& newTableAscii(const QString& fname, const QString &sep, int lines,
+  Table& newTable(const QString& fname, const QString &sep, int lines,
                   bool renameCols, bool stripSpaces, bool simplifySpaces,
                   bool convertToNumeric, QLocale numericLocale);
   //! Used when loading a table from a project file
-  Table& newTable_(const std::string& caption,int r, int c);
-  Table& newTable_(int r, int c, const QString& name = QString(),const QString& legend = QString());
+  Table& newTable(const std::string& caption,int r=30, int c=2);
+  Table& newTable(int r, int c, const QString& name = QString(),const QString& legend = QString());
   /// used when importing an ASCII file
-  Table& newTableAscii(const QString& name, const QString& legend, QList<Column *> columns);
+  Table& newTable(const QString& name, const QString& legend, QList<Column *> columns);
   /**
    * \brief Create a Table which is initially hidden; used to return the result of an analysis operation.
    *

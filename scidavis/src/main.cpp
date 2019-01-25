@@ -177,7 +177,7 @@ int main( int argc, char ** argv )
 	} else {
           ApplicationWindow* mw=new ApplicationWindow;
 		mw->applyUserSettings();
-		mw->newEmptyTable();
+		mw->newTable();
 		mw->activateSubWindow();
 		mw->savedProject();
 #ifdef SEARCH_FOR_UPDATES

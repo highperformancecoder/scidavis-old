@@ -30,7 +30,7 @@ SUITE(ApplicationWindow)
 
   TEST_FIXTURE(ApplicationWindow, basicWindowTests)
     {
-      auto& t=newEmptyTable();
+      auto& t=newTable();
       CHECK(t.name()!="xxx");
       renameWindow(&t,"xxx");
       CHECK_EQUAL("xxx", t.name());
@@ -46,7 +46,7 @@ SUITE(ApplicationWindow)
 
   TEST_FIXTURE(ApplicationWindow, deleteSelectedItems)
     {
-      auto& t=newEmptyTable();
+      auto& t=newTable();
       bool found=false;
       QList<MyWidget*> windows = windowsList();
       for (auto i: windows)
@@ -78,7 +78,7 @@ SUITE(ApplicationWindow)
       }
 
       // add a table, and check it pops up the window menu
-      auto& t=newEmptyTable();
+      auto& t=newTable();
       addListViewItem(&t);
 
       // TODO add some more items like folder views etc to this test

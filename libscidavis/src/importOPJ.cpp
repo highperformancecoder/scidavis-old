@@ -207,7 +207,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
   if(!columnCount) //remove tables without cols
     return false;
 
-  Table& table = mw->newTable_(spread.name.c_str(), maxrows, columnCount);
+  Table& table = mw->newTable(spread.name.c_str(), maxrows, columnCount);
   if (spread.hidden || spread.loose)
     mw->hideWindow(&table);
 

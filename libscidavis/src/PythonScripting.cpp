@@ -184,10 +184,19 @@ namespace classdesc
 
 const char* PythonScripting::langName = "Python";
 
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newTablesii,newTable,1,3);
+
 BOOST_PYTHON_MODULE(scidavis)
 {
   classdesc::python_t p;
   p.defineClass<ApplicationWindow>();
+  // overload handling
+  Table& (ApplicationWindow::*newTable)()=&ApplicationWindow::newTable;
+  Table& (ApplicationWindow::*newTablesii)(const std::string&,int,int)=&ApplicationWindow::newTable;
+  p.getClass<ApplicationWindow>().
+    overload("newTable",newTable).
+    overload("newTable",newTablesii,ApplicationWindow_newTablesii());
+
   p.defineClass<PythonScripting>();
   p.defineClass<PythonScript>();
   p.defineClass<ArrowMarker>();

@@ -420,7 +420,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 Table* Fit::parametersTable(const QString& tableName)
 {
 	ApplicationWindow *app = (ApplicationWindow *)parent();
-	Table& t = app->newTable_(tableName.toStdString(), d_p, 3);
+	Table& t = app->newTable(tableName.toStdString(), d_p, 3);
 	t.setHeader(QStringList() << tr("Parameter") << tr("Value") << tr ("Error"));
 	t.column(0)->setColumnMode(SciDAVis::Text);
 	t.column(1)->setColumnMode(SciDAVis::Numeric);
