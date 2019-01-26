@@ -7452,7 +7452,7 @@ void ApplicationWindow::windowsMenuAboutToShow()
 		return;
 
 	windowsMenu->clear();
-	windowsMenu->addAction(tr("&Cascade"), &d_workspace, SLOT(cascadeSubWindows() ) );
+	windowsMenu->addAction(tr("&Cascade"), this, SLOT(cascade() ) );
 	windowsMenu->addAction(tr("&Tile"), &d_workspace, SLOT(tileSubWindows() ) );
 	windowsMenu->addSeparator();
 	windowsMenu->addAction(actionNextWindow);
