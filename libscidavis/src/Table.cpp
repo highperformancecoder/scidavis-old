@@ -306,7 +306,7 @@ void Table::print(const QString& fileName)
 		for(int j=0;j<cols;j++)
 		{
 			int w = columnWidth (j);
-			cell_text = text(i,j)+"\t";
+			cell_text = column(j)->textAt(i)+"\t";
 			tr = p.boundingRect(tr,Qt::AlignCenter,cell_text);
 			br.setTopLeft(QPoint(right,height));
 			br.setWidth(w);
@@ -907,38 +907,44 @@ int Table::columnCount()
 
 double Table::cell(int row, int col)
 {
-	Column *colPtr = column(col);
-	if (!colPtr) return 0.0;
-	if (!colPtr->isInvalid(row)) {
-		if (colPtr->columnMode() == SciDAVis::Text) {
-			QString yval = colPtr->textAt(row);
-			bool valid_data = true;
-			double dbval = QLocale().toDouble(yval, &valid_data);
-			if (!valid_data)
-				return 0.0;
-			return dbval;
-		}
-		return colPtr->valueAt(row);
-	}
-	else
-		return 0.0;
+  // python interface uses 1-based indices
+  row--; 
+  col--;
+  Column *colPtr = column(col);
+  if (!colPtr) return 0.0;
+  if (!colPtr->isInvalid(row)) {
+    if (colPtr->columnMode() == SciDAVis::Text) {
+      QString yval = colPtr->textAt(row);
+      bool valid_data = true;
+      double dbval = QLocale().toDouble(yval, &valid_data);
+      if (!valid_data)
+        return 0.0;
+      return dbval;
+    }
+    return colPtr->valueAt(row);
+  }
+  else
+    return 0.0;
 }
 
 void Table::setCell(int row, int col, double val)
 {
-	column(col)->setValueAt(row, val);
+  row--; col--;
+  column(col)->setValueAt(row, val);
 }
 
 QString Table::text(int row, int col)
 {
-	Column *colPtr = column(col);
-	if (!colPtr) return QString();
-	return colPtr->asStringColumn()->textAt(row);
+  row--; col--;
+  Column *colPtr = column(col);
+  if (!colPtr) return QString();
+  return colPtr->asStringColumn()->textAt(row);
 }
 
 void Table::setText(int row, int col, const QString & text)
 {
-	column(col)->asStringColumn()->setTextAt(row, text);
+  row--; col--;
+  column(col)->asStringColumn()->setTextAt(row, text);
 }
 
 void Table::importV0x0001XXHeader(QStringList header)

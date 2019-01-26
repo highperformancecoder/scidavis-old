@@ -408,7 +408,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 
                               int col = t.colIndex(colName);
                               for (unsigned i=0; i<d_n; i++)
-                                d_y_errors[i] = t.cell(i, col);
+                                d_y_errors[i] = t.column(col)->valueAt(i);
                             }
                           catch (NoSuchObject&) {return false;}
 			}

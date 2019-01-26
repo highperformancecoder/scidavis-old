@@ -2761,7 +2761,7 @@ Table* ApplicationWindow::convertMatrixToTable()
 	for (int i = 0; i<rows; i++)
 	{
 		for (int j = 0; j<cols; j++)
-			w->setCell(i, j, m->cell(i,j));
+                  w->column(j)->setValueAt(i, m->cell(i,j));
 	}
 
 	w->setName(generateUniqueName(tr("Table")));
@@ -2813,7 +2813,7 @@ Matrix* ApplicationWindow::convertTableToMatrix()
 	for (int i = 0; i<rows; i++)
 	{
 		for (int j = 0; j<cols; j++)
-			w->setText(i, j, m->text(i,j));
+                  w->setText(i, j, m->column(j)->asStringColumn()->textAt(i));
 	}
 
 	QString caption = generateUniqueName(m->name());
@@ -9367,11 +9367,11 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 						continue;
 
 					if (d_file_version < 90 && w.columnType(col) == SciDAVis::Numeric)
-						w.setCell(row, col, QLocale::c().toDouble(cell.replace(",", ".")));
+                                          w.column(col)->setValueAt(row, QLocale::c().toDouble(cell.replace(",", ".")));
 					else if (d_file_version >= 0x000100 && w.columnType(col) == SciDAVis::Numeric)
-						w.setCell(row, col, QLocale().toDouble(cell));
+                                          w.column(col)->setValueAt(row, QLocale().toDouble(cell));
 					else
-						w.setText(row, col, cell);
+                                          w.column(col)->setTextAt(row, cell);
 				}
 			}
 			if (t.elapsed() > 1000)

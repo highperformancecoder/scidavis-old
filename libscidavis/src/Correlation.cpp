@@ -89,8 +89,8 @@ void Correlation::setDataFromTable(Table *t, const QString& colName1, const QStr
 		memset( d_y, 0, d_n * sizeof( double ) );
 		for(unsigned i=0; i<rows; i++)
 		{
-			d_x[i] = d_table->cell(i, col1);
-			d_y[i] = d_table->cell(i, col2);
+                  d_x[i] = d_table->column(col1)->valueAt(i);
+                  d_y[i] = d_table->column(col2)->valueAt(i);
 		}
 	}
 	else

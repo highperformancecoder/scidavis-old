@@ -78,7 +78,7 @@ void Convolution::setDataFromTable(Table *t, const QString& signalColName, const
 	int rows = d_table->numRows();
 	for (int i=0; i<rows; i++)
 	{
-		if (!d_table->text(i, response_col).isEmpty())
+          if (!d_table->column(response_col)->textAt(i).isEmpty())
 			d_n_response++;
 	}
 	if (d_n_response >= rows/2)
@@ -109,9 +109,9 @@ void Convolution::setDataFromTable(Table *t, const QString& signalColName, const
 	{
 		memset( d_x, 0, d_n_signal * sizeof( double ) );// zero-pad signal data array
 		for(unsigned i=0; i<d_n; i++)
-			d_x[i] = d_table->cell(i, signal_col);
+                  d_x[i] = d_table->column(signal_col)->valueAt(i);
 		for(int i=0; i<d_n_response; i++)
-			d_y[i] = d_table->cell(i, response_col);
+                  d_y[i] = d_table->column(response_col)->valueAt(i);
 	}
 	else
 	{

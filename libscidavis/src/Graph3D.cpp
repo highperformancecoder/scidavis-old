@@ -268,9 +268,9 @@ void Graph3D::addData(Table* table, int xcol, int ycol)
 		{
 			if (!table->column(xcol)->isInvalid(i) && !table->column(ycol)->isInvalid(i))
 			{
-				gsl_vector_set (x, k, table->cell(i, xcol));
+                          gsl_vector_set (x, k, table->column(xcol)->valueAt(i));
 
-				double yv = table->cell(i, ycol);
+                          double yv = table->column(ycol)->valueAt(i);
 				gsl_vector_set (y, k, yv);
 				data[k][j] = yv;
 				k++;
@@ -382,7 +382,7 @@ void Graph3D::addData(Table* table,const QString& xColName,const QString& yColNa
 	{
 		if (!table->column(xcol)->isInvalid(i) && !table->column(ycol)->isInvalid(i))
 		{
-			xv=table->cell(i, xcol);
+                  xv=table->column(xcol)->valueAt(i);
 			if (xv>=xl && xv <= xr)
 				xmesh++;
 		}
@@ -394,25 +394,25 @@ void Graph3D::addData(Table* table,const QString& xColName,const QString& yColNa
 	double **data = Matrix::allocateMatrixData(xmesh, ymesh);
 	for ( j = 0; j < ymesh; j++)
 	{
-		int k=0;
-		for ( i = 0; i < r; i++)
-		{
-			if (!table->column(xcol)->isInvalid(i) && !table->column(ycol)->isInvalid(i))
-			{
-				xv=table->cell(i,xcol);
-				if (xv>=xl && xv <= xr)
-				{
-					yv=table->cell(i,ycol);
-					if (yv > zr)
-						data[k][j] = zr;
-					else if (yv < zl)
-						data[k][j] = zl;
-					else
-						data[k][j] = yv;
-					k++;
-				}
-			}
-		}
+          int k=0;
+          for ( i = 0; i < r; i++)
+            {
+              if (!table->column(xcol)->isInvalid(i) && !table->column(ycol)->isInvalid(i))
+                {
+                  xv=table->column(xcol)->valueAt(i);
+                  if (xv>=xl && xv <= xr)
+                    {
+                      yv=table->column(ycol)->valueAt(i);
+                      if (yv > zr)
+                        data[k][j] = zr;
+                      else if (yv < zl)
+                        data[k][j] = zl;
+                      else
+                        data[k][j] = yv;
+                      k++;
+                    }
+                }
+            }
 	}
 	sp->makeCurrent();
 	sp->loadFromData(data, xmesh, ymesh, xl, xr, yl, yr);
@@ -470,19 +470,19 @@ void Graph3D::addData(Table* table, int xCol,int yCol,int zCol, int type)
 	Qwt3D::Triple **data=allocateData(columns,columns);
 	for (j = 0; j < columns; j++)
 	{
-		int k=0;
-		for ( i = 0; i < r; i++)
-		{
-			if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
-			{
-				double xv=table->cell(i,xCol);
-				double yv=table->cell(i,yCol);
-				double zv=table->cell(i,zCol);
+          int k=0;
+          for ( i = 0; i < r; i++)
+            {
+              if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
+                {
+                  double xv=table->column(xCol)->valueAt(i);
+                  double yv=table->column(yCol)->valueAt(i);
+                  double zv=table->column(zCol)->valueAt(i);
 
-				data[k][j] = Triple(xv,yv,zv);
-				k++;
-			}
-		}
+                  data[k][j] = Triple(xv,yv,zv);
+                  k++;
+                }
+            }
 	}
 
 	sp->makeCurrent();
@@ -520,61 +520,61 @@ void Graph3D::addData(Table* table, int xCol,int yCol,int zCol, int type)
 void Graph3D::addData(Table* table, int xCol,int yCol,int zCol,
 		double xl, double xr, double yl, double yr, double zl, double zr)
 {
-	worksheet=table;
-	int r=table->numRows();
+  worksheet=table;
+  int r=table->numRows();
 
-	QString s=table->colName(xCol)+"(X),";
-	s+=table->colName(yCol)+"(Y),";
-	s+=table->colName(zCol)+"(Z)";
-	plotAssociation = s;
+  QString s=table->colName(xCol)+"(X),";
+  s+=table->colName(yCol)+"(Y),";
+  s+=table->colName(zCol)+"(Z)";
+  plotAssociation = s;
 
-	int i,j,columns=0;
-	double xv,yv;
-	for ( i = 0; i < r; i++)
-	{
-		if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
-		{
-			xv=table->cell(i,xCol);
-			yv=table->cell(i,yCol);
-			if (xv >= xl && xv <= xr && yv >= yl && yv <= yr)
-				columns++;
-		}
-	}
+  int i,j,columns=0;
+  double xv,yv;
+  for ( i = 0; i < r; i++)
+    {
+      if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
+        {
+          xv=table->column(xCol)->valueAt(i);
+          yv=table->column(yCol)->valueAt(i);
+          if (xv >= xl && xv <= xr && yv >= yl && yv <= yr)
+            columns++;
+        }
+    }
 
-	if (columns == 0)
-		columns++;
+  if (columns == 0)
+    columns++;
 
-	Qwt3D::Triple **data=allocateData(columns,columns);
-	for (j = 0; j < columns; j++)
-	{
-		int k=0;
-		for ( i = 0; i < r; i++)
-		{
-			if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
-			{
-				xv=table->cell(i,xCol);
-				yv=table->cell(i,yCol);
-				if (xv >= xl && xv <= xr && yv >= yl && yv <= yr)
-				{
-					double zv=table->cell(i,zCol);
-					if (zv > zr)
-						data[k][j] = Triple(xv,yv,zr);
-					else if (zv < zl)
-						data[k][j] = Triple(xv,yv,zl);
-					else
-						data[k][j] = Triple(xv,yv,zv);
-					k++;
-				}
-			}
-		}
-	}
-	sp->makeCurrent();
-	sp->loadFromData (data, columns, columns, false, false);
-	sp->createCoordinateSystem(Triple(xl, yl, zl), Triple(xr, yr, zr));
-	sp->legend()->setLimits(zl, zr);
-	sp->legend()->setMajors(legendMajorTicks);
+  Qwt3D::Triple **data=allocateData(columns,columns);
+  for (j = 0; j < columns; j++)
+    {
+      int k=0;
+      for ( i = 0; i < r; i++)
+        {
+          if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
+            {
+              xv=table->column(xCol)->valueAt(i);
+              yv=table->column(yCol)->valueAt(i);
+              if (xv >= xl && xv <= xr && yv >= yl && yv <= yr)
+                {
+                  double zv=table->column(zCol)->valueAt(i);
+                  if (zv > zr)
+                    data[k][j] = Triple(xv,yv,zr);
+                  else if (zv < zl)
+                    data[k][j] = Triple(xv,yv,zl);
+                  else
+                    data[k][j] = Triple(xv,yv,zv);
+                  k++;
+                }
+            }
+        }
+    }
+  sp->makeCurrent();
+  sp->loadFromData (data, columns, columns, false, false);
+  sp->createCoordinateSystem(Triple(xl, yl, zl), Triple(xr, yr, zr));
+  sp->legend()->setLimits(zl, zr);
+  sp->legend()->setMajors(legendMajorTicks);
 
-	deleteData(data,columns);
+  deleteData(data,columns);
 }
 
 void Graph3D::updateData(Table* table)
@@ -639,14 +639,14 @@ void Graph3D::updateDataXY(Table* table, int xCol, int yCol)
 		{
 			if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i))
 			{
-				double xv=table->cell(i,xCol);
-				double yv=table->cell(i,yCol);
+                          double xv=table->column(xCol)->valueAt(i);
+                          double yv=table->column(yCol)->valueAt(i);
 
-				gsl_vector_set (x, k, xv);
-				gsl_vector_set (y, k, yv);
+                          gsl_vector_set (x, k, xv);
+                          gsl_vector_set (y, k, yv);
 
-				data[k][j] =yv;
-				k++;
+                          data[k][j] =yv;
+                          k++;
 			}
 		}
 	}
@@ -694,16 +694,16 @@ void Graph3D::updateDataXYZ(Table* table, int xCol, int yCol, int zCol)
 		int k=0;
 		for ( i = 0; i < r; i++)
 		{
-			if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
-			{
-				double xv=table->cell(i,xCol);
-				double yv=table->cell(i,yCol);
-				double zv=table->cell(i,zCol);
+                  if (!table->column(xCol)->isInvalid(i) && !table->column(yCol)->isInvalid(i) && !table->column(zCol)->isInvalid(i))
+                    {
+                      double xv=table->column(xCol)->valueAt(i);
+                      double yv=table->column(yCol)->valueAt(i);
+                      double zv=table->column(zCol)->valueAt(i);
 
-				gsl_vector_set (z, k, zv);
-				data[k][j] = Triple(xv,yv,zv);
-				k++;
-			}
+                      gsl_vector_set (z, k, zv);
+                      data[k][j] = Triple(xv,yv,zv);
+                      k++;
+                    }
 		}
 	}
 
@@ -1382,100 +1382,100 @@ void Graph3D::updateScalesFromMatrix(double xl, double xr, double yl,
 void Graph3D::updateScales(double xl, double xr, double yl, double yr,double zl, double zr,
 		int xcol, int ycol)
 {
-	int r=worksheet->numRows();
-	int i, j, xmesh=0, ymesh=2;
-	double xv, yv;
+  int r=worksheet->numRows();
+  int i, j, xmesh=0, ymesh=2;
+  double xv, yv;
 
-	for (i = 0; i < r; i++)
-	{
-		if (!worksheet->column(xcol)->isInvalid(i) && !worksheet->column(ycol)->isInvalid(i))
-		{
-			xv=worksheet->cell(i,xcol);
-			if (xv >= xl && xv <= xr)
-				xmesh++;
-		}
-	}
+  for (i = 0; i < r; i++)
+    {
+      if (!worksheet->column(xcol)->isInvalid(i) && !worksheet->column(ycol)->isInvalid(i))
+        {
+          xv=worksheet->column(xcol)->valueAt(i);
+          if (xv >= xl && xv <= xr)
+            xmesh++;
+        }
+    }
 
-	if (xmesh == 0)
-		xmesh++;
+  if (xmesh == 0)
+    xmesh++;
 
-	double **data = Matrix::allocateMatrixData(xmesh, ymesh);
+  double **data = Matrix::allocateMatrixData(xmesh, ymesh);
 
-	for ( j = 0; j < ymesh; j++)
-	{
-		int k=0;
-		for ( i = 0; i < r; i++)
-		{
-			if (!worksheet->column(xcol)->isInvalid(i) && !worksheet->column(ycol)->isInvalid(i))
-			{
-				xv=worksheet->cell(i,xcol);
-				if (xv >= xl && xv <= xr)
-				{
-					yv=worksheet->cell(i,ycol);
-					if (yv > zr)
-						data[k][j] = zr;
-					else if (yv < zl)
-						data[k][j] = zl;
-					else
-						data[k][j] = yv;
-					k++;
-				}
-			}
-		}
-	}
+  for ( j = 0; j < ymesh; j++)
+    {
+      int k=0;
+      for ( i = 0; i < r; i++)
+        {
+          if (!worksheet->column(xcol)->isInvalid(i) && !worksheet->column(ycol)->isInvalid(i))
+            {
+              xv=worksheet->column(xcol)->valueAt(i);
+              if (xv >= xl && xv <= xr)
+                {
+                  yv=worksheet->column(ycol)->valueAt(i);
+                  if (yv > zr)
+                    data[k][j] = zr;
+                  else if (yv < zl)
+                    data[k][j] = zl;
+                  else
+                    data[k][j] = yv;
+                  k++;
+                }
+            }
+        }
+    }
 
-	sp->loadFromData(data, xmesh, ymesh, xl, xr, yl, yr);
-	sp->createCoordinateSystem(Triple(xl, yl, zl), Triple(xr, yr, zr));
-	Matrix::freeMatrixData(data, xmesh);
+  sp->loadFromData(data, xmesh, ymesh, xl, xr, yl, yr);
+  sp->createCoordinateSystem(Triple(xl, yl, zl), Triple(xr, yr, zr));
+  Matrix::freeMatrixData(data, xmesh);
 }
 
 void Graph3D::updateScales(double xl, double xr, double yl, double yr, double zl, double zr,
 		int xCol, int yCol, int zCol)
 {
-	int r=worksheet->numRows();
-	int i,j,columns=0;
-	double xv, yv, zv;
-	for ( i = 0; i < r; i++)
-	{
-		if (!worksheet->column(xCol)->isInvalid(i) && !worksheet->column(yCol)->isInvalid(i) && !worksheet->column(zCol)->isInvalid(i))
-		{
-			xv=worksheet->cell(i,xCol);
-			yv=worksheet->cell(i,yCol);
-			if (xv >= xl && xv <= xr && yv >= yl && yv <= yr)
-				columns++;
-		}
-	}
+  int r=worksheet->numRows();
+  int i,j,columns=0;
+  double xv, yv, zv;
+  for ( i = 0; i < r; i++)
+    {
+      if (!worksheet->column(xCol)->isInvalid(i) && !worksheet->column(yCol)->isInvalid(i) && !worksheet->column(zCol)->isInvalid(i))
+        {
+          xv=worksheet->column(xCol)->valueAt(i);
+          yv=worksheet->column(yCol)->valueAt(i);
+          if (xv >= xl && xv <= xr && yv >= yl && yv <= yr)
+            columns++;
+        }
+    }
 
-	if (columns == 0)
-		columns++;
+  if (columns == 0)
+    columns++;
 
-	Qwt3D::Triple **data=allocateData(columns,columns);
-	for ( j = 0; j < columns; j++)
-	{
-		int k=0;
-		for ( i = 0; i < r; i++)
-		{
-			if (!worksheet->column(xCol)->isInvalid(i) && !worksheet->column(yCol)->isInvalid(i) && !worksheet->column(zCol)->isInvalid(i))
-			{
-				xv=worksheet->cell(i,xCol);
-				yv=worksheet->cell(i,yCol);
-				if (xv >= xl && xv <= xr && yv >= yl && yv <= yr )
-				{
-					zv=worksheet->cell(i,zCol);
-					if (zv > zr)
-						data[k][j] = Triple(xv,yv,zr);
-					else if (zv < zl)
-						data[k][j] = Triple(xv,yv,zl);
-					else
-						data[k][j] = Triple(xv,yv,zv);
-					k++;
-				}
-			}
-		}
-	}
-	sp->loadFromData (data, columns, columns, false,false);
-	sp->createCoordinateSystem(Triple(xl, yl, zl), Triple(xr, yr, zr));
-	deleteData(data,columns);
+  Qwt3D::Triple **data=allocateData(columns,columns);
+  for ( j = 0; j < columns; j++)
+    {
+      int k=0;
+      for ( i = 0; i < r; i++)
+        {
+          if (!worksheet->column(xCol)->isInvalid(i) && !worksheet->column(yCol)->isInvalid(i) && !worksheet->column(zCol)->isInvalid(i))
+            {
+              xv=worksheet->column(xCol)->valueAt(i);
+              yv=worksheet->column(yCol)->valueAt(i);
+              if (xv >= xl && xv <= xr && yv >= yl && yv <= yr )
+                {
+                  zv=worksheet->column(zCol)->valueAt(i);
+                  if (zv > zr)
+                    data[k][j] = Triple(xv,yv,zr);
+                  else if (zv < zl)
+                    data[k][j] = Triple(xv,yv,zl);
+                  else
+                    data[k][j] = Triple(xv,yv,zv);
+                  k++;
+                }
+            }
+        }
+    }
+  sp->loadFromData (data, columns, columns, false,false);
+  sp->createCoordinateSystem(Triple(xl, yl, zl), Triple(xr, yr, zr));
+  deleteData(data,columns);
 }
 
 void Graph3D::setTicks(const QStringList& options)

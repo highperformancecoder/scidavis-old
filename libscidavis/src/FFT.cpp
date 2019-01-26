@@ -218,9 +218,9 @@ void FFT::setDataFromTable(Table *t, const QString& realColName, const QString& 
 		for(unsigned i=0; i<d_n; i++)
 		{
 			int i2 = 2*i;
-			d_y[i2] = d_table->cell(i, d_real_col);
+			d_y[i2] = d_table->column(d_real_col)->valueAt(i);
 			if (d_imag_col >= 0)
-				d_y[i2+1] = d_table->cell(i, d_imag_col);
+                          d_y[i2+1] = d_table->column(d_imag_col)->valueAt(i);
 		}
 	}
 	else

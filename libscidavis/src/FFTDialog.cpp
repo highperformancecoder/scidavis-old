@@ -197,9 +197,9 @@ void FFTDialog::activateCurve(const QString& curveName)
 	else if (d_table)
 	{
 	    int col = d_table->colIndex(curveName);
-		double x0 = d_table->text(0, col).toDouble();
-		double x1 = d_table->text(1, col).toDouble();
-		boxSampling->setText(QString::number(x1 - x0));
+            double x0 = d_table->column(col)->textAt(0).toDouble();
+            double x1 = d_table->column(col)->textAt(1).toDouble();
+            boxSampling->setText(QString::number(x1 - x0));
 	}
 };
 
@@ -216,8 +216,8 @@ void FFTDialog::setTable(Table *t)
 	{
 		boxName->setCurrentIndex(xcol);
 
-		double x0 = t->text(0, xcol).toDouble();
-		double x1 = t->text(1, xcol).toDouble();
+		double x0 = t->column(xcol)->textAt(0).toDouble();
+		double x1 = t->column(xcol)->textAt(1).toDouble();
 		boxSampling->setText(QString::number(x1 - x0));
 	}
 

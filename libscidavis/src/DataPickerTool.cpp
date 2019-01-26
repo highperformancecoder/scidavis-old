@@ -143,8 +143,8 @@ void DataPickerTool::setSelection(QwtPlotCurve *curve, int point_index)
         emit statusText(QString("%1[%2]: x=%3; y=%4")
 			.arg(d_selected_curve->title().text())
 			.arg(row + 1)
-			.arg(t->text(row, xCol))
-			.arg(t->text(row, yCol)));
+			.arg(t->column(xCol)->textAt(row))
+			.arg(t->column(yCol)->textAt(row)));
     }
 
 	QwtDoublePoint selected_point_value(d_selected_curve->x(d_selected_point), d_selected_curve->y(d_selected_point));

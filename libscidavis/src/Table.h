@@ -129,6 +129,8 @@ public slots:
   Column* column(const QString & name) const { return d_future_table? d_future_table->column(name): nullptr; }
 
   //! Return the value of the cell as a double
+  /// NB these calls are only used from python, and are deprecated
+  /// indexing is base 1
   /**
    * If one of the indices or the cell content is invalid, return 0.0. For the next non-bugfix
    * SciDAVis release, indication of failure should be done by returning NaN (wherever applicable).
@@ -139,6 +141,8 @@ public slots:
   void setCell(int row, int col, double val);
 
   QString text(int row, int col);
+  void setText(int row,int col,const QString & text);
+
   QStringList columnsList();
   QStringList colNames();
   QString colName(int col);
@@ -153,7 +157,6 @@ public slots:
   void setColName(int col,const QString& text);
   void setHeader(QStringList header);
   void importV0x0001XXHeader(QStringList header);
-  void setText(int row,int col,const QString & text);
 
   void clearCell(int row, int col);
 
