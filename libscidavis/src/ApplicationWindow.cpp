@@ -2575,7 +2575,7 @@ Table& ApplicationWindow::newTable()
 /*
  *used when opening a project file
  */
-Table& ApplicationWindow::newTable(const std::string& caption, int r, int c)
+Table& ApplicationWindow::newTable(const std::string& caption, int c, int r)
 {
   assert(scriptEnv);
 	Table* w = new Table(scriptEnv, r, c, "", &d_workspace, 0);
@@ -4166,7 +4166,7 @@ void ApplicationWindow::openTemplate()
               else
                 {
                   if (templateType == "<table>")
-                    w = &newTable(tr("Table1").toStdString(), rows, cols);
+                    w = &newTable(tr("Table1").toStdString(), cols, rows);
                   else if (templateType == "<matrix>")
                     w = &newDefaultMatrix(rows, cols);
                   if (w)
@@ -7210,7 +7210,7 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
   } else if (w->inherits("Table")){
     Table *t = (Table *)w;
     QString caption = generateUniqueName(tr("Table"));
-    nw = &newTable(caption.toStdString(), t->numRows(), t->numCols());
+    nw = &newTable(caption.toStdString(), t->numCols(), t->numRows());
     ((Table *)nw)->copy(t);
   } else if (w->inherits("Graph3D")){
     Graph3D *g = (Graph3D *)w;
@@ -9304,7 +9304,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 		int rows = list[1].toInt();
 		int cols = list[2].toInt();
 
-		Table& w = app->newTable(caption.toStdString(), rows, cols);
+		Table& w = app->newTable(caption.toStdString(), cols, rows);
 		app->setListViewDate(caption, list[3]);
 		w.setBirthDate(list[3]);
 

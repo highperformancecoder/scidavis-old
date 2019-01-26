@@ -10,7 +10,8 @@ dp=0.003 #noise's stddev
     
 #generate a table t1 with Gaussian data points with some noise and random y-errors
 t1Name="Gaussian-curve"
-t1=newTable(t1Name,3,100)
+#t1=newTable(t1Name,3,100)
+t1=newTable(t1Name,100,3)
 for i in range(1,t1.numRows()+1):
     xx=float(i)
     t1.setCell(1,i,xx)

@@ -12,7 +12,7 @@ SUITE(FFT)
 {
   TEST_FIXTURE(ApplicationWindow, fft)
     {
-      auto& table=newTable("1",30,2);
+      auto& table=newTable("1",2,30);
       table.setColName(0,"x");
       table.setColName(1,"y");
   

@@ -426,7 +426,7 @@ public slots:
                   bool renameCols, bool stripSpaces, bool simplifySpaces,
                   bool convertToNumeric, QLocale numericLocale);
   //! Used when loading a table from a project file
-  Table& newTable(const std::string& caption,int r=30, int c=2);
+  Table& newTable(const std::string& caption,int c=2, int r=30);
   Table& newTable(int r, int c, const QString& name = QString(),const QString& legend = QString());
   /// used when importing an ASCII file
   Table& newTable(const QString& name, const QString& legend, QList<Column *> columns);
