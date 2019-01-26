@@ -10,13 +10,12 @@ dp=0.003 #noise's stddev
     
 #generate a table t1 with Gaussian data points with some noise and random y-errors
 t1Name="Gaussian-curve"
-#t1=newTable(t1Name,3,100)
-t1=newTable(t1Name,100,3)
+t1=newTable(t1Name,3,100)
 for i in range(1,t1.numRows()+1):
     xx=float(i)
-    t1.setCell(1,i,xx)
-    t1.setCell(2,i,exponential_curve(xx)+random.uniform(0,dp))
-    t1.setCell(3,i,random.uniform(0,dp))
+    t1.setCell(i,1,xx)
+    t1.setCell(i,2,exponential_curve(xx)+random.uniform(0,dp))
+    t1.setCell(i,3,random.uniform(0,dp))
 
 g1=plot(t1,'2',1) #plotting the curve
         
