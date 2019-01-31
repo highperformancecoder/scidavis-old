@@ -124,8 +124,8 @@ void AssociationsDialog::updateCurves()
 
 void AssociationsDialog::changePlotAssociation(int curve, const QString& text)
 {
-  DataCurve *c = (DataCurve *)graph->curve(curve); //c_keys[curve]);
-  if (!c)
+  DataCurve *c = (DataCurve *)graph->curve(dataCurvesList[curve]); //c_keys[curve]);
+  if (!c || c->type()==Graph::Function)
     return;
 
   if (c->plotAssociation() == text)
@@ -375,6 +375,7 @@ for (int i=0; i<graph->curves(); i++)
         QString s = ((DataCurve *)it)->plotAssociation();
         QString table = ((DataCurve *)it)->table()->name();
         plotAssociationsList << table + ": " + s.remove(table + "_");
+        dataCurvesList << i;
         }
 	}
 associations->addItems(plotAssociationsList);

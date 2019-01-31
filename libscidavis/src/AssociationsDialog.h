@@ -70,6 +70,7 @@ private:
 	Table *active_table;
 	Graph *graph;
 	QStringList plotAssociationsList;
+	QList<int> dataCurvesList;
 
     QLabel* tableCaptionLabel;
 	QTableWidget *table;
