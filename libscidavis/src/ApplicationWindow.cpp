@@ -315,6 +315,7 @@ ApplicationWindow::ApplicationWindow()
 
 	d_workspace.setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	d_workspace.setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+	d_workspace.setActivationOrder(QMdiArea::ActivationHistoryOrder);
 	setCentralWidget(&d_workspace);
 	setAcceptDrops(true);
 

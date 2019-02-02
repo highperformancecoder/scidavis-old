@@ -174,7 +174,7 @@ void PolynomialFit::fit()
   if (app->writeFitResultsToLog)
     app->updateLog(logFitInfo(d_results, 0, 0, d_graph->parentPlotName()));
 
-  if (show_legend)
+  if (show_legend || app->pasteFitResultsToPlot)
     showLegend();
 
   generateFitCurve(d_results);
@@ -182,21 +182,31 @@ void PolynomialFit::fit()
 
 QString PolynomialFit::legendInfo()
 {
-	QString legend = "Y=" + QLocale().toString(d_results[0], 'g', d_prec);
-	for (unsigned j = 1; j < d_p; j++)
-	{
-		double cj = d_results[j];
-		if (cj>0 && !legend.isEmpty())
-			legend += "+";
+	ApplicationWindow *app = (ApplicationWindow *)parent();
+	QString legend = "";
+	if (show_legend) {
+		legend = "Y=" + QLocale().toString(d_results[0], 'g', d_prec);
+		for (unsigned j = 1; j < d_p; j++)
+		{
+			double cj = d_results[j];
+			if (cj>0 && !legend.isEmpty())
+				legend += "+";
 
-		QString s;
-		s.sprintf("%.5f",cj);
-		if (s != "1.00000")
-			legend += QLocale().toString(cj, 'g', d_prec);
+			QString s;
+			s.sprintf("%.5f",cj);
+			if (s != "1.00000")
+				legend += QLocale().toString(cj, 'g', d_prec);
 
-		legend += "X";
-		if (j>1)
-			legend += "<sup>" + QString::number(j) + "</sup>";
+			legend += "X";
+			if (j>1)
+				legend += "<sup>" + QString::number(j) + "</sup>";
+		}
+	}
+	if (app->pasteFitResultsToPlot) {
+		if (show_legend) {
+			legend += "\n";
+		}
+		legend += Fit::legendInfo();
 	}
 	return legend;
 }
