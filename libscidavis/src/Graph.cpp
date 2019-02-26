@@ -3088,7 +3088,7 @@ void Graph::updateErrorBars(QwtErrorPlotCurve *er, bool xErr, int width, int cap
 	emit modifiedGraph();
 }
 
-bool Graph::addErrorBars(const QString& yColName, Table *errTable, const QString& errColName,
+bool Graph::addErrorBars(const QString& yColName, Table& errTable, const QString& errColName,
 		int type, int width, int cap, const QColor& color, bool through, bool minus, bool plus)
 {
 	QList<int> keys = d_plot->curveKeys();
@@ -3105,14 +3105,14 @@ bool Graph::addErrorBars(const QString& yColName, Table *errTable, const QString
 }
 
 bool Graph::addErrorBars(const QString& xColName, const QString& yColName,
-		Table *errTable, const QString& errColName, int type, int width, int cap,
+		Table& errTable, const QString& errColName, int type, int width, int cap,
 		const QColor& color, bool through, bool minus, bool plus)
 {
 	DataCurve *master_curve = masterCurve(xColName, yColName);
 	if (!master_curve)
 		return false;
 
-	QwtErrorPlotCurve *er = new QwtErrorPlotCurve(type, errTable, errColName);
+	QwtErrorPlotCurve *er = new QwtErrorPlotCurve(type, &errTable, errColName);
 	er->setMasterCurve(master_curve);
 	er->setCapLength(cap);
 	er->setColor(color);
@@ -3340,9 +3340,9 @@ bool Graph::insertCurvesList(Table* w, const QStringList& names, int style, int 
                     return false;
 
                 if (w->colPlotDesignation(j) == SciDAVis::xErr)
-                    ok = addErrorBars(w->colName(ycol), w, lst[i], (int)QwtErrorPlotCurve::Horizontal);
+                    ok = addErrorBars(w->colName(ycol), *w, lst[i], (int)QwtErrorPlotCurve::Horizontal);
                 else
-                    ok = addErrorBars(w->colName(ycol), w, lst[i]);
+                    ok = addErrorBars(w->colName(ycol), *w, lst[i]);
 			}
 			else {
 				type_of_i = (CurveType) style;

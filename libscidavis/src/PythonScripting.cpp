@@ -217,6 +217,8 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newNoteS,newNote,0,1);
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_plotTVSII,plot,2,4);
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_plotTSII,plot,2,4);
 
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(Graph_addErrorBars,addErrorBars,3,10);
+
 BOOST_PYTHON_MODULE(scidavis)
 {
   classdesc::python_t p;
@@ -236,7 +238,12 @@ BOOST_PYTHON_MODULE(scidavis)
     overload("newNote",&ApplicationWindow::newNote,ApplicationWindow_newNoteS()).
     overload("plot",plotTSII,ApplicationWindow_plotTSII()).
     overload("plot",plotTVSII,ApplicationWindow_plotTVSII());
-    
+
+  bool (Graph::*graph_addErrorBars)
+    (const QString&,Table&,const QString&,
+     int,int,int,const QColor&,bool,bool,bool)=&Graph::addErrorBars;
+  p.getClass<Graph>().
+    overload("addErrorBars",graph_addErrorBars,Graph_addErrorBars());
 
   p.defineClass<PythonScripting>();
   p.defineClass<PythonScript>();

@@ -687,7 +687,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
                                       if(style==Graph::ErrorBars)
 					{
                                           int flags=_curve.symbolShape;
-                                          graph->addErrorBars(QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), &table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()),
+                                          graph->addErrorBars(QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()),
                                                               ((flags&0x10)==0x10?0:1), ceil(_curve.lineWidth), ceil(_curve.symbolSize), QColor(Qt::black),
                                                               (flags&0x40)==0x40, (flags&2)==2, (flags&1)==1);
 					}

@@ -2425,7 +2425,7 @@ MultiLayer* ApplicationWindow::multilayerPlot(const QStringList& colList)
                 }
 
               QString errColName = caption+s.mid(posY+2, posErr-posY-2);
-              ag->addErrorBars(xColName, yColName, &w, errColName, errType);
+              ag->addErrorBars(xColName, yColName, w, errColName, errType);
             }
           else
             ag->insertCurve(&w, xCol, yColName, defaultCurveStyle);
@@ -2980,7 +2980,7 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type, const QSt
           errors->setValueAt(i, dev);
       }
       w.d_future_table->addChild(errors);
-      g->addErrorBars(xColName, name, &w, errors->name(), direction);
+      g->addErrorBars(xColName, name, w, errors->name(), direction);
     }
   catch (NoSuchObject&)
     { //user defined function
@@ -3023,7 +3023,7 @@ void ApplicationWindow::defineErrorBars(const QString& curveName, const QString&
       if (!g)
         return;
 
-      g->addErrorBars(curveName, &errTable, errColumnName, direction);
+      g->addErrorBars(curveName, errTable, errColumnName, direction);
       emit modified();
     }
   catch (NoSuchObject&)
@@ -9888,7 +9888,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                         try
 			{
                           Table& errTable = app->table(curve[4]);
-                          ag->addErrorBars(curve[2], curve[3], &errTable, curve[4], curve[1].toInt(),
+                          ag->addErrorBars(curve[2], curve[3], errTable, curve[4], curve[1].toInt(),
                                            curve[5].toInt(), curve[6].toInt(), QColor(COLORVALUE(curve[7])),
                                            curve[8].toInt(), curve[10].toInt(), curve[9].toInt());
 			}
