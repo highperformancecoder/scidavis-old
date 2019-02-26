@@ -86,7 +86,7 @@ public:
   void wheelEvent(QWheelEvent *);
   void keyPressEvent(QKeyEvent *);
   bool eventFilter(QObject *object, QEvent *);
-  void releaseLayer();
+  //  void releaseLayer();
 
   bool focusNextPrevChild ( bool next );
   //@}
@@ -122,7 +122,13 @@ public slots:
    */
   void addTextLayer(const QPoint& pos);
 
-  Graph* activeGraph(){return active_graph;};
+  Graph* activeGraph(){return active_graph;}
+  Graph& activeLayer() {
+    if (active_graph)
+      return *active_graph;
+    else throw NoSuchObject();
+  }
+  void setActiveLayer(Graph& g) {setActiveGraph(&g);}
   void setActiveGraph(Graph* g);
   void activateGraph(LayerButton* button);
 

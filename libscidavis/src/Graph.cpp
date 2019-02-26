@@ -4873,7 +4873,7 @@ void Graph::setCurveStyle(int index, int s)
 	c->setStyle((QwtPlotCurve::CurveStyle)s);
 }
 
-void Graph::setCurveSymbol(int index, const QwtSymbol& s)
+void Graph::setCurveSymbol(int index, const sciqwt::QwtSymbol& s)
 {
 	QwtPlotCurve *c = curve(index);
 	if (!c)

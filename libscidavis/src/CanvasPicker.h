@@ -26,6 +26,8 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
+#ifndef CANVASPICKER_H
+#define CANVASPICKER_H
 #include <QObject>
 #include "Plot.h"
 
@@ -97,3 +99,4 @@ private:
 	 */
 	ArrowMarker *d_editing_marker;
 };
+#endif

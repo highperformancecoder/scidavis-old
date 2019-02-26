@@ -2247,6 +2247,16 @@ MultiLayer& ApplicationWindow::newGraph(const QString& caption)
   return *ml; //TODO is ml owned by anything?
 }
 
+MultiLayer& ApplicationWindow::plot(Table& t,const pytuple& col,int style,int colour)
+{
+  vector<string> colList;
+#ifdef SCRIPTING_PYTHON
+  for (int i=0; i<len(col); ++i)
+    colList.push_back(py::extract<string>(col[i]));
+#endif
+  return plot(t,colList,style,colour);
+}
+
 MultiLayer& ApplicationWindow::plot(Table& table,const std::vector<std::string>& colList,int style,int colour)
 {
   QStringList cl;

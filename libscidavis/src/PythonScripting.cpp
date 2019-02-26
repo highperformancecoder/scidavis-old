@@ -27,6 +27,8 @@
  *                                                                         *
  ***************************************************************************/
 // get rid of a compiler warning
+#include <python_base.h>
+
 #ifdef _POSIX_C_SOURCE
 #undef _POSIX_C_SOURCE
 #endif
@@ -48,7 +50,6 @@ typedef struct _traceback {
 } PyTracebackObject;
 #endif
 
-#include <python_base.h>
 #include "PythonScript.h"
 #include "PythonScript.cd"
 #include "PythonScripting.h"
@@ -75,6 +76,12 @@ typedef struct _traceback {
 #include "ArrowMarker.cd"
 #include "Table.h"
 #include "Table.cd"
+#include "MultiLayer.cd"
+#include "QwtSymbol.cd"
+#include "QwtErrorPlotCurve.h"
+//#include "ScalePicker.h"
+//#include "TitlePicker.h"
+//#include "qwt_plot_zoomer.h"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -148,10 +155,17 @@ namespace classdesc
   DEF_TYPENAME(QRect);
   DEF_TYPENAME(QRectF);
   DEF_TYPENAME(QVariant);
-
+  DEF_TYPENAME(QwtPlotCurve);
+  DEF_TYPENAME(QwtPlotZoomer);
+  
   template <class T> struct tn<QList<T>>
   {
     static string name() {return "QList<"+typeName<T>()+">";}
+  };
+
+  template <class T> struct tn<QVector<T>>
+  {
+    static string name() {return "QVector<"+typeName<T>()+">";}
   };
 
   template <class T> struct tn<QPointer<T>>
@@ -212,7 +226,7 @@ BOOST_PYTHON_MODULE(scidavis)
   Table& (ApplicationWindow::*newTableSII)(const std::string&,int,int)=&ApplicationWindow::newTable;
   MultiLayer& (ApplicationWindow::*plotTSII)(Table&,const std::string&, int, int)
     =&ApplicationWindow::plot;
-  MultiLayer& (ApplicationWindow::*plotTVSII)(Table&,const std::vector<std::string>&, int, int)
+  MultiLayer& (ApplicationWindow::*plotTVSII)(Table&,const pytuple&, int, int)
     =&ApplicationWindow::plot;
   p.getClass<ApplicationWindow>().
     overload("newTable",newTable).

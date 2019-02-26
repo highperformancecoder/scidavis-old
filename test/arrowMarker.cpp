@@ -20,7 +20,7 @@ SUITE(ArrowMarker)
       auto layer=graph.activeGraph();
       layer->addArrow(&arrow);
 
-      arrow.attach(layer->d_plot);
+      arrow.attach(layer->plotWidget());
       
       arrow.setStartPoint(50,200);
       arrow.setEndPoint(400,400);
