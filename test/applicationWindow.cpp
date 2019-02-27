@@ -57,7 +57,7 @@ SUITE(ApplicationWindow)
       for (QTreeWidgetItemIterator item(&lv); *item; item++)
         if (dynamic_cast<WindowListItem*>(*item)->window()==&t)
           (*item)->setSelected(true);
-      t.askOnCloseEvent(false);
+      t.confirmClose(false);
       ApplicationWindow::deleteSelectedItems();
       found=false;
       windows=windowsList();

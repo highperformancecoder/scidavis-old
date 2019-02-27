@@ -82,6 +82,8 @@ typedef struct _traceback {
 #include "QwtErrorPlotCurve.h"
 #include "IntervalAttribute.cd"
 #include "Interval.cd"
+#include "ExponentialFit.h"
+#include "ExponentialFit.cd"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -154,10 +156,13 @@ namespace classdesc
   DEF_TYPENAME(QChar);
   DEF_TYPENAME(QRect);
   DEF_TYPENAME(QRectF);
+  DEF_TYPENAME(QPen);
+  DEF_TYPENAME(QBrush);
   DEF_TYPENAME(QVariant);
   DEF_TYPENAME(QwtPlotCurve);
   DEF_TYPENAME(QwtPlotZoomer);
-  
+  DEF_TYPENAME(QTreeWidgetItem);
+
   template <class T> struct tn<QList<T>>
   {
     static string name() {return "QList<"+typeName<T>()+">";}
@@ -284,10 +289,33 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_plotTSII,plot,2,4);
 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(Graph_addErrorBars,addErrorBars,3,10);
 
+// returns the current ApplicationWindow instance
+ApplicationWindow& theApp()
+{
+  using namespace py;
+  dict the_dict=extract<dict>(import("__main__").attr("__dict__"));
+  return extract<ApplicationWindow&>(the_dict["app"]);
+
+}
+
+boost::shared_ptr<ExponentialFit> newExponentialFit(ApplicationWindow& a,Graph& g, const QString& s)
+{
+  boost::shared_ptr<ExponentialFit> r(new ExponentialFit(&a,&g,s));
+  return r;
+}
+
+boost::shared_ptr<ExponentialFit> newExponentialFit2(Graph& g, const QString& s)
+{return newExponentialFit(theApp(),g,s);}
+
 BOOST_PYTHON_MODULE(scidavis)
 {
   classdesc::python_t p;
   p.defineClass<ApplicationWindow>();
+  p.defineClass<PythonScripting>();
+  p.defineClass<PythonScript>();
+  p.defineClass<ArrowMarker>();
+  p.defineClass<ExponentialFit>();
+
   // overload handling
   Table& (ApplicationWindow::*newTable)()=&ApplicationWindow::newTable;
   Table& (ApplicationWindow::*newTableSII)(const std::string&,int,int)=&ApplicationWindow::newTable;
@@ -310,9 +338,12 @@ BOOST_PYTHON_MODULE(scidavis)
   p.getClass<Graph>().
     overload("addErrorBars",graph_addErrorBars,Graph_addErrorBars());
 
-  p.defineClass<PythonScripting>();
-  p.defineClass<PythonScript>();
-  p.defineClass<ArrowMarker>();
+  p.getClass<ExponentialFit>().
+    def("__init__",py::make_constructor(newExponentialFit)).
+    def("__init__",py::make_constructor(newExponentialFit2));
+//  p.getClass<ExponentialFit>().
+//    def(py::init<ApplicationWindow*,Graph*,const QString&>());
+  
 }
 
 QString PythonScripting::toString(PyObject *object, bool decref)

@@ -59,6 +59,7 @@ public:
   enum Algorithm{ScaledLevenbergMarquardt, UnscaledLevenbergMarquardt, NelderMeadSimplex};
   enum ErrorSource {UnknownErrors, AssociatedErrors, PoissonErrors, CustomErrors};
 
+  Fit() {}
   Fit(ApplicationWindow *parent, Graph *g = 0, QString name = QString());
   virtual ~Fit();
 

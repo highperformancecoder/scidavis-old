@@ -36,6 +36,7 @@ class ExponentialFit : public Fit
   Q_OBJECT
 
 public:
+  ExponentialFit() {}
   ExponentialFit(ApplicationWindow *parent, Graph *g,  bool expGrowth = false);
   ExponentialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, bool expGrowth = false);
   ExponentialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, 
