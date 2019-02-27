@@ -2702,7 +2702,7 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 	m->setWindowTitle(name);
 	m->setName(name);
 	m->setWindowIcon( QPixmap(":/note.xpm") );
-	m->askOnCloseEvent(confirmCloseNotes);
+	m->confirmClose(confirmCloseNotes);
 	m->setFolder(current_folder);
 
 	current_folder->addWindow(m);
@@ -2790,7 +2790,7 @@ void ApplicationWindow::initMatrix(Matrix* m)
 {
 	d_workspace.addSubWindow(m);
 	m->setWindowIcon( QPixmap(":/matrix.xpm") );
-	m->askOnCloseEvent(confirmCloseMatrix);
+	m->confirmClose(confirmCloseMatrix);
 	m->setNumericFormat(d_default_numeric_format, d_decimal_digits);
 	m->setFolder(current_folder);
 	
@@ -3172,7 +3172,7 @@ void ApplicationWindow::updateConfirmOptions(bool askTables, bool askMatrices, b
 		for (int i = 0; i < int(windows.count());i++ )
 		{
 			if (windows.at(i)->inherits("Table"))
-				((MyWidget*)windows.at(i))->askOnCloseEvent(confirmCloseTable);
+				((MyWidget*)windows.at(i))->confirmClose(confirmCloseTable);
 		}
 	}
 
@@ -3182,7 +3182,7 @@ void ApplicationWindow::updateConfirmOptions(bool askTables, bool askMatrices, b
 		for (int i = 0; i < int(windows.count());i++ )
 		{
 			if (windows.at(i)->inherits("Matrix"))
-				((MyWidget*)windows.at(i))->askOnCloseEvent(confirmCloseMatrix);
+				((MyWidget*)windows.at(i))->confirmClose(confirmCloseMatrix);
 		}
 	}
 
@@ -3192,7 +3192,7 @@ void ApplicationWindow::updateConfirmOptions(bool askTables, bool askMatrices, b
 		for (int i = 0; i < int(windows.count());i++ )
 		{
 			if (windows.at(i)->inherits("MultiLayer"))
-				((MyWidget*)windows.at(i))->askOnCloseEvent(confirmClosePlot2D);
+				((MyWidget*)windows.at(i))->confirmClose(confirmClosePlot2D);
 		}
 	}
 
@@ -3202,7 +3202,7 @@ void ApplicationWindow::updateConfirmOptions(bool askTables, bool askMatrices, b
 		for (int i = 0; i < int(windows.count());i++ )
 		{
 			if (windows.at(i)->inherits("Graph3D"))
-				((MyWidget*)windows.at(i))->askOnCloseEvent(confirmClosePlot3D);
+				((MyWidget*)windows.at(i))->confirmClose(confirmClosePlot3D);
 		}
 	}
 
@@ -3212,7 +3212,7 @@ void ApplicationWindow::updateConfirmOptions(bool askTables, bool askMatrices, b
 		for (int i = 0; i < int(windows.count());i++ )
 		{
 			if (windows.at(i)->inherits("Note"))
-				((MyWidget*)windows.at(i))->askOnCloseEvent(confirmCloseNotes);
+				((MyWidget*)windows.at(i))->confirmClose(confirmCloseNotes);
 		}
 	}
 
@@ -10399,7 +10399,7 @@ void ApplicationWindow::connectSurfacePlot(Graph3D *plot)
 	connect (plot,SIGNAL(modified()),this, SIGNAL(modified()));
 	connect (plot,SIGNAL(custom3DActions(MyWidget*)),this, SLOT(custom3DActions(MyWidget*)));
 
-	plot->askOnCloseEvent(confirmClosePlot3D);
+	plot->confirmClose(confirmClosePlot3D);
 }
 
 void ApplicationWindow::connectMultilayerPlot(MultiLayer *g)
@@ -10437,7 +10437,7 @@ void ApplicationWindow::connectMultilayerPlot(MultiLayer *g)
 	connect (g,SIGNAL(createIntensityTable(const QString&)),this,SLOT(importImage(const QString&)));
 	connect (g, SIGNAL(setPointerCursor()),this, SLOT(pickPointerCursor()));
 
-	g->askOnCloseEvent(confirmClosePlot2D);
+	g->confirmClose(confirmClosePlot2D);
 }
 
 void ApplicationWindow::connectTable(Table* w)
@@ -10456,7 +10456,7 @@ void ApplicationWindow::connectTable(Table* w)
 	connect(w->d_future_table, SIGNAL(requestRowStatistics()), this, SLOT(showRowStatistics()));
 	connect(w->d_future_table, SIGNAL(requestColumnStatistics()), this, SLOT(showColStatistics()));
 #endif
-	w->askOnCloseEvent(confirmCloseTable);
+	w->confirmClose(confirmCloseTable);
 }
 
 void ApplicationWindow::setAppColors(const QColor& wc,const QColor& pc,const QColor& tpc)
@@ -11722,7 +11722,7 @@ void ApplicationWindow::deleteFitTables()
 						if (!t)
 							continue;
 
-						t->askOnCloseEvent(false);
+						t->confirmClose(false);
 						t->close();
 					}
 				}

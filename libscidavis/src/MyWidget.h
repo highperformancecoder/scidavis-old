@@ -120,7 +120,7 @@ public:
 	 */
 	void closeEvent( QCloseEvent *);
 	//! Toggle the "ask on close" flag
-	void askOnCloseEvent(bool ask){askOnClose = ask;};
+	void confirmClose(bool ask){askOnClose = ask;};
 	//! Customizes title bar's context menu)
 	void contextMenuEvent(QContextMenuEvent *e);
 
