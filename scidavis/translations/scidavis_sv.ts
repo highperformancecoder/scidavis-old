@@ -8533,17 +8533,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Skriv in ett giltigt kurvnamn!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="233"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="244"/>
         <source>Plot</source>
         <translation type="unfinished">Rita</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="234"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="245"/>
         <source>fit of dataset</source>
         <translation type="unfinished">anpassning av datamängd</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="236"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="247"/>
         <source>using function</source>
         <translation type="unfinished">använder funktion</translation>
     </message>
@@ -8568,108 +8568,108 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Statistiskt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="240"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="251"/>
         <source>Y standard errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="244"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="255"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="247"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="258"/>
         <source>Associated dataset (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="250"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="261"/>
         <source>Statistical (assuming Poisson distribution)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="253"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="264"/>
         <source>Arbitrary Dataset</source>
         <translation type="unfinished">Godtycklig datamängd</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="261"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="272"/>
         <source>Nelder-Mead Simplex</source>
         <translation type="unfinished">Nelder-Mead Simplex</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="263"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="274"/>
         <source>Unscaled Levenberg-Marquardt</source>
         <translation type="unfinished">Oskalad Levenberg-Marquardt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="265"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="276"/>
         <source>Scaled Levenberg-Marquardt</source>
         <translation type="unfinished">Skalad Levenberg-Marquardt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="267"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="278"/>
         <source> algorithm with tolerance = </source>
         <translation type="unfinished"> algoritm med tolerans = </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="270"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="281"/>
         <source>From x</source>
         <translation type="unfinished">Från x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="270"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="281"/>
         <source>to x</source>
         <translation type="unfinished">till x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="283"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="323"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="294"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="334"/>
         <source>R^2</source>
         <translation type="unfinished">R^2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="287"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="298"/>
         <source>Iterations</source>
         <translation type="unfinished">Iterationer</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="288"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="299"/>
         <source>Status</source>
         <translation type="unfinished">Status</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="318"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="329"/>
         <source>Dataset</source>
         <translation type="unfinished">Datamängd</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="319"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="330"/>
         <source>Function</source>
         <translation type="unfinished">Funktion</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="371"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="402"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="424"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="382"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="413"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="435"/>
         <source>Error</source>
         <translation type="unfinished">Fel</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="372"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="383"/>
         <source>The curve %1 has no associated Y error bars.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="403"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="414"/>
         <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="481"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="487"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="493"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="499"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="492"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="498"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="504"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="510"/>
         <source>Fit Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8678,12 +8678,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Kurvan %1 har inga kopplade Y-felstaplar. Du kan inte använda instrumentell viktningsmetod.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="424"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="435"/>
         <source>Parameter</source>
         <translation type="unfinished">Parameter</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="424"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="435"/>
         <source>Value</source>
         <translation type="unfinished">Värde</translation>
     </message>
@@ -8692,22 +8692,22 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Du specificerade inte en datamängd för denna åtgärd. Åtgärden avbröts!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="488"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="499"/>
         <source>There are no parameters specified for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Inga parametrar har specificerats för denna anpassningsåtgärd! Åtgärden avbröts!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="511"/>
         <source>You must specify a valid fit function first. Operation aborted!</source>
         <translation type="unfinished">Du måste specificera en giltig anpassningsfunktion först. Åtgärden avbröts!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="530"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="541"/>
         <source>Input function error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="619"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="630"/>
         <source>Fit</source>
         <translation type="unfinished">Anpassning</translation>
     </message>
@@ -8724,12 +8724,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Du behöver minst %1 punkter för att genomföra denna åtgärd. Åtgärden avbruten!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="482"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="493"/>
         <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Du specificerade inte en giltig datamängd för denna anpassningsåtgärd. Åtgärden avbruten!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="494"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="505"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
         <translation type="unfinished">Du behöver minst %1 punkter för att genomföra denna åtgärd. Åtgärden avbruten!</translation>
     </message>

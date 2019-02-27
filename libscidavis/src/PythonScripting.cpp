@@ -82,6 +82,8 @@ typedef struct _traceback {
 #include "QwtErrorPlotCurve.h"
 #include "IntervalAttribute.cd"
 #include "Interval.cd"
+#include "Fit.h"
+#include "Fit.cd"
 #include "ExponentialFit.h"
 #include "ExponentialFit.cd"
 

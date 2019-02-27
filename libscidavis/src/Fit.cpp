@@ -220,6 +220,17 @@ void Fit::setInitialGuesses(double *x_init)
 		gsl_vector_set(d_param_init, i, x_init[i]);
 }
 
+void Fit::setInitialValues(const pyobject& init)
+{
+#ifdef SCRIPTING_PYTHON
+  using namespace boost::python;
+  if (len(init)!=d_p)
+    throw runtime_error("incorrect number of initialisation parameters");
+  for (unsigned i = 0; i < d_p; i++)
+    gsl_vector_set(d_param_init, i, extract<double>(init[i])());
+#endif
+}
+
 void Fit::generateFunction(bool yes, int points)
 {
 	d_gen_function = yes;

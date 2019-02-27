@@ -8714,7 +8714,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Пожалуйста, введите правильное название кривой!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="+234"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="+245"/>
         <source>fit of dataset</source>
         <translation type="unfinished">приближение по набору данных</translation>
     </message>

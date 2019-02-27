@@ -44,6 +44,13 @@ class Matrix;
 class ApplicationWindow;
 class Script;
 
+#ifdef SCRIPTING_PYTHON
+#include <boost/python.hpp>
+typedef boost::python::object pyobject;
+#else
+struct pyobject;
+#endif
+
 //! Fit base class
 class Fit : public Filter, public scripted
 {
@@ -71,11 +78,12 @@ public:
 
   void setDataCurve(int curve, double start, double end);
 
-  QString formula(){return d_formula;};
+  std::string formula(){return d_formula.toStdString();};
   int numParameters() {return d_p;}
 
-  void setInitialGuess(int parIndex, double val){gsl_vector_set(d_param_init, parIndex, val);};
+  void setInitialValue(int parIndex, double val){gsl_vector_set(d_param_init, parIndex, val);};
   void setInitialGuesses(double *x_init);
+  void setInitialValues(const pyobject&);
 
   virtual void guessInitialValues(){};
 

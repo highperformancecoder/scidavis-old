@@ -27,7 +27,7 @@ g1.confirmClose(False)
 t1.confirmClose(False)
     
 f1=ExponentialFit(l1,curve1)
-f1.setInitialValues(.8,.5,1.1)
+f1.setInitialValues((.8,.5,1.1))
 f1.fit()
 assert f1.rSquare() > 0.99,"f1.rSquare() >= 0.99"
 assert f1.formula()=="y0+A*exp(-x/t)"

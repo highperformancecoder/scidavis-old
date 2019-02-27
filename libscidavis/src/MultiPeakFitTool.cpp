@@ -74,8 +74,8 @@ void MultiPeakFitTool::selectPeak(QwtPlotCurve *curve, int point_index)
 		return;
 	d_curve = curve;
 
-	d_fit->setInitialGuess(3*d_selected_peaks, curve->y(point_index));
-	d_fit->setInitialGuess(3*d_selected_peaks+1, curve->x(point_index));
+	d_fit->setInitialValue(3*d_selected_peaks, curve->y(point_index));
+	d_fit->setInitialValue(3*d_selected_peaks+1, curve->x(point_index));
 
 	QwtPlotMarker *m = new QwtPlotMarker();
 	m->setLineStyle(QwtPlotMarker::VLine);
