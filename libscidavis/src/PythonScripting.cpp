@@ -282,6 +282,7 @@ static int dummy=(
 
 const char* PythonScripting::langName = "Python";
 
+// variable argument overloads here
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newTableSII,newTable,1,3);
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newMatrixSII,newMatrix,0,3);
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newGraphS,newGraph,0,1);
