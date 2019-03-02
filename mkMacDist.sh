@@ -88,10 +88,11 @@ EOF
 codesign -s "Developer ID Application" --deep --force scidavis/scidavis.app
 if [ $? -ne 0 ]; then
     echo "try running this script on the Mac GUI desktop, not ssh shell"
-fi
-productbuild --root scidavis/scidavis.app /Applications/scidavis.app scidavis.pkg
-productsign --sign "Developer ID Installer" scidavis.pkg scidavis-$version.pkg
-if [ $? -ne 0 ]; then
-    echo "try running this script on the Mac GUI desktop, not ssh shell"
+    exit
 fi
 
+rm -f scidavis-$version-mac-dist.dmg
+hdiutil create -srcfolder scidavis/scidavis.app -volname SciDAVis -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDRW -size 200M temp.dmg
+hdiutil convert -format UDZO -imagekey zlib-level=9 -o scidavis-$version-mac-dist.dmg temp.dmg 
+rm -f temp.dmg
+codesign -s "Developer ID Application" scidavis-$version-mac-dist.dmg
