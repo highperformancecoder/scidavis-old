@@ -111,6 +111,11 @@ MacOSX.](http://www.hpcoders.com.au/blog/?p=100)
   Sadly, you may need to do this step multiple times before eveything
   is installed
 
+4. link sip-2.7 executable to sip:
+~~~
+ln -sf /opt/local/bin/sip-2.7 /opt/local/bin
+~~~
+
 5. Add qt's bin directory to your PATH
   - PATH=/opt/local/bin:/opt/local/libexec/qt4/bin:$PATH
   
