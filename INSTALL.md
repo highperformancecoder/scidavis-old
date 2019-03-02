@@ -107,13 +107,13 @@ executable that will run on older versions of
 MacOSX.](http://www.hpcoders.com.au/blog/?p=100)
 
 4. Install the prerequisites for scidavis.
-  - port install qt4-mac qwt52 qwtplot3d boost gsl py27-pyqt4 py-pyqwt py27-sip py-sip muparser<br>
+  - port install qt4-mac qwt52 qwtplot3d boost gsl py27-pyqt4 py-pyqwt py27-sip muparser<br>
   Sadly, you may need to do this step multiple times before eveything
   is installed
 
-4. link sip-2.7 executable to sip:
+4. link sip-2.7 share directory to where sip expects it to be:
 ~~~
-ln -sf /opt/local/bin/sip-2.7 /opt/local/bin
+ln -sf /opt/local/Library/Frameworks/Python.framework/Versions/2.7/share/sip /opt/local/share/py27-sip
 ~~~
 
 5. Add qt's bin directory to your PATH
