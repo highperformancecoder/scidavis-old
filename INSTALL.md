@@ -62,6 +62,7 @@ MXE_HOME, do
 4. Build scidavis
    - make qmake
    - make
+   - sip generated code incorrectly attempts to assign a nullptr to an integer field. Change it to 0.
 
 5. Copy the scidavis directory to a Windows machine
 
