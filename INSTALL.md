@@ -107,7 +107,7 @@ executable that will run on older versions of
 MacOSX.](http://www.hpcoders.com.au/blog/?p=100)
 
 4. Install the prerequisites for scidavis.
-  - port install qt4-mac qwt52 qwtplot3d boost gsl py27-pyqt4 py-pyqwt py27-sip muparser<br>
+  - port install qt4-mac qwt52 qwtplot3d boost gsl py27-pyqt4 py-pyqwt py27-sip py-sip muparser<br>
   Sadly, you may need to do this step multiple times before eveything
   is installed
 
