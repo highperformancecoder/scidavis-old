@@ -62,6 +62,7 @@ MXE_HOME, do
 4. Build scidavis
    - make qmake
    - make
+   - sip generated code incorrectly attempts to assign a nullptr to an integer field. Change it to 0.
 
 5. Copy the scidavis directory to a Windows machine
 
@@ -110,6 +111,11 @@ MacOSX.](http://www.hpcoders.com.au/blog/?p=100)
   - port install qt4-mac qwt52 qwtplot3d boost gsl py27-pyqt4 py-pyqwt py27-sip muparser<br>
   Sadly, you may need to do this step multiple times before eveything
   is installed
+
+4. link sip-2.7 share directory to where sip expects it to be:
+~~~
+ln -sf /opt/local/Library/Frameworks/Python.framework/Versions/2.7/share/sip /opt/local/share/py27-sip
+~~~
 
 5. Add qt's bin directory to your PATH
   - PATH=/opt/local/bin:/opt/local/libexec/qt4/bin:$PATH
