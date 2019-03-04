@@ -46,7 +46,7 @@ public:
   PythonScripting(ApplicationWindow *parent, bool batch=false);
   ~PythonScripting();
   static ScriptingEnv *constructor(ApplicationWindow *parent, bool batch=false) { return new PythonScripting(parent, batch); }
-  bool initialize();
+  bool initialize() override;
   void redirectStdIO() override;
 
   void write(const QString &text) { emit print(text); }
@@ -75,20 +75,22 @@ public:
   bool exec(const QString &code, PyObject *argDict=NULL, const char *name="<scidavis>");
   QString errorMsg();
 
-  bool isRunning() const;
-  Script *newScript(const QString &code, QObject *context, const QString &name="<input>")
+  bool isRunning() const override;
+  Script *newScript(const QString &code, QObject *context, const QString &name="<input>") override
   {
     return new PythonScript(this, code, context, name);
   }
 
   bool setQObject(QObject*, const char*, PyObject *dict);
-  bool setQObject(QObject *val, const char *name) { return setQObject(val,name,NULL); }
-  bool setInt(int, const char*, PyObject *dict=NULL);
-  bool setDouble(double, const char*, PyObject *dict=NULL);
+  bool setQObject(QObject *val, const char *name) override { return setQObject(val,name,NULL); }
+  bool setInt(int i, const char* s) override {return setInt(i,s,nullptr);}
+  bool setInt(int, const char*, PyObject *dict);
+  bool setDouble(double x, const char* s) override {return setDouble(x,s,nullptr);}
+  bool setDouble(double, const char*, PyObject *dict);
 
-  const QStringList mathFunctions() const;
-  const QString mathFunctionDoc (const QString &name) const;
-  const QStringList fileExtensions() const;
+  const QStringList mathFunctions() const override;
+  const QString mathFunctionDoc (const QString &name) const override;
+  const QStringList fileExtensions() const override;
 
   PyObject *globalDict() { return globals; }
   PyObject *sysDict() { return sys; }

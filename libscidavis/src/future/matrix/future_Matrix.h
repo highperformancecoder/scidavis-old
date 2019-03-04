@@ -161,6 +161,7 @@ class Matrix : public AbstractPart
 		void setRowCells(int row, int first_column, int last_column, const QVector<qreal> & values);
 		//! Return the text displayed in the given cell
 		QString text(int row, int col);
+  using AbstractPart::copy;
 		void copy(Matrix * other);
 		double xStart() const;
 		double yStart() const;

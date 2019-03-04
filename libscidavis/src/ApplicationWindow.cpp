@@ -3670,7 +3670,6 @@ bool ApplicationWindow::loadProject(const QString& fn)
     d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
 
   projectname = fn;
-  d_file_version = d_file_version;
   setWindowTitle(tr("SciDAVis") + " - " + fn);
 
   QFileInfo fi(fn);

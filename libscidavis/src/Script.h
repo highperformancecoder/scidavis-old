@@ -90,7 +90,7 @@ class Script : public QObject
     virtual bool exec();
 
     // local variables
-    virtual bool setQObject(const QObject*, const char*) { return false; }
+    virtual bool setQObject(QObject*, const char*) { return false; }
     virtual bool setInt(int, const char*) { return false; }
     virtual bool setDouble(double, const char*) { return false; }
 

@@ -211,7 +211,7 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
     // if we need to bundle Python libraries with the executable,
     // specify the library location here
 #ifdef PYTHONHOME
-    Py_SetPythonHome(str(PYTHONHOME));
+    Py_SetPythonHome(const_cast<char*>(str(PYTHONHOME)));
 #endif
     //		PyEval_InitThreads ();
 #if PY_MAJOR_VERSION >= 3

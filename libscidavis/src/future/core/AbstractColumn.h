@@ -42,6 +42,7 @@
 class Column;
 class AbstractSimpleFilter;
 class QStringList;
+class AbstractFilter;
 
 //! Interface definition for data with column logic
 /**
@@ -103,7 +104,8 @@ class AbstractColumn : public AbstractAspect
 		 * This sets the column mode and, if
 		 * necessary, converts it to another datatype.
 		 */
-		virtual void setColumnMode(SciDAVis::ColumnMode mode) { Q_UNUSED(mode) };
+  virtual void setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *conversion_filter=0)
+  { Q_UNUSED(mode);  Q_UNUSED(conversion_filter);};
 		//! Copy another column of the same type
 		/**
 		 * This function will return false if the data type
