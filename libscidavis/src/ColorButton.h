@@ -42,6 +42,7 @@ static inline QString COLORVALUE( QString s ) { return s; }
 static inline QString COLORNAME( QColor c ) { return ('#'+QString::number(c.rgba(),16)); }
 static inline QString COLORVALUE( QString s ) { if ((s[0]=='#') && (s.size()==9)) return s.remove(1,2); else return s; }
 #endif
+static inline uint    COLORUINT( QString s ) { if (s[0]=='#') return s.remove(0,1).toUInt(nullptr,16); else return s.toUInt(); }
 
 //! A button used for color selection
 /**
