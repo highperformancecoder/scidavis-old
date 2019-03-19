@@ -86,6 +86,8 @@ typedef struct _traceback {
 #include "Fit.cd"
 #include "ExponentialFit.h"
 #include "ExponentialFit.cd"
+#include "Qt.h"
+#include "Qt.cd"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -270,10 +272,10 @@ struct QString_from_python_str
 };
 
 static int dummy=(
-                  // register the Qstring to-python converter
-                  py::to_python_converter<
-                  QString,
-                  QString_to_python_str>(),
+//                  // register the Qstring to-python converter
+//                  py::to_python_converter<
+//                  QString,
+//                  QString_to_python_str>(),
  
                   // register the Qstring from-python converter
                   QString_from_python_str(),
@@ -291,13 +293,13 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_plotTVSII,plot,2,4);
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_plotTSII,plot,2,4);
 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(Graph_addErrorBars,addErrorBars,3,10);
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(Graph_exportImage,exportImage,1,2);
 
 // returns the current ApplicationWindow instance
 ApplicationWindow& theApp()
 {
   using namespace py;
-  dict the_dict=extract<dict>(import("__main__").attr("__dict__"));
-  return extract<ApplicationWindow&>(the_dict["app"]);
+  return extract<ApplicationWindow&>(modDict("__main__")["app"]);
 
 }
 
@@ -318,7 +320,10 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<PythonScript>();
   p.defineClass<ArrowMarker>();
   p.defineClass<ExponentialFit>();
-
+  p.defineClass<QtNamespace>();
+  // redefine Qt as an alias for QtNamespace
+  modDict("__main__")["Qt"]=modDict("scidavis")["QtNamespace"];
+  
   // overload handling
   Table& (ApplicationWindow::*newTable)()=&ApplicationWindow::newTable;
   Table& (ApplicationWindow::*newTableSII)(const std::string&,int,int)=&ApplicationWindow::newTable;
@@ -339,8 +344,12 @@ BOOST_PYTHON_MODULE(scidavis)
     (const QString&,Table&,const QString&,
      int,int,int,const QColor&,bool,bool,bool)=&Graph::addErrorBars;
   p.getClass<Graph>().
-    overload("addErrorBars",graph_addErrorBars,Graph_addErrorBars());
-
+    overload("addErrorBars",graph_addErrorBars,Graph_addErrorBars()).
+    overload("exportImage",&Graph::exportImage,Graph_exportImage())
+    ;
+  p.getClass<MultiLayer>().
+    overload("exportImage",&MultiLayer::exportImage,Graph_exportImage())
+    ;
   p.getClass<ExponentialFit>().
     def("__init__",py::make_constructor(newExponentialFit)).
     def("__init__",py::make_constructor(newExponentialFit2));

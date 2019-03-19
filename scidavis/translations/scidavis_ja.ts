@@ -7913,7 +7913,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="617"/>
+        <location filename="../../libscidavis/src/Graph.h" line="619"/>
         <source>F</source>
         <translation type="unfinished"></translation>
     </message>

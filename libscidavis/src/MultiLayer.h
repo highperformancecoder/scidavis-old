@@ -166,7 +166,8 @@ public slots:
   //! \name Print and Export
   //@{
   void exportToFile(const QString& fileName);
-  void exportImage(const QString& fileName, int quality = -1);
+  void exportImageQString(const QString& fileName, int quality = -1);
+  void exportImage(const std::string& fileName, int quality = -1) {exportImageQString(fileName.c_str(),quality);}
   void exportSVG(const QString& fname);
   void exportPDF(const QString& fname);
   void exportVector(const QString& fileName, int res = 0, bool color = true,

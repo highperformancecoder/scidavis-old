@@ -11541,7 +11541,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="unfinished">Bitte einen gültigen Dateinamen eingeben!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="617"/>
+        <location filename="../../libscidavis/src/Graph.h" line="619"/>
         <source>F</source>
         <translation type="unfinished">F</translation>
     </message>

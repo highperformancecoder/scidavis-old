@@ -1372,7 +1372,7 @@ void Graph::exportToFile(const QString& fileName)
 		QList<QByteArray> list = QImageWriter::supportedImageFormats();
     	for(int i=0 ; i<list.count() ; i++){
 			if (fileName.contains( "." + list[i].toLower())){
-				exportImage(fileName);
+				exportImageQString(fileName);
 				return;
 			}
 		}
@@ -1380,7 +1380,7 @@ void Graph::exportToFile(const QString& fileName)
 	}
 }
 
-void Graph::exportImage(const QString& fileName, int quality)
+void Graph::exportImageQString(const QString& fileName, int quality)
 {
 	QImage image(size(), QImage::Format_ARGB32);
 	exportPainter(image);
@@ -2610,7 +2610,7 @@ long Graph::insertTextMarker(const QStringList& list, int fileVersion)
 	return key;
 }
 
-void Graph::addArrow(QStringList list, int fileVersion)
+void Graph::addArrowProject(QStringList list, int fileVersion)
 {
 	ArrowMarker* mrk = new ArrowMarker();
 	long mrkID=d_plot->insertMarker(mrk);

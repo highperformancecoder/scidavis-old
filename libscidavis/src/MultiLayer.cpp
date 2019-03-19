@@ -652,7 +652,7 @@ void MultiLayer::exportToFile(const QString& fileName)
 		QList<QByteArray> list = QImageWriter::supportedImageFormats();
     	for(int i=0 ; i<list.count() ; i++){
 			if (fileName.contains( "." + list[i].toLower())){
-				exportImage(fileName);
+				exportImageQString(fileName);
 				return;
 			}
 		}
@@ -660,7 +660,7 @@ void MultiLayer::exportToFile(const QString& fileName)
 	}
 }
 
-void MultiLayer::exportImage(const QString& fileName, int quality)
+void MultiLayer::exportImageQString(const QString& fileName, int quality)
 {
 	QImage image(canvas->size(), QImage::Format_ARGB32);
 	exportPainter(image);

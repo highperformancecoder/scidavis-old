@@ -246,7 +246,9 @@ public slots:
   void exportVector(const QString& fileName, int res = 0, bool color = true,
                     bool keepAspect = true, QPrinter::PageSize pageSize = QPrinter::Custom, 
                     QPrinter::Orientation orientation = QPrinter::Portrait);
-  void exportImage(const QString& fileName, int quality = -1);
+  void exportImageQString(const QString& fileName, int quality = -1);
+  void exportImage(const std::string& fileName, int quality = -1)
+  {exportImageQString(QString(fileName.c_str()),quality);}
   //@}
 
   void replot(){d_plot->replot();};
@@ -376,7 +378,7 @@ public slots:
   void addArrow(ArrowMarker* mrk);
 
   //! Used when opening a project file
-  void addArrow(QStringList list, int fileVersion);
+  void addArrowProject(QStringList list, int fileVersion);
   QVector<int> lineMarkerKeys(){return d_lines;};
 
   //!Draws a line/arrow depending on the value of "arrow"

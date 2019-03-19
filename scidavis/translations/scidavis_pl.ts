@@ -7810,7 +7810,7 @@ p, li { white-space: pre-wrap; }
         <translation>Na tym wykresie brak krzywych o więcej niż dwóch punktach. Czynność wstrzymano!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="617"/>
+        <location filename="../../libscidavis/src/Graph.h" line="619"/>
         <source>F</source>
         <translation></translation>
     </message>

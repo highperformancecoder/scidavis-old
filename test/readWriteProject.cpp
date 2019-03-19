@@ -44,7 +44,7 @@ SUITE(ReadWriteProject)
           if (auto w=dynamic_cast<MultiLayer*>(i))
             {
               w->exportSVG(i->windowTitle()+".svg");
-              w->exportImage(i->windowTitle()+".png");
+              w->exportImage((i->windowTitle()+".png").toStdString());
             }
       }
   
