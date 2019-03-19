@@ -56,9 +56,9 @@ public:
   future::Matrix *d_future_matrix;
 
   //! Return the window name
-  virtual QString name() { return d_future_matrix->name();} 
+  std::string name() const override { return d_future_matrix->name().toStdString();} 
   //! Set the window name
-  virtual void setName(const QString& s) { d_future_matrix->setName(s); }
+  void setName(const std::string& s) override { d_future_matrix->setName(s.c_str()); }
   //! Return the window label
   virtual QString windowLabel() { return d_future_matrix->comment(); }
   //! Set the window label

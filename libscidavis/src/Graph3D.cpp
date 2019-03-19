@@ -327,7 +327,7 @@ void Graph3D::addMatrixData(Matrix* m)
 		first_time = true;
 
 	d_matrix = m;
-	plotAssociation = "matrix<" + QString(m->name()) + ">";
+	plotAssociation = "matrix<" + QString(m->name().c_str()) + ">";
 
 	int cols = m->numCols();
 	int rows = m->numRows();
@@ -358,7 +358,7 @@ void Graph3D::addMatrixData(Matrix* m, double xl, double xr,
 		double yl, double yr, double zl, double zr)
 {
 	d_matrix = m;
-	plotAssociation = "matrix<" + QString(m->name()) + ">";
+	plotAssociation = "matrix<" + QString(m->name().c_str()) + ">";
 
 	updateScalesFromMatrix(xl, xr, yl, yr, zl, zr);
 }
@@ -2016,7 +2016,7 @@ void Graph3D::print()
 		}
 		else
 			QMessageBox::about(0,tr("IO Error"),
-					tr("Could not print: <h4>") + QString(name()) + "</h4>.");
+                                           tr("Could not print: <h4>") + QString(name().c_str()) + "</h4>.");
 	}
 }
 
@@ -2433,7 +2433,7 @@ QString Graph3D::formula()
 QString Graph3D::saveToString(const QString& geometry)
 {
 	QString s="<SurfacePlot>\n";
-	s+= QString(name())+"\t";
+	s+= QString(name().c_str())+"\t";
 	s+= birthDate() + "\n";
 	s+= geometry;
 	s+= "SurfaceFunction\t";

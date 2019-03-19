@@ -1789,7 +1789,7 @@ void ApplicationWindow::change3DMatrix()
 
 	Graph3D* g = (Graph3D*)d_workspace.activeSubWindow();
 	if (g && g->matrix())
-		ad->setCurentDataSet(g->matrix()->name());
+          ad->setCurentDataSet(g->matrix()->name().c_str());
 	ad->exec();
 }
 
@@ -1915,7 +1915,7 @@ Graph3D& ApplicationWindow::newPlot3D(const QString& formula, double xl, double 
 	plot->addFunction(formula, xl, xr, yl, yr, zl, zr);
 	plot->resize(500,400);
 	plot->setWindowTitle(label);
-	plot->setName(label);
+	plot->setName(label.toStdString());
 	customPlot3D(plot);
 	plot->update();
 
@@ -1947,7 +1947,7 @@ Graph3D& ApplicationWindow::newPlot3D(const QString& caption,const QString& form
 		label = generateUniqueName(tr("Graph"));
 
 	plot->setWindowTitle(label);
-	plot->setName(label);
+	plot->setName(label.toStdString());
 	initPlot3D(plot);
 	return *plot;
 }
@@ -1962,7 +1962,7 @@ Graph3D* ApplicationWindow::dataPlot3D(Table* table, const QString& colName)
 	plot->addData(table, colName);
 	plot->resize(500,400);
 	plot->setWindowTitle(label);
-	plot->setName(label);
+	plot->setName(label.toStdString());
 
 	customPlot3D(plot);
 	plot->update();
@@ -2000,7 +2000,7 @@ Graph3D* ApplicationWindow::dataPlot3D(const QString& caption,const QString& for
         label = generateUniqueName(tr("Graph"));
 
       plot->setWindowTitle(label);
-      plot->setName(label);
+      plot->setName(label.toStdString());
       initPlot3D(plot);
 
       return plot;
@@ -2019,7 +2019,7 @@ Graph3D& ApplicationWindow::newPlot3D()
 	plot->setAttribute(Qt::WA_DeleteOnClose);
 	plot->resize(500, 400);
 	plot->setWindowTitle(label);
-	plot->setName(label);
+	plot->setName(label.toStdString());
 
 	customPlot3D(plot);
 	initPlot3D(plot);
@@ -2043,7 +2043,7 @@ Graph3D* ApplicationWindow::dataPlotXYZ(Table* table, const QString& zColName, i
 	plot->addData(table, xCol, yCol, zCol, type);
 	plot->resize(500,400);
 	plot->setWindowTitle(label);
-	plot->setName(label);
+	plot->setName(label.toStdString());
 
 	customPlot3D(plot);
 	plot->update();
@@ -2090,7 +2090,7 @@ Graph3D* ApplicationWindow::dataPlotXYZ(const QString& caption,const QString& fo
         label = generateUniqueName(tr("Graph"));
 
       plot->setWindowTitle(label);
-      plot->setName(label);
+      plot->setName(label.toStdString());
       initPlot3D(plot);
       return plot;
     }
@@ -2189,7 +2189,7 @@ void ApplicationWindow::loadImage(const QString& fn)
 	MultiLayer *plot = multilayerPlot(generateUniqueName(tr("Graph")));
 	plot->setWindowLabel(fn);
 	plot->setCaptionPolicy(MyWidget::Both);
-	setListViewLabel(plot->name(), fn);
+	setListViewLabel(plot->name().c_str(), fn);
 
 	plot->showNormal();
 	Graph *g = plot->addLayer(0, 0, plot->width(), plot->height());
@@ -2455,7 +2455,7 @@ void ApplicationWindow::initBareMultilayerPlot(MultiLayer* g, const QString& nam
 	connectMultilayerPlot(g);
 
 	g->setWindowTitle(label);
-	g->setName(label);
+	g->setName(label.toStdString());
 	g->setWindowIcon(QPixmap(":/graph.xpm"));
 	g->setScaleLayersOnPrint(d_scale_plots_on_print);
 	g->printCropmarks(d_print_cropmarks);
@@ -2543,7 +2543,7 @@ void ApplicationWindow::setPreferences(Graph* g)
 void ApplicationWindow::newWrksheetPlot(const QString& name,const QString& label, QList<Column *> columns)
 {
 	Table& w = newTable(name, label, columns);
-	MultiLayer* plot=multilayerPlot(&w, QStringList(QString(w.name())+"_intensity"), 0);
+	MultiLayer* plot=multilayerPlot(&w, QStringList(QString(w.name().c_str())+"_intensity"), 0);
 	Graph *g=(Graph*)plot->activeGraph();
 	if (g)
 	{
@@ -2565,8 +2565,8 @@ Table& ApplicationWindow::newTable(const QString& fname, const QString &sep,
 			simplifySpaces, convertToNumeric, numericLocale, fname, &d_workspace, 0, 0);
 	if (w)
 	{
-		w->setName(generateUniqueName(tr("Table")));
-		d_project->addChild(w->d_future_table);
+          w->setName(generateUniqueName(tr("Table")).toStdString());
+          d_project->addChild(w->d_future_table);
 	}
 	return *w;
 }
@@ -2577,7 +2577,7 @@ Table& ApplicationWindow::newTable(const QString& fname, const QString &sep,
 Table& ApplicationWindow::newTable()
 {
 	Table* w = new Table(scriptEnv, 30, 2, "", &d_workspace, 0);
-	w->setName(generateUniqueName(tr("Table")));
+	w->setName(generateUniqueName(tr("Table")).toStdString());
 	d_project->addChild(w->d_future_table);
 	return *w;
 }
@@ -2593,10 +2593,10 @@ Table& ApplicationWindow::newTable(const std::string& caption, int c, int r)
 	d_project->addChild(w->d_future_table);
 	if (w->name() != caption.c_str())//the table was renamed
 	{
-          renamedTables << caption.c_str() << w->name();
+          renamedTables << caption.c_str() << w->name().c_str();
           QMessageBox:: warning(this, tr("Renamed Window"),
 				tr("The table '%1' already exists. It has been renamed '%2'.").
-                                arg(caption.c_str()).arg(w->name()));
+                                arg(caption.c_str()).arg(w->name().c_str()));
 	}
 	return *w;
 }
@@ -2604,20 +2604,20 @@ Table& ApplicationWindow::newTable(const std::string& caption, int c, int r)
 Table& ApplicationWindow::newTable(int r, int c, const QString& name, const QString& legend)
 {
   assert(scriptEnv);
-	Table* w = new Table(scriptEnv, r, c, legend, &d_workspace, 0);
-	w->setName(name);
-	d_project->addChild(w->d_future_table);
-	return *w;
+  Table* w = new Table(scriptEnv, r, c, legend, &d_workspace, 0);
+  w->setName(name.toStdString());
+  d_project->addChild(w->d_future_table);
+  return *w;
 }
 
 Table& ApplicationWindow::newTable(const QString& name, const QString& legend, QList<Column *> columns)
 {
   assert(scriptEnv);
-	Table* w = new Table(scriptEnv, 0, 0, legend, &d_workspace, 0);
-	w->d_future_table->appendColumns(columns);
-	w->setName(name);
-	d_project->addChild(w->d_future_table);
-	return *w;
+  Table* w = new Table(scriptEnv, 0, 0, legend, &d_workspace, 0);
+  w->d_future_table->appendColumns(columns);
+  w->setName(name.toStdString());
+  d_project->addChild(w->d_future_table);
+  return *w;
 }
 
 Table& ApplicationWindow::newHiddenTable(const QString& name, const QString& label, QList<Column *> columns)
@@ -2651,7 +2651,7 @@ TableStatistics *ApplicationWindow::newTableStatistics(Table *base, int type, QL
 {
 	TableStatistics* s = new TableStatistics(scriptEnv, &d_workspace, base, (TableStatistics::Type) type, target);
 	if (!caption.isEmpty())
-		s->setName(caption);
+          s->setName(caption.toStdString());
 
 	d_project->addChild(s->d_future_table);
 	connect(base, SIGNAL(modifiedData(Table*,const QString&)), s, SLOT(update(Table*,const QString&)));
@@ -2700,7 +2700,7 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 
 	d_workspace.addSubWindow(m);
 	m->setWindowTitle(name);
-	m->setName(name);
+	m->setName(name.toStdString());
 	m->setWindowIcon( QPixmap(":/note.xpm") );
 	m->confirmClose(confirmCloseNotes);
 	m->setFolder(current_folder);
@@ -2722,10 +2722,10 @@ Matrix& ApplicationWindow::newMatrix(const QString& caption, int r, int c)
 	Matrix* w = new Matrix(scriptEnv, r, c, "", 0 ,0);
 	QString name = caption;
 	while(alreadyUsedName(name)) {name = generateUniqueName(caption); }
-	w->setName(name);
+	w->setName(name.toStdString());
 	d_project->addChild(w->d_future_matrix);
-	if (w->name() != caption)//the matrix was renamed
-		renamedTables << caption << w->name();
+	if (w->name().c_str() != caption)//the matrix was renamed
+          renamedTables << caption << w->name().c_str();
 
 	return *w;
 }
@@ -2738,7 +2738,7 @@ void ApplicationWindow::matrixDeterminant()
 
 	QDateTime dt = QDateTime::currentDateTime ();
 	QString info=dt.toString(Qt::LocalDate);
-	info+= "\n" + tr("Determinant of ") + QString(m->name()) + ":\t";
+	info+= "\n" + tr("Determinant of ") + QString(m->name().c_str()) + ":\t";
 	info+= "det = " + QString::number(m->determinant()) + "\n";
 	info+="-------------------------------------------------------------\n";
 
@@ -2774,7 +2774,7 @@ Table* ApplicationWindow::convertMatrixToTable()
                   w->column(j)->setValueAt(i, m->cell(i,j));
 	}
 
-	w->setName(generateUniqueName(tr("Table")));
+	w->setName(generateUniqueName(tr("Table")).toStdString());
 	d_project->addChild(w->d_future_table);
 	w->setWindowLabel(m->windowLabel());
 	w->setCaptionPolicy(m->captionPolicy());
@@ -2826,8 +2826,8 @@ Matrix* ApplicationWindow::convertTableToMatrix()
                   w->setText(i, j, m->column(j)->asStringColumn()->textAt(i));
 	}
 
-	QString caption = generateUniqueName(m->name());
-	w->setName(caption);
+	QString caption = generateUniqueName(m->name().c_str());
+	w->setName(caption.toStdString());
 	d_project->addChild(w->d_future_matrix);
 
 	w->setCaptionPolicy(m->captionPolicy());
@@ -2845,7 +2845,7 @@ MyWidget* ApplicationWindow::window(const QString& name)
 	for (int i = 0; i < windows.count();i++ )
 	{
 		widget = windows.at(i);
-		if (widget && widget->name() == name)
+		if (widget && widget->name().c_str() == name)
 			return widget;
 	}
 	return widget;
@@ -2858,7 +2858,7 @@ Table& ApplicationWindow::table(const QString& name)
 
 	for(MyWidget *w: windowsList())
           if (auto t=dynamic_cast<Table*>(w))
-            if (t->name() == caption)
+            if (t->name().c_str() == caption)
               return *t;
 	throw NoSuchObject();
 }
@@ -2875,7 +2875,7 @@ Matrix& ApplicationWindow::matrix(const QString& name)
 	QList<MyWidget*> lst = windowsList();
 	foreach(MyWidget *w, lst)
           if (auto m=dynamic_cast<Matrix*>(w))
-            if (m->name() == caption)
+            if (m->name().c_str() == caption)
               return *m;
 	throw NoSuchObject();
 }
@@ -3375,7 +3375,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 			Table& w = newTable(sorted_files[i], local_column_separator, local_ignored_lines,
 					local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric, local_numeric_locale);
 			w.setCaptionPolicy(MyWidget::Both);
-			setListViewLabel(w.name(), sorted_files[i]);
+			setListViewLabel(w.name().c_str(), sorted_files[i]);
 			if (i==0) 
 			{
 				dx = w.verticalHeaderWidth();
@@ -3887,7 +3887,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
             {
               QStringList lst=t.readLine().split("\t");
               plot->setWindowLabel(lst[1]);
-              setListViewLabel(plot->name(),lst[1]);
+              setListViewLabel(plot->name().c_str(),lst[1]);
               plot->setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
             }
           if (d_file_version > 83)
@@ -4901,7 +4901,7 @@ void ApplicationWindow::exportAllGraphs()
 				QApplication::restoreOverrideCursor();
 				QMessageBox::warning(this, tr("Warning"),
 						tr("There are no plot layers available in window <b>%1</b>.<br>"
-							"Graph window not exported!").arg(plot2D->name()));
+                                                   "Graph window not exported!").arg(plot2D->name().c_str()));
 				QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 				continue;
 			}
@@ -4999,7 +4999,7 @@ QString ApplicationWindow::windowGeometryInfo(MyWidget *w)
 void ApplicationWindow::restoreWindowGeometry(ApplicationWindow *app, MyWidget *w, const QString s)
 {
 	w->blockSignals (true);
-	QString caption = w->name();
+	QString caption = w->name().c_str();
 	if (s.contains ("minimized"))
 	{
 	    QStringList lst = s.split("\t");
@@ -5143,7 +5143,7 @@ void ApplicationWindow::saveAsTemplate()
 		filter = tr("SciDAVis/QtiPlot 3D Surface Template")+" (*.qst)";
 
 	QString selectedFilter;
-	QString fn = QFileDialog::getSaveFileName(this, tr("Save Window As Template"), templatesDir + "/" + w->name(), filter, &selectedFilter);
+	QString fn = QFileDialog::getSaveFileName(this, tr("Save Window As Template"), templatesDir + "/" + w->name().c_str(), filter, &selectedFilter);
 	if ( !fn.isEmpty() )
 	{
 		QFileInfo fi(fn);
@@ -5189,7 +5189,7 @@ void ApplicationWindow::renameWindow_(QTreeWidgetItem *item, int, const QString 
 {
   if (auto wli=dynamic_cast<WindowListItem*>(item))
     if (auto w=wli->window())
-      if (text!=w->name())
+      if (text!=w->name().c_str())
         renameWindow(w, text);
 }
 
@@ -5198,7 +5198,7 @@ bool ApplicationWindow::renameWindow(MyWidget *w, const QString &text)
 	if (!w)
 		return false;
 
-	QString name = w->name();
+	QString name = w->name().c_str();
 
 	QString newName = text;
 	newName.replace("-", "_");
@@ -5235,7 +5235,7 @@ bool ApplicationWindow::renameWindow(MyWidget *w, const QString &text)
 	else if (w->inherits("Matrix"))
 		changeMatrixName(name, newName);
 
-	w->setName(newName);
+	w->setName(newName.toStdString());
 	w->setCaptionPolicy(w->captionPolicy());
 	renameListViewItem(name, newName);
 	return true;
@@ -5255,7 +5255,7 @@ QStringList ApplicationWindow::columnsList(SciDAVis::PlotDesignation plotType)
 		for (int i=0; i < t->numCols(); i++)
 		{
 			if (t->colPlotDesignation(i) == plotType)
-				list << QString(t->name()) + "_" + t->colLabel(i);
+                          list << QString(t->name().c_str()) + "_" + t->colLabel(i);
 		}
 	}
 
@@ -5275,7 +5275,7 @@ QStringList ApplicationWindow::columnsList()
 		Table *t = (Table *)w;
 		for (int i=0; i < t->numCols(); i++)
 		{
-			list << QString(t->name()) + "_" + t->colLabel(i);
+                  list << QString(t->name().c_str()) + "_" + t->colLabel(i);
 		}
 	}
 
@@ -5486,7 +5486,7 @@ void ApplicationWindow::showExportASCIIDialog()
 				this, SLOT(exportAllTables(const QString&, bool, bool)));
 
 		ed->setTableNames(tableWindows());
-		ed->setActiveTableName(table->name());
+		ed->setActiveTableName(table->name().c_str());
 		ed->setColumnSeparator(columnSeparator);
 		ed->exec();
 	}
@@ -5507,7 +5507,7 @@ void ApplicationWindow::exportAllTables(const QString& sep, bool colNames, bool 
 			if (w->inherits("Table"))
 			{
 				Table *t = (Table*)w;
-				QString fileName = dir + "/" + t->name() + ".txt";
+				QString fileName = dir + "/" + t->name().c_str() + ".txt";
 				QFile f(fileName);
 				if (f.exists(fileName) && confirmOverwrite)
 				{
@@ -7276,7 +7276,7 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
 
     nw->setWindowLabel(w->windowLabel());
     nw->setCaptionPolicy(w->captionPolicy());
-    setListViewLabel(nw->name(), w->windowLabel());
+    setListViewLabel(nw->name().c_str(), w->windowLabel());
   }
   QApplication::restoreOverrideCursor();
   return nw;
@@ -7306,16 +7306,16 @@ bool ApplicationWindow::hidden(MyWidget* window)
 
 void ApplicationWindow::updateWindowStatus(MyWidget* w)
 {
-	setListView(w->name(), w->aspect());
-	if (w->status() == MyWidget::Maximized)
-	{
-		QList<MyWidget *> windows = current_folder->windowsList();
-		foreach(MyWidget *oldMaxWindow, windows)
-		{
-			if (oldMaxWindow != w && oldMaxWindow->status() == MyWidget::Maximized)
-				oldMaxWindow->setStatus(MyWidget::Normal);
-		}
-	}
+  setListView(w->name().c_str(), w->aspect());
+  if (w->status() == MyWidget::Maximized)
+    {
+      QList<MyWidget *> windows = current_folder->windowsList();
+      foreach(MyWidget *oldMaxWindow, windows)
+        {
+          if (oldMaxWindow != w && oldMaxWindow->status() == MyWidget::Maximized)
+            oldMaxWindow->setStatus(MyWidget::Normal);
+        }
+    }
 }
 
 void ApplicationWindow::hideActiveWindow()
@@ -7443,7 +7443,7 @@ void ApplicationWindow::removeWindowFromLists(MyWidget* w)
 	if (!w)
 		return;
 
-	QString caption = w->name();
+	QString caption = w->name().c_str();
 	if (w->inherits("Table")){
 		Table* m=(Table*)w;
 		for (int i=0; i<m->numCols(); i++){
@@ -7479,7 +7479,7 @@ void ApplicationWindow::closeWindow(MyWidget* window)
 	window->folder()->removeWindow(window);
 
 	//update list view in project explorer
-	QTreeWidgetItem *it=lv.findItems (window->name(), Qt::MatchExactly | Qt::MatchCaseSensitive).at(0);
+	QTreeWidgetItem *it=lv.findItems (window->name().c_str(), Qt::MatchExactly | Qt::MatchCaseSensitive).at(0);
 	if (it)
 		lv.takeTopLevelItem(lv.indexOfTopLevelItem(it));
 
@@ -7527,7 +7527,7 @@ void ApplicationWindow::windowsMenuAboutToShow()
 		{
 			MyWidget *widget = qobject_cast<MyWidget *>(windows.at(i));
 			if (!widget) continue;
-			QAction *actId = windowsMenu->addAction(widget->name(),
+			QAction *actId = windowsMenu->addAction(widget->name().c_str(),
 					this, SLOT( windowsMenuActivated( bool ) ) );
 			actId->setData(i);
 			actId->setCheckable(true);
@@ -7541,7 +7541,7 @@ void ApplicationWindow::windowsMenuAboutToShow()
 		{
 			MyWidget *widget = qobject_cast<MyWidget *>(windows.at(i));
 			if (!widget) continue;
-			QAction *actId = windowsMenu->addAction(widget->name(),
+			QAction *actId = windowsMenu->addAction(widget->name().c_str(),
 					this, SLOT( windowsMenuActivated( bool ) ) );
 			actId->setData(i);
 			actId->setCheckable(true);
@@ -7607,7 +7607,7 @@ void ApplicationWindow::windowsMenuActivated( bool checked )
 		if(hidden(w))
 		{
 			hiddenWindows.takeAt(hiddenWindows.indexOf(w));
-			setListView(w->name(), tr("Normal"));
+			setListView(w->name().c_str(), tr("Normal"));
 		}
 	}
 }
@@ -7865,7 +7865,7 @@ void ApplicationWindow::showTable(const QString& curve)
       w.deselectAll();
       w.setCellsSelected(0, colIndex, w.d_future_table->rowCount()-1, colIndex);
       w.showMaximized();
-      QTreeWidgetItem *it=lv.findItems (w.name(), Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
+      QTreeWidgetItem *it=lv.findItems (w.name().c_str(), Qt::MatchExactly | Qt::MatchCaseSensitive ).at(0);
       if (it)
         it->setText(2,tr("Maximized"));
       emit modified();
@@ -7881,7 +7881,7 @@ QStringList ApplicationWindow::depending3DPlots(Matrix *m)
 	{
 		MyWidget *w = windows.at(i);
 		if (w && w->inherits("Graph3D") && ((Graph3D *)w)->matrix() == m)
-			plots << w->name();
+                  plots << w->name().c_str();
 	}
 	return plots;
 }
@@ -7904,14 +7904,14 @@ QStringList ApplicationWindow::dependingPlots(const QString& name)
 				Graph *g = (Graph *)widget;
 				onPlot = g->curvesList();
 				onPlot = onPlot.filter(QRegExp("^"+name+"_.*"));
-				if (onPlot.count() > 0 && plots.contains(w->name()) <= 0 )
-					plots << w->name();
+				if (onPlot.count() > 0 && plots.contains(w->name().c_str()) <= 0 )
+                                  plots << w->name().c_str();
 			}
 		}
 		else if (w->inherits("Graph3D"))
 		{
-			if ((((Graph3D*)w)->formula()).contains(name,Qt::CaseSensitive) && plots.contains(w->name())<=0)
-				plots << w->name();
+                  if ((((Graph3D*)w)->formula()).contains(name,Qt::CaseSensitive) && plots.contains(w->name().c_str())<=0)
+                    plots << w->name().c_str();
 		}
 	}
 	return plots;
@@ -9116,7 +9116,7 @@ Matrix& ApplicationWindow::importImage(const QString& fileName)
       return emptyMatrix;  
     }
   QString caption = generateUniqueName(tr("Matrix"));
-  m->setName(caption);
+  m->setName(caption.toStdString());
   d_project->addChild(m->d_future_matrix);
   return *m;
 }
@@ -9183,7 +9183,7 @@ Note* ApplicationWindow::openNote(ApplicationWindow* app, const QStringList &fli
 	lst=flist[2].split("\t");
 	w.setWindowLabel(lst[1]);
 	w.setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
-	app->setListViewLabel(w.name(), lst[1]);
+	app->setListViewLabel(w.name().c_str(), lst[1]);
 	return &w;
 }
 
@@ -9226,7 +9226,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 			} else if (fields[0] == "WindowLabel") { // d_file_version > 71
 				w.setWindowLabel(fields[1]);
 				w.setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
-				app->setListViewLabel(w.name(), fields[1]);
+				app->setListViewLabel(w.name().c_str(), fields[1]);
 			} else if (fields[0] == "Coordinates") { // d_file_version > 81
 				w.setCoordinates(fields[1].toDouble(), fields[2].toDouble(), fields[3].toDouble(), fields[4].toDouble());
 			} else // <data> or values
@@ -9357,7 +9357,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 			} else if (fields[0] == "WindowLabel") { // d_file_version > 71
 				w.setWindowLabel(fields[1]);
 				w.setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
-				app->setListViewLabel(w.name(), fields[1]);
+				app->setListViewLabel(w.name().c_str(), fields[1]);
 			} else // <data> or values
 				break;
 		}
@@ -9510,7 +9510,7 @@ TableStatistics* ApplicationWindow::openTableStatistics(const QStringList &flist
           } else if (fields[0] == "WindowLabel") { // d_file_version > 71
             w->setWindowLabel(fields[1]);
             w->setCaptionPolicy((MyWidget::CaptionPolicy)fields[2].toInt());
-            setListViewLabel(w->name(), fields[1]);
+            setListViewLabel(w->name().c_str(), fields[1]);
           }
 	}
       return w;
@@ -10238,7 +10238,7 @@ Graph3D* ApplicationWindow::openSurfacePlot(ApplicationWindow* app, const QStrin
 		fList=lst[20].split("\t"); // using QString::SkipEmptyParts here causes a crash for empty window labels
 		plot->setWindowLabel(fList[1]);
 		plot->setCaptionPolicy((MyWidget::CaptionPolicy)fList[2].toInt());
-		app->setListViewLabel(plot->name(),fList[1]);
+		app->setListViewLabel(plot->name().c_str(),fList[1]);
 	}
 
 	if (d_file_version >= 88)
@@ -11572,7 +11572,7 @@ Graph3D * ApplicationWindow::openMatrixPlot3D(const QString& caption, const QStr
       Graph3D *plot = new Graph3D("", &d_workspace, 0, 0);
       plot->setAttribute(Qt::WA_DeleteOnClose);
       plot->setWindowTitle(caption);
-      plot->setName(caption);
+      plot->setName(caption.toStdString());
       plot->addMatrixData(&m, xl, xr, yl, yr, zl, zr);
       plot->update();
 
@@ -11599,7 +11599,7 @@ void ApplicationWindow::plot3DMatrix(int style)
 
 	plot->resize(500, 400);
 	plot->setWindowTitle(label);
-	plot->setName(label);
+	plot->setName(label.toStdString());
 	initPlot3D(plot);
 
 	emit modified();
@@ -12133,7 +12133,7 @@ QStringList ApplicationWindow::matrixNames()
 	QList<MyWidget*> windows = windowsList();
 	foreach(MyWidget *w, windows){
 		if (w->inherits("Matrix"))
-			names << static_cast<Matrix *>(w)->name();
+                  names << QString(static_cast<Matrix *>(w)->name().c_str());
 	}
 	return names;
 }
@@ -12144,7 +12144,7 @@ bool ApplicationWindow::alreadyUsedName(const QString& label)
 	bool used = false;
 	foreach(MyWidget *widget, windows)
 	{
-		if (widget && widget->name() == label)
+          if (widget && widget->name().c_str() == label)
 		{
 			used = true;
 			break;
@@ -12387,7 +12387,7 @@ void ApplicationWindow::appendProject(const QString& fn)
                     {
                       QStringList lst=t.readLine().split("\t");
                       plot->setWindowLabel(lst[1]);
-                      setListViewLabel(plot->name(),lst[1]);
+                      setListViewLabel(plot->name().c_str(),lst[1]);
                       plot->setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
                     }
 
@@ -12674,7 +12674,7 @@ void ApplicationWindow::setShowWindowsPolicy(bool checked)
 			if (!widget) continue;
 			hiddenWindows.append(widget);
 			widget->hide();
-			setListView(widget->name(),tr("Hidden"));
+			setListView(widget->name().c_str(),tr("Hidden"));
 		}
 	}
 	else
@@ -13211,7 +13211,7 @@ void ApplicationWindow::addListViewItem(MyWidget *w)
 		it->setText(1, tr("3D Graph"));
 	}
 
-	it->setText(0, w->name());
+	it->setText(0, w->name().c_str());
     it->setText(2, w->aspect());
 	it->setText(3, w->birthDate());
 	it->setText(4, w->windowLabel());
@@ -13227,7 +13227,7 @@ void ApplicationWindow::windowProperties()
 	QMessageBox *mbox = new QMessageBox ( tr("Properties"), QString(), QMessageBox::NoIcon,
 			QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this);
 
-	QString s = QString(w->name()) + "\n\n";
+	QString s = QString(w->name().c_str()) + "\n\n";
 	s += "\n\n\n";
 
 	s += tr("Label") + ": " + ((MyWidget *)w)->windowLabel() + "\n\n";
@@ -13563,8 +13563,8 @@ QString ApplicationWindow::generateUniqueName(const QString& name, bool incremen
 	{
 		MyWidget *widget = windows.at(i);
 		if (!widget) continue;
-		lst << widget->name();
-		if (widget->name().startsWith(name))
+		lst << widget->name().c_str();
+		if (QString(widget->name().c_str()).startsWith(name))
 			index++;
 	}
 
@@ -13783,7 +13783,7 @@ QMenu* ApplicationWindow::showWindowMenuImpl(MyWidget * widget)
 	int n;
 	if (widget->inherits("Table"))
 	{
-		QStringList graphs = dependingPlots(widget->name());
+          QStringList graphs = dependingPlots(widget->name().c_str());
 		n = graphs.count();
 		if (n > 0)
 		{
@@ -13842,9 +13842,9 @@ QMenu* ApplicationWindow::showWindowMenuImpl(MyWidget * widget)
 			}
 			else if (m)
 			{
-				depend_menu->addAction(m->name(), this, SLOT(setActiveWindowFromAction()));
-				depend_menu->setTitle(tr("D&epends on"));
-				cm->addMenu(depend_menu);
+                          depend_menu->addAction(m->name().c_str(), this, SLOT(setActiveWindowFromAction()));
+                          depend_menu->setTitle(tr("D&epends on"));
+                          cm->addMenu(depend_menu);
 			}
 		}
 	}

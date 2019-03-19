@@ -54,7 +54,7 @@ autoExec = false;
 QDateTime dt = QDateTime::currentDateTime ();
 setBirthDate(dt.toString(Qt::LocalDate));
 
-te = new ScriptEdit(env, this, name());
+ te = new ScriptEdit(env, this, name().c_str());
 te->setContext(this);
 this->setWidget(te);
 
@@ -70,7 +70,7 @@ emit modifiedWindow(this);
 QString Note::saveToString(const QString &info)
 {
 QString s= "<note>\n";
-s+= QString(name()) + "\t" + birthDate() + "\n";
+ s+= QString(name().c_str()) + "\t" + birthDate() + "\n";
 s+= info;
 s+= "WindowLabel\t" + windowLabel() + "\t" + QString::number(captionPolicy()) + "\n";
 s+= "AutoExec\t" + QString(autoExec ? "1" : "0") + "\n";

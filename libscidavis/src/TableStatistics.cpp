@@ -83,77 +83,77 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
 	setCaptionPolicy(MyWidget::Both);
 	if (d_type == TableStatistics::StatRow)
 	{
-		setName(QString(d_base->name())+"-"+tr("RowStats"));
-		setWindowLabel(tr("Row Statistics of %1").arg(base->name()));
-		d_future_table->setRowCount(d_targets.size());
-		d_future_table->setColumnCount(9);
-		setColName(0, tr("Row"));
-		setColName(1, tr("Cols"));
-		setColName(2, tr("Mean"));
-		setColName(3, tr("StandardDev"));
-		setColName(4, tr("Variance"));
-		setColName(5, tr("Sum"));
-		setColName(6, tr("Max"));
-		setColName(7, tr("Min"));
-		setColName(8, "N");
+          setName(d_base->name()+"-"+tr("RowStats").toStdString());
+          setWindowLabel(tr("Row Statistics of %1").arg(base->name().c_str()));
+          d_future_table->setRowCount(d_targets.size());
+          d_future_table->setColumnCount(9);
+          setColName(0, tr("Row"));
+          setColName(1, tr("Cols"));
+          setColName(2, tr("Mean"));
+          setColName(3, tr("StandardDev"));
+          setColName(4, tr("Variance"));
+          setColName(5, tr("Sum"));
+          setColName(6, tr("Max"));
+          setColName(7, tr("Min"));
+          setColName(8, "N");
 
-		for (int i=0; i < 9; i++)
-			setColumnType(i, SciDAVis::Numeric);
+          for (int i=0; i < 9; i++)
+            setColumnType(i, SciDAVis::Numeric);
 
-		Double2StringFilter *pFilter = qobject_cast<Double2StringFilter*>(column(0)->outputFilter());
-		Q_ASSERT(pFilter != NULL);
-		pFilter->setNumDigits(0);	
-		pFilter->setNumericFormat('f');	
-		pFilter = qobject_cast<Double2StringFilter*>(column(1)->outputFilter());
-		Q_ASSERT(pFilter != NULL);
-		pFilter->setNumDigits(0);	
-		pFilter->setNumericFormat('f');	
-		pFilter = qobject_cast<Double2StringFilter*>(column(8)->outputFilter());
-		Q_ASSERT(pFilter != NULL);
-		pFilter->setNumDigits(0);	
-		pFilter->setNumericFormat('f');	
+          Double2StringFilter *pFilter = qobject_cast<Double2StringFilter*>(column(0)->outputFilter());
+          Q_ASSERT(pFilter != NULL);
+          pFilter->setNumDigits(0);	
+          pFilter->setNumericFormat('f');	
+          pFilter = qobject_cast<Double2StringFilter*>(column(1)->outputFilter());
+          Q_ASSERT(pFilter != NULL);
+          pFilter->setNumDigits(0);	
+          pFilter->setNumericFormat('f');	
+          pFilter = qobject_cast<Double2StringFilter*>(column(8)->outputFilter());
+          Q_ASSERT(pFilter != NULL);
+          pFilter->setNumDigits(0);	
+          pFilter->setNumericFormat('f');	
 
-		update(d_base, QString());
+          update(d_base, QString());
 	}
 	else if (d_type == TableStatistics::StatColumn)
 	{
-		setName(QString(d_base->name())+"-"+tr("ColStats"));
-		setWindowLabel(tr("Column Statistics of %1").arg(base->name()));
-		d_future_table->setRowCount(d_targets.size());
-		d_future_table->setColumnCount(11);
-		setColName(0, tr("Col"));
-		setColName(1, tr("Rows"));
-		setColName(2, tr("Mean"));
-		setColName(3, tr("StandardDev"));
-		setColName(4, tr("Variance"));
-		setColName(5, tr("Sum"));
-		setColName(6, tr("iMax"));
-		setColName(7, tr("Max"));
-		setColName(8, tr("iMin"));
-		setColName(9, tr("Min"));
-		setColName(10, "N");
+          setName(d_base->name()+"-"+tr("ColStats").toStdString());
+          setWindowLabel(tr("Column Statistics of %1").arg(base->name().c_str()));
+          d_future_table->setRowCount(d_targets.size());
+          d_future_table->setColumnCount(11);
+          setColName(0, tr("Col"));
+          setColName(1, tr("Rows"));
+          setColName(2, tr("Mean"));
+          setColName(3, tr("StandardDev"));
+          setColName(4, tr("Variance"));
+          setColName(5, tr("Sum"));
+          setColName(6, tr("iMax"));
+          setColName(7, tr("Max"));
+          setColName(8, tr("iMin"));
+          setColName(9, tr("Min"));
+          setColName(10, "N");
 
-		for (int i=0; i < 2; i++)
-			setColumnType(i, SciDAVis::Text);
+          for (int i=0; i < 2; i++)
+            setColumnType(i, SciDAVis::Text);
 		
-		for (int i=2; i < 11; i++)
-			setColumnType(i, SciDAVis::Numeric);
+          for (int i=2; i < 11; i++)
+            setColumnType(i, SciDAVis::Numeric);
 
-		Double2StringFilter *pFilter = qobject_cast<Double2StringFilter*>(column(6)->outputFilter());
-		Q_ASSERT(pFilter != NULL);
-		pFilter->setNumDigits(0);	
-		pFilter->setNumericFormat('f');	
-		pFilter = qobject_cast<Double2StringFilter*>(column(8)->outputFilter());
-		Q_ASSERT(pFilter != NULL);
-		pFilter->setNumDigits(0);	
-		pFilter->setNumericFormat('f');	
-		pFilter = qobject_cast<Double2StringFilter*>(column(10)->outputFilter());
-		Q_ASSERT(pFilter != NULL);
-		pFilter->setNumDigits(0);	
-		pFilter->setNumericFormat('f');	
+          Double2StringFilter *pFilter = qobject_cast<Double2StringFilter*>(column(6)->outputFilter());
+          Q_ASSERT(pFilter != NULL);
+          pFilter->setNumDigits(0);	
+          pFilter->setNumericFormat('f');	
+          pFilter = qobject_cast<Double2StringFilter*>(column(8)->outputFilter());
+          Q_ASSERT(pFilter != NULL);
+          pFilter->setNumDigits(0);	
+          pFilter->setNumericFormat('f');	
+          pFilter = qobject_cast<Double2StringFilter*>(column(10)->outputFilter());
+          Q_ASSERT(pFilter != NULL);
+          pFilter->setNumDigits(0);	
+          pFilter->setNumericFormat('f');	
 
-		for (int i=0; i < d_targets.size(); i++)
-			update(d_base, d_base->colName(d_targets.at(i)));
+          for (int i=0; i < d_targets.size(); i++)
+            update(d_base, d_base->colName(d_targets.at(i)));
 	}
 	setColPlotDesignation(0, SciDAVis::X);
 }
@@ -212,7 +212,7 @@ void TableStatistics::update(Table *t, const QString& colName)
 		}
 	} else if (d_type == TableStatistics::StatColumn) {
 		for (int destRow=0; destRow < d_targets.size(); destRow++) {
-			if (colName == QString(d_base->name())+"_"+d_base->colLabel(d_targets[destRow]))
+                  if (colName == QString(d_base->name().c_str())+"_"+d_base->colLabel(d_targets[destRow]))
 			{
 				int colIndex = d_base->colIndex(colName);
 				Column *col = d_base->column(colIndex);
@@ -288,7 +288,7 @@ void TableStatistics::renameCol(const QString &from, const QString &to)
 {
 	if (d_type == TableStatistics::StatRow) return;
 	for (int c=0; c < d_targets.size(); c++)
-          if (from == QString(d_base->name())+"_"+column(0)->textAt(c))
+          if (from == QString(d_base->name().c_str())+"_"+column(0)->textAt(c))
 		{
 			column(0)->setTextAt(c, to.section('_', 1, 1));
 			return;
@@ -303,7 +303,7 @@ void TableStatistics::removeCol(const QString &col)
 		return;
 	}
 	for (int c=0; c < d_targets.size(); c++)
-          if (col == QString(d_base->name())+"_"+column(0)->textAt(c))
+          if (col == QString(d_base->name().c_str())+"_"+column(0)->textAt(c))
 		{
 			d_targets.removeAll(d_targets.at(c));
 			d_future_table->removeRows(c,1);
@@ -314,8 +314,8 @@ void TableStatistics::removeCol(const QString &col)
 QString TableStatistics::saveToString(const QString &geometry)
 {
 	QString s = "<TableStatistics>\n";
-	s += QString(name())+"\t";
-	s += QString(d_base->name())+"\t";
+	s += QString(name().c_str())+"\t";
+	s += QString(d_base->name().c_str())+"\t";
 	s += QString(d_type == StatRow ? "row" : "col") + "\t";
 	s += birthDate()+"\n";
 	s += "Targets";

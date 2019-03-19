@@ -668,7 +668,7 @@ QStringList Table::selectedColumns()
 	for (int i=0; i<numCols(); i++)
 	{
 		if(isColumnSelected(i))
-			names << name() + "_" + column(i)->name();
+                  names << QString(name().c_str()) + "_" + column(i)->name();
 	}
 	return names;
 }
@@ -680,7 +680,7 @@ QStringList Table::YColumns()
 	for (int i=0;i<numCols();i++)
 	{
 		if(column(i)->plotDesignation() == SciDAVis::Y)
-			names << name() + "_" + column(i)->name();
+                  names << QString(name().c_str()) + "_" + column(i)->name();
 	}
 	return names;
 }
@@ -692,7 +692,7 @@ QStringList Table::selectedYColumns()
 	for (int i=0;i<numCols();i++)
 	{
 		if(isColumnSelected(i) && column(i)->plotDesignation() == SciDAVis::Y)
-			names << name() + "_" + column(i)->name();
+                  names << QString(name().c_str()) + "_" + column(i)->name();
 	}
 	return names;
 }
@@ -706,7 +706,7 @@ QStringList Table::selectedErrColumns()
 		if (isColumnSelected(i) && 
 				(column(i)->plotDesignation() == SciDAVis::xErr || 
 				 column(i)->plotDesignation() == SciDAVis::yErr) )
-			names << name() + "_" + column(i)->name();
+                  names << QString(name().c_str()) + "_" + column(i)->name();
 	}
 	return names;
 }
@@ -718,7 +718,7 @@ QStringList Table::drawableColumnSelection()
 	for (int i=0; i<numCols(); i++)
 	{
 		if(isColumnSelected(i) && column(i)->plotDesignation() == SciDAVis::Y)
-			names << name() + "_" + column(i)->name();
+                  names << QString(name().c_str()) + "_" + column(i)->name();
 	}
 
 	for (int i=0; i<numCols(); i++)
@@ -726,7 +726,7 @@ QStringList Table::drawableColumnSelection()
 		if (isColumnSelected(i) && 
 				(column(i)->plotDesignation() == SciDAVis::xErr || 
 				 column(i)->plotDesignation() == SciDAVis::yErr) )
-			names << name() + "_" + column(i)->name();
+                  names << QString(name().c_str()) + "_" + column(i)->name();
 	}
 	return names;
 }
@@ -748,7 +748,7 @@ QStringList Table::columnsList()
 // TODO for 0.3.0: Column * list
 	QStringList names;
 	for (int i=0; i<numCols(); i++)
-		names << name() +"_" + column(i)->name();
+          names << QString(name().c_str()) +"_" + column(i)->name();
 
 	return names;
 }
@@ -768,7 +768,7 @@ QString Table::colName(int col)
 	if (col<0 || col >= numCols())
 		return QString();
 
-	return QString(name() + "_" + column(col)->name());
+	return QString(name().c_str()) + "_" + column(col)->name();
 }
 
 void Table::insertCols(int start, int count)
@@ -1398,7 +1398,7 @@ void Table::applyFormula()
   if (!d_future_table) return;
 
   QApplication::setOverrideCursor(Qt::WaitCursor);
-  d_future_table->beginMacro(tr("%1: apply formula to column").arg(name()));
+  d_future_table->beginMacro(tr("%1: apply formula to column").arg(name().c_str()));
 
   QString formula = ui.formula_box->toPlainText();
   for (int col=firstSelectedColumn(); col<=lastSelectedColumn(); col++)
@@ -1451,8 +1451,8 @@ void Table::handleAspectDescriptionChange(const AbstractAspect *aspect)
 	{
 		QString old_name = d_stored_column_labels.value(col);
 		QString new_name = col->name();
-		emit changedColHeader(name() + "_" + old_name,
-				name() + "_" + new_name);
+		emit changedColHeader(QString(name().c_str()) + "_" + old_name,
+                                      QString(name().c_str()) + "_" + new_name);
 
 		for (int i=0; i<d_future_table->columnCount(); i++)
 		{

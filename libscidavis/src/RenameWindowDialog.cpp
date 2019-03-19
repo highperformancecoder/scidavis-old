@@ -96,7 +96,7 @@ RenameWindowDialog::RenameWindowDialog(QWidget* parent, Qt::WindowFlags fl )
 void RenameWindowDialog::setWidget(MyWidget *w)
 {
 	window = w;
-	boxNameLine->setText(w->name());
+	boxNameLine->setText(QString(w->name().c_str()));
 	boxLabelEdit->setText(w->windowLabel());
 	switch (w->captionPolicy())
 	{
@@ -127,31 +127,31 @@ MyWidget::CaptionPolicy RenameWindowDialog::getCaptionPolicy()
 
 void RenameWindowDialog::accept()
 {
-	QString name = window->name();
-	QString text = boxNameLine->text().remove("=").remove(QRegExp("\\s"));
-	QString label = boxLabelEdit->toPlainText();
+  QString name = window->name().c_str();
+  QString text = boxNameLine->text().remove("=").remove(QRegExp("\\s"));
+  QString label = boxLabelEdit->toPlainText();
 
-	MyWidget::CaptionPolicy policy = getCaptionPolicy();
-	if (text == name && label == window->windowLabel() && window->captionPolicy() == policy)
-		close();
+  MyWidget::CaptionPolicy policy = getCaptionPolicy();
+  if (text == name && label == window->windowLabel() && window->captionPolicy() == policy)
+    close();
 
-	ApplicationWindow *app = (ApplicationWindow *)parentWidget();
-	if (!app)
-		return;
+  ApplicationWindow *app = (ApplicationWindow *)parentWidget();
+  if (!app)
+    return;
 
-	if (text.contains("_")){
-  		QMessageBox::warning(this, tr("Warning"),
-  	    tr("For internal consistency reasons the underscore character is replaced with a minus sign."));}
+  if (text.contains("_")){
+    QMessageBox::warning(this, tr("Warning"),
+                         tr("For internal consistency reasons the underscore character is replaced with a minus sign."));}
   	 
-  	if (text.replace("_", "-") != name){
-		if(!app->renameWindow(window, text))
-			return;
-	}
+  if (text.replace("_", "-") != name){
+    if(!app->renameWindow(window, text))
+      return;
+  }
 
-	label.replace("\n"," ").replace("\t"," ");
-	window->setWindowLabel(label);
-	window->setCaptionPolicy(policy);
-	app->setListViewLabel(window->name(), label);
-	app->modifiedProject(window);
-	close();
+  label.replace("\n"," ").replace("\t"," ");
+  window->setWindowLabel(label);
+  window->setCaptionPolicy(policy);
+  app->setListViewLabel(window->name().c_str(), label);
+  app->modifiedProject(window);
+  close();
 }

@@ -796,7 +796,7 @@ void Graph::setLabelsColHeaderFormat(int axis, Table *table) {
 	if (!table) return;
 
 	axisType[axis] = ColHeader;
-	axesFormatInfo[axis] = table->name();
+	axesFormatInfo[axis] = table->name().c_str();
 
 	QMap<int, QString> list;
 	for (int col=0; col < table->columnCount(); col++)
@@ -4841,8 +4841,8 @@ void Graph::plotBoxDiagram(Table *w, const QStringList& names, int startRow, int
 	d_plot->setAxisMaxMajor(QwtPlot::xTop, names.count()+1);
 	d_plot->setAxisMaxMinor(QwtPlot::xTop, 0);
 
-	axesFormatInfo[QwtPlot::xBottom] = w->name();
-	axesFormatInfo[QwtPlot::xTop] = w->name();
+	axesFormatInfo[QwtPlot::xBottom] = w->name().c_str();
+	axesFormatInfo[QwtPlot::xTop] = w->name().c_str();
 }
 
 void Graph::setCurveStyle(int index, int s)

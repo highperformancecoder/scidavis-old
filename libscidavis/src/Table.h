@@ -66,9 +66,9 @@ public:
   //void setNumericPrecision(int prec);
 
   //! Return the window name
-  virtual QString name() { return d_future_table? d_future_table->name(): QString();} 
+  std::string name() const override { return d_future_table? d_future_table->name().toStdString(): "";} 
   //! Set the window name
-  virtual void setName(const QString& s) { if (d_future_table) d_future_table->setName(s); }
+  void setName(const std::string& s) override { if (d_future_table) d_future_table->setName(s.c_str()); }
   //! Return the window label
   virtual QString windowLabel() { return d_future_table? d_future_table->comment(): QString(); }
   //! Set the window label

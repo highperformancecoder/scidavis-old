@@ -220,7 +220,7 @@ if (!t)
 if (active_table != t)
 	{
 	active_table = t;
-	tableCaptionLabel->setText(t->name());
+	tableCaptionLabel->setText(t->name().c_str());
 	table->clearContents();
 	table->setRowCount(t->numCols());
 
@@ -374,7 +374,7 @@ for (int i=0; i<graph->curves(); i++)
     if (((DataCurve *)it)->type() != Graph::Function)
         {
         QString s = ((DataCurve *)it)->plotAssociation();
-        QString table = ((DataCurve *)it)->table()->name();
+        QString table = ((DataCurve *)it)->table()->name().c_str();
         plotAssociationsList << table + ": " + s.remove(table + "_");
         }
 	}

@@ -163,7 +163,7 @@ void Matrix::setText(int row, int col, const QString & new_text )
 		d_future_matrix->setCell(row, col, res);
 	else
 	{
-		Script *script = scriptEnv->newScript(new_text, this, QString("<%1_%2_%3>").arg(name()).arg(row).arg(col));
+          Script *script = scriptEnv->newScript(new_text, this, QString("<%1_%2_%3>").arg(name().c_str()).arg(row).arg(col));
 		connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
 
 		script->setInt(row+1, "row");
@@ -396,7 +396,7 @@ void Matrix::forgetSavedCells()
 bool Matrix::recalculate()
 {
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-	Script *script = scriptEnv->newScript(formula(), this, QString("<%1>").arg(name()));
+	Script *script = scriptEnv->newScript(formula(), this, QString("<%1>").arg(name().c_str()));
 	connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
 	connect(script, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
 	if (!script->compile())
@@ -733,7 +733,7 @@ Matrix * Matrix::fromImage(const QImage & image, ScriptingEnv *env)
 void Matrix::applyFormula()
 {
 	QApplication::setOverrideCursor(Qt::WaitCursor);
-	d_future_matrix->beginMacro(tr("%1: apply formula to selection").arg(name()));
+	d_future_matrix->beginMacro(tr("%1: apply formula to selection").arg(name().c_str()));
 
 	setFormula(ui.formula_box->toPlainText());
 	recalculate();

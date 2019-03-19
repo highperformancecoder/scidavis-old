@@ -272,10 +272,10 @@ struct QString_from_python_str
 };
 
 static int dummy=(
-//                  // register the Qstring to-python converter
-//                  py::to_python_converter<
-//                  QString,
-//                  QString_to_python_str>(),
+                  // register the Qstring to-python converter
+                  py::to_python_converter<
+                  QString,
+                  QString_to_python_str>(),
  
                   // register the Qstring from-python converter
                   QString_from_python_str(),

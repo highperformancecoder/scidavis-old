@@ -681,7 +681,7 @@ void MultiLayer::exportVector(const QString& fileName, int, bool color, bool kee
   }
 
   QPrinter printer;
-  printer.setDocName (this->name());
+  printer.setDocName (this->name().c_str());
   printer.setCreator("SciDAVis");
   printer.setFullPage(true);
   printer.setOutputFileName(fileName);
@@ -722,7 +722,7 @@ void MultiLayer::exportSVG(const QString& fname)
         generator.setSize(canvas->size());
         generator.setViewBox(QRect(QPoint(0,0), generator.size()));
 		generator.setResolution(96); // FIXME hardcored
-        generator.setTitle(this->name());
+                generator.setTitle(this->name().c_str());
 #endif
         exportPainter(generator);
 #endif
@@ -1108,7 +1108,7 @@ bool MultiLayer::isEmpty ()
 QString MultiLayer::saveToString(const QString& geometry)
 {
 	QString s="<multiLayer>\n";
-	s+=QString(name())+"\t";
+	s+=QString(name().c_str())+"\t";
 	s+=QString::number(cols)+"\t";
 	s+=QString::number(rows)+"\t";
 	s+=birthDate()+"\n";

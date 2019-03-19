@@ -54,21 +54,21 @@ void MyWidget::updateCaption()
 	switch (caption_policy)
 	{
 		case Name:
-			setWindowTitle(name());
-			break;
+                  setWindowTitle(name().c_str());
+                  break;
 
 		case Label:
-			if (!windowLabel().isEmpty())
-				setWindowTitle(windowLabel());
-			else
-				setWindowTitle(name());
-			break;
+                  if (!windowLabel().isEmpty())
+                    setWindowTitle(windowLabel());
+                  else
+                    setWindowTitle(name().c_str());
+                  break;
 
 		case Both:
 			if (!windowLabel().isEmpty())
-				setWindowTitle(name() + " - " + windowLabel());
+                          setWindowTitle(QString(name().c_str()) + " - " + windowLabel());
 			else
-				setWindowTitle(name());
+                          setWindowTitle(QString(name().c_str()));
 			break;
 	}
 };

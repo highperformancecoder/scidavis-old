@@ -126,7 +126,7 @@ MyWidget* Folder::findWindow(const QString& s, bool windowNames, bool labels,
 	{
 		if (windowNames)
 		{
-			QString name = w->name();
+                  QString name = w->name().c_str();
 			if (partialMatch && name.startsWith(s, cs))
 				return w;
 			else if (caseSensitive && name == s)
@@ -160,7 +160,7 @@ MyWidget* Folder::findWindow(const QString& s, bool windowNames, bool labels,
 MyWidget *Folder::window(const QString &name, const char *cls, bool recursive)
 {
 	foreach (MyWidget *w, lstWindows)
-		if (w->inherits(cls) && name == w->name().mid(0,w->name().indexOf("@")))
+          if (w->inherits(cls) && name == QString(w->name().c_str()).mid(0,QString(w->name().c_str()).indexOf("@")))
 			return w;
 	if (!recursive) return NULL;
 	foreach (QObject *f, children())

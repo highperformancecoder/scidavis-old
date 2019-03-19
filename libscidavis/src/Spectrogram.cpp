@@ -45,7 +45,7 @@ Spectrogram::Spectrogram():
 }
 
 Spectrogram::Spectrogram(Matrix *m):
-	QwtPlotSpectrogram(QString(m->name())),
+  QwtPlotSpectrogram(QString(m->name().c_str())),
 	d_matrix(m),
 	color_axis(QwtPlot::yRight),
 	color_map_policy(Default),
@@ -250,7 +250,7 @@ return colorMap;
 QString Spectrogram::saveToString()
 {
 QString s = "<spectrogram>\n";
-s += "\t<matrix>" + QString(d_matrix->name()) + "</matrix>\n";
+ s += "\t<matrix>" + QString(d_matrix->name().c_str()) + "</matrix>\n";
 
 if (color_map_policy != Custom)
 	s += "\t<ColorPolicy>" + QString::number(color_map_policy) + "</ColorPolicy>\n";

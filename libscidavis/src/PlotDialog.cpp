@@ -1014,7 +1014,7 @@ void PlotDialog::setMultiLayer(MultiLayer *ml)
 	boxScaleLayers->setChecked(d_ml->scaleLayersOnPrint());
 	boxPrintCrops->setChecked(d_ml->printCropmarksEnabled());
 
-    QTreeWidgetItem *item = new QTreeWidgetItem(listBox, QStringList(ml->name()));
+        QTreeWidgetItem *item = new QTreeWidgetItem(listBox, QStringList(ml->name().c_str()));
     item->setIcon(0, QIcon(":/folder_open.xpm"));
     listBox->addTopLevelItem(item);
     listBox->setCurrentItem(item);
@@ -2575,7 +2575,7 @@ void LayerItem::insertCurvesList()
             if (c->type() != Graph::Function)
             {
                 QString s = ((DataCurve *)it)->plotAssociation();
-                QString table = ((DataCurve *)it)->table()->name();
+                QString table = ((DataCurve *)it)->table()->name().c_str();
                 plotAssociation = table + ": " + s.remove(table + "_");
             }
             else

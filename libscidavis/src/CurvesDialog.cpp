@@ -543,7 +543,7 @@ void CurvesDialog::showCurrentFolder(bool currentFolder)
 				Table *t = (Table *)w;
 				for (int i=0; i < t->numCols(); i++){
 					if(t->colPlotDesignation(i) == SciDAVis::Y)
-						columns << QString(t->name()) + "_" + t->colLabel(i);
+                                          columns << QString(t->name().c_str()) + "_" + t->colLabel(i);
 				}
 			}
 			available->addItems(columns);
