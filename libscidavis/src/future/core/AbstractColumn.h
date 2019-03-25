@@ -112,7 +112,7 @@ public:
    * The validity information for the rows is also copied.
    * Use a filter to convert a column to another type.
    */
-  virtual bool copy(const AbstractColumn * other) { Q_UNUSED(other) return false; };
+  virtual bool copyAbstract(const AbstractColumn& other) { Q_UNUSED(other) return false; };
   //! Copies part of another column of the same type
   /**
    * This function will return false if the data type
@@ -123,7 +123,7 @@ public:
    * \param dest_start first row to copy in
    * \param num_rows the number of rows to copy
    */ 
-  virtual bool copy(const AbstractColumn * source, int source_start, int dest_start, int num_rows) 
+  virtual bool copyAbstract(const AbstractColumn& source, int source_start, int dest_start, int num_rows) 
   {
     Q_UNUSED(source)
       Q_UNUSED(source_start)
@@ -219,7 +219,7 @@ public:
   /**
    * Use this only when dataType() is QString
    */
-  //virtual void setTextAt(int row, const QString& new_value) { Q_UNUSED(row) Q_UNUSED(new_value) };
+  virtual void setTextAt(int row, const QString& new_value) { Q_UNUSED(row) Q_UNUSED(new_value) };
   //! Replace a range of values 
   /**
    * Use this only when dataType() is QString

@@ -366,6 +366,11 @@ BOOST_PYTHON_MODULE(scidavis)
     overload("column",tableColumnInt).
     overload("column",tableColumnString);
 
+  bool (Column::*copy1)(const Column& other)=&Column::copy;
+  bool (Column::*copy2)(const Column& source, int source_start, int dest_start, int num_rows)=&Column::copy;
+  p.getClass<Column>().
+    overload("copy",copy1).
+    overload("copy",copy2);
   
 }
 

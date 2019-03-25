@@ -3444,7 +3444,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 						Column& src_col = temp->column(col);
 						Column& dst_col = table->column(col);
 						Q_ASSERT(src_col.dataType() == dst_col.dataType());
-						dst_col.copy(&src_col, 0, start_row, src_col.rowCount());
+						dst_col.copy(src_col, 0, start_row, src_col.rowCount());
 						if (local_rename_columns) dst_col.setName(src_col.name().c_str());
 					}
 					break;
@@ -3458,7 +3458,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 						Column& src_col = temp->column(col);
 						Column& dst_col = table->column(col);
 						Q_ASSERT(src_col.dataType() == dst_col.dataType());
-						dst_col.copy(&src_col, 0, 0, temp->rowCount());
+						dst_col.copy(src_col, 0, 0, temp->rowCount());
 						if (local_rename_columns) dst_col.setName(src_col.name().c_str());
 					}
 					if (temp->columnCount() > table->columnCount())

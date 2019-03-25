@@ -55,14 +55,14 @@ assert t.numRows() == 31
 
 # fill c1 with row random values
 for j in range(1,nRows+1):
-  t.setCell(1,j,random.uniform(0,1.0))
+  t.setCell(j,1,random.uniform(0,1.0))
 c2.copy(c1)
 for j in range(1,nRows+1):
-  assert t.cell(2,j) == t.cell(1,j)
+  assert t.cell(j,2) == t.cell(j,1)
 
 c3.copy(c1,0,10,10)
 for k in range(1,11):
-  assert t.cell(3,k+10) == t.cell(1,k)
+  assert t.cell(k+10,3) == t.cell(k,1)
 # I guess that there is an inconsistency in the command "copy(Column,int,int,int)"... It works when it
 # is called using 'pure python' indexation for vectors, that is, starting from zero, not in the same
 # way as column indexing works on SciDAVis,starting from 1.

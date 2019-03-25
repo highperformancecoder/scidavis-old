@@ -6498,7 +6498,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>Column</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="+380"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="+377"/>
         <source>column type missing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6562,7 +6562,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="+340"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="+343"/>
         <source>as string</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15197,7 +15197,7 @@ Released</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="-464"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="-462"/>
         <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="+40"/>
         <location filename="../../libscidavis/src/future/table/TableView.cpp" line="+676"/>
         <location line="+22"/>
@@ -20242,7 +20242,7 @@ floating point values
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+379"/>
+        <location line="+373"/>
         <source>invalid row or column count</source>
         <translation type="unfinished"></translation>
     </message>

@@ -107,19 +107,17 @@ void Column::setColumnModeFilter(SciDAVis::ColumnMode mode, AbstractFilter *conv
 }
 
 
-bool Column::copy(const AbstractColumn * other)
+bool Column::copyAbstract(const AbstractColumn& other)
 {
-  Q_CHECK_PTR(other);
-  if(other->dataType() != dataType()) return false;
-  exec(new ColumnFullCopyCmd(d_column_private, other));
+  if(other.dataType() != dataType()) return false;
+  exec(new ColumnFullCopyCmd(d_column_private, &other));
   return true;
 }
 
-bool Column::copy(const AbstractColumn * source, int source_start, int dest_start, int num_rows)
+bool Column::copyAbstract(const AbstractColumn& source, int source_start, int dest_start, int num_rows)
 {
-  Q_CHECK_PTR(source);
-  if(source->dataType() != dataType()) return false;
-  exec(new ColumnPartialCopyCmd(d_column_private, source, source_start, dest_start, num_rows));
+  if(source.dataType() != dataType()) return false;
+  exec(new ColumnPartialCopyCmd(d_column_private, &source, source_start, dest_start, num_rows));
   return true;
 }
 
@@ -655,28 +653,28 @@ void ColumnStringIO::setTextAt(int row, const QString &value)
 {
   d_setting = true;
   d_to_set = value;
-  d_owner->copy(d_owner->d_column_private->inputFilter()->output(0), 0, row, 1);
+  d_owner->copyAbstract(*d_owner->d_column_private->inputFilter()->output(0), 0, row, 1);
   d_setting = false;
   d_to_set.clear();
 }
 
-bool ColumnStringIO::copy(const AbstractColumn *other) {
-  if (other->columnMode() != SciDAVis::Text) return false;
-  d_owner->d_column_private->inputFilter()->input(0,other);
-  d_owner->copy(d_owner->d_column_private->inputFilter()->output(0));
+bool ColumnStringIO::copyAbstract(const AbstractColumn& other) {
+  if (other.columnMode() != SciDAVis::Text) return false;
+  d_owner->d_column_private->inputFilter()->input(0,&other);
+  d_owner->copyAbstract(*d_owner->d_column_private->inputFilter()->output(0));
   d_owner->d_column_private->inputFilter()->input(0,this);
   return true;
 }
 
-bool ColumnStringIO::copy(const AbstractColumn *source, int source_start, int dest_start, int num_rows) {
-  if (source->columnMode() != SciDAVis::Text) return false;
-  d_owner->d_column_private->inputFilter()->input(0,source);
-  d_owner->copy(d_owner->d_column_private->inputFilter()->output(0), source_start, dest_start, num_rows);
+bool ColumnStringIO::copyAbstract(const AbstractColumn& source, int source_start, int dest_start, int num_rows) {
+  if (source.columnMode() != SciDAVis::Text) return false;
+  d_owner->d_column_private->inputFilter()->input(0,&source);
+  d_owner->copyAbstract(*d_owner->d_column_private->inputFilter()->output(0), source_start, dest_start, num_rows);
   d_owner->d_column_private->inputFilter()->input(0,this);
   return true;
 }
 
 void ColumnStringIO::replaceTexts(int start_row, const QStringList &texts) {
   Column tmp("tmp", texts);
-  copy(&tmp, 0, start_row, texts.size());
+  copyAbstract(tmp, 0, start_row, texts.size());
 }

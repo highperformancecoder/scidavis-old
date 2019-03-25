@@ -1501,7 +1501,7 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 		int preexisting_cols = columnCount();
 		int overwritten_cols = qMin(temp->columnCount(), preexisting_cols);
 		for (int i=0; i<overwritten_cols; i++) {
-			column(i).asStringColumn()->copy(temp->column(i));
+			column(i).asStringColumn()->copyAbstract(*temp->column(i));
 			if (renameCols)
                           column(i).setName(temp->column(i)->name().c_str());
 		}
@@ -1512,7 +1512,7 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 			filter->input(0, temp->column(i));
 			Column *new_col = new Column(temp->column(i)->name().c_str(), SciDAVis::Numeric);
 			new_col->setPlotDesignation(SciDAVis::Y);
-			new_col->copy(filter->output(0));
+			new_col->copyAbstract(*filter->output(0));
 			d_future_table->addChild(new_col);
 		}
 		delete filter;
