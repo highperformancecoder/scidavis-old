@@ -765,7 +765,7 @@ void Graph::setLabelsTextFormat(int axis, const Column *column, int startRow, in
 	if (axis < 0 || axis > 3) return;
 
 	axisType[axis] = Txt;
-	axesFormatInfo[axis] = table->name() + "_" + column->name();
+	axesFormatInfo[axis] = (table->name() + "_" + column->name()).c_str();
 
 	QMap<int, QString> list;
 	for (int row = startRow; row <= endRow; row++)
@@ -776,21 +776,33 @@ void Graph::setLabelsTextFormat(int axis, const Column *column, int startRow, in
 	d_plot->setAxisScaleDraw(axis, sd);
 }
 
-void Graph::setLabelsTextFormat(int axis, Table *table, const QString& columnName) {
-	Column *col = 0;
-	if (!table || !(col = table->column(columnName))) {
-		QMessageBox::critical(this, tr("Internal Error"),
-				tr("<html>Failed to set axis labels on Graph %1. Maybe you're trying to open a corrupted"
-					" project file; or there's some problem within SciDAVis. Please report this"
-					" as a bug (together with detailed instructions how to reproduce this message or"
-					" the corrupted file).<p>"
-					"<a href=\"https://sourceforge.net/tracker/?group_id=199120&atid=968214>\">"
-					"bug tracker: https://sourceforge.net/tracker/?group_id=199120&atid=968214</a></html>")
-				.arg(objectName()));
-		return;
-	}
-	setLabelsTextFormat(axis, col, 0, col->rowCount()-1);
+namespace
+{
+  struct NoTable: public std::exception
+  {
+    const char* what() const noexcept override {return "No Table";}
+  };
 }
+
+void Graph::setLabelsTextFormat(int axis, Table *table, const QString& columnName)
+  try
+    {
+      if (!table) throw NoTable();
+      auto& col=table->column(columnName.toStdString());
+      setLabelsTextFormat(axis, &col, 0, col.rowCount()-1);
+    }
+  catch (const std::exception&)
+    {
+      QMessageBox::critical(this, tr("Internal Error"),
+                            tr("<html>Failed to set axis labels on Graph %1. Maybe you're trying to open a corrupted"
+                               " project file; or there's some problem within SciDAVis. Please report this"
+                               " as a bug (together with detailed instructions how to reproduce this message or"
+                               " the corrupted file).<p>"
+                               "<a href=\"https://sourceforge.net/tracker/?group_id=199120&atid=968214>\">"
+                               "bug tracker: https://sourceforge.net/tracker/?group_id=199120&atid=968214</a></html>")
+				.arg(objectName()));
+    }
+
 
 void Graph::setLabelsColHeaderFormat(int axis, Table *table) {
 	if (!table) return;
@@ -1858,7 +1870,7 @@ void Graph::updateCurvesData(Table* w, const QString& colName)
         if (static_cast<PlotCurve*>(it)->type() == Function) continue;
 		  DataCurve *c = static_cast<DataCurve*>(it);
 		  if (c->table() == w && (c->xColumnName() == colName || c->yColumnName() == colName)) {
-			  int colType = w->column(colName)->columnMode();
+                    int colType = w->column(colName.toStdString()).columnMode();
 			  AxisType atype;
 			  if (c->xColumnName() == colName) {
 				  if (c->type() == HorizontalBars)
@@ -3158,7 +3170,7 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 	int size = 0;
 	double sum = 0.0;
 	
-	Column *y_col_ptr = w->column(ycol);
+	Column& y_col_ptr = w->column(ycol);
 	int yColType = w->columnType(ycol);
 
 	if (endRow < 0)
@@ -3173,17 +3185,17 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 	static_cast<QwtPlotCanvas*>(d_plot->canvas())->setLineWidth(1);
 
 	QVarLengthArray<double> Y(abs(endRow - startRow) + 1);
-	for (int row = startRow; row<= endRow && row<y_col_ptr->rowCount(); row++) {
-		if (!y_col_ptr->isInvalid(row)) {
+	for (int row = startRow; row<= endRow && row<y_col_ptr.rowCount(); row++) {
+		if (!y_col_ptr.isInvalid(row)) {
 			if (yColType == Table::Text) {
-				QString yval = y_col_ptr->textAt(row);
+				QString yval = y_col_ptr.textAt(row);
 				bool valid_data = true;
 				Y[size] = QLocale().toDouble(yval, &valid_data);
 				if (!valid_data)
 					continue;
 			}
 			else
-				Y[size] = y_col_ptr->valueAt(row);
+				Y[size] = y_col_ptr.valueAt(row);
 
 			sum += Y[size];
 			size++;
@@ -3254,9 +3266,11 @@ bool Graph::plotHistogram(Table *w, QStringList names, int startRow, int endRow)
 		endRow = w->numRows() - 1;
 
 	bool success = false;
-	foreach(QString col, names) {
-		Column *col_ptr = w->column(col);
-		if (!col_ptr || col_ptr->columnMode() != SciDAVis::Numeric) continue;
+	for(auto& col: names) 
+          try
+            {
+              Column& col_ptr = w->column(col.toStdString());
+		if (col_ptr.columnMode() != SciDAVis::Numeric) continue;
 
 		QwtHistogram *c = new QwtHistogram(w, col, startRow, endRow);
 		c->loadData();
@@ -3273,7 +3287,9 @@ bool Graph::plotHistogram(Table *w, QStringList names, int startRow, int endRow)
 		addLegendItem(col);
 		
 		success = true;
-	}
+            }
+          catch (const std::exception&)
+            {continue;}
 
 	return success;
 }

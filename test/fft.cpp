@@ -16,8 +16,8 @@ SUITE(FFT)
       table.setColName(0,"x");
       table.setColName(1,"y");
   
-      auto& colX=*table.column(0);
-      auto& colY=*table.column(1);
+      auto& colX=table.column(0);
+      auto& colY=table.column(1);
       for (int r=0; r<table.numRows(); ++r)
         {
           colX.setValueAt(r,r);
@@ -62,8 +62,8 @@ SUITE(FFT)
       CHECK_EQUAL(table1->numRows(), table2->numRows());
       for (int c=0; c<table1->numCols(); ++c)
         {
-          auto& col1=*table1->column(c);
-          auto& col2=*table2->column(c);
+          auto& col1=table1->column(c);
+          auto& col2=table2->column(c);
           for (int r=0; r<table1->numRows(); ++r)
             CHECK_EQUAL(col1.valueAt(r), col2.valueAt(r));
         }

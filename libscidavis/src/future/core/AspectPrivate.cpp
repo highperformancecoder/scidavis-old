@@ -202,7 +202,7 @@ QString AbstractAspect::Private::uniqueNameFor(const QString &current_name) cons
 {
 	QStringList child_names;
 	foreach(AbstractAspect * child, d_children)
-		child_names << child->name();
+          child_names << child->name().c_str();
 
 	if (!child_names.contains(current_name))
 		return current_name;

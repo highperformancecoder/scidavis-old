@@ -79,6 +79,8 @@
 #define WAIT_CURSOR QApplication::setOverrideCursor(QCursor(Qt::WaitCursor))
 #define RESET_CURSOR QApplication::restoreOverrideCursor()
 
+using std::to_string;
+
 namespace future
 {
 
@@ -139,7 +141,7 @@ Column * Table::column(const QString & name, bool legacy_kludge) const
 	for (int i=0; i<columnCount(); i++)
 	{
 		Column *col = d_table_private.column(i);
-		if (col->name() == name || (legacy_kludge && col->name() == label))
+		if (col->name().c_str() == name || (legacy_kludge && col->name() == label.toStdString()))
 			return col;
 	}
 
@@ -169,7 +171,7 @@ void Table::insertColumns(int before, QList<Column*> new_cols)
 {
 	if( new_cols.size() < 1 || before < 0 || before > columnCount()) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: insert %2 column(s)").arg(name()).arg(new_cols.size()));
+	beginMacro(QObject::tr("%1: insert %2 column(s)").arg(name().c_str()).arg(new_cols.size()));
 	int pos=before;
 	foreach(Column* col, new_cols)
 		insertChild(col, pos++);
@@ -182,7 +184,7 @@ void Table::removeColumns(int first, int count)
 {
 	if( count < 1 || first < 0 || first+count > columnCount()) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: remove %2 column(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: remove %2 column(s)").arg(name().c_str()).arg(count));
 	QList<Column*> cols;
 	for(int i=first; i<(first+count); i++)
 		cols.append(d_table_private.column(i));
@@ -202,7 +204,7 @@ void Table::removeRows(int first, int count)
 {
 	if( count < 1 || first < 0 || first+count > rowCount()) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: remove %2 row(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: remove %2 row(s)").arg(name().c_str()).arg(count));
 	int end = d_table_private.columnCount();
 	for(int col=0; col<end; col++)
 		d_table_private.column(col)->removeRows(first, count);
@@ -216,7 +218,7 @@ void Table::insertRows(int before, int count)
 	if( count < 1 || before < 0 || before > rowCount()) return;
 	WAIT_CURSOR;
 	int new_row_count = rowCount() + count;
-	beginMacro(QObject::tr("%1: insert %2 row(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: insert %2 row(s)").arg(name().c_str()).arg(count));
 	int end = d_table_private.columnCount();
 	for(int col=0; col<end; col++)
 		d_table_private.column(col)->insertRows(before, count);
@@ -229,7 +231,7 @@ void Table::setRowCount(int new_size)
 {
 	if( (new_size < 0) || (new_size == d_table_private.rowCount()) ) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: set the number of rows to %2").arg(name()).arg(new_size));
+	beginMacro(QObject::tr("%1: set the number of rows to %2").arg(name().c_str()).arg(new_size));
 	if (new_size < d_table_private.rowCount())
 	{
 		int end = d_table_private.columnCount();
@@ -296,7 +298,7 @@ int Table::columnIndex(const Column * col) const
 void Table::clear()
 {
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: clear").arg(name()));
+	beginMacro(QObject::tr("%1: clear").arg(name().c_str()));
 	int cols = columnCount();
 	for(int i=0; i<cols; i++)
 		column(i)->clear();
@@ -320,7 +322,7 @@ void Table::clearMasks()
 void Table::addColumn()
 {
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: add column").arg(name()));
+	beginMacro(QObject::tr("%1: add column").arg(name().c_str()));
 	setColumnCount(columnCount()+1);
 	endMacro();
 	RESET_CURSOR;
@@ -331,7 +333,7 @@ void Table::addColumns()
 	if (!d_view) return;
 	WAIT_CURSOR;
 	int count = d_view->selectedColumnCount(false);
-	beginMacro(QObject::tr("%1: add %2 column(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: add %2 column(s)").arg(name().c_str()).arg(count));
 	setColumnCount(columnCount() + count);
 	endMacro();
 	RESET_CURSOR;
@@ -344,7 +346,7 @@ void Table::cutSelection()
 	if( first < 0 ) return;
 
 	WAIT_CURSOR;
-	beginMacro(tr("%1: cut selected cell(s)").arg(name()));
+	beginMacro(tr("%1: cut selected cell(s)").arg(name().c_str()));
 	copySelection();
 	clearSelectedCells();
 	endMacro();
@@ -406,7 +408,7 @@ void Table::pasteIntoSelection()
 	if(columnCount() < 1 || rowCount() < 1) return;
 
 	WAIT_CURSOR;
-	beginMacro(tr("%1: paste from clipboard").arg(name()));
+	beginMacro(tr("%1: paste from clipboard").arg(name().c_str()));
 
 	int first_col = d_view->firstSelectedColumn(false);
 	int last_col = d_view->lastSelectedColumn(false);
@@ -570,7 +572,7 @@ void Table::recalculateSelectedCells()
 	if (!d_view) return;
 #ifdef LEGACY_CODE_0_2_x
 	WAIT_CURSOR;
-	beginMacro(tr("%1: apply formula to selection").arg(name()));
+	beginMacro(tr("%1: apply formula to selection").arg(name().c_str()));
 	emit recalculate();
 	endMacro();
 	RESET_CURSOR;
@@ -586,7 +588,7 @@ void Table::fillSelectedCellsWithRowNumbers()
 	if( first < 0 ) return;
 	
 	WAIT_CURSOR;
-	beginMacro(tr("%1: fill cells with row numbers").arg(name()));
+	beginMacro(tr("%1: fill cells with row numbers").arg(name().c_str()));
 	foreach(Column *col_ptr, d_view->selectedColumns()) {
 		int col = columnIndex(col_ptr);
 		switch (col_ptr->columnMode()) {
@@ -629,7 +631,7 @@ void Table::fillSelectedCellsWithRandomNumbers()
 	if( first < 0 ) return;
 	
 	WAIT_CURSOR;
-	beginMacro(tr("%1: fill cells with random values").arg(name()));
+	beginMacro(tr("%1: fill cells with random values").arg(name().c_str()));
 	qsrand(QTime::currentTime().msec());
 	foreach(Column *col_ptr, d_view->selectedColumns()) {
 		int col = columnIndex(col_ptr);
@@ -700,7 +702,7 @@ void Table::insertEmptyColumns()
 	QList<Column*> cols;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: insert empty column(s)").arg(name()));
+	beginMacro(QObject::tr("%1: insert empty column(s)").arg(name().c_str()));
 	while( current <= last )
 	{
 		current = first+1;
@@ -727,7 +729,7 @@ void Table::removeSelectedColumns()
 {
 	if (!d_view) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: remove selected column(s)").arg(name()));
+	beginMacro(QObject::tr("%1: remove selected column(s)").arg(name().c_str()));
 
 	QList< Column* > list = d_view->selectedColumns();
 	foreach(Column* ptr, list)
@@ -741,7 +743,7 @@ void Table::clearSelectedColumns()
 {
 	if (!d_view) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: clear selected column(s)").arg(name()));
+	beginMacro(QObject::tr("%1: clear selected column(s)").arg(name().c_str()));
 
 	QList< Column* > list = d_view->selectedColumns();
 	if (d_view->formulaModeActive())
@@ -763,7 +765,7 @@ void Table::setSelectionAs(SciDAVis::PlotDesignation pd)
 {
 	if (!d_view) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: set plot designation(s)").arg(name()));
+	beginMacro(QObject::tr("%1: set plot designation(s)").arg(name().c_str()));
 
 	QList< Column* > list = d_view->selectedColumns();
 	foreach(Column* ptr, list)
@@ -808,7 +810,7 @@ void Table::normalizeColumns(QList< Column* > cols)
 	if (!d_view) return;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: normalize column(s)").arg(name()));
+	beginMacro(QObject::tr("%1: normalize column(s)").arg(name().c_str()));
 	foreach(Column * col, cols)
 	{
 		if (col->dataType() == SciDAVis::TypeDouble)
@@ -840,7 +842,7 @@ void Table::normalizeSelection()
 	if (!d_view) return;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: normalize selection").arg(name()));
+	beginMacro(QObject::tr("%1: normalize selection").arg(name().c_str()));
 	double max = 0.0;
 	foreach(Column *col_ptr, d_view->selectedColumns()) {
 		int col = columnIndex(col_ptr);
@@ -902,7 +904,7 @@ void Table::insertEmptyRows()
 	if( first < 0 ) return;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: insert empty rows(s)").arg(name()));
+	beginMacro(QObject::tr("%1: insert empty rows(s)").arg(name().c_str()));
 	while( current <= last )
 	{
 		current = first+1;
@@ -923,7 +925,7 @@ void Table::removeSelectedRows()
 	if (!d_view) return;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: remove selected rows(s)").arg(name()));
+	beginMacro(QObject::tr("%1: remove selected rows(s)").arg(name().c_str()));
 	foreach(Interval<int> i, d_view->selectedRows().intervals())
 		removeRows(i.start(), i.size());
 	endMacro();
@@ -939,7 +941,7 @@ void Table::clearSelectedCells()
 	if( first < 0 ) return;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: clear selected cell(s)").arg(name()));
+	beginMacro(QObject::tr("%1: clear selected cell(s)").arg(name().c_str()));
 	QList<Column*> list = d_view->selectedColumns();
 	foreach(Column * col_ptr, list)
 	{
@@ -978,7 +980,7 @@ void Table::addRows()
 	if (!d_view) return;
 	WAIT_CURSOR;
 	int count = d_view->selectedRowCount(false);
-	beginMacro(QObject::tr("%1: add %2 rows(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: add %2 rows(s)").arg(name().c_str()).arg(count));
 	exec(new TableSetNumberOfRowsCmd(d_table_private, rowCount() + count));
 	endMacro();
 	RESET_CURSOR;
@@ -1535,7 +1537,7 @@ void Table::showTeXTableExportDialog()
         export_Dialog.setNameFilter("*.tex");
 
         //Set the default file name by the name of the table
-        export_Dialog.selectFile( name() );
+        export_Dialog.selectFile( name().c_str() );
         
         export_Dialog.exec();
 
@@ -1611,7 +1613,7 @@ bool Table::export_to_TeX( QString fileName, TeXTableSettings& tex_settings )
 
    //Check whether the TeX table should have caption 
    if (tex_settings.with_caption()) 
-       out << "\\begin{table} \n \\caption{" << name() << "}\n"; 
+     out << "\\begin{table} \n \\caption{" << name().c_str() << "}\n"; 
 
    //begin tabular with all parameters
    out << QString("\\begin{tabular}{|*{") + QString().setNum( columns_list.count() ) 
@@ -1623,7 +1625,7 @@ bool Table::export_to_TeX( QString fileName, TeXTableSettings& tex_settings )
      {
          //Get the columns labes        
          QStringList columns_labels; 
-         foreach (Column* col, columns_list) columns_labels << col->name();
+         foreach (Column* col, columns_list) columns_labels << col->name().c_str();
          out << columns_labels.join(" & ")  << "\\\\ \\hline \n";
      }
 
@@ -1810,7 +1812,7 @@ void Table::dimensionsDialog()
 
 void Table::moveColumn(int from, int to)
 {
-	beginMacro(tr("%1: move column %2 from position %3 to %4.").arg(name()).arg(d_table_private.column(from)->name()).arg(from+1).arg(to+1));
+  beginMacro(tr("%1: move column %2 from position %3 to %4.").arg(name().c_str()).arg(d_table_private.column(from)->name().c_str()).arg(from+1).arg(to+1));
 	moveChild(from, to);
 	exec(new TableMoveColumnCmd(d_table_private, from, to));	
 	endMacro();
@@ -1819,14 +1821,14 @@ void Table::moveColumn(int from, int to)
 void Table::copy(Table * other)
 {
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: copy %2").arg(name()).arg(other->name()));
+	beginMacro(QObject::tr("%1: copy %2").arg(name().c_str()).arg(other->name().c_str()));
 	
 	removeColumns(0, columnCount());
 	QList<Column *> columns;
 	for (int i=0; i<other->columnCount(); i++)
 	{
 		Column * src_col = other->column(i);
-		Column * new_col = new Column(src_col->name(), src_col->columnMode());
+		Column * new_col = new Column(src_col->name().c_str(), src_col->columnMode());
 		new_col->copy(src_col);
 		new_col->setPlotDesignation(src_col->plotDesignation());
 		QList< Interval<int> > masks = src_col->maskedIntervals();
@@ -1945,7 +1947,7 @@ void Table::sortColumns(Column *leading, QList<Column*> cols, bool ascending)
 	};
 
 	WAIT_CURSOR;
-	beginMacro(tr("%1: sort column(s)").arg(name()));
+	beginMacro(tr("%1: sort column(s)").arg(name().c_str()));
 
 	if(leading == 0) // sort separately
 	{
@@ -2609,37 +2611,37 @@ void Table::Private::updateHorizontalHeader(int start_col, int end_col)
 		for (int i=0; i<d_column_count; i++)
 		{
 			if (d_columns.at(i)->plotDesignation() == SciDAVis::X)
-				composeColumnHeader(i, d_columns.at(i)->name()+"[X" + QString::number(++x_cols) +"]");
+                          composeColumnHeader(i, (d_columns.at(i)->name()+"[X" + to_string(++x_cols) +"]").c_str());
 			else if (d_columns.at(i)->plotDesignation() == SciDAVis::Y)
 			{
 				if(x_cols>0)
-					composeColumnHeader(i, d_columns.at(i)->name()+"[Y"+ QString::number(x_cols) +"]");
+                                  composeColumnHeader(i, (d_columns.at(i)->name()+"[Y"+ to_string(x_cols) +"]").c_str());
 				else
-					composeColumnHeader(i, d_columns.at(i)->name()+"[Y]");
+                                  composeColumnHeader(i, (d_columns.at(i)->name()+"[Y]").c_str());
 			}
 			else if (d_columns.at(i)->plotDesignation() == SciDAVis::Z)
 			{
 				if(x_cols>0)
-					composeColumnHeader(i, d_columns.at(i)->name()+"[Z"+ QString::number(x_cols) +"]");
+                                  composeColumnHeader(i, (d_columns.at(i)->name()+"[Z"+ to_string(x_cols) +"]").c_str());
 				else
-					composeColumnHeader(i, d_columns.at(i)->name()+"[Z]");
+                                  composeColumnHeader(i, (d_columns.at(i)->name()+"[Z]").c_str());
 			}
 			else if (d_columns.at(i)->plotDesignation() == SciDAVis::xErr)
 			{
 				if(x_cols>0)
-					composeColumnHeader(i, d_columns.at(i)->name()+"[xEr"+ QString::number(x_cols) +"]");
+                                  composeColumnHeader(i, (d_columns.at(i)->name()+"[xEr"+ to_string(x_cols) +"]").c_str());
 				else
-					composeColumnHeader(i, d_columns.at(i)->name()+"[xEr]");
+                                  composeColumnHeader(i, (d_columns.at(i)->name()+"[xEr]").c_str());
 			}
 			else if (d_columns.at(i)->plotDesignation() == SciDAVis::yErr)
 			{
 				if(x_cols>0)
-					composeColumnHeader(i, d_columns.at(i)->name()+"[yEr"+ QString::number(x_cols) +"]");
+                                  composeColumnHeader(i, (d_columns.at(i)->name()+"[yEr"+ to_string(x_cols) +"]").c_str());
 				else
-					composeColumnHeader(i, d_columns.at(i)->name()+"[yEr]");
+                                  composeColumnHeader(i, (d_columns.at(i)->name()+"[yEr]").c_str());
 			}
 			else
-				composeColumnHeader(i, d_columns.at(i)->name());
+                          composeColumnHeader(i, d_columns.at(i)->name().c_str());
 		}
 	}
 	else
@@ -2647,17 +2649,17 @@ void Table::Private::updateHorizontalHeader(int start_col, int end_col)
 		for (int i=0; i<d_column_count; i++)
 		{
 			if (d_columns.at(i)->plotDesignation() == SciDAVis::X)
-				composeColumnHeader(i, d_columns.at(i)->name()+"[X]");
+                          composeColumnHeader(i, (d_columns.at(i)->name()+"[X]").c_str());
 			else if(d_columns.at(i)->plotDesignation() == SciDAVis::Y)
-				composeColumnHeader(i, d_columns.at(i)->name()+"[Y]");
+                          composeColumnHeader(i, (d_columns.at(i)->name()+"[Y]").c_str());
 			else if(d_columns.at(i)->plotDesignation() == SciDAVis::Z)
-				composeColumnHeader(i, d_columns.at(i)->name()+"[Z]");
+                          composeColumnHeader(i, (d_columns.at(i)->name()+"[Z]").c_str());
 			else if(d_columns.at(i)->plotDesignation() == SciDAVis::xErr)
-				composeColumnHeader(i, d_columns.at(i)->name()+"[xEr]");
+                          composeColumnHeader(i, (d_columns.at(i)->name()+"[xEr]").c_str());
 			else if(d_columns.at(i)->plotDesignation() == SciDAVis::yErr)
-				composeColumnHeader(i, d_columns.at(i)->name()+"[yEr]");
+                          composeColumnHeader(i, (d_columns.at(i)->name()+"[yEr]").c_str());
 			else
-				composeColumnHeader(i, d_columns.at(i)->name());
+                          composeColumnHeader(i, d_columns.at(i)->name().c_str());
 		}
 	}
 	emit d_owner.headerDataChanged(Qt::Horizontal, start_col, end_col);	

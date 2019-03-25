@@ -131,8 +131,8 @@ void TranslateCurveTool::selectDestination(const QwtDoublePoint &point)
 	int row_start = c->tableRow(0);
         int row_end = row_start + c->dataSize();
 	for (int i=row_start; i<row_end; i++){
-          if (!tab.column(col)->isInvalid(i))
-            tab.column(col)->setValueAt(i, (d_dir==Horizontal ? d_selected_curve->x(i) : d_selected_curve->y(i)) + d);
+          if (!tab.column(col).isInvalid(i))
+            tab.column(col).setValueAt(i, (d_dir==Horizontal ? d_selected_curve->x(i) : d_selected_curve->y(i)) + d);
 	}
 	d_app->updateCurves(&tab, col_name);
 	d_app->modifiedProject();

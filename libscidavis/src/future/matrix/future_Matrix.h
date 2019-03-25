@@ -367,116 +367,116 @@ class Matrix : public AbstractPart
   */
 class Matrix::Private
 {
-	public:
-		Private(Matrix *owner); 
-		//! Insert columns before column number 'before'
-		/**
-		 * If 'first' is equal to the current number of columns,
-		 * the columns will be appended.
-		 * \param before index of the column to insert before
-		 * \param count the number of columns to be inserted
-		 */
-		void insertColumns(int before, int count);
-		//! Remove Columns
-		/**
-		 * \param first index of the first column to be removed
-		 * \param count number of columns to remove
-		 */
-		void removeColumns(int first, int count);
-		//! Insert rows before row number 'before'
-		/**
-		 * If 'first' is equal to the current number of rows,
-		 * the rows will be appended.
-		 * \param before index of the row to insert before
-		 * \param count the number of rows to be inserted
-		 */
-		void insertRows(int before, int count);
-		//! Remove Columns
-		/**
-		 * \param first index of the first row to be removed
-		 * \param count number of rows to remove
-		 */
-		void removeRows(int first, int count);
-		//! Return the number of columns in the table
-		int columnCount() const { return d_column_count; }
-		//! Return the number of rows in the table
-		int rowCount() const { return d_row_count; }
-		QString name() const { return d_owner->name(); }
-		//! Return the value in the given cell
-		double cell(int row, int col) const;
-		//! Set the value in the given cell
-		void setCell(int row, int col, double value);
-		//! Set the value of all cells
-		void setCells(const QVector<qreal>& data);
-		//! Return the values in the given cells as double vector
-		QVector<qreal> columnCells(int col, int first_row, int last_row);
-		//! Set the values in the given cells from a double vector
-		void setColumnCells(int col, int first_row, int last_row, const QVector<qreal> & values);
-		//! Return the values in the given cells as double vector
-		QVector<qreal> rowCells(int row, int first_column, int last_column);
-		//! Set the values in the given cells from a double vector
-		void setRowCells(int row, int first_column, int last_column, const QVector<qreal> & values);
-		char numericFormat() const { return d_numeric_format; }
-		void setNumericFormat(char format) { d_numeric_format = format; emit d_owner->formatChanged(); }
-		int displayedDigits()  const { return d_displayed_digits; }
-		void setDisplayedDigits(int digits) { d_displayed_digits = digits;  emit d_owner->formatChanged(); }
-		//! Fill column with zeroes
-		void clearColumn(int col);
-		double xStart() const;
-		double yStart() const;
-		double xEnd() const;
-		double yEnd() const;
-		QString formula() const;
-		void setFormula(const QString & formula);
-		void setXStart(double x);
-		void setXEnd(double x);
-		void setYStart(double y);
-		void setYEnd(double y);
-		void setRowHeight(int row, int height) { d_row_heights[row] = height; }
-		void setColumnWidth(int col, int width) { d_column_widths[col] = width; }
-		int rowHeight(int row) const { return d_row_heights.at(row); }
-		int columnWidth(int col) const { return d_column_widths.at(col); }
-		//! Enable/disable the emission of dataChanged signals.
-		/** This can be used to suppress the emission of dataChanged signals
-		 * temporally. It does not suppress any other signals however.
-		 * Typical code:
-		 * <code>
-		 * d_matrix_private->blockChangeSignals(true);
-		 * for (...)
-		 *     for(...)
-		 *         setCell(...);
-		 * d_matrix_private->blockChangeSignals(false);
-		 * emit dataChanged(0, 0, rowCount()-1, columnCount()-1);
-		 * </code>
-		 */
-		void blockChangeSignals(bool block) { d_block_change_signals = block; }
-		//! Access to the dataChanged signal for commands
-		void emitDataChanged(int top, int left, int bottom, int right) { emit d_owner->dataChanged(top, left, bottom, right); }
+public:
+  Private(Matrix *owner); 
+  //! Insert columns before column number 'before'
+  /**
+   * If 'first' is equal to the current number of columns,
+   * the columns will be appended.
+   * \param before index of the column to insert before
+   * \param count the number of columns to be inserted
+   */
+  void insertColumns(int before, int count);
+  //! Remove Columns
+  /**
+   * \param first index of the first column to be removed
+   * \param count number of columns to remove
+   */
+  void removeColumns(int first, int count);
+  //! Insert rows before row number 'before'
+  /**
+   * If 'first' is equal to the current number of rows,
+   * the rows will be appended.
+   * \param before index of the row to insert before
+   * \param count the number of rows to be inserted
+   */
+  void insertRows(int before, int count);
+  //! Remove Columns
+  /**
+   * \param first index of the first row to be removed
+   * \param count number of rows to remove
+   */
+  void removeRows(int first, int count);
+  //! Return the number of columns in the table
+  int columnCount() const { return d_column_count; }
+  //! Return the number of rows in the table
+  int rowCount() const { return d_row_count; }
+  std::string name() const { return d_owner->name(); }
+  //! Return the value in the given cell
+  double cell(int row, int col) const;
+  //! Set the value in the given cell
+  void setCell(int row, int col, double value);
+  //! Set the value of all cells
+  void setCells(const QVector<qreal>& data);
+  //! Return the values in the given cells as double vector
+  QVector<qreal> columnCells(int col, int first_row, int last_row);
+  //! Set the values in the given cells from a double vector
+  void setColumnCells(int col, int first_row, int last_row, const QVector<qreal> & values);
+  //! Return the values in the given cells as double vector
+  QVector<qreal> rowCells(int row, int first_column, int last_column);
+  //! Set the values in the given cells from a double vector
+  void setRowCells(int row, int first_column, int last_column, const QVector<qreal> & values);
+  char numericFormat() const { return d_numeric_format; }
+  void setNumericFormat(char format) { d_numeric_format = format; emit d_owner->formatChanged(); }
+  int displayedDigits()  const { return d_displayed_digits; }
+  void setDisplayedDigits(int digits) { d_displayed_digits = digits;  emit d_owner->formatChanged(); }
+  //! Fill column with zeroes
+  void clearColumn(int col);
+  double xStart() const;
+  double yStart() const;
+  double xEnd() const;
+  double yEnd() const;
+  QString formula() const;
+  void setFormula(const QString & formula);
+  void setXStart(double x);
+  void setXEnd(double x);
+  void setYStart(double y);
+  void setYEnd(double y);
+  void setRowHeight(int row, int height) { d_row_heights[row] = height; }
+  void setColumnWidth(int col, int width) { d_column_widths[col] = width; }
+  int rowHeight(int row) const { return d_row_heights.at(row); }
+  int columnWidth(int col) const { return d_column_widths.at(col); }
+  //! Enable/disable the emission of dataChanged signals.
+  /** This can be used to suppress the emission of dataChanged signals
+   * temporally. It does not suppress any other signals however.
+   * Typical code:
+   * <code>
+   * d_matrix_private->blockChangeSignals(true);
+   * for (...)
+   *     for(...)
+   *         setCell(...);
+   * d_matrix_private->blockChangeSignals(false);
+   * emit dataChanged(0, 0, rowCount()-1, columnCount()-1);
+   * </code>
+   */
+  void blockChangeSignals(bool block) { d_block_change_signals = block; }
+  //! Access to the dataChanged signal for commands
+  void emitDataChanged(int top, int left, int bottom, int right) { emit d_owner->dataChanged(top, left, bottom, right); }
 		
-	private:
-		//! The owner aspect
-		Matrix *d_owner;
-		//! The number of columns
-		int d_column_count;
-		//! The number of rows
-		int d_row_count;
-		//! The matrix data
-		QVector< QVector<qreal> > d_data;	
-		//! Row widths
-		QList<int> d_row_heights;
-		//! Columns widths
-		QList<int> d_column_widths;
-		//! Last formula used to calculate cell values
-		QString d_formula; // TODO: should we support interval/rectangle based formulas?
-		//! Format code for displaying numbers
-		char d_numeric_format;
-		//! Number of significant digits
-		int d_displayed_digits;
-		double d_x_start, //!< X value corresponding to column 1
-			   d_x_end,  //!< X value corresponding to the last column
-			   d_y_start,  //!< Y value corresponding to row 1
-			   d_y_end;  //!< Y value corresponding to the last row
-		bool d_block_change_signals;
+private:
+  //! The owner aspect
+  Matrix *d_owner;
+  //! The number of columns
+  int d_column_count;
+  //! The number of rows
+  int d_row_count;
+  //! The matrix data
+  QVector< QVector<qreal> > d_data;	
+  //! Row widths
+  QList<int> d_row_heights;
+  //! Columns widths
+  QList<int> d_column_widths;
+  //! Last formula used to calculate cell values
+  QString d_formula; // TODO: should we support interval/rectangle based formulas?
+  //! Format code for displaying numbers
+  char d_numeric_format;
+  //! Number of significant digits
+  int d_displayed_digits;
+  double d_x_start, //!< X value corresponding to column 1
+    d_x_end,  //!< X value corresponding to the last column
+    d_y_start,  //!< Y value corresponding to row 1
+    d_y_end;  //!< Y value corresponding to the last row
+  bool d_block_change_signals;
 
 };
 

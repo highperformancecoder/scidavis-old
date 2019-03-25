@@ -2771,7 +2771,7 @@ Table* ApplicationWindow::convertMatrixToTable()
 	for (int i = 0; i<rows; i++)
 	{
 		for (int j = 0; j<cols; j++)
-                  w->column(j)->setValueAt(i, m->cell(i,j));
+                  w->column(j).setValueAt(i, m->cell(i,j));
 	}
 
 	w->setName(generateUniqueName(tr("Table")).toStdString());
@@ -2823,7 +2823,7 @@ Matrix* ApplicationWindow::convertTableToMatrix()
 	for (int i = 0; i<rows; i++)
 	{
 		for (int j = 0; j<cols; j++)
-                  w->setText(i, j, m->column(j)->asStringColumn()->textAt(i));
+                  w->setText(i, j, m->column(j).asStringColumn()->textAt(i));
 	}
 
 	QString caption = generateUniqueName(m->name().c_str());
@@ -2980,7 +2980,7 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type, const QSt
           errors->setValueAt(i, dev);
       }
       w.d_future_table->addChild(errors);
-      g->addErrorBars(xColName, name, w, errors->name(), direction);
+      g->addErrorBars(xColName, name, w, errors->name().c_str(), direction);
     }
   catch (NoSuchObject&)
     { //user defined function
@@ -3404,17 +3404,17 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 		{
 			if (local_convert_to_numeric) {
 				for (int col=0; col < qMin(temp->columnCount(), table->columnCount()); col++)
-					if (table->column(col)->columnMode() != SciDAVis::Numeric) {
+					if (table->column(col).columnMode() != SciDAVis::Numeric) {
 						QMessageBox::critical(this, tr("ASCII Import Failed"),
-								tr("Numeric data cannot be imported into non-numeric column \"%1\".").arg(table->column(col)->name()));
+                                                                      tr("Numeric data cannot be imported into non-numeric column \"%1\".").arg(table->column(col).name().c_str()));
 						delete temp;
 						return;
 					}
 			} else {
 				for (int col=0; col < qMin(temp->columnCount(), table->columnCount()); col++)
-					if (table->column(col)->columnMode() != SciDAVis::Text) {
+					if (table->column(col).columnMode() != SciDAVis::Text) {
 						QMessageBox::critical(this, tr("ASCII Import Failed"),
-								tr("Non-numeric data cannot be imported into non-text column \"%1\".").arg(table->column(col)->name()));
+                                                                      tr("Non-numeric data cannot be imported into non-text column \"%1\".").arg(table->column(col).name().c_str()));
 						delete temp;
 						return;
 					}
@@ -3441,11 +3441,11 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 					table->d_future_table->setRowCount(table->rowCount() + temp->rowCount());
 					for (int col=0; col<temp->columnCount(); col++)
 					{
-						Column * src_col = temp->column(col);
-						Column * dst_col = table->column(col);
-						Q_ASSERT(src_col->dataType() == dst_col->dataType());
-						dst_col->copy(src_col, 0, start_row, src_col->rowCount());
-						if (local_rename_columns) dst_col->setName(src_col->name());
+						Column& src_col = temp->column(col);
+						Column& dst_col = table->column(col);
+						Q_ASSERT(src_col.dataType() == dst_col.dataType());
+						dst_col.copy(&src_col, 0, start_row, src_col.rowCount());
+						if (local_rename_columns) dst_col.setName(src_col.name().c_str());
 					}
 					break;
 				}
@@ -3455,11 +3455,11 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 						table->d_future_table->setRowCount(temp->rowCount());
 					for (int col=0; col<table->columnCount() && col<temp->columnCount(); col++)
 					{
-						Column * src_col = temp->column(col);
-						Column * dst_col = table->column(col);
-						Q_ASSERT(src_col->dataType() == dst_col->dataType());
-						dst_col->copy(src_col, 0, 0, temp->rowCount());
-						if (local_rename_columns) dst_col->setName(src_col->name());
+						Column& src_col = temp->column(col);
+						Column& dst_col = table->column(col);
+						Q_ASSERT(src_col.dataType() == dst_col.dataType());
+						dst_col.copy(&src_col, 0, 0, temp->rowCount());
+						if (local_rename_columns) dst_col.setName(src_col.name().c_str());
 					}
 					if (temp->columnCount() > table->columnCount())
 					{
@@ -9377,11 +9377,11 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 						continue;
 
 					if (d_file_version < 90 && w.columnType(col) == SciDAVis::Numeric)
-                                          w.column(col)->setValueAt(row, QLocale::c().toDouble(cell.replace(",", ".")));
+                                          w.column(col).setValueAt(row, QLocale::c().toDouble(cell.replace(",", ".")));
 					else if (d_file_version >= 0x000100 && w.columnType(col) == SciDAVis::Numeric)
-                                          w.column(col)->setValueAt(row, QLocale().toDouble(cell));
+                                          w.column(col).setValueAt(row, QLocale().toDouble(cell));
 					else
-                                          w.column(col)->setTextAt(row, cell);
+                                          w.column(col).setTextAt(row, cell);
 				}
 			}
 			if (t.elapsed() > 1000)
@@ -14006,6 +14006,6 @@ QStringList ApplicationWindow::tableWindows()
 	QList<AbstractAspect *> tables = d_project->descendantsThatInherit("future::Table");
 	QStringList result;
 	foreach(AbstractAspect *aspect, tables)
-		result.append(aspect->name());
+          result.append(aspect->name().c_str());
 	return result;
 }

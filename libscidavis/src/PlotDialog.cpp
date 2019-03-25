@@ -1084,10 +1084,10 @@ void PlotDialog::showStatistics()
     for (int i = 0; i<h->dataSize(); i++ )
       {
         sum += h->y(i);
-        t.column(0)->setValueAt(i, h->x(i));
-        t.column(1)->setValueAt(i, h->y(i));
-        t.column(2)->setValueAt(i, sum);
-        t.column(3)->setValueAt(i, sum/h_sum*100);
+        t.column(0).setValueAt(i, h->x(i));
+        t.column(1).setValueAt(i, h->y(i));
+        t.column(2).setValueAt(i, sum);
+        t.column(3).setValueAt(i, sum/h_sum*100);
       }
     t.setHeader(QStringList() << tr("Bins") << tr("Quantity") << tr("Sum") << tr("Percent"));
     t.showMaximized();

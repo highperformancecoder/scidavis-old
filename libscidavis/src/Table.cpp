@@ -115,7 +115,7 @@ void Table::init()
 
 
 	for (int i=0; i<columnCount(); i++)
-		ui.add_reference_combobox->addItem("col(\""+column(i)->name()+"\")"); 
+          ui.add_reference_combobox->addItem(("col(\""+column(i).name()+"\")").c_str()); 
 
 	ui.add_function_combobox->addItems(scriptEnv->mathFunctions());
 	updateFunctionDoc();
@@ -306,7 +306,7 @@ void Table::print(const QString& fileName)
 		for(int j=0;j<cols;j++)
 		{
 			int w = columnWidth (j);
-			cell_text = column(j)->textAt(i)+"\t";
+			cell_text = column(j).textAt(i)+"\t";
 			tr = p.boundingRect(tr,Qt::AlignCenter,cell_text);
 			br.setTopLeft(QPoint(right,height));
 			br.setWidth(w);
@@ -359,33 +359,36 @@ void Table::setColWidths(const QStringList& widths)
 
 void Table::setColumnTypes(const QStringList& ctl)
 {
-// TODO: obsolete, remove in 0.3.0
-	int n = qMin((int)ctl.count(), numCols());
-	for (int i=0; i<n; i++)
-	{
-		QStringList l = ctl[i].split(";");
-		switch (l[0].toInt())
-		{
-			//	old enum: enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5};
-			case 0:
-				column(i)->setColumnMode(SciDAVis::Numeric);
-				break;
-			case 1:
-				column(i)->setColumnMode(SciDAVis::Text);
-				break;
-			case 2:
-			case 3:
-			case 6:
-				column(i)->setColumnMode(SciDAVis::DateTime);
-				break;
-			case 4:
-				column(i)->setColumnMode(SciDAVis::Month);
-				break;
-			case 5:
-				column(i)->setColumnMode(SciDAVis::Day);
-				break;
-		}
-	}
+  // TODO: obsolete, remove in 0.3.0
+  int n = qMin((int)ctl.count(), numCols());
+  for (int i=0; i<n; i++)
+    try
+      {
+        QStringList l = ctl[i].split(";");
+        switch (l[0].toInt())
+          {
+            //	old enum: enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5};
+          case 0:
+            column(i).setColumnMode(SciDAVis::Numeric);
+            break;
+          case 1:
+            column(i).setColumnMode(SciDAVis::Text);
+            break;
+          case 2:
+          case 3:
+          case 6:
+            column(i).setColumnMode(SciDAVis::DateTime);
+            break;
+          case 4:
+            column(i).setColumnMode(SciDAVis::Month);
+            break;
+          case 5:
+            column(i).setColumnMode(SciDAVis::Day);
+            break;
+          }
+      }
+    catch (const std::exception&)
+      {/*ignore bad column errors*/}
 }
 
 QString Table::saveColumnWidths()
@@ -403,19 +406,19 @@ QString Table::saveColumnTypes()
 // TODO: obsolete, remove in 0.3.0
 	QString s="ColType";
 	for (int i=0; i<numCols(); i++)
-		s += "\t"+QString::number(column(i)->columnMode())+";0/6";
+		s += "\t"+QString::number(column(i).columnMode())+";0/6";
 	return s+"\n";
 }
 
 void Table::setCommands(const QStringList& com)
 {
 	for(int i=0; i<(int)com.size() && i<numCols(); i++)
-		column(i)->setFormula(Interval<int>(0, numRows()-1), com.at(i).trimmed());
+		column(i).setFormula(Interval<int>(0, numRows()-1), com.at(i).trimmed());
 }
 
 void Table::setCommand(int col, const QString& com)
 {
-	column(col)->setFormula(Interval<int>(0, numRows()-1), com.trimmed());
+	column(col).setFormula(Interval<int>(0, numRows()-1), com.trimmed());
 }
 
 void Table::setCommands(const QString& com)
@@ -435,83 +438,89 @@ bool Table::recalculate()
 
 bool Table::recalculate(int col, bool only_selected_rows)
 {
-	QApplication::setOverrideCursor(Qt::WaitCursor);
-	Column *col_ptr=column(col);
-	if (!col_ptr) return false;
+  QApplication::setOverrideCursor(Qt::WaitCursor);
+  try
+    {
+      auto& col_ptr=column(col);
 
-	QList< Interval<int> > formula_intervals = col_ptr->formulaIntervals();
-	if (only_selected_rows) {
-		// remove non-selected rows from list of intervals
-		QList< Interval<int> > deselected = Interval<int>(0,col_ptr->rowCount()-1) - selectedRows().intervals();
-		foreach(Interval<int> i, deselected)
-			Interval<int>::subtractIntervalFromList(&formula_intervals, i);
-	}
-	foreach(Interval<int> interval, formula_intervals)
+      QList< Interval<int> > formula_intervals = col_ptr.formulaIntervals();
+      if (only_selected_rows) {
+        // remove non-selected rows from list of intervals
+        QList< Interval<int> > deselected = Interval<int>(0,col_ptr.rowCount()-1) - selectedRows().intervals();
+        foreach(Interval<int> i, deselected)
+          Interval<int>::subtractIntervalFromList(&formula_intervals, i);
+      }
+      foreach(Interval<int> interval, formula_intervals)
 	{
-		QString formula = col_ptr->formula(interval.start());
-		if (formula.isEmpty())
-			continue;
+          QString formula = col_ptr.formula(interval.start());
+          if (formula.isEmpty())
+            continue;
 
-		Script *colscript = scriptEnv->newScript(formula, this,  QString("<%1>").arg(colName(col)));
-		connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
-		connect(colscript, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
+          Script *colscript = scriptEnv->newScript(formula, this,  QString("<%1>").arg(colName(col)));
+          connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
+          connect(colscript, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
 
-		if (!colscript->compile()) {
-			delete colscript;
-			QApplication::restoreOverrideCursor();
-			return false;
-		}
+          if (!colscript->compile()) {
+            delete colscript;
+            QApplication::restoreOverrideCursor();
+            return false;
+          }
 
-		colscript->setInt(col+1, "j");
-		QVariant ret;
-		int start_row = interval.start();
-		int end_row = interval.end();
-		switch (col_ptr->columnMode()) {
-			case SciDAVis::Numeric:
-				{
-					QVector<qreal> results(end_row-start_row+1);
-					for (int i=start_row; i<=end_row; i++) {
-						colscript->setInt(i+1,"i");
-						ret = colscript->eval();
-						if (!ret.isValid()) {
-							delete colscript;
-							QApplication::restoreOverrideCursor();
-							return false;
-						}
-						if (ret.canConvert(QVariant::Double))
-							results[i-start_row] = ret.toDouble();
-						else
-							results[i-start_row] = NAN;
-					}
-					col_ptr->replaceValues(start_row, results);
-					break;
-				}
-			default:
-				{
-					QStringList results;
-					for (int i=start_row; i<=end_row; i++) {
-						colscript->setInt(i+1,"i");
-						ret = colscript->eval();
-						if (!ret.isValid()) {
-							delete colscript;
-							QApplication::restoreOverrideCursor();
-							return false;
-						}
-						if (ret.type() == QVariant::Double)
-							results << QLocale().toString(ret.toDouble(), 'g', 14);
-						else if(ret.canConvert(QVariant::String))
-							results << ret.toString();
-						else 
-							results << QString();
-					}
-					col_ptr->asStringColumn()->replaceTexts(start_row, results);
-					break;
-				}
-		}
-		delete colscript;
+          colscript->setInt(col+1, "j");
+          QVariant ret;
+          int start_row = interval.start();
+          int end_row = interval.end();
+          switch (col_ptr.columnMode()) {
+          case SciDAVis::Numeric:
+            {
+              QVector<qreal> results(end_row-start_row+1);
+              for (int i=start_row; i<=end_row; i++) {
+                colscript->setInt(i+1,"i");
+                ret = colscript->eval();
+                if (!ret.isValid()) {
+                  delete colscript;
+                  QApplication::restoreOverrideCursor();
+                  return false;
+                }
+                if (ret.canConvert(QVariant::Double))
+                  results[i-start_row] = ret.toDouble();
+                else
+                  results[i-start_row] = NAN;
+              }
+              col_ptr.replaceValues(start_row, results);
+              break;
+            }
+          default:
+            {
+              QStringList results;
+              for (int i=start_row; i<=end_row; i++) {
+                colscript->setInt(i+1,"i");
+                ret = colscript->eval();
+                if (!ret.isValid()) {
+                  delete colscript;
+                  QApplication::restoreOverrideCursor();
+                  return false;
+                }
+                if (ret.type() == QVariant::Double)
+                  results << QLocale().toString(ret.toDouble(), 'g', 14);
+                else if(ret.canConvert(QVariant::String))
+                  results << ret.toString();
+                else 
+                  results << QString();
+              }
+              col_ptr.asStringColumn()->replaceTexts(start_row, results);
+              break;
+            }
+          }
+          delete colscript;
 	}
-	QApplication::restoreOverrideCursor();
-	return true;
+      QApplication::restoreOverrideCursor();
+      return true;
+    }
+  catch (const std::exception&)
+    {
+      return false;
+    }
 }
 
 QString Table::saveCommands()
@@ -519,10 +528,10 @@ QString Table::saveCommands()
 // TODO: obsolete, remove for 0.3.0, only needed for template saving
 	QString s="<com>\n";
 	for (int col=0; col<numCols(); col++)
-		if (!column(col)->formula(0).isEmpty())
+		if (!column(col).formula(0).isEmpty())
 		{
 			s += "<col nr=\""+QString::number(col)+"\">\n";
-			s += column(col)->formula(0);
+			s += column(col).formula(0);
 			s += "\n</col>\n";
 		}
 	s += "</com>\n";
@@ -535,7 +544,7 @@ QString Table::saveComments()
 	QString s = "Comments\t";
 	for (int i=0; i<numCols(); i++)
 	{
-		s += column(i)->comment() + "\t";
+		s += column(i).comment() + "\t";
 	}
 	return s + "\n";
 }
@@ -614,7 +623,7 @@ QString Table::saveHeader()
 	QString s = "header";
 	for (int j=0; j<numCols(); j++)
 	{
-		switch (column(j)->plotDesignation())
+		switch (column(j).plotDesignation())
 		{
 			case SciDAVis::X:
 				s += "\t" + colLabel(j) + "[X]";
@@ -642,7 +651,7 @@ int Table::firstXCol()
 {
 	for (int j=0; j<numCols(); j++)
 	{
-		if (column(j)->plotDesignation() == SciDAVis::X)
+		if (column(j).plotDesignation() == SciDAVis::X)
 			return j;
 	}
 	return -1;
@@ -650,7 +659,7 @@ int Table::firstXCol()
 
 void Table::setColComment(int col, const QString& s)
 {
-	column(col)->setComment(s);
+	column(col).setComment(s);
 }
 
 void Table::setColName(int col, const QString& text)
@@ -658,7 +667,7 @@ void Table::setColName(int col, const QString& text)
 	if (col < 0 || col >= numCols())
 		return;
 
-	column(col)->setName(text);
+	column(col).setName(text);
 }
 
 QStringList Table::selectedColumns()
@@ -668,7 +677,7 @@ QStringList Table::selectedColumns()
 	for (int i=0; i<numCols(); i++)
 	{
 		if(isColumnSelected(i))
-                  names << QString(name().c_str()) + "_" + column(i)->name();
+                  names << QString(name().c_str()) + "_" + column(i).name().c_str();
 	}
 	return names;
 }
@@ -679,8 +688,8 @@ QStringList Table::YColumns()
 	QStringList names;
 	for (int i=0;i<numCols();i++)
 	{
-		if(column(i)->plotDesignation() == SciDAVis::Y)
-                  names << QString(name().c_str()) + "_" + column(i)->name();
+		if(column(i).plotDesignation() == SciDAVis::Y)
+                  names << QString(name().c_str()) + "_" + column(i).name().c_str();
 	}
 	return names;
 }
@@ -691,8 +700,8 @@ QStringList Table::selectedYColumns()
 	QStringList names;
 	for (int i=0;i<numCols();i++)
 	{
-		if(isColumnSelected(i) && column(i)->plotDesignation() == SciDAVis::Y)
-                  names << QString(name().c_str()) + "_" + column(i)->name();
+		if(isColumnSelected(i) && column(i).plotDesignation() == SciDAVis::Y)
+                  names << QString(name().c_str()) + "_" + column(i).name().c_str();
 	}
 	return names;
 }
@@ -704,9 +713,9 @@ QStringList Table::selectedErrColumns()
 	for (int i=0;i<numCols();i++)
 	{
 		if (isColumnSelected(i) && 
-				(column(i)->plotDesignation() == SciDAVis::xErr || 
-				 column(i)->plotDesignation() == SciDAVis::yErr) )
-                  names << QString(name().c_str()) + "_" + column(i)->name();
+				(column(i).plotDesignation() == SciDAVis::xErr || 
+				 column(i).plotDesignation() == SciDAVis::yErr) )
+                  names << QString(name().c_str()) + "_" + column(i).name().c_str();
 	}
 	return names;
 }
@@ -717,16 +726,16 @@ QStringList Table::drawableColumnSelection()
 	QStringList names;
 	for (int i=0; i<numCols(); i++)
 	{
-		if(isColumnSelected(i) && column(i)->plotDesignation() == SciDAVis::Y)
-                  names << QString(name().c_str()) + "_" + column(i)->name();
+		if(isColumnSelected(i) && column(i).plotDesignation() == SciDAVis::Y)
+                  names << QString(name().c_str()) + "_" + column(i).name().c_str();
 	}
 
 	for (int i=0; i<numCols(); i++)
 	{
 		if (isColumnSelected(i) && 
-				(column(i)->plotDesignation() == SciDAVis::xErr || 
-				 column(i)->plotDesignation() == SciDAVis::yErr) )
-                  names << QString(name().c_str()) + "_" + column(i)->name();
+				(column(i).plotDesignation() == SciDAVis::xErr || 
+				 column(i).plotDesignation() == SciDAVis::yErr) )
+                  names << QString(name().c_str()) + "_" + column(i).name().c_str();
 	}
 	return names;
 }
@@ -737,8 +746,8 @@ QMap<int, QString> Table::selectedYLabels()
 	QMap<int, QString> names;
 	for (int i=0;i <numCols(); i++)
 	{
-		if(isColumnSelected(i) && column(i)->plotDesignation() == SciDAVis::Y)
-			names.insert(i, column(i)->name());
+		if(isColumnSelected(i) && column(i).plotDesignation() == SciDAVis::Y)
+                  names.insert(i, column(i).name().c_str());
 	}
 	return names;
 }
@@ -748,7 +757,7 @@ QStringList Table::columnsList()
 // TODO for 0.3.0: Column * list
 	QStringList names;
 	for (int i=0; i<numCols(); i++)
-          names << QString(name().c_str()) +"_" + column(i)->name();
+          names << QString(name().c_str()) +"_" + column(i).name().c_str();
 
 	return names;
 }
@@ -768,7 +777,7 @@ QString Table::colName(int col)
 	if (col<0 || col >= numCols())
 		return QString();
 
-	return QString(name().c_str()) + "_" + column(col)->name();
+	return QString(name().c_str()) + "_" + column(col).name().c_str();
 }
 
 void Table::insertCols(int start, int count)
@@ -802,8 +811,8 @@ void Table::addCol(SciDAVis::PlotDesignation pd)
   if (d_future_table)
     {
       d_future_table->addColumn();
-      column(d_future_table->columnCount()-1)->setColumnMode(SciDAVis::Numeric); // in case we ever change the default
-      column(d_future_table->columnCount()-1)->setPlotDesignation(pd);
+      column(d_future_table->columnCount()-1).setColumnMode(SciDAVis::Numeric); // in case we ever change the default
+      column(d_future_table->columnCount()-1).setPlotDesignation(pd);
     }
 }
 
@@ -826,10 +835,10 @@ void Table::clearCol()
 
 void Table::clearCell(int row, int col)
 {
-	column(col)->setTextAt(row, QString());
-	column(col)->setValueAt(row, 0.0);
-	column(col)->setDateTimeAt(row, QDateTime());
-	column(col)->setInvalid(row, true);
+	column(col).setTextAt(row, QString());
+	column(col).setValueAt(row, 0.0);
+	column(col).setDateTimeAt(row, QDateTime());
+	column(col).setInvalid(row, true);
 }
 
 void Table::deleteSelectedRows()
@@ -906,45 +915,47 @@ int Table::columnCount()
 }
 
 double Table::cell(int row, int col)
-{
-  // python interface uses 1-based indices
-  row--; 
-  col--;
-  Column *colPtr = column(col);
-  if (!colPtr) return 0.0;
-  if (!colPtr->isInvalid(row)) {
-    if (colPtr->columnMode() == SciDAVis::Text) {
-      QString yval = colPtr->textAt(row);
-      bool valid_data = true;
-      double dbval = QLocale().toDouble(yval, &valid_data);
-      if (!valid_data)
+  try
+    {
+      // python interface uses 1-based indices
+      row--; 
+      col--;
+      Column& colPtr = column(col);
+      if (!colPtr.isInvalid(row)) {
+        if (colPtr.columnMode() == SciDAVis::Text) {
+          QString yval = colPtr.textAt(row);
+          bool valid_data = true;
+          double dbval = QLocale().toDouble(yval, &valid_data);
+          if (!valid_data)
+            return 0.0;
+          return dbval;
+        }
+        return colPtr.valueAt(row);
+      }
+      else
         return 0.0;
-      return dbval;
     }
-    return colPtr->valueAt(row);
-  }
-  else
-    return 0.0;
-}
+catch (const std::exception&)
+  {return 0;}
 
 void Table::setCell(int row, int col, double val)
 {
   row--; col--;
-  column(col)->setValueAt(row, val);
+  column(col).setValueAt(row, val);
 }
 
 QString Table::text(int row, int col)
-{
-  row--; col--;
-  Column *colPtr = column(col);
-  if (!colPtr) return QString();
-  return colPtr->asStringColumn()->textAt(row);
-}
+  try
+    {
+      row--; col--;
+      return column(col).asStringColumn()->textAt(row);
+    }
+  catch (const std::exception&) {return "";}
 
 void Table::setText(int row, int col, const QString & text)
 {
   row--; col--;
-  column(col)->asStringColumn()->setTextAt(row, text);
+  column(col).asStringColumn()->setTextAt(row, text);
 }
 
 void Table::importV0x0001XXHeader(QStringList header)
@@ -991,7 +1002,7 @@ void Table::importV0x0001XXHeader(QStringList header)
     }
   QList<Column*> quarantine;
   for (int i=0; i<col_label.count() && i<d_future_table->columnCount();i++)
-    quarantine << column(i);
+    quarantine << &column(i);
   int i = 0;
   foreach(Column * col, quarantine) {
     d_future_table->removeChild(col, true);
@@ -1009,7 +1020,7 @@ void Table::setHeader(QStringList header)
   if (!d_future_table) return;
   QList<Column*> quarantine;
   for (int i=0; i<header.count() && i<d_future_table->columnCount();i++)
-    quarantine << column(i);
+    quarantine << &column(i);
   int i = 0;
   foreach(Column * col, quarantine) {
     d_future_table->removeChild(col, true);
@@ -1023,7 +1034,7 @@ void Table::setHeader(QStringList header)
 
 int Table::colIndex(const QString& name)
 {
-  return d_future_table? d_future_table->columnIndex(column(name)):0;
+  return d_future_table? d_future_table->columnIndex(&column(name.toStdString())):0;
 }
 
 bool Table::noXColumn()
@@ -1117,10 +1128,10 @@ bool Table::exportASCII(const QString& fname, const QString& separator,
   QList<Column*> col_ptrs;
   if (exportSelection) {
     for (j=1; j<=selectedCols; j++)
-      col_ptrs << column(sCols[j]);
+      col_ptrs << &column(sCols[j]);
   } else {
     for (j=0;j<cols;j++)
-      col_ptrs << column(j);
+      col_ptrs << &column(j);
     topRow = 0;
     bottomRow = rows-1;
   }
@@ -1272,23 +1283,23 @@ QStringList Table::colNames()
       QStringList list;
       if (d_future_table)
         for (int i=0; i<d_future_table->columnCount(); i++)
-          list << column(i)->name();
+          list << column(i).name().c_str();
       return list;
 }
 
 QString Table::colLabel(int col)
 {
-	return column(col)->name();
+  return column(col).name().c_str();
 }
 
 SciDAVis::PlotDesignation Table::colPlotDesignation(int col)
 {
-	return column(col)->plotDesignation();
+	return column(col).plotDesignation();
 }
 
 void Table::setColPlotDesignation(int col, SciDAVis::PlotDesignation d)
 {
-	column(col)->setPlotDesignation(d);
+	column(col).setPlotDesignation(d);
 }
 
 QList<int> Table::plotDesignations()
@@ -1296,7 +1307,7 @@ QList<int> Table::plotDesignations()
 	QList<int> list;
         if (d_future_table)
           for (int i=0; i<d_future_table->columnCount(); i++)
-            list << column(i)->plotDesignation();
+            list << column(i).plotDesignation();
 	return list;
 }
 
@@ -1305,13 +1316,13 @@ QList<int> Table::columnTypes()
 	QList<int> list;
         if (d_future_table)
           for (int i=0; i<d_future_table->columnCount(); i++)
-            list << column(i)->columnMode();
+            list << column(i).columnMode();
 	return list;
 }
 
 int Table::columnType(int col)
 {
-	return column(col)->columnMode();
+	return column(col).columnMode();
 }
 
 void Table::setColumnTypes(QList<int> ctl)
@@ -1324,21 +1335,21 @@ void Table::setColumnTypes(QList<int> ctl)
         {
           //	old enum: enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5};
         case 0:
-          column(i)->setColumnMode(SciDAVis::Numeric);
+          column(i).setColumnMode(SciDAVis::Numeric);
           break;
         case 1:
-          column(i)->setColumnMode(SciDAVis::Text);
+          column(i).setColumnMode(SciDAVis::Text);
           break;
         case 2:
         case 3:
         case 6:
-          column(i)->setColumnMode(SciDAVis::DateTime);
+          column(i).setColumnMode(SciDAVis::DateTime);
           break;
         case 4:
-          column(i)->setColumnMode(SciDAVis::Month);
+          column(i).setColumnMode(SciDAVis::Month);
           break;
         case 5:
-          column(i)->setColumnMode(SciDAVis::Day);
+          column(i).setColumnMode(SciDAVis::Day);
           break;
         }
     }
@@ -1346,19 +1357,19 @@ void Table::setColumnTypes(QList<int> ctl)
 
 void Table::setColumnType(int col, SciDAVis::ColumnMode mode) 
 { 
-	column(col)->setColumnMode(mode);
+	column(col).setColumnMode(mode);
 }
 
 QString Table::columnFormat(int col)
 {
 	// TODO: obsolete, remove in 0.3.0
-	Column * col_ptr = column(col);
-	if (col_ptr->columnMode() != SciDAVis::DateTime &&
-		col_ptr->columnMode() != SciDAVis::Month &&
-		col_ptr->columnMode() != SciDAVis::Day)
+	Column& col_ptr = column(col);
+	if (col_ptr.columnMode() != SciDAVis::DateTime &&
+		col_ptr.columnMode() != SciDAVis::Month &&
+		col_ptr.columnMode() != SciDAVis::Day)
 		return QString();
 
-	DateTime2StringFilter *filter = static_cast<DateTime2StringFilter *>(col_ptr->outputFilter());
+	DateTime2StringFilter *filter = static_cast<DateTime2StringFilter *>(col_ptr.outputFilter());
 	return filter->format();
 }
 
@@ -1369,7 +1380,7 @@ int Table::verticalHeaderWidth()
 
 QString Table::colComment(int col)
 {
-	return column(col)->comment();
+	return column(col).comment();
 }
 
 QStringList Table::colComments()
@@ -1377,7 +1388,7 @@ QStringList Table::colComments()
 	QStringList list;
         if (d_future_table)
           for (int i=0; i<d_future_table->columnCount(); i++)
-            list << column(i)->comment();
+            list << column(i).comment();
 	return list;
 }
 
@@ -1385,7 +1396,7 @@ void Table::setColComments(const QStringList& list)
 {
   if (d_future_table)
     for (int i=0; i<d_future_table->columnCount(); i++)
-      column(i)->setComment(list.at(i));
+      column(i).setComment(list.at(i));
 }
 
 bool Table::commentsEnabled()
@@ -1403,9 +1414,9 @@ void Table::applyFormula()
   QString formula = ui.formula_box->toPlainText();
   for (int col=firstSelectedColumn(); col<=lastSelectedColumn(); col++)
     {
-      Column *col_ptr = column(col);
-      col_ptr->insertRows(col_ptr->rowCount(), rowCount()-col_ptr->rowCount());
-      col_ptr->setFormula(Interval<int>(0,rowCount()-1), formula);
+      Column& col_ptr = column(col);
+      col_ptr.insertRows(col_ptr.rowCount(), rowCount()-col_ptr.rowCount());
+      col_ptr.setFormula(Interval<int>(0,rowCount()-1), formula);
       if (!recalculate(col, false))
         break;
     }
@@ -1434,40 +1445,40 @@ void Table::handleAspectDescriptionAboutToChange(const AbstractAspect *aspect)
 	const Column * col = qobject_cast<const Column *>(aspect);
 	if (col && d_future_table && d_future_table->columnIndex(col) != -1)
 	{
-		d_stored_column_labels[col] = aspect->name();
+          d_stored_column_labels[col] = aspect->name().c_str();
 	}
 }
 
 void Table::handleAspectDescriptionChange(const AbstractAspect *aspect)
 {
-	if (aspect == d_future_table)
-	{
-		setObjectName(d_future_table->name());
-		updateCaption();
-		return;
-	}
-	const Column * col = qobject_cast<const Column *>(aspect);
-	if (col && d_future_table && d_future_table->columnIndex(col) != -1 && d_stored_column_labels.contains(col))
-	{
-		QString old_name = d_stored_column_labels.value(col);
-		QString new_name = col->name();
-		emit changedColHeader(QString(name().c_str()) + "_" + old_name,
-                                      QString(name().c_str()) + "_" + new_name);
+  if (aspect == d_future_table)
+    {
+      setObjectName(d_future_table->name().c_str());
+      updateCaption();
+      return;
+    }
+  const Column * col = qobject_cast<const Column *>(aspect);
+  if (col && d_future_table && d_future_table->columnIndex(col) != -1 && d_stored_column_labels.contains(col))
+    {
+      QString old_name = d_stored_column_labels.value(col);
+      QString new_name = col->name().c_str();
+      emit changedColHeader(QString(name().c_str()) + "_" + old_name,
+                            QString(name().c_str()) + "_" + new_name);
 
-		for (int i=0; i<d_future_table->columnCount(); i++)
-		{
-			QList< Interval<int> > formula_intervals = column(i)->formulaIntervals();
-			foreach(Interval<int> interval, formula_intervals)
-			{
-				QString formula = column(i)->formula(interval.start());
-				if (formula.contains("\"" + old_name + "\""))
-				{
-					formula.replace("\"" + old_name + "\"", "\"" + new_name + "\"");
-					column(i)->setFormula(interval, formula);
-				}
-			}
-		}
-	}
+      for (int i=0; i<d_future_table->columnCount(); i++)
+        {
+          QList< Interval<int> > formula_intervals = column(i).formulaIntervals();
+          foreach(Interval<int> interval, formula_intervals)
+            {
+              QString formula = column(i).formula(interval.start());
+              if (formula.contains("\"" + old_name + "\""))
+                {
+                  formula.replace("\"" + old_name + "\"", "\"" + new_name + "\"");
+                  column(i).setFormula(interval, formula);
+                }
+            }
+        }
+    }
 }
 
 // this function is for backwards compatibility (used by Python), 
@@ -1490,16 +1501,16 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 		int preexisting_cols = columnCount();
 		int overwritten_cols = qMin(temp->columnCount(), preexisting_cols);
 		for (int i=0; i<overwritten_cols; i++) {
-			column(i)->asStringColumn()->copy(temp->column(i));
+			column(i).asStringColumn()->copy(temp->column(i));
 			if (renameCols)
-				column(i)->setName(temp->column(i)->name());
+                          column(i).setName(temp->column(i)->name().c_str());
 		}
 		for (int i=overwritten_cols; i<preexisting_cols; i++)
-			column(overwritten_cols)->remove();
+                  column(overwritten_cols).remove();
 		String2DoubleFilter * filter = new String2DoubleFilter;
 		for (int i=overwritten_cols; i<temp->columnCount(); i++) {
 			filter->input(0, temp->column(i));
-			Column *new_col = new Column(temp->column(i)->name(), SciDAVis::Numeric);
+			Column *new_col = new Column(temp->column(i)->name().c_str(), SciDAVis::Numeric);
 			new_col->setPlotDesignation(SciDAVis::Y);
 			new_col->copy(filter->output(0));
 			d_future_table->addChild(new_col);

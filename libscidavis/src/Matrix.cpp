@@ -760,7 +760,7 @@ void Matrix::updateFunctionDoc()
 void Matrix::handleAspectDescriptionChange(const AbstractAspect *aspect)
 {
 	if (aspect != d_future_matrix) return;
-	setObjectName(d_future_matrix->name());
+	setObjectName(d_future_matrix->name().c_str());
 	updateCaption();
 }
 

@@ -98,97 +98,100 @@ void QwtHistogram::setBinning(bool autoBin, double size, double begin, double en
 }
 
 bool QwtHistogram::loadData()
-{
-    int r = abs(d_end_row - d_start_row) + 1;
-	QVarLengthArray<double> Y(r);
+  try
+    {
+      int r = abs(d_end_row - d_start_row) + 1;
+      QVarLengthArray<double> Y(r);
 
-    int ycol = d_table->colIndex(title().text());
-	Column *y_col_ptr = d_table->column(ycol);
-	int yColType = d_table->columnType(ycol);
-	int size = 0;
-	for (int row = d_start_row; row <= d_end_row && row < y_col_ptr->rowCount(); row++) {
-		if (!y_col_ptr->isInvalid(row)) {
-			if (yColType == Table::Text) {
-				QString yval = y_col_ptr->textAt(row);
-				bool valid_data = true;
-				Y[size] = QLocale().toDouble(yval, &valid_data);
-				if (!valid_data)
-					continue;
-			}
-			else
-				Y[size] = y_col_ptr->valueAt(row);
-			size++;
-		}
-	}
+      int ycol = d_table->colIndex(title().text());
+      Column& y_col_ptr = d_table->column(ycol);
+      int yColType = d_table->columnType(ycol);
+      int size = 0;
+      for (int row = d_start_row; row <= d_end_row && row < y_col_ptr.rowCount(); row++) {
+        if (!y_col_ptr.isInvalid(row)) {
+          if (yColType == Table::Text) {
+            QString yval = y_col_ptr.textAt(row);
+            bool valid_data = true;
+            Y[size] = QLocale().toDouble(yval, &valid_data);
+            if (!valid_data)
+              continue;
+          }
+          else
+            Y[size] = y_col_ptr.valueAt(row);
+          size++;
+        }
+      }
 
-	if(size < 2 || (size==2 && Y[0] == Y[1])){//non valid histogram
-		double X[2];
-		Y.resize(2);
-		for (int i = 0; i<2; i++ ){
-			Y[i] = 0;
-			X[i] = 0;
-		}
-		setData(X, Y.data(), 2);
-		return false;
-	}
+      if(size < 2 || (size==2 && Y[0] == Y[1])){//non valid histogram
+        double X[2];
+        Y.resize(2);
+        for (int i = 0; i<2; i++ ){
+          Y[i] = 0;
+          X[i] = 0;
+        }
+        setData(X, Y.data(), 2);
+        return false;
+      }
 
-	int n;
-	gsl_histogram *h;
-	if (d_autoBin){
-		n = 10;
-		h = gsl_histogram_alloc (n);
-		if (!h)
-			return false;
+      int n;
+      gsl_histogram *h;
+      if (d_autoBin){
+        n = 10;
+        h = gsl_histogram_alloc (n);
+        if (!h)
+          return false;
 
-		gsl_vector *v = gsl_vector_alloc (size);
-		for (int i = 0; i<size; i++ )
-			gsl_vector_set (v, i, Y[i]);
+        gsl_vector *v = gsl_vector_alloc (size);
+        for (int i = 0; i<size; i++ )
+          gsl_vector_set (v, i, Y[i]);
 
-		double min, max;
-		gsl_vector_minmax (v, &min, &max);
-		gsl_vector_free (v);
+        double min, max;
+        gsl_vector_minmax (v, &min, &max);
+        gsl_vector_free (v);
 
-		d_begin = floor(min);
-		d_end = ceil(max);
-		d_bin_size = (d_end - d_begin)/(double)n;
+        d_begin = floor(min);
+        d_end = ceil(max);
+        d_bin_size = (d_end - d_begin)/(double)n;
 
-		gsl_histogram_set_ranges_uniform (h, floor(min), ceil(max));
-	} else {
-		n = int((d_end - d_begin)/d_bin_size + 1);
-		h = gsl_histogram_alloc (n);
-		if (!h)
-			return false;
+        gsl_histogram_set_ranges_uniform (h, floor(min), ceil(max));
+      } else {
+        n = int((d_end - d_begin)/d_bin_size + 1);
+        h = gsl_histogram_alloc (n);
+        if (!h)
+          return false;
 
-		double *range = new double[n+2];
-		for (int i = 0; i<= n+1; i++ )
-			range[i] = d_begin + i*d_bin_size;
+        double *range = new double[n+2];
+        for (int i = 0; i<= n+1; i++ )
+          range[i] = d_begin + i*d_bin_size;
 
-		gsl_histogram_set_ranges (h, range, n+1);
-		delete[] range;
-	}
+        gsl_histogram_set_ranges (h, range, n+1);
+        delete[] range;
+      }
 
-	for (int i = 0; i<size; i++ )
-		gsl_histogram_increment (h, Y[i]);
+      for (int i = 0; i<size; i++ )
+        gsl_histogram_increment (h, Y[i]);
 
-	double X[n]; //stores ranges (x) and bins (y)
-	Y.resize(n);
-	for (int i = 0; i<n; i++ ){
-		Y[i] = gsl_histogram_get (h, i);
-		double lower, upper;
-		gsl_histogram_get_range (h, i, &lower, &upper);
-		X[i] = lower;
-	}
-	setData(X, Y.data(), n);
+      double X[n]; //stores ranges (x) and bins (y)
+      Y.resize(n);
+      for (int i = 0; i<n; i++ ){
+        Y[i] = gsl_histogram_get (h, i);
+        double lower, upper;
+        gsl_histogram_get_range (h, i, &lower, &upper);
+        X[i] = lower;
+      }
+      setData(X, Y.data(), n);
 
-	d_mean = gsl_histogram_mean(h);
-	d_standard_deviation = gsl_histogram_sigma(h);
-	d_min = gsl_histogram_min_val(h);
-	d_max = gsl_histogram_max_val(h);
+      d_mean = gsl_histogram_mean(h);
+      d_standard_deviation = gsl_histogram_sigma(h);
+      d_min = gsl_histogram_min_val(h);
+      d_max = gsl_histogram_max_val(h);
 
-	gsl_histogram_free (h);
+      gsl_histogram_free (h);
 
-	return true;
-}
+      return true;
+    }
+  catch (const std::exception&)
+    {return false;}
 
 void QwtHistogram::initData(const QVector<double>& Y, int size)
 {

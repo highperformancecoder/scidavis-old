@@ -89,8 +89,8 @@ void Correlation::setDataFromTable(Table *t, const QString& colName1, const QStr
 		memset( d_y, 0, d_n * sizeof( double ) );
 		for(unsigned i=0; i<rows; i++)
 		{
-                  d_x[i] = d_table->column(col1)->valueAt(i);
-                  d_y[i] = d_table->column(col2)->valueAt(i);
+                  d_x[i] = d_table->column(col1).valueAt(i);
+                  d_y[i] = d_table->column(col2).valueAt(i);
 		}
 	}
 	else
@@ -158,8 +158,8 @@ void Correlation::addResultCurve()
       else
         y_temp[i] = d_x[i-n];
 
-      d_table->column(cols)->setValueAt(i, x_temp[i]);
-      d_table->column(cols2)->setValueAt(i, y_temp[i]);
+      d_table->column(cols).setValueAt(i, x_temp[i]);
+      d_table->column(cols2).setValueAt(i, y_temp[i]);
     }
 
   QStringList l = d_table->colNames().filter(tr("Lag"));

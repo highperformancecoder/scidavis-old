@@ -85,7 +85,7 @@ Column::~Column()
 void Column::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *conversion_filter)
 {
   if(mode == columnMode()) return;
-  beginMacro(QObject::tr("%1: change column type").arg(name()));
+  beginMacro(QObject::tr("%1: change column type").arg(name().c_str()));
   AbstractSimpleFilter * old_input_filter = d_column_private->inputFilter();
   AbstractSimpleFilter * old_output_filter = outputFilter();
   exec(new ColumnSetModeCmd(d_column_private, mode, conversion_filter));

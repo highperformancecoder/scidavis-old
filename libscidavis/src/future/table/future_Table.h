@@ -537,7 +537,7 @@ public:
         if(d_columns.at(i) == col) return i;
       return -1;
     }
-    QString name() const { return d_owner.name(); }
+    std::string name() const { return d_owner.name(); }
     QVariant headerData(int section, Qt::Orientation orientation,int role) const;
 
     //! Update the vertical header labels

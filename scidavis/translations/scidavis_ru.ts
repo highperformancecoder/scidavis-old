@@ -6562,7 +6562,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="+335"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="+337"/>
         <source>as string</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9716,17 +9716,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Ошибка при открытии файла</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="+782"/>
-        <source>Internal Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&lt;html&gt;Failed to set axis labels on Graph %1. Maybe you&apos;re trying to open a corrupted project file; or there&apos;s some problem within SciDAVis. Please report this as a bug (together with detailed instructions how to reproduce this message or the corrupted file).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+31"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="+826"/>
         <source>Couldn&apos;t change the axis type to the requested format!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9736,7 +9726,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2641"/>
+        <location line="+2645"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
         <translation type="unfinished">1</translation>
@@ -10108,7 +10098,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">По правому краю</translation>
     </message>
     <message>
-        <location line="-2625"/>
+        <location line="-2629"/>
         <source>Title</source>
         <translation type="unfinished">Заголовок</translation>
     </message>
@@ -10125,7 +10115,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Ошибка перемещения данных</translation>
     </message>
     <message>
-        <location line="+2043"/>
+        <location line="+2047"/>
         <location line="+30"/>
         <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
         <translation type="unfinished">Файл изображения: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;больше не существует!</translation>
@@ -10216,7 +10206,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">усреднённое сглаживание</translation>
     </message>
     <message>
-        <location line="-3101"/>
+        <location line="-3105"/>
         <location line="+32"/>
         <source>Please provide a valid file name!</source>
         <translation type="unfinished">Пожалуйста укажите корректное имя файла!</translation>
@@ -10227,7 +10217,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Формат файла не обработан, операция прервана!</translation>
     </message>
     <message>
-        <location line="+2677"/>
+        <location line="+2681"/>
         <source>Data set generated from curve</source>
         <translation type="unfinished">Набор данный постноенный по кривой</translation>
     </message>
@@ -10236,11 +10226,11 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Table</translation>
     </message>
     <message>
-        <location line="-3242"/>
+        <location line="-3246"/>
         <location line="+547"/>
         <location line="+18"/>
         <location line="+14"/>
-        <location line="+3826"/>
+        <location line="+3830"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
@@ -10251,8 +10241,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Ошибка открытия файла</translation>
     </message>
     <message>
-        <location line="-2421"/>
-        <location line="+2969"/>
+        <location line="-2425"/>
+        <location line="+2973"/>
         <location line="+4"/>
         <location line="+826"/>
         <source>Warning</source>
@@ -15224,7 +15214,7 @@ Released</source>
         <location line="+45"/>
         <location filename="../../libscidavis/src/future/matrix/future_Matrix.cpp" line="+154"/>
         <location filename="../../libscidavis/src/future/matrix/matrixcommands.cpp" line="+64"/>
-        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="+219"/>
+        <location filename="../../libscidavis/src/future/table/future_Table.cpp" line="+221"/>
         <source>%1: insert %2 row(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16538,7 +16528,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">Нет</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="+1156"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="+1167"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>

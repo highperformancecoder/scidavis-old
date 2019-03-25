@@ -62,6 +62,8 @@ class Column : public AbstractColumn
 public:
   class Private;
   friend class Private;
+  Column() {}
+  
   //! Ctor
   /**
    * \param name the column name (= aspect name)
@@ -316,8 +318,8 @@ private slots:
 
 private:
   //! Pointer to the private data object
-  Private * d_column_private;
-  ColumnStringIO * d_string_io;
+  Private * d_column_private=nullptr;
+  ColumnStringIO * d_string_io=nullptr;
 
   void init();
   template <class D>

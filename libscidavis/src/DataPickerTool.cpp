@@ -143,8 +143,8 @@ void DataPickerTool::setSelection(QwtPlotCurve *curve, int point_index)
         emit statusText(QString("%1[%2]: x=%3; y=%4")
 			.arg(d_selected_curve->title().text())
 			.arg(row + 1)
-			.arg(t->column(xCol)->textAt(row))
-			.arg(t->column(yCol)->textAt(row)));
+			.arg(t->column(xCol).textAt(row))
+			.arg(t->column(yCol).textAt(row)));
     }
 
 	QwtDoublePoint selected_point_value(d_selected_curve->x(d_selected_point), d_selected_curve->y(d_selected_point));
@@ -327,8 +327,8 @@ void DataPickerTool::removePoint()
 	int col = t->colIndex(d_selected_curve->title().text());
 	if (t->columnType(col) == Table::Numeric)
 	{
-		t->column(col)->setValueAt(((DataCurve *)d_selected_curve)->tableRow(d_selected_point), 0.0);
-		t->column(col)->setInvalid(((DataCurve *)d_selected_curve)->tableRow(d_selected_point), true);
+		t->column(col).setValueAt(((DataCurve *)d_selected_curve)->tableRow(d_selected_point), 0.0);
+		t->column(col).setInvalid(((DataCurve *)d_selected_curve)->tableRow(d_selected_point), true);
 	}
 	else {
           QMessageBox::warning(const_cast<Graph*>(d_graph), tr("Warning"),
@@ -392,8 +392,8 @@ bool DataPickerTool::end(bool ok)
 		int ycol = t->colIndex(d_selected_curve->title().text());
 		if (t->columnType(xcol) == Table::Numeric && t->columnType(ycol) == Table::Numeric)
 		{
-			t->column(xcol)->setValueAt(row, new_x_val);
-			t->column(ycol)->setValueAt(row, new_y_val);
+			t->column(xcol).setValueAt(row, new_x_val);
+			t->column(ycol).setValueAt(row, new_y_val);
 			d_app->updateCurves(t, d_selected_curve->title().text());
 			d_app->modifiedProject();
 		}

@@ -214,13 +214,13 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
   table.setWindowLabel(spread.label.c_str());
   for(int j = 0; j < columnCount; ++j){
     Origin::SpreadColumn column = spread.columns[j];
-    Column *scidavis_column = table.column(j);
+    Column& scidavis_column = table.column(j);
 
     QString name(column.name.c_str());
-    scidavis_column->setName(name.replace(QRegExp(".*_"),""));
+    scidavis_column.setName(name.replace(QRegExp(".*_"),""));
     if (column.command.size() > 0)
-      scidavis_column->setFormula(Interval<int>(0,maxrows), QString(column.command.c_str()));
-    scidavis_column->setComment(QString(column.comment.c_str()));
+      scidavis_column.setFormula(Interval<int>(0,maxrows), QString(column.command.c_str()));
+    scidavis_column.setComment(QString(column.comment.c_str()));
     table.setColumnWidth(j, (int)column.width*SciDAVis_scaling_factor);
 
     switch(column.type){
@@ -257,23 +257,23 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
       {
         double datavalue;
         bool setAsText = false;
-        table.column(j)->setColumnMode(SciDAVis::Numeric);
+        table.column(j).setColumnMode(SciDAVis::Numeric);
         for (int i=0; i < std::min((int)column.data.size(), maxrows); ++i) {
           Origin::variant value(column.data[i]);
           if (value.type() == Origin::variant::V_DOUBLE) {
             datavalue = value.as_double();
             if (datavalue==_ONAN) continue; // mark for empty cell
             if (!setAsText) {
-              scidavis_column->setValueAt(i, datavalue);
+              scidavis_column.setValueAt(i, datavalue);
             } else { // convert double to string for Text columns
-              scidavis_column->setTextAt(i, locale.toString(datavalue, 'g', 16));
+              scidavis_column.setTextAt(i, locale.toString(datavalue, 'g', 16));
             }
           } else { // string
             if (!setAsText && i==0) {
-              table.column(j)->setColumnMode(SciDAVis::Text);
+              table.column(j).setColumnMode(SciDAVis::Text);
               setAsText = true;
             }
-            scidavis_column->setTextAt(i, column.data[i].as_string());
+            scidavis_column.setTextAt(i, column.data[i].as_string());
           }
         }
         int f=0;
@@ -296,16 +296,16 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
                 f=0;
                 break;
               }
-            Double2StringFilter *filter = static_cast<Double2StringFilter*>(table.column(j)->outputFilter());
+            Double2StringFilter *filter = static_cast<Double2StringFilter*>(table.column(j).outputFilter());
             filter->setNumericFormat(f);
             filter->setNumDigits(column.decimalPlaces);
           }
         break;
       }
     case Origin::Text:
-      table.column(j)->setColumnMode(SciDAVis::Text);
+      table.column(j).setColumnMode(SciDAVis::Text);
       for (int i=0; i < min((int)column.data.size(), maxrows); ++i) {
-        scidavis_column->setTextAt(i, column.data[i].as_string());
+        scidavis_column.setTextAt(i, column.data[i].as_string());
       }
       break;
     case Origin::Date:
@@ -362,9 +362,9 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
           format="dd.MM.yyyy";
         }
         for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-          scidavis_column->setValueAt(i, column.data[i].as_double());
-        table.column(j)->setColumnMode(SciDAVis::DateTime);
-        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(scidavis_column->outputFilter());
+          scidavis_column.setValueAt(i, column.data[i].as_double());
+        table.column(j).setColumnMode(SciDAVis::DateTime);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(scidavis_column.outputFilter());
         filter->setFormat(format);
         break;
       }
@@ -406,9 +406,9 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
           break;
         }
         for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-          scidavis_column->setValueAt(i, column.data[i].as_double());
-        table.column(j)->setColumnMode(SciDAVis::DateTime);
-        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table.column(j)->outputFilter());
+          scidavis_column.setValueAt(i, column.data[i].as_double());
+        table.column(j).setColumnMode(SciDAVis::DateTime);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table.column(j).outputFilter());
         filter->setFormat(format);
         break;
       }
@@ -426,9 +426,9 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
           break;
         }
         for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-          scidavis_column->setValueAt(i, column.data[i].as_double());
-        table.column(j)->setColumnMode(SciDAVis::Month);
-        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table.column(j)->outputFilter());
+          scidavis_column.setValueAt(i, column.data[i].as_double());
+        table.column(j).setColumnMode(SciDAVis::Month);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table.column(j).outputFilter());
         filter->setFormat(format);
         break;
       }
@@ -447,9 +447,9 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
             break;
           }
         for (int i=0; i < min((int)column.data.size(), maxrows); ++i)
-          scidavis_column->setValueAt(i, column.data[i].as_double());
-        table.column(j)->setColumnMode(SciDAVis::Day);
-        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table.column(j)->outputFilter());
+          scidavis_column.setValueAt(i, column.data[i].as_double());
+        table.column(j).setColumnMode(SciDAVis::Day);
+        DateTime2StringFilter *filter = static_cast<DateTime2StringFilter*>(table.column(j).outputFilter());
         filter->setFormat(format);
         break;
       }

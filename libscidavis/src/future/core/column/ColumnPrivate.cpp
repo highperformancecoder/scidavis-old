@@ -971,7 +971,7 @@ void Column::Private::replaceFormulas(IntervalAttribute<QString> formulas)
 
 QString Column::Private::name() const
 { 
-	return d_owner->name();
+  return d_owner->name().c_str();
 }
 
 QString Column::Private::comment() const

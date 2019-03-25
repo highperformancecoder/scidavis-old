@@ -71,7 +71,7 @@ void AbstractAspect::writeBasicAttributes(QXmlStreamWriter * writer) const
 {
 	writer->writeAttribute("creation_time" , creationTime().toString("yyyy-dd-MM hh:mm:ss:zzz"));
 	writer->writeAttribute("caption_spec", captionSpec());
-	writer->writeAttribute("name", name());
+	writer->writeAttribute("name", name().c_str());
 }
 
 bool AbstractAspect::readBasicAttributes(XmlStreamReader * reader)
@@ -94,7 +94,7 @@ bool AbstractAspect::readBasicAttributes(XmlStreamReader * reader)
 	QDateTime creation_time = QDateTime::fromString(str, "yyyy-dd-MM hh:mm:ss:zzz");
 	if(str.isEmpty() || !creation_time.isValid())
 	{
-		reader->raiseWarning(tr("Invalid creation time for '%1'. Using current time.").arg(name()));
+          reader->raiseWarning(tr("Invalid creation time for '%1'. Using current time.").arg(name().c_str()));
 		setCreationTime(QDateTime::currentDateTime());
 	}
 	else
@@ -114,10 +114,10 @@ AbstractAspect * AbstractAspect::parentAspect() const
 void AbstractAspect::addChild(AbstractAspect* child)
 {
 	Q_CHECK_PTR(child);
-	QString new_name = d_aspect_private->uniqueNameFor(child->name());
-	beginMacro(tr("%1: add %2.").arg(name()).arg(new_name));
-	if (new_name != child->name()) {
-		info(tr("Renaming \"%1\" to \"%2\" in order to avoid name collision.").arg(child->name()).arg(new_name));
+	QString new_name = d_aspect_private->uniqueNameFor(child->name().c_str());
+	beginMacro(tr("%1: add %2.").arg(name().c_str()).arg(new_name));
+	if (new_name != child->name().c_str()) {
+          info(tr("Renaming \"%1\" to \"%2\" in order to avoid name collision.").arg(child->name().c_str()).arg(new_name));
 		child->setName(new_name);
 	}
 	exec(new AspectChildAddCmd(d_aspect_private, child, d_aspect_private->childCount()));
@@ -128,10 +128,10 @@ void AbstractAspect::addChild(AbstractAspect* child)
 void AbstractAspect::insertChild(AbstractAspect* child, int index)
 {
 	Q_CHECK_PTR(child);
-	QString new_name = d_aspect_private->uniqueNameFor(child->name());
-	beginMacro(tr("%1: insert %2 at position %3.").arg(name()).arg(new_name).arg(index+1));
-	if (new_name != child->name()) {
-		info(tr("Renaming \"%1\" to \"%2\" in order to avoid name collision.").arg(child->name()).arg(new_name));
+	QString new_name = d_aspect_private->uniqueNameFor(child->name().c_str());
+	beginMacro(tr("%1: insert %2 at position %3.").arg(name().c_str()).arg(new_name).arg(index+1));
+	if (new_name != child->name().c_str()) {
+          info(tr("Renaming \"%1\" to \"%2\" in order to avoid name collision.").arg(child->name().c_str()).arg(new_name));
 		child->setName(new_name);
 	}
 	exec(new AspectChildAddCmd(d_aspect_private, child, index));
@@ -142,7 +142,7 @@ void AbstractAspect::insertChild(AbstractAspect* child, int index)
 void AbstractAspect::removeChild(AbstractAspect* child, bool detach)
 {
 	Q_ASSERT(indexOfChild(child) != -1);
-	beginMacro(tr("%1: remove %2.").arg(name()).arg(child->name()));
+	beginMacro(tr("%1: remove %2.").arg(name().c_str()).arg(child->name().c_str()));
 	prepareAspectRemoval(child);
 	exec(new AspectChildRemoveCmd(d_aspect_private, child, detach));
 	endMacro();
@@ -159,10 +159,10 @@ void AbstractAspect::reparentChild(AbstractAspect *new_parent, AbstractAspect *c
 	Q_ASSERT(indexOfChild(child) != -1);
 	Q_ASSERT(new_index > 0 && new_index <= new_parent->childCount());
 	Q_ASSERT(new_parent != NULL);
-	QString new_name = new_parent->d_aspect_private->uniqueNameFor(child->name());
-	beginMacro(tr("%1: move %2 to %3.").arg(name()).arg(child->name()).arg(new_parent->name()));
-	if (new_name != child->name()) {
-		info(tr("Renaming \"%1\" to \"%2\" in order to avoid name collision.").arg(child->name()).arg(new_name));
+	QString new_name = new_parent->d_aspect_private->uniqueNameFor(child->name().c_str());
+	beginMacro(tr("%1: move %2 to %3.").arg(name().c_str()).arg(child->name().c_str()).arg(new_parent->name().c_str()));
+	if (new_name != child->name().c_str()) {
+          info(tr("Renaming \"%1\" to \"%2\" in order to avoid name collision.").arg(child->name().c_str()).arg(new_name));
 		child->setName(new_name);
 	}
 	prepareAspectRemoval(child);
@@ -226,9 +226,9 @@ void AbstractAspect::endMacro()
 		stack->endMacro();
 }
 
-QString AbstractAspect::name() const
+std::string AbstractAspect::name() const
 {
-	return d_aspect_private->name();
+  return d_aspect_private->name().toStdString();
 }
 
 void AbstractAspect::setName(const QString &value)
@@ -351,7 +351,7 @@ QList<AbstractAspect *> AbstractAspect::descendantsThatInherit(const char * clas
 
 void AbstractAspect::removeAllChildAspects()
 {
-	beginMacro(tr("%1: remove all children.").arg(name()));
+  beginMacro(tr("%1: remove all children.").arg(name().c_str()));
 	for (int i=childCount()-1; i >= 0; i--) 
 		removeChild(i);
 	endMacro();

@@ -91,7 +91,7 @@ SUITE(ReadWriteProject)
         CHECK_EQUAL(matrix->numCols(),table->numCols());
         for (int r=0; r<matrix->numRows(); ++r)
           for (int c=0; c<matrix->numCols(); ++c)
-            CHECK_CLOSE(matrix->cell(r,c),table->column(c)->valueAt(r), 1e-5);
+            CHECK_CLOSE(matrix->cell(r,c),table->column(c).valueAt(r), 1e-5);
       }
     }
 

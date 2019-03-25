@@ -316,7 +316,7 @@ QwtPlotCurve* Filter::addResultCurve(double *x, double *y)
         Table& t = app->newHiddenTable(tableName, d_explanation + " " + tr("of") + " " + d_curve->title().text(), 
                                            QList<Column *>() << xCol << yCol);
 
-        DataCurve *c = new DataCurve(&t, tableName + "_" + xCol->name(), tableName + "_" + yCol->name());
+        DataCurve *c = new DataCurve(&t, tableName + "_" + xCol->name().c_str(), tableName + "_" + yCol->name().c_str());
         c->setData(x, y, d_points);
         c->setPen(QPen(d_curveColor, 1));
         d_graph->insertPlotItem(c, Graph::Line);

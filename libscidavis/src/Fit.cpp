@@ -419,7 +419,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 
                               int col = t.colIndex(colName);
                               for (unsigned i=0; i<d_n; i++)
-                                d_y_errors[i] = t.column(col)->valueAt(i);
+                                d_y_errors[i] = t.column(col).valueAt(i);
                             }
                           catch (NoSuchObject&) {return false;}
 			}
@@ -433,17 +433,17 @@ Table* Fit::parametersTable(const QString& tableName)
 	ApplicationWindow *app = (ApplicationWindow *)parent();
 	Table& t = app->newTable(tableName.toStdString(), 3, d_p);
 	t.setHeader(QStringList() << tr("Parameter") << tr("Value") << tr ("Error"));
-	t.column(0)->setColumnMode(SciDAVis::Text);
-	t.column(1)->setColumnMode(SciDAVis::Numeric);
-	t.column(2)->setColumnMode(SciDAVis::Numeric);
+	t.column(0).setColumnMode(SciDAVis::Text);
+	t.column(1).setColumnMode(SciDAVis::Numeric);
+	t.column(2).setColumnMode(SciDAVis::Numeric);
 	for (unsigned i=0; i<d_p; i++)
 	{
-		t.column(0)->setTextAt(i, d_param_names[i]);
-		t.column(1)->setValueAt(i, d_results[i]);
-		t.column(2)->setValueAt(i, sqrt(gsl_matrix_get(covar,i,i)));
+		t.column(0).setTextAt(i, d_param_names[i]);
+		t.column(1).setValueAt(i, d_results[i]);
+		t.column(2).setValueAt(i, sqrt(gsl_matrix_get(covar,i,i)));
 	}
 
-	t.column(2)->setPlotDesignation(SciDAVis::yErr);
+	t.column(2).setPlotDesignation(SciDAVis::yErr);
 // TODO: replace or remove this
 #if 0
 	for (int j=0; j<3; j++)

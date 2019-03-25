@@ -56,7 +56,7 @@ public:
   future::Matrix *d_future_matrix;
 
   //! Return the window name
-  std::string name() const override { return d_future_matrix->name().toStdString();} 
+  std::string name() const override { return d_future_matrix->name();} 
   //! Set the window name
   void setName(const std::string& s) override { d_future_matrix->setName(s.c_str()); }
   //! Return the window label

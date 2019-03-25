@@ -278,32 +278,32 @@ class AbstractSimpleFilter : public AbstractFilter
 
 class SimpleFilterColumn : public AbstractColumn
 {
-	Q_OBJECT
+  Q_OBJECT
 
-	public:
-		SimpleFilterColumn(AbstractSimpleFilter *owner) : AbstractColumn(owner->name()), d_owner(owner) {}
+public:
+  SimpleFilterColumn(AbstractSimpleFilter *owner) : AbstractColumn(owner->name().c_str()), d_owner(owner) {}
 
-		virtual SciDAVis::ColumnDataType dataType() const { return d_owner->dataType(); }
-		virtual SciDAVis::ColumnMode columnMode() const { return d_owner->columnMode(); }
-		virtual int rowCount() const { return d_owner->rowCount(); }
-		virtual SciDAVis::PlotDesignation plotDesignation() const { return d_owner->plotDesignation(); }
-		virtual bool isInvalid(int row) const { return d_owner->isInvalid(row); }
-		virtual bool isInvalid(Interval<int> i) const { return d_owner->isInvalid(i); }
-		virtual QList< Interval<int> > invalidIntervals() const { return d_owner->invalidIntervals(); }
-		virtual bool isMasked(int row) const { return d_owner->isMasked(row); }
-		virtual bool isMasked(Interval<int> i) const { return d_owner->isMasked(i); }
-		virtual QList< Interval<int> > maskedIntervals() const { return d_owner->maskedIntervals(); }
-		virtual void clearMasks() { d_owner->clearMasks(); }
-		virtual QString textAt(int row) const { return d_owner->textAt(row); }
-		virtual QDate dateAt(int row) const { return d_owner->dateAt(row); }
-		virtual QTime timeAt(int row) const { return d_owner->timeAt(row); }
-		virtual QDateTime dateTimeAt(int row) const { return d_owner->dateTimeAt(row); }
-		virtual double valueAt(int row) const { return d_owner->valueAt(row); }
+  virtual SciDAVis::ColumnDataType dataType() const { return d_owner->dataType(); }
+  virtual SciDAVis::ColumnMode columnMode() const { return d_owner->columnMode(); }
+  virtual int rowCount() const { return d_owner->rowCount(); }
+  virtual SciDAVis::PlotDesignation plotDesignation() const { return d_owner->plotDesignation(); }
+  virtual bool isInvalid(int row) const { return d_owner->isInvalid(row); }
+  virtual bool isInvalid(Interval<int> i) const { return d_owner->isInvalid(i); }
+  virtual QList< Interval<int> > invalidIntervals() const { return d_owner->invalidIntervals(); }
+  virtual bool isMasked(int row) const { return d_owner->isMasked(row); }
+  virtual bool isMasked(Interval<int> i) const { return d_owner->isMasked(i); }
+  virtual QList< Interval<int> > maskedIntervals() const { return d_owner->maskedIntervals(); }
+  virtual void clearMasks() { d_owner->clearMasks(); }
+  virtual QString textAt(int row) const { return d_owner->textAt(row); }
+  virtual QDate dateAt(int row) const { return d_owner->dateAt(row); }
+  virtual QTime timeAt(int row) const { return d_owner->timeAt(row); }
+  virtual QDateTime dateTimeAt(int row) const { return d_owner->dateTimeAt(row); }
+  virtual double valueAt(int row) const { return d_owner->valueAt(row); }
 
-	private:
-		AbstractSimpleFilter *d_owner;
+private:
+  AbstractSimpleFilter *d_owner;
 
-	friend class AbstractSimpleFilter;
+  friend class AbstractSimpleFilter;
 };
 
 #endif // ifndef ABSTRACT_SIMPLE_FILTER

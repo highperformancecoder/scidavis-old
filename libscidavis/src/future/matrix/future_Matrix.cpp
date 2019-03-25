@@ -121,7 +121,7 @@ void Matrix::insertColumns(int before, int count)
 {
 	if( count < 1 || before < 0 || before > columnCount()) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: insert %2 column(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: insert %2 column(s)").arg(name().c_str()).arg(count));
 	exec(new MatrixInsertColumnsCmd(d_matrix_private, before, count));
 	endMacro();
 	RESET_CURSOR;
@@ -131,7 +131,7 @@ void Matrix::removeColumns(int first, int count)
 {
 	if( count < 1 || first < 0 || first+count > columnCount()) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: remove %2 column(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: remove %2 column(s)").arg(name().c_str()).arg(count));
 	exec(new MatrixRemoveColumnsCmd(d_matrix_private, first, count));
 	endMacro();
 	RESET_CURSOR;
@@ -141,7 +141,7 @@ void Matrix::removeRows(int first, int count)
 {
 	if( count < 1 || first < 0 || first+count > rowCount()) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: remove %2 row(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: remove %2 row(s)").arg(name().c_str()).arg(count));
 	exec(new MatrixRemoveRowsCmd(d_matrix_private, first, count));
 	endMacro();
 	RESET_CURSOR;
@@ -151,7 +151,7 @@ void Matrix::insertRows(int before, int count)
 {
 	if( count < 1 || before < 0 || before > rowCount()) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: insert %2 row(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: insert %2 row(s)").arg(name().c_str()).arg(count));
 	exec(new MatrixInsertRowsCmd(d_matrix_private, before, count));
 	endMacro();
 	RESET_CURSOR;
@@ -161,7 +161,7 @@ void Matrix::setDimensions(int rows, int cols)
 {
 	if( (rows < 0) || (cols < 0 ) || (rows == rowCount() && cols == columnCount()) ) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: set matrix size to %2x%3").arg(name()).arg(rows).arg(cols));
+	beginMacro(QObject::tr("%1: set matrix size to %2x%3").arg(name().c_str()).arg(rows).arg(cols));
 	int col_diff = cols - columnCount();
 	int row_diff = rows - rowCount();
 	if(col_diff > 0)
@@ -189,7 +189,7 @@ int Matrix::rowCount() const
 void Matrix::clear()
 {
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: clear").arg(name()));
+	beginMacro(QObject::tr("%1: clear").arg(name().c_str()));
 	exec(new MatrixClearCmd(d_matrix_private));
 	endMacro();
 	RESET_CURSOR;
@@ -209,7 +209,7 @@ void Matrix::cutSelection()
 	if( first < 0 ) return;
 
 	WAIT_CURSOR;
-	beginMacro(tr("%1: cut selected cell(s)").arg(name()));
+	beginMacro(tr("%1: cut selected cell(s)").arg(name().c_str()));
 	copySelection();
 	clearSelectedCells();
 	endMacro();
@@ -256,7 +256,7 @@ void Matrix::pasteIntoSelection()
 	if(columnCount() < 1 || rowCount() < 1) return;
 
 	WAIT_CURSOR;
-	beginMacro(tr("%1: paste from clipboard").arg(name()));
+	beginMacro(tr("%1: paste from clipboard").arg(name().c_str()));
 
 	int first_col = d_view->firstSelectedColumn(false);
 	int last_col = d_view->lastSelectedColumn(false);
@@ -330,7 +330,7 @@ void Matrix::insertEmptyColumns()
 	int count, current = first;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: insert empty column(s)").arg(name()));
+	beginMacro(QObject::tr("%1: insert empty column(s)").arg(name().c_str()));
 	while( current <= last )
 	{
 		current = first+1;
@@ -354,7 +354,7 @@ void Matrix::removeSelectedColumns()
 	if( first < 0 ) return;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: remove selected column(s)").arg(name()));
+	beginMacro(QObject::tr("%1: remove selected column(s)").arg(name().c_str()));
 	for(int i=last; i>=first; i--)
 		if(d_view->isColumnSelected(i, false)) removeColumns(i, 1);
 	endMacro();
@@ -365,7 +365,7 @@ void Matrix::clearSelectedColumns()
 {
 	if (!d_view) return;
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: clear selected column(s)").arg(name()));
+	beginMacro(QObject::tr("%1: clear selected column(s)").arg(name().c_str()));
 	for(int i=0; i<columnCount(); i++)
 		if(d_view->isColumnSelected(i, false))
 			exec(new MatrixClearColumnCmd(d_matrix_private, i));
@@ -383,7 +383,7 @@ void Matrix::insertEmptyRows()
 	if( first < 0 ) return;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: insert empty rows(s)").arg(name()));
+	beginMacro(QObject::tr("%1: insert empty rows(s)").arg(name().c_str()));
 	while( current <= last )
 	{
 		current = first+1;
@@ -407,7 +407,7 @@ void Matrix::removeSelectedRows()
 	if( first < 0 ) return;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: remove selected rows(s)").arg(name()));
+	beginMacro(QObject::tr("%1: remove selected rows(s)").arg(name().c_str()));
 	for(int i=last; i>=first; i--)
 		if(d_view->isRowSelected(i, false)) removeRows(i, 1);
 	endMacro();
@@ -422,7 +422,7 @@ void Matrix::clearSelectedRows()
 	if( first < 0 ) return;
 
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: clear selected rows(s)").arg(name()));
+	beginMacro(QObject::tr("%1: clear selected rows(s)").arg(name().c_str()));
 	for(int i=first; i<=last; i++)
 	{
 		if(d_view->isRowSelected(i))
@@ -444,7 +444,7 @@ void Matrix::clearSelectedCells()
 	if( first_col < 0 ) return;
 
 	WAIT_CURSOR;
-	beginMacro(tr("%1: clear selected cell(s)").arg(name()));
+	beginMacro(tr("%1: clear selected cell(s)").arg(name().c_str()));
 	for(int i=first_row; i<=last_row; i++)
 		for(int j=first_col; j<=last_col; j++)
 			if(d_view->isCellSelected(i, j))
@@ -866,7 +866,7 @@ void Matrix::goToCell()
 void Matrix::copy(Matrix * other)
 {
 	WAIT_CURSOR;
-	beginMacro(QObject::tr("%1: copy %2").arg(name()).arg(other->name()));
+	beginMacro(QObject::tr("%1: copy %2").arg(name().c_str()).arg(other->name().c_str()));
 	int rows = other->rowCount();
 	int columns = other->columnCount();
 	setDimensions(rows, columns);
@@ -1004,7 +1004,7 @@ void Matrix::addRows()
 	if (!d_view) return;
 	WAIT_CURSOR;
 	int count = d_view->selectedRowCount(false);
-	beginMacro(QObject::tr("%1: add %2 rows(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: add %2 rows(s)").arg(name().c_str()).arg(count));
 	exec(new MatrixInsertRowsCmd(d_matrix_private, rowCount(), count));
 	endMacro();
 	RESET_CURSOR;
@@ -1015,7 +1015,7 @@ void Matrix::addColumns()
 	if (!d_view) return;
 	WAIT_CURSOR;
 	int count = d_view->selectedRowCount(false);
-	beginMacro(QObject::tr("%1: add %2 column(s)").arg(name()).arg(count));
+	beginMacro(QObject::tr("%1: add %2 column(s)").arg(name().c_str()).arg(count));
 	exec(new MatrixInsertColumnsCmd(d_matrix_private, columnCount(), count));
 	endMacro();
 	RESET_CURSOR;
@@ -1466,7 +1466,7 @@ void Matrix::recalculateSelectedCells()
 	if (!d_view) return;
 #ifdef LEGACY_CODE_0_2_x
 	WAIT_CURSOR;
-	beginMacro(tr("%1: apply formula to selection").arg(name()));
+	beginMacro(tr("%1: apply formula to selection").arg(name().c_str()));
 	emit recalculate();
 	endMacro();
 	RESET_CURSOR;

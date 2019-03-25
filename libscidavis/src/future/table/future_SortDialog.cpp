@@ -98,7 +98,7 @@ void SortDialog::setColumnsList(QList<Column*> list)
 	d_columns_list = list;
 
 	for(int i=0; i<list.size(); i++)
-		ui.columns_list->addItem( list.at(i)->name() );
+          ui.columns_list->addItem( list.at(i)->name().c_str() );
 	ui.columns_list->setCurrentIndex(0);
 }
 

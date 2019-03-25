@@ -279,34 +279,30 @@ void QwtErrorPlotCurve::setMasterCurve(DataCurve *c)
 }
 
 bool QwtErrorPlotCurve::loadData()
+try
 {
-	if (!d_master_curve) return false;
-	Table *mt = d_master_curve->table();
-	if (!mt) return false;
-	Column *x = mt->column(d_master_curve->xColumnName());
-	Column *y = mt->column(d_master_curve->title().text());
+  if (!d_master_curve) return false;
+  Table *mt = d_master_curve->table();
+  if (!mt) return false;
+  Column& x = mt->column(d_master_curve->xColumnName().toStdString());
+  Column& y = mt->column(d_master_curve->title().text().toStdString());
 
-	Column *err = d_table->column(title().text());
+  Column& err = d_table->column(title().text().toStdString());
 
-	if (!x || !y || !err) {
-		remove();
-		return false;
-	}
+  QList< QVector<double> > data = convertData(
+                                              d_master_curve->type() == Graph::HorizontalBars ? (QList<Column*>() << &y << &x << &err) : (QList<Column*>() << &x << &y << &err),
+                                              QList<int>() << xAxis() << yAxis() << (type==Horizontal ? xAxis() : yAxis()) );
 
-	QList< QVector<double> > data = convertData(
-			d_master_curve->type() == Graph::HorizontalBars ? (QList<Column*>() << y << x << err) : (QList<Column*>() << x << y << err),
-			QList<int>() << xAxis() << yAxis() << (type==Horizontal ? xAxis() : yAxis()) );
+  setData(data[0].data(), data[1].data(), data[0].size());
+  setErrors(data[2]);
 
-	if (data.isEmpty() || data[0].size() == 0) {
-		remove();
-		return false;
-	}
-
-	setData(data[0].data(), data[1].data(), data[0].size());
-	setErrors(data[2]);
-
-	return true;
-}
+  return true;
+ }
+ catch(const std::exception&)
+   {
+     remove();
+     return false;
+   }
 
 QString QwtErrorPlotCurve::plotAssociation()
 {

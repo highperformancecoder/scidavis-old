@@ -333,35 +333,40 @@ QwtDoubleRect BoxCurve::boundingRect() const
 }
 
 bool BoxCurve::loadData()
+try
 {
-	QVector<double> Y(abs(d_end_row - d_start_row) + 1);
-    int ycol = d_table->colIndex(title().text());
-	Column *y_col_ptr = d_table->column(ycol);
-	int yColType = d_table->columnType(ycol);
-	int size = 0;
-	for (int row = d_start_row; row <= d_end_row && row < y_col_ptr->rowCount(); row++) {
-		if (!y_col_ptr->isInvalid(row)) {
-			if (yColType == Table::Text) {
-				QString yval = y_col_ptr->textAt(row);
-				bool valid_data = true;
-				Y[size] = QLocale().toDouble(yval, &valid_data);
-				if (!valid_data)
-					continue;
-			}
-			else
-				Y[size] = y_col_ptr->valueAt(row);
 
-			size++;
-        }
-	}
+  QVector<double> Y(abs(d_end_row - d_start_row) + 1);
+  int ycol = d_table->colIndex(title().text());
+  Column& y_col_ptr = d_table->column(ycol);
+  int yColType = d_table->columnType(ycol);
+  int size = 0;
+  for (int row = d_start_row; row <= d_end_row && row < y_col_ptr.rowCount(); row++) {
+    if (!y_col_ptr.isInvalid(row)) {
+      if (yColType == Table::Text) {
+        QString yval = y_col_ptr.textAt(row);
+        bool valid_data = true;
+        Y[size] = QLocale().toDouble(yval, &valid_data);
+        if (!valid_data)
+          continue;
+      }
+      else
+        Y[size] = y_col_ptr.valueAt(row);
 
-	if (size>0) {
-		Y.resize(size);
-		gsl_sort (Y.data(), 1, size);
-        setData(QwtSingleArrayData(this->x(0), Y, size));
-	} else
-		remove();
+      size++;
+    }
+  }
 
-	return true;
-}
+  if (size>0) {
+    Y.resize(size);
+    gsl_sort (Y.data(), 1, size);
+    setData(QwtSingleArrayData(this->x(0), Y, size));
+  } else
+    remove();
 
+  return true;
+ }
+ catch (const std::exception&)
+   {
+     return false;
+   }

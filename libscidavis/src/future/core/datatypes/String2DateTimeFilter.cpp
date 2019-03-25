@@ -136,7 +136,7 @@ String2DateTimeFilterSetFormatCmd::String2DateTimeFilterSetFormatCmd(String2Date
 	: d_target(target), d_other_format(new_format) 
 {
 	if(d_target->parentAspect())
-		setText(QObject::tr("%1: set date-time format to %2").arg(d_target->parentAspect()->name()).arg(new_format));
+          setText(QObject::tr("%1: set date-time format to %2").arg(d_target->parentAspect()->name().c_str()).arg(new_format));
 	else
 		setText(QObject::tr("set date-time format to %1").arg(new_format));
 }

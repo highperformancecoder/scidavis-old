@@ -280,27 +280,32 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 
 bool DataCurve::loadData()
 {
-	Column *x_col_ptr = d_table->column(d_x_column);
-	Column *y_col_ptr = d_table->column(title().text());
-	if (!x_col_ptr || !y_col_ptr) {
-		remove();
-		return false;
-	}
+  try
+    {
+      Column& x_col_ptr = d_table->column(d_x_column.toStdString());
+      Column& y_col_ptr = d_table->column(title().text().toStdString());
 	
-	QList< QVector<double> > points = convertData(
-			d_type == Graph::HorizontalBars ? (QList<Column*>() << y_col_ptr << x_col_ptr) : (QList<Column*>() << x_col_ptr << y_col_ptr),
-			QList<int>() << xAxis() << yAxis());
+      QList< QVector<double> > points = convertData(
+                                                    d_type == Graph::HorizontalBars ? (QList<Column*>() << &y_col_ptr << &x_col_ptr) : (QList<Column*>() << &x_col_ptr << &y_col_ptr),
+                                                    QList<int>() << xAxis() << yAxis());
 
-	if (points.isEmpty() || points[0].size() == 0) {
-		remove();
-		return false;
-	}
+      if (points.isEmpty() || points[0].size() == 0) {
+        remove();
+        return false;
+      }
 
-	setData(points[0].data(), points[1].data(), points[0].size());
-	foreach(DataCurve *c, d_error_bars)
-		c->setData(points[0].data(), points[1].data(), points[0].size());
+      setData(points[0].data(), points[1].data(), points[0].size());
+      foreach(DataCurve *c, d_error_bars)
+        c->setData(points[0].data(), points[1].data(), points[0].size());
 
-	return true;
+      return true;
+    }
+  catch (const std::exception&)
+    {
+      remove();
+      return false;
+    }
+
 }
 
 void DataCurve::removeErrorBars(DataCurve *c)

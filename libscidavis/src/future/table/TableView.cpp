@@ -374,9 +374,9 @@ void TableView::setColumnForControlTabs(int col)
       Column *col_ptr = d_table->column(col);
 
 	QString str = tr("Current column:\nName: %1\nPosition: %2")\
-		.arg(col_ptr->name()).arg(col+1);
+          .arg(col_ptr->name().c_str()).arg(col+1);
 		
-	ui.name_edit->setText(col_ptr->name());
+	ui.name_edit->setText(col_ptr->name().c_str());
 	ui.comment_box->document()->setPlainText(col_ptr->comment());
 	ui.type_box->setCurrentIndex(ui.type_box->findData((int)col_ptr->columnMode()));
 	switch(col_ptr->columnMode()) {
@@ -419,7 +419,7 @@ void TableView::handleAspectDescriptionChanged(const AbstractAspect * aspect)
       const Column * col = qobject_cast<const Column*>(aspect);
       if (!col || col->parentAspect() != static_cast<AbstractAspect*>(d_table))
         return;
-      ui.add_reference_combobox->setItemText(d_table->columnIndex(col), "col(\"" + col->name() + "\")");
+      ui.add_reference_combobox->setItemText(d_table->columnIndex(col), ("col(\"" + col->name() + "\")").c_str());
     }
 }
 
@@ -429,7 +429,7 @@ void TableView::handleAspectAdded(const AbstractAspect *aspect) {
       const Column * col = qobject_cast<const Column*>(aspect);
       if (!col || col->parentAspect() != static_cast<AbstractAspect*>(d_table))
         return;
-      ui.add_reference_combobox->insertItem(d_table->indexOfChild(aspect), "col(\"" + col->name() + "\")");
+      ui.add_reference_combobox->insertItem(d_table->indexOfChild(aspect), ("col(\"" + col->name() + "\")").c_str());
     }
 }
 
@@ -673,7 +673,7 @@ void TableView::applyType()
 	switch(new_mode) {
 		case SciDAVis::Numeric:
 			foreach(Column* col, list) {
-                col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
+                          col->beginMacro(QObject::tr("%1: change column type").arg(col->name().c_str()));
 				col->setColumnMode(new_mode);
 				Double2StringFilter * filter = static_cast<Double2StringFilter*>(col->outputFilter());
 				int digits = ui.digits_box->value(); // setNumericFormat causes digits_box to be modified...
@@ -695,7 +695,7 @@ void TableView::applyType()
 			else
 				format = ui.format_box->itemData(format_index).toString();
 			foreach(Column* col, list) {
-                col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
+                          col->beginMacro(QObject::tr("%1: change column type").arg(col->name().c_str()));
 				SciDAVis::ColumnMode old_mode = col->columnMode();
 				AbstractFilter *converter = 0;
 				switch (old_mode) {

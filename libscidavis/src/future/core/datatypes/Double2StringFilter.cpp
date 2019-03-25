@@ -75,7 +75,7 @@ Double2StringFilterSetFormatCmd::Double2StringFilterSetFormatCmd(Double2StringFi
 	: d_target(target), d_other_format(new_format) 
 {
 	if(d_target->parentAspect())
-		setText(QObject::tr("%1: set numeric format to '%2'").arg(d_target->parentAspect()->name()).arg(new_format));
+          setText(QObject::tr("%1: set numeric format to '%2'").arg(d_target->parentAspect()->name().c_str()).arg(new_format));
 	else
 		setText(QObject::tr("set numeric format to '%1'").arg(new_format));
 }
@@ -97,7 +97,7 @@ Double2StringFilterSetDigitsCmd::Double2StringFilterSetDigitsCmd(Double2StringFi
 	: d_target(target), d_other_digits(new_digits) 
 {
 	if(d_target->parentAspect())
-		setText(QObject::tr("%1: set decimal digits to %2").arg(d_target->parentAspect()->name()).arg(new_digits));
+          setText(QObject::tr("%1: set decimal digits to %2").arg(d_target->parentAspect()->name().c_str()).arg(new_digits));
 	else
 		setText(QObject::tr("set decimal digits to %1").arg(new_digits));
 }

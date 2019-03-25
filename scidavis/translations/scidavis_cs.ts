@@ -5656,7 +5656,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&lt;html&gt;Failed to set axis labels on Graph %1. Maybe you&apos;re trying to open a corrupted project file; or there&apos;s some problem within SciDAVis. Please report this as a bug (together with detailed instructions how to reproduce this message or the corrupted file).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;Nastavení popisů os v nákresu %1 se nepodařilo. Je možné, že se pokoušíte otevřít soubor s projektem, který je poškozen; nebo je nějaký problém ve SciDAVisu . Nahlašte to, prosím, jako chybu (společně s podrobnými údaji o tom, jakým způsobem se dá toto hlášení nebo poškozený soubor vytvořit znovu).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;stopař slídící po chybách: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;Nastavení popisů os v nákresu %1 se nepodařilo. Je možné, že se pokoušíte otevřít soubor s projektem, který je poškozen; nebo je nějaký problém ve SciDAVisu . Nahlašte to, prosím, jako chybu (společně s podrobnými údaji o tom, jakým způsobem se dá toto hlášení nebo poškozený soubor vytvořit znovu).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;stopař slídící po chybách: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>The column</source>
@@ -5704,7 +5704,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Internal Error</source>
-        <translation type="unfinished">Vnitřní chyba</translation>
+        <translation type="obsolete">Vnitřní chyba</translation>
     </message>
     <message>
         <source>Ctrl+Shift+R</source>

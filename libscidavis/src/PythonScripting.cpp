@@ -88,6 +88,9 @@ typedef struct _traceback {
 #include "ExponentialFit.cd"
 #include "Qt.h"
 #include "Qt.cd"
+#include "AbstractAspect.cd"
+#include "AbstractColumn.cd"
+#include "Column.cd"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -161,11 +164,15 @@ namespace classdesc
   DEF_TYPENAME(QRect);
   DEF_TYPENAME(QRectF);
   DEF_TYPENAME(QPen);
+  DEF_TYPENAME(QIcon);
   DEF_TYPENAME(QBrush);
   DEF_TYPENAME(QVariant);
   DEF_TYPENAME(QwtPlotCurve);
   DEF_TYPENAME(QwtPlotZoomer);
   DEF_TYPENAME(QTreeWidgetItem);
+  DEF_TYPENAME(QDate);
+  DEF_TYPENAME(QDateTime);
+  DEF_TYPENAME(QTime);
 
   template <class T> struct tn<QList<T>>
   {
@@ -321,6 +328,7 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<ArrowMarker>();
   p.defineClass<ExponentialFit>();
   p.defineClass<QtNamespace>();
+  p.defineClass<Column>();
   // redefine Qt as an alias for QtNamespace
   modDict("__main__")["Qt"]=modDict("scidavis")["QtNamespace"];
   
@@ -355,6 +363,12 @@ BOOST_PYTHON_MODULE(scidavis)
     def("__init__",py::make_constructor(newExponentialFit2));
 //  p.getClass<ExponentialFit>().
 //    def(py::init<ApplicationWindow*,Graph*,const QString&>());
+  Column& (Table::*tableColumnInt)(int x) const =&Table::column;
+  Column& (Table::*tableColumnString)(const std::string& x) const=&Table::column;
+  p.getClass<Table>().
+    overload("column",tableColumnInt).
+    overload("column",tableColumnString);
+
   
 }
 
