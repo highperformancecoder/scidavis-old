@@ -152,7 +152,7 @@ public:
   //! Return whether a certain row contains an invalid value 	 
   virtual bool isInvalid(int row) const { return !Interval<int>(0, rowCount()-1).contains(row); } 	 
   //! Return whether a certain interval of rows contains only invalid values 	 
-  virtual bool isInvalid(Interval<int> i) const { return !Interval<int>(0, rowCount()-1).contains(i); } 	 
+  virtual bool isInvalidInterval(Interval<int> i) const { return !Interval<int>(0, rowCount()-1).contains(i); } 	 
   //! Return all intervals of invalid rows
   virtual QList< Interval<int> > invalidIntervals() const { return QList< Interval<int> >(); } 	 
   //! Return whether a certain row is masked 	 

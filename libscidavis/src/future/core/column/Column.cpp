@@ -600,7 +600,7 @@ bool Column::isInvalid(int row) const
   return d_column_private->isInvalid(row); 
 }
 
-bool Column::isInvalid(Interval<int> i) const 
+bool Column::isInvalidInterval(Interval<int> i) const 
 { 
   return d_column_private->isInvalid(i); 
 }

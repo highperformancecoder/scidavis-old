@@ -80,6 +80,7 @@ for l in range(0,10):
   assert c3.isInvalid(l) == True
 # Another inconsistency regarding indexes...
 
+print(c2.formula(1))
 assert c2.formula(1) == ""
 # setFormula(int, string) is not working. I don't know if it make sense to set a formula for a single row
 # of a column... I would suggests to remove it from scidavis.sip and from the manual

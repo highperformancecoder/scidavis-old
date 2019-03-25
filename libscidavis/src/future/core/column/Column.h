@@ -178,7 +178,7 @@ public:
   //! Return whether a certain row contains an invalid value 	 
   bool isInvalid(int row) const override;
   //! Return whether a certain interval of rows contains only invalid values 	 
-  bool isInvalid(Interval<int> i) const override;
+  bool isInvalidInterval(Interval<int> i) const override;
   //! Return all intervals of invalid rows
   QList< Interval<int> > invalidIntervals() const;
   //! Return whether a certain row is masked 	 

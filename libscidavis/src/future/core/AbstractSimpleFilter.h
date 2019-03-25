@@ -238,7 +238,7 @@ class AbstractSimpleFilter : public AbstractFilter
 		//! Return whether a certain row contains an invalid value 	 
 		virtual bool isInvalid(int row) const { return d_inputs.value(0) ? d_inputs.at(0)->isInvalid(row) : false; }
 		//! Return whether a certain interval of rows contains only invalid values 	 
-		virtual bool isInvalid(Interval<int> i) const { return d_inputs.value(0) ? d_inputs.at(0)->isInvalid(i) : false; }
+		virtual bool isInvalid(Interval<int> i) const { return d_inputs.value(0) ? d_inputs.at(0)->isInvalidInterval(i) : false; }
 		//! Return all intervals of invalid rows
 		virtual QList< Interval<int> > invalidIntervals() const 
 		{
@@ -288,7 +288,7 @@ public:
   int rowCount() const override { return d_owner->rowCount(); }
   SciDAVis::PlotDesignation plotDesignation() const override { return d_owner->plotDesignation(); }
   bool isInvalid(int row) const override { return d_owner->isInvalid(row); }
-  bool isInvalid(Interval<int> i) const override { return d_owner->isInvalid(i); }
+  bool isInvalidInterval(Interval<int> i) const override { return d_owner->isInvalid(i); }
   QList< Interval<int> > invalidIntervals() const override { return d_owner->invalidIntervals(); }
   bool isMasked(int row) const override { return d_owner->isMasked(row); }
   bool isMasked(Interval<int> i) const override { return d_owner->isMasked(i); }
