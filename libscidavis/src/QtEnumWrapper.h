@@ -8,7 +8,11 @@ struct QtEnumWrapper
 {
   E value;
   QtEnumWrapper() {}
+  QtEnumWrapper(E v): value(E(v)) {}
   QtEnumWrapper(QE v): value(E(v)) {}
-  operator QE() {return QE(value);}
+  operator QE() const {return QE(value);}
+  operator E() const {return value;}
+  operator int() const {return int(value);}
+  bool operator==(QE e) const {return int(e)==int(value);}
 };
 #endif

@@ -46,10 +46,10 @@ class SciDAVis : public QObject
 	Q_ENUMS(ColumnDataType)
 
 	private:
-		SciDAVis() {} // don't allow instancing
+  //SciDAVis() {} // don't allow instancing - yes, but boost.python doesn't work without it. Besides, who cares if this gets instanced...
 
 	public:
-		virtual ~SciDAVis() {} // avoid the warning message
+  //virtual ~SciDAVis() {} // avoid the warning message
 		//! Types of plot designations
 		enum PlotDesignation
 		{

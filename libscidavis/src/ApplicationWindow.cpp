@@ -4850,7 +4850,8 @@ void ApplicationWindow::exportLayer()
 	}
 
 	if (selected_filter.contains(".eps") || selected_filter.contains(".pdf") || selected_filter.contains(".ps"))
-		g->exportVector(file_name, ied->resolution(), ied->color(), ied->keepAspect(), ied->pageSize(), ied->pageOrientation());
+          g->exportVector(file_name, ied->resolution(), ied->color(), ied->keepAspect(),
+                          QPrinterEnum::PageSize(ied->pageSize()), QPrinterEnum::Orientation(ied->pageOrientation()));
 	else if (selected_filter.contains(".svg"))
 		g->exportSVG(file_name);
 	else {

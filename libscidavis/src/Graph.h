@@ -47,6 +47,7 @@
 #include "PlotToolInterface.h"
 #include "core/column/Column.h"
 #include "QwtSymbol.h"
+#include "Qt.h"
 
 class QwtPlotCurve;
 class QwtPlotZoomer;
@@ -244,8 +245,8 @@ public slots:
   void exportToFile(const QString& fileName);
   void exportSVG(const QString& fname);
   void exportVector(const QString& fileName, int res = 0, bool color = true,
-                    bool keepAspect = true, QPrinter::PageSize pageSize = QPrinter::Custom, 
-                    QPrinter::Orientation orientation = QPrinter::Portrait);
+                    bool keepAspect = true, QPrinterEnum::PageSize pageSize = QPrinterEnum::Custom, 
+                    QPrinterEnum::Orientation orientation = QPrinterEnum::Portrait);
   void exportImageQString(const QString& fileName, int quality = -1);
   void exportImage(const std::string& fileName, int quality = -1)
   {exportImageQString(QString(fileName.c_str()),quality);}
@@ -667,7 +668,7 @@ public slots:
   static QtPenStyle getPenStyle(int style);
   static Qt::BrushStyle getBrushStyle(int style);
   static void showPlotErrorMessage(QWidget *parent, const QStringList& emptyColumns);
-  static QPrinter::PageSize minPageSize(const QPrinter& printer, const QRect& r);
+  static QPrinterEnum::PageSize minPageSize(const QPrinter& printer, const QRect& r);
 
   void showTitleContextMenu();
   void copyTitle();

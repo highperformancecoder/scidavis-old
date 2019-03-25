@@ -22,6 +22,7 @@ assert c2.name() == "2"
 c2.setName("col2")
 assert c2.name() == "col2"
 
+
 # Testing data types (column modes) of a column (verification and change)
 colModes = ["Numeric","Text","Month","Day","DateTime"]
 for i in range(0,len(colModes)-1):

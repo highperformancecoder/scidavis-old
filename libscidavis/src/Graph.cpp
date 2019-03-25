@@ -1399,44 +1399,44 @@ void Graph::exportImageQString(const QString& fileName, int quality)
 	image.save(fileName, 0, quality);
 }
 
-void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPrinter::Orientation orientation)
+void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspect, QPrinterEnum::PageSize pageSize, QPrinterEnum::Orientation orientation)
 {
-	if ( fileName.isEmpty() ){
-		QMessageBox::critical(this, tr("Error"), tr("Please provide a valid file name!"));
-        return;
-	}
+  if ( fileName.isEmpty() ){
+    QMessageBox::critical(this, tr("Error"), tr("Please provide a valid file name!"));
+    return;
+  }
 
-	QPrinter printer;
-    printer.setCreator("SciDAVis");
-	printer.setFullPage(true);
+  QPrinter printer;
+  printer.setCreator("SciDAVis");
+  printer.setFullPage(true);
 
-    printer.setOutputFileName(fileName);
-    if (fileName.contains(".eps"))
+  printer.setOutputFileName(fileName);
+  if (fileName.contains(".eps"))
     {
 #if QT_VERSION >= 0x050000
-        QMessageBox::warning(this, tr("Warning"),
-            tr("Output in postscript format is not available for Qt5, using PDF"));
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName(fileName+".pdf");
+      QMessageBox::warning(this, tr("Warning"),
+                           tr("Output in postscript format is not available for Qt5, using PDF"));
+      printer.setOutputFormat(QPrinter::PdfFormat);
+      printer.setOutputFileName(fileName+".pdf");
 #else
-        printer.setOutputFormat(QPrinter::PostScriptFormat);
+      printer.setOutputFormat(QPrinter::PostScriptFormat);
 #endif
-	}
+    }
 
-    if (color)
-		printer.setColorMode(QPrinter::Color);
-	else
-		printer.setColorMode(QPrinter::GrayScale);
+  if (color)
+    printer.setColorMode(QPrinter::Color);
+  else
+    printer.setColorMode(QPrinter::GrayScale);
 
-    if (pageSize == QPrinter::Custom)
-       printer.setPaperSize(size(), QPrinter::Point);
-    else
-	{
-		printer.setOrientation(orientation);
-		printer.setPaperSize(pageSize);
-	}
+  if (pageSize == QPrinter::Custom)
+    printer.setPaperSize(size(), QPrinter::Point);
+  else
+    {
+      printer.setOrientation(orientation);
+      printer.setPaperSize(pageSize);
+    }
 
-	exportPainter(printer, keepAspect);
+  exportPainter(printer, keepAspect);
 }
 
 void Graph::print()
@@ -5416,7 +5416,7 @@ int Graph::visibleCurves()
 	return c;
 }
 
-QPrinter::PageSize Graph::minPageSize(const QPrinter& printer, const QRect& r)
+QPrinterEnum::PageSize Graph::minPageSize(const QPrinter& printer, const QRect& r)
 {
   double x_margin = 0.2/2.54*printer.logicalDpiX(); // 2 mm margins
   double y_margin = 0.2/2.54*printer.logicalDpiY();
@@ -5435,61 +5435,61 @@ QPrinter::PageSize Graph::minPageSize(const QPrinter& printer, const QRect& r)
       w = (int)ceil(h_mm);
     }
 
-  QPrinter::PageSize size = QPrinter::A5;
+  QPrinterEnum::PageSize size = QPrinterEnum::A5;
   if (w < 45 && h < 32)
-    size =  QPrinter::B10;
+    size =  QPrinterEnum::B10;
   else if (w < 52 && h < 37)
-    size =  QPrinter::A9;
+    size =  QPrinterEnum::A9;
   else if (w < 64 && h < 45)
-    size =  QPrinter::B9;
+    size =  QPrinterEnum::B9;
   else if (w < 74 && h < 52)
-    size =  QPrinter::A8;
+    size =  QPrinterEnum::A8;
   else if (w < 91 && h < 64)
-    size =  QPrinter::B8;
+    size =  QPrinterEnum::B8;
   else if (w < 105 && h < 74)
-    size =  QPrinter::A7;
+    size =  QPrinterEnum::A7;
   else if (w < 128 && h < 91)
-    size =  QPrinter::B7;
+    size =  QPrinterEnum::B7;
   else if (w < 148 && h < 105)
-    size =  QPrinter::A6;
+    size =  QPrinterEnum::A6;
   else if (w < 182 && h < 128)
-    size =  QPrinter::B6;
+    size =  QPrinterEnum::B6;
   else if (w < 210 && h < 148)
-    size =  QPrinter::A5;
+    size =  QPrinterEnum::A5;
   else if (w < 220 && h < 110)
-    size =  QPrinter::DLE;
+    size =  QPrinterEnum::DLE;
   else if (w < 229 && h < 163)
-    size =  QPrinter::C5E;
+    size =  QPrinterEnum::C5E;
   else if (w < 241 && h < 105)
-    size =  QPrinter::Comm10E;
+    size =  QPrinterEnum::Comm10E;
   else if (w < 257 && h < 182)
-    size =  QPrinter::B5;
+    size =  QPrinterEnum::B5;
   else if (w < 279 && h < 216)
-    size =  QPrinter::Letter;
+    size =  QPrinterEnum::Letter;
   else if (w < 297 && h < 210)
-    size =  QPrinter::A4;
+    size =  QPrinterEnum::A4;
   else if (w < 330 && h < 210)
-    size =  QPrinter::Folio;
+    size =  QPrinterEnum::Folio;
   else if (w < 356 && h < 216)
-    size =  QPrinter::Legal;
+    size =  QPrinterEnum::Legal;
   else if (w < 364 && h < 257)
-    size =  QPrinter::B4;
+    size =  QPrinterEnum::B4;
   else if (w < 420 && h < 297)
-    size =  QPrinter::A3;
+    size =  QPrinterEnum::A3;
   else if (w < 515 && h < 364)
-    size =  QPrinter::B3;
+    size =  QPrinterEnum::B3;
   else if (w < 594 && h < 420)
-    size =  QPrinter::A2;
+    size =  QPrinterEnum::A2;
   else if (w < 728 && h < 515)
-    size =  QPrinter::B2;
+    size =  QPrinterEnum::B2;
   else if (w < 841 && h < 594)
-    size =  QPrinter::A1;
+    size =  QPrinterEnum::A1;
   else if (w < 1030 && h < 728)
-    size =  QPrinter::B1;
+    size =  QPrinterEnum::B1;
   else if (w < 1189 && h < 841)
-    size =  QPrinter::A0;
+    size =  QPrinterEnum::A0;
   else if (w < 1456 && h < 1030)
-    size =  QPrinter::B0;
+    size =  QPrinterEnum::B0;
 
   return size;
 }

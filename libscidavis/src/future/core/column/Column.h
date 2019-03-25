@@ -114,12 +114,15 @@ public:
    * the values in the column additional to the data type.
    */ 
   SciDAVis::ColumnMode columnMode() const;
+  void setColumnMode(SciDAVis::ColumnMode mode) override 
+  {setColumnModeFilter(mode,nullptr);}
+    
   //! Set the column mode
   /**
    * This sets the column mode and, if
    * necessary, converts it to another datatype.
    */
-  void setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *conversion_filter=0);
+  void setColumnModeFilter(SciDAVis::ColumnMode mode, AbstractFilter *conversion_filter);
   //! Copy another column of the same type
   /**
    * This function will return false if the data type

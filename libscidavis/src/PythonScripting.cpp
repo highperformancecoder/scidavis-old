@@ -91,6 +91,7 @@ typedef struct _traceback {
 #include "AbstractAspect.cd"
 #include "AbstractColumn.cd"
 #include "Column.cd"
+#include "globals.cd"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -278,17 +279,6 @@ struct QString_from_python_str
     }
 };
 
-static int dummy=(
-                  // register the Qstring to-python converter
-                  py::to_python_converter<
-                  QString,
-                  QString_to_python_str>(),
- 
-                  // register the Qstring from-python converter
-                  QString_from_python_str(),
-                  1);
-
-
 const char* PythonScripting::langName = "Python";
 
 // variable argument overloads here
@@ -321,7 +311,13 @@ boost::shared_ptr<ExponentialFit> newExponentialFit2(Graph& g, const QString& s)
 
 BOOST_PYTHON_MODULE(scidavis)
 {
+  // register the Qstring to-python converter
+  py::to_python_converter<QString,QString_to_python_str>();
+  // register the Qstring from-python converter
+  QString_from_python_str();
+
   classdesc::python_t p;
+  p.defineClass<SciDAVis>();
   p.defineClass<ApplicationWindow>();
   p.defineClass<PythonScripting>();
   p.defineClass<PythonScript>();
@@ -329,7 +325,8 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<ExponentialFit>();
   p.defineClass<QtNamespace>();
   p.defineClass<Column>();
-  // redefine Qt as an alias for QtNamespace
+  python<SciDAVis::ColumnMode>(p,"");
+  // redefine Qt as an alias for QtNamespace - unfortunately QtNamespace cannot be called Qt in C++ as Qt is already taken
   modDict("__main__")["Qt"]=modDict("scidavis")["QtNamespace"];
   
   // overload handling

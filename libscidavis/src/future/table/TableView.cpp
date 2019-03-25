@@ -715,7 +715,7 @@ void TableView::applyType()
 					default:
                         			break;
 				}
-				col->setColumnMode(new_mode, converter);
+				col->setColumnModeFilter(new_mode, converter);
 				DateTime2StringFilter * filter = static_cast<DateTime2StringFilter*>(col->outputFilter());
 				filter->setFormat(format);
                 col->endMacro();

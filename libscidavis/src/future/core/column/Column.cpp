@@ -34,6 +34,8 @@
 #include <QIcon>
 #include <QXmlStreamWriter>
 #include <QtDebug>
+#include <iostream>
+using namespace std;
 
 Column::Column(const QString& name, SciDAVis::ColumnMode mode)
   : AbstractColumn(name)
@@ -82,7 +84,7 @@ Column::~Column()
   delete d_column_private;
 }
 
-void Column::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *conversion_filter)
+void Column::setColumnModeFilter(SciDAVis::ColumnMode mode, AbstractFilter *conversion_filter)
 {
   if(mode == columnMode()) return;
   beginMacro(QObject::tr("%1: change column type").arg(name().c_str()));

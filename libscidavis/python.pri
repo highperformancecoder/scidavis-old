@@ -22,7 +22,7 @@
                     src/MultiLayer.h src/QwtSymbol.h \
                     src/future/lib/Interval.h src/future/lib/IntervalAttribute.h \
                     src/Fit.h src/ExponentialFit.h src/Qt.h src/future/core/column/Column.h \
-                    src/future/core/AbstractAspect.h src/future/core/AbstractColumn.h 
+                    src/future/core/AbstractAspect.h src/future/core/AbstractColumn.h src/globals.h 
   classdesc.input = CLASSDESC_HEADERS
   classdesc.output = $${TMP_DIR}/${QMAKE_FILE_BASE}.cd
   classdesc.commands = classdesc -qt -respect_private -typeName -use_mbr_pointers -nodef -onbase -i ${QMAKE_FILE_NAME} python >${QMAKE_FILE_OUT}

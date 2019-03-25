@@ -83,10 +83,10 @@ public:
   void setStyle(QtPenStyle s);
   //! The pen style of the arrow line
   QtPenStyle style(){return linePen().style ();};
-  void setCapStyle(Qt::PenCapStyle c);
+  void setCapStyle(QtPenCapStyle c);
   QtPenCapStyle capStyle(){return linePen().capStyle();};
-  void setJoinStyle(Qt::PenJoinStyle);
-  Qt::PenJoinStyle joinStyle(){return linePen().joinStyle();};
+  void setJoinStyle(QtPenJoinStyle);
+  QtPenJoinStyle joinStyle(){return linePen().joinStyle();};
 
   //! Specifies weather the start arrow should be drawn
   void drawStartArrow(bool on = true){d_start_arrow = on;};

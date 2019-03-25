@@ -223,7 +223,7 @@ pen.setStyle(style);
 setLinePen(pen);
 }
 
-void ArrowMarker::setCapStyle(Qt::PenCapStyle style)
+void ArrowMarker::setCapStyle(QtPenCapStyle style)
 {
 if (linePen().capStyle() == style)
 	return;
@@ -233,7 +233,7 @@ pen.setCapStyle(style);
 setLinePen(pen);
 }
 
-void ArrowMarker::setJoinStyle(Qt::PenJoinStyle style)
+void ArrowMarker::setJoinStyle(QtPenJoinStyle style)
 {
 if (linePen().joinStyle() == style)
 	return;

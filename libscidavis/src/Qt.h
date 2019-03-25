@@ -1,4 +1,7 @@
+#ifndef QT_SCIDAVIS_H
+#define QT_SCIDAVIS_H
 #include <qcolor.h>
+#include <qprinter.h>
 
 struct QtNamespace
 {
@@ -23,3 +26,5 @@ struct QtNamespace
   static const QColor color0;
   static const QColor color1;
 };
+
+#endif
