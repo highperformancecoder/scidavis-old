@@ -288,7 +288,7 @@ void TableStatistics::renameCol(const QString &from, const QString &to)
 {
 	if (d_type == TableStatistics::StatRow) return;
 	for (int c=0; c < d_targets.size(); c++)
-          if (from == QString(d_base->name().c_str())+"_"+column(0).textAt(c))
+          if (from.toStdString() == d_base->name()+"_"+column(0).textAt(c))
 		{
 			column(0).setTextAt(c, to.section('_', 1, 1));
 			return;
@@ -303,7 +303,7 @@ void TableStatistics::removeCol(const QString &col)
 		return;
 	}
 	for (int c=0; c < d_targets.size(); c++)
-          if (col == QString(d_base->name().c_str())+"_"+column(0).textAt(c))
+          if (col.toStdString() == d_base->name()+"_"+column(0).textAt(c))
 		{
 			d_targets.removeAll(d_targets.at(c));
 			d_future_table->removeRows(c,1);

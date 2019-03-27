@@ -41,6 +41,13 @@ class QString;
 
 class ColumnStringIO;
 
+#ifdef SCRIPTING_PYTHON
+#include <boost/python.hpp>
+typedef boost::python::object pyobject;
+#else
+struct pyobject;
+#endif
+
 //! Aspect that manages a column
 /**
   This class represents a column, i.e., (mathematically) a 1D vector of 
@@ -212,7 +219,7 @@ public:
   //! \name Formula related functions
   //@{
   //! Return the formula associated with row 'row' 	 
-  QString formula(int row) const;
+  std::string formula(int row) const override;
   //! Return the intervals that have associated formulas
   /**
    * This can be used to make a list of formulas with their intervals.
@@ -240,7 +247,7 @@ public:
   /**
    * Use this only when dataType() is QString
    */
-  QString textAt(int row) const override;
+  std::string textAt(int row) const override;
   //! Set the content of row 'row'
   /**
    * Use this only when dataType() is QString
@@ -250,7 +257,8 @@ public:
   /**
    * Use this only when dataType() is QString
    */
-  void replaceTexts(int first, const QStringList& new_values);
+  void replaceTextsStringList(int first, const QStringList& new_values) override;
+  void replaceTexts(int first, const pyobject& new_values);
   //! Return the date part of row 'row'
   /**
    * Use this only when dataType() is QDateTime
@@ -297,9 +305,11 @@ public:
   /**
    * Use this only when dataType() is double
    */
-  virtual void replaceValues(int first, const QVector<qreal>& new_values) override;
+  void replaceValuesQVector(int first, const QVector<qreal>& new_values) override;
   //@}
-
+  // Python API
+  void replaceValues(int first, const pyobject&);
+  
   //! \name XML related functions
   //@{
   //! Save the column as XML
@@ -337,30 +347,30 @@ private:
 //! String-IO interface of Column.
 class ColumnStringIO : public AbstractColumn
 {
-	Q_OBJECT
+  Q_OBJECT
 	
-	public:
-		ColumnStringIO(Column * owner) : AbstractColumn(tr("as string")), d_owner(owner), d_setting(false) {}
-		SciDAVis::ColumnMode columnMode() const override { return SciDAVis::Text; }
-		SciDAVis::ColumnDataType dataType() const override { return SciDAVis::TypeQString; }
-		SciDAVis::PlotDesignation plotDesignation() const override { return d_owner->plotDesignation(); }
-		int rowCount() const override { return d_owner->rowCount(); }
-		QString textAt(int row) const override;
-		void setTextAt(int row, const QString &value) override;
-		bool isInvalid(int row) const override {
-			if (d_setting)
-				return false;
-			else
-				return d_owner->isInvalid(row);
-		}
-		bool copyAbstract(const AbstractColumn& other) override;
-		bool copyAbstract(const AbstractColumn& source, int source_start, int dest_start, int num_rows) override;
-		void replaceTexts(int start_row, const QStringList &texts) override;
+public:
+  ColumnStringIO(Column * owner) : AbstractColumn(tr("as string")), d_owner(owner), d_setting(false) {}
+  SciDAVis::ColumnMode columnMode() const override { return SciDAVis::Text; }
+  SciDAVis::ColumnDataType dataType() const override { return SciDAVis::TypeQString; }
+  SciDAVis::PlotDesignation plotDesignation() const override { return d_owner->plotDesignation(); }
+  int rowCount() const override { return d_owner->rowCount(); }
+  std::string textAt(int row) const override;
+  void setTextAt(int row, const QString &value) override;
+  bool isInvalid(int row) const override {
+    if (d_setting)
+      return false;
+    else
+      return d_owner->isInvalid(row);
+  }
+  bool copyAbstract(const AbstractColumn& other) override;
+  bool copyAbstract(const AbstractColumn& source, int source_start, int dest_start, int num_rows) override;
+  void replaceTextsStringList(int start_row, const QStringList &texts) override;
 
-	private:
-		Column * d_owner;
-		bool d_setting;
-		QString d_to_set;
+private:
+  Column * d_owner;
+  bool d_setting;
+  QString d_to_set;
 };
 
 #endif

@@ -80,7 +80,6 @@ for l in range(0,10):
   assert c3.isInvalid(l) == True
 # Another inconsistency regarding indexes...
 
-print(c2.formula(1))
 assert c2.formula(1) == ""
 # setFormula(int, string) is not working. I don't know if it make sense to set a formula for a single row
 # of a column... I would suggests to remove it from scidavis.sip and from the manual
@@ -101,8 +100,9 @@ for j in range(11,11+len(v1)-1):
 
 c3.setColumnMode("Text")
 for k in range(1,nRows+1):
-  t.setText(3,k,"a")
+  t.setText(k,3,"a")
 
+print(type(c3.textAt(1)))
 assert c3.textAt(1) == "a"
 c3.setTextAt(1,"b")
 assert c3.textAt(1) == "b"
@@ -121,7 +121,8 @@ assert colNames == ["1", "col2", "3", "2", "4", "5"]
 # check that you get same column either by name or by index
 c4 = t.column("2")
 c4b = t.column(3) # index is base 0
-assert c4 == c4b
+print(c4b.name(),c4.name())
+assert c4 is c4b
 
 # set column 4 as X (X2).
 c4.setPlotDesignation("X")

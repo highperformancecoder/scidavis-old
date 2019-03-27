@@ -407,7 +407,7 @@ void TableView::setColumnForControlTabs(int col)
 			ui.date_time_0_label->setVisible(false);
 			break;
 	}
-	ui.formula_box->setText(col_ptr->formula(0));
+	ui.formula_box->setText(col_ptr->formula(0).c_str());
 
     }
 }

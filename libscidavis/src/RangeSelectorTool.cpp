@@ -193,8 +193,8 @@ void RangeSelectorTool::emitStatusText()
 			.arg(d_active_marker.xValue() > d_inactive_marker.xValue() ? tr("Right") : tr("Left"))
 			.arg(d_selected_curve->title().text())
 			.arg(row + 1)
-			.arg(t->column(t->colIndex(((DataCurve*)d_selected_curve)->xColumnName())).textAt(row))
-			.arg(t->column(t->colIndex(d_selected_curve->title().text())).textAt(row)));
+			.arg(t->column(t->colIndex(((DataCurve*)d_selected_curve)->xColumnName())).textAt(row).c_str())
+			.arg(t->column(t->colIndex(d_selected_curve->title().text())).textAt(row).c_str()));
     }
 }
 

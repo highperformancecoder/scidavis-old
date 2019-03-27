@@ -770,7 +770,7 @@ void Graph::setLabelsTextFormat(int axis, const Column *column, int startRow, in
 	QMap<int, QString> list;
 	for (int row = startRow; row <= endRow; row++)
 		if (!column->isInvalid(row))
-			list.insert(row+1, column->textAt(row));
+                  list.insert(row+1, column->textAt(row).c_str());
 	QwtTextScaleDraw *sd = new QwtTextScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)), list);
 	sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 	d_plot->setAxisScaleDraw(axis, sd);
@@ -3188,11 +3188,11 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 	for (int row = startRow; row<= endRow && row<y_col_ptr.rowCount(); row++) {
 		if (!y_col_ptr.isInvalid(row)) {
 			if (yColType == Table::Text) {
-				QString yval = y_col_ptr.textAt(row);
-				bool valid_data = true;
-				Y[size] = QLocale().toDouble(yval, &valid_data);
-				if (!valid_data)
-					continue;
+                          QString yval = y_col_ptr.textAt(row).c_str();
+                          bool valid_data = true;
+                          Y[size] = QLocale().toDouble(yval, &valid_data);
+                          if (!valid_data)
+                            continue;
 			}
 			else
 				Y[size] = y_col_ptr.valueAt(row);

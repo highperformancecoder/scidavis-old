@@ -186,7 +186,7 @@ public:
   //! \name Formula related functions
   //@{
   //! Return the formula associated with row 'row' 	 
-  virtual QString formula(int row) const { Q_UNUSED(row); return QString(); }
+  virtual std::string formula(int row) const { Q_UNUSED(row); return ""; }
   //! Return the intervals that have associated formulas
   /**
    * This can be used to make a list of formulas with their intervals.
@@ -214,7 +214,7 @@ public:
   /**
    * Use this only when dataType() is QString
    */
-  virtual QString textAt(int row) const { Q_UNUSED(row); return ""; }
+  virtual std::string textAt(int row) const { Q_UNUSED(row); return ""; }
   //! Set the content of row 'row'
   /**
    * Use this only when dataType() is QString
@@ -224,7 +224,7 @@ public:
   /**
    * Use this only when dataType() is QString
    */
-  virtual void replaceTexts(int first, const QStringList& new_values) { Q_UNUSED(first) Q_UNUSED(new_values) };
+  virtual void replaceTextsStringList(int first, const QStringList& new_values) { Q_UNUSED(first) Q_UNUSED(new_values) };
   //! Return the date part of row 'row'
   /**
    * Use this only when dataType() is QDateTime
@@ -274,7 +274,7 @@ public:
   /**
    * Use this only when dataType() is double
    */
-  virtual void replaceValues(int first, const QVector<qreal>& new_values) { Q_UNUSED(first) Q_UNUSED(new_values) };
+  virtual void replaceValuesQVector(int first, const QVector<qreal>& new_values) { Q_UNUSED(first) Q_UNUSED(new_values) };
   //@}
 
 signals: 

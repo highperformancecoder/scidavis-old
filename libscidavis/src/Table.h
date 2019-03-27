@@ -148,7 +148,7 @@ public slots:
   double cell(int row, int col);
   void setCell(int row, int col, double val);
 
-  QString text(int row, int col);
+  std::string text(int row, int col);
   void setText(int row,int col,const QString & text);
 
   QStringList columnsList();

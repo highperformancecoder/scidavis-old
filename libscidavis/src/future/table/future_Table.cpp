@@ -379,7 +379,7 @@ void Table::copySelection()
 			{
 				if (d_view->formulaModeActive())
 				{
-					output_str += col_ptr->formula(first_row + r);
+                                  output_str += col_ptr->formula(first_row + r).c_str();
 				}
 				else if (col_ptr->dataType() == SciDAVis::TypeDouble)
 				{
@@ -509,7 +509,7 @@ void Table::pasteIntoSelection()
 					if (cols_texts.at(c).size() != cols_texts.at(c).filter(floatorintrx).size())
 						col_ptr->setColumnMode(SciDAVis::Text);
 				}
-				col_ptr->asStringColumn()->replaceTexts(first_row, cols_texts.at(c).mid(0,rows));
+				col_ptr->asStringColumn()->replaceTextsStringList(first_row, cols_texts.at(c).mid(0,rows));
 			}
 		}
 
@@ -600,7 +600,7 @@ void Table::fillSelectedCellsWithRowNumbers()
 							results[row-first] = row+1;
 						else
 							results[row-first] = col_ptr->valueAt(row);
-					col_ptr->replaceValues(first, results);
+					col_ptr->replaceValuesQVector(first, results);
 					break;
 				}
 			case SciDAVis::Text:
@@ -610,8 +610,8 @@ void Table::fillSelectedCellsWithRowNumbers()
 						if (d_view->isCellSelected(row, col))
 							results << QString::number(row+1);
 						else
-							results << col_ptr->textAt(row);
-					col_ptr->replaceTexts(first, results);
+                                                  results << col_ptr->textAt(row).c_str();
+					col_ptr->replaceTextsStringList(first, results);
 					break;
 				}
 			default:
@@ -644,7 +644,7 @@ void Table::fillSelectedCellsWithRandomNumbers()
 							results[row-first] = double(qrand())/double(RAND_MAX);
 						else
 							results[row-first] = col_ptr->valueAt(row);
-					col_ptr->replaceValues(first, results);
+					col_ptr->replaceValuesQVector(first, results);
 					break;
 				}
 			case SciDAVis::Text:
@@ -654,8 +654,8 @@ void Table::fillSelectedCellsWithRandomNumbers()
 						if (d_view->isCellSelected(row, col))
 							results << QString::number(double(qrand())/double(RAND_MAX));
 						else
-							results << col_ptr->textAt(row);
-					col_ptr->replaceTexts(first, results);
+                                                  results << col_ptr->textAt(row).c_str();
+					col_ptr->replaceTextsStringList(first, results);
 					break;
 				}
 			case SciDAVis::DateTime:
@@ -825,7 +825,7 @@ void Table::normalizeColumns(QList< Column* > cols)
 			if (max != 0.0) // avoid division by zero
 				for (int row=0; row<col->rowCount(); row++)
 					results[row] = col->valueAt(row) / max;
-			col->replaceValues(0, results);
+			col->replaceValuesQVector(0, results);
 		}
 	}
 	endMacro();
@@ -863,7 +863,7 @@ void Table::normalizeSelection()
 						results[row] = col_ptr->valueAt(row) / max;
 					else
 						results[row] = col_ptr->valueAt(row);
-				col_ptr->replaceValues(0, results);
+				col_ptr->replaceValuesQVector(0, results);
 			}
 		}
 	}
@@ -956,7 +956,7 @@ void Table::clearSelectedCells()
 					QStringList empties;
 					for (int j=0; j<i.size(); j++)
 						empties << QString();
-					col_ptr->asStringColumn()->replaceTexts(i.start(), empties);
+					col_ptr->asStringColumn()->replaceTextsStringList(i.start(), empties);
 				}
 	}
 	endMacro();
@@ -1636,7 +1636,7 @@ bool Table::export_to_TeX( QString fileName, TeXTableSettings& tex_settings )
       {
          str_row.clear(); 
          foreach( Column* col, columns_list ) 
-           str_row << col->asStringColumn()->textAt( row_index );
+           str_row << col->asStringColumn()->textAt( row_index ).c_str();
          out << str_row.join(" & ") << " \\\\ \\hline \n "; 
      }
 
@@ -1836,7 +1836,7 @@ void Table::copy(Table * other)
 			new_col->setMasked(iv);
 		QList< Interval<int> > formulas = src_col->formulaIntervals();
 		foreach(Interval<int> iv, formulas)
-			new_col->setFormula(iv, src_col->formula(iv.start()));
+                  new_col->setFormula(iv, src_col->formula(iv.start()).c_str());
 		columns.append(new_col);
 	}
 	appendColumns(columns);
@@ -1988,7 +1988,7 @@ void Table::sortColumns(Column *leading, QList<Column*> cols, bool ascending)
 				QList< QPair<QString, int> > map;
 
 				for(int j=0; j<rows; j++)
-					map.append(QPair<QString, int>(col->textAt(j), j));
+                                  map.append(QPair<QString, int>(col->textAt(j).c_str(), j));
 	
 				if(ascending)
 					qStableSort(map.begin(), map.end(), CompareFunctions::QStringLess);
@@ -2077,7 +2077,7 @@ void Table::sortColumns(Column *leading, QList<Column*> cols, bool ascending)
 			int rows = leading->rowCount();
 
 			for(int i=0; i<rows; i++)
-				map.append(QPair<QString, int>(leading->textAt(i), i));
+                          map.append(QPair<QString, int>(leading->textAt(i).c_str(), i));
 
 			if(ascending)
 				qStableSort(map.begin(), map.end(), CompareFunctions::QStringLess);
@@ -2156,7 +2156,7 @@ QString Table::text(int row, int col)
 
 	AbstractSimpleFilter * out_fltr = col_ptr->outputFilter();
 	out_fltr->input(0, col_ptr);
-	return out_fltr->output(0)->textAt(row);
+	return out_fltr->output(0)->textAt(row).c_str();
 }
 
 void Table::selectAll()

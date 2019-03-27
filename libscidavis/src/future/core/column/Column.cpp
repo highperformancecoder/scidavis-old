@@ -199,10 +199,20 @@ void Column::setTextAt(int row, const QString& new_value)
   exec(new ColumnSetTextCmd(d_column_private, row, new_value));
 }
 
-void Column::replaceTexts(int first, const QStringList& new_values)
+void Column::replaceTextsStringList(int first, const QStringList& new_values)
 {
   if (!new_values.isEmpty())
     exec(new ColumnReplaceTextsCmd(d_column_private, first, new_values));
+}
+
+void Column::replaceTexts(int first, const pyobject& newValues)
+{
+#ifdef SCRIPTING_PYTHON
+  QStringList x;
+  for (int i=0; i<len(newValues); ++i)
+    x << boost::python::extract<const char*>(newValues[i])();
+  replaceTextsStringList(first,x);
+#endif
 }
 
 void Column::setDateAt(int row, const QDate& new_value)
@@ -231,15 +241,25 @@ void Column::setValueAt(int row, double new_value)
   exec(new ColumnSetValueCmd(d_column_private, row, new_value));
 }
 
-void Column::replaceValues(int first, const QVector<qreal>& new_values)
+void Column::replaceValuesQVector(int first, const QVector<qreal>& new_values)
 {
   if (!new_values.isEmpty())
     exec(new ColumnReplaceValuesCmd(d_column_private, first, new_values));
 }
 
-QString Column::textAt(int row) const
+void Column::replaceValues(int first, const pyobject& newValues)
 {
-  return d_column_private->textAt(row);
+#ifdef SCRIPTING_PYTHON
+  QVector<qreal> x;
+  for (int i=0; i<len(newValues); ++i)
+    x.append(boost::python::extract<double>(newValues[i]));
+  replaceValuesQVector(first,x);
+#endif
+}
+
+std::string Column::textAt(int row) const
+{
+  return d_column_private->textAt(row).toStdString();
 }
 
 QDate Column::dateAt(int row) const
@@ -304,7 +324,7 @@ void Column::save(QXmlStreamWriter * writer) const
       writer->writeStartElement("formula");
       writer->writeAttribute("start_row", QString::number(interval.start()));
       writer->writeAttribute("end_row", QString::number(interval.end()));
-      writer->writeCharacters(formula(interval.start()));
+      writer->writeCharacters(formula(interval.start()).c_str());
       writer->writeEndElement();
     }
   int i;
@@ -328,7 +348,7 @@ void Column::save(QXmlStreamWriter * writer) const
           writer->writeAttribute("type", SciDAVis::enumValueToString(dataType(), "ColumnDataType"));
           writer->writeAttribute("index", QString::number(i));
           writer->writeAttribute("invalid", isInvalid(i) ? "yes" : "no");
-          writer->writeCharacters(textAt(i));
+          writer->writeCharacters(textAt(i).c_str());
           writer->writeEndElement();
         }
       break;
@@ -625,9 +645,9 @@ QList< Interval<int> > Column::maskedIntervals() const
   return d_column_private->maskedIntervals(); 
 }
 
-QString Column::formula(int row) const 
+std::string Column::formula(int row) const 
 { 
-  return d_column_private->formula(row); 
+  return d_column_private->formula(row).toStdString(); 
 }
 
 QList< Interval<int> > Column::formulaIntervals() const 
@@ -641,10 +661,10 @@ void Column::notifyDisplayChange()
   emit aspectDescriptionChanged(this); // the icon for the type changed
 }
 
-QString ColumnStringIO::textAt(int row) const
+std::string ColumnStringIO::textAt(int row) const
 {
   if (d_setting)
-    return d_to_set;
+    return d_to_set.toStdString();
   else
     return d_owner->d_column_private->outputFilter()->output(0)->textAt(row);
 }
@@ -674,7 +694,8 @@ bool ColumnStringIO::copyAbstract(const AbstractColumn& source, int source_start
   return true;
 }
 
-void ColumnStringIO::replaceTexts(int start_row, const QStringList &texts) {
+void ColumnStringIO::replaceTextsStringList(int start_row, const QStringList &texts) {
   Column tmp("tmp", texts);
   copyAbstract(tmp, 0, start_row, texts.size());
 }
+

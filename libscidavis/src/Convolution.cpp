@@ -78,7 +78,7 @@ void Convolution::setDataFromTable(Table *t, const QString& signalColName, const
 	int rows = d_table->numRows();
 	for (int i=0; i<rows; i++)
 	{
-          if (!d_table->column(response_col).textAt(i).isEmpty())
+          if (!d_table->column(response_col).textAt(i).empty())
 			d_n_response++;
 	}
 	if (d_n_response >= rows/2)

@@ -103,17 +103,17 @@ using boost::python::import;
 
 namespace classdesc_access
 {
-//  template <>
-//  struct access_python<QString>
-//  {
-//    template <class C> 
-//    void type(classdesc::python_t& targ, const classdesc::string&)
-//    {
-//      auto& c=targ.getClass<C>();
-//      if (!c.completed)
-//        c.def("__str__",&QString::toStdString);
-//    }
-//  };
+  template <>
+  struct access_python<QString>
+  {
+    template <class C> 
+    void type(classdesc::python_t& targ, const classdesc::string&)
+    {
+      auto& c=targ.getClass<C>();
+      if (!c.completed)
+        c.def("__str__",&QString::toStdString);
+    }
+  };
 
   template <class T>
   struct access_python<QList<T>>:

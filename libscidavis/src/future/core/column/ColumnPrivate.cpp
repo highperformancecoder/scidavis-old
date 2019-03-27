@@ -490,7 +490,7 @@ bool Column::Private::copy(const AbstractColumn * other)
 		case SciDAVis::TypeQString:
 			{
 				for(int i=0; i<num_rows; i++)
-					static_cast< QStringList* >(d_data)->replace(i, other->textAt(i));
+                                  static_cast< QStringList* >(d_data)->replace(i, other->textAt(i).c_str());
 				break;
 			}
 		case SciDAVis::TypeQDateTime:
@@ -531,7 +531,7 @@ bool Column::Private::copy(const AbstractColumn * source, int source_start, int 
 			}
 		case SciDAVis::TypeQString:
 				for(int i=0; i<num_rows; i++)
-					static_cast< QStringList* >(d_data)->replace(dest_start+i, source->textAt(source_start + i));
+                                  static_cast< QStringList* >(d_data)->replace(dest_start+i, source->textAt(source_start + i).c_str());
 				break;
 		case SciDAVis::TypeQDateTime:
 				for(int i=0; i<num_rows; i++)

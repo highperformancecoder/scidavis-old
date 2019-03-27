@@ -109,11 +109,11 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 		case Qt::DisplayRole:
 			{
 				if(d_formula_mode)
-					return QVariant(col_ptr->formula(row));
+                                  return QVariant(col_ptr->formula(row).c_str());
 				if(col_ptr->isInvalid(row))
 					return QVariant(tr("-","string for invalid rows"));
 				
-				return QVariant(col_ptr->asStringColumn()->textAt(row) + postfix);
+				return QVariant(col_ptr->asStringColumn()->textAt(row).c_str() + postfix);
 			}
 		case Qt::ForegroundRole:
 			{
@@ -125,7 +125,7 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 		case MaskingRole:
 			return QVariant(col_ptr->isMasked(row));
 		case FormulaRole:
-			return QVariant(col_ptr->formula(row));
+                  return QVariant(col_ptr->formula(row).c_str());
 		case Qt::DecorationRole:
 			if(d_formula_mode)
 				return QIcon(QPixmap(":/equals.png"));

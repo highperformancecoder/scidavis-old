@@ -2823,7 +2823,7 @@ Matrix* ApplicationWindow::convertTableToMatrix()
 	for (int i = 0; i<rows; i++)
 	{
 		for (int j = 0; j<cols; j++)
-                  w->setText(i, j, m->column(j).asStringColumn()->textAt(i));
+                  w->setText(i, j, m->column(j).asStringColumn()->textAt(i).c_str());
 	}
 
 	QString caption = generateUniqueName(m->name().c_str());

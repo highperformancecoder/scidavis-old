@@ -172,7 +172,7 @@ class AbstractSimpleFilter : public AbstractFilter
 		 */
 		virtual QString textAt(int row) const
 		{
-			return d_inputs.value(0) ? d_inputs.at(0)->textAt(row) : QString();
+                  return d_inputs.value(0) ? d_inputs.at(0)->textAt(row).c_str() : QString();
 		}
 		//! Return the date part of row 'row'
 		/**
@@ -294,7 +294,7 @@ public:
   bool isMasked(Interval<int> i) const override { return d_owner->isMasked(i); }
   QList< Interval<int> > maskedIntervals() const override { return d_owner->maskedIntervals(); }
   void clearMasks() override { d_owner->clearMasks(); }
-  QString textAt(int row) const override { return d_owner->textAt(row); }
+  std::string textAt(int row) const override { return d_owner->textAt(row).toStdString(); }
   QDate dateAt(int row) const override { return d_owner->dateAt(row); }
   QTime timeAt(int row) const override { return d_owner->timeAt(row); }
   QDateTime dateTimeAt(int row) const override { return d_owner->dateTimeAt(row); }

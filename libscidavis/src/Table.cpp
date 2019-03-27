@@ -306,7 +306,7 @@ void Table::print(const QString& fileName)
 		for(int j=0;j<cols;j++)
 		{
 			int w = columnWidth (j);
-			cell_text = column(j).textAt(i)+"\t";
+			cell_text = (column(j).textAt(i)+"\t").c_str();
 			tr = p.boundingRect(tr,Qt::AlignCenter,cell_text);
 			br.setTopLeft(QPoint(right,height));
 			br.setWidth(w);
@@ -452,7 +452,7 @@ bool Table::recalculate(int col, bool only_selected_rows)
       }
       foreach(Interval<int> interval, formula_intervals)
 	{
-          QString formula = col_ptr.formula(interval.start());
+          QString formula = col_ptr.formula(interval.start()).c_str();
           if (formula.isEmpty())
             continue;
 
@@ -487,7 +487,7 @@ bool Table::recalculate(int col, bool only_selected_rows)
                 else
                   results[i-start_row] = NAN;
               }
-              col_ptr.replaceValues(start_row, results);
+              col_ptr.replaceValuesQVector(start_row, results);
               break;
             }
           default:
@@ -508,7 +508,7 @@ bool Table::recalculate(int col, bool only_selected_rows)
                 else 
                   results << QString();
               }
-              col_ptr.asStringColumn()->replaceTexts(start_row, results);
+              col_ptr.asStringColumn()->replaceTextsStringList(start_row, results);
               break;
             }
           }
@@ -528,10 +528,10 @@ QString Table::saveCommands()
 // TODO: obsolete, remove for 0.3.0, only needed for template saving
 	QString s="<com>\n";
 	for (int col=0; col<numCols(); col++)
-		if (!column(col).formula(0).isEmpty())
+		if (!column(col).formula(0).empty())
 		{
 			s += "<col nr=\""+QString::number(col)+"\">\n";
-			s += column(col).formula(0);
+			s += column(col).formula(0).c_str();
 			s += "\n</col>\n";
 		}
 	s += "</com>\n";
@@ -923,7 +923,7 @@ double Table::cell(int row, int col)
       Column& colPtr = column(col);
       if (!colPtr.isInvalid(row)) {
         if (colPtr.columnMode() == SciDAVis::Text) {
-          QString yval = colPtr.textAt(row);
+          QString yval = colPtr.textAt(row).c_str();
           bool valid_data = true;
           double dbval = QLocale().toDouble(yval, &valid_data);
           if (!valid_data)
@@ -944,7 +944,7 @@ void Table::setCell(int row, int col, double val)
   column(col).setValueAt(row, val);
 }
 
-QString Table::text(int row, int col)
+std::string Table::text(int row, int col)
   try
     {
       row--; col--;
@@ -1143,7 +1143,7 @@ bool Table::exportASCII(const QString& fname, const QString& separator,
         first = false;
       else
         out << separator;
-      out << col->asStringColumn()->textAt(i);
+      out << col->asStringColumn()->textAt(i).c_str();
     }
     out << "\n";
   }
@@ -1470,7 +1470,7 @@ void Table::handleAspectDescriptionChange(const AbstractAspect *aspect)
           QList< Interval<int> > formula_intervals = column(i).formulaIntervals();
           foreach(Interval<int> interval, formula_intervals)
             {
-              QString formula = column(i).formula(interval.start());
+              QString formula = column(i).formula(interval.start()).c_str();
               if (formula.contains("\"" + old_name + "\""))
                 {
                   formula.replace("\"" + old_name + "\"", "\"" + new_name + "\"");

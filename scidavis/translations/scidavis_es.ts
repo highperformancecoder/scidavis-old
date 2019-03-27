@@ -6592,63 +6592,63 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
 <context>
     <name>Column</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="377"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="397"/>
         <source>column type missing</source>
         <translation type="unfinished">tipo de columna perdida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="383"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="403"/>
         <source>column type invalid</source>
         <translation type="unfinished">tipo de columna perdida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="390"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="410"/>
         <source>column mode missing</source>
         <translation type="unfinished">modo de columna perdida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="396"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="416"/>
         <source>column mode invalid</source>
         <translation type="unfinished">modo de columna invalida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="402"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="422"/>
         <source>column type or mode invalid</source>
         <translation type="unfinished">tipo ó modo de columna invalida</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="412"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="432"/>
         <source>column plot designation invalid</source>
         <translation type="unfinished">designación del diagrama de la columna invalido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="448"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="468"/>
         <source>unknown element &apos;%1&apos;</source>
         <translation type="unfinished">elemento &apos;%1&apos; desconocido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="457"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="477"/>
         <source>no column element found</source>
         <translation type="unfinished">Ningún elemento de columna hallado</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="492"/>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="511"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="512"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="531"/>
         <source>invalid or missing start or end row</source>
         <translation type="unfinished">comienzo o final de fila invalido ó perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="532"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="552"/>
         <source>invalid or missing row type</source>
         <translation type="unfinished">tipo de fila invalido ó perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="540"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="560"/>
         <source>invalid or missing row index</source>
         <translation type="unfinished">índice de fila invalido ó perdido</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="552"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="572"/>
         <source>invalid row value</source>
         <translation type="unfinished">valor de fila invalido</translation>
     </message>
@@ -6656,7 +6656,7 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="343"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="353"/>
         <source>as string</source>
         <translation type="unfinished">como string</translation>
     </message>

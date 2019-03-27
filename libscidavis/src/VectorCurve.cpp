@@ -334,10 +334,10 @@ bool VectorCurve::loadData()
   QVector<double> X(rows), Y(rows), X2(rows), Y2(rows);
   int size = 0;
   for (int i = d_start_row; i <= d_end_row; i++){
-    QString xval = d_table->column(xcol).textAt(i);
-    QString yval = d_table->column(ycol).textAt(i);
-    QString xend = d_table->column(endXCol).textAt(i);
-    QString yend = d_table->column(endYCol).textAt(i);
+    QString xval = d_table->column(xcol).textAt(i).c_str();
+    QString yval = d_table->column(ycol).textAt(i).c_str();
+    QString xend = d_table->column(endXCol).textAt(i).c_str();
+    QString yend = d_table->column(endYCol).textAt(i).c_str();
     if (!xval.isEmpty() && !yval.isEmpty() && !xend.isEmpty() && !yend.isEmpty()){
       bool valid_data = true;
       X[size] = QLocale().toDouble(xval, &valid_data);

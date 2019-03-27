@@ -48,16 +48,16 @@ class String2DoubleFilter : public AbstractSimpleFilter
 		virtual double valueAt(int row) const {
 			if (!d_inputs.value(0)) return 0;
 			if (d_use_default_locale) // we need a new QLocale instance here in case the default changed since the last call
-				return QLocale().toDouble(d_inputs.value(0)->textAt(row));
-			return d_numeric_locale.toDouble(d_inputs.value(0)->textAt(row));
+                          return QLocale().toDouble(d_inputs.value(0)->textAt(row).c_str());
+			return d_numeric_locale.toDouble(d_inputs.value(0)->textAt(row).c_str());
 		}
 		virtual bool isInvalid(int row) const { 
 			if (!d_inputs.value(0)) return false;
 			bool ok;
 			if (d_use_default_locale)
-				QLocale().toDouble(d_inputs.value(0)->textAt(row), &ok);
+                          QLocale().toDouble(d_inputs.value(0)->textAt(row).c_str(), &ok);
 			else
-				d_numeric_locale.toDouble(d_inputs.value(0)->textAt(row), &ok);
+                          d_numeric_locale.toDouble(d_inputs.value(0)->textAt(row).c_str(), &ok);
 			return !ok;
 		}
 		virtual bool isInvalid(Interval<int> i) const {
@@ -67,7 +67,7 @@ class String2DoubleFilter : public AbstractSimpleFilter
 				locale = d_numeric_locale;
 			for (int row = i.start(); row <= i.end(); row++) {
 				bool ok;
-				locale.toDouble(d_inputs.value(0)->textAt(row), &ok);
+				locale.toDouble(d_inputs.value(0)->textAt(row).c_str(), &ok);
 				if (ok)
 					return false;
 			}

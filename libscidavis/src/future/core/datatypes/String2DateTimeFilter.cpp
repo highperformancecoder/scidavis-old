@@ -63,7 +63,7 @@ const char * String2DateTimeFilter::time_formats[] = {
 QDateTime String2DateTimeFilter::dateTimeAt(int row) const
 {
 	if (!d_inputs.value(0)) return QDateTime();
-	QString input_value = d_inputs.value(0)->textAt(row);
+	QString input_value = d_inputs.value(0)->textAt(row).c_str();
 	if (input_value.isEmpty()) return QDateTime();
 
 	// first try the selected format string d_format
