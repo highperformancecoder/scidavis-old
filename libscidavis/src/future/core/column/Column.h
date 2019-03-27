@@ -113,7 +113,7 @@ public:
   //! Return the data type of the column
   SciDAVis::ColumnDataType dataType() const override;
   //! Return whether the object is read-only
-  bool isReadOnly() const override { return false; };
+  bool isReadOnly() const { return false; };
   //! Return the column mode
   /**
    * This function is most used by tables but can also be used
@@ -121,7 +121,7 @@ public:
    * the values in the column additional to the data type.
    */ 
   SciDAVis::ColumnMode columnMode() const override;
-  void setColumnMode(SciDAVis::ColumnMode mode) override 
+  void setColumnMode(SciDAVis::ColumnMode mode) /*override */
   {setColumnModeFilter(mode,nullptr);}
     
   //! Set the column mode
@@ -138,7 +138,7 @@ public:
    * Use a filter to convert a column to another type.
    */
   bool copy(const Column& other) {return copyAbstract(other);}
-  bool copyAbstract(const AbstractColumn& other) override;
+  bool copyAbstract(const AbstractColumn& other);
   //! Copies a part of another column of the same type
   /**
    * This function will return false if the data type
@@ -151,7 +151,7 @@ public:
    */ 
   bool copy(const Column& source, int source_start, int dest_start, int num_rows)
   {return copyAbstract(source,source_start,dest_start,num_rows);}
-  bool copyAbstract(const AbstractColumn& source, int source_start, int dest_start, int num_rows) override;
+  bool copyAbstract(const AbstractColumn& source, int source_start, int dest_start, int num_rows);
   //! Return the data vector size
   /**
    * This returns the number of rows that actually contain data. 
@@ -160,17 +160,17 @@ public:
    */
   int rowCount() const override;
   //! Insert some empty (or initialized with zero) rows
-  void insertRows(int before, int count) override;
+  void insertRows(int before, int count);
   //! Remove 'count' rows starting from row 'first'
-  void removeRows(int first, int count) override;
+  void removeRows(int first, int count);
   //! Return the column plot designation
   SciDAVis::PlotDesignation plotDesignation() const override;
   //! Set the column plot designation
   void setPlotDesignation(SciDAVis::PlotDesignation pd);
   //! Clear the whole column
-  void clear() override;
+  void clear();
   //! This must be called before the column is replaced by another
-  void notifyReplacement(const AbstractColumn* replacement) override;
+  void notifyReplacement(const AbstractColumn* replacement);
   //! Return the output filter (for data type -> string  conversion)
   /**
    * This method is mainly used to get a filter that can convert
@@ -195,9 +195,9 @@ public:
   //! Return all intervals of masked rows
   QList< Interval<int> > maskedIntervals() const override;
   //! Clear all validity information
-  void clearValidity() override;
+  void clearValidity();
   //! Clear all masking information
-  void clearMasks() override;
+  void clearMasks();
   //! Set an interval invalid or valid
   /**
    * \param i the interval
@@ -219,7 +219,7 @@ public:
   //! \name Formula related functions
   //@{
   //! Return the formula associated with row 'row' 	 
-  std::string formula(int row) const override;
+  std::string formula(int row) const;
   //! Return the intervals that have associated formulas
   /**
    * This can be used to make a list of formulas with their intervals.
@@ -257,7 +257,7 @@ public:
   /**
    * Use this only when dataType() is QString
    */
-  void replaceTextsStringList(int first, const QStringList& new_values) override;
+  void replaceTextsStringList(int first, const QStringList& new_values);
   void replaceTexts(int first, const pyobject& new_values);
   //! Return the date part of row 'row'
   /**
@@ -293,7 +293,7 @@ public:
   /**
    * Use this only when dataType() is QDateTime
    */
-  void replaceDateTimes(int first, const QList<QDateTime>& new_values) override;
+  void replaceDateTimes(int first, const QList<QDateTime>& new_values);
   //! Return the double value in row 'row'
   double valueAt(int row) const override;
   //! Set the content of row 'row'
@@ -305,7 +305,7 @@ public:
   /**
    * Use this only when dataType() is double
    */
-  void replaceValuesQVector(int first, const QVector<qreal>& new_values) override;
+  void replaceValuesQVector(int first, const QVector<qreal>& new_values);
   //@}
   // Python API
   void replaceValues(int first, const pyobject&);
@@ -356,16 +356,16 @@ public:
   SciDAVis::PlotDesignation plotDesignation() const override { return d_owner->plotDesignation(); }
   int rowCount() const override { return d_owner->rowCount(); }
   std::string textAt(int row) const override;
-  void setTextAt(int row, const QString &value) override;
+  void setTextAt(int row, const QString &value);
   bool isInvalid(int row) const override {
     if (d_setting)
       return false;
     else
       return d_owner->isInvalid(row);
   }
-  bool copyAbstract(const AbstractColumn& other) override;
-  bool copyAbstract(const AbstractColumn& source, int source_start, int dest_start, int num_rows) override;
-  void replaceTextsStringList(int start_row, const QStringList &texts) override;
+  bool copyAbstract(const AbstractColumn& other);
+  bool copyAbstract(const AbstractColumn& source, int source_start, int dest_start, int num_rows);
+  void replaceTextsStringList(int start_row, const QStringList &texts);
 
 private:
   Column * d_owner;

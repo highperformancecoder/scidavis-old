@@ -90,65 +90,18 @@ public:
 
   //! Return the data type of the column
   virtual SciDAVis::ColumnDataType dataType() const = 0;
-  //! Return whether the object is read-only
-  virtual bool isReadOnly() const { return true; };
-  //! Return the column mode
   /*
    * This function is most used by tables but can also be used
    * by plots. The column mode specifies how to interpret 
    * the values in the column additional to the data type.
    */ 
   virtual SciDAVis::ColumnMode columnMode() const = 0;
-  //! Set the column mode
-  /**
-   * This sets the column mode and, if
-   * necessary, converts it to another datatype.
-   */
-  virtual void setColumnMode(SciDAVis::ColumnMode mode) { Q_UNUSED(mode) };
-  //! Copy another column of the same type
-  /**
-   * This function will return false if the data type
-   * of 'other' is not the same as the type of 'this'.
-   * The validity information for the rows is also copied.
-   * Use a filter to convert a column to another type.
-   */
-  virtual bool copyAbstract(const AbstractColumn& other) { Q_UNUSED(other) return false; };
-  //! Copies part of another column of the same type
-  /**
-   * This function will return false if the data type
-   * of 'other' is not the same as the type of 'this'.
-   * The validity information for the rows is also copied.
-   * \param other pointer to the column to copy
-   * \param src_start first row to copy in the column to copy
-   * \param dest_start first row to copy in
-   * \param num_rows the number of rows to copy
-   */ 
-  virtual bool copyAbstract(const AbstractColumn& source, int source_start, int dest_start, int num_rows) 
-  {
-    Q_UNUSED(source)
-      Q_UNUSED(source_start)
-      Q_UNUSED(dest_start)
-      Q_UNUSED(num_rows)
-      return false; 
-  };
-
   //! Return the data vector size
   virtual int rowCount() const = 0;
-  //! Insert some empty (or initialized with zero) rows
-  virtual void insertRows(int before, int count) { Q_UNUSED(before) Q_UNUSED(count) };
-  //! Remove 'count' rows starting from row 'first'
-  virtual void removeRows(int first, int count) { Q_UNUSED(first) Q_UNUSED(count) };
   //! Return the column plot designation
   virtual SciDAVis::PlotDesignation plotDesignation() const = 0;
-  //! Set the column plot designation
-  //virtual void setPlotDesignation(SciDAVis::PlotDesignation pd) { Q_UNUSED(pd) };
-  //! Clear the whole column
-  virtual void clear() {};
-  //! This must be called before the column is replaced by another
-  virtual void notifyReplacement(const AbstractColumn *replacement) { aboutToBeReplaced(this, replacement); }
-
   //! \name IntervalAttribute related functions
-  //@{
+  /// @{
   //! Return whether a certain row contains an invalid value 	 
   virtual bool isInvalid(int row) const { return !Interval<int>(0, rowCount()-1).contains(row); } 	 
   //! Return whether a certain interval of rows contains only invalid values 	 
@@ -161,121 +114,27 @@ public:
   virtual bool isMasked(Interval<int> i) const { Q_UNUSED(i); return false; }
   //! Return all intervals of masked rows
   virtual QList< Interval<int> > maskedIntervals() const { return QList< Interval<int> >(); } 	 
-  //! Clear all validity information
-  virtual void clearValidity() {};
-  //! Clear all masking information
-  virtual void clearMasks() {};
-  //! Set an interval invalid or valid
-  /**
-   * \param i the interval
-   * \param invalid true: set invalid, false: set valid
-   */ 
-  //virtual void setInvalid(Interval<int> i, bool invalid = true) { Q_UNUSED(i) Q_UNUSED(invalid) };
-  //! Overloaded function for convenience
-  //virtual void setInvalid(int row, bool invalid = true) { Q_UNUSED(row) Q_UNUSED(invalid) };
-  //! Set an interval masked
-  /**
-   * \param i the interval
-   * \param mask true: mask, false: unmask
-   */ 
-  //virtual void setMasked(Interval<int> i, bool mask = true) { Q_UNUSED(i) Q_UNUSED(mask) };
-  //! Overloaded function for convenience
-  //virtual void setMasked(int row, bool mask = true) { Q_UNUSED(row) Q_UNUSED(mask) };
-  //@}
-
-  //! \name Formula related functions
-  //@{
-  //! Return the formula associated with row 'row' 	 
-  virtual std::string formula(int row) const { Q_UNUSED(row); return ""; }
-  //! Return the intervals that have associated formulas
-  /**
-   * This can be used to make a list of formulas with their intervals.
-   * Here is some example code:
-   *
-   * \code
-   * QStringList list;
-   * QList< Interval<int> > intervals = my_column.formulaIntervals();
-   * foreach(Interval<int> interval, intervals)
-   * 	list << QString(interval.toString() + ": " + my_column.formula(interval.start()));
-   * \endcode
-   */
-  virtual QList< Interval<int> > formulaIntervals() const { return QList< Interval<int> >(); }
-  //! Set a formula string for an interval of rows
-  //virtual void setFormula(Interval<int> i, QString formula) { Q_UNUSED(i) Q_UNUSED(formula) };
-  //! Overloaded function for convenience
-  //virtual void setFormula(int row, QString formula) { Q_UNUSED(row) Q_UNUSED(formula) };
-  //! Clear all formulas
-  virtual void clearFormulas() {};
-  //@}
-		
-  //! \name type specific functions
-  //@{
-  //! Return the content of row 'row'.
+  /// @}
   /**
    * Use this only when dataType() is QString
    */
   virtual std::string textAt(int row) const { Q_UNUSED(row); return ""; }
-  //! Set the content of row 'row'
-  /**
-   * Use this only when dataType() is QString
-   */
-  virtual void setTextAt(int row, const QString& new_value) { Q_UNUSED(row) Q_UNUSED(new_value) };
-  //! Replace a range of values 
-  /**
-   * Use this only when dataType() is QString
-   */
-  virtual void replaceTextsStringList(int first, const QStringList& new_values) { Q_UNUSED(first) Q_UNUSED(new_values) };
-  //! Return the date part of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   virtual QDate dateAt(int row) const { Q_UNUSED(row); return QDate(); };
-  //! Set the content of row 'row'
-  /**
-   * Use this only when dataType() is QDateTime
-   */
-  //virtual void setDateAt(int row, const QDate& new_value) { Q_UNUSED(row) Q_UNUSED(new_value) };
-  //! Return the time part of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   virtual QTime timeAt(int row) const { Q_UNUSED(row); return QTime(); };
-  //! Set the content of row 'row'
-  /**
-   * Use this only when dataType() is QDateTime
-   */
-  //virtual void setTimeAt(int row, const QTime& new_value) { Q_UNUSED(row) Q_UNUSED(new_value) };
-  //! Return the QDateTime in row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   virtual QDateTime dateTimeAt(int row) const { Q_UNUSED(row); return QDateTime(); };
-  //! Set the content of row 'row'
-  /**
-   * Use this only when dataType() is QDateTime
-   */
-  //virtual void setDateTimeAt(int row, const QDateTime& new_value) { Q_UNUSED(row) Q_UNUSED(new_value) };
-  //! Replace a range of values 
-  /**
-   * Use this only when dataType() is QDateTime
-   */
-  virtual void replaceDateTimes(int first, const QList<QDateTime>& new_values) { Q_UNUSED(first) Q_UNUSED(new_values) };
-  //! Return the double value in row 'row'
   /**
    * Use this only when dataType() is double
    */
   virtual double valueAt(int row) const { Q_UNUSED(row); return 0; };
-  //! Set the content of row 'row'
-  /**
-   * Use this only when dataType() is double
-   */
-  //virtual void setValueAt(int row, double new_value) { Q_UNUSED(row) Q_UNUSED(new_value) };
-  //! Replace a range of values 
-  /**
-   * Use this only when dataType() is double
-   */
-  virtual void replaceValuesQVector(int first, const QVector<qreal>& new_values) { Q_UNUSED(first) Q_UNUSED(new_values) };
-  //@}
 
 signals: 
   //! Column plot designation will be changed

@@ -293,7 +293,7 @@ public:
   bool isMasked(int row) const override { return d_owner->isMasked(row); }
   bool isMasked(Interval<int> i) const override { return d_owner->isMasked(i); }
   QList< Interval<int> > maskedIntervals() const override { return d_owner->maskedIntervals(); }
-  void clearMasks() override { d_owner->clearMasks(); }
+  void clearMasks() { d_owner->clearMasks(); }
   std::string textAt(int row) const override { return d_owner->textAt(row).toStdString(); }
   QDate dateAt(int row) const override { return d_owner->dateAt(row); }
   QTime timeAt(int row) const override { return d_owner->timeAt(row); }
