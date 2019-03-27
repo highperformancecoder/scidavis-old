@@ -121,8 +121,7 @@ assert colNames == ["1", "col2", "3", "2", "4", "5"]
 # check that you get same column either by name or by index
 c4 = t.column("2")
 c4b = t.column(3) # index is base 0
-print(c4b.name(),c4.name())
-assert c4 is c4b
+assert c4.name()==c4b.name()
 
 # set column 4 as X (X2).
 c4.setPlotDesignation("X")
