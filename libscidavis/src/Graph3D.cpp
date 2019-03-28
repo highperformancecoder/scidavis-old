@@ -1600,28 +1600,28 @@ void Graph3D::setColors(const QColor& meshColor,const QColor& axesColor,const QC
 
 void Graph3D::setColors(const QStringList& colors)
 {
-	meshCol=QColor(colors[1]);
+	meshCol=QColor(COLORVALUE(colors[1]));
 	sp->setMeshColor(Qt2GL(meshCol));
 
-	axesCol=QColor(colors[2]);
+	axesCol=QColor(COLORVALUE(colors[2]));
 	sp->coordinates()->setAxesColor(Qt2GL(axesCol));
 
-	numCol=QColor(colors[3]);
+	numCol=QColor(COLORVALUE(colors[3]));
 	sp->coordinates()->setNumberColor(Qt2GL(numCol));
 
-	labelsCol=QColor(colors[4]);
+	labelsCol=QColor(COLORVALUE(colors[4]));
 	sp->coordinates()->setLabelColor(Qt2GL(labelsCol));
 
-	bgCol=QColor(colors[5]);
+	bgCol=QColor(COLORVALUE(colors[5]));
 	sp->setBackgroundColor(Qt2GL(bgCol));
 
-	gridCol=QColor(colors[6]);
+	gridCol=QColor(COLORVALUE(colors[6]));
 	sp->coordinates()->setGridLinesColor(Qt2GL(gridCol));
 
 	if ((int)colors.count()>7)
 	{
-		QColor min=QColor(colors[7]);
-		QColor max=QColor(colors[8]);
+		QColor min=QColor(COLORVALUE(colors[7]));
+		QColor max=QColor(COLORVALUE(colors[8]));
 		alpha = colors[9].toDouble();
 		if ((int)colors.count() == 11)
             setDataColorMap(colors[10]);
@@ -2649,7 +2649,7 @@ void Graph3D::setTitle(const QStringList& lst)
 	title=lst[1];
 	sp->setTitle(title);
 
-	titleCol=QColor(lst[2]);
+	titleCol=QColor(COLORVALUE(lst[2]));
 	sp->setTitleColor(Qt2GL(titleCol));
 
 	titleFnt=QFont(lst[3],lst[4].toInt(),lst[5].toInt(),lst[6].toInt());
