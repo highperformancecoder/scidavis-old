@@ -62,11 +62,11 @@ typedef struct _traceback {
 #include "Graph.h"
 #include "Graph.cd"
 #include "Graph3D.h"
-#include "Matrix.h"
-#include "Matrix.cd"
 #include "MultiLayer.h"
 #include "MyWidget.h"
 #include "MyWidget.cd"
+#include "Matrix.h"
+#include "Matrix.cd"
 #include "Note.h"
 #include "Note.cd"
 #include "QtEnums.cd"
@@ -92,6 +92,8 @@ typedef struct _traceback {
 #include "AbstractColumn.cd"
 #include "Column.cd"
 #include "globals.cd"
+#include "CurveRangeDialog.h"
+#include "Legend.h"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -167,6 +169,7 @@ namespace classdesc
   DEF_TYPENAME(QPen);
   DEF_TYPENAME(QIcon);
   DEF_TYPENAME(QBrush);
+  DEF_TYPENAME(QPainter);
   DEF_TYPENAME(QVariant);
   DEF_TYPENAME(QwtPlotCurve);
   DEF_TYPENAME(QwtPlotZoomer);
@@ -174,6 +177,7 @@ namespace classdesc
   DEF_TYPENAME(QDate);
   DEF_TYPENAME(QDateTime);
   DEF_TYPENAME(QTime);
+  DEF_TYPENAME(QwtPlotPrintFilter);
 
   template <class T> struct tn<QList<T>>
   {
@@ -349,8 +353,8 @@ BOOST_PYTHON_MODULE(scidavis)
     (const QString&,Table&,const QString&,
      int,int,int,const QColor&,bool,bool,bool)=&Graph::addErrorBars;
   p.getClass<Graph>().
-    overload("addErrorBars",graph_addErrorBars,Graph_addErrorBars()).
-    overload("exportImage",&Graph::exportImage,Graph_exportImage())
+    overload("addErrorBars",graph_addErrorBars,Graph_addErrorBars())
+    //    overload("exportImage",&Graph::exportImage,Graph_exportImage())
     ;
   p.getClass<MultiLayer>().
     overload("exportImage",&MultiLayer::exportImage,Graph_exportImage())
@@ -360,17 +364,17 @@ BOOST_PYTHON_MODULE(scidavis)
     def("__init__",py::make_constructor(newExponentialFit2));
 //  p.getClass<ExponentialFit>().
 //    def(py::init<ApplicationWindow*,Graph*,const QString&>());
-  Column& (Table::*tableColumnInt)(int x) const =&Table::column;
-  Column& (Table::*tableColumnString)(const std::string& x) const=&Table::column;
-  p.getClass<Table>().
-    overload("column",tableColumnInt).
-    overload("column",tableColumnString);
+//  Column& (Table::*tableColumnInt)(int x) const =&Table::column;
+//  Column& (Table::*tableColumnString)(const std::string& x) const=&Table::column;
+//  p.getClass<Table>().
+//    overload("column",tableColumnInt).
+//    overload("column",tableColumnString);
 
-  bool (Column::*copy1)(const Column& other)=&Column::copy;
-  bool (Column::*copy2)(const Column& source, int source_start, int dest_start, int num_rows)=&Column::copy;
-  p.getClass<Column>().
-    overload("copy",copy1).
-    overload("copy",copy2);
+//  bool (Column::*copy1)(const Column& other)=&Column::copy;
+//  bool (Column::*copy2)(const Column& source, int source_start, int dest_start, int num_rows)=&Column::copy;
+//  p.getClass<Column>().
+//    overload("copy",copy1).
+//    overload("copy",copy2);
   
 }
 

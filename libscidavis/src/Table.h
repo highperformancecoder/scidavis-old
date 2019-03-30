@@ -74,7 +74,7 @@ public:
   //! Set the window label
   virtual void setWindowLabel(const QString& s) { if (d_future_table) d_future_table->setComment(s); updateCaption(); }
   //! Set the caption policy
-  void setCaptionPolicy(CaptionPolicy policy) 
+  void setCaptionPolicy(MyWidget::CaptionPolicy policy) 
   {
     if (d_future_table)
       {

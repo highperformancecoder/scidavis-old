@@ -64,7 +64,7 @@ public:
   //! Set the window label
   virtual void setWindowLabel(const QString& s) { d_future_matrix->setComment(s); updateCaption(); }
   //! Set the caption policy
-  void setCaptionPolicy(CaptionPolicy policy) 
+  void setCaptionPolicy(MyWidget::CaptionPolicy policy) 
   { 
     caption_policy = policy; updateCaption(); 
     switch (policy)

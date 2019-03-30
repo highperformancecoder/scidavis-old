@@ -118,27 +118,27 @@ protected:
 //! keeps a static list of available interpreters and instantiates them on demand
 class ScriptingLangManager
 {
-  public:
-    //! Return an instance of the first implementation we can find.
+public:
+  //! Return an instance of the first implementation we can find.
   static ScriptingEnv *newEnv(ApplicationWindow *parent);
-    //! Return an instance of the implementation specified by name, NULL on failure.
+  //! Return an instance of the implementation specified by name, NULL on failure.
   static ScriptingEnv *newEnv(const std::string& name, ApplicationWindow *parent, bool batch=false);
-    //! Return the names of available implementations.
-    static QStringList languages();
-    //! Return the number of available implementations.
-    static int numLanguages();
+  //! Return the names of available implementations.
+  static QStringList languages();
+  //! Return the number of available implementations.
+  static int numLanguages();
 
 };
 
 //! notify an object that it should update its scripting environment (see class scripted)
 class ScriptingChangeEvent : public QEvent
 {
-  public:
-    ScriptingChangeEvent(ScriptingEnv *e) : QEvent(SCRIPTING_CHANGE_EVENT), env(e) {}
-    ScriptingEnv *scriptingEnv() const { return env; }
-    Type type() const { return SCRIPTING_CHANGE_EVENT; }
-  private:
-    ScriptingEnv *env;
+public:
+  ScriptingChangeEvent(ScriptingEnv *e) : QEvent(SCRIPTING_CHANGE_EVENT), env(e) {}
+  ScriptingEnv *scriptingEnv() const { return env; }
+  QEvent::Type type() const { return SCRIPTING_CHANGE_EVENT; }
+private:
+  ScriptingEnv *env;
 };
 
 //! Interface for maintaining a reference to the current ScriptingEnv
