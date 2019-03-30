@@ -4780,7 +4780,7 @@ Uwaga: to poprzemieszcza istniejące!</translation>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="353"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="377"/>
         <source>as string</source>
         <translation>jako ciąg</translation>
     </message>
@@ -13046,7 +13046,7 @@ Released</source>
         <translation>Anuluj</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1412"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1416"/>
         <source>%1: apply formula to column</source>
         <translation>%1: zastosuj równanie do kolumny</translation>
     </message>

@@ -672,7 +672,7 @@ void Table::fillSelectedCellsWithRandomNumbers()
 									earliestDate.addDays(((double)qrand())*((double)earliestDate.daysTo(latestDate))/((double)RAND_MAX)),
 									midnight.addMSecs(((qint64)qrand())*1000*60*60*24/RAND_MAX));
 						else
-							results << col_ptr->dateTimeAt(row);
+							results << col_ptr->QDateTimeAt(row);
 					col_ptr->replaceDateTimes(first, results);
 					break;
 				}
@@ -2015,7 +2015,7 @@ void Table::sortColumns(Column *leading, QList<Column*> cols, bool ascending)
 				QList< QPair<QDateTime, int> > map;
 
 				for(int j=0; j<rows; j++)
-					map.append(QPair<QDateTime, int>(col->dateTimeAt(j), j));
+					map.append(QPair<QDateTime, int>(col->QDateTimeAt(j), j));
 	
 				if(ascending)
 					qStableSort(map.begin(), map.end(), CompareFunctions::QDateTimeLess);
@@ -2107,7 +2107,7 @@ void Table::sortColumns(Column *leading, QList<Column*> cols, bool ascending)
 			int rows = leading->rowCount();
 
 			for(int i=0; i<rows; i++)
-				map.append(QPair<QDateTime, int>(leading->dateTimeAt(i), i));
+				map.append(QPair<QDateTime, int>(leading->QDateTimeAt(i), i));
 
 			if(ascending)
 				qStableSort(map.begin(), map.end(), CompareFunctions::QDateTimeLess);

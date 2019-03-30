@@ -496,7 +496,7 @@ bool Column::Private::copy(const AbstractColumn * other)
 		case SciDAVis::TypeQDateTime:
 			{
 				for(int i=0; i<num_rows; i++)
-					static_cast< QList<QDateTime>* >(d_data)->replace(i, other->dateTimeAt(i));
+					static_cast< QList<QDateTime>* >(d_data)->replace(i, other->QDateTimeAt(i));
 				break;
 			}
 	}
@@ -535,7 +535,7 @@ bool Column::Private::copy(const AbstractColumn * source, int source_start, int 
 				break;
 		case SciDAVis::TypeQDateTime:
 				for(int i=0; i<num_rows; i++)
-					static_cast< QList<QDateTime>* >(d_data)->replace(dest_start+i, source->dateTimeAt(source_start + i));
+					static_cast< QList<QDateTime>* >(d_data)->replace(dest_start+i, source->QDateTimeAt(source_start + i));
 				break;
 	}
 	// copy the validity information

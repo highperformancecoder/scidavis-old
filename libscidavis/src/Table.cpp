@@ -1360,18 +1360,22 @@ void Table::setColumnType(int col, SciDAVis::ColumnMode mode)
 	column(col).setColumnMode(mode);
 }
 
-QString Table::columnFormat(int col)
-{
-	// TODO: obsolete, remove in 0.3.0
-	Column& col_ptr = column(col);
-	if (col_ptr.columnMode() != SciDAVis::DateTime &&
-		col_ptr.columnMode() != SciDAVis::Month &&
-		col_ptr.columnMode() != SciDAVis::Day)
-		return QString();
+std::string Table::columnFormat(int col) const
+{return column(col).columnFormat();}
 
-	DateTime2StringFilter *filter = static_cast<DateTime2StringFilter *>(col_ptr.outputFilter());
-	return filter->format();
-}
+
+//QString Table::columnFormat(int col)
+//{
+//	// TODO: obsolete, remove in 0.3.0
+//	Column& col_ptr = column(col);
+//	if (col_ptr.columnMode() != SciDAVis::DateTime &&
+//		col_ptr.columnMode() != SciDAVis::Month &&
+//		col_ptr.columnMode() != SciDAVis::Day)
+//		return QString();
+//
+//	DateTime2StringFilter *filter = static_cast<DateTime2StringFilter *>(col_ptr.outputFilter());
+//	return filter->format();
+//}
 
 int Table::verticalHeaderWidth()
 {

@@ -167,7 +167,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 					}
 					if (!time.isValid()) {
 						foreach (int row, valid_rows) {
-							time = col->timeAt(row);
+							time = col->QTimeAt(row);
 							if (time.isValid()) break;
 						}
 					}
@@ -194,7 +194,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 
 					if (!date.isValid()) {
 						foreach (int row, valid_rows) {
-							date = col->dateAt(row);
+							date = col->QDateAt(row);
 							if (date.isValid()) break;
 						}
 					}
@@ -221,7 +221,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 
 					if (!datetime.isValid()) {
 						foreach (int row, valid_rows) {
-							datetime = col->dateTimeAt(row);
+							datetime = col->QDateTimeAt(row);
 							if (datetime.isValid()) break;
 						}
 					}
@@ -251,28 +251,28 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 	// convert data to numeric representation used for plotting
 	for (int i=0; i<valid_rows.size(); i++)
 		for (int j=0; j<cols.size(); j++)
-			switch (cols[j]->columnMode()) {
-                        case Table::Text:
-					result[j][i] = static_cast<double>(valid_rows[i] + 1);
-					break;
-                          // TODO: Time and Date need to be removed or otherwise dealt with. There is a comment in globals.h that reads:
-                          // 2 and 3 are skipped to avoid problems with old obsolete values
-				case Table::Time:
-					result[j][i] = reference_times[j].msecsTo(cols[j]->timeAt(valid_rows[i]));
-					break;
-				case Table::Date:
-					result[j][i] = reference_dates[j].daysTo(cols[j]->dateAt(valid_rows[i]));
-					break;
-				case Table::DateTime:
-					{
-						QDateTime dt = cols[j]->dateTimeAt(valid_rows[i]);
-						result[j][i] = dt.toMSecsSinceEpoch()/86400000.+2440587.5;
-						break;
-					}
-				default:
-					result[j][i] = cols[j]->valueAt(valid_rows[i]);
-					break;
-			};
+                  switch (cols[j]->columnMode()) {
+                  case Table::Text:
+                    result[j][i] = static_cast<double>(valid_rows[i] + 1);
+                    break;
+                    // TODO: Time and Date need to be removed or otherwise dealt with. There is a comment in globals.h that reads:
+                    // 2 and 3 are skipped to avoid problems with old obsolete values
+                  case Table::Time:
+                    result[j][i] = reference_times[j].msecsTo(cols[j]->QTimeAt(valid_rows[i]));
+                    break;
+                  case Table::Date:
+                    result[j][i] = reference_dates[j].daysTo(cols[j]->QDateAt(valid_rows[i]));
+                    break;
+                  case Table::DateTime:
+                    {
+                      QDateTime dt = cols[j]->QDateTimeAt(valid_rows[i]);
+                      result[j][i] = dt.toMSecsSinceEpoch()/86400000.+2440587.5;
+                      break;
+                    }
+                  default:
+                    result[j][i] = cols[j]->valueAt(valid_rows[i]);
+                    break;
+                  };
 
 	d_index_to_row = QVector<int>::fromList(valid_rows);
 	return result;

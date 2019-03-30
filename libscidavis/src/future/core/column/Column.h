@@ -36,6 +36,7 @@
 #include "lib/XmlStreamReader.h"
 
 #include <memory>
+#include <iostream>
 
 class QString;
 
@@ -104,6 +105,12 @@ public:
 
   ~Column();
 
+  /// for date time formatting options
+  std::string m_columnFormat="yyyy-MM-dd hh:mm:ss.zzz";
+  // setters/getters purely for Python API compatibility
+  std::string columnFormat() const {return m_columnFormat;}
+  void setColumnFormat(const std::string& x) {m_columnFormat=x;}
+  
   //! \name aspect related functions
   //@{
   //! Return an icon to be used for decorating the views and table column headers
@@ -263,32 +270,51 @@ public:
   /**
    * Use this only when dataType() is QDateTime
    */
-  QDate dateAt(int row) const override;
+  QDate QDateAt(int row) const override;
+  std::string dateAt(int row) const
+  {return QDateAt(row).toString(m_columnFormat.c_str()).toStdString();}
   //! Set the content of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   void setDateAt(int row, const QDate& new_value);
+  void setDateAt(int row, const std::string& new_value)
+  {setDateAt(row,QDate::fromString(new_value.c_str(),"yyyy-MM-dd"));}
   //! Return the time part of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
-  QTime timeAt(int row) const override;
+  QTime QTimeAt(int row) const override;
+  std::string timeAt(int row) const
+  {return QTimeAt(row).toString(m_columnFormat.c_str()).toStdString();}
   //! Set the content of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   void setTimeAt(int row, const QTime& new_value);
+  void setTimeAt(int row, const std::string& new_value)
+  {setTimeAt(row,QTime::fromString(new_value.c_str(),"hh:mm:ss.zzz"));}
   //! Return the QDateTime in row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
-  QDateTime dateTimeAt(int row) const override;
+  QDateTime QDateTimeAt(int row) const override;
+  std::string dateTimeAt(int row) const
+  {return dateTimeAt(row,m_columnFormat);}
+  std::string dateTimeAt(int row,const std::string& format) const
+  {return QDateTimeAt(row).toString(format.c_str()).toStdString();}
+  std::string isoDateTimeAt(int row) const
+  {return QDateTimeAt(row).toString(Qt::ISODate).toStdString();}
   //! Set the content of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   void setDateTimeAt(int row, const QDateTime& new_value);
+  void setDateTimeAt(int row, const std::string& new_value)
+  {setDateTimeAt(row,new_value,m_columnFormat);}
+  void setDateTimeAt(int row, const std::string& new_value, const std::string&format)
+  {setDateTimeAt(row,QDateTime::fromString(new_value.c_str(),format.c_str()));}
+  
   //! Replace a range of values 
   /**
    * Use this only when dataType() is QDateTime

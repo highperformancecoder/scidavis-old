@@ -131,20 +131,23 @@ c6 = t.column("5")
 c6.setPlotDesignation("Y")
 
 
+import datetime as dt
 # DateTime data
 c4.setColumnMode("DateTime")
-dt1 = QtCore.QDateTime(2018,5,4,10,12,23,300)
-for i in range(16):
-    c4.setDateTimeAt(i,dt1)
-    dt1 = dt1.addSecs(60*60*6) # add 6 hours
 
-# print(c4.columnFormat())
 assert c4.columnFormat() == "yyyy-MM-dd hh:mm:ss.zzz"
-c4.setColumnFormat('yyyy-MM-dd hh:mm')
+c4.setColumnFormat('yyyy-MM-dd hh:mm:ss');
 assert t.columnFormat(3) == c4.columnFormat()
 
-# print(c4.dateTimeAt(8))
-assert c4.dateTimeAt(8).toString(QtCore.Qt.ISODate) == "2018-05-06T10:12:23"
+dt1=dt.datetime(2018,5,4,10,12,23)
+for i in range(16):
+    c4.setDateTimeAt(i,str(dt1))
+    print(str(dt1),c4.dateAt(i))
+    dt1+=dt.timedelta(hours=6)
+
+for i in range(16):
+  print(c4.isoDateTimeAt(i), c4.dateTimeAt(i))
+assert c4.isoDateTimeAt(8) == "2018-05-06T10:12:23"
 
 # check rowCount insertRows
 assert c4.rowCount() == 16

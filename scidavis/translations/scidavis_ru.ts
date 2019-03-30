@@ -6562,7 +6562,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="+353"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="+377"/>
         <source>as string</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16693,7 +16693,7 @@ Do you want to insert cells?</source>
         <translation type="unfinished">Скрыть</translation>
     </message>
     <message>
-        <location line="+245"/>
+        <location line="+249"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16702,7 +16702,7 @@ Do you want to insert cells?</source>
         <translation type="obsolete">Ошибка</translation>
     </message>
     <message>
-        <location line="-355"/>
+        <location line="-359"/>
         <source>ASCII Export Error</source>
         <translation type="unfinished">Ошибка экспорта в ASCII</translation>
     </message>

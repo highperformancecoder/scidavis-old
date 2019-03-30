@@ -7126,7 +7126,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="353"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="377"/>
         <source>as string</source>
         <translation type="unfinished">Textversion</translation>
     </message>
@@ -19190,7 +19190,7 @@ Wollen sie Zellen einfügen?</translation>
         <translation type="unfinished">Ausblenden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1412"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1416"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished">%1: Formel auf Spalte angewendet</translation>
     </message>

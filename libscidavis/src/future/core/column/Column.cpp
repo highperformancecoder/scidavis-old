@@ -217,12 +217,12 @@ void Column::replaceTexts(int first, const pyobject& newValues)
 
 void Column::setDateAt(int row, const QDate& new_value)
 {
-  setDateTimeAt(row, QDateTime(new_value, timeAt(row)));
+  setDateTimeAt(row, QDateTime(new_value, QTimeAt(row)));
 }
 
 void Column::setTimeAt(int row,const QTime& new_value)
 {
-  setDateTimeAt(row, QDateTime(dateAt(row), new_value));
+  setDateTimeAt(row, QDateTime(QDateAt(row), new_value));
 }
 
 void Column::setDateTimeAt(int row, const QDateTime& new_value)
@@ -262,17 +262,17 @@ std::string Column::textAt(int row) const
   return d_column_private->textAt(row).toStdString();
 }
 
-QDate Column::dateAt(int row) const
+QDate Column::QDateAt(int row) const
 {
   return d_column_private->dateAt(row);
 }
 
-QTime Column::timeAt(int row) const
+QTime Column::QTimeAt(int row) const
 {
   return d_column_private->timeAt(row);
 }
 
-QDateTime Column::dateTimeAt(int row) const
+QDateTime Column::QDateTimeAt(int row) const
 {
   return d_column_private->dateTimeAt(row);
 }
@@ -371,7 +371,7 @@ void Column::save(QXmlStreamWriter * writer) const
             }
           writer->writeCharacters(str);
 #else
-          writer->writeCharacters(dateTimeAt(i).toString("yyyy-dd-MM hh:mm:ss:zzz"));
+          writer->writeCharacters(QDateTimeAt(i).toString("yyyy-dd-MM hh:mm:ss:zzz"));
 #endif
           writer->writeEndElement();
         }

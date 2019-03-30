@@ -6584,7 +6584,7 @@ Le fichier de version (contenu: &quot;%1&quot;) ne peut être décodé dans un n
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="353"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="377"/>
         <source>as string</source>
         <translation type="unfinished">comme fil</translation>
     </message>
@@ -16620,7 +16620,7 @@ La première représente le signal et la seconde la réponse de la fonction !</t
         <translation type="unfinished">Cacher</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1412"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1416"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished"></translation>
     </message>

@@ -6404,7 +6404,7 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="353"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="377"/>
         <source>as string</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16481,7 +16481,7 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
         <translation type="unfinished">Dölja</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1412"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1416"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished"></translation>
     </message>

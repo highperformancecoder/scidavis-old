@@ -6656,7 +6656,7 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="353"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="377"/>
         <source>as string</source>
         <translation type="unfinished">como string</translation>
     </message>
@@ -17601,7 +17601,7 @@ Do you want to insert cells?</source>
         <translation type="obsolete">Tabla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1412"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1416"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished">%1: aplicar formula a columna</translation>
     </message>

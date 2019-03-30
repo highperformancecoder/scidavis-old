@@ -4815,7 +4815,7 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="353"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="377"/>
         <source>as string</source>
         <translation type="unfinished">jako řetězec</translation>
     </message>
@@ -13385,7 +13385,7 @@ Released</source>
         <translation type="unfinished">Skrýt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1412"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1416"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished">%1: použít vzorec na sloupec</translation>
     </message>

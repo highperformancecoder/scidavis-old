@@ -122,15 +122,15 @@ public:
   /**
    * Use this only when dataType() is QDateTime
    */
-  virtual QDate dateAt(int row) const { Q_UNUSED(row); return QDate(); };
+  virtual QDate QDateAt(int row) const { Q_UNUSED(row); return QDate(); };
   /**
    * Use this only when dataType() is QDateTime
    */
-  virtual QTime timeAt(int row) const { Q_UNUSED(row); return QTime(); };
+  virtual QTime QTimeAt(int row) const { Q_UNUSED(row); return QTime(); };
   /**
    * Use this only when dataType() is QDateTime
    */
-  virtual QDateTime dateTimeAt(int row) const { Q_UNUSED(row); return QDateTime(); };
+  virtual QDateTime QDateTimeAt(int row) const { Q_UNUSED(row); return QDateTime(); };
   /**
    * Use this only when dataType() is double
    */

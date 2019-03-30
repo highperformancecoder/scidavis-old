@@ -240,7 +240,7 @@ public slots:
   void setColumnType(int col, SciDAVis::ColumnMode mode);
 
 
-  QString columnFormat(int col);
+  std::string columnFormat(int col) const;
 
   void importASCII(const QString &fname, const QString &sep, int ignoredLines,
                    bool renameCols, bool stripSpaces, bool simplifySpaces, bool newTable);
