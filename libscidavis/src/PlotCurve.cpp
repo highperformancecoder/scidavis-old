@@ -167,7 +167,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 					}
 					if (!time.isValid()) {
 						foreach (int row, valid_rows) {
-							time = col->QTimeAt(row);
+							time = col->timeAt(row);
 							if (time.isValid()) break;
 						}
 					}
@@ -194,7 +194,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 
 					if (!date.isValid()) {
 						foreach (int row, valid_rows) {
-							date = col->QDateAt(row);
+							date = col->dateAt(row);
 							if (date.isValid()) break;
 						}
 					}
@@ -221,7 +221,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 
 					if (!datetime.isValid()) {
 						foreach (int row, valid_rows) {
-							datetime = col->QDateTimeAt(row);
+							datetime = col->dateTimeAt(row);
 							if (datetime.isValid()) break;
 						}
 					}
@@ -258,14 +258,14 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
                     // TODO: Time and Date need to be removed or otherwise dealt with. There is a comment in globals.h that reads:
                     // 2 and 3 are skipped to avoid problems with old obsolete values
                   case Table::Time:
-                    result[j][i] = reference_times[j].msecsTo(cols[j]->QTimeAt(valid_rows[i]));
+                    result[j][i] = reference_times[j].msecsTo(cols[j]->timeAt(valid_rows[i]));
                     break;
                   case Table::Date:
-                    result[j][i] = reference_dates[j].daysTo(cols[j]->QDateAt(valid_rows[i]));
+                    result[j][i] = reference_dates[j].daysTo(cols[j]->dateAt(valid_rows[i]));
                     break;
                   case Table::DateTime:
                     {
-                      QDateTime dt = cols[j]->QDateTimeAt(valid_rows[i]);
+                      QDateTime dt = cols[j]->dateTimeAt(valid_rows[i]);
                       result[j][i] = dt.toMSecsSinceEpoch()/86400000.+2440587.5;
                       break;
                     }

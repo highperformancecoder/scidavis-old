@@ -328,6 +328,8 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<ArrowMarker>();
   p.defineClass<ExponentialFit>();
   p.defineClass<QtNamespace>();
+//  p.defineClass<QtCore>();
+//  p.defineClass<QtCore::QDateTime>();
   p.defineClass<Column>();
   python<SciDAVis::ColumnMode>(p,"");
   // redefine Qt as an alias for QtNamespace - unfortunately QtNamespace cannot be called Qt in C++ as Qt is already taken

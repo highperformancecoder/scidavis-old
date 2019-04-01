@@ -133,7 +133,7 @@ class ApplicationWindow: public SciDAVisObject<QMainWindow>, public scripted
   Q_OBJECT
 public:
   ApplicationWindow();
-  ApplicationWindow(const QStringList& l);
+  //ApplicationWindow(const QStringList& l);
   ~ApplicationWindow();
 
   void exit() {::exit(0);}

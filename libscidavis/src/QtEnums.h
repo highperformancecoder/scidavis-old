@@ -29,6 +29,26 @@ namespace QtEnums
         SvgMiterJoin = Qt::SvgMiterJoin,
         MPenJoinStyle = Qt::MPenJoinStyle
     };
+
+  enum DateFormat
+    {
+     TextDate = Qt::TextDate,
+     ISODate = Qt::ISODate,
+     SystemLocaleDate = Qt::SystemLocaleDate,
+     LocalDate = Qt::LocalDate,
+     LocaleDate = Qt::LocaleDate,
+     SystemLocaleShortDate = Qt::SystemLocaleShortDate,
+     SystemLocaleLongDate = Qt::SystemLocaleLongDate,
+     DefaultLocaleShortDate = Qt::DefaultLocaleShortDate,
+     DefaultLocaleLongDate = Qt::DefaultLocaleLongDate
+    };
+  
+  enum TimeSpec
+    {
+        LocalTime = Qt::LocalTime,
+        UTC = Qt::UTC,
+        OffsetFromUTC = Qt::OffsetFromUTC
+    };
 }
 
 #include "QtEnumWrapper.h"
@@ -36,6 +56,8 @@ namespace QtEnums
 typedef QtEnumWrapper<QtEnums::PenStyle, Qt::PenStyle> QtPenStyle;
 typedef QtEnumWrapper<QtEnums::PenCapStyle, Qt::PenCapStyle> QtPenCapStyle;
 typedef QtEnumWrapper<QtEnums::PenJoinStyle, Qt::PenJoinStyle> QtPenJoinStyle;
+typedef QtEnumWrapper<QtEnums::DateFormat, Qt::DateFormat> QtDateFormat;
+typedef QtEnumWrapper<QtEnums::TimeSpec, Qt::TimeSpec> QtTimeSpec;
 
 struct QPrinterEnum
 {

@@ -31,7 +31,7 @@
 from __future__ import print_function
 import __main__
 import scidavis
-
+import re
 
 def import_to_global(modname, attrs=None, math=False):
 	"""
@@ -71,6 +71,16 @@ import_to_global("math", None, True)
 for name in dir(scidavis):
 	setattr(__main__, name, getattr(scidavis, name))
 
+#Add aliases for classes defined in QtCore
+class QtCore:
+        pass
+
+for name in dir(scidavis):
+        if re.match("QtCore::",name):
+                setattr(QtCore, re.sub("QtCore::","",name), getattr(scidavis, name))
+
+setattr(__main__,"QtCore",QtCore)
+        
 # import selected methods of ApplicationWindow into the global namespace
 appImports = (
 	"table","newTable",

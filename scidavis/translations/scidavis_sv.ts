@@ -6404,7 +6404,7 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="377"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="379"/>
         <source>as string</source>
         <translation type="unfinished"></translation>
     </message>

@@ -180,7 +180,7 @@ class AbstractSimpleFilter : public AbstractFilter
 		 */
 		virtual QDate dateAt(int row) const
 		{
-			return d_inputs.value(0) ? d_inputs.at(0)->QDateAt(row) : QDate();
+			return d_inputs.value(0) ? d_inputs.at(0)->dateAt(row) : QDate();
 		}
 		//! Return the time part of row 'row'
 		/**
@@ -188,7 +188,7 @@ class AbstractSimpleFilter : public AbstractFilter
 		 */
 		virtual QTime timeAt(int row) const
 		{
-			return d_inputs.value(0) ? d_inputs.at(0)->QTimeAt(row) : QTime();
+			return d_inputs.value(0) ? d_inputs.at(0)->timeAt(row) : QTime();
 		}
 		//! Set the content of row 'row'
 		/**
@@ -196,7 +196,7 @@ class AbstractSimpleFilter : public AbstractFilter
 		 */
 		virtual QDateTime dateTimeAt(int row) const
 		{
-			return d_inputs.value(0) ? d_inputs.at(0)->QDateTimeAt(row) : QDateTime();
+			return d_inputs.value(0) ? d_inputs.at(0)->dateTimeAt(row) : QDateTime();
 		}
 		//! Return the double value in row 'row'
 		/**
@@ -295,9 +295,9 @@ public:
   QList< Interval<int> > maskedIntervals() const override { return d_owner->maskedIntervals(); }
   void clearMasks() { d_owner->clearMasks(); }
   std::string textAt(int row) const override { return d_owner->textAt(row).toStdString(); }
-  QDate QDateAt(int row) const override { return d_owner->dateAt(row); }
-  QTime QTimeAt(int row) const override { return d_owner->timeAt(row); }
-  QDateTime QDateTimeAt(int row) const override { return d_owner->dateTimeAt(row); }
+  QtCore::QDate dateAt(int row) const override { return d_owner->dateAt(row); }
+  QtCore::QTime timeAt(int row) const override { return d_owner->timeAt(row); }
+  QtCore::QDateTime dateTimeAt(int row) const override { return d_owner->dateTimeAt(row); }
   double valueAt(int row) const override { return d_owner->valueAt(row); }
 
 private:

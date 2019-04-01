@@ -4815,7 +4815,7 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="377"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="379"/>
         <source>as string</source>
         <translation type="unfinished">jako řetězec</translation>
     </message>

@@ -7126,7 +7126,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="377"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="379"/>
         <source>as string</source>
         <translation type="unfinished">Textversion</translation>
     </message>

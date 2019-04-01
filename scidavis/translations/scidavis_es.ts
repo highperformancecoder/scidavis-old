@@ -6656,7 +6656,7 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="377"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="379"/>
         <source>as string</source>
         <translation type="unfinished">como string</translation>
     </message>

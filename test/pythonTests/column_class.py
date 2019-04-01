@@ -22,7 +22,6 @@ assert c2.name() == "2"
 c2.setName("col2")
 assert c2.name() == "col2"
 
-
 # Testing data types (column modes) of a column (verification and change)
 colModes = ["Numeric","Text","Month","Day","DateTime"]
 for i in range(0,len(colModes)-1):
@@ -102,7 +101,6 @@ c3.setColumnMode("Text")
 for k in range(1,nRows+1):
   t.setText(k,3,"a")
 
-print(type(c3.textAt(1)))
 assert c3.textAt(1) == "a"
 c3.setTextAt(1,"b")
 assert c3.textAt(1) == "b"
@@ -121,7 +119,7 @@ assert colNames == ["1", "col2", "3", "2", "4", "5"]
 # check that you get same column either by name or by index
 c4 = t.column("2")
 c4b = t.column(3) # index is base 0
-assert c4.name()==c4b.name()
+assert c4.name() == c4b.name()
 
 # set column 4 as X (X2).
 c4.setPlotDesignation("X")
@@ -131,23 +129,17 @@ c6 = t.column("5")
 c6.setPlotDesignation("Y")
 
 
-import datetime as dt
 # DateTime data
 c4.setColumnMode("DateTime")
-
-assert c4.columnFormat() == "yyyy-MM-dd hh:mm:ss.zzz"
-c4.setColumnFormat('yyyy-MM-dd hh:mm:ss');
-assert t.columnFormat(3) == c4.columnFormat()
-
-dt1=dt.datetime(2018,5,4,10,12,23)
+dt1 = QtCore.QDateTime(2018,5,4,10,12,23,300)
 for i in range(16):
-    c4.setDateTimeAt(i,str(dt1))
-    print(str(dt1),c4.dateAt(i))
-    dt1+=dt.timedelta(hours=6)
+    c4.setDateTimeAt(i,dt1)
+    dt1 = dt1.addSecs(60*60*6) # add 6 hours
 
-for i in range(16):
-  print(c4.isoDateTimeAt(i), c4.dateTimeAt(i))
-assert c4.isoDateTimeAt(8) == "2018-05-06T10:12:23"
+
+# print(c4.dateTimeAt(8))
+print(c4.dateTimeAt(8).toString("ISODate"))
+assert c4.dateTimeAt(8).toString("ISODate") == "2018-05-06T10:12:23"
 
 # check rowCount insertRows
 assert c4.rowCount() == 16
@@ -166,21 +158,14 @@ assert c1.rowCount() == 31
 # Date data
 c5.setColumnMode("Month")
 dt1 = QtCore.QDate(2018,5,4)
-assert c5.columnFormat() == "MMMM"
 
 c5.setDateAt(2,QtCore.QDate(2018,11,20))
 c5.setDateAt(3,QtCore.QDate(2018,5,4))
-# possible formats for 'Month': ['M', 'MM', 'MMM', 'MMMM']
-c5.setColumnFormat("MMM")
-assert c5.dateAt(2).toString(QtCore.Qt.ISODate) == "2018-11-20"
+assert c5.dateAt(2).toString("ISODate") == "2018-11-20"
 
 c6.setColumnMode("Day")
 # print(c6.columnMode())
 assert c6.columnMode() == "Day"
-# possible formats for 'Day': ['d', 'dd', 'ddd', 'dddd']
-# print(c6.columnFormat())
-assert c6.columnFormat() == "dddd"
-c6.setColumnFormat('ddd')
 
 c6.setDateAt(2,QtCore.QDate(2018,11,20))
 c6.setDateAt(3,QtCore.QDate(2018,5,4))
