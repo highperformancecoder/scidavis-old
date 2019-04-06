@@ -44,12 +44,6 @@ class Matrix;
 class ApplicationWindow;
 class Script;
 
-#ifdef SCRIPTING_PYTHON
-#include <boost/python.hpp>
-typedef boost::python::object pyobject;
-#else
-struct pyobject;
-#endif
 
 //! Fit base class
 class Fit : public Filter, public scripted

@@ -1,5 +1,6 @@
 #ifndef SCIDAVISOBJECT_H
 #define SCIDAVISOBJECT_H
+#include <QWidget>
 
 /**
    Generic base class for Qt based classes in SciDAVis

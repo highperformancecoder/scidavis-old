@@ -320,6 +320,7 @@ public:
    * Use this only when dataType() is QDateTime
    */
   void replaceDateTimes(int first, const QList<QDateTime>& new_values);
+  void replaceDateTimes(int first, const pyobject& new_values);
   //! Return the double value in row 'row'
   double valueAt(int row) const override;
   //! Set the content of row 'row'
@@ -342,6 +343,10 @@ public:
   void save(QXmlStreamWriter * writer) const override;
   //! Load the column from XML
   bool load(XmlStreamReader * reader) override;
+
+  /// return x-column associated with this
+  Column& x() const;
+  Column& y() const;
 private:
   //! Read XML input filter element
   bool XmlReadInputFilter(XmlStreamReader * reader);

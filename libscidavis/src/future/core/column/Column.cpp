@@ -30,7 +30,9 @@
 #include "core/column/Column.h"
 #include "core/column/ColumnPrivate.h"
 #include "core/column/columncommands.h"
+#include "table/future_Table.h"
 #include "lib/XmlStreamReader.h"
+#include "SciDAVisObject.h"
 #include <QIcon>
 #include <QXmlStreamWriter>
 #include <QtDebug>
@@ -235,6 +237,16 @@ void Column::replaceDateTimes(int first, const QList<QDateTime>& new_values)
   if (!new_values.isEmpty())
     exec(new ColumnReplaceDateTimesCmd(d_column_private, first, new_values));
 }
+
+void Column::replaceDateTimes(int first, const pyobject& new_values)
+{
+#ifdef SCRIPTING_PYTHON
+  QList<QDateTime> v;
+  for (int i=0; i<len(new_values); ++i)
+    v.append(py::extract<QtCore::QDateTime>(new_values[i]));
+  replaceDateTimes(first,v);
+#endif
+}  
 
 void Column::setValueAt(int row, double new_value)
 {
@@ -478,7 +490,23 @@ bool Column::load(XmlStreamReader * reader)
 
   return !reader->error();
 }
-					
+
+Column& Column::x() const
+{
+  if (auto t=dynamic_cast<future::Table*>(parentAspect()))
+    if (auto c=t->column(t->colX(t->indexOfChild(this))))
+      return *c;
+  throw NoSuchObject();
+}
+
+Column& Column::y() const
+{
+  if (auto t=dynamic_cast<future::Table*>(parentAspect()))
+    if (auto c=t->column(t->colY(t->indexOfChild(this))))
+    return *c;
+  throw NoSuchObject();
+}
+
 bool Column::XmlReadInputFilter(XmlStreamReader * reader)
 {
   Q_ASSERT(reader->isStartElement() && reader->name() == "input_filter");

@@ -202,5 +202,14 @@ struct QtCore
   };
 };
 
-  
+
+#ifdef SCRIPTING_PYTHON
+#include <boost/python.hpp>
+typedef boost::python::object pyobject;
+namespace py=boost::python;
+#else
+struct pyobject;
+#endif
+
+
 #endif

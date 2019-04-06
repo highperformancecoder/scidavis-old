@@ -189,9 +189,9 @@ c4.replaceDateTimes(21,dtlist)
 
 # x() and y()
 # check that X-column of column("3") is column("1")
-assert c3.x() == c1
+assert c3.x().name() == c1.name()
 # check that X-column of column("4") is column("2")
-assert c5.x() == c4
+assert c5.x().name() == c4.name()
 
 # look for Y-column of column("4")
 print("column(4).y().name: "+c4.y().name())
