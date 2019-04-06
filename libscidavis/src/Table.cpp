@@ -487,7 +487,7 @@ bool Table::recalculate(int col, bool only_selected_rows)
                 else
                   results[i-start_row] = NAN;
               }
-              col_ptr.replaceValuesQVector(start_row, results);
+              col_ptr.replaceValues(start_row, results);
               break;
             }
           default:
@@ -1516,7 +1516,7 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
 			filter->input(0, temp->column(i));
 			Column *new_col = new Column(temp->column(i)->name().c_str(), SciDAVis::Numeric);
 			new_col->setPlotDesignation(SciDAVis::Y);
-			new_col->copyAbstract(*filter->output(0));
+			new_col->copy(*filter->output(0));
 			d_future_table->addChild(new_col);
 		}
 		delete filter;

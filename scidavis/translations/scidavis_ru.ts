@@ -6498,7 +6498,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>Column</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="+397"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="+409"/>
         <source>column type missing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6538,7 +6538,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+51"/>
         <location line="+19"/>
         <source>invalid or missing start or end row</source>
         <translation type="unfinished"></translation>
@@ -6562,7 +6562,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="+379"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="+371"/>
         <source>as string</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15197,7 +15197,7 @@ Released</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="-482"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="-508"/>
         <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="+40"/>
         <location filename="../../libscidavis/src/future/table/TableView.cpp" line="+676"/>
         <location line="+22"/>

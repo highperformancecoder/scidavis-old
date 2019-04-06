@@ -109,7 +109,7 @@ void Column::setColumnModeFilter(SciDAVis::ColumnMode mode, AbstractFilter *conv
 }
 
 
-bool Column::copyAbstract(const AbstractColumn& other)
+bool Column::copy(const AbstractColumn& other)
 {
   if(other.dataType() != dataType()) return false;
   exec(new ColumnFullCopyCmd(d_column_private, &other));
@@ -201,7 +201,7 @@ void Column::setTextAt(int row, const QString& new_value)
   exec(new ColumnSetTextCmd(d_column_private, row, new_value));
 }
 
-void Column::replaceTextsStringList(int first, const QStringList& new_values)
+void Column::replaceTexts(int first, const QStringList& new_values)
 {
   if (!new_values.isEmpty())
     exec(new ColumnReplaceTextsCmd(d_column_private, first, new_values));
@@ -213,7 +213,7 @@ void Column::replaceTexts(int first, const pyobject& newValues)
   QStringList x;
   for (int i=0; i<len(newValues); ++i)
     x << boost::python::extract<const char*>(newValues[i])();
-  replaceTextsStringList(first,x);
+  replaceTexts(first,x);
 #endif
 }
 
@@ -253,7 +253,7 @@ void Column::setValueAt(int row, double new_value)
   exec(new ColumnSetValueCmd(d_column_private, row, new_value));
 }
 
-void Column::replaceValuesQVector(int first, const QVector<qreal>& new_values)
+void Column::replaceValues(int first, const QVector<qreal>& new_values)
 {
   if (!new_values.isEmpty())
     exec(new ColumnReplaceValuesCmd(d_column_private, first, new_values));
@@ -265,7 +265,7 @@ void Column::replaceValues(int first, const pyobject& newValues)
   QVector<qreal> x;
   for (int i=0; i<len(newValues); ++i)
     x.append(boost::python::extract<double>(newValues[i]));
-  replaceValuesQVector(first,x);
+  replaceValues(first,x);
 #endif
 }
 
@@ -709,7 +709,7 @@ void ColumnStringIO::setTextAt(int row, const QString &value)
 bool ColumnStringIO::copyAbstract(const AbstractColumn& other) {
   if (other.columnMode() != SciDAVis::Text) return false;
   d_owner->d_column_private->inputFilter()->input(0,&other);
-  d_owner->copyAbstract(*d_owner->d_column_private->inputFilter()->output(0));
+  d_owner->copy(*d_owner->d_column_private->inputFilter()->output(0));
   d_owner->d_column_private->inputFilter()->input(0,this);
   return true;
 }

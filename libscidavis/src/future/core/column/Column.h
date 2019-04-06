@@ -144,8 +144,9 @@ public:
    * The validity information for the rows is also copied.
    * Use a filter to convert a column to another type.
    */
-  bool copy(const Column& other) {return copyAbstract(other);}
-  bool copyAbstract(const AbstractColumn& other);
+  // first overload is for python purposes
+  bool copy(const Column& other) {return copy(static_cast<const AbstractColumn&>(other));}
+  bool copy(const AbstractColumn& other);
   //! Copies a part of another column of the same type
   /**
    * This function will return false if the data type
@@ -264,56 +265,42 @@ public:
   /**
    * Use this only when dataType() is QString
    */
-  void replaceTextsStringList(int first, const QStringList& new_values);
+  void replaceTexts(int first, const QStringList& new_values);
   void replaceTexts(int first, const pyobject& new_values);
   //! Return the date part of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   QtCore::QDate dateAt(int row) const override;
-//  std::string dateAt(int row) const
-//  {return QDateAt(row).toString(m_columnFormat.c_str());}
+
   //! Set the content of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   void setDateAt(int row, const QtCore::QDate& new_value);
-  void setDateAt(int row, const std::string& new_value)
-  {setDateAt(row,QDate::fromString(new_value.c_str(),"yyyy-MM-dd"));}
+
   //! Return the time part of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   QtCore::QTime timeAt(int row) const override;
-//  std::string timeAt(int row) const
-//  {return QTimeAt(row).toString(m_columnFormat.c_str());}
+
   //! Set the content of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   void setTimeAt(int row, const QtCore::QTime& new_value);
-  void setTimeAt(int row, const std::string& new_value)
-  {setTimeAt(row,QTime::fromString(new_value.c_str(),"hh:mm:ss.zzz"));}
   //! Return the QDateTime in row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   QtCore::QDateTime dateTimeAt(int row) const override;
-//  std::string dateTimeAt(int row) const
-//  {return dateTimeAt(row,m_columnFormat);}
-//  std::string dateTimeAt(int row,const std::string& format) const
-//  {return QDateTimeAt(row).toString(format.c_str());}
-//  std::string isoDateTimeAt(int row) const
-//  {return QDateTimeAt(row).toString(Qt::ISODate);}
+
   //! Set the content of row 'row'
   /**
    * Use this only when dataType() is QDateTime
    */
   void setDateTimeAt(int row, const QtCore::QDateTime& new_value);
-  void setDateTimeAt(int row, const std::string& new_value)
-  {setDateTimeAt(row,new_value,m_columnFormat);}
-  void setDateTimeAt(int row, const std::string& new_value, const std::string&format)
-  {setDateTimeAt(row,QDateTime::fromString(new_value.c_str(),format.c_str()));}
   
   //! Replace a range of values 
   /**
@@ -332,7 +319,7 @@ public:
   /**
    * Use this only when dataType() is double
    */
-  void replaceValuesQVector(int first, const QVector<qreal>& new_values);
+  void replaceValues(int first, const QVector<qreal>& new_values);
   //@}
   // Python API
   void replaceValues(int first, const pyobject&);

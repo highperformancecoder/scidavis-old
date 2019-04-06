@@ -600,7 +600,7 @@ void Table::fillSelectedCellsWithRowNumbers()
 							results[row-first] = row+1;
 						else
 							results[row-first] = col_ptr->valueAt(row);
-					col_ptr->replaceValuesQVector(first, results);
+					col_ptr->replaceValues(first, results);
 					break;
 				}
 			case SciDAVis::Text:
@@ -611,7 +611,7 @@ void Table::fillSelectedCellsWithRowNumbers()
 							results << QString::number(row+1);
 						else
                                                   results << col_ptr->textAt(row).c_str();
-					col_ptr->replaceTextsStringList(first, results);
+					col_ptr->replaceTexts(first, results);
 					break;
 				}
 			default:
@@ -644,7 +644,7 @@ void Table::fillSelectedCellsWithRandomNumbers()
 							results[row-first] = double(qrand())/double(RAND_MAX);
 						else
 							results[row-first] = col_ptr->valueAt(row);
-					col_ptr->replaceValuesQVector(first, results);
+					col_ptr->replaceValues(first, results);
 					break;
 				}
 			case SciDAVis::Text:
@@ -655,7 +655,7 @@ void Table::fillSelectedCellsWithRandomNumbers()
 							results << QString::number(double(qrand())/double(RAND_MAX));
 						else
                                                   results << col_ptr->textAt(row).c_str();
-					col_ptr->replaceTextsStringList(first, results);
+					col_ptr->replaceTexts(first, results);
 					break;
 				}
 			case SciDAVis::DateTime:
@@ -825,7 +825,7 @@ void Table::normalizeColumns(QList< Column* > cols)
 			if (max != 0.0) // avoid division by zero
 				for (int row=0; row<col->rowCount(); row++)
 					results[row] = col->valueAt(row) / max;
-			col->replaceValuesQVector(0, results);
+			col->replaceValues(0, results);
 		}
 	}
 	endMacro();
@@ -863,7 +863,7 @@ void Table::normalizeSelection()
 						results[row] = col_ptr->valueAt(row) / max;
 					else
 						results[row] = col_ptr->valueAt(row);
-				col_ptr->replaceValuesQVector(0, results);
+				col_ptr->replaceValues(0, results);
 			}
 		}
 	}

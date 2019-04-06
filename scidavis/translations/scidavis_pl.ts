@@ -4716,63 +4716,63 @@ Uwaga: to poprzemieszcza istniejące!</translation>
 <context>
     <name>Column</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="397"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="409"/>
         <source>column type missing</source>
         <translation>brakuje typu kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="403"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="415"/>
         <source>column type invalid</source>
         <translation>nieprawidłowy typ kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="410"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="422"/>
         <source>column mode missing</source>
         <translation>brakujący tryb kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="416"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="428"/>
         <source>column mode invalid</source>
         <translation>nieprawidłowy tryb kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="422"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="434"/>
         <source>column type or mode invalid</source>
         <translation>nieprawidłowy typ lub tryb kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="432"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="444"/>
         <source>column plot designation invalid</source>
         <translation>nieprawidłowe przypisanie kolumny do wykreślania</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="468"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="480"/>
         <source>unknown element &apos;%1&apos;</source>
         <translation>nieznany element &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="477"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="489"/>
         <source>no column element found</source>
         <translation>nie znaleziono żadnej kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="512"/>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="531"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="540"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="559"/>
         <source>invalid or missing start or end row</source>
         <translation>błędny lub brakujący wiersz początkowy lub końcowy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="552"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="580"/>
         <source>invalid or missing row type</source>
         <translation>nieprawidłowy lub brakujący typ wiersza</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="560"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="588"/>
         <source>invalid or missing row index</source>
         <translation>nieprawidłowy lub brakujący indeks wiersza</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="572"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="600"/>
         <source>invalid row value</source>
         <translation>nieprawidłowa wartość wiersza</translation>
     </message>
@@ -4780,7 +4780,7 @@ Uwaga: to poprzemieszcza istniejące!</translation>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="379"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="371"/>
         <source>as string</source>
         <translation>jako ciąg</translation>
     </message>
@@ -12016,7 +12016,7 @@ p, li { white-space: pre-wrap; }
         <translation>%1: przenieś %2 do %3.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="90"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="92"/>
         <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="40"/>
         <location filename="../../libscidavis/src/future/table/TableView.cpp" line="676"/>
         <location filename="../../libscidavis/src/future/table/TableView.cpp" line="698"/>

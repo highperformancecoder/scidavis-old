@@ -4751,63 +4751,63 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
 <context>
     <name>Column</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="397"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="409"/>
         <source>column type missing</source>
         <translation type="unfinished">chybí typ sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="403"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="415"/>
         <source>column type invalid</source>
         <translation type="unfinished">neplatný typ sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="410"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="422"/>
         <source>column mode missing</source>
         <translation type="unfinished">chybí režim sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="416"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="428"/>
         <source>column mode invalid</source>
         <translation type="unfinished">neplatný režim sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="422"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="434"/>
         <source>column type or mode invalid</source>
         <translation type="unfinished">neplatný typ nebo režim sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="432"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="444"/>
         <source>column plot designation invalid</source>
         <translation type="unfinished">neplatné označení sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="468"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="480"/>
         <source>unknown element &apos;%1&apos;</source>
         <translation type="unfinished">neznámý element &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="477"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="489"/>
         <source>no column element found</source>
         <translation type="unfinished">nenalezen žádný prvek sloupce</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="512"/>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="531"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="540"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="559"/>
         <source>invalid or missing start or end row</source>
         <translation type="unfinished">neplatný nebo chybějící začátek/konec řádku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="552"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="580"/>
         <source>invalid or missing row type</source>
         <translation type="unfinished">neplatný nebo chybějící typ řádku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="560"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="588"/>
         <source>invalid or missing row index</source>
         <translation type="unfinished">neplatný nebo chybějící index řádku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="572"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="600"/>
         <source>invalid row value</source>
         <translation type="unfinished">neplatná hodnota řádku</translation>
     </message>
@@ -4815,7 +4815,7 @@ první reprezentuje funkci signálu, druhý fukci odpovědi!</translation>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="379"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="371"/>
         <source>as string</source>
         <translation type="unfinished">jako řetězec</translation>
     </message>
@@ -12429,7 +12429,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">%1: přesunout %2 na %3.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="90"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="92"/>
         <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="40"/>
         <location filename="../../libscidavis/src/future/table/TableView.cpp" line="676"/>
         <location filename="../../libscidavis/src/future/table/TableView.cpp" line="698"/>

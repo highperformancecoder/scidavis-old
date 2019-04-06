@@ -7062,63 +7062,63 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
 <context>
     <name>Column</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="397"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="409"/>
         <source>column type missing</source>
         <translation type="unfinished">Spaltentyp fehlt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="403"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="415"/>
         <source>column type invalid</source>
         <translation type="unfinished">Spaltentyp ist ungültig</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="410"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="422"/>
         <source>column mode missing</source>
         <translation type="unfinished">Spaltenmodus fehlt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="416"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="428"/>
         <source>column mode invalid</source>
         <translation type="unfinished">Spaltenmodus ist ungültig</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="422"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="434"/>
         <source>column type or mode invalid</source>
         <translation type="unfinished">Spaltentyp oder -modus ist ungültig</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="432"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="444"/>
         <source>column plot designation invalid</source>
         <translation type="unfinished">Darstellungszuordnung der Spalte ist ungültig</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="468"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="480"/>
         <source>unknown element &apos;%1&apos;</source>
         <translation type="unfinished">unbekanntes Element &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="477"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="489"/>
         <source>no column element found</source>
         <translation type="unfinished">kein Spalten-Element gefunden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="512"/>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="531"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="540"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="559"/>
         <source>invalid or missing start or end row</source>
         <translation type="unfinished">ungültige oder fehlende Anfangs- oder Endzeile</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="552"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="580"/>
         <source>invalid or missing row type</source>
         <translation type="unfinished">ungültiger oder fehlender Zeilentyp</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="560"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="588"/>
         <source>invalid or missing row index</source>
         <translation type="unfinished">ungültiger oder fehlender Zeilenindex</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="572"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="600"/>
         <source>invalid row value</source>
         <translation type="unfinished">ungültiger Zeileninhalt</translation>
     </message>
@@ -7126,7 +7126,7 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="379"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="371"/>
         <source>as string</source>
         <translation type="unfinished">Textversion</translation>
     </message>
@@ -17693,7 +17693,7 @@ Absolutbetrag von x.</translation>
         <translation type="unfinished">%1: verschiebe %2 nach %3.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="90"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="92"/>
         <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="40"/>
         <location filename="../../libscidavis/src/future/table/TableView.cpp" line="676"/>
         <location filename="../../libscidavis/src/future/table/TableView.cpp" line="698"/>
