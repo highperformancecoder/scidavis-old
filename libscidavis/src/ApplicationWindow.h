@@ -318,7 +318,6 @@ public slots:
   {return plot(t,colList,style,-1);}
   MultiLayer& plot(Table& t,const pyobject& colList)
   {return plot(t,colList,1);}
-  MultiLayer& plot(Table&,const std::vector<std::string>& colList,int style=1,int colour=-1);
   ///used when plotting from the panel menu
   MultiLayer* multilayerPlot(int c, int r, int style);
   MultiLayer* multilayerPlot(Table* w, const QStringList& colList, int style=1, int startRow = 0, int endRow = -1);

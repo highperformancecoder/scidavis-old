@@ -2249,28 +2249,19 @@ MultiLayer& ApplicationWindow::newGraph(const QString& caption)
 
 MultiLayer& ApplicationWindow::plot(Table& t,const pyobject& col,int style,int colour)
 {
-  vector<string> colList;
 #ifdef SCRIPTING_PYTHON
+  QStringList cl;
   py::extract<string> es(col);
   if (es.check())
-    colList.push_back(es());
+    cl<<es().c_str();
   else
     for (int i=0; i<len(col); ++i)
-      colList.push_back(py::extract<string>(col[i]));
+      cl<<py::extract<string>(col[i])().c_str();
+  if (auto ml=multilayerPlot(&t,cl,style,colour))
+    return *ml;
 #endif
-  return plot(t,colList,style,colour);
+  throw NoSuchObject();
 }
-
-MultiLayer& ApplicationWindow::plot(Table& table,const std::vector<std::string>& colList,int style,int colour)
-{
-  QStringList cl;
-  for (auto i: colList) cl<<i.c_str();
-  if (auto pl=multilayerPlot(&table,cl,style))
-    return *pl;
-  else
-    throw NoSuchObject();
-}
-
 
 MultiLayer* ApplicationWindow::multilayerPlot(Table* w, const QStringList& colList, int style, int startRow, int endRow)
 {//used when plotting selected columns
