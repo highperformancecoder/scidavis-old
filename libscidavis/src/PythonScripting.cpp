@@ -338,18 +338,12 @@ BOOST_PYTHON_MODULE(scidavis)
   // overload handling
   Table& (ApplicationWindow::*newTable)()=&ApplicationWindow::newTable;
   Table& (ApplicationWindow::*newTableSII)(const std::string&,int,int)=&ApplicationWindow::newTable;
-  MultiLayer& (ApplicationWindow::*plotTSII)(Table&,const std::string&, int, int)
-    =&ApplicationWindow::plot;
-  MultiLayer& (ApplicationWindow::*plotTVSII)(Table&,const pytuple&, int, int)
-    =&ApplicationWindow::plot;
   p.getClass<ApplicationWindow>().
     overload("newTable",newTable).
     overload("newTable",newTableSII,ApplicationWindow_newTableSII()).
     overload("newMatrix",&ApplicationWindow::newMatrix,ApplicationWindow_newMatrixSII()).
     overload("newGraph",&ApplicationWindow::newGraph,ApplicationWindow_newGraphS()).
-    overload("newNote",&ApplicationWindow::newNote,ApplicationWindow_newNoteS()).
-    overload("plot",plotTSII,ApplicationWindow_plotTSII()).
-    overload("plot",plotTVSII,ApplicationWindow_plotTVSII());
+    overload("newNote",&ApplicationWindow::newNote,ApplicationWindow_newNoteS());
 
   bool (Graph::*graph_addErrorBars)
     (const QString&,Table&,const QString&,

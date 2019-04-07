@@ -92,13 +92,6 @@ using std::shared_ptr;
 #define TS_PATH (qApp->applicationDirPath() + "/translations")
 #endif
 
-#ifdef SCRIPTING_PYTHON
-#include <boost/python.hpp>
-namespace py=boost::python;
-typedef py::tuple pytuple;
-#else
-class pytuple;
-#endif
 
 /**
  * \brief SciDAVis's main window.
@@ -319,10 +312,12 @@ public slots:
 
   //! \name Multilayer Plots
   //@{
-  /// python use
-  MultiLayer& plot(Table& t,const std::string& col,int style=1,int colour=-1)
-  {return plot(t,std::vector<std::string>{col},style,colour);}
-  MultiLayer& plot(Table&,const pytuple& colList,int style=1,int colour=-1);
+  /// python use: plot(Table, string or sequence of strings, int, int)
+  MultiLayer& plot(Table&,const pyobject& colList,int style,int colour);
+  MultiLayer& plot(Table& t,const pyobject& colList,int style)
+  {return plot(t,colList,style,-1);}
+  MultiLayer& plot(Table& t,const pyobject& colList)
+  {return plot(t,colList,1);}
   MultiLayer& plot(Table&,const std::vector<std::string>& colList,int style=1,int colour=-1);
   ///used when plotting from the panel menu
   MultiLayer* multilayerPlot(int c, int r, int style);
