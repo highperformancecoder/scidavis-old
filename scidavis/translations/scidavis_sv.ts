@@ -2013,8 +2013,8 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9114"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13191"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13234"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="408"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="410"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="409"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="414"/>
         <source>Matrix</source>
         <translation type="unfinished">Matris</translation>
     </message>
@@ -4924,7 +4924,7 @@ Varning: detta kommer att arrangera om befintliga lager!</translation>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11648"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13203"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13249"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="576"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="583"/>
         <source>Graph</source>
         <translation type="unfinished">Diagram</translation>
     </message>
@@ -10061,7 +10061,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="620"/>
+        <location filename="../../libscidavis/src/Graph.h" line="643"/>
         <source>F</source>
         <translation type="unfinished"></translation>
     </message>

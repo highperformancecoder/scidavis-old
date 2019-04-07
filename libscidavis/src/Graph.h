@@ -247,9 +247,8 @@ public slots:
   void exportVector(const QString& fileName, int res = 0, bool color = true,
                     bool keepAspect = true, QPrinterEnum::PageSize pageSize = QPrinterEnum::Custom, 
                     QPrinterEnum::Orientation orientation = QPrinterEnum::Portrait);
-  void exportImageQString(const QString& fileName, int quality = -1);
-  void exportImage(const std::string& fileName, int quality = -1)
-  {exportImageQString(QString(fileName.c_str()),quality);}
+  void exportImage(const QString& fileName, int quality);
+  void exportImage(const QString& fileName) {exportImage(fileName,-1);}
   //@}
 
   void replot(){d_plot->replot();};
@@ -258,12 +257,32 @@ public slots:
   //! \name Error Bars
   //@{
   bool addErrorBars(const QString& xColName, const QString& yColName, Table& errTable,
-                    const QString& errColName, int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(Qt::black),
-                    bool through = true, bool minus = true, bool plus = true);
+                    const QString& errColName, int type=1, int width=1, int cap=8,
+                    const QColor& color=Qt::black,
+                    bool through=true, bool minus=true, bool plus=true);
 
   bool addErrorBars(const QString& yColName, Table& errTable, const QString& errColName,
-                    int type = 1, int width = 1, int cap = 8, const QColor& color = QColor(Qt::black),
-                    bool through = true, bool minus = true, bool plus = true);
+                    int type, int width, int cap, const QColor& color, bool through, bool minus,bool plus);
+  
+  bool addErrorBars(const QString& yColName, Table& errTable, const QString& errColName,
+                    int type, int width, int cap, const QColor& color, bool through, bool minus)
+  {return addErrorBars(yColName,errTable,errColName,type,width,cap,color,through,minus,true);}
+  bool addErrorBars(const QString& yColName, Table& errTable, const QString& errColName,
+                    int type, int width, int cap, const QColor& color, bool through)
+  {return addErrorBars(yColName,errTable,errColName,type,width,cap,color,through,true);}
+  bool addErrorBars(const QString& yColName, Table& errTable, const QString& errColName,
+                    int type, int width, int cap, const QColor& color)
+  {return addErrorBars(yColName,errTable,errColName,type,width,cap,color,true);}
+  bool addErrorBars(const QString& yColName, Table& errTable, const QString& errColName,
+                    int type, int width, int cap)
+  {return addErrorBars(yColName,errTable,errColName,type,width,cap,Qt::black);}
+  bool addErrorBars(const QString& yColName, Table& errTable, const QString& errColName,
+                    int type, int width)
+  {return addErrorBars(yColName,errTable,errColName,type,width,8);}
+  bool addErrorBars(const QString& yColName, Table& errTable, const QString& errColName, int type)
+  {return addErrorBars(yColName,errTable,errColName,type,1);}
+  bool addErrorBars(const QString& yColName, Table& errTable, const QString& errColName)
+  {return addErrorBars(yColName,errTable,errColName,1);}
 
   void updateErrorBars(QwtErrorPlotCurve *er, bool xErr,int width, int cap, const QColor& c, bool plus, bool minus, bool through);
 

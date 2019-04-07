@@ -4803,7 +4803,7 @@ void ApplicationWindow::exportGraph()
 		{
 			if (selected_filter.contains("." + (list[i]).toLower())) {
 				if (plot2D)
-					plot2D->exportImageQString(file_name, ied->quality());
+					plot2D->exportImage(file_name, ied->quality());
 				else if (plot3D)
 					plot3D->exportImage(file_name, ied->quality());
 			}
@@ -4853,7 +4853,7 @@ void ApplicationWindow::exportLayer()
 		QList<QByteArray> list = QImageWriter::supportedImageFormats();
 		for (int i=0; i<(int)list.count(); i++)
 			if (selected_filter.contains("."+(list[i]).toLower()))
-				g->exportImageQString(file_name, ied->quality());
+				g->exportImage(file_name, ied->quality());
 	}
 }
 
@@ -4946,7 +4946,7 @@ void ApplicationWindow::exportAllGraphs()
 			{
 				if (file_suffix.contains("." + (list[i]).toLower())) {
 					if (plot2D)
-						plot2D->exportImageQString(file_name, ied->quality());
+						plot2D->exportImage(file_name, ied->quality());
 					else if (plot3D)
 						plot3D->exportImage(file_name, ied->quality());
 				}

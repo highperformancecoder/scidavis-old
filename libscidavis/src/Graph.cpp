@@ -1384,7 +1384,7 @@ void Graph::exportToFile(const QString& fileName)
 		QList<QByteArray> list = QImageWriter::supportedImageFormats();
     	for(int i=0 ; i<list.count() ; i++){
 			if (fileName.contains( "." + list[i].toLower())){
-				exportImageQString(fileName);
+				exportImage(fileName);
 				return;
 			}
 		}
@@ -1392,7 +1392,7 @@ void Graph::exportToFile(const QString& fileName)
 	}
 }
 
-void Graph::exportImageQString(const QString& fileName, int quality)
+void Graph::exportImage(const QString& fileName, int quality)
 {
 	QImage image(size(), QImage::Format_ARGB32);
 	exportPainter(image);

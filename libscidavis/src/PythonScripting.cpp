@@ -285,17 +285,6 @@ struct QString_from_python_str
 
 const char* PythonScripting::langName = "Python";
 
-// variable argument overloads here
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newTableSII,newTable,1,3);
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newMatrixSII,newMatrix,0,3);
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newGraphS,newGraph,0,1);
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_newNoteS,newNote,0,1);
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_plotTVSII,plot,2,4);
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(ApplicationWindow_plotTSII,plot,2,4);
-
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(Graph_addErrorBars,addErrorBars,3,10);
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(Graph_exportImage,exportImage,1,2);
-
 // returns the current ApplicationWindow instance
 ApplicationWindow& theApp()
 {
@@ -328,50 +317,14 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<ArrowMarker>();
   p.defineClass<ExponentialFit>();
   p.defineClass<QtNamespace>();
-//  p.defineClass<QtCore>();
-//  p.defineClass<QtCore::QDateTime>();
   p.defineClass<Column>();
   python<SciDAVis::ColumnMode>(p,"");
   // redefine Qt as an alias for QtNamespace - unfortunately QtNamespace cannot be called Qt in C++ as Qt is already taken
   modDict("__main__")["Qt"]=modDict("scidavis")["QtNamespace"];
   
-  // overload handling
-  Table& (ApplicationWindow::*newTable)()=&ApplicationWindow::newTable;
-  Table& (ApplicationWindow::*newTableSII)(const std::string&,int,int)=&ApplicationWindow::newTable;
-  p.getClass<ApplicationWindow>().
-    overload("newTable",newTable).
-    overload("newTable",newTableSII,ApplicationWindow_newTableSII()).
-    overload("newMatrix",&ApplicationWindow::newMatrix,ApplicationWindow_newMatrixSII()).
-    overload("newGraph",&ApplicationWindow::newGraph,ApplicationWindow_newGraphS()).
-    overload("newNote",&ApplicationWindow::newNote,ApplicationWindow_newNoteS());
-
-  bool (Graph::*graph_addErrorBars)
-    (const QString&,Table&,const QString&,
-     int,int,int,const QColor&,bool,bool,bool)=&Graph::addErrorBars;
-  p.getClass<Graph>().
-    overload("addErrorBars",graph_addErrorBars,Graph_addErrorBars())
-    //    overload("exportImage",&Graph::exportImage,Graph_exportImage())
-    ;
-  p.getClass<MultiLayer>().
-    overload("exportImage",&MultiLayer::exportImage,Graph_exportImage())
-    ;
   p.getClass<ExponentialFit>().
     def("__init__",py::make_constructor(newExponentialFit)).
     def("__init__",py::make_constructor(newExponentialFit2));
-//  p.getClass<ExponentialFit>().
-//    def(py::init<ApplicationWindow*,Graph*,const QString&>());
-//  Column& (Table::*tableColumnInt)(int x) const =&Table::column;
-//  Column& (Table::*tableColumnString)(const std::string& x) const=&Table::column;
-//  p.getClass<Table>().
-//    overload("column",tableColumnInt).
-//    overload("column",tableColumnString);
-
-//  bool (Column::*copy1)(const Column& other)=&Column::copy;
-//  bool (Column::*copy2)(const Column& source, int source_start, int dest_start, int num_rows)=&Column::copy;
-//  p.getClass<Column>().
-//    overload("copy",copy1).
-//    overload("copy",copy2);
-  
 }
 
 QString PythonScripting::toString(PyObject *object, bool decref)

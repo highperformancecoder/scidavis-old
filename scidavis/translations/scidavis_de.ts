@@ -997,8 +997,8 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9114"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13191"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13234"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="408"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="410"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="409"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="414"/>
         <source>Matrix</source>
         <translation type="unfinished">Matrix</translation>
     </message>
@@ -4027,7 +4027,7 @@ Wollen Sie fortfahren?</translation>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11648"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13203"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13249"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="576"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="583"/>
         <source>Graph</source>
         <translation type="unfinished">Grafik</translation>
     </message>
@@ -11541,7 +11541,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="unfinished">Bitte einen gültigen Dateinamen eingeben!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="620"/>
+        <location filename="../../libscidavis/src/Graph.h" line="643"/>
         <source>F</source>
         <translation type="unfinished">F</translation>
     </message>

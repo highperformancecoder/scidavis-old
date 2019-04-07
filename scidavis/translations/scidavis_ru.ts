@@ -1021,8 +1021,8 @@ Do you want to overwrite it?</source>
         <location line="+7289"/>
         <location line="+4077"/>
         <location line="+43"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="+408"/>
-        <location line="+2"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="+409"/>
+        <location line="+5"/>
         <source>Matrix</source>
         <translation type="unfinished">Матрица</translation>
     </message>
@@ -5301,7 +5301,7 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+61"/>
         <location line="+1555"/>
         <location line="+46"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.h" line="+166"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.h" line="+169"/>
         <source>Graph</source>
         <translation type="unfinished">График</translation>
     </message>
@@ -10249,7 +10249,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Предупреждение</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="+620"/>
+        <location filename="../../libscidavis/src/Graph.h" line="+643"/>
         <source>F</source>
         <translation type="unfinished">F</translation>
     </message>

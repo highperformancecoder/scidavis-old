@@ -186,7 +186,8 @@ public slots:
   //! Deletes the currently selected items from the list view #lv.
   void deleteSelectedItems();
 
-  Note& newNote(const QString& caption = QString());
+  Note& newNote(const QString& caption);
+  Note& newNote() {return newNote("");}
   void saveNoteAs();
   void showLayerDialog();
   void showPlotWizard();
@@ -407,7 +408,10 @@ public slots:
   Matrix& matrix(const QString& name);
   Matrix& newDefaultMatrix(int r, int c) {return newMatrix(tr("Matrix"),r,c);}
   //! To be used when opening a project file only!
-  Matrix& newMatrix(const QString& caption=tr("Matrix"), int r=32, int c=32);
+  Matrix& newMatrix(const QString& caption, int r, int c);
+  Matrix& newMatrix(const QString& caption, int r) {return newMatrix(caption,r,32);}
+  Matrix& newMatrix(const QString& caption) {return newMatrix(caption, 32);}
+  Matrix& newMatrix() {return newMatrix(tr("Matrix"));}
   void initMatrix(Matrix* m);
   void invertMatrix();
   void matrixDeterminant();
@@ -423,7 +427,9 @@ public slots:
                   bool renameCols, bool stripSpaces, bool simplifySpaces,
                   bool convertToNumeric, QLocale numericLocale);
   //! Used when loading a table from a project file
-  Table& newTable(const std::string& caption,int c=2, int r=30);
+  Table& newTable(const std::string& caption,int c, int r);
+  Table& newTable(const std::string& caption,int c) {return newTable(caption,c,30);}
+  Table& newTable(const std::string& caption) {return newTable(caption,2);}
   Table& newTable(int r, int c, const QString& name = QString(),const QString& legend = QString());
   /// used when importing an ASCII file
   Table& newTable(const QString& name, const QString& legend, QList<Column *> columns);
@@ -573,8 +579,9 @@ public slots:
   void newProject();
 
   //! Creates a new empty multilayer plot
-  MultiLayer& newGraph(const QString& caption = tr("Graph"));
-
+  MultiLayer& newGraph(const QString& caption);
+  MultiLayer& newGraph() {return newGraph(tr("Graph"));}
+  
   //! \name Reading from a Project File
   //@{
   void openRecentProject();
