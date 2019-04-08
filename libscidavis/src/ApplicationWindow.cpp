@@ -9483,12 +9483,12 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 				c.setAlpha(fList[2].toInt());
 			ag->setBackgroundColor(c);
 		}
-		else if (s.contains ("Margin"))
+		else if (s.startsWith ("Margin"))
 		{
 			QStringList fList=s.split("\t");
 			ag->plotWidget()->setMargin(fList[1].toInt());
 		}
-		else if (s.contains ("Border"))
+		else if (s.startsWith ("Border"))
 		{
 			QStringList fList=s.split("\t");
 			ag->setFrame(fList[1].toInt(), QColor(COLORVALUE(fList[2])));
