@@ -32,6 +32,7 @@
 #define WIDGET_H
 
 #include <QMdiSubWindow>
+#include "SciDAVisObject.h"
 class QEvent;
 class QCloseEvent;
 class QString;
@@ -72,6 +73,8 @@ public:
   };
   enum Status{Hidden = -1, Normal = 0, Minimized = 1, Maximized = 2};
 
+  QString windowTitle() const {return QMdiSubWindow::windowTitle();}
+  
   //! Return the window label
   virtual QString windowLabel(){return QString(w_label);};
   //! Set the window label
@@ -126,7 +129,12 @@ public:
   void contextMenuEvent(QContextMenuEvent *e);
 
   //! Returns the pointer to the parent folder of the window
-  Folder* folder(){return parentFolder;};
+  Folder& folder(){
+    if (parentFolder)
+      return *parentFolder;
+    else
+      throw NoSuchObject();
+  };
 
   //! Initializes the pointer to the parent folder of the window
   void setFolder(Folder* f){parentFolder = f;};

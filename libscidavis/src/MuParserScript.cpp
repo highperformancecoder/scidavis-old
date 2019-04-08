@@ -297,24 +297,33 @@ double MuParserScript::tableColumn_Function(double columnIndex) {
  * so this is not implemented for the discouraged version. However, see tableCellFunction() for how
  * to get a specific cell with the column specified by name.
  */
-double MuParserScript::tableColumn__Function(const char *tableName, double columnIndex) {
-	Table *thisTable = qobject_cast<Table*>(s_currentInstance->Context);
-	if (!thisTable)
-		// improving the error message would break translations
-		// TODO: change tablecol() to column() for next minor release
-		throw mu::Parser::exception_type(qPrintable(tr("tablecol() works only on tables!")));
-	Table *targetTable = thisTable->folder()->rootFolder()->table(tableName, true);
-	if (!targetTable)
-		throw mu::Parser::exception_type(qPrintable(tr("Couldn't find a table named %1.")
-					.arg(tableName)));
-	Column *column = targetTable->d_future_table->column(qRound(columnIndex) - 1);
-	if (!column)
-		throw mu::Parser::exception_type(qPrintable(tr("There's no column %1 in table %2!")
-					.arg(qRound(columnIndex)).arg(tableName)));
-	int row = qRound(s_currentInstance->m_variables["i"]) - 1;
-	if (column->isInvalid(row))
-		throw new EmptySourceError();
-	return column->valueAt(row);
+double MuParserScript::tableColumn__Function(const char *tableName, double columnIndex)
+{
+  Table *thisTable = dynamic_cast<Table*>(s_currentInstance->Context);
+  if (!thisTable)
+    // improving the error message would break translations
+    // TODO: change tablecol() to column() for next minor release
+    throw mu::Parser::exception_type(qPrintable(tr("tablecol() works only on tables!")));
+  try
+    {
+      Table& targetTable = thisTable->folder().rootFolder()->table(tableName, true);
+      Column *column = targetTable.d_future_table->column(qRound(columnIndex) - 1);
+      if (!column)
+        throw mu::Parser::exception_type(qPrintable(tr("There's no column %1 in table %2!")
+                                                    .arg(qRound(columnIndex)).arg(tableName)));
+      int row = qRound(s_currentInstance->m_variables["i"]) - 1;
+      if (column->isInvalid(row))
+        throw new EmptySourceError();
+      return column->valueAt(row);
+
+    }
+  // nb if future::Table::column is refactored to return a reference,
+  // then we'll need to set an error message variable within the try
+  // block
+  catch (const NoSuchObject&)
+    {
+      throw mu::Parser::exception_type(qPrintable(tr("Couldn't find a table named %1.").arg(tableName)));
+    }
 }
 
 /**
@@ -392,85 +401,86 @@ double MuParserScript::matrixCellFunction(double rowIndex, double columnIndex) {
  * Also, it's possible to escape /'s in the path using \\. Column and folder names can already
  * contain slashes and table names will follow in a future release.
  */
-Column *MuParserScript::resolveColumnPath(const QString &path) {
-	Column *result = 0;
+Column *MuParserScript::resolveColumnPath(const QString &path)
+{
+  // Split path into components.
+  // While escape handling would be possible using a regular expression, it would require
+  // lookbehind assertions, which are currently not supported by QRegExp. Thus, we can't simply
+  // use QString::split() and have to explicitly loop over the characters in path.
+  QStringList pathComponents;
+  QString current;
+  for (int i=0; i<path.size(); ++i)
+    switch(path.at(i).toLatin1())
+      {
+      case '/':
+        pathComponents << current;
+        current.clear();
+        break;
+      case '\\':
+        if (i+1 < path.size())
+          current.append(path.at(++i));
+        break;
+      default:
+        current.append(path.at(i));
+        break;
+      }
+  QString columnName = current;
 
-	// Split path into components.
-	// While escape handling would be possible using a regular expression, it would require
-	// lookbehind assertions, which are currently not supported by QRegExp. Thus, we can't simply
-	// use QString::split() and have to explicitly loop over the characters in path.
-	QStringList pathComponents;
-	QString current;
-	for (int i=0; i<path.size(); ++i)
-		switch(path.at(i).toLatin1()) {
-			case '/':
-				pathComponents << current;
-				current.clear();
-				break;
-			case '\\':
-				if (i+1 < path.size())
-					current.append(path.at(++i));
-				break;
-			default:
-				current.append(path.at(i));
-				break;
-		}
-	QString columnName = current;
+  Table *table = 0;
+  if (pathComponents.isEmpty())
+    {
+      // only column name specified, read from this table
+      table = dynamic_cast<Table *>(Context);
+      if (!table)
+        throw mu::Parser::exception_type(qPrintable(tr(
+                                                       "Accessing table values is not (yet) supported in this context.")));
+    }
+  else
+    {
+      // look up the table containing the column
+      MyWidget *myContext = dynamic_cast<MyWidget *>(Context);
+      if (!myContext)
+        throw mu::Parser::exception_type(qPrintable(tr(
+                                                       "Accessing table values is not (yet) supported in this context.")));
+      QString tableName = pathComponents.takeLast();
+      if (pathComponents.isEmpty())
+        // needed for backwards compatibility, but will be problematic once we drop the requirement
+        // of project-wide unique object names
+        table = &myContext->folder().rootFolder()->table(tableName, true);
+      else {
+        Folder *folder;
+        if (pathComponents.at(0).isEmpty())
+          // absolute path
+          folder = myContext->folder().rootFolder();
+        else if (pathComponents.at(0) == "..")
+          // relative path
+          folder = &myContext->folder();
+        else
+          // invalid path
+          throw mu::Parser::exception_type(qPrintable(tr("Couldn't find a table named %1.")
+                                                      .arg(pathComponents.join("/")+"/"+tableName)));
+        pathComponents.removeFirst();
+        foreach(QString f, pathComponents) {
+          if (f == "..")
+            folder = qobject_cast<Folder*>(folder->parent());
+          else
+            folder = folder->findSubfolder(f);
+          if (!folder)
+            throw mu::Parser::exception_type(qPrintable(tr("Couldn't find a table named %1.")
+                                                        .arg(pathComponents.join("/")+"/"+tableName)));
+        }
+        table = &folder->table(tableName);
+      }
+    }
 
-	Table *table = 0;
-	if (pathComponents.isEmpty()) {
-		// only column name specified, read from this table
-		table = qobject_cast<Table *>(Context);
-		if (!table)
-			throw mu::Parser::exception_type(qPrintable(tr(
-							"Accessing table values is not (yet) supported in this context.")));
-	} else {
-		// look up the table containing the column
-		MyWidget *myContext = qobject_cast<MyWidget *>(Context);
-		if (!myContext)
-			throw mu::Parser::exception_type(qPrintable(tr(
-							"Accessing table values is not (yet) supported in this context.")));
-		QString tableName = pathComponents.takeLast();
-		if (pathComponents.isEmpty())
-			// needed for backwards compatibility, but will be problematic once we drop the requirement
-			// of project-wide unique object names
-			table = myContext->folder()->rootFolder()->table(tableName, true);
-		else {
-			Folder *folder;
-			if (pathComponents.at(0).isEmpty())
-				// absolute path
-				folder = myContext->folder()->rootFolder();
-			else if (pathComponents.at(0) == "..")
-				// relative path
-				folder = myContext->folder();
-			else
-				// invalid path
-				throw mu::Parser::exception_type(qPrintable(tr("Couldn't find a table named %1.")
-							.arg(pathComponents.join("/")+"/"+tableName)));
-			pathComponents.removeFirst();
-			foreach(QString f, pathComponents) {
-				if (f == "..")
-					folder = qobject_cast<Folder*>(folder->parent());
-				else
-					folder = folder->findSubfolder(f);
-				if (!folder)
-					throw mu::Parser::exception_type(qPrintable(tr("Couldn't find a table named %1.")
-								.arg(pathComponents.join("/")+"/"+tableName)));
-			}
-			table = folder->table(tableName);
-		}
-		if (!table)
-			throw mu::Parser::exception_type(qPrintable(tr("Couldn't find a table named %1.")
-						.arg(pathComponents.join("/")+"/"+tableName)));
-	}
 
-	// finally, look up the column in the table
-	result = table->d_future_table->column(columnName, false);
-	if (!result)
-		throw mu::Parser::exception_type(qPrintable(tr("There's no column named %1 in table %2!")
+  // finally, look up the column in the table
+  auto result = table->d_future_table->column(columnName, false);
+  if (!result)
+    throw mu::Parser::exception_type(qPrintable(tr("There's no column named %1 in table %2!")
 					.arg(columnName).arg(table->d_future_table->path())));
 
-	return result;
+  return result;
 }
 
 /**

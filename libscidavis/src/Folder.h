@@ -47,102 +47,143 @@
 
 class FolderListItem;
 class FolderListView;
-class Table;
-class Matrix;
-class MultiLayer;
-class Note;
+
+#include "Table.h"
+#include "Matrix.h"
+#include "MultiLayer.h"
+#include "Note.h"
+
+//class Table;
+//class Matrix;
+//class MultiLayer;
+//class Note;
 
 class QDragEnterEvent;
 class QDragMoveEvent;
 class QDragLeaveEvent;
 class QDropEvent;
 
+class Folder;
+
+/// wrap a Qt container with Python accessor method
+struct FolderList: public QList<Folder*>
+{
+  Folder& __getitem__(size_t i) {return *(*this)[i];}
+};
+
 //! Folder for the project explorer
 class Folder : public SciDAVisObject<QObject>
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    Folder(const QString &name="");
+  Folder(const QString &name="");
 
-	QList<MyWidget *> windowsList(){return lstWindows;};
+  QList<MyWidget *> windowsList(){return lstWindows;};
 
-    void addWindow( MyWidget *w ) {
-		w->setFolder(this);
-		lstWindows.append( w );
-	};
-	void removeWindow( MyWidget *w ){
-		w->setFolder(0);
-		lstWindows.removeAll(w);
-		if (w==d_active_window) d_active_window=0;
-	};
+  void addWindow( MyWidget *w ) {
+    w->setFolder(this);
+    lstWindows.append( w );
+  };
+  void removeWindow( MyWidget *w ){
+    w->setFolder(0);
+    lstWindows.removeAll(w);
+    if (w==d_active_window) d_active_window=0;
+  };
 
-	int windowCount(bool recursive = false) const {
-	    int result = lstWindows.size();
-	    if (recursive)
-		foreach (Folder *folder, folders())
-		    result += folder->windowCount(true);
-	    return result;
-	};
+  int windowCount(bool recursive = false) const {
+    int result = lstWindows.size();
+    if (recursive)
+      foreach (Folder *folder, folders())
+        result += folder->windowCount(true);
+    return result;
+  };
 
-	//! The list of subfolder names, including first generation children only
-	QStringList subfolders();
+  //! The list of subfolder names, including first generation children only
+  QStringList subfolders();
 
-	//! The list of subfolders
-	QList<Folder*> folders() const;
+  //! The list of subfolders
+  FolderList folders() const;
 
-	//! Pointer to the subfolder called s
-	Folder* findSubfolder(const QString& s, bool caseSensitive = true, bool partialMatch = false);
+  //! Pointer to the subfolder called s
+  Folder* findSubfolder(const QString& s, bool caseSensitive = true, bool partialMatch = false);
 
-	//! Pointer to the first window matching the search criteria
-	MyWidget* findWindow(const QString& s, bool windowNames, bool labels,
-							 bool caseSensitive, bool partialMatch);
+  //! Pointer to the first window matching the search criteria
+  MyWidget* findWindow(const QString& s, bool windowNames, bool labels,
+                       bool caseSensitive, bool partialMatch);
 
-	//! get a window by name
-	  /**
-	   * Returns the first window with given name that inherits class cls;
-	   * NULL on failure. If recursive is true, do a depth-first recursive
-	   * search.
-	   */
-	MyWidget *window(const QString &name, const char *cls="myWidget", bool recursive=false);
-	//! Return table named name or NULL
-	Table *table(const QString &name, bool recursive=false) { return (Table*) window(name, "Table", recursive); }
-	//! Return matrix named name or NULL
-	Matrix *matrix(const QString &name, bool recursive=false) { return (Matrix*) window(name, "Matrix", recursive); }
-	//! Return graph named name or NULL
-	MultiLayer *graph(const QString &name, bool recursive=false) { return (MultiLayer*) window(name, "MultiLayer", recursive); }
-	//! Return note named name or NULL
-	Note *note(const QString &name, bool recursive=false) { return (Note*) window(name, "Note", recursive); }
+  //! get a window by name
+  /**
+   * Returns the first window with given name that inherits class cls;
+   * NULL on failure. If recursive is true, do a depth-first recursive
+   * search.
+   */
+  MyWidget* window(const QString &name, const char *cls="myWidget", bool recursive=false);
 
-	//! The complete path of the folder in the project tree
-	QString path();
+  template<class T> T& windowT(const QString& name, bool recursive) const {
+    for (auto w: lstWindows)
+      if (auto wt=dynamic_cast<T*>(w))
+        if (name == QString(w->name().c_str()).mid(0,QString(w->name().c_str()).indexOf("@")))
+          return *wt;
+    if (recursive)
+      for (auto c: children())
+        if (auto f=dynamic_cast<Folder*>(c))
+          try {
+            return f->windowT<T>(name,recursive);
+          } catch (const NoSuchObject&) {} //keep going if not found
+    throw std::runtime_error((tr("Couldn't find window named ")+name).toStdString());
+  }
+  
+  //! Return table named name or NULL
+  Table& table(const QString &name, bool recursive) const
+  {return windowT<Table>(name, recursive);}
+  Table& table(const QString &name) {return table(name,false);}
+  
 
-	//! The root of the hierarchy this folder belongs to.
-	Folder* rootFolder();
+  //! Return matrix named name or NULL
+  Matrix& matrix(const QString &name, bool recursive) const
+  {return windowT<Matrix>(name, recursive);}
+  Matrix& matrix(const QString &name) {return matrix(name, false);}
 
-	QString birthDate(){return birthdate;};
-	void setBirthDate(const QString& s){birthdate = s;};
+  //! Return graph named name or NULL
+  MultiLayer& graph(const QString &name, bool recursive) const
+  {return windowT<MultiLayer>(name, recursive);}
+  MultiLayer& graph(const QString &name) const {return graph(name,false);}
+  
+  //! Return note named name. @throw if nonexistent
+  Note& note(const QString &name, bool recursive) const
+  {return windowT<Note>(name, recursive); }
+  Note& note(const QString &name) const {return note(name,false);}
 
-	QString modificationDate(){return modifDate;};
-	void setModificationDate(const QString& s){modifDate = s;};
+  //! The complete path of the folder in the project tree
+  QString path();
 
-	//! Pointer to the corresponding QListViewItem in the main application
-	FolderListItem * folderListItem(){return myFolderListItem;};
-	void setFolderListItem(FolderListItem *it){myFolderListItem = it;};
+  //! The root of the hierarchy this folder belongs to.
+  Folder* rootFolder();
 
-    MyWidget *activeWindow(){return d_active_window;};
-    void setActiveWindow(MyWidget *w){d_active_window = w;};
+  QString birthDate(){return birthdate;};
+  void setBirthDate(const QString& s){birthdate = s;};
 
-	// TODO: move to Aspect
-	QString name(){return objectName();}
-	void setName(const QString& s){setObjectName(s);}
+  QString modificationDate(){return modifDate;};
+  void setModificationDate(const QString& s){modifDate = s;};
+
+  //! Pointer to the corresponding QListViewItem in the main application
+  FolderListItem * folderListItem(){return myFolderListItem;};
+  void setFolderListItem(FolderListItem *it){myFolderListItem = it;};
+
+  MyWidget *activeWindow(){return d_active_window;};
+  void setActiveWindow(MyWidget *w){d_active_window = w;};
+
+  // TODO: move to Aspect
+  QString name(){return objectName();}
+  void setName(const QString& s){setObjectName(s);}
 protected:
-    QString birthdate, modifDate;
-    QList<MyWidget *> lstWindows;
-	FolderListItem *myFolderListItem;
+  QString birthdate, modifDate;
+  QList<MyWidget *> lstWindows;
+  FolderListItem *myFolderListItem;
 
-	//! Pointer to the active window in the folder
-	MyWidget *d_active_window;
+  //! Pointer to the active window in the folder
+  MyWidget *d_active_window;
 };
 
 /*****************************************************************************

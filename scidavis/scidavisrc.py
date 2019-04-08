@@ -80,13 +80,13 @@ for name in dir(scidavis):
                 setattr(QtCore, re.sub("QtCore::","",name), getattr(scidavis, name))
 
 setattr(__main__,"QtCore",QtCore)
-        
+
 # import selected methods of ApplicationWindow into the global namespace
 appImports = (
 	"table","newTable",
 	"matrix","newMatrix",
-	"newGraph",
-	"newNote",
+	"graph", "newGraph",
+	"note", "newNote",
         "plot",
 	"plotContour", "plotColorMap", "plotGrayScale",
 	"saveFolder",

@@ -738,7 +738,7 @@ void ApplicationWindow::insertTranslatedStrings()
 	edit->setTitle(tr("&Edit"));
 	view->setTitle(tr("&View"));
 	scriptingMenu->setTitle(tr("Scripting"));
-	graph->setTitle(tr("&Graph"));
+	graphMenu->setTitle(tr("&Graph"));
 	plot3DMenu->setTitle(tr("3D &Plot"));
 	matrixMenu->setTitle(tr("&Matrix"));
 	tableMenu->setTitle(tr("&Table"));
@@ -863,27 +863,27 @@ void ApplicationWindow::initMainMenu()
 	view->addAction(actionShowConsole);
 #endif
 
-	graph = new QMenu(this);
-	graph->setFont(appFont);
-	graph->setTitle(tr("&Graph"));
-	graph->addAction(actionShowCurvesDialog);
-	graph->addAction(actionAddErrorBars);
-	graph->addAction(actionAddFunctionCurve);
+	graphMenu = new QMenu(this);
+	graphMenu->setFont(appFont);
+	graphMenu->setTitle(tr("&Graph"));
+	graphMenu->addAction(actionShowCurvesDialog);
+	graphMenu->addAction(actionAddErrorBars);
+	graphMenu->addAction(actionAddFunctionCurve);
 
-	graph->addSeparator();
+	graphMenu->addSeparator();
 
-	graph->addAction(actionAddText);
-	graph->addAction(btnArrow);
-	graph->addAction(btnLine);
-	graph->addAction(actionTimeStamp);
-	graph->addAction(actionAddImage);
-	graph->addAction(actionNewLegend);
+	graphMenu->addAction(actionAddText);
+	graphMenu->addAction(btnArrow);
+	graphMenu->addAction(btnLine);
+	graphMenu->addAction(actionTimeStamp);
+	graphMenu->addAction(actionAddImage);
+	graphMenu->addAction(actionNewLegend);
 
-	graph->addSeparator();//layers section
-	graph->addAction(actionAutomaticLayout);
-	graph->addAction(actionAddLayer);
-	graph->addAction(actionDeleteLayer);
-	graph->addAction(actionShowLayerDialog);
+	graphMenu->addSeparator();//layers section
+	graphMenu->addAction(actionAutomaticLayout);
+	graphMenu->addAction(actionAddLayer);
+	graphMenu->addAction(actionDeleteLayer);
+	graphMenu->addAction(actionShowLayerDialog);
 
 	plot3DMenu = new QMenu(this);
 	plot3DMenu->setFont(appFont);
@@ -1143,7 +1143,7 @@ void ApplicationWindow::customMenu(MyWidget* w)
 
 		if (w->inherits("MultiLayer"))
 		{
-			menuBar()->addMenu(graph);
+			menuBar()->addMenu(graphMenu);
 			menuBar()->addMenu(plotDataMenu);
 			menuBar()->addMenu(calcul);
 			menuBar()->addMenu(format);
@@ -2712,6 +2712,32 @@ void ApplicationWindow::initNote(Note* m, const QString& caption)
 	emit modified();
 }
 
+Note& ApplicationWindow::note(const QString& name)
+{
+  try
+    {
+      return current_folder->note(name,false);
+    }
+  catch (const std::exception&)
+    {
+      return projectFolder().note(name,true);
+    }
+}
+
+MultiLayer& ApplicationWindow::graph(const QString& name)
+{
+  try
+    {
+      return current_folder->graph(name,false);
+    }
+  catch (const std::exception&)
+    {
+      return projectFolder().graph(name,true);
+    }
+}
+
+
+
 Matrix& ApplicationWindow::newMatrix(const QString& caption, int r, int c)
 {
 	Matrix* w = new Matrix(scriptEnv, r, c, "", 0 ,0);
@@ -2883,9 +2909,13 @@ void ApplicationWindow::windowActivated(QMdiSubWindow *w)
 	customToolBars((MyWidget*)w);
 	customMenu((MyWidget*)w);
 
-	Folder *f = ((MyWidget *)w)->folder();
-	if (f)
-        f->setActiveWindow((MyWidget *)w);
+        try
+          {
+            Folder& f = ((MyWidget *)w)->folder();
+            f.setActiveWindow((MyWidget *)w);
+          }
+        catch (const std::exception&)
+          {}
 }
 
 void ApplicationWindow::addErrorBars()
@@ -3131,7 +3161,7 @@ void ApplicationWindow::updateAppFonts()
 	scriptingMenu->setFont(appFont);
 	windowsMenu->setFont(appFont);
 	view->setFont(appFont);
-	graph->setFont(appFont);
+	graphMenu->setFont(appFont);
 	file->setFont(appFont);
 	format->setFont(appFont);
 	calcul->setFont(appFont);
@@ -4959,37 +4989,37 @@ void ApplicationWindow::exportAllGraphs()
 
 QString ApplicationWindow::windowGeometryInfo(MyWidget *w)
 {
-	QString s = "geometry\t";
-    if (w->status() == MyWidget::Maximized)
-	{
-		if (w == w->folder()->activeWindow())
-			return s + "maximized\tactive\n";
-		else
-			return s + "maximized\n";
-	}
-
-	if (!w->parent())
-        s+="0\t0\t500\t400\t";
-    else
+  QString s = "geometry\t";
+  if (w->status() == MyWidget::Maximized)
     {
-        QPoint p = w->pos();// store position
-        s+=QString::number(p.x())+"\t";
-        s+=QString::number(p.y())+"\t";
-        s+=QString::number(w->frameGeometry().width())+"\t";
-        s+=QString::number(w->frameGeometry().height())+"\t";
+      if (w == w->folder().activeWindow())
+        return s + "maximized\tactive\n";
+      else
+        return s + "maximized\n";
     }
 
-    if (w->status() == MyWidget::Minimized)
-        s += "minimized\t";
+  if (!w->parent())
+    s+="0\t0\t500\t400\t";
+  else
+    {
+      QPoint p = w->pos();// store position
+      s+=QString::number(p.x())+"\t";
+      s+=QString::number(p.y())+"\t";
+      s+=QString::number(w->frameGeometry().width())+"\t";
+      s+=QString::number(w->frameGeometry().height())+"\t";
+    }
 
-    bool hide = hidden(w);
-    if (w == w->folder()->activeWindow() && !hide)
-        s+="active\n";
-    else if(hide)
-        s+="hidden\n";
-    else
-        s+="\n";
-    return s;
+  if (w->status() == MyWidget::Minimized)
+    s += "minimized\t";
+
+  bool hide = hidden(w);
+  if (w == w->folder().activeWindow() && !hide)
+    s+="active\n";
+  else if(hide)
+    s+="hidden\n";
+  else
+    s+="\n";
+  return s;
 }
 
 void ApplicationWindow::restoreWindowGeometry(ApplicationWindow *app, MyWidget *w, const QString s)
@@ -5023,11 +5053,12 @@ void ApplicationWindow::restoreWindowGeometry(ApplicationWindow *app, MyWidget *
 	}
 
 	if (s.contains ("active"))
-	{
-        Folder *f = w->folder();
-        if (f)
-            f->setActiveWindow(w);
-	}
+          try
+            {
+              w->folder().setActiveWindow(w);
+            }
+          catch (const std::exception&)
+            {}
 
 	w->blockSignals (false);
 }
@@ -7472,7 +7503,7 @@ void ApplicationWindow::closeWindow(MyWidget* window)
 		return;
 
 	removeWindowFromLists(window);
-	window->folder()->removeWindow(window);
+	window->folder().removeWindow(window);
 
 	//update list view in project explorer
 	QTreeWidgetItem *it=lv.findItems (window->name().c_str(), Qt::MatchExactly | Qt::MatchCaseSensitive).at(0);
@@ -11657,9 +11688,9 @@ MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
 	return g;
 }
 
+#ifdef ORIGIN_IMPORT
 ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
 {
-#ifdef ORIGIN_IMPORT
     if (filename.endsWith(".opj", Qt::CaseInsensitive) || filename.endsWith(".ogg", Qt::CaseInsensitive) || filename.endsWith(".org", Qt::CaseInsensitive))
     {
         QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -11687,10 +11718,14 @@ ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
         return this;
     }
 	else return 0;
-#else
-    return NULL;
-#endif
 }
+#else
+ApplicationWindow* ApplicationWindow::importOPJ(const QString&)
+{
+    return NULL;
+}
+#endif
+
 
 void ApplicationWindow::deleteFitTables()
 {

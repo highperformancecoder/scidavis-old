@@ -1,3 +1,5 @@
+from checkThrow import checkThrow
+
 app.loadProject("Establishing_contact.sciprj");
 n=app.note("TestNote")
 assert n.windowTitle()=="TestNote"
@@ -40,9 +42,14 @@ f0 = activeFolder()
 f1 = rootFolder()
 
 f2 = f1.folders()[0]
-f3 = f1.folder("New Folder",True,False)
-t1 = f1.table("Table2",False)
-m4 = f1.matrix("Matrix2",False)
-g3 = f1.graph("Graph2",False)
-n4 = f1.note("Notes2",False)
+# I can't see how the following folder method can pass:
+# a) it is not documented in the manual
+# b) Folder has no "folder" method
+# c) scidavis.sip doesn't define it either
+# f3 = f1.folder("New Folder",True,False)
+checkThrow('t1 = f1.table("Table2",False)')
+checkThrow('m4 = f1.matrix("Matrix2",False)')
+checkThrow('g3 = f1.graph("Graph2",False)')
+checkThrow('n4 = f1.note("Notes2",False)')
+
 app.exit()

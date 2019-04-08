@@ -5437,6 +5437,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>Folder</name>
+    <message>
+        <source>Couldn&apos;t find window named </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FunctionCurve</name>
     <message>
         <source>Input function error</source>
@@ -9397,6 +9404,10 @@ nejmenší celé číslo větší nebo rovno x.</translation>
     <message>
         <source>
 Released</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No such object</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

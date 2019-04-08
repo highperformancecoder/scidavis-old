@@ -7075,6 +7075,10 @@ p, li { white-space: pre-wrap; }
         <source>no plugin to load element &apos;%1&apos; found</source>
         <translation type="obsolete">Nenhum plugin para carregar o elemento &apos;%1&apos; foi encontrado</translation>
     </message>
+    <message>
+        <source>Couldn&apos;t find window named </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FunctionCurve</name>
@@ -12087,6 +12091,10 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
 Released</source>
         <translation>
 Atualizado</translation>
+    </message>
+    <message>
+        <source>No such object</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

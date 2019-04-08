@@ -36,7 +36,8 @@ public:
 // thrown in the event an object reference cannot be returned
 struct NoSuchObject: public std::exception
 {
-  const char* what() const noexcept override {return "No such object";}
+  const char* what() const noexcept override
+  {return qPrintable(QObject::tr("No such object"));}
 };
 
 #endif

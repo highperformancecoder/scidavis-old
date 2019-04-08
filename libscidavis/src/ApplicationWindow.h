@@ -830,6 +830,12 @@ public slots:
   void initNote(Note* m, const QString& caption);
   //@}
 
+  /// return reference to a note subwindow named \a name
+  Note& note(const QString& name);
+  /// return reference to a MultiLayer subwindow named \a name
+  MultiLayer& graph(const QString& name);
+
+  
   //! \name Folders
   //@{
   //! Deletes the current folder
@@ -1078,7 +1084,7 @@ private:
   Graph *lastCopiedLayer;
   QSplitter *explorerSplitter;
 
-  QMenu *windowsMenu,*view,*graph,*file,*format,*calcul,*edit,*dataMenu,*recent, *exportPlot, *toolbarsMenu;
+  QMenu *windowsMenu,*view,*graphMenu,*file,*format,*calcul,*edit,*dataMenu,*recent, *exportPlot, *toolbarsMenu;
   QMenu *d_quick_fit_menu;
   QMenu *help,*type,*plot2D,*plot3D, *specialPlot, *panels,*stat,*decay, *filter;
   QMenu *matrixMenu, *plot3DMenu, *plotDataMenu, *tableMenu;
