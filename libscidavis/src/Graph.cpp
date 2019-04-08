@@ -1933,7 +1933,7 @@ void Graph::drawCanvasFrame(const QStringList& frame)
           d_plot->setFrameStyle(QFrame::Box);
         
 	QPalette pal = d_plot->palette();
-	pal.setColor(QPalette::WindowText,QColor(frame[2]));
+	pal.setColor(QPalette::WindowText,QColor(COLORVALUE(frame[2])));
 	d_plot->setPalette(pal);
 }
 
@@ -2191,7 +2191,7 @@ void Graph::setAxesTitleColor(QStringList l)
 		if (scale)
 		{
   	        QwtText title = scale->title();
-  	        title.setColor(QColor(l[i+1]));
+	        title.setColor(QColor(COLORVALUE(l[i+1])));
   	        scale->setTitle(title);
   	   }
 	}
@@ -2585,9 +2585,9 @@ long Graph::insertTextMarker(const QStringList& list, int fileVersion)
 	}
 	else if (fileVersion < 90)
 	{
-		mrk->setTextColor(QColor(fList[9]));
+		mrk->setTextColor(QColor(COLORVALUE(fList[9])));
 		mrk->setFrameStyle(fList[10].toInt());
-		mrk->setBackgroundColor(QColor(fList[12]));
+		mrk->setBackgroundColor(QColor(COLORVALUE(fList[12])));
 
 		int n=(int)fList.count();
 		for (int i=0;i<n-13;i++)
@@ -2595,9 +2595,9 @@ long Graph::insertTextMarker(const QStringList& list, int fileVersion)
 	}
 	else
 	{
-		mrk->setTextColor(QColor(fList[9]));
+		mrk->setTextColor(QColor(COLORVALUE(fList[9])));
 		mrk->setFrameStyle(fList[10].toInt());
-		QColor c = QColor(fList[12]);
+		QColor c = QColor(COLORVALUE(fList[12]));
 		c.setAlpha(fList[13].toInt());
 		mrk->setBackgroundColor(c);
 
@@ -2627,7 +2627,7 @@ void Graph::addArrow(QStringList list, int fileVersion)
 							list[3].toDouble(), list[4].toDouble());
 
 	mrk->setWidth(list[5].toInt());
-	mrk->setColor(QColor(list[6]));
+	mrk->setColor(QColor(COLORVALUE(list[6])));
 	mrk->setStyle(getPenStyle(list[7]));
 	mrk->drawEndArrow(list[8]=="1");
 	mrk->drawStartArrow(list[9]=="1");
@@ -5122,9 +5122,9 @@ void Graph::restoreSpectrogram(ApplicationWindow *app, const QStringList& lst)
             s = *(++line);
             int mode = s.remove("<Mode>").remove("</Mode>").trimmed().toInt();
             s = *(++line);
-            QColor color1 = QColor(s.remove("<MinColor>").remove("</MinColor>").trimmed());
+            QColor color1 = QColor(COLORVALUE(s.remove("<MinColor>").remove("</MinColor>").trimmed()));
             s = *(++line);
-            QColor color2 = QColor(s.remove("<MaxColor>").remove("</MaxColor>").trimmed());
+            QColor color2 = QColor(COLORVALUE(s.remove("<MaxColor>").remove("</MaxColor>").trimmed()));
 
             QwtLinearColorMap colorMap = QwtLinearColorMap(color1, color2);
             colorMap.setMode((QwtLinearColorMap::Mode)mode);
@@ -5135,7 +5135,7 @@ void Graph::restoreSpectrogram(ApplicationWindow *app, const QStringList& lst)
             {
                 s = (*(++line)).trimmed();
                 QStringList l = s.remove("<Stop>").remove("</Stop>").split("\t");
-                colorMap.addColorStop(l[0].toDouble(), QColor(l[1]));
+                colorMap.addColorStop(l[0].toDouble(), QColor(COLORVALUE(l[1])));
             }
             sp->setCustomColorMap(colorMap);
             line++;
@@ -5162,7 +5162,7 @@ void Graph::restoreSpectrogram(ApplicationWindow *app, const QStringList& lst)
                 else
                 {
                     s = (*(++line)).trimmed();
-                    QColor c = QColor(s.remove("<PenColor>").remove("</PenColor>"));
+                    QColor c = QColor(COLORVALUE(s.remove("<PenColor>").remove("</PenColor>")));
                     s = (*(++line)).trimmed();
                     int width = s.remove("<PenWidth>").remove("</PenWidth>").toInt();
                     s = (*(++line)).trimmed();
