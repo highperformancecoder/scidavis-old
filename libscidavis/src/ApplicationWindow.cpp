@@ -2257,7 +2257,7 @@ MultiLayer& ApplicationWindow::plot(Table& t,const pyobject& col,int style,int c
   else
     for (int i=0; i<len(col); ++i)
       cl<<py::extract<string>(col[i])().c_str();
-  if (auto ml=multilayerPlot(&t,cl,style,colour))
+  if (auto ml=multilayerPlot(&t,cl,style))
     return *ml;
 #endif
   throw NoSuchObject();
