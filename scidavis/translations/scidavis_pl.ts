@@ -7421,7 +7421,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Folder</name>
     <message>
-        <location filename="../../libscidavis/src/Folder.h" line="156"/>
+        <location filename="../../libscidavis/src/Folder.h" line="143"/>
         <source>Couldn&apos;t find window named </source>
         <translation type="unfinished"></translation>
     </message>

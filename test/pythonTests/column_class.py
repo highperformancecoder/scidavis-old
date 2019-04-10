@@ -119,7 +119,7 @@ assert colNames == ["1", "col2", "3", "2", "4", "5"]
 # check that you get same column either by name or by index
 c4 = t.column("2")
 c4b = t.column(3) # index is base 0
-assert c4.name() == c4b.name()
+assert c4 == c4b
 
 # set column 4 as X (X2).
 c4.setPlotDesignation("X")
@@ -189,9 +189,9 @@ c4.replaceDateTimes(21,dtlist)
 
 # x() and y()
 # check that X-column of column("3") is column("1")
-assert c3.x().name() == c1.name()
+assert c3.x() == c1
 # check that X-column of column("4") is column("2")
-assert c5.x().name() == c4.name()
+assert c5.x() == c4
 
 # look for Y-column of column("4")
 print("column(4).y().name: "+c4.y().name())

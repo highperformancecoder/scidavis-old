@@ -10327,7 +10327,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">kein Plugin gefunden, um Element &apos;%1&apos; zu laden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Folder.h" line="156"/>
+        <location filename="../../libscidavis/src/Folder.h" line="143"/>
         <source>Couldn&apos;t find window named </source>
         <translation type="unfinished"></translation>
     </message>
