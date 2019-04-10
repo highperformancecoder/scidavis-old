@@ -16,7 +16,8 @@
   SOURCES += src/PythonScript.cpp src/PythonScripting.cpp src/Qt.cpp
 
   CLASSDESC_HEADERS = src/ApplicationWindow.h src/Script.h src/Folder.h \
-                    src/Matrix.h src/Note.h src/MyWidget.h src/QtEnums.h \
+                    src/Matrix.h src/future/matrix/MatrixView.h \
+                    src/Note.h src/MyWidget.h src/QtEnums.h \
                     src/Graph.h src/PythonScripting.h src/PythonScript.h \
                     src/ArrowMarker.h src/Table.h src/future/table/TableView.h \
                     src/MultiLayer.h src/QwtSymbol.h \

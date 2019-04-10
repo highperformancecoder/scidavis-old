@@ -26,7 +26,7 @@ public:
   
   /// generic factory function to add a child object, to avoid bare pointers
   template <class T, class... A>
-  T& addChild(A... args) {
+  T& addQChild(A... args) {
     T* child=new T(std::forward<A>(args)...);
     m_setParent(child,this);
     return *child;

@@ -43,6 +43,9 @@ inline py::dict modDict(const char* mod) {
   return extract<dict>(import(mod).attr("__dict__"))();
 }
 
+/// returns a reference to the current "scidavis.app" object
+ApplicationWindow& theApp();
+
 class PythonScripting: public ScriptingEnv
 {
   Q_OBJECT

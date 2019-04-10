@@ -2233,7 +2233,7 @@ MultiLayer* ApplicationWindow::multilayerPlot(const QString& caption)
 
 MultiLayer& ApplicationWindow::newGraph(const QString& caption)
 {
-  MultiLayer *ml = multilayerPlot(generateUniqueName(caption));
+  MultiLayer *ml = multilayerPlot(generateUniqueName(caption,false));
   assert(ml);
   Graph *g = ml->addLayer();
   setPreferences(g);
@@ -3794,7 +3794,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
       if  (s.left(8) == "<folder>")
         {
           list = s.split("\t");
-          Folder& f = current_folder->addChild<Folder>(list[1]);
+          Folder& f = current_folder->addQChild<Folder>(list[1]);
           f.setBirthDate(list[2]);
           f.setModificationDate(list[3]);
           if(list.count() > 4)
@@ -4017,7 +4017,7 @@ ApplicationWindow* ApplicationWindow::openProject(const QString& fn)
 
 void ApplicationWindow::executeNotes()
 {
-	QList<MyWidget *> lst = projectFolder().windowsList();
+	QList<MyWidget *> lst = projectFolder().windows();
 	foreach(MyWidget *widget, lst)
 		if (widget->inherits("Note") && ((Note*)widget)->autoexec())
 			((Note*)widget)->executeAll();
@@ -5778,7 +5778,7 @@ QDialog* ApplicationWindow::showScaleDialog()
 			return 0;
 
 		Graph* g = ((MultiLayer*)w)->activeGraph();
-		auto& ad = addChild<AxesDialog>();
+		auto& ad = addQChild<AxesDialog>();
 		ad.setGraph(g);
 		ad.exec();
 		return &ad;
@@ -7336,7 +7336,7 @@ void ApplicationWindow::updateWindowStatus(MyWidget* w)
   setListView(w->name().c_str(), w->aspect());
   if (w->status() == MyWidget::Maximized)
     {
-      QList<MyWidget *> windows = current_folder->windowsList();
+      QList<MyWidget *> windows = current_folder->windows();
       foreach(MyWidget *oldMaxWindow, windows)
         {
           if (oldMaxWindow != w && oldMaxWindow->status() == MyWidget::Maximized)
@@ -11772,7 +11772,7 @@ QList<MyWidget*> ApplicationWindow::windowsList()
 	int initial_depth = item->depth();
 	QTreeWidgetItemIterator it(item);
 	while (item && item->depth() >= initial_depth){
-		QList<MyWidget *> folderWindows = item->folder()->windowsList();
+		QList<MyWidget *> folderWindows = item->folder()->windows();
 		foreach(MyWidget *w, folderWindows)
 			lst.append(w);
 		it++;
@@ -12293,7 +12293,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 		baseName += QString::number(n);
 	}
 
-	current_folder = &current_folder->addChild<Folder>(baseName);
+	current_folder = &current_folder->addQChild<Folder>(baseName);
 	FolderListItem *fli = new FolderListItem(item, current_folder);
 	current_folder->setFolderListItem(fli);
 
@@ -12334,7 +12334,7 @@ void ApplicationWindow::appendProject(const QString& fn)
               if  (s.left(8) == "<folder>")
                 {
                   lst = s.split("\t");
-                  Folder& f = current_folder->addChild<Folder>(lst[1]);
+                  Folder& f = current_folder->addQChild<Folder>(lst[1]);
                   f.setBirthDate(lst[2]);
                   f.setModificationDate(lst[3]);
                   if(lst.count() > 4)
@@ -12484,7 +12484,7 @@ void ApplicationWindow::rawSaveFolder(Folder *folder, QIODevice *device)
 {
     QTextStream stream(device);
     stream.setCodec(QTextCodec::codecForName("UTF-8"));
-    foreach (MyWidget *w, folder->windowsList()) {
+    foreach (MyWidget *w, folder->windows()) {
 	Table *t = qobject_cast<Table*>(w);
 	if (t)
 	    t->saveToDevice(device, windowGeometryInfo(w));
@@ -12492,7 +12492,7 @@ void ApplicationWindow::rawSaveFolder(Folder *folder, QIODevice *device)
 	    stream << w->saveToString(windowGeometryInfo(w));
     }
     foreach (Folder *subfolder, folder->folders()) {
-	stream << "<folder>\t"+QString(subfolder->name())+"\t"+subfolder->birthDate()+"\t"+subfolder->modificationDate();
+      stream << "<folder>\t"+QString(subfolder->name().c_str())+"\t"+subfolder->birthDate()+"\t"+subfolder->modificationDate();
 	if (subfolder == current_folder)
 		stream << "\tcurrent\n";
 	else
@@ -12776,14 +12776,14 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString
 	}
 
 	QStringList lst = parent->subfolders();
-	lst.removeAll(current_folder->name());
+	lst.removeAll(current_folder->name().c_str());
 	while(lst.contains(text))
 	{
 		QMessageBox::critical(this,tr("Error"),
 				tr("Name already exists!")+"\n"+tr("Please choose another name!"));
 
 		it->setFlags(it->flags() | Qt::ItemIsEditable);
-		it->setText(0, current_folder->name());
+		it->setText(0, current_folder->name().c_str());
 		it->treeWidget()->editItem(it, 0);
 		return;
 	}
@@ -12799,7 +12799,7 @@ void ApplicationWindow::renameFolder(QTreeWidgetItem *it, int col, const QString
 
 void ApplicationWindow::showAllFolderWindows()
 {
-	QList<MyWidget *> lst = current_folder->windowsList();
+	QList<MyWidget *> lst = current_folder->windows();
 	foreach(MyWidget *w, lst)
 	{//force show all windows in current folder
 		if (w)
@@ -12835,7 +12835,7 @@ void ApplicationWindow::showAllFolderWindows()
 	QTreeWidgetItemIterator it(item);
 	while (item && item->depth() >= initial_depth)
 	{// show/hide windows in all subfolders
-		lst = ((Folder *)item->folder())->windowsList();
+		lst = ((Folder *)item->folder())->windows();
 		foreach(MyWidget *w, lst)
 		{
 			if (w && show_windows_policy == SubFolders)
@@ -12871,7 +12871,7 @@ void ApplicationWindow::showAllFolderWindows()
 
 void ApplicationWindow::hideAllFolderWindows()
 {
-	QList<MyWidget *> lst = current_folder->windowsList();
+	QList<MyWidget *> lst = current_folder->windows();
 	foreach(MyWidget *w, lst)
 		hideWindow(w);
 
@@ -12886,7 +12886,7 @@ void ApplicationWindow::hideAllFolderWindows()
 		QTreeWidgetItemIterator it(item);
 		while (item && item->depth() >= initial_depth)
 		{
-			lst = item->folder()->windowsList();
+			lst = item->folder()->windows();
 			foreach(MyWidget *w, lst)
 				hideWindow(w);
 
@@ -12898,7 +12898,7 @@ void ApplicationWindow::hideAllFolderWindows()
 
 void ApplicationWindow::projectProperties()
 {
-	QString s = QString(current_folder->name()) + "\n\n";
+  QString s = QString(current_folder->name().c_str()) + "\n\n";
 	s += "\n\n\n";
 	s += tr("Type") + ": " + tr("Project")+"\n\n";
 	if (projectname != "untitled")
@@ -12938,11 +12938,11 @@ void ApplicationWindow::folderProperties()
 		return;
 	}
 
-	QString s = current_folder->name() + "\n\n";
+	QString s = (current_folder->name() + "\n\n").c_str();
 	s += "\n\n\n";
 	s += tr("Type") + ": " + tr("Folder")+"\n\n";
 	s += tr("Path") + ": " + current_folder->path() + "\n\n";
-	s += tr("Contents") + ": " + QString::number(current_folder->windowsList().count()) + " " + tr("windows");
+	s += tr("Contents") + ": " + QString::number(current_folder->windows().count()) + " " + tr("windows");
 	s += ", " + QString::number(current_folder->subfolders().count()) + " " + tr("folders") + "\n\n";
 	//s += "\n\n\n";
 	s += tr("Created") + ": " + current_folder->birthDate() + "\n\n";
@@ -12963,7 +12963,7 @@ void ApplicationWindow::addFolder()
 	if (!lst.isEmpty())
 		name += " ("+ QString::number(lst.size()+1)+")";
 
-	Folder& f = current_folder->addChild<Folder>(name);
+	Folder& f = current_folder->addQChild<Folder>(name);
 	addFolderListViewItem(&f);
 
 	FolderListItem *fi = new FolderListItem(current_folder->folderListItem(), &f);
@@ -12977,7 +12977,7 @@ void ApplicationWindow::addFolder()
 bool ApplicationWindow::deleteFolder(Folder *f)
 {
   if (confirmCloseFolder && QMessageBox::information(this, tr("Delete folder?"),
-                                                     tr("Delete folder '%1' and all the windows it contains?").arg(f->name()),
+                                                     tr("Delete folder '%1' and all the windows it contains?").arg(f->name().c_str()),
                                                      tr("Yes"), tr("No"), 0, 0))
     {
       return false;
@@ -12985,7 +12985,7 @@ bool ApplicationWindow::deleteFolder(Folder *f)
   else
     {
       FolderListItem *fi = f->folderListItem();
-      foreach(MyWidget *w, f->windowsList())
+      foreach(MyWidget *w, f->windows())
         closeWindow(w);
 
       if ( !(f->children()).isEmpty() ){
@@ -12995,7 +12995,7 @@ bool ApplicationWindow::deleteFolder(Folder *f)
         while (item && item->depth() >= initial_depth){
           Folder *subFolder = (Folder *)item->folder();
           if (subFolder){
-            foreach(MyWidget *w, subFolder->windowsList()){
+            foreach(MyWidget *w, subFolder->windows()){
               removeWindowFromLists(w);
               subFolder->removeWindow(w);
               delete w;
@@ -13080,7 +13080,7 @@ void ApplicationWindow::folderItemChanged(QTreeWidgetItem *current, QTreeWidgetI
 
 void ApplicationWindow::hideFolderWindows(Folder *f)
 {
-	QList<MyWidget *> lst = f->windowsList();
+	QList<MyWidget *> lst = f->windows();
 	foreach(MyWidget *w, lst)
 		w->hide();
 
@@ -13094,7 +13094,7 @@ void ApplicationWindow::hideFolderWindows(Folder *f)
 	int initial_depth = item->depth();
 	QTreeWidgetItemIterator it(item);
 	while (item && item->depth() >= initial_depth){
-		lst = item->folder()->windowsList();
+		lst = item->folder()->windows();
 		foreach(MyWidget *w, lst)
 			w->hide();
 		it++;
@@ -13133,7 +13133,7 @@ bool ApplicationWindow::changeFolder(Folder *newFolder, bool force)
 			addFolderListViewItem(static_cast<Folder *>(f));
 	}
 
-	QList<MyWidget *> lst = newFolder->windowsList();
+	QList<MyWidget *> lst = newFolder->windows();
 	foreach(MyWidget *w, lst){
         w->blockSignals(true);
         if (!hiddenWindows.contains(w) && !outWindows.contains(w) && show_windows_policy != HideAll){
@@ -13158,7 +13158,7 @@ bool ApplicationWindow::changeFolder(Folder *newFolder, bool force)
         QTreeWidgetItemIterator it(item);
         while (item && item->depth() >= initial_depth)
         {//show/hide windows in subfolders
-            lst = ((Folder *)item->folder())->windowsList();
+            lst = ((Folder *)item->folder())->windows();
             foreach(MyWidget *w, lst){
                 if (!hiddenWindows.contains(w) && !outWindows.contains(w)){
                     if (show_windows_policy == SubFolders){
@@ -13199,7 +13199,7 @@ bool ApplicationWindow::changeFolder(Folder *newFolder, bool force)
         oldFolder->setActiveWindow(old_active_window);
      }
 
-    foreach(MyWidget *w, newFolder->windowsList())
+    foreach(MyWidget *w, newFolder->windows())
         w->blockSignals(false);
 
 	 return true;
@@ -13302,7 +13302,7 @@ void ApplicationWindow::addFolderListViewItem(Folder *f)
 
 	FolderListItem* it = new FolderListItem(&lv, f);
 	it->setActive(false);
-	it->setText(0, f->name());
+	it->setText(0, f->name().c_str());
 	it->setText(1, tr("Folder"));
 	it->setText(3, f->birthDate());
 }
@@ -13311,65 +13311,67 @@ void ApplicationWindow::find(const QString& s, bool windowNames, bool labels,
 		bool folderNames, bool caseSensitive, bool partialMatch,
 		bool subfolders)
 {
-	if (windowNames || labels)
-	{
-		MyWidget *w = current_folder->findWindow(s,windowNames,labels,caseSensitive,partialMatch);
-		if (w)
-		{
-			activateSubWindow(w);
-			return;
-		}
+  if (windowNames || labels)
+    {
+      try
+        {
+          activateSubWindow(&current_folder->findWindow(s,windowNames,labels,caseSensitive,partialMatch));
+          return;
+        }
+      catch (const std::exception&)
+        {
+          if (subfolders)
+            {
+              FolderListItem *item = (FolderListItem *)folders.currentItem()->child(0);
+              QTreeWidgetItemIterator it(item);
+              while (item)
+                {
+                  Folder *f = item->folder();
+                  try
+                    {
+                      auto& w = f->findWindow(s,windowNames,labels,caseSensitive,partialMatch);
+                      folders.setCurrentItem(f->folderListItem());
+                      activateSubWindow(&w);
+                      return;
+                    }
+                  catch (const std::exception&) {}
+                  it++;
+                  item = (FolderListItem *)(*it);
+                }
+            }
+        }
+    }
 
-		if (subfolders)
-		{
-			FolderListItem *item = (FolderListItem *)folders.currentItem()->child(0);
-			QTreeWidgetItemIterator it(item);
-			while (item)
-			{
-				Folder *f = item->folder();
-				MyWidget *w = f->findWindow(s,windowNames,labels,caseSensitive,partialMatch);
-				if (w)
-				{
-					folders.setCurrentItem(f->folderListItem());
-					activateSubWindow(w);
-					return;
-				}
-				it++;
-				item = (FolderListItem *)(*it);
-			}
-		}
-	}
+  if (folderNames)
+    {
+      Folder *f = current_folder->findSubfolder(s, caseSensitive, partialMatch);
+      if (f)
+        {
+          folders.setCurrentItem(f->folderListItem());
+          return;
+        }
 
-	if (folderNames)
-	{
-		Folder *f = current_folder->findSubfolder(s, caseSensitive, partialMatch);
-		if (f)
-		{
-			folders.setCurrentItem(f->folderListItem());
-			return;
-		}
+      if (subfolders)
+        {
+          FolderListItem *item = (FolderListItem *)folders.currentItem()->child(0);
+          QTreeWidgetItemIterator it(item);
+          while (item)
+            {
+              Folder *f = item->folder()->findSubfolder(s, caseSensitive, partialMatch);
+              if (f)
+                {
+                  folders.setCurrentItem(f->folderListItem());
+                  return;
+                }
 
-		if (subfolders)
-		{
-			FolderListItem *item = (FolderListItem *)folders.currentItem()->child(0);
-			QTreeWidgetItemIterator it(item);
-			while (item)
-			{
-				Folder *f = item->folder()->findSubfolder(s, caseSensitive, partialMatch);
-				if (f)
-				{
-					folders.setCurrentItem(f->folderListItem());
-					return;
-				}
+              it++;
+              item = (FolderListItem *)(*it);
+            }
+        }
+    }
 
-				it++;
-				item = (FolderListItem *)(*it);
-			}
-		}
-	}
-
-	QMessageBox::warning(this, tr("No match found"),
-			tr("Sorry, no match found for string: '%1'").arg(s));
+  QMessageBox::warning(this, tr("No match found"),
+                       tr("Sorry, no match found for string: '%1'").arg(s));
 }
 
 void ApplicationWindow::dropFolderItems(QTreeWidgetItem *dest)
@@ -13408,10 +13410,10 @@ void ApplicationWindow::dropFolderItems(QTreeWidgetItem *dest)
 			if (dest_f == parent)
 				return;
 
-			if (subfolders.contains(f->name()))
+			if (subfolders.contains(f->name().c_str()))
 			{
 				QMessageBox::critical(this, tr("SciDAVis") +" - " + tr("Skipped moving folder"),
-						tr("The destination folder already contains a folder called '%1'! Folder skipped!").arg(f->name()));
+                                                      tr("The destination folder already contains a folder called '%1'! Folder skipped!").arg(f->name().c_str()));
 			}
 			else
 				moveFolder(src, (FolderListItem *)dest);
@@ -13447,15 +13449,15 @@ void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)
 	Folder *dest_f = dest->folder();
 	Folder *src_f = src->folder();
 
-	dest_f = &dest_f->addChild<Folder>(src_f->name());
+	dest_f = &dest_f->addQChild<Folder>(src_f->name().c_str());
 	dest_f->setBirthDate(src_f->birthDate());
 	dest_f->setModificationDate(src_f->modificationDate());
 
 	FolderListItem *copy_item = new FolderListItem(dest, dest_f);
-	copy_item->setText(0, src_f->name());
+	copy_item->setText(0, src_f->name().c_str());
 	dest_f->setFolderListItem(copy_item);
 
-	QList<MyWidget *> lst = src_f->windowsList();
+	QList<MyWidget *> lst = src_f->windows();
 	foreach(MyWidget *w, lst)
 	{
 		src_f->removeWindow(w);
@@ -13472,15 +13474,15 @@ void ApplicationWindow::moveFolder(FolderListItem *src, FolderListItem *dest)
 		{
 			src_f = (Folder *)item->folder();
 
-			dest_f = &dest_f->addChild<Folder>(src_f->name());
+			dest_f = &dest_f->addQChild<Folder>(src_f->name().c_str());
 			dest_f->setBirthDate(src_f->birthDate());
 			dest_f->setModificationDate(src_f->modificationDate());
 
 			copy_item = new FolderListItem(copy_item, dest_f);
-			copy_item->setText(0, src_f->name());
+			copy_item->setText(0, src_f->name().c_str());
 			dest_f->setFolderListItem(copy_item);
 
-			lst = QList<MyWidget *>(src_f->windowsList());
+			lst = QList<MyWidget *>(src_f->windows());
 			foreach(MyWidget *w, lst)
 			{
 				src_f->removeWindow(w);

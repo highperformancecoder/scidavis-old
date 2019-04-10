@@ -891,6 +891,7 @@ public slots:
 
   //!  returns the root project folder
   Folder& projectFolder();
+  Folder& rootFolder() {return projectFolder();}
 
   //!  used by the findDialog
   void find(const QString& s, bool windowNames, bool labels, bool folderNames,

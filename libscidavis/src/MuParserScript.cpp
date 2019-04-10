@@ -306,7 +306,7 @@ double MuParserScript::tableColumn__Function(const char *tableName, double colum
     throw mu::Parser::exception_type(qPrintable(tr("tablecol() works only on tables!")));
   try
     {
-      Table& targetTable = thisTable->folder().rootFolder()->table(tableName, true);
+      Table& targetTable = thisTable->folder().rootFolder().table(tableName, true);
       Column *column = targetTable.d_future_table->column(qRound(columnIndex) - 1);
       if (!column)
         throw mu::Parser::exception_type(qPrintable(tr("There's no column %1 in table %2!")
@@ -446,12 +446,12 @@ Column *MuParserScript::resolveColumnPath(const QString &path)
       if (pathComponents.isEmpty())
         // needed for backwards compatibility, but will be problematic once we drop the requirement
         // of project-wide unique object names
-        table = &myContext->folder().rootFolder()->table(tableName, true);
+        table = &myContext->folder().rootFolder().table(tableName, true);
       else {
         Folder *folder;
         if (pathComponents.at(0).isEmpty())
           // absolute path
-          folder = myContext->folder().rootFolder();
+          folder = &myContext->folder().rootFolder();
         else if (pathComponents.at(0) == "..")
           // relative path
           folder = &myContext->folder();

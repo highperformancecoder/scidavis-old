@@ -211,5 +211,23 @@ namespace py=boost::python;
 struct pyobject;
 #endif
 
+/// wrap a Qt container with Python accessor method
+template <class T>
+struct PyQtList: public QList<T*>
+{
+  T& __getitem__(size_t i) {
+    if (i<this->size())
+      return *(*this)[i];
+    else
+      throw std::out_of_range("index out of bounds");
+  }
+  size_t __len__() const {return this->size();}
+  bool __contains__(const T& x) const {
+    return this->count(const_cast<T*>(&x));
+  }
+};
+
+
+
 
 #endif

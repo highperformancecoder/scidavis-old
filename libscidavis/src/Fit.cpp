@@ -316,7 +316,7 @@ double Fit::rSquare()
             for (unsigned i=0; i<d_n; i++) {
                 mean += d_y[i]/(d_y_errors[i]*d_y_errors[i]);
                 weights_sum += 1.0/(d_y_errors[i]*d_y_errors[i]);
-            }
+              }
             mean /= weights_sum;
             for (unsigned i=0; i<d_n; i++)
                 tss += (d_y[i] - mean)*(d_y[i] - mean)/(d_y_errors[i]*d_y_errors[i]);

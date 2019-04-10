@@ -67,6 +67,7 @@ typedef struct _traceback {
 #include "MyWidget.cd"
 #include "Matrix.h"
 #include "Matrix.cd"
+#include "MatrixView.cd"
 #include "Note.h"
 #include "Note.cd"
 #include "QtEnums.cd"

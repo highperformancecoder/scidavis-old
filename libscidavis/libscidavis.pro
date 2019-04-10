@@ -11,6 +11,7 @@ QMAKE_CLEAN += $$TARGET
 include(../config.pri)
 
 INCLUDEPATH += ../scidavis
+QMAKE_CXXFLAGS += -ftemplate-backtrace-limit=0
 
 liborigin {
   !packagesExist(liborigin) | !contains(PRESET, linux_package) {

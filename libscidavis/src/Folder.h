@@ -53,23 +53,12 @@ class FolderListView;
 #include "MultiLayer.h"
 #include "Note.h"
 
-//class Table;
-//class Matrix;
-//class MultiLayer;
-//class Note;
-
 class QDragEnterEvent;
 class QDragMoveEvent;
 class QDragLeaveEvent;
 class QDropEvent;
 
 class Folder;
-
-/// wrap a Qt container with Python accessor method
-struct FolderList: public QList<Folder*>
-{
-  Folder& __getitem__(size_t i) {return *(*this)[i];}
-};
 
 //! Folder for the project explorer
 class Folder : public SciDAVisObject<QObject>
@@ -79,7 +68,7 @@ class Folder : public SciDAVisObject<QObject>
 public:
   Folder(const QString &name="");
 
-  QList<MyWidget *> windowsList(){return lstWindows;};
+  PyQtList<MyWidget> windows() const {return lstWindows;};
 
   void addWindow( MyWidget *w ) {
     w->setFolder(this);
@@ -103,14 +92,34 @@ public:
   QStringList subfolders();
 
   //! The list of subfolders
-  FolderList folders() const;
+  PyQtList<Folder> folders() const;
 
+  void addChild(Folder *f);
+  
   //! Pointer to the subfolder called s
   Folder* findSubfolder(const QString& s, bool caseSensitive = true, bool partialMatch = false);
-
+  /// @{
+  /** @return folder named \a s.
+      @thow if no such folder exists
+  */
+  Folder& folder(const QString& s, bool caseSensitive, bool partialMatch) {
+    if (auto r=findSubfolder(s,caseSensitive,partialMatch))
+      return *r;
+    throw NoSuchObject();
+  }
+  Folder& folder(const QString& s, bool c) {return folder(s,c,false);}
+  Folder& folder(const QString& s) {return folder(s,true);}
+  /// @}
+  
   //! Pointer to the first window matching the search criteria
-  MyWidget* findWindow(const QString& s, bool windowNames, bool labels,
-                       bool caseSensitive, bool partialMatch);
+  MyWidget& findWindow(const QString& s, bool windowNames, bool labels,
+                       bool caseSensitive, bool partialMatch) const;
+  MyWidget& findWindow(const QString& s, bool w, bool l, bool c) const
+  {return findWindow(s,w,l,c,true);}
+  MyWidget& findWindow(const QString& s, bool w, bool l) const
+  {return findWindow(s,w,l,false);}
+  MyWidget& findWindow(const QString& s, bool w) const {return findWindow(s,w,true);}
+  MyWidget& findWindow(const QString& s) const {return findWindow(s,true);}
 
   //! get a window by name
   /**
@@ -137,13 +146,13 @@ public:
   //! Return table named name or NULL
   Table& table(const QString &name, bool recursive) const
   {return windowT<Table>(name, recursive);}
-  Table& table(const QString &name) {return table(name,false);}
+  Table& table(const QString &name) const {return table(name,false);}
   
 
   //! Return matrix named name or NULL
   Matrix& matrix(const QString &name, bool recursive) const
   {return windowT<Matrix>(name, recursive);}
-  Matrix& matrix(const QString &name) {return matrix(name, false);}
+  Matrix& matrix(const QString &name) const {return matrix(name, false);}
 
   //! Return graph named name or NULL
   MultiLayer& graph(const QString &name, bool recursive) const
@@ -159,7 +168,7 @@ public:
   QString path();
 
   //! The root of the hierarchy this folder belongs to.
-  Folder* rootFolder();
+  Folder& rootFolder();
 
   QString birthDate(){return birthdate;};
   void setBirthDate(const QString& s){birthdate = s;};
@@ -175,11 +184,15 @@ public:
   void setActiveWindow(MyWidget *w){d_active_window = w;};
 
   // TODO: move to Aspect
-  QString name(){return objectName();}
+  std::string name(){return objectName().toStdString();}
   void setName(const QString& s){setObjectName(s);}
+
+  /// save contents of folder
+  void save(const std::string& fileName);
+  
 protected:
   QString birthdate, modifDate;
-  QList<MyWidget *> lstWindows;
+  PyQtList<MyWidget> lstWindows;
   FolderListItem *myFolderListItem;
 
   //! Pointer to the active window in the folder

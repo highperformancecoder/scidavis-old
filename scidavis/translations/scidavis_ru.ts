@@ -1006,7 +1006,7 @@ Do you want to overwrite it?</source>
         <translation type="unfinished">Заголовок оси X</translation>
     </message>
     <message>
-        <location line="+8142"/>
+        <location line="+8144"/>
         <source>No updates available. You are already running the latest version.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1016,7 +1016,7 @@ Do you want to overwrite it?</source>
         <translation type="unfinished">Пожалуйста выберите колонку Y для отображения!</translation>
     </message>
     <message>
-        <location line="-12148"/>
+        <location line="-12150"/>
         <location line="+42"/>
         <location line="+7320"/>
         <location line="+4081"/>
@@ -1144,7 +1144,7 @@ Do you want to overwrite it?</source>
     <message>
         <location line="-597"/>
         <location line="+598"/>
-        <location line="+8080"/>
+        <location line="+8082"/>
         <source>&amp;Yes</source>
         <translation type="unfinished">&amp;Да</translation>
     </message>
@@ -1158,7 +1158,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">QtiPlot - Ошибка при экспортировании</translation>
     </message>
     <message>
-        <location line="-8808"/>
+        <location line="-8810"/>
         <location line="+57"/>
         <location line="+316"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
@@ -1639,12 +1639,12 @@ Are you sure you want to continue?</source>
         <location line="+2"/>
         <location line="+2"/>
         <location line="+5077"/>
-        <location line="+1129"/>
+        <location line="+1131"/>
         <source>&amp;Properties...</source>
         <translation type="unfinished">&amp;Свойства...</translation>
     </message>
     <message>
-        <location line="-6198"/>
+        <location line="-6200"/>
         <source>Please use the project explorer to select a window!</source>
         <translation type="unfinished">Пожалуйста, используйте проводник проекта для выбора окна!</translation>
     </message>
@@ -1684,7 +1684,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">З&amp;ависимые 3D графики</translation>
     </message>
     <message>
-        <location line="+2471"/>
+        <location line="+2473"/>
         <location line="+18"/>
         <location line="+6"/>
         <source>D&amp;epends on</source>
@@ -1719,7 +1719,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">&amp;Вставить изображение</translation>
     </message>
     <message>
-        <location line="-5822"/>
+        <location line="-5824"/>
         <location line="+4"/>
         <location line="+5"/>
         <location line="+108"/>
@@ -3622,7 +3622,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">QtiPlot - совпадений не найдено</translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location line="+81"/>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
         <translation type="unfinished">Извините, совпадений для строки &apos;%1&apos; не найдено</translation>
     </message>
@@ -3646,7 +3646,7 @@ Are you sure you want to continue?</source>
         <translation type="unfinished">Папка назначения уже содержит вложенную папку с названнием &apos;%1&apos;! Папка будет пропущена!</translation>
     </message>
     <message>
-        <location line="-13106"/>
+        <location line="-13108"/>
         <location line="+419"/>
         <source>Scripting Console</source>
         <translation type="unfinished">Консоль команд</translation>
@@ -3839,7 +3839,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">QtiPlot - получить файла версии через HTTP</translation>
     </message>
     <message>
-        <location line="+2036"/>
+        <location line="+2038"/>
         <source>Error while fetching version file with HTTP: %1.</source>
         <translation type="unfinished">Ошибка при получении файла версии с помощью HTTP: %1.</translation>
     </message>
@@ -3874,7 +3874,7 @@ Are you sure you want to continue?</source>
         <translation type="obsolete">Написание с&amp;криптов</translation>
     </message>
     <message>
-        <location line="-11705"/>
+        <location line="-11707"/>
         <source>&lt;h4&gt;There are no matrices available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;В этом проекте матрицы недоступны.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Пожалуйста, создайте матницу и попробуйте ещё раз!&lt;/h4&gt;</translation>
     </message>
@@ -3945,7 +3945,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Детали &amp;построения...</translation>
     </message>
     <message>
-        <location line="+2732"/>
+        <location line="+2734"/>
         <source>D&amp;epending Graphs</source>
         <translation type="unfinished">&amp;Связанные графики</translation>
     </message>
@@ -3975,7 +3975,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Ctrl+Alt+O</translation>
     </message>
     <message>
-        <location line="-2781"/>
+        <location line="-2783"/>
         <location line="+390"/>
         <source>Ctrl+Return</source>
         <translation type="unfinished">Ctrl+Return</translation>
@@ -4047,7 +4047,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">3D График</translation>
     </message>
     <message>
-        <location line="+2176"/>
+        <location line="+2178"/>
         <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
         <translation type="unfinished">Все содержимое и все данные связанные с таблицей будет удалены. Вы уверены?</translation>
     </message>
@@ -4068,7 +4068,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">QtiPlot - Скрипт-Окно</translation>
     </message>
     <message>
-        <location line="-2877"/>
+        <location line="-2879"/>
         <location line="+543"/>
         <source>&amp;Horizontal Steps</source>
         <translation type="unfinished">&amp;Горизонтальных Шагов</translation>
@@ -4808,18 +4808,18 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
     <message>
         <location line="+503"/>
-        <location line="+12409"/>
+        <location line="+12411"/>
         <source>Please set a default X column for this table, first!</source>
         <translation type="unfinished">Пожалуйста установите сначала колонку X по умолчанию для данной таблицы!</translation>
     </message>
     <message>
-        <location line="-12399"/>
-        <location line="+12387"/>
+        <location line="-12401"/>
+        <location line="+12389"/>
         <source>Please select a column to plot!</source>
         <translation type="unfinished">Пожалуйста выберите колонку для отображения!</translation>
     </message>
     <message>
-        <location line="-12368"/>
+        <location line="-12370"/>
         <location line="+19"/>
         <source>Please select four columns for this operation!</source>
         <translation type="unfinished">Пожалуйста выберите четыре колонки для выполнения этой операции!</translation>
@@ -5226,7 +5226,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">3D график</translation>
     </message>
     <message>
-        <location line="+124"/>
+        <location line="+126"/>
         <source>Skipped moving folder</source>
         <translation type="unfinished">Пропуск операции перемещения папки</translation>
     </message>
@@ -5269,7 +5269,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Сначала необходимо задать колонку Y!</translation>
     </message>
     <message>
-        <location line="-13476"/>
+        <location line="-13478"/>
         <source>New Aspect</source>
         <translation type="unfinished">Новый ракурс</translation>
     </message>
@@ -5375,7 +5375,7 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+7"/>
         <location line="+757"/>
         <location line="+9"/>
-        <location line="+1115"/>
+        <location line="+1117"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+5"/>
@@ -5387,7 +5387,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location line="-12191"/>
+        <location line="-12193"/>
         <location line="+10"/>
         <location line="+63"/>
         <location line="+1110"/>
@@ -5425,12 +5425,12 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+13"/>
         <location line="+32"/>
         <location line="+13"/>
-        <location line="+1714"/>
+        <location line="+1716"/>
         <source>Warning</source>
         <translation type="unfinished">Предупреждение</translation>
     </message>
     <message>
-        <location line="-11858"/>
+        <location line="-11860"/>
         <location line="+11"/>
         <source>Choose data set</source>
         <translation type="unfinished">Выберите набор данных</translation>
@@ -5558,12 +5558,12 @@ Various parts of this file may not be displayed as expected.</source>
         <location line="+42"/>
         <location line="+1484"/>
         <location line="+4229"/>
-        <location line="+1441"/>
+        <location line="+1443"/>
         <source>SciDAVis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-9636"/>
+        <location line="-9638"/>
         <source>Opening file</source>
         <translation type="unfinished">Открытие файла</translation>
     </message>
@@ -5604,7 +5604,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Загаловок верхней оси</translation>
     </message>
     <message>
-        <location line="+8530"/>
+        <location line="+8532"/>
         <source>Undo/Redo History</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5617,7 +5617,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="obsolete">Введите номер столбца</translation>
     </message>
     <message>
-        <location line="-8344"/>
+        <location line="-8346"/>
         <source>Column selection error</source>
         <translation type="unfinished">Ошибка выбора столбца</translation>
     </message>
@@ -5706,7 +5706,7 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Удалить папку?</translation>
     </message>
     <message>
-        <location line="+392"/>
+        <location line="+394"/>
         <source>No match found</source>
         <translation type="unfinished">Совпадений не найдено</translation>
     </message>
@@ -5727,12 +5727,12 @@ Various parts of this file may not be displayed as expected.</source>
         <translation type="unfinished">Русский</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="-2442"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="-2444"/>
         <source>Create an empty note / script window</source>
         <translation type="unfinished">Созать пустое окно заметки / скрипта</translation>
     </message>
     <message>
-        <location line="+2392"/>
+        <location line="+2394"/>
         <source>SciDAVis will now try to determine whether a new version of SciDAVis is available. Please modify your firewall settings in order to allow SciDAVis to connect to the internet.</source>
         <translation type="unfinished">SciDAVis пытается проверить, доступна ли более новой версии SciDAVis. Пожалуйста настройте ваш firewall, чтобы разрешить SciDAVis подключаться к интернету.</translation>
     </message>
@@ -9446,7 +9446,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">байт</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Folder.h" line="+134"/>
+        <location filename="../../libscidavis/src/Folder.h" line="+156"/>
         <source>Couldn&apos;t find window named </source>
         <translation type="unfinished"></translation>
     </message>
@@ -15130,7 +15130,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="-1602"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="-1604"/>
         <source>Released</source>
         <translation type="unfinished">Дата релиза</translation>
     </message>

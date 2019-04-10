@@ -111,7 +111,7 @@ bool ImportOPJ::createProjectTree(const OriginFile& opj)
 	{
           if(sib->type == Origin::ProjectNode::Folder){
             
-            Folder& f = parent.value(projectTree->parent(sib))->addChild<Folder>(sib->name.c_str());
+            Folder& f = parent.value(projectTree->parent(sib))->addQChild<Folder>(sib->name.c_str());
             parent[sib] = &f;
             f.setBirthDate(posixTimeToString(sib->creationDate));
             f.setModificationDate(posixTimeToString(sib->modificationDate));
