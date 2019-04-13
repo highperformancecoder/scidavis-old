@@ -215,8 +215,10 @@ struct pyobject;
 template <class T>
 struct PyQtList: public QList<T*>
 {
-  T& __getitem__(size_t i) {
-    if (i<this->size())
+  T& __getitem__(int i) {
+    if (i<0)
+      i+=this->size();
+    if (i>=0 && i<this->size())
       return *(*this)[i];
     else
       throw std::out_of_range("index out of bounds");
