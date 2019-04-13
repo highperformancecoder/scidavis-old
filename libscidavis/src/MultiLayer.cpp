@@ -139,9 +139,9 @@ MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name
 	setFocusPolicy(Qt::StrongFocus);
 }
 
-Graph *MultiLayer::layer(int num)
+Graph& MultiLayer::layer(int num)
 {
-	return (Graph*) graphsList.at(num-1);
+  return static_cast<Graph&>(*graphsList.at(num-1));
 }
 
 LayerButton* MultiLayer::addLayerButton()
@@ -162,24 +162,24 @@ LayerButton* MultiLayer::addLayerButton()
 	return button;
 }
 
-Graph* MultiLayer::addLayer(int x, int y, int width, int height)
+Graph& MultiLayer::addLayer(int x, int y, int width, int height)
 {
-	addLayerButton();
-	if (!width && !height) {
-		width =	graph_width;
-		height = graph_height;
-	}
+  addLayerButton();
+  if (!width && !height) {
+    width =	graph_width;
+    height = graph_height;
+  }
 
-	Graph* g = new Graph(canvas);
-	g->setAttribute(Qt::WA_DeleteOnClose);
-	g->setGeometry(x, y, width, height);
-    g->plotWidget()->resize(QSize(width, height));
-	graphsList.append(g);
+  Graph* g = new Graph(canvas);
+  g->setAttribute(Qt::WA_DeleteOnClose);
+  g->setGeometry(x, y, width, height);
+  g->plotWidget()->resize(QSize(width, height));
+  graphsList.append(g);
 
-	active_graph = g;
-	g->show();
-	connectLayer(g);
-	return g;
+  active_graph = g;
+  g->show();
+  connectLayer(g);
+  return *g; //TODO is g owned by anything?
 }
 
 void MultiLayer::activateGraph(LayerButton* button)
@@ -947,21 +947,21 @@ void MultiLayer::addTextLayer(int f, const QFont& font,
 
 void MultiLayer::addTextLayer(const QPoint& pos)
 {
-	Graph* g=addLayer();
-	g->removeLegend();
-	g->setTitle("");
+	Graph& g=addLayer();
+	g.removeLegend();
+	g.setTitle("");
 	QVector<bool> axesOn(4);
 	for (int j=0;j<4;j++)
 		axesOn[j] = false;
-	g->enableAxes(axesOn);
-	g->setIgnoreResizeEvents(true);
-	g->setTextMarkerDefaults(defaultTextMarkerFrame, defaultTextMarkerFont,
+	g.enableAxes(axesOn);
+	g.setIgnoreResizeEvents(true);
+	g.setTextMarkerDefaults(defaultTextMarkerFrame, defaultTextMarkerFont,
 			defaultTextMarkerColor, defaultTextMarkerBackground);
-	Legend *mrk = g->newLegend(tr("enter your text here"));
+	Legend *mrk = g.newLegend(tr("enter your text here"));
 	QSize size = mrk->rect().size();
 	setGraphGeometry(pos.x(), pos.y(), size.width()+10, size.height()+10);
-	g->setIgnoreResizeEvents(false);
-	g->show();
+	g.setIgnoreResizeEvents(false);
+	g.show();
 	QApplication::restoreOverrideCursor();
 	canvas->releaseMouse();
 	addTextOn=false;
@@ -1296,10 +1296,10 @@ void MultiLayer::copy(ApplicationWindow * parent, MultiLayer* ml)
 	QWidgetList graphsList = ml->graphPtrs();
 	for (int i=0; i<graphsList.count(); i++){
 		Graph* g = (Graph*)graphsList.at(i);
-		Graph* g2 = addLayer(g->pos().x(), g->pos().y(), g->width(), g->height());
-		g2->copy(parent, g);
-		g2->setIgnoreResizeEvents(g->ignoresResizeEvents());
-		g2->setAutoscaleFonts(g->autoscaleFonts());
+		Graph& g2 = addLayer(g->pos().x(), g->pos().y(), g->width(), g->height());
+		g2.copy(parent, g);
+		g2.setIgnoreResizeEvents(g->ignoresResizeEvents());
+		g2.setAutoscaleFonts(g->autoscaleFonts());
 	}
 	show();
 }

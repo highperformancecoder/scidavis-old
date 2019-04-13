@@ -339,7 +339,7 @@ public slots:
   void autoArrangeLayers();
   void initMultilayerPlot(MultiLayer* g, const QString& name);
   void initBareMultilayerPlot(MultiLayer* g, const QString& name);
-  void polishGraph(Graph *g, int style);
+  void polishGraph(Graph& g, int style);
   void plot2VerticalLayers();
   void plot2HorizontalLayers();
   void plot4Layers();
@@ -465,7 +465,7 @@ public slots:
 
   //! \name Graphs
   //@{
-  void setPreferences(Graph* g);
+  void setPreferences(Graph& g);
   void setGraphDefaultSettings(bool autoscale,bool scaleFonts,bool resizeLayers,bool antialiasing);
   void setLegendDefaultSettings(int frame, const QFont& font,
                                 const QColor& textCol, const QColor& backgroundCol);

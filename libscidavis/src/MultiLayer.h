@@ -71,13 +71,13 @@ public:
   MultiLayer() {}
   MultiLayer (const QString& label, QWidget* parent=0, const QString name=QString(), Qt::WindowFlags f=0);
   QWidgetList graphPtrs(){return graphsList;};
-  Graph *layer(int num);
-  QWidgetList layerWidgets() const { return graphsList; }
+  Graph& layer(int num);
+  const PyQtList<QWidget>& layers() const { return graphsList; }
   LayerButton* addLayerButton();
   void copy(ApplicationWindow * parent, MultiLayer* ml);
 
-  enum HorAlignement{HCenter, Left, Right};
-  enum VertAlignement{VCenter, Top, Bottom};
+  enum HorAlignment{HCenter, Left, Right};
+  enum VertAlignment{VCenter, Top, Bottom};
 
   //! \name Event Handlers
   //@{
@@ -97,7 +97,9 @@ public:
   void printCropmarks(bool on){d_print_cropmarks = on;};
 
 public slots:
-  Graph* addLayer(int x = 0, int y = 0, int width = 0, int height = 0);
+  Graph& addLayer(int x, int y, int width, int height);
+  Graph& addLayer(int x, int y) {return addLayer(x,y,0,0);}
+  Graph& addLayer() {return addLayer(0,0);}
   void setLayersNumber(int n);
 
   bool isEmpty();
@@ -161,7 +163,7 @@ public slots:
   int verticalAlignement(){return vert_align;};
   void setAlignement (int ha, int va);
 
-  int layers(){return graphs;};
+  int numLayers(){return graphs;};
 
   //! \name Print and Export
   //@{
@@ -237,7 +239,8 @@ private:
   QFont defaultTextMarkerFont;
   QColor defaultTextMarkerColor, defaultTextMarkerBackground;
 
-  QWidgetList buttonsList, graphsList;
+  QWidgetList buttonsList;
+  PyQtList<QWidget> graphsList;
   QHBoxLayout *layerButtonsBox=nullptr;
   QWidget *canvas=nullptr;
 

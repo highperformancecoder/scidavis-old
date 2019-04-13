@@ -383,7 +383,7 @@ void Column::save(QXmlStreamWriter * writer) const
             }
           writer->writeCharacters(str);
 #else
-          writer->writeCharacters(dateTimeAt(i).toStringStrf("yyyy-dd-MM hh:mm:ss:zzz").c_str());
+          writer->writeCharacters(dateTimeAt(i).toString("yyyy-dd-MM hh:mm:ss:zzz").c_str());
 #endif
           writer->writeEndElement();
         }
