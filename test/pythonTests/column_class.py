@@ -23,7 +23,7 @@ c2.setName("col2")
 assert c2.name() == "col2"
 
 # Testing data types (column modes) of a column (verification and change)
-colModes = ["Numeric","Text","Month","Day","DateTime"]
+colModes = [Numeric,Text,Month,Day,DateTime]
 for i in range(0,len(colModes)-1):
   assert c3.columnMode() == colModes[i]
   c3.setColumnMode(colModes[i+1])
@@ -66,10 +66,10 @@ for k in range(1,11):
 # is called using 'pure python' indexation for vectors, that is, starting from zero, not in the same
 # way as column indexing works on SciDAVis,starting from 1.
 
-assert c1.plotDesignation() == "X"
-assert c2.plotDesignation() == "Y"
-c3.setPlotDesignation("yErr")
-assert c3.plotDesignation() == "yErr"
+assert c1.plotDesignation() == X
+assert c2.plotDesignation() == Y
+c3.setPlotDesignation(yErr)
+assert c3.plotDesignation() == yErr
 
 for i in range(0,nRows):
   assert c1.isInvalid(i) == False
@@ -97,7 +97,7 @@ for j in range(11,11+len(v1)-1):
 # replaceValues() is also 0-based index
 
 
-c3.setColumnMode("Text")
+c3.setColumnMode(Text)
 for k in range(1,nRows+1):
   t.setText(k,3,"a")
 
@@ -122,15 +122,15 @@ c4b = t.column(3) # index is base 0
 assert c4 == c4b
 
 # set column 4 as X (X2).
-c4.setPlotDesignation("X")
+c4.setPlotDesignation(X)
 c5 = t.column("4")
-c5.setPlotDesignation("Y")
+c5.setPlotDesignation(Y)
 c6 = t.column("5")
-c6.setPlotDesignation("Y")
+c6.setPlotDesignation(Y)
 
 
 # DateTime data
-c4.setColumnMode("DateTime")
+c4.setColumnMode(DateTime)
 dt1 = QtCore.QDateTime(2018,5,4,10,12,23,300)
 for i in range(16):
     c4.setDateTimeAt(i,dt1)
@@ -138,8 +138,8 @@ for i in range(16):
 
 
 # print(c4.dateTimeAt(8))
-print(c4.dateTimeAt(8).toString("ISODate"))
-assert c4.dateTimeAt(8).toString("ISODate") == "2018-05-06T10:12:23"
+print(c4.dateTimeAt(8).toString(ISODate))
+assert c4.dateTimeAt(8).toString(ISODate) == "2018-05-06T10:12:23"
 
 # check rowCount insertRows
 assert c4.rowCount() == 16
@@ -156,16 +156,16 @@ assert t.numRows() == 34
 assert c1.rowCount() == 31
 
 # Date data
-c5.setColumnMode("Month")
+c5.setColumnMode(Month)
 dt1 = QtCore.QDate(2018,5,4)
 
 c5.setDateAt(2,QtCore.QDate(2018,11,20))
 c5.setDateAt(3,QtCore.QDate(2018,5,4))
-assert c5.dateAt(2).toString("ISODate") == "2018-11-20"
+assert c5.dateAt(2).toString(ISODate) == "2018-11-20"
 
-c6.setColumnMode("Day")
+c6.setColumnMode(Day)
 # print(c6.columnMode())
-assert c6.columnMode() == "Day"
+assert c6.columnMode() == Day
 
 c6.setDateAt(2,QtCore.QDate(2018,11,20))
 c6.setDateAt(3,QtCore.QDate(2018,5,4))
@@ -195,12 +195,12 @@ assert c5.x() == c4
 
 # look for Y-column of column("4")
 print("column(4).y().name: "+c4.y().name())
-print("Column 4, named '"+c4.name()+"' is a '"+c4.plotDesignation()+"' column, whose 'y' is named '"+
-    c4.y().name()+"' and is a '"+c4.y().plotDesignation()+"' column.")
+print("Column 4, named '"+c4.name()+"' is a '"+c4.plotDesignation().name+"' column, whose 'y' is named '"+
+    c4.y().name()+"' and is a '"+c4.y().plotDesignation().name+"' column.")
 
 # same for column("1")
 print("column(3).x().name: "+c3.x().name())
-print("Column 3, named '"+c3.name()+"' is a '"+c3.plotDesignation()+"' column, whose 'x' is named '"+
-    c3.x().name()+"' and is a '"+c3.x().plotDesignation()+"' column.")
+print("Column 3, named '"+c3.name()+"' is a '"+c3.plotDesignation().name+"' column, whose 'x' is named '"+
+    c3.x().name()+"' and is a '"+c3.x().plotDesignation().name+"' column.")
 
 app.exit()

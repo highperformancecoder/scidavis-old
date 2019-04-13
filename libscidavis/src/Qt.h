@@ -73,7 +73,7 @@ struct QtCore
     {return ::QDate::toString().toStdString();}
     std::string toString(QtEnums::DateFormat f) const
     {return ::QDate::toString(Qt::DateFormat(int(f))).toStdString();}
-    std::string toStringStrf(const std::string& format) const
+    std::string toString(const std::string& format) const
     {return ::QDate::toString(format.c_str()).toStdString();}
 
     bool setDate(int year, int month, int day)
@@ -116,7 +116,7 @@ struct QtCore
     std::string toString() const{return ::QTime::toString().toStdString();}
     std::string toString(QtEnums::DateFormat f) const
     {return ::QTime::toString(Qt::DateFormat(int(f))).toStdString();}
-    std::string toStringStrf(const std::string& f) const
+    std::string toString(const std::string& f) const
     {return ::QTime::toString(f.c_str()).toStdString();}
     bool setHMS(int h, int m, int s){return ::QTime::setHMS(h,m,s);}
     bool setHMS(int h, int m, int s, int ms){return ::QTime::setHMS(h,m,s,ms);}
@@ -170,7 +170,7 @@ struct QtCore
     std::string toString() const{return ::QDateTime::toString().toStdString();}
     std::string toString(QtEnums::DateFormat f) const
     {return ::QDateTime::toString(Qt::DateFormat(int(f))).toStdString();}
-    std::string toStringStrf(const std::string &format) const
+    std::string toString(const std::string &format) const
     {return ::QDateTime::toString(format.c_str()).toStdString();}
     QDateTime addDays(int days) const {return ::QDateTime::addDays(days);}
     QDateTime addMonths(int months) const {return ::QDateTime::addMonths(months);}
