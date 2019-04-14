@@ -49,6 +49,12 @@ namespace QtEnums
         UTC = Qt::UTC,
         OffsetFromUTC = Qt::OffsetFromUTC
     };
+
+  enum Orientation
+    {
+     Horizontal = Qt::Horizontal,
+     Vertical = Qt::Vertical
+    };
 }
 
 #include "QtEnumWrapper.h"

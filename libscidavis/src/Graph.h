@@ -150,7 +150,12 @@ public:
   //! Return the active tool, or NULL if none is active.
   PlotToolInterface* activeTool() const { return d_active_tool; }
 
-  Grid *grid(){return d_plot->grid();};
+  Grid& grid(){
+    if (auto g=d_plot->grid())
+      return *g;
+    else
+      throw NoSuchObject();
+  };
 
   void exportPainter(QPaintDevice &paintDevice, bool keepAspect = false, QRect rect = QRect());
   void exportPainter(QPainter &painter, bool keepAspect = false, QRect rect = QRect(), QSize size = QSize());

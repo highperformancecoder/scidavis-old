@@ -1047,22 +1047,22 @@ void AxesDialog::updateGrid()
     grid->enableX(boxMajorGrid->isChecked());
     grid->enableXMin(boxMinorGrid->isChecked());
 
-    grid->setMajPenX(QPen(boxColorMajor->color(), boxWidthMajor->value(),
+    grid->setXMajorPen(QPen(boxColorMajor->color(), boxWidthMajor->value(),
                           Graph::getPenStyle(boxTypeMajor->currentIndex())));
-    grid->setMinPenX(QPen(boxColorMinor->color(), boxWidthMinor->value(),
+    grid->setXMinorPen(QPen(boxColorMinor->color(), boxWidthMinor->value(),
                           Graph::getPenStyle(boxTypeMinor->currentIndex())));
   } else {
     grid->enableY(boxMajorGrid->isChecked());
     grid->enableYMin(boxMinorGrid->isChecked());
 
-    grid->setMajPenY(QPen(boxColorMajor->color(), boxWidthMajor->value(),
+    grid->setYMajorPen(QPen(boxColorMajor->color(), boxWidthMajor->value(),
                           Graph::getPenStyle(boxTypeMajor->currentIndex())));
-    grid->setMinPenY(QPen(boxColorMinor->color(), boxWidthMinor->value(),
+    grid->setYMinorPen(QPen(boxColorMinor->color(), boxWidthMinor->value(),
                           Graph::getPenStyle(boxTypeMinor->currentIndex())));
   }
 
-  grid->enableZeroLineX(boxXLine->isChecked());
-  grid->enableZeroLineY(boxYLine->isChecked());
+  grid->setXZeroLine(boxXLine->isChecked());
+  grid->setYZeroLine(boxYLine->isChecked());
 
   grid->setAxis(boxGridXAxis->currentIndex() + 2, boxGridYAxis->currentIndex());
   d_graph->replot();
@@ -1088,12 +1088,12 @@ void AxesDialog::showGridOptions(int axis)
     boxGridXAxis->setEnabled(true);
     boxGridYAxis->setDisabled(true);
 
-    QPen majPenX = grd->majPenX();
+    QPen majPenX = grd->xMajorPen();
     boxTypeMajor->setCurrentIndex(majPenX.style() - 1);
     boxColorMajor->setColor(majPenX.color());
     boxWidthMajor->setValue(majPenX.width());
 
-    QPen minPenX = grd->minPenX();
+    QPen minPenX = grd->xMinorPen();
     boxTypeMinor->setCurrentIndex(minPenX.style() - 1);
     boxColorMinor->setColor(minPenX.color());
     boxWidthMinor->setValue(minPenX.width());
@@ -1107,12 +1107,12 @@ void AxesDialog::showGridOptions(int axis)
     boxGridXAxis->setDisabled(true);
     boxGridYAxis->setEnabled(true);
 
-    QPen majPenY = grd->majPenY();
+    QPen majPenY = grd->yMajorPen();
     boxTypeMajor->setCurrentIndex(majPenY.style() - 1);
     boxColorMajor->setColor(majPenY.color());
     boxWidthMajor->setValue(majPenY.width());
 
-    QPen minPenY = grd->minPenY();
+    QPen minPenY = grd->yMinorPen();
     boxTypeMinor->setCurrentIndex(minPenY.style() - 1);
     boxColorMinor->setColor(minPenY.color());
     boxWidthMinor->setValue(minPenY.width());
@@ -1131,8 +1131,8 @@ void AxesDialog::showGridOptions(int axis)
   boxGridXAxis->setCurrentIndex(grd->xAxis() - 2);
   boxGridYAxis->setCurrentIndex(grd->yAxis());
 
-  boxXLine->setChecked(grd->xZeroLineEnabled());
-  boxYLine->setChecked(grd->yZeroLineEnabled());
+  boxXLine->setChecked(grd->xZeroLine());
+  boxYLine->setChecked(grd->yZeroLine());
 
   connect(boxMajorGrid, SIGNAL(toggled(bool)), this, SLOT(majorGridEnabled(bool)));
   connect(boxMinorGrid, SIGNAL(toggled(bool)), this, SLOT(minorGridEnabled(bool)));

@@ -63,9 +63,9 @@ void Grid::draw(QPainter *painter,
 	painter->setPen(minPen());
 
 	if (xMinEnabled()){
-		drawLines(painter, r, Qt::Vertical, mx,
+		drawLines(painter, r, QtEnums::Vertical, mx,
 				xScaleDiv().ticks(QwtScaleDiv::MinorTick));
-		drawLines(painter, r, Qt::Vertical, mx,
+		drawLines(painter, r, QtEnums::Vertical, mx,
 				xScaleDiv().ticks(QwtScaleDiv::MediumTick));
 	}
 
@@ -73,9 +73,9 @@ void Grid::draw(QPainter *painter,
 	painter->setPen(d_min_pen_y);
 
 	if (yMinEnabled()){
-		drawLines(painter, r, Qt::Horizontal, my,
+		drawLines(painter, r, QtEnums::Horizontal, my,
 				yScaleDiv().ticks(QwtScaleDiv::MinorTick));
-		drawLines(painter, r, Qt::Horizontal, my,
+		drawLines(painter, r, QtEnums::Horizontal, my,
 				yScaleDiv().ticks(QwtScaleDiv::MediumTick));
 	}
 
@@ -83,7 +83,7 @@ void Grid::draw(QPainter *painter,
 	painter->setPen(majPen());
 
 	if (xEnabled()){
-		drawLines(painter, r, Qt::Vertical, mx,
+		drawLines(painter, r, QtEnums::Vertical, mx,
 				xScaleDiv().ticks (QwtScaleDiv::MajorTick));
 	}
 
@@ -91,13 +91,13 @@ void Grid::draw(QPainter *painter,
 	painter->setPen(d_maj_pen_y);
 
 	if (yEnabled()){
-		drawLines(painter, r, Qt::Horizontal, my,
+		drawLines(painter, r, QtEnums::Horizontal, my,
 				yScaleDiv().ticks (QwtScaleDiv::MajorTick));
 	}
 }
 
 void Grid::drawLines(QPainter *painter, const QRect &rect,
-		Qt::Orientation orientation, const QwtScaleMap &map,
+		QtEnums::Orientation orientation, const QwtScaleMap &map,
 		const QwtValueList &values) const
 {
 	const int x1 = rect.left();
@@ -108,7 +108,7 @@ void Grid::drawLines(QPainter *painter, const QRect &rect,
 
 	for (uint i = 0; i < (uint)values.count(); i++){
 		const int value = map.transform(values[i]);
-		if ( orientation == Qt::Horizontal ){
+		if ( orientation == QtEnums::Horizontal ){
 			if ((value >= y1 + margin) && (value <= y2 - margin))
 				QwtPainter::drawLine(painter, x1, value, x2, value);
 		} else {
@@ -159,10 +159,10 @@ void Grid::load(const QStringList& grid)
 		}
 	}
 
-	setMajPenX(majPenX);
-	setMinPenX(minPenX);
-	setMajPenY(majPenY);
-	setMinPenY(minPenY);
+	setXMajorPen(majPenX);
+	setXMinorPen(minPenX);
+	setYMajorPen(majPenY);
+	setYMinorPen(minPenY);
 
 	enableX(majorOnX);
 	enableXMin(minorOnX);
@@ -171,11 +171,11 @@ void Grid::load(const QStringList& grid)
 
 	setAxis(xAxis, yAxis);
 
-	enableZeroLineX(xZeroOn);
-	enableZeroLineY(yZeroOn);
+	setXZeroLine(xZeroOn);
+	setYZeroLine(yZeroOn);
 }
 
-void Grid::enableZeroLineX(bool enable)
+void Grid::setXZeroLine(bool enable)
 {
 	Plot *d_plot = (Plot *)plot();
 	if (!d_plot)
@@ -202,7 +202,7 @@ void Grid::enableZeroLineX(bool enable)
 	}
 }
 
-void Grid::enableZeroLineY(bool enable)
+void Grid::setYZeroLine(bool enable)
 {
 	Plot *d_plot = (Plot *)plot();
 	if (!d_plot)
@@ -234,10 +234,10 @@ void Grid::copy(Grid *grid)
 	if (!grid)
 		return;
 
-	setMajPenX(grid->majPenX());
-	setMinPenX(grid->minPenX());
-	setMajPenY(grid->majPenY());
-	setMinPenY(grid->minPenY());
+	setXMajorPen(grid->xMajorPen());
+	setXMinorPen(grid->xMinorPen());
+	setYMajorPen(grid->yMajorPen());
+	setYMinorPen(grid->yMinorPen());
 
 	enableX(grid->xEnabled());
 	enableXMin(grid->xMinEnabled());
@@ -246,8 +246,8 @@ void Grid::copy(Grid *grid)
 
 	setAxis(grid->xAxis(), grid->yAxis());
 
-	enableZeroLineX(grid->xZeroLineEnabled());
-	enableZeroLineY(grid->yZeroLineEnabled());
+	setXZeroLine(grid->xZeroLine());
+	setYZeroLine(grid->yZeroLine());
 }
 
 QString Grid::saveToString()
@@ -258,24 +258,24 @@ QString Grid::saveToString()
 	s += QString::number(yEnabled())+"\t";
 	s += QString::number(yMinEnabled())+"\t";
 
-	s += COLORNAME(majPenX().color())+"\t";
-	s += QString::number(majPenX().style() - 1)+"\t";
-	s += QString::number(majPenX().width())+"\t";
+	s += COLORNAME(xMajorPen().color())+"\t";
+	s += QString::number(xMajorPen().style() - 1)+"\t";
+	s += QString::number(xMajorPen().width())+"\t";
 
-	s += COLORNAME(minPenX().color())+"\t";
-	s += QString::number(minPenX().style() - 1)+"\t";
-	s += QString::number(minPenX().width())+"\t";
+	s += COLORNAME(xMinorPen().color())+"\t";
+	s += QString::number(xMinorPen().style() - 1)+"\t";
+	s += QString::number(xMinorPen().width())+"\t";
 
-	s += COLORNAME(majPenY().color())+"\t";
-	s += QString::number(majPenY().style() - 1)+"\t";
-	s += QString::number(majPenY().width())+"\t";
+	s += COLORNAME(yMajorPen().color())+"\t";
+	s += QString::number(yMajorPen().style() - 1)+"\t";
+	s += QString::number(yMajorPen().width())+"\t";
 
-	s += COLORNAME(minPenY().color())+"\t";
-	s += QString::number(minPenY().style() - 1)+"\t";
-	s += QString::number(minPenY().width())+"\t";
+	s += COLORNAME(yMinorPen().color())+"\t";
+	s += QString::number(yMinorPen().style() - 1)+"\t";
+	s += QString::number(yMinorPen().width())+"\t";
 
-	s += QString::number(xZeroLineEnabled())+"\t";
-	s += QString::number(yZeroLineEnabled())+"\t";
+	s += QString::number(xZeroLine())+"\t";
+	s += QString::number(yZeroLine())+"\t";
 	s += QString::number(xAxis())+"\t";
 	s += QString::number(yAxis())+"\n";
 	return s;
