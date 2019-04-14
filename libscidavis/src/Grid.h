@@ -50,17 +50,17 @@ public:
   bool yZeroLine() const {return (mrkY >= 0)?true:false;};
   void setYZeroLine(bool enable = true);
 
-  void setXMajorPen(const QPen &p){	setMajPen(p);};
-  const QPen& xMajorPen() const {return majPen();};
+  void setXMajorPen(const QtNamespace::QPen &p) {setMajPen(p);};
+  QtNamespace::QPen xMajorPen() const {return majPen();};
 
-  void setXMinorPen(const QPen &p){	setMinPen(p);};
-  const QPen& xMinorPen() const {return minPen();};
+  void setXMinorPen(const QtNamespace::QPen &p){setMinPen(p);};
+  QtNamespace::QPen xMinorPen() const {return minPen();};
 
-  void setYMajorPen(const QPen &p){	if (d_maj_pen_y != p) d_maj_pen_y = p;};
-  const QPen& yMajorPen() const {return d_maj_pen_y;};
+  void setYMajorPen(const QtNamespace::QPen &p){if (d_maj_pen_y != p) d_maj_pen_y = p;};
+  QtNamespace::QPen yMajorPen() const {return d_maj_pen_y;};
 
-  void setYMinorPen(const QPen &p){	if (d_min_pen_y != p) d_min_pen_y = p;};
-  const QPen& yMinorPen() const {return d_min_pen_y;};
+  void setYMinorPen(const QtNamespace::QPen &p){if (d_min_pen_y != p) d_min_pen_y = p;};
+  QtNamespace::QPen yMinorPen() const {return d_min_pen_y;};
 
   void setMajor(bool x) {
     enableX(x);

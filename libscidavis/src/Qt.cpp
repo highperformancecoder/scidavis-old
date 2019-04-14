@@ -22,3 +22,13 @@ const QColor QtNamespace::transparent{Qt::transparent};
 const QColor QtNamespace::color0{Qt::color0};
 const QColor QtNamespace::color1{Qt::color1};
 
+void QtNamespace::QPen::setDashPattern(const pyobject &pattern)
+{
+#ifdef SCRIPTING_PYTHON
+  QVector<qreal> p;
+  for (int i=0; i<len(pattern); ++i)
+    p.append(boost::python::extract<qreal>(pattern[i]));
+  setDashPattern(p);
+#endif
+}
+

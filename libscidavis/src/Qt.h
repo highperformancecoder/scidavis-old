@@ -3,7 +3,17 @@
 #include <qcolor.h>
 #include <qprinter.h>
 #include <QDateTime>
+#include <QPen>
+
 #include <QtEnums.h>
+
+#ifdef SCRIPTING_PYTHON
+#include <boost/python.hpp>
+typedef boost::python::object pyobject;
+namespace py=boost::python;
+#else
+struct pyobject;
+#endif
 
 struct QtNamespace
 {
@@ -27,7 +37,64 @@ struct QtNamespace
   static const QColor transparent;
   static const QColor color0;
   static const QColor color1;
+
+  struct QPen: public ::QPen
+  {
+    QPen() {}
+    QPen(QtEnums::PenStyle x): ::QPen(x) {}
+    QPen(const QColor &color): ::QPen(color) {}
+    //    QPen(const QBrush &brush, qreal width, Qt::PenStyle s = Qt::SolidLine,
+    //         Qt::PenCapStyle c = Qt::SquareCap, Qt::PenJoinStyle j = Qt::BevelJoin)
+    
+    QPen(const ::QPen &pen): ::QPen(pen) {}
+
+    //    inline void swap(QPen &other) { qSwap(d, other.d); }
+
+    QtEnums::PenStyle style() const {return QtEnums::PenStyle(::QPen::style());}
+    void setStyle(QtEnums::PenStyle s) {::QPen::setStyle(Qt::PenStyle(s));}
+
+    QVector<qreal> dashPattern() const {return ::QPen::dashPattern();}
+    void setDashPattern(const QVector<qreal> &pattern)
+    {::QPen::setDashPattern(pattern);}
+    void setDashPattern(const pyobject &pattern);
+
+    qreal dashOffset() const {return ::QPen::dashOffset();}
+    void setDashOffset(qreal doffset) {::QPen::setDashOffset(doffset);}
+
+    qreal miterLimit() const {return ::QPen::miterLimit();}
+    void setMiterLimit(qreal limit) {::QPen::setMiterLimit(limit);}
+
+    qreal widthF() const {return ::QPen::widthF();}
+    void setWidthF(qreal width) {::QPen::setWidthF(width);}
+
+    int width() const {return ::QPen::width();}
+    void setWidth(int width) {::QPen::setWidth(width);}
+
+    QColor color() const {return ::QPen::color();}
+    void setColor(const QColor &color) {::QPen::setColor(color);}
+
+    QBrush brush() const {return ::QPen::brush();}
+    void setBrush(const QBrush &brush) {::QPen::setBrush(brush);}
+
+    bool isSolid() const {return ::QPen::isSolid();}
+
+    QtEnums::PenCapStyle capStyle() const {return QtEnums::PenCapStyle(::QPen::capStyle());}
+    void setCapStyle(QtEnums::PenCapStyle pcs) {::QPen::setCapStyle(Qt::PenCapStyle(pcs));}
+
+    QtEnums::PenJoinStyle joinStyle() const {return QtEnums::PenJoinStyle(::QPen::joinStyle());}
+    void setJoinStyle(QtEnums::PenJoinStyle pcs) {::QPen::setJoinStyle(Qt::PenJoinStyle(pcs));}
+
+    bool isCosmetic() const {return ::QPen::isCosmetic();}
+    void setCosmetic(bool cosmetic) {return setCosmetic(cosmetic);}
+
+    bool isDetached() {return ::QPen::isDetached();}
+
+  };
+
+
 };
+
+
 
 // shims around Qt classes to allow automatic exposure to python
 struct QtCore
@@ -202,14 +269,6 @@ struct QtCore
   };
 };
 
-
-#ifdef SCRIPTING_PYTHON
-#include <boost/python.hpp>
-typedef boost::python::object pyobject;
-namespace py=boost::python;
-#else
-struct pyobject;
-#endif
 
 /// wrap a Qt container with Python accessor method
 template <class T>
