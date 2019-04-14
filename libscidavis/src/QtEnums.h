@@ -55,6 +55,14 @@ namespace QtEnums
      Horizontal = Qt::Horizontal,
      Vertical = Qt::Vertical
     };
+
+    enum AspectRatioMode
+      {
+       IgnoreAspectRatio=Qt::IgnoreAspectRatio,
+       KeepAspectRatio=Qt::KeepAspectRatio,
+       KeepAspectRatioByExpanding=Qt::KeepAspectRatioByExpanding
+      };
+
 }
 
 #include "QtEnumWrapper.h"

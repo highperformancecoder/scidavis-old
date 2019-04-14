@@ -97,6 +97,8 @@ typedef struct _traceback {
 #include "Legend.h"
 #include "Grid.h"
 #include "Grid.cd"
+#include "ImageMarker.h"
+#include "ImageMarker.cd"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -182,6 +184,7 @@ namespace classdesc
   DEF_TYPENAME(QTime);
   DEF_TYPENAME(QwtPlotPrintFilter);
   DEF_TYPENAME(QwtScaleMap);
+  DEF_TYPENAME(QPixmap);
 
   template <class T> struct tn<QList<T>>
   {

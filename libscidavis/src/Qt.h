@@ -267,6 +267,37 @@ struct QtCore
     {return ::QDateTime::fromMSecsSinceEpoch(msecs);}
     static qint64 currentMSecsSinceEpoch() {return ::QDateTime::currentMSecsSinceEpoch();}
   };
+
+  struct QSize: ::QSize
+  {
+    QSize() {}
+    QSize(int w, int h): ::QSize(w,h) {}
+    QSize(const ::QSize& x): ::QSize(x) {}
+
+    bool isNull() const {return ::QSize::isNull();}
+    bool isEmpty() const {return ::QSize::isEmpty();}
+    bool isValid() const {return ::QSize::isValid();}
+
+    int width() const {return ::QSize::width();}
+    int height() const {return ::QSize::height();}
+    void setWidth(int w) {::QSize::setWidth(w);}
+    void setHeight(int h) {::QSize::setHeight(h);}
+    void transpose() {::QSize::transpose();}
+
+    void scale(int w, int h, QtEnums::AspectRatioMode mode)
+    {::QSize::scale(w,h,Qt::AspectRatioMode(mode));}
+    void scale(const QSize &s, QtEnums::AspectRatioMode mode)
+    {::QSize::scale(s,Qt::AspectRatioMode(mode));}
+
+    QSize expandedTo(const QSize & x) const 
+    {return ::QSize::expandedTo(x);}
+    QSize boundedTo(const QSize & x) const
+    {return ::QSize::boundedTo(x);}
+
+//    int &rwidth() {return ::QSize::rwidth();}
+//    int &rheight() {return ::QSize::rheight();}
+  };
+
 };
 
 

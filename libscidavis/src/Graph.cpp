@@ -3809,17 +3809,16 @@ ImageMarker* Graph::addImage(ImageMarker* mrk)
 	return mrk;
 }
 
-ImageMarker* Graph::addImage(const QString& fileName)
+ImageMarker& Graph::addImage(const QString& fileName)
 {
-	if (fileName.isEmpty() || !QFile::exists(fileName)){
-		QMessageBox::warning(0, tr("File open error"),
-				tr("Image file: <p><b> %1 </b><p>does not exist anymore!").arg(fileName));
-		return 0;
-	}
+	if (fileName.isEmpty() || !QFile::exists(fileName))
+          throw std::runtime_error
+            (tr("Image file: <p><b> %1 </b><p>does not exist anymore!").arg(fileName).toStdString());
 	
 	ImageMarker* mrk = new ImageMarker(fileName);
 	int imagesOnPlot = d_images.size();
 	d_images.resize(++imagesOnPlot);
+        // ownership passed here, I think!
 	d_images[imagesOnPlot-1] = d_plot->insertMarker(mrk);
 
 	QSize picSize = mrk->pixmap().size();
@@ -3835,7 +3834,7 @@ ImageMarker* Graph::addImage(const QString& fileName)
 	d_plot->replot();
 
 	emit modifiedGraph();
-	return mrk;
+	return *mrk;
 }
 
 void Graph::insertImageMarker(const QStringList& lst, int fileVersion)

@@ -57,7 +57,7 @@ void ImageMarker::draw (QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap 
 	p->drawPixmap(QRect(x0, y0, abs(x1 - x0), abs(y1 - y0)), d_pic);
 }
 
-void ImageMarker::setSize(const QSize& size)
+void ImageMarker::setSize(const QtCore::QSize& size)
 {
     d_size = size;
     updateBoundingRect();

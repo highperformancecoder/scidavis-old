@@ -428,7 +428,7 @@ public slots:
   ImageMarker* imageMarker(long id);
   QVector<int> imageMarkerKeys(){return d_images;};
   ImageMarker* addImage(ImageMarker* mrk);
-  ImageMarker* addImage(const QString& fileName);
+  ImageMarker& addImage(const QString& fileName);
 
   void insertImageMarker(const QStringList& lst, int fileVersion);
   bool imageMarkerSelected();
