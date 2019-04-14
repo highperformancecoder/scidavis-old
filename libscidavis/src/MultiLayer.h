@@ -161,7 +161,7 @@ public slots:
 
   int horizontalAlignement(){return hor_align;};
   int verticalAlignement(){return vert_align;};
-  void setAlignement (int ha, int va);
+  void setAlignment (int ha, int va);
 
   int numLayers(){return graphs;};
 

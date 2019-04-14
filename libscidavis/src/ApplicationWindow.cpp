@@ -3917,7 +3917,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
               lst=t.readLine().split("\t", QString::SkipEmptyParts);
               plot->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
               lst=t.readLine().split("\t", QString::SkipEmptyParts);
-              plot->setAlignement(lst[1].toInt(),lst[2].toInt());
+              plot->setAlignment(lst[1].toInt(),lst[2].toInt());
             }
 
           while ( s!="</multiLayer>" )
@@ -4173,7 +4173,7 @@ void ApplicationWindow::openTemplate()
                           lst=t.readLine().split("\t", QString::SkipEmptyParts);
                           ((MultiLayer*)w)->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
                           lst=t.readLine().split("\t", QString::SkipEmptyParts);
-                          ((MultiLayer*)w)->setAlignement(lst[1].toInt(),lst[2].toInt());
+                          ((MultiLayer*)w)->setAlignment(lst[1].toInt(),lst[2].toInt());
                         }
                       while (!t.atEnd())
                         {//open layers
@@ -12422,7 +12422,7 @@ void ApplicationWindow::appendProject(const QString& fn)
                       lst=t.readLine().split("\t", QString::SkipEmptyParts);
                       plot->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
                       lst=t.readLine().split("\t", QString::SkipEmptyParts);
-                      plot->setAlignement(lst[1].toInt(),lst[2].toInt());
+                      plot->setAlignment(lst[1].toInt(),lst[2].toInt());
                     }
 
                   while ( s!="</multiLayer>" )

@@ -23,5 +23,5 @@ graph.setAlignment(0,1)
 graph.arrangeLayers(True)
 
 # doesn't seem to export image?
-graph.export("graph.png")
+graph.exportToFile("graph.png")
 app.exit()

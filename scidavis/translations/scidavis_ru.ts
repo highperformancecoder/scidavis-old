@@ -9721,7 +9721,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Ошибка при открытии файла</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="+826"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="+829"/>
         <source>Couldn&apos;t change the axis type to the requested format!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9731,7 +9731,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2645"/>
+        <location line="+2656"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
         <translation type="unfinished">1</translation>
@@ -10103,7 +10103,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">По правому краю</translation>
     </message>
     <message>
-        <location line="-2629"/>
+        <location line="-2640"/>
         <source>Title</source>
         <translation type="unfinished">Заголовок</translation>
     </message>
@@ -10130,7 +10130,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Ошибка ввода функции</translation>
     </message>
     <message>
-        <location line="+635"/>
+        <location line="+646"/>
         <source>Ctrl+Shift+R</source>
         <translation type="unfinished">Ctrl+Shift+R</translation>
     </message>
@@ -10211,7 +10211,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">усреднённое сглаживание</translation>
     </message>
     <message>
-        <location line="-3105"/>
+        <location line="-3116"/>
         <location line="+32"/>
         <source>Please provide a valid file name!</source>
         <translation type="unfinished">Пожалуйста укажите корректное имя файла!</translation>
@@ -10222,7 +10222,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Формат файла не обработан, операция прервана!</translation>
     </message>
     <message>
-        <location line="+2681"/>
+        <location line="+2692"/>
         <source>Data set generated from curve</source>
         <translation type="unfinished">Набор данный постноенный по кривой</translation>
     </message>
@@ -10231,30 +10231,30 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Table</translation>
     </message>
     <message>
-        <location line="-3246"/>
+        <location line="-3257"/>
         <location line="+547"/>
         <location line="+18"/>
         <location line="+14"/>
-        <location line="+3830"/>
+        <location line="+3841"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location line="-1423"/>
+        <location line="-1434"/>
         <location line="+30"/>
         <source>File open error</source>
         <translation type="unfinished">Ошибка открытия файла</translation>
     </message>
     <message>
         <location line="-2425"/>
-        <location line="+2973"/>
+        <location line="+2984"/>
         <location line="+4"/>
         <location line="+826"/>
         <source>Warning</source>
         <translation type="unfinished">Предупреждение</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="+639"/>
+        <location filename="../../libscidavis/src/Graph.h" line="+652"/>
         <source>F</source>
         <translation type="unfinished">F</translation>
     </message>

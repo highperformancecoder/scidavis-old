@@ -1218,7 +1218,7 @@ void MultiLayer::setLayerCanvasSize (int w, int h)
 		l_canvas_height = h;
 }
 
-void MultiLayer::setAlignement (int ha, int va)
+void MultiLayer::setAlignment (int ha, int va)
 {
 	if (hor_align != ha)
 		hor_align = ha;
@@ -1290,7 +1290,7 @@ void MultiLayer::copy(ApplicationWindow * parent, MultiLayer* ml)
     resize(ml->size());
 	
 	setSpacing(ml->rowsSpacing(), ml->colsSpacing());
-	setAlignement(ml->horizontalAlignement(), ml->verticalAlignement());
+	setAlignment(ml->horizontalAlignement(), ml->verticalAlignement());
 	setMargins(ml->leftMargin(), ml->rightMargin(), ml->topMargin(), ml->bottomMargin());
 
 	QWidgetList graphsList = ml->graphPtrs();

@@ -631,10 +631,23 @@ public slots:
   //! \name User-defined Functions
   //@{
   bool modifyFunctionCurve(ApplicationWindow * parent, int curve, int type, const QStringList &formulas, const QString &var,QList<double> &ranges, int points);
-  bool addFunctionCurve(ApplicationWindow *parent, int type, const QStringList &formulas, const QString& var,
-                        QList<double> &ranges, int points, const QString& title = QString::null);
+  bool addFunctionCurve
+  (ApplicationWindow *parent, int type, const QStringList &formulas,
+   const QString& var,const QList<double> &ranges, int points,
+   const QString& title = QString::null);
   //! Used when reading from a project file.
   bool insertFunctionCurve(ApplicationWindow * parent, const QStringList& func_spec, int points, int fileVersion);
+  bool insertFunctionCurve(const QString &formula, double from, double to,
+                           int points, const QString &title);
+  bool insertFunctionCurve
+  (const QString &formula, double from, double to, int points)
+  {return insertFunctionCurve(formula,from,to,points,QString::null);}
+  bool insertFunctionCurve(const QString &formula, double from, double to)
+  {return insertFunctionCurve(formula,from,to,100);}
+  bool insertFunctionCurve(const QString &formula, double from)
+  {return insertFunctionCurve(formula,from,1);}
+  bool insertFunctionCurve(const QString &formula)
+  {return insertFunctionCurve(formula,0);}
   //! Returns an unique function name
   QString generateFunctionName(const QString& name = tr("F"));
   //@}

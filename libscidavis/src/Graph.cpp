@@ -54,6 +54,9 @@
 #include "PlotCurve.h"
 #include "ApplicationWindow.h"
 #include "core/column/Column.h"
+#ifdef SCRIPTING_PYTHON
+#include "PythonScripting.h"
+#endif
 #include <classdesc_epilogue.h>
 
 #include <QApplication>
@@ -3936,7 +3939,7 @@ QString Graph::generateFunctionName(const QString& name)
 }
 
 bool Graph::addFunctionCurve(ApplicationWindow *parent, int type, const QStringList &formulas, const QString &var,
-		QList<double> &ranges, int points, const QString& title)
+		const QList<double> &ranges, int points, const QString& title)
 {
 	QString name;
 	if (!title.isEmpty())
@@ -3966,6 +3969,17 @@ bool Graph::addFunctionCurve(ApplicationWindow *parent, int type, const QStringL
 	emit modifiedGraph();
 	return true;
 }
+
+bool Graph::insertFunctionCurve
+(const QString &formula, double from, double to, int points,
+ const QString &title)
+{
+#ifdef SCRIPTING_PYTHON
+  return addFunctionCurve(&theApp(), int(FunctionCurve::Normal), 
+                   {formula},"x",{from,to}, points, title);
+#endif
+}
+
 
 bool Graph::insertFunctionCurve(ApplicationWindow * parent, const QStringList& func_spec, int points, int fileVersion)
 {

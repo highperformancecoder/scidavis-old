@@ -251,7 +251,7 @@ void LayerDialog::update()
 		if (GroupCanvasSize->isChecked())
 			multi_layer->setLayerCanvasSize(boxCanvasWidth->value(), boxCanvasHeight->value());
 
-		multi_layer->setAlignement(alignHorBox->currentIndex(), alignVertBox->currentIndex());
+		multi_layer->setAlignment(alignHorBox->currentIndex(), alignVertBox->currentIndex());
 
 		multi_layer->setMargins(boxLeftSpace->value(), boxRightSpace->value(),
 				boxTopSpace->value(), boxBottomSpace->value());
