@@ -87,7 +87,7 @@ void ImageMarker::setRect(int x, int y, int w, int h)
     updateBoundingRect();
 }
 
-void ImageMarker::setBoundingRect(double left, double top, double right, double bottom)
+void ImageMarker::setCoordinates(double left, double top, double right, double bottom)
 {
     if (xValue() == left && yValue() == top && d_x_right == right && d_y_bottom == bottom)
         return;

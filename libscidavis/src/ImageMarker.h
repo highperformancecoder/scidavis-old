@@ -77,7 +77,7 @@ public:
   //! Return bounding rectangle in plot coordinates.
   virtual QwtDoubleRect boundingRect() const;
   //! Set position (xValue() and yValue()), right and bottom values giving everything in plot coordinates.
-  void setBoundingRect(double left, double top, double right, double bottom);
+  void setCoordinates(double left, double top, double right, double bottom);
 
   double right(){return d_x_right;};
   double bottom(){return d_y_bottom;};
