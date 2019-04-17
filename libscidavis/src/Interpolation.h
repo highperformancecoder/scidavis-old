@@ -37,24 +37,31 @@ class Interpolation : public Filter
 Q_OBJECT
 
 public:
-	enum InterpolationMethod{Linear, Cubic, Akima};
-
-	Interpolation(ApplicationWindow *parent, Graph *g, const QString& curveTitle, int m = 0);
-	Interpolation(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end, int m = 0);
-
-    int method(){return d_method;};
-    void setMethod(int m);
-	void setMethod(InterpolationMethod m){setMethod((int)m);};
+  enum InterpolationMethod {Linear, Cubic, Akima};
+  Interpolation() {}
+  
+  Interpolation(ApplicationWindow *parent, Graph *g, const QString& curveTitle, InterpolationMethod m = Linear);
+  Interpolation(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end, InterpolationMethod m = Linear);
+  Interpolation(Graph& g, const QString& curveTitle, double start, double end, InterpolationMethod m);
+  Interpolation(Graph& g, const QString& curveTitle, double start, double end):
+    Interpolation(g,curveTitle,start,end,Linear) {}
+  Interpolation(Graph& g, const QString& curveTitle, InterpolationMethod m);
+  Interpolation(Graph& g, const QString& curveTitle):
+    Interpolation(g, curveTitle, Linear) {}
+    
+  
+  InterpolationMethod method(){return d_method;};
+  void setMethod(InterpolationMethod m){d_method=m; init();};
 
 protected:
-	virtual bool isDataAcceptable();
+  virtual bool isDataAcceptable();
 
 private:
-    void init(int m);
-    void calculateOutputData(double *x, double *y);
+  void init();
+  void calculateOutputData(double *x, double *y);
 
-    //! the interpolation method
-    int d_method;
+  //! the interpolation method
+  InterpolationMethod d_method;
 };
 
 #endif

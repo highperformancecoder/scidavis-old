@@ -149,12 +149,14 @@ if (from >= to)
 	return;
 	}
 
-Interpolation *i = new Interpolation((ApplicationWindow *)this->parent(), graph, curve,
-                                      from, to, boxMethod->currentIndex());
-i->setOutputPoints(boxPoints->value());
-i->setColor(btnColor->color());
-i->run();
-delete i;
+ if (auto app=dynamic_cast<ApplicationWindow*>(parent()))
+   {
+     Interpolation i(app, graph, curve,
+                     from, to, Interpolation::InterpolationMethod(boxMethod->currentIndex()));
+     i.setOutputPoints(boxPoints->value());
+     i.setColor(btnColor->color());
+     i.run();
+   }
 }
 
 void InterpolationDialog::setGraph(Graph *g)

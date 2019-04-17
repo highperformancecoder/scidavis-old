@@ -27,6 +27,9 @@
  *                                                                         *
  ***************************************************************************/
 #include "Interpolation.h"
+#ifdef SCRIPTING_PYTHON
+#include "PythonScripting.h"
+#endif
 #include <classdesc_epilogue.h>
 
 #include <QMessageBox>
@@ -35,71 +38,75 @@
 #include <gsl/gsl_spline.h>
 #include <gsl/gsl_interp.h>
 
-Interpolation::Interpolation(ApplicationWindow *parent, Graph *g, const QString& curveTitle, int m)
-: Filter(parent, g)
+Interpolation::Interpolation(ApplicationWindow *parent, Graph *g, const QString& curveTitle, InterpolationMethod m)
+  : Filter(parent, g), d_method(m)
 {
-	init(m);
+	init();
 	setDataFromCurve(curveTitle);
 }
 
 Interpolation::Interpolation(ApplicationWindow *parent, Graph *g, const QString& curveTitle,
-                             double start, double end, int m)
-: Filter(parent, g)
+                             double start, double end, InterpolationMethod  m)
+  : Filter(parent, g), d_method(m)
 {
-	init(m);
+	init();
 	setDataFromCurve(curveTitle, start, end);
 }
 
-void Interpolation::init(int m)
+Interpolation::Interpolation(Graph& g, const QString& curveTitle, double start, double end, InterpolationMethod m)
+#ifdef SCRIPTING_PYTHON
+  :Interpolation(&theApp(), &g, curveTitle, start, end, m)
+#endif
+{}
+
+Interpolation::Interpolation(Graph& g, const QString& curveTitle, InterpolationMethod m)
+#ifdef SCRIPTING_PYTHON
+  :Interpolation(&theApp(), &g, curveTitle, m)
+#endif
+{}
+
+void Interpolation::init()
 {
-    if (m < 0 || m > 2)
+  switch(d_method)
     {
-        QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
-        tr("Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima."));
-        d_init_err = true;
-        return;
+    case Linear:
+      setObjectName(tr("Linear") + tr("Int"));
+      d_explanation = tr("Linear") + " " + tr("Interpolation");
+      break;
+    case Cubic:
+      setObjectName(tr("Cubic") + tr("Int"));
+      d_explanation = tr("Cubic") + " " + tr("Interpolation");
+      break;
+    case Akima:
+      setObjectName(tr("Akima") + tr("Int"));
+      d_explanation = tr("Akima") + " " + tr("Interpolation");
+      break;
     }
-    d_method = m;
-	switch(d_method)
-	{
-		case 0:
-			setObjectName(tr("Linear") + tr("Int"));
-			d_explanation = tr("Linear") + " " + tr("Interpolation");
-			break;
-		case 1:
-			setObjectName(tr("Cubic") + tr("Int"));
-			d_explanation = tr("Cubic") + " " + tr("Interpolation");
-			break;
-		case 2:
-			setObjectName(tr("Akima") + tr("Int"));
-			d_explanation = tr("Akima") + " " + tr("Interpolation");
-			break;
-	}
-    d_sort_data = true;
-    d_min_points = d_method + 3;
+  d_sort_data = true;
+  d_min_points = d_method + 3;
 }
 
 
-void Interpolation::setMethod(int m)
-{
-if (m < 0 || m > 2)
-    {
-        QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
-        tr("Unknown interpolation method, valid values are: 0 - Linear, 1 - Cubic, 2 - Akima."));
-        d_init_err = true;
-        return;
-    }
-unsigned min_points = m + 3;
-if (d_n < min_points)
-	{
-		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
-				tr("You need at least %1 points in order to perform this operation!").arg(min_points));
-        d_init_err = true;
-        return;
-	}
-d_method = m;
-d_min_points = min_points;
-}
+//void Interpolation::setMethod(int m)
+//{
+//if (m < 0 || m > 2)
+//    {
+//        QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
+//        tr("Unknown interpolation method, valid values are: 0 - Linear, 1 - Cubic, 2 - Akima."));
+//        d_init_err = true;
+//        return;
+//    }
+//unsigned min_points = m + 3;
+//if (d_n < min_points)
+//	{
+//		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " + tr("Error"),
+//				tr("You need at least %1 points in order to perform this operation!").arg(min_points));
+//        d_init_err = true;
+//        return;
+//	}
+//d_method = m;
+//d_min_points = min_points;
+//}
 
 void Interpolation::calculateOutputData(double *x, double *y)
 {

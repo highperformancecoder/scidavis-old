@@ -22,9 +22,9 @@ t1Name="generic-curve"
 t1=newTable(t1Name,2,NP)
 for i in range(1,t1.numRows()+1):
  xx=float(i)
- t1.setCell(1,i,xx)
-# t1.setCell(2,i,f1(xx)+dp*r[i])
- t1.setCell(2,i,f1(xx)+random.uniform(0,dp))
+ t1.setCell(i,1,xx)
+# t1.setCell(i,2,f1(xx)+dp*r[i])
+ t1.setCell(i,2,f1(xx)+random.uniform(0,dp))
 
 g1=plot(t1,'2',1) #plotting the curve
 
@@ -35,21 +35,21 @@ l1=g1.activeLayer()
 curve1=t1Name+"_2"
 
 start=t1.cell(1,1)
-end=t1.cell(1,t1.numRows())
+end=t1.cell(t1.numRows(),1)
 
 # brief syntax of interpolation:
 # Interpolation(layer,curve name, start, end, method number)
 # valid method numbers are 0, 1, and 2 for Linear, Cubic, and Akima methods, respectively
-interp0=Interpolation(l1,curve1,start,end,0)
+interp0=Interpolation(l1,curve1,start,end,Interpolation.Linear)
 interp0.setOutputPoints(3*NP)
 interp0.run()
 
-interp1=Interpolation(l1,curve1,start,end,1)
+interp1=Interpolation(l1,curve1,start,end,Interpolation.Cubic)
 interp1.setOutputPoints(3*NP)
 interp1.setColor("blue")
 interp1.run()
 
-interp2=Interpolation(l1,curve1,start,end,2)
+interp2=Interpolation(l1,curve1,start,end,Interpolation.Akima)
 interp2.setOutputPoints(3*NP)
 interp2.setColor("green")
 interp2.run()
