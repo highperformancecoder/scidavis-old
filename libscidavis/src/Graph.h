@@ -172,14 +172,42 @@ public slots:
   //! Used when restoring a pie plot from a project file
   void plotPie(Table* w,const QString& name, const QPen& pen, int brush, int size, int firstColor, int startRow = 0, int endRow = -1, bool visible = true);
   void removePie();
-  QString pieLegendText();
+  QString pieLegend();
   QString savePieCurveLayout();
   //@}
 
   bool insertCurvesList(Table* w, const QStringList& names, int style, int lWidth, int sSize, int startRow = 0, int endRow = -1);
-  bool insertCurve(Table* w, const QString& name, int style, int startRow = 0, int endRow = -1);
+  bool insertCurve(Table* w, const QString& name, int style, int startRow, int endRow);
+  bool insertCurve(Table* w, const QString& name, int style, int startRow)
+  {return insertCurve(w,name,style,startRow,-1);}
+  bool insertCurve(Table* w, const QString& name, int style)
+  {return insertCurve(w,name,style,0);}
   bool insertCurve(Table* w, int xcol, const QString& name, int style);
-  bool insertCurve(Table* w, const QString& xColName, const QString& yColName, int style, int startRow = 0, int endRow = -1);
+  bool insertCurve(Table* w, const QString& xColName, const QString& yColName, int style, int startRow, int endRow);
+  bool insertCurve(Table* w, const QString& xColName, const QString& yColName, int style, int startRow)
+  {return insertCurve(w,xColName,yColName,style,startRow,-1);}
+  bool insertCurve(Table* w, const QString& xColName, const QString& yColName, int style)
+  {return insertCurve(w,xColName,yColName,style,0);}
+
+  bool insertPolarCurve(const QString &radial, const QString &angular,
+			double from, double to, const QString &parameter, int points,
+			const QString &title);
+  bool insertPolarCurve(const QString &radial, const QString &angular,
+			double from, double to, const QString &parameter, int points)
+  {return insertPolarCurve(radial,angular,from,to,parameter,points,QString::null);}
+  bool insertPolarCurve(const QString &radial, const QString &angular,
+			double from, double to, const QString &parameter)
+  {return insertPolarCurve(radial,angular,from,to,parameter,100);}
+  bool insertPolarCurve(const QString &radial, const QString &angular,
+			double from, double to)
+  {return insertPolarCurve(radial,angular,from,to,"t");}
+  bool insertPolarCurve(const QString &radial, const QString &angular,
+			double from)
+  {return insertPolarCurve(radial,angular,from,2*M_PI);}
+  bool insertPolarCurve(const QString &radial, const QString &angular)
+  {return insertPolarCurve(radial,angular,0);}
+
+  
   void insertPlotItem(QwtPlotItem *i, int type);
 
   //! Shows/Hides a curve defined by its index.

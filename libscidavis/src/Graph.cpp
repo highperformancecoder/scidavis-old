@@ -1839,7 +1839,7 @@ QString Graph::legendText()
 	return text;
 }
 
-QString Graph::pieLegendText()
+QString Graph::pieLegend()
 {
 	QString text="";
 	QList<int> keys= d_plot->curveKeys();
@@ -2504,7 +2504,7 @@ Legend* Graph::newLegend()
 	mrk->setOrigin(QPoint(10, 10));
 
 	if (isPiePlot())
-		mrk->setText(pieLegendText());
+		mrk->setText(pieLegend());
 	else
 		mrk->setText(legendText());
 
@@ -3436,6 +3436,15 @@ bool Graph::insertCurve(Table* w, const QString& xColName, const QString& yColNa
 	updatePlot();
 
 	return true;
+}
+
+bool Graph::insertPolarCurve(const QString &radial, const QString &angular,
+                      double from, double to, const QString &parameter,
+                      int points,  const QString &title)
+{
+#ifdef SCRIPTING_PYTHON
+  return addFunctionCurve(&theApp(), FunctionCurve::Polar, QStringList() << radial << angular, parameter, QList<double>() << from << to, points, title);
+#endif
 }
 
 void Graph::plotVectorCurve(Table* w, const QStringList& colList, int style, int startRow, int endRow)
