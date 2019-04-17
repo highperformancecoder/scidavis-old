@@ -29,6 +29,9 @@
 #include "Integration.h"
 #include "MultiLayer.h"
 #include "Legend.h"
+#ifdef SCRIPTING_PYTHON
+#include "PythonScripting.h"
+#endif
 #include <classdesc_epilogue.h>
 
 #include <QMessageBox>
@@ -61,6 +64,19 @@ Integration::Integration(ApplicationWindow *parent, Graph *g, const QString& cur
 	init();
 	setDataFromCurve(curveTitle, start, end);
 }
+
+Integration::Integration(Graph& g, const QString& curveTitle)
+#ifdef SCRIPTING_PYTHON
+  : Integration(&theApp(), &g, curveTitle)
+#endif
+{}
+  
+Integration::Integration(Graph& g, const std::string& curveTitle, double start, double end)
+#ifdef SCRIPTING_PYTHON
+  : Integration(&theApp(), &g, curveTitle.c_str(), start, end)
+#endif
+{}
+
 
 void Integration::init()
 {

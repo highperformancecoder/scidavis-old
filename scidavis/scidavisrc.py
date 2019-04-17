@@ -70,16 +70,12 @@ import_to_global("math", None, True)
 # import SciDAVis' classes to the global namespace (particularly useful for fits)
 for name in dir(scidavis):
 	setattr(__main__, name, getattr(scidavis, name))
-
-#Add aliases for classes defined in QtCore
-class QtCore:
-        pass
-
-for name in dir(scidavis):
-        if re.match("QtCore::",name):
-                setattr(QtCore, re.sub("QtCore::","",name), getattr(scidavis, name))
-
-setattr(__main__,"QtCore",QtCore)
+for name in dir(SciDAVis):
+        if not name.startswith("__"):
+	        setattr(__main__, name, getattr(SciDAVis, name))
+for name in dir(QtEnums):
+        if not name.startswith("__"):
+                setattr(__main__,name,getattr(QtEnums,name))
 
 # import selected methods of ApplicationWindow into the global namespace
 appImports = (

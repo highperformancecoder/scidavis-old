@@ -339,7 +339,7 @@ void PythonScript::beginStdoutRedirect()
 
 void PythonScript::endStdoutRedirect()
 {
-  if (!batchMode && env())
+  if (!batchMode && env() && stdoutSave.ptr() && stderrSave.ptr())
     {
       auto sys=modDict("sys");
       sys["stdout"]=stdoutSave;

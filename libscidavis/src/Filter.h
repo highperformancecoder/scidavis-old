@@ -46,7 +46,7 @@ public:
   Filter() {}
   Filter(ApplicationWindow *parent, Table *t = 0, QString name = QString());
   Filter(ApplicationWindow *parent, Graph *g = 0, QString name = QString());
-  ~Filter();
+  virtual ~Filter();
 
   //! Actually does the job. Should be reimplemented in derived classes.
   virtual bool run();

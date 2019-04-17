@@ -68,7 +68,8 @@ void Filter::init()
 	d_points = 100;
 	d_max_iterations = 1000;
 	d_curve = 0;
-	d_prec = ((ApplicationWindow *)parent())->fit_output_precision;
+        if (auto app=dynamic_cast<ApplicationWindow *>(parent()))
+          d_prec = app->fit_output_precision;
 	d_init_err = false;
     d_sort_data = false;
     d_min_points = 2;

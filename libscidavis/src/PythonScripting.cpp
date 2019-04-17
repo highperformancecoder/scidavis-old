@@ -99,6 +99,10 @@ typedef struct _traceback {
 #include "Grid.cd"
 #include "ImageMarker.h"
 #include "ImageMarker.cd"
+#include "Integration.h"
+#include "Integration.cd"
+#include "Filter.h"
+#include "Filter.cd"
 
 #include <QTranslator>
 #include <QToolBar>
@@ -325,6 +329,7 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<ExponentialFit>();
   p.defineClass<QtNamespace>();
   p.defineClass<Column>();
+  p.defineClass<Integration>();
   python<SciDAVis::ColumnMode>(p,"");
   // redefine Qt as an alias for QtNamespace - unfortunately QtNamespace cannot be called Qt in C++ as Qt is already taken
   modDict("__main__")["Qt"]=modDict("scidavis")["QtNamespace"];

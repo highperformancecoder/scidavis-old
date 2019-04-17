@@ -23,6 +23,7 @@ c2.setName("col2")
 assert c2.name() == "col2"
 
 # Testing data types (column modes) of a column (verification and change)
+print(dir(SciDAVis))
 colModes = [Numeric,Text,Month,Day,DateTime]
 for i in range(0,len(colModes)-1):
   assert c3.columnMode() == colModes[i]

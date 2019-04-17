@@ -8463,7 +8463,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Filter.cpp" line="+84"/>
+        <location filename="../../libscidavis/src/Filter.cpp" line="+85"/>
         <location line="+39"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
@@ -9731,7 +9731,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2656"/>
+        <location line="+2655"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
         <translation type="unfinished">1</translation>
@@ -10103,7 +10103,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">По правому краю</translation>
     </message>
     <message>
-        <location line="-2640"/>
+        <location line="-2639"/>
         <source>Title</source>
         <translation type="unfinished">Заголовок</translation>
     </message>
@@ -10121,7 +10121,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+2047"/>
-        <location line="+30"/>
+        <location line="+29"/>
         <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
         <translation type="unfinished">Файл изображения: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;больше не существует!</translation>
     </message>
@@ -10211,7 +10211,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">усреднённое сглаживание</translation>
     </message>
     <message>
-        <location line="-3116"/>
+        <location line="-3115"/>
         <location line="+32"/>
         <source>Please provide a valid file name!</source>
         <translation type="unfinished">Пожалуйста укажите корректное имя файла!</translation>
@@ -10222,7 +10222,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Формат файла не обработан, операция прервана!</translation>
     </message>
     <message>
-        <location line="+2692"/>
+        <location line="+2691"/>
         <source>Data set generated from curve</source>
         <translation type="unfinished">Набор данный постноенный по кривой</translation>
     </message>
@@ -10231,30 +10231,29 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Table</translation>
     </message>
     <message>
-        <location line="-3257"/>
+        <location line="-3256"/>
         <location line="+547"/>
         <location line="+18"/>
         <location line="+14"/>
-        <location line="+3841"/>
+        <location line="+3840"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location line="-1434"/>
-        <location line="+30"/>
+        <location line="-1404"/>
         <source>File open error</source>
         <translation type="unfinished">Ошибка открытия файла</translation>
     </message>
     <message>
-        <location line="-2425"/>
-        <location line="+2984"/>
+        <location line="-2424"/>
+        <location line="+2983"/>
         <location line="+4"/>
         <location line="+826"/>
         <source>Warning</source>
         <translation type="unfinished">Предупреждение</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="+652"/>
+        <location filename="../../libscidavis/src/Graph.h" line="+657"/>
         <source>F</source>
         <translation type="unfinished">F</translation>
     </message>
@@ -11217,7 +11216,7 @@ The limits must be within the range of x; If you do not know the maximum (minimu
 <context>
     <name>Integration</name>
     <message>
-        <location filename="../../libscidavis/src/Integration.cpp" line="+67"/>
+        <location filename="../../libscidavis/src/Integration.cpp" line="+83"/>
         <source>Integration</source>
         <translation type="unfinished">Интегрирование</translation>
     </message>
