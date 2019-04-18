@@ -294,7 +294,7 @@ QFont Graph::axisFont(int axis)
 	return d_plot->axisFont (axis);
 }
 
-void Graph::enableAxis(int axis, bool on)
+void Graph::enableAxis(Axis axis, bool on)
 {
 	d_plot->enableAxis(axis, on);
 	QwtScaleWidget *scale = (QwtScaleWidget *)d_plot->axisWidget(axis);
@@ -384,7 +384,7 @@ QList<int> Graph::axesType()
 	return axisType;
 }
 
-void Graph::setLabelsNumericFormat(int axis, int format, int prec, const QString& formula)
+void Graph::setAxisNumericFormat(int axis, int format, int prec, const QString& formula)
 {
 	axisType[axis] = Numeric;
 	axesFormulas[axis] = formula;
@@ -421,7 +421,7 @@ void Graph::setLabelsNumericFormat(int axis, const QStringList& l)
 
 	int format=l[2*axis].toInt();
 	int prec=l[2*axis+1].toInt();
-	setLabelsNumericFormat(axis, format, prec, axesFormulas[axis]);
+	setAxisNumericFormat(axis, format, prec, axesFormulas[axis]);
 }
 
 void Graph::setLabelsNumericFormat(const QStringList& l)
@@ -687,7 +687,7 @@ void Graph::showAxis(int axis, int type, const QString& formatInfo, Table *table
 	{
 		switch(type) {
 			case Numeric:
-				setLabelsNumericFormat(axis, format, prec, formula);
+				setAxisNumericFormat(axis, format, prec, formula);
 				break;
 			case Day:
 				setLabelsDayFormat (axis, format);
@@ -1095,28 +1095,28 @@ void Graph::setTitleFont(const QFont &fnt)
 	emit modifiedGraph();
 }
 
-void Graph::setYAxisTitle(const QString& text)
+void Graph::setYTitle(const QString& text)
 {
 	d_plot->setAxisTitle(QwtPlot::yLeft, text);
 	d_plot->replot();
 	emit modifiedGraph();
 }
 
-void Graph::setXAxisTitle(const QString& text)
+void Graph::setXTitle(const QString& text)
 {
 	d_plot->setAxisTitle(QwtPlot::xBottom, text);
 	d_plot->replot();
 	emit modifiedGraph();
 }
 
-void Graph::setRightAxisTitle(const QString& text)
+void Graph::setRightTitle(const QString& text)
 {
 	d_plot->setAxisTitle(QwtPlot::yRight, text);
 	d_plot->replot();
 	emit modifiedGraph();
 }
 
-void Graph::setTopAxisTitle(const QString& text)
+void Graph::setTopTitle(const QString& text)
 {
 	d_plot->setAxisTitle(QwtPlot::xTop, text);
 	d_plot->replot();
@@ -1809,12 +1809,12 @@ void Graph::updateTextMarker(const QString& text,int angle, int bkg,const QFont&
 	emit modifiedGraph();
 }
 
-Legend* Graph::legend()
+Legend& Graph::legend()
 {
-	if (legendMarkerID >=0 )
-		return (Legend*) d_plot->marker(legendMarkerID);
-	else
-		return 0;
+  if (legendMarkerID >=0 )
+    return dynamic_cast<Legend&>(*d_plot->marker(legendMarkerID));
+  else
+    throw NoSuchObject();
 }
 
 QString Graph::legendText()
@@ -2498,7 +2498,7 @@ QString Graph::saveCurves()
 	return s;
 }
 
-Legend* Graph::newLegend()
+Legend& Graph::newLegend()
 {
 	Legend* mrk = new Legend(d_plot);
 	mrk->setOrigin(QPoint(10, 10));
@@ -2520,18 +2520,18 @@ Legend* Graph::newLegend()
 
 	emit modifiedGraph();
 	d_plot->replot();
-	return mrk;
+	return *mrk;
 }
 
 void Graph::addTimeStamp()
 {
-	Legend* mrk= newLegend(QDateTime::currentDateTime().toString(Qt::LocalDate));
-	mrk->setOrigin(QPoint(d_plot->canvas()->width()/2, 10));
+	Legend& mrk= newLegend(QDateTime::currentDateTime().toString(Qt::LocalDate));
+	mrk.setOrigin(QPoint(d_plot->canvas()->width()/2, 10));
 	emit modifiedGraph();
 	d_plot->replot();
 }
 
-Legend* Graph::newLegend(const QString& text)
+Legend& Graph::newLegend(const QString& text)
 {
 	Legend* mrk = new Legend(d_plot);
 	selectedMarker = d_plot->insertMarker(mrk);
@@ -2548,7 +2548,7 @@ Legend* Graph::newLegend(const QString& text)
 	mrk->setFont(defaultMarkerFont);
 	mrk->setTextColor(defaultTextMarkerColor);
 	mrk->setBackgroundColor(defaultTextMarkerBackground);
-	return mrk;
+	return *mrk;
 }
 
 void Graph::insertLegend(const QStringList& lst, int fileVersion)
@@ -3447,6 +3447,15 @@ bool Graph::insertPolarCurve(const QString &radial, const QString &angular,
 #endif
 }
 
+bool Graph::Graph::insertParametricCurve(const QString &x, const QString &y,
+                           double from, double to, const QString &parameter,
+                           int points, const QString &title)
+{
+#ifdef SCRIPTING_PYTHON
+  return addFunctionCurve(&theApp(), FunctionCurve::Parametric, QStringList() << x << y, parameter, QList<double>() << from << to, points, title);
+#endif
+}
+
 void Graph::plotVectorCurve(Table* w, const QStringList& colList, int style, int startRow, int endRow)
 {
 	if (colList.count() != 4)
@@ -4258,7 +4267,7 @@ void Graph::setBackgroundColor(const QColor& color)
 	emit modifiedGraph();
 }
 
-void Graph::setCanvasBackground(const QColor& color)
+void Graph::setCanvasColor(const QColor& color)
 {
 	d_plot->setCanvasBackground(color);
 	emit modifiedGraph();
@@ -4583,7 +4592,7 @@ void Graph::copy(ApplicationWindow *parent, Graph* g)
 
 	setBackgroundColor(plot->paletteBackgroundColor());
 	setFrame(plot->lineWidth(), plot->frameColor());
-	setCanvasBackground(plot->canvasBackground());
+	setCanvasColor(plot->canvasBackground());
 
 	enableAxes(g->enabledAxes());
 	setAxesColors(g->axesColors());
@@ -4749,7 +4758,7 @@ void Graph::copy(ApplicationWindow *parent, Graph* g)
 		if (sd->hasComponent(QwtAbstractScaleDraw::Labels))
 		{
 			if (axisType[i] == Graph::Numeric)
-				setLabelsNumericFormat(i, plot->axisLabelFormat(i), plot->axisLabelPrecision(i), axesFormulas[i]);
+				setAxisNumericFormat(i, plot->axisLabelFormat(i), plot->axisLabelPrecision(i), axesFormulas[i]);
 			else if (axisType[i] == Graph::Day)
 				setLabelsDayFormat(i, axesFormatInfo[i].toInt());
 			else if (axisType[i] == Graph::Month)

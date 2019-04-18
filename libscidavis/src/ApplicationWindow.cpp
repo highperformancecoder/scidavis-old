@@ -2536,8 +2536,8 @@ void ApplicationWindow::newWrksheetPlot(const QString& name,const QString& label
 	if (g)
 	{
 		g->setTitle("");
-		g->setXAxisTitle(tr("pixels"));
-		g->setYAxisTitle(tr("pixel intensity (a.u.)"));
+		g->setXTitle(tr("pixels"));
+		g->setYTitle(tr("pixel intensity (a.u.)"));
 	}
 }
 
@@ -10054,7 +10054,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			QColor c = QColor(COLORVALUE(list[1]));
 			if (list.count() == 3)
 				c.setAlpha(list[2].toInt());
-			ag->setCanvasBackground(c);
+			ag->setCanvasColor(c);
 		}
 		else if (s.contains ("Legend"))
 		{// version <= 0.8.9

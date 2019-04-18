@@ -1757,7 +1757,7 @@ bool PlotDialog::acceptParams()
 
               c = boxCanvasColor->color();
               c.setAlpha(boxCanvasTransparency->value());
-              g->setCanvasBackground(c);
+              g->setCanvasColor(c);
 
               g->setAntialiasing(boxAntialiasing->isChecked());
             }
@@ -2284,7 +2284,7 @@ void PlotDialog::updateCanvasTransparency(int alpha)
 			{
 				QColor c = boxCanvasColor->color();
 				c.setAlpha(boxCanvasTransparency->value());
-				g->setCanvasBackground(c);
+				g->setCanvasColor(c);
 			}
 		}
 	}
@@ -2298,7 +2298,7 @@ void PlotDialog::updateCanvasTransparency(int alpha)
 		{
 			QColor c = boxCanvasColor->color();
 			c.setAlpha(boxCanvasTransparency->value());
-			g->setCanvasBackground(c);
+			g->setCanvasColor(c);
 		}
 	}
 }
@@ -2318,7 +2318,7 @@ void PlotDialog::pickCanvasColor(QColor c)
 			if (g)
 			{
 				c.setAlpha(boxCanvasTransparency->value());
-				g->setCanvasBackground(c);
+				g->setCanvasColor(c);
 				g->replot();
 			}
 		}
@@ -2332,7 +2332,7 @@ void PlotDialog::pickCanvasColor(QColor c)
 		if (g)
 		{
 			c.setAlpha(boxCanvasTransparency->value());
-			g->setCanvasBackground(c);
+			g->setCanvasColor(c);
 			g->replot();
 		}
 	}

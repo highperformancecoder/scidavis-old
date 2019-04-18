@@ -133,7 +133,8 @@ public:
   Graph (QWidget* parent=0, QString name=QString(), Qt::WindowFlags f=0);
   ~Graph();
 
-  enum Axis{Left, Right, Bottom, Top};
+  enum Axis{Left=QwtPlot::yLeft, Right=QwtPlot::yRight, Bottom=QwtPlot::xBottom,
+            Top=QwtPlot::xTop};
   enum AxisType{Numeric = 0, Txt = 1, Day = 2, Month = 3, Time = 4, Date = 5, ColHeader = 6, DateTime = 22};
   enum MarkerType{None = -1, Text = 0, Arrow = 1, Image = 2};
   enum CurveType{Line, Scatter, LineSymbols, VerticalBars, Area, Pie, VerticalDropLines,
@@ -206,6 +207,22 @@ public slots:
   {return insertPolarCurve(radial,angular,from,2*M_PI);}
   bool insertPolarCurve(const QString &radial, const QString &angular)
   {return insertPolarCurve(radial,angular,0);}
+
+  bool insertParametricCurve(const QString &x, const QString &y,
+                             double from, double to, const QString &parameter, int points,
+                             const QString &title);
+  bool insertParametricCurve(const QString &x, const QString &y,
+                             double from, double to, const QString &parameter, int points)
+  {return insertParametricCurve(x,y,from,to,parameter,points,QString::null);}
+  bool insertParametricCurve(const QString &x, const QString &y,
+                             double from, double to, const QString &parameter)
+  {return insertParametricCurve(x,y,from,to,parameter,100);}
+  bool insertParametricCurve(const QString &x, const QString &y,double from, double to)
+  {return insertParametricCurve(x,y,from,to,"t");}
+  bool insertParametricCurve(const QString &x, const QString &y,double from)
+  {return insertParametricCurve(x,y,from,1);}
+  bool insertParametricCurve(const QString &x, const QString &y)
+  {return insertParametricCurve(x,y,0);}
 
   
   void insertPlotItem(QwtPlotItem *i, int type);
@@ -333,8 +350,20 @@ public slots:
   //@}
 
   //! Set axis scale
-  void setScale(int axis, double start, double end, double step = 0.0,
-                int majorTicks = 5, int minorTicks = 5, int type = 0, bool inverted = false);
+  void setScale(int axis, double start, double end, double step,
+                int majorTicks, int minorTicks, int type, bool inverted);
+  void setScale(int axis, double start, double end, double step,
+                int majorTicks, int minorTicks, int type)
+  {setScale(axis,start,end,step,majorTicks,minorTicks,type,false);}
+  void setScale(int axis, double start, double end, double step,
+                int majorTicks, int minorTicks)
+  {setScale(axis,start,end,step,majorTicks,minorTicks,0);}
+  void setScale(int axis, double start, double end, double step, int majorTicks)
+  {setScale(axis,start,end,step,majorTicks,5);}
+  void setScale(int axis, double start, double end, double step)
+  {setScale(axis,start,end,step,5);}
+  void setScale(int axis, double start, double end)
+  {setScale(axis,start,end,0);}
   double axisStep(int axis){return d_user_step[axis];};
 
   //! \name Curves Layout
@@ -416,9 +445,9 @@ public slots:
   void removeLegendItem(int index);
   void addLegendItem(const QString& colName);
   void insertLegend(const QStringList& lst, int fileVersion);
-  Legend *legend();
-  Legend *newLegend();
-  Legend *newLegend(const QString& text);
+  Legend& legend();
+  Legend& newLegend();
+  Legend& newLegend(const QString& text);
   bool hasLegend(){return legendMarkerID >= 0;};
 
   //! Creates a new legend text using the curves titles
@@ -492,10 +521,10 @@ public slots:
   QList<int> axesType();
 
   QStringList scalesTitles();
-  void setXAxisTitle(const QString& text);
-  void setYAxisTitle(const QString& text);
-  void setRightAxisTitle(const QString& text);
-  void setTopAxisTitle(const QString& text);
+  void setXTitle(const QString& text);
+  void setYTitle(const QString& text);
+  void setRightTitle(const QString& text);
+  void setTopTitle(const QString& text);
   void setAxisTitle(int axis, const QString& text);
   QString axisTitle(int axis) { return d_plot->axisTitle(axis).text(); }
 
@@ -536,7 +565,7 @@ public slots:
                 int majTicksType, int minTicksType, bool labelsOn, const QColor& c, int format,
                 int prec, int rotation, int baselineDist, const QString& formula, const QColor& labelsColor);
 
-  void enableAxis(int axis, bool on = true);
+  void enableAxis(Axis axis, bool on = true);
   QVector<bool> enabledAxes();
   void enableAxes(QVector<bool> axesOn);
   void enableAxes(const QStringList& list);
@@ -575,7 +604,11 @@ public slots:
 
   void setLabelsNumericFormat(const QStringList& l);
   void setLabelsNumericFormat(int axis, const QStringList& l);
-  void setLabelsNumericFormat(int axis, int format, int prec = 6, const QString& formula = QString());
+  void setAxisNumericFormat(int axis, int format, int prec, const QString& formula);
+  void setAxisNumericFormat(int axis, int format, int prec)
+  {setAxisNumericFormat(axis,format,prec,"");}
+  void setAxisNumericFormat(int axis, int format)
+  {setAxisNumericFormat(axis,format,6);}
   void setLabelsDateTimeFormat(int axis, int type, const QString& formatInfo);
   void setLabelsDayFormat(int axis, int format);
   void setLabelsMonthFormat(int axis, int format);
@@ -639,9 +672,13 @@ public slots:
   //! \name Border and Margin
   //@{
   void setMargin (int d);
-  void setFrame(int width = 1, const QColor& color = QColor(Qt::black));
+  void setFrame(int width, const QColor& color);
+  void setFrame(int width)
+  {setFrame(width,Qt::black);}
+  void setFrame()
+  {setFrame(1);}
   void setBackgroundColor(const QColor& color);
-  void setCanvasBackground(const QColor& color);
+  void setCanvasColor(const QColor& color);
   //@}
 
   void addFitCurve(QwtPlotCurve *c);
@@ -723,6 +760,7 @@ public slots:
 
   void updateSecondaryAxis(int axis);
   void enableAutoscaling(bool yes){m_autoscale = yes;};
+  void enableAutoscaling(){enableAutoscaling(true);};
 
   bool autoscaleFonts(){return autoScaleFonts;};
   void setAutoscaleFonts(bool yes){autoScaleFonts = yes;};

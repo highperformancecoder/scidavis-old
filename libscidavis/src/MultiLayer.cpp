@@ -957,8 +957,8 @@ void MultiLayer::addTextLayer(const QPoint& pos)
 	g.setIgnoreResizeEvents(true);
 	g.setTextMarkerDefaults(defaultTextMarkerFrame, defaultTextMarkerFont,
 			defaultTextMarkerColor, defaultTextMarkerBackground);
-	Legend *mrk = g.newLegend(tr("enter your text here"));
-	QSize size = mrk->rect().size();
+	Legend& mrk = g.newLegend(tr("enter your text here"));
+	QSize size = mrk.rect().size();
 	setGraphGeometry(pos.x(), pos.y(), size.width()+10, size.height()+10);
 	g.setIgnoreResizeEvents(false);
 	g.show();

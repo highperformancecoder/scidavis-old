@@ -105,6 +105,8 @@ typedef struct _traceback {
 #include "Filter.cd"
 #include "Interpolation.h"
 #include "Interpolation.cd"
+#include "Legend.h"
+#include "Legend.cd"
 
 #include <QTranslator>
 #include <QToolBar>
