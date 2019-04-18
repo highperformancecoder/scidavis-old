@@ -8586,7 +8586,7 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
     </message>
     <message>
         <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation>Método de interpolação desconhecido. Os valores válidos são: 0 - Linear, 1 - Cúbico, 2 - Akima.</translation>
+        <translation type="obsolete">Método de interpolação desconhecido. Os valores válidos são: 0 - Linear, 1 - Cúbico, 2 - Akima.</translation>
     </message>
     <message>
         <source>Linear</source>
@@ -8614,11 +8614,11 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
     </message>
     <message>
         <source>Unknown interpolation method, valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation>Método de Interpolação desconhecido. Os valores válidos são: 0 - Linear, 1 - Cúbico, 2 - Akima.</translation>
+        <translation type="obsolete">Método de Interpolação desconhecido. Os valores válidos são: 0 - Linear, 1 - Cúbico, 2 - Akima.</translation>
     </message>
     <message>
         <source>You need at least %1 points in order to perform this operation!</source>
-        <translation>São necessários pelo menos %1 pontos para realizar esta operação!</translation>
+        <translation type="obsolete">São necessários pelo menos %1 pontos para realizar esta operação!</translation>
     </message>
     <message>
         <source>SciDAVis</source>

@@ -6492,11 +6492,11 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation type="unfinished">Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - kubická, 2 - Akima.</translation>
+        <translation type="obsolete">Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - kubická, 2 - Akima.</translation>
     </message>
     <message>
         <source>Unknown interpolation method, valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation type="unfinished">Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - kubická, 2 - Akima.</translation>
+        <translation type="obsolete">Neznámý způsob interpolace. Platné hodnoty jsou: 0 - lineární, 1 - kubická, 2 - Akima.</translation>
     </message>
     <message>
         <source>SciDAVis</source>
@@ -6504,7 +6504,7 @@ Pokud toto číslo neznáte, zadejte v zadávacím poli &apos;min&apos;.</transl
     </message>
     <message>
         <source>You need at least %1 points in order to perform this operation!</source>
-        <translation type="unfinished">Pro provedení této operace potřebujete alespoň %1 bodů!</translation>
+        <translation type="obsolete">Pro provedení této operace potřebujete alespoň %1 bodů!</translation>
     </message>
     <message>
         <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>

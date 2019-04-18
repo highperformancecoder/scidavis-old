@@ -8499,7 +8499,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Имя цвета &apos;%1&apos; не корректно, будет использован цвет по умолчанию (красный)!</translation>
     </message>
     <message>
-        <location line="+117"/>
+        <location line="+116"/>
         <source>1</source>
         <comment>filter table x column name</comment>
         <translation type="unfinished">1</translation>
@@ -8520,7 +8520,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">от</translation>
     </message>
     <message>
-        <location line="-182"/>
+        <location line="-181"/>
         <source>Filter Error</source>
         <translation type="unfinished">Ошибка фильтра</translation>
     </message>
@@ -9731,7 +9731,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2655"/>
+        <location line="+2673"/>
         <source>1</source>
         <comment>curve data table x column name</comment>
         <translation type="unfinished">1</translation>
@@ -10103,7 +10103,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">По правому краю</translation>
     </message>
     <message>
-        <location line="-2639"/>
+        <location line="-2657"/>
         <source>Title</source>
         <translation type="unfinished">Заголовок</translation>
     </message>
@@ -10120,7 +10120,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Ошибка перемещения данных</translation>
     </message>
     <message>
-        <location line="+2047"/>
+        <location line="+2065"/>
         <location line="+29"/>
         <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
         <translation type="unfinished">Файл изображения: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;больше не существует!</translation>
@@ -10211,7 +10211,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">усреднённое сглаживание</translation>
     </message>
     <message>
-        <location line="-3115"/>
+        <location line="-3133"/>
         <location line="+32"/>
         <source>Please provide a valid file name!</source>
         <translation type="unfinished">Пожалуйста укажите корректное имя файла!</translation>
@@ -10222,7 +10222,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Формат файла не обработан, операция прервана!</translation>
     </message>
     <message>
-        <location line="+2691"/>
+        <location line="+2709"/>
         <source>Data set generated from curve</source>
         <translation type="unfinished">Набор данный постноенный по кривой</translation>
     </message>
@@ -10231,11 +10231,11 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Table</translation>
     </message>
     <message>
-        <location line="-3256"/>
+        <location line="-3274"/>
         <location line="+547"/>
         <location line="+18"/>
         <location line="+14"/>
-        <location line="+3840"/>
+        <location line="+3858"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
@@ -10245,15 +10245,15 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Ошибка открытия файла</translation>
     </message>
     <message>
-        <location line="-2424"/>
-        <location line="+2983"/>
+        <location line="-2442"/>
+        <location line="+3001"/>
         <location line="+4"/>
         <location line="+826"/>
         <source>Warning</source>
         <translation type="unfinished">Предупреждение</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.h" line="+657"/>
+        <location filename="../../libscidavis/src/Graph.h" line="+722"/>
         <source>F</source>
         <translation type="unfinished">F</translation>
     </message>
@@ -11337,27 +11337,21 @@ The limits must be within the range of x; If you do not know the maximum (minimu
         <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Interpolation.cpp" line="+57"/>
-        <location line="+30"/>
-        <location line="+8"/>
-        <location line="+45"/>
+        <location filename="../../libscidavis/src/Interpolation.cpp" line="+147"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location line="-83"/>
-        <location line="+38"/>
-        <location line="+45"/>
+        <location line="+0"/>
         <source>SciDAVis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-82"/>
         <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation type="unfinished">Неизвестный метода итнеполяции, корректные значения: 0 - линейная, 1 - кубическая, 2 - akima.</translation>
+        <translation type="obsolete">Неизвестный метода итнеполяции, корректные значения: 0 - линейная, 1 - кубическая, 2 - akima.</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="-74"/>
         <location line="+1"/>
         <source>Linear</source>
         <translation type="unfinished">Linear</translation>
@@ -11398,14 +11392,12 @@ The limits must be within the range of x; If you do not know the maximum (minimu
         <translation type="obsolete">QtiPlot - Ошибка</translation>
     </message>
     <message>
-        <location line="-53"/>
         <source>Unknown interpolation method, valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation type="unfinished">Неизвестный метода итнеполяции, корректные значения: 0 - линейная, 1 - кубическая, 2 - akima.</translation>
+        <translation type="obsolete">Неизвестный метода итнеполяции, корректные значения: 0 - линейная, 1 - кубическая, 2 - akima.</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>You need at least %1 points in order to perform this operation!</source>
-        <translation type="unfinished">Необходимо как минимум %1 точек данных подряд для выполнения этой операции!</translation>
+        <translation type="obsolete">Необходимо как минимум %1 точек данных подряд для выполнения этой операции!</translation>
     </message>
 </context>
 <context>

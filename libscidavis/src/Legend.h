@@ -87,8 +87,8 @@ public:
   int frameStyle(){return d_frame;};
   void setFrameStyle(int style);
 
-  QFont font(){return d_text->font();};
-  void setFont(const QFont& font);
+  QtGui::QFont font(){return d_text->font();};
+  void setFont(const QtGui::QFont& font);
 
   int angle(){return d_angle;};
   void setAngle(int ang){d_angle=ang;};

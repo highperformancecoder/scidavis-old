@@ -193,6 +193,7 @@ namespace classdesc
   DEF_TYPENAME(QwtPlotPrintFilter);
   DEF_TYPENAME(QwtScaleMap);
   DEF_TYPENAME(QPixmap);
+  DEF_TYPENAME(Qt::WindowType);
 
   template <class T> struct tn<QList<T>>
   {
@@ -212,6 +213,11 @@ namespace classdesc
   template <class K, class V> struct tn<QMap<K,V>>
   {
     static string name() {return "QMap<"+typeName<K>()+","+typeName<V>()+">";}
+  };
+
+  template <class T> struct tn<QFlags<T>>
+  {
+    static string name() {return "QFlags<"+typeName<T>()+">";}
   };
 
 

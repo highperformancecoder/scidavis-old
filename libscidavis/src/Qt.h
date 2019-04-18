@@ -4,6 +4,7 @@
 #include <qprinter.h>
 #include <QDateTime>
 #include <QPen>
+#include <QFont>
 
 #include <QtEnums.h>
 
@@ -298,6 +299,202 @@ struct QtCore
 //    int &rheight() {return ::QSize::rheight();}
   };
 
+};
+
+struct QtGui
+{
+  struct QFont: public ::QFont
+    {
+      enum StyleHint {
+                      Helvetica=::QFont::Helvetica,
+                      SansSerif =::QFont::SansSerif,
+                      Times=::QFont::Times,
+                      Serif = ::QFont::Serif,
+                      Courier = ::QFont::Courier,
+                      TypeWriter = ::QFont::TypeWriter,
+                      OldEnglish = ::QFont::OldEnglish,
+                      Decorative = ::QFont::Decorative,
+                      System = ::QFont::System,
+                      AnyStyle = ::QFont::AnyStyle,
+                      Cursive = ::QFont::Cursive,
+                      Monospace = ::QFont::Monospace,
+                      Fantasy = ::QFont::Fantasy
+      };
+
+      enum StyleStrategy {
+                          PreferDefault       = ::QFont::PreferDefault,
+                          PreferBitmap        = ::QFont::PreferBitmap,
+                          PreferDevice        = ::QFont::PreferDevice,
+                          PreferOutline       = ::QFont::PreferOutline,
+                          ForceOutline        = ::QFont::ForceOutline,
+                          PreferMatch         = ::QFont::PreferMatch,
+                          PreferQuality       = ::QFont::PreferQuality,
+                          PreferAntialias     = ::QFont::PreferAntialias,
+                          NoAntialias         = ::QFont::NoAntialias,
+                          OpenGLCompatible    = ::QFont::OpenGLCompatible,
+                          ForceIntegerMetrics = ::QFont::ForceIntegerMetrics,
+                          NoFontMerging       = ::QFont::NoFontMerging
+      };
+
+      enum HintingPreference {
+                              PreferDefaultHinting        = ::QFont::PreferDefaultHinting,
+                              PreferNoHinting             = ::QFont::PreferNoHinting,
+                              PreferVerticalHinting       = ::QFont::PreferVerticalHinting,
+                              PreferFullHinting           = ::QFont::PreferFullHinting
+      };
+
+      enum Weight {
+                   Light    = ::QFont::Light,
+                   Normal   = ::QFont::Normal,
+                   DemiBold = ::QFont::DemiBold,
+                   Bold     = ::QFont::Bold,
+                   Black    = ::QFont::Black
+      };
+
+      enum Style {
+                  StyleNormal= ::QFont::StyleNormal,
+                  StyleItalic= ::QFont::StyleItalic,
+                  StyleOblique= ::QFont::StyleOblique
+      };
+
+      enum Stretch {
+                    UltraCondensed = ::QFont::UltraCondensed,
+                    ExtraCondensed = ::QFont::ExtraCondensed,
+                    Condensed      = ::QFont::Condensed,
+                    SemiCondensed  = ::QFont::SemiCondensed,
+                    Unstretched    = ::QFont::Unstretched,
+                    SemiExpanded   = ::QFont::SemiExpanded,
+                    Expanded       = ::QFont::Expanded,
+                    ExtraExpanded  = ::QFont::ExtraExpanded,
+                    UltraExpanded  = ::QFont::UltraExpanded
+      };
+
+      enum Capitalization {
+                           MixedCase  = ::QFont::MixedCase,
+                           AllUppercase  = ::QFont::AllUppercase,
+                           AllLowercase  = ::QFont::AllLowercase,
+                           SmallCaps  = ::QFont::SmallCaps,
+                           Capitalize  = ::QFont::Capitalize
+      };
+
+      enum SpacingType {
+                        PercentageSpacing  = ::QFont::PercentageSpacing,
+                        AbsoluteSpacing  = ::QFont::AbsoluteSpacing
+      };
+
+      enum ResolveProperties {
+                              FamilyResolved              = ::QFont::FamilyResolved,
+                              SizeResolved                = ::QFont::SizeResolved,
+                              StyleHintResolved           = ::QFont::StyleHintResolved,
+                              StyleStrategyResolved       = ::QFont::StyleStrategyResolved,
+                              WeightResolved              = ::QFont::WeightResolved,
+                              StyleResolved               = ::QFont::StyleResolved,
+                              UnderlineResolved           = ::QFont::UnderlineResolved,
+                              OverlineResolved            = ::QFont::OverlineResolved,
+                              StrikeOutResolved           = ::QFont::StrikeOutResolved,
+                              FixedPitchResolved          = ::QFont::FixedPitchResolved,
+                              StretchResolved             = ::QFont::StretchResolved,
+                              KerningResolved             = ::QFont::KerningResolved,
+                              CapitalizationResolved      = ::QFont::CapitalizationResolved,
+                              LetterSpacingResolved       = ::QFont::LetterSpacingResolved,
+                              WordSpacingResolved         = ::QFont::WordSpacingResolved,
+                              HintingPreferenceResolved   = ::QFont::HintingPreferenceResolved,
+                              StyleNameResolved           = ::QFont::StyleNameResolved,
+                              AllPropertiesResolved       = ::QFont::AllPropertiesResolved
+      };
+
+      QFont() {}
+      QFont(const QString &family, int pointSize, Weight weight, bool italic):
+        ::QFont(family,pointSize,weight,italic) {}
+
+      QFont(const QString &family, int pointSize, Weight weight):
+        QFont(family,pointSize,weight,false) {}
+      QFont(const QString &family, int pointSize): ::QFont(family,pointSize,-1) {}
+      QFont(const QString &family): QFont(family,-1) {}
+
+      QFont(const ::QFont& x): ::QFont(x) {}
+      
+      //      QFont(const QFont &, QPaintDevice *pd);
+
+      QString family() const {return ::QFont::family();}
+      void setFamily(const QString& f) {::QFont::setFamily(f);}
+
+      QString styleName() const {return ::QFont::styleName();}
+      void setStyleName(const QString& s) {::QFont::setStyleName(s);}
+
+      int pointSize() const {return ::QFont::pointSize();}
+      void setPointSize(int p) {::QFont::setPointSize(p);}
+      qreal pointSizeF() const {return ::QFont::pointSizeF();}
+      void setPointSizeF(qreal p) {::QFont::setPointSizeF(p);}
+
+      int pixelSize() const {return ::QFont::pixelSize();}
+      void setPixelSize(int p) {::QFont::setPixelSize(p);}
+
+      int weight() const {return ::QFont::weight();}
+      void setWeight(int w) {::QFont::setWeight(w);}
+
+      bool bold() const {return ::QFont::bold();}
+      void setBold(bool b) {::QFont::setBold(b);}
+
+      void setStyle(Style style) {::QFont::setStyle(::QFont::Style(style));}
+      Style style() const {return Style(::QFont::style());}
+
+      bool italic() const {return ::QFont::italic();}
+      void setItalic(bool b) {::QFont::setItalic(b);}
+
+      bool underline() const {return ::QFont::underline();}
+      void setUnderline(bool x) {::QFont::setUnderline(x);}
+
+      bool overline() const {return ::QFont::overline();}
+      void setOverline(bool x) {::QFont::setOverline(x);}
+
+      bool strikeOut() const {return ::QFont::strikeOut();}
+      void setStrikeOut(bool x) {::QFont::setStrikeOut(x);}
+
+      bool fixedPitch() const {return ::QFont::fixedPitch();}
+      void setFixedPitch(bool x) {::QFont::setFixedPitch(x);}
+
+      bool kerning() const {return ::QFont::kerning();}
+      void setKerning(bool x) {::QFont::setKerning(x);}
+
+      StyleHint styleHint() const {return StyleHint(::QFont::styleHint());}
+      StyleStrategy styleStrategy() const {return StyleStrategy(::QFont::styleStrategy());}
+      void setStyleHint(StyleHint sh, StyleStrategy ss) {
+        ::QFont::setStyleHint(::QFont::StyleHint(sh),::QFont::StyleStrategy(ss));}
+      void setStyleHint(StyleHint sh) {setStyleHint(sh,PreferDefault);}
+      void setStyleStrategy(StyleStrategy s) {::QFont::setStyleStrategy(::QFont::StyleStrategy(s));}
+
+      int stretch() const {return ::QFont::stretch();}
+      void setStretch(int s) {::QFont::setStretch(s);}
+
+      qreal letterSpacing() const {return ::QFont::letterSpacing();}
+      SpacingType letterSpacingType() const
+      {return SpacingType(::QFont::letterSpacingType());}
+      void setLetterSpacing(SpacingType type, qreal spacing)
+      {::QFont::setLetterSpacing(::QFont::SpacingType(type),spacing);}
+
+      qreal wordSpacing() const {return ::QFont::wordSpacing();}
+      void setWordSpacing(qreal spacing) {::QFont::setWordSpacing(spacing);}
+
+      void setCapitalization(Capitalization c)
+      {::QFont::setCapitalization(::QFont::Capitalization(c));}
+      Capitalization capitalization() const
+      {return Capitalization(::QFont::capitalization());}
+
+      void setHintingPreference(HintingPreference hintingPreference)
+      {::QFont::setHintingPreference(::QFont::HintingPreference(hintingPreference));}
+      HintingPreference hintingPreference() const
+      {return HintingPreference(::QFont::hintingPreference());}
+
+      // is raw mode still needed?
+      bool rawMode() const{return ::QFont::rawMode();}
+      void setRawMode(bool x) {::QFont::setRawMode(x);}
+
+      // dupicated from QFontInfo
+      bool exactMatch() const {return ::QFont::exactMatch();}
+
+      bool isCopyOf(const QFont& f) const {return ::QFont::isCopyOf(f);}
+  };
 };
 
 

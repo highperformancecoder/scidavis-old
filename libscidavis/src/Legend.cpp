@@ -187,7 +187,7 @@ void Legend::setOriginCoord(double x, double y)
 	d_pos = QPoint(xMap.transform(x), yMap.transform(y));
 }
 
-void Legend::setFont(const QFont& font)
+void Legend::setFont(const QtGui::QFont& font)
 {
 	if ( font == d_text->font() )
 		return;
