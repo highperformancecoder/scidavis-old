@@ -149,7 +149,7 @@ protected:
   QwtPlotCurve *d_curve=nullptr;
 
   //! Precision (number of significant digits) used for the results output
-  int d_prec;
+  int d_prec=15;
 
   //! Error flag telling if something went wrong during the initialization phase.
   bool d_init_err;

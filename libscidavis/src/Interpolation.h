@@ -42,10 +42,12 @@ public:
   
   Interpolation(ApplicationWindow *parent, Graph *g, const QString& curveTitle, InterpolationMethod m = Linear);
   Interpolation(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end, InterpolationMethod m = Linear);
-  Interpolation(Graph& g, const QString& curveTitle, double start, double end, InterpolationMethod m);
+  Interpolation(Graph& g, const QString& curveTitle, double start, double end, InterpolationMethod m):
+    Interpolation(0,&g,curveTitle,start,end,m) {}
   Interpolation(Graph& g, const QString& curveTitle, double start, double end):
     Interpolation(g,curveTitle,start,end,Linear) {}
-  Interpolation(Graph& g, const QString& curveTitle, InterpolationMethod m);
+  Interpolation(Graph& g, const QString& curveTitle, InterpolationMethod m):
+    Interpolation(0,&g,curveTitle,m) {}
   Interpolation(Graph& g, const QString& curveTitle):
     Interpolation(g, curveTitle, Linear) {}
     

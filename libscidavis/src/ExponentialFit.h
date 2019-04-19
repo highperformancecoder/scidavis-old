@@ -41,6 +41,16 @@ public:
   ExponentialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, bool expGrowth = false);
   ExponentialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, 
                  double start, double end, bool expGrowth = false);
+  ExponentialFit(Graph& g, const QString& curveTitle, 
+                 double start, double end, bool expGrowth):
+    ExponentialFit(0,&g,curveTitle,start,end,expGrowth) {}
+  ExponentialFit(Graph& g, const QString& curveTitle, 
+                 double start, double end):
+    ExponentialFit(0,&g,curveTitle,start,end,false) {}
+  ExponentialFit(Graph& g, const QString& curveTitle, bool expGrowth):
+    ExponentialFit(0,&g,curveTitle,expGrowth) {}
+  ExponentialFit(Graph& g, const QString& curveTitle):
+    ExponentialFit(0,&g,curveTitle,false) {}
 
 private:
   void init();

@@ -221,7 +221,8 @@ bool Filter::run()
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 
     output();//data analysis and output
-    ((ApplicationWindow *)parent())->updateLog(logInfo());
+    if (auto app=dynamic_cast<ApplicationWindow*>(parent()))
+      app->updateLog(logInfo());
 
 	QApplication::restoreOverrideCursor();
     return true;
@@ -301,28 +302,36 @@ int Filter::curveData(QwtPlotCurve *c, double start, double end, double **x, dou
 
 QwtPlotCurve* Filter::addResultCurve(double *x, double *y)
 {
-    ApplicationWindow *app = (ApplicationWindow *)parent();
-    const QString tableName = app->generateUniqueName(this->objectName());
-	Column *xCol = new Column(tr("1", "filter table x column name"), SciDAVis::Numeric);
-	Column *yCol = new Column(tr("2", "filter table y column name"), SciDAVis::Numeric);
-	xCol->setPlotDesignation(SciDAVis::X);
-	yCol->setPlotDesignation(SciDAVis::Y);
-	for (int i=0; i<d_points; i++)
-	{
-		xCol->setValueAt(i, x[i]);
-		yCol->setValueAt(i, y[i]);
-	}
-	// first set the values, then add the columns to the table, otherwise, we generate too many undo commands
-        Table& t = app->newHiddenTable(tableName, d_explanation + " " + tr("of") + " " + d_curve->title().text(), 
-                                           QList<Column *>() << xCol << yCol);
+  Column *xCol = new Column(tr("1", "filter table x column name"), SciDAVis::Numeric);
+  Column *yCol = new Column(tr("2", "filter table y column name"), SciDAVis::Numeric);
+  xCol->setPlotDesignation(SciDAVis::X);
+  yCol->setPlotDesignation(SciDAVis::Y);
+  for (int i=0; i<d_points; i++)
+    {
+      xCol->setValueAt(i, x[i]);
+      yCol->setValueAt(i, y[i]);
+    }
 
-        DataCurve *c = new DataCurve(&t, tableName + "_" + xCol->name().c_str(), tableName + "_" + yCol->name().c_str());
-        c->setData(x, y, d_points);
-        c->setPen(QPen(d_curveColor, 1));
-        d_graph->insertPlotItem(c, Graph::Line);
-        d_graph->updatePlot();
+  DataCurve* c=nullptr;
+  if (auto app=dynamic_cast<ApplicationWindow *>(parent()))
+    {
+      const QString tableName = app->generateUniqueName(this->objectName());
+
+      // first set the values, then add the columns to the table, otherwise, we generate too many undo commands
+      Table& t = app->newHiddenTable(tableName, d_explanation + " " + tr("of") + " " + d_curve->title().text(), 
+                                     QList<Column *>() << xCol << yCol);
+
+      c = new DataCurve(&t, tableName + "_" + xCol->name().c_str(), tableName + "_" + yCol->name().c_str());
+    }
+  else
+    // if a standalone object, then attach the curve to the table owned by this
+    c=new DataCurve(d_table,xCol->name().c_str(), yCol->name().c_str());
+  c->setData(x, y, d_points);
+  c->setPen(QPen(d_curveColor, 1));
+  d_graph->insertPlotItem(c, Graph::Line);
+  d_graph->updatePlot();
         
-        return (QwtPlotCurve*)c;
+  return c;
 }
 
 Filter::~Filter()

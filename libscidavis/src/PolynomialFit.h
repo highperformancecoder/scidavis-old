@@ -36,10 +36,19 @@ class PolynomialFit : public Fit
   Q_OBJECT
 
 public:
+  PolynomialFit() {}
   PolynomialFit(ApplicationWindow *parent, Graph *g, int order = 2, bool legend = false);
-  PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, int order = 2, bool legend = false);
-  PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, double start, double end, int order = 2, bool legend = false);
-
+  PolynomialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, int order = 2, bool legend = false);
+  PolynomialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end, int order = 2, bool legend = false);
+  PolynomialFit(Graph& g, const QString& curve, double start, double end, int order):
+    PolynomialFit(0,&g,curve,start,end,order) {}
+  PolynomialFit(Graph& g, const QString& curve, double start, double end):
+    PolynomialFit(g,curve,start,end,2) {}
+  PolynomialFit(Graph& g, const QString& curve, int order):
+    PolynomialFit(0,&g,curve,order) {}
+  PolynomialFit(Graph& g, const QString& curve):
+    PolynomialFit(g,curve,2) {}
+  
   QString legendInfo() override;
   void fit() override;
 
@@ -59,10 +68,14 @@ class LinearFit : public Fit
   Q_OBJECT
 
 public:
+  LinearFit() {}
   LinearFit(ApplicationWindow *parent, Graph *g);
   LinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
   LinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
-
+  LinearFit(Graph& g, const QString& curve, double start, double end):
+    LinearFit(0,&g,curve,start,end) {}
+  LinearFit(Graph& g, const QString& curve): LinearFit(0,&g,curve) {}
+  
   void fit() override;
 
 private:

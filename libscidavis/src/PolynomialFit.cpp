@@ -42,14 +42,14 @@ using namespace std;
 	init();
 }
 
-	PolynomialFit::PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, int order, bool legend)
+	PolynomialFit::PolynomialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, int order, bool legend)
 : Fit(parent, g), d_order(order), show_legend(legend)
 {
 	init();
 	setDataFromCurve(curveTitle);
 }
 
-	PolynomialFit::PolynomialFit(ApplicationWindow *parent, Graph *g, QString& curveTitle, double start, double end, int order, bool legend)
+	PolynomialFit::PolynomialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end, int order, bool legend)
 : Fit(parent, g), d_order(order), show_legend(legend)
 {
 	init();
@@ -171,9 +171,9 @@ void PolynomialFit::fit()
   gsl_vector_free (c);
   gsl_vector_free(weights);
 
-  ApplicationWindow *app = (ApplicationWindow *)parent();
-  if (app->writeFitResultsToLog)
-    app->updateLog(logFitInfo(d_results, 0, 0, d_graph->parentPlotName()));
+  if (auto app = dynamic_cast<ApplicationWindow *>(parent()))
+    if (app->writeFitResultsToLog)
+      app->updateLog(logFitInfo(d_results, 0, 0, d_graph->parentPlotName()));
 
   if (show_legend)
     showLegend();
@@ -277,9 +277,9 @@ void LinearFit::fit()
   gsl_matrix_set(covar, 1, 1, cov11);
   gsl_matrix_set(covar, 1, 0, cov01);
 
-  ApplicationWindow *app = (ApplicationWindow *)parent();
-  if (app->writeFitResultsToLog)
-    app->updateLog(logFitInfo(d_results, 0, 0, d_graph->parentPlotName()));
+  if (auto app = dynamic_cast<ApplicationWindow *>(parent()))
+    if (app->writeFitResultsToLog)
+      app->updateLog(logFitInfo(d_results, 0, 0, d_graph->parentPlotName()));
 
   generateFitCurve(d_results);
 }

@@ -42,9 +42,10 @@ public:
   Integration(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
   Integration(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
   /// Python constructors
-  Integration(Graph& g, const QString& curveTitle);
-  //  Integration(Graph& g, const QString& curveTitle, double start, double end);
-  Integration(Graph& g, const std::string& curveTitle, double start, double end);
+  Integration(Graph& g, const QString& curveTitle):
+    Integration(0,&g,curveTitle) {}
+  Integration(Graph& g, const QString& curveTitle, double start, double end):
+    Integration(0,&g,curveTitle,start,end) {}
 
   ~Integration() {}
 

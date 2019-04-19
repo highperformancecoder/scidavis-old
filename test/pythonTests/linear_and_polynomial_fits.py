@@ -12,9 +12,9 @@ dp=1.5 #noise's stddev
 t1Name="Linear-data"
 t1=newTable(t1Name,3,100)
 for i in range(1,t1.numRows()+1):
- t1.setCell(1,i,i+random.uniform(0,dp))
- t1.setCell(2,i,2+3*i+random.uniform(0,dp))
- t1.setCell(3,i,random.uniform(0,dp))
+ t1.setCell(i,1,i+random.uniform(0,dp))
+ t1.setCell(i,2,2+3*i+random.uniform(0,dp))
+ t1.setCell(i,3,random.uniform(0,dp))
 
 g1=plot(t1,'2',1) #plotting the linear data
 

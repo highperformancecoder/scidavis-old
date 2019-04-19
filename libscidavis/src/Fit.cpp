@@ -67,7 +67,8 @@ scripted(ScriptingLangManager::newEnv("muParser", parent))
 	d_explanation = QString::null;
 	d_y_error_source = UnknownErrors;
 	d_y_error_dataset = QString::null;
-	d_prec = parent->fit_output_precision;
+        if (parent)
+          d_prec = parent->fit_output_precision;
 	d_init_err = false;
 	chi_2 = -1;
 	d_scale_errors = false;
@@ -346,86 +347,89 @@ QString Fit::legendInfo()
 
 bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_silently)
 {
-	d_y_error_source = err;
-	switch (d_y_error_source)
-	{
-		case UnknownErrors:
-			{
-				d_y_error_dataset = QString::null;
-				// using 1.0 here is important for correct error estimates,
-				// cmp. Fit::fitGslMultifit and Fit::fitGslMultimin
-				for (unsigned i=0; i<d_n; i++)
-					d_y_errors[i] = 1.0;
-			}
-			break;
-		case AssociatedErrors:
-			{
-				bool error = true;
-				QwtErrorPlotCurve *er = 0;
-				if (d_curve && ((PlotCurve *)d_curve)->type() != Graph::Function)
-				{
-					QList<DataCurve *> lst = ((DataCurve *)d_curve)->errorBarsList();
-                	foreach (DataCurve *c, lst)
-                	{
-                    	er = (QwtErrorPlotCurve *)c;
-                    	if (!er->xErrors())
-                    	{
-                        	d_y_error_dataset = er->title().text();
-                        	error = false;
-                        	break;
-                    	}
-					}
+  d_y_error_source = err;
+  switch (d_y_error_source)
+    {
+    case UnknownErrors:
+      {
+        d_y_error_dataset = QString::null;
+        // using 1.0 here is important for correct error estimates,
+        // cmp. Fit::fitGslMultifit and Fit::fitGslMultimin
+        for (unsigned i=0; i<d_n; i++)
+          d_y_errors[i] = 1.0;
+      }
+      break;
+    case AssociatedErrors:
+      {
+        bool error = true;
+        QwtErrorPlotCurve *er = 0;
+        if (d_curve && ((PlotCurve *)d_curve)->type() != Graph::Function)
+          {
+            QList<DataCurve *> lst = ((DataCurve *)d_curve)->errorBarsList();
+            foreach (DataCurve *c, lst)
+              {
+                er = (QwtErrorPlotCurve *)c;
+                if (!er->xErrors())
+                  {
+                    d_y_error_dataset = er->title().text();
+                    error = false;
+                    break;
+                  }
+              }
+          }
+        if (error)
+          {
+            if (!fail_silently)
+              throw runtime_error
+                (tr("The curve %1 has no associated Y error bars.").arg(d_curve->title().text()).toStdString());
+            return false;
+          }
+        if (er)
+          {
+            for (unsigned j=0; j<d_n; j++)
+              d_y_errors[j] = er->errorValue(j);
+          }
+      }
+      break;
+    case PoissonErrors:
+      {
+        d_y_error_dataset = d_curve->title().text();
+
+        for (unsigned i=0; i<d_n; i++)
+          d_y_errors[i] = sqrt(d_y[i]);
+      }
+      break;
+    case CustomErrors:
+      {
+        //d_y_errors are equal to the values of the arbitrary dataset
+        if (colName.isEmpty())
+          return false;
+
+        if (ApplicationWindow* app=dynamic_cast<ApplicationWindow*>(parent()))
+          try
+            {
+              Table& t = ((ApplicationWindow *)parent())->table(colName);
+
+              if (unsigned(t.numRows()) < d_n)
+                {
+                  if (!fail_silently)
+                    QMessageBox::critical
+                      (app, tr("Error"),
+                       tr("The column %1 has fewer points than the fitted data set. Please choose another column!").arg(colName));
+                  return false;
                 }
-				if (error)
-				{
-					if (!fail_silently)
-						QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
-								tr("The curve %1 has no associated Y error bars.").arg(d_curve->title().text()));
-					return false;
-				}
-				if (er)
-				{
-					for (unsigned j=0; j<d_n; j++)
-						d_y_errors[j] = er->errorValue(j);
-				}
-			}
-			break;
-		case PoissonErrors:
-			{
-				d_y_error_dataset = d_curve->title().text();
 
-				for (unsigned i=0; i<d_n; i++)
-					d_y_errors[i] = sqrt(d_y[i]);
-			}
-			break;
-		case CustomErrors:
-			{//d_y_errors are equal to the values of the arbitrary dataset
-                          if (colName.isEmpty())
-                            return false;
+               d_y_error_dataset = colName;
 
-                          try
-                            {
-                              Table& t = ((ApplicationWindow *)parent())->table(colName);
-
-                              if (unsigned(t.numRows()) < d_n)
-                                {
-                                  if (!fail_silently)
-                                    QMessageBox::critical((ApplicationWindow *)parent(), tr("Error"),
-                                                          tr("The column %1 has less points than the fitted data set. Please choose another column!").arg(colName));
-                                  return false;
-                                }
-
-                              d_y_error_dataset = colName;
-
-                              int col = t.colIndex(colName);
-                              for (unsigned i=0; i<d_n; i++)
-                                d_y_errors[i] = t.column(col).valueAt(i);
-                            }
-                          catch (NoSuchObject&) {return false;}
-			}
-			break;
-	}
-	return true;
+               int col = t.colIndex(colName);
+               for (unsigned i=0; i<d_n; i++)
+                 d_y_errors[i] = t.column(col).valueAt(i);
+            }
+          catch (NoSuchObject&) {return false;}
+      }
+      break;
+    }
+  return true;
 }
 
 Table* Fit::parametersTable(const QString& tableName)
@@ -529,9 +533,9 @@ void Fit::fit()
 	if (status == GSL_SUCCESS)
 		generateFitCurve(par);
 
-	ApplicationWindow *app = (ApplicationWindow *)parent();
-	if (app->writeFitResultsToLog)
-		app->updateLog(logFitInfo(d_results, iterations, status, d_graph->parentPlotName()));
+	if (auto app = dynamic_cast<ApplicationWindow *>(parent()))
+          if (app->writeFitResultsToLog)
+            app->updateLog(logFitInfo(d_results, iterations, status, d_graph->parentPlotName()));
 
 	QApplication::restoreOverrideCursor();
 }

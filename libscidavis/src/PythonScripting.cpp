@@ -87,6 +87,8 @@ typedef struct _traceback {
 #include "Fit.cd"
 #include "ExponentialFit.h"
 #include "ExponentialFit.cd"
+#include "PolynomialFit.h"
+#include "PolynomialFit.cd"
 #include "Qt.h"
 #include "Qt.cd"
 #include "AbstractAspect.cd"
@@ -314,15 +316,6 @@ ApplicationWindow& theApp()
 
 }
 
-boost::shared_ptr<ExponentialFit> newExponentialFit(ApplicationWindow& a,Graph& g, const QString& s)
-{
-  boost::shared_ptr<ExponentialFit> r(new ExponentialFit(&a,&g,s));
-  return r;
-}
-
-boost::shared_ptr<ExponentialFit> newExponentialFit2(Graph& g, const QString& s)
-{return newExponentialFit(theApp(),g,s);}
-
 BOOST_PYTHON_MODULE(scidavis)
 {
   // register the Qstring to-python converter
@@ -337,17 +330,16 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<PythonScript>();
   p.defineClass<ArrowMarker>();
   p.defineClass<ExponentialFit>();
+  p.defineClass<LinearFit>();
+  p.defineClass<PolynomialFit>();
   p.defineClass<QtNamespace>();
   p.defineClass<Column>();
   p.defineClass<Integration>();
   p.defineClass<Interpolation>();
   python<SciDAVis::ColumnMode>(p,"");
+
   // redefine Qt as an alias for QtNamespace - unfortunately QtNamespace cannot be called Qt in C++ as Qt is already taken
   modDict("__main__")["Qt"]=modDict("scidavis")["QtNamespace"];
-  
-  p.getClass<ExponentialFit>().
-    def("__init__",py::make_constructor(newExponentialFit)).
-    def("__init__",py::make_constructor(newExponentialFit2));
 }
 
 QString PythonScripting::toString(PyObject *object, bool decref)
