@@ -6,8 +6,8 @@ m.setRow(1,0,[1,3]);
 assert m.determinant()==3,"m.determinant()"
 
 m.transpose()
-assert m.cell(1,2)==1,"m.cell(1,2)==1"
-assert m.cell(2,1)==3,"m.cell(2,1)==3"
+assert m.cell(0,1)==1,"m.cell(1,2)==1"
+assert m.cell(1,0)==3,"m.cell(2,1)==3"
 m.transpose()
 
 m1=newMatrix("m1",2,2)
@@ -21,7 +21,7 @@ for i in range(2):
     for j in range(2):
         s=0
         for k in range(2):
-            s+=m.cell(i+1,k+1)*m1.cell(k+1,j+1)
+            s+=m.cell(i,k)*m1.cell(k,j)
         assert s == (i==j),str(s)+" == ("+str(i)+"=="+str(j)+")"
 
 M=newMatrix() #use defaults

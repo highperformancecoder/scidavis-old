@@ -39,6 +39,7 @@
 #include "MyWidget.h"
 #include "ScriptingEnv.h"
 #include "Script.h"
+#include "Qt.h"
 #include <qwt_double_rect.h>
 #include "future/matrix/future_Matrix.h"
 #include "future/matrix/MatrixView.h"
@@ -111,6 +112,9 @@ public:
   //! Return the number of columns
   int numCols();
   void setNumCols(int cols);
+
+  /// set a row of data starting at \a first_column. \a data is any python sequence of floats
+  void setRow(int row, int first_column, const pyobject& data);
 
   //event handlers
   //! Custom event handler

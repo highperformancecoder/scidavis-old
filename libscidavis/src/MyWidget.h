@@ -146,6 +146,9 @@ public:
   void setMinimized();
   void setMaximized();
 
+  // close this widget
+  bool close() {return QWidget::close();}
+
 signals:
   //! Emitted when the window was closed
   void closedWindow(MyWidget *);

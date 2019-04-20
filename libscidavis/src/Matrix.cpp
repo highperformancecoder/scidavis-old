@@ -300,6 +300,17 @@ void Matrix::setNumCols(int cols)
 	d_future_matrix->setDimensions(d_future_matrix->rowCount(), cols);
 }
 
+void Matrix::setRow(int row, int first_column, const pyobject& data)
+{
+#ifdef SCRIPTING_PYTHON
+  QVector<qreal> x;
+  for (int i=0; i<len(data); ++i)
+    x.append(py::extract<qreal>(data[i]));
+  d_future_matrix->setRowCells(row, first_column, first_column+x.size()-1, x);
+#endif
+}
+
+
 double Matrix::determinant()
 {
 	int rows = numRows();
