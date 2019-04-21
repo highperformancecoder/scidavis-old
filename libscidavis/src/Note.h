@@ -62,7 +62,7 @@ public slots:
   void modifiedNote();
 
   // ScriptEdit methods
-  QString text() { return te->toPlainText(); };
+  QString text() const { return te->toPlainText(); };
   void setText(const QString &s) { te->setText(s); };
   void print() { te->print(); };
   void exportPDF(const QString& fileName){te->exportPDF(fileName);};

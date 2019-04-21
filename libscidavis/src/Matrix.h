@@ -61,11 +61,11 @@ public:
   //! Set the window name
   void setName(const std::string& s) override { d_future_matrix->setName(s.c_str()); }
   //! Return the window label
-  virtual QString windowLabel() { return d_future_matrix->comment(); }
+  QString windowLabel() const override { return d_future_matrix->comment(); }
   //! Set the window label
-  virtual void setWindowLabel(const QString& s) { d_future_matrix->setComment(s); updateCaption(); }
+  void setWindowLabel(const QString& s) override { d_future_matrix->setComment(s); updateCaption(); }
   //! Set the caption policy
-  void setCaptionPolicy(MyWidget::CaptionPolicy policy) 
+  void setCaptionPolicy(MyWidget::CaptionPolicy policy) override
   { 
     caption_policy = policy; updateCaption(); 
     switch (policy)
@@ -106,11 +106,11 @@ public:
   ~Matrix();
 
   //! Return the number of rows
-  int numRows();
+  int numRows() const;
   void setNumRows(int rows);
 
   //! Return the number of columns
-  int numCols();
+  int numCols() const;
   void setNumCols(int cols);
 
   /// set a row of data starting at \a first_column. \a data is any python sequence of floats
@@ -288,7 +288,7 @@ public slots:
   static void freeMatrixData(double **data, int rows);
 
   static Matrix * fromImage(const QImage & image, ScriptingEnv * env);
-  void copy(Matrix *m);
+  void copy(const Matrix& m);
 	
   //! Return the creation date
   virtual QString birthDate(){return d_future_matrix->creationTime().toString(Qt::LocalDate); };

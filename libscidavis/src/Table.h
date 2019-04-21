@@ -70,11 +70,11 @@ public:
   //! Set the window name
   void setName(const std::string& s) override { if (d_future_table) d_future_table->setName(s.c_str()); }
   //! Return the window label
-  virtual QString windowLabel() { return d_future_table? d_future_table->comment(): QString(); }
+  QString windowLabel() const override { return d_future_table? d_future_table->comment(): QString(); }
   //! Set the window label
-  virtual void setWindowLabel(const QString& s) { if (d_future_table) d_future_table->setComment(s); updateCaption(); }
+  void setWindowLabel(const QString& s) override { if (d_future_table) d_future_table->setComment(s); updateCaption(); }
   //! Set the caption policy
-  void setCaptionPolicy(MyWidget::CaptionPolicy policy) 
+  void setCaptionPolicy(MyWidget::CaptionPolicy policy) override
   {
     if (d_future_table)
       {

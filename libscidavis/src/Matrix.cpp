@@ -280,7 +280,7 @@ void Matrix::setDimensions(int rows, int cols)
 	d_future_matrix->setDimensions(rows, cols);
 }
 
-int Matrix::numRows()
+int Matrix::numRows() const
 {
 	return d_future_matrix->rowCount();
 }
@@ -290,7 +290,7 @@ void Matrix::setNumRows(int rows)
 	d_future_matrix->setDimensions(rows, d_future_matrix->columnCount());
 }
 
-int Matrix::numCols()
+int Matrix::numCols() const
 {
 	return d_future_matrix->columnCount();
 }
@@ -726,12 +726,9 @@ void Matrix::updateDecimalSeparators()
 	this->update();
 }
 
-void Matrix::copy(Matrix *m)
+void Matrix::copy(const Matrix& m)
 {
-	if (!m)
-        return;
-	
-	d_future_matrix->copy(m->d_future_matrix);
+	d_future_matrix->copy(m.d_future_matrix);
 }
 
 Matrix * Matrix::fromImage(const QImage & image, ScriptingEnv *env)

@@ -7212,40 +7212,36 @@ void ApplicationWindow::pasteSelection()
 	emit modified();
 }
 
-MyWidget* ApplicationWindow::clone()
+MyWidget& ApplicationWindow::clone()
 {
-	MyWidget* w = (MyWidget*)d_workspace.activeSubWindow();
-	if (!w){
-		QMessageBox::critical(this,tr("Duplicate window error"),
-				tr("There are no windows available in this project!"));
-		return 0;
-	}
-
-	return clone(w);
+  if (auto w=dynamic_cast<MyWidget*>(d_workspace.activeSubWindow()))
+    return clone(*w);
+  else
+    throw
+      std::runtime_error
+      ((tr("Duplicate window error")+
+        tr("There are no windows available in this project!")).toStdString());
 }
 
-MyWidget* ApplicationWindow::clone(MyWidget* w)
+MyWidget& ApplicationWindow::clone(const MyWidget& w)
 {
-  if (!w)
-    return 0;
-
   MyWidget* nw = 0;
   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-  if (w->inherits("MultiLayer")){
+  if (w.inherits("MultiLayer")){
     nw = multilayerPlot(generateUniqueName(tr("Graph")));
-    ((MultiLayer *)nw)->copy(this, (MultiLayer *)w);
-  } else if (w->inherits("Table")){
-    Table *t = (Table *)w;
+    ((MultiLayer *)nw)->copy(this, (MultiLayer *)&w);
+  } else if (w.inherits("Table")){
+    Table *t = (Table *)&w;
     QString caption = generateUniqueName(tr("Table"));
     nw = &newTable(caption.toStdString(), t->numCols(), t->numRows());
     ((Table *)nw)->copy(t);
-  } else if (w->inherits("Graph3D")){
-    Graph3D *g = (Graph3D *)w;
+  } else if (w.inherits("Graph3D")){
+    Graph3D *g = (Graph3D *)&w;
     if (!g->hasData()){
       QApplication::restoreOverrideCursor();
-      QMessageBox::warning(this, tr("Duplicate error"), tr("Empty 3D surface plots cannot be duplicated!"));
-      return 0;
+      //      QMessageBox::warning(this, tr("Duplicate error"), tr("Empty 3D surface plots cannot be duplicated!"));
+      throw std::runtime_error((tr("Duplicate error")+tr("Empty 3D surface plots cannot be duplicated!")).toStdString());
     }
 
     QString caption = generateUniqueName(tr("Graph"));
@@ -7259,45 +7255,45 @@ MyWidget* ApplicationWindow::clone(MyWidget* w)
     else
       nw = openMatrixPlot3D(caption, s, g->xStart(), g->xStop(), g->yStart(), g->yStop(),g->zStart(),g->zStop());
 
-    if (!nw)
-      return 0;
-
-    ((Graph3D *)nw)->copy(g);
+    if (auto g3d=dynamic_cast<Graph3D*>(nw))
+      g3d->copy(g);
     customToolBars((MyWidget*)nw);
-  } else if (w->inherits("Matrix")){
-    nw = &newDefaultMatrix(((Matrix *)w)->numRows(), ((Matrix *)w)->numCols());
-    ((Matrix *)nw)->copy((Matrix *)w);
-  } else if (w->inherits("Note")){
+  } else if (w.inherits("Matrix")){
+    nw = &newDefaultMatrix(((const Matrix &)w).numRows(), ((const Matrix&)w).numCols());
+    ((Matrix *)nw)->copy((const Matrix&)w);
+  } else if (w.inherits("Note")){
     nw = &newNote();
-    if (nw)
-      ((Note*)nw)->setText(((Note*)w)->text());
+    ((Note*)nw)->setText(((const Note&)w).text());
   }
 
   if (nw){
-    if (w->inherits("MultiLayer")){
-      if (w->status() == MyWidget::Maximized)
+    if (w.inherits("MultiLayer")){
+      if (w.status() == MyWidget::Maximized)
         nw->showMaximized();
-    } else if (w->inherits("Graph3D")){
+    } else if (w.inherits("Graph3D")){
       ((Graph3D*)nw)->setIgnoreFonts(true);
-      if (w->status() == MyWidget::Maximized){
-        w->showNormal();
-        w->resize(500,400);
-        nw->resize(w->size());
+      if (w.status() == MyWidget::Maximized){
+        // why are these mutating calls here?
+        //        w.showNormal();
+        //        w.resize(500,400);
+        nw->resize(w.size());
         nw->showMaximized();
       } else
-        nw->resize(w->size());
+        nw->resize(w.size());
       ((Graph3D*)nw)->setIgnoreFonts(false);
     } else {
-      nw->resize(w->size());
+      nw->resize(w.size());
       nw->showNormal();
     }
 
-    nw->setWindowLabel(w->windowLabel());
-    nw->setCaptionPolicy(w->captionPolicy());
-    setListViewLabel(nw->name().c_str(), w->windowLabel());
+    nw->setWindowLabel(w.windowLabel());
+    nw->setCaptionPolicy(w.captionPolicy());
+    setListViewLabel(nw->name().c_str(), w.windowLabel());
   }
   QApplication::restoreOverrideCursor();
-  return nw;
+  if (!nw)
+    throw std::runtime_error("Could not clone "+std::string(w.staticMetaObject.className()));
+  return *nw;
 }
 
 void ApplicationWindow::undo()

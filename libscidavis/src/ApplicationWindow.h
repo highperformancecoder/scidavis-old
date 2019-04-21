@@ -227,8 +227,8 @@ public slots:
    * This table is then plotted with the Graph::LineSymbols style.
    */
   ApplicationWindow* plotFile(const QString& fn);
-  MyWidget* clone();
-  MyWidget* clone(MyWidget*);
+  MyWidget& clone();
+  MyWidget& clone(const MyWidget&);
   //! \name 3D Data Plots
   //@{
   Graph3D* openMatrixPlot3D(const QString& caption, const QString& matrix_name,

@@ -15,10 +15,13 @@ assert t.windowLabel() == ""
 tNewLabel = "a table"
 t.setWindowLabel(tNewLabel)
 assert t.windowLabel() == tNewLabel
-for i in range(2,-1,-1):
-  assert t.captionPolicy() == i
-  if (i > 0):
-    t.setCaptionPolicy(i-1)
+t.setCaptionPolicy(MyWidget.Name)
+assert t.captionPolicy()==MyWidget.Name
+t.setCaptionPolicy(MyWidget.Label)
+assert t.captionPolicy()==MyWidget.Label
+t.setCaptionPolicy(MyWidget.Both)
+assert t.captionPolicy()==MyWidget.Both
+
 ## default captionPolicy is 2: show both name and label
 
 # t.folder() will return something like 
@@ -30,9 +33,9 @@ for i in range(2,-1,-1):
 # Otherwise it just closes...
 
 t.setCell(1,1,10.0)
-t2 = t.clone()
+t2 = app.clone(t)
 t2.confirmClose(False)
-assert t2.captionPolicy() == 0
+assert t2.captionPolicy() == MyWidget.Both
 assert t2.numRows() == t.numRows()
 assert t2.numCols() == t.numCols()
 assert t2.cell(1,1) == t.cell(1,1)
@@ -50,12 +53,11 @@ assert g.windowLabel() == ""
 gNewLabel = "a graph"
 g.setWindowLabel(gNewLabel)
 assert g.windowLabel() == gNewLabel
-for i in range(2,-1,-1):
+for i in (MyWidget.Name,MyWidget.Label,MyWidget.Both):
+  g.setCaptionPolicy(i)
   assert g.captionPolicy() == i
-  if (i > 0):
-    g.setCaptionPolicy(i-1)
-g2 = g.clone()
-assert g2.captionPolicy() == 0
+g2 = app.clone(g)
+assert g2.captionPolicy() == MyWidget.Both
 g2.confirmClose(False)
 
 # matrix...
@@ -70,12 +72,12 @@ assert m.windowLabel() == ""
 mNewLabel = "a matrix"
 m.setWindowLabel(mNewLabel)
 assert m.windowLabel() == mNewLabel
-for i in range(2,-1,-1):
+for i in (MyWidget.Name,MyWidget.Label,MyWidget.Both):
+  m.setCaptionPolicy(i)
   assert m.captionPolicy() == i
-  if (i > 0):
-    m.setCaptionPolicy(i-1)
-m2 = m.clone()
-assert m2.captionPolicy() == 0
+
+m2 = app.clone(m)
+assert m2.captionPolicy() == MyWidget.Both
 m2.confirmClose(False)
 
 # note...
@@ -90,11 +92,10 @@ assert n.windowLabel() == ""
 nNewLabel = "a note"
 n.setWindowLabel(nNewLabel)
 assert n.windowLabel() == nNewLabel
-for i in range(2,-1,-1):
+for i in (MyWidget.Name,MyWidget.Label,MyWidget.Both):
+  n.setCaptionPolicy(i)
   assert n.captionPolicy() == i
-  if (i > 0):
-    n.setCaptionPolicy(i-1)
-n2 = n.clone()
-assert n2.captionPolicy() == 0
+n2 = app.clone(n)
+assert n2.captionPolicy() == MyWidget.Both
 n2.confirmClose(False)
 app.exit()

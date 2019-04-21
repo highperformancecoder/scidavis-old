@@ -76,7 +76,7 @@ public:
   QString windowTitle() const {return QMdiSubWindow::windowTitle();}
   
   //! Return the window label
-  virtual QString windowLabel(){return QString(w_label);};
+  virtual QString windowLabel() const {return QString(w_label);};
   //! Set the window label
   virtual void setWindowLabel(const QString& s) { w_label = s; updateCaption();};
 
@@ -87,7 +87,7 @@ public:
   {setObjectName(s.c_str()); updateCaption();};
 
   //! Return the caption policy
-  virtual CaptionPolicy captionPolicy(){return caption_policy;};
+  CaptionPolicy captionPolicy() const {return caption_policy;};
   //! Set the caption policy
   virtual void setCaptionPolicy(CaptionPolicy policy) { caption_policy = policy; updateCaption(); }
 
@@ -99,7 +99,7 @@ public:
   //! Return the window status as a string
   QString aspect();
   //! Return the window status flag (hidden, normal, minimized or maximized)
-  Status status(){return w_status;};
+  Status status() const {return w_status;};
   //! Set the window status flag (hidden, normal, minimized or maximized)
   void setStatus(Status s);
 
