@@ -89,6 +89,10 @@ typedef struct _traceback {
 #include "ExponentialFit.cd"
 #include "PolynomialFit.h"
 #include "PolynomialFit.cd"
+#include "MultiPeakFit.h"
+#include "MultiPeakFit.cd"
+#include "NonLinearFit.h"
+#include "NonLinearFit.cd"
 #include "Qt.h"
 #include "Qt.cd"
 #include "AbstractAspect.cd"
@@ -330,7 +334,12 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<PythonScript>();
   p.defineClass<ArrowMarker>();
   p.defineClass<ExponentialFit>();
+  p.defineClass<GaussFit>();
+  p.defineClass<GaussAmpFit>();
   p.defineClass<LinearFit>();
+  p.defineClass<LorentzFit>();
+  p.defineClass<MultiPeakFit>();
+  p.defineClass<NonLinearFit>();
   p.defineClass<PolynomialFit>();
   p.defineClass<QtNamespace>();
   p.defineClass<Column>();

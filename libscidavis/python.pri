@@ -23,6 +23,7 @@
                     src/MultiLayer.h src/QwtSymbol.h \
                     src/future/lib/Interval.h src/future/lib/IntervalAttribute.h \
                     src/Fit.h src/ExponentialFit.h src/PolynomialFit.h src/Qt.h \
+                    src/MultiPeakFit.h src/NonLinearFit.h \
                     src/future/core/column/Column.h \
                     src/future/core/AbstractAspect.h src/future/core/AbstractColumn.h \
                     src/globals.h src/Grid.h src/ImageMarker.h src/Integration.h \

@@ -102,6 +102,18 @@ void NonLinearFit::setParametersList(const QStringList& lst)
 		d_param_explain << "";
 }
 
+
+void NonLinearFit::setParameters(const pyobject& parms)
+{
+#ifdef SCRIPTING_PYTHON
+  using namespace boost::python;
+  QStringList list;
+  for (int i=0; i<len(parms); ++i)
+    list << extract<QString>(parms[i]);
+  setParametersList(list);
+#endif
+}
+
 void NonLinearFit::calculateFitCurveData(const vector<double>& par, double *X, double *Y)
 {
     for (unsigned i=0; i<d_p; i++)

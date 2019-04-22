@@ -38,7 +38,13 @@ class MultiPeakFit : public Fit
 
 public:		
   enum PeakProfile{Gauss, Lorentz};
+  MultiPeakFit() {}
   MultiPeakFit(ApplicationWindow *parent, Graph *g = 0, PeakProfile profile = Gauss, int peaks = 1);
+  MultiPeakFit(Graph& g, PeakProfile profile, int peaks):
+    MultiPeakFit(0, &g, profile, peaks) {}
+  MultiPeakFit(Graph& g, PeakProfile profile):
+    MultiPeakFit(0, &g, profile, 1) {}
+  MultiPeakFit(Graph& g): MultiPeakFit(0, &g, Gauss, 1) {}
 
   int peaks(){return d_peaks;};
   void setNumPeaks(int n);
@@ -77,28 +83,39 @@ private:
 
 class LorentzFit : public MultiPeakFit
 {
-	Q_OBJECT
+  Q_OBJECT
 
-	public:
-		LorentzFit(ApplicationWindow *parent, Graph *g);
-		LorentzFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-		LorentzFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+public:
+  LorentzFit() {}
+  LorentzFit(ApplicationWindow *parent, Graph *g);
+  LorentzFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+  LorentzFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+  LorentzFit(Graph& g): LorentzFit(0,&g) {}
+  LorentzFit(Graph& g, const QString& c): LorentzFit(0,&g,c) {}
+  LorentzFit(Graph& g, const QString& c, double s, double e):
+    LorentzFit(0,&g,c,s,e) {}
+    
 
-	private:
-		void init();
+private:
+  void init();
 };
 
 class GaussFit : public MultiPeakFit
 {
-	Q_OBJECT
+  Q_OBJECT
 
-	public:
-		GaussFit(ApplicationWindow *parent, Graph *g);
-		GaussFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-		GaussFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+public:
+  GaussFit() {}
+  GaussFit(ApplicationWindow *parent, Graph *g);
+  GaussFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+  GaussFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+  GaussFit(Graph& g): GaussFit(0,&g) {}
+  GaussFit(Graph& g, const QString& c): GaussFit(0,&g,c) {}
+  GaussFit(Graph& g, const QString& c, double s, double e):
+    GaussFit(0,&g,c,s,e) {}
 
-	private:
-		void init();
+private:
+  void init();
 };
 
 class GaussAmpFit : public Fit
@@ -106,9 +123,14 @@ class GaussAmpFit : public Fit
   Q_OBJECT
 
 public:
+  GaussAmpFit() {}
   GaussAmpFit(ApplicationWindow *parent, Graph *g);
   GaussAmpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
   GaussAmpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+  GaussAmpFit(Graph& g): GaussAmpFit(0,&g) {}
+  GaussAmpFit(Graph& g, const QString& c): GaussAmpFit(0,&g,c) {}
+  GaussAmpFit(Graph& g, const QString& c, double s, double e):
+    GaussAmpFit(0,&g,c,s,e) {}
 
 private:
   void init();
