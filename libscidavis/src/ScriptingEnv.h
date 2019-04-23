@@ -40,6 +40,8 @@
 
 #include "customevents.h"
 
+#include <memory>
+
 class ApplicationWindow;
 class Script;
 
@@ -95,11 +97,6 @@ public slots:
   //! If the implementation supports asynchronuos execution, activate it.
   virtual void startExecution() {}
 
-  //! Increase the reference count. This should only be called by scripted and Script to avoid memory leaks.
-  void incref();
-  //! Decrease the reference count. This should only be called by scripted and Script to avoid segfaults.
-  void decref();
-
 signals:
   //! signal an error condition / exception
   void error(const QString & message, const QString & scriptName, int lineNumber);
@@ -111,10 +108,8 @@ protected:
   bool d_initialized;
   //! the context in which we are running
   ApplicationWindow *d_parent=nullptr;
-
-private:
-  //! the reference counter
-  int d_refcount;
 };
+
+typedef std::shared_ptr<ScriptingEnv> ScriptingEnvPtr;
 
 #endif

@@ -89,7 +89,6 @@ class AbstractAspect : public QObject
   AbstractAspect(const AbstractAspect&)=delete;
   void operator=(const AbstractAspect&)=delete;
 public:
-  AbstractAspect() {}
   class Private;
   friend class Private;
 

@@ -59,9 +59,10 @@
 #include <iostream>
 using namespace std;
 
-Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
-			 bool stripSpaces, bool simplifySpaces, bool convertToNumeric, QLocale numericLocale, const QString& label,
-			 QWidget* parent, const char* name, Qt::WindowFlags f)
+Table::Table(const ScriptingEnvPtr& env, const QString &fname,const QString &sep,
+             int ignoredLines, bool renameCols,
+             bool stripSpaces, bool simplifySpaces, bool convertToNumeric, QLocale numericLocale,
+             const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 	: TableView(label, parent, name,f), scripted(env)
 {
 
@@ -87,8 +88,9 @@ Table::Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ign
 	init();
 }
 
-Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
-	: TableView(label, parent, name,f), scripted(env)
+Table::Table(const ScriptingEnvPtr& env, int r, int c, const QString& label, QWidget* parent,
+             const char* name, Qt::WindowFlags f)
+  : TableView(label, parent, name,f), scripted(env)
 {
 	d_future_table = new future::Table(r, c, label);
 	init();
@@ -457,8 +459,8 @@ bool Table::recalculate(int col, bool only_selected_rows)
             continue;
 
           Script *colscript = scriptEnv->newScript(formula, this,  QString("<%1>").arg(colName(col)));
-          connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
-          connect(colscript, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
+          connect(colscript, SIGNAL(error(const QString&,const QString&,int)), scriptEnv.get(), SIGNAL(error(const QString&,const QString&,int)));
+          connect(colscript, SIGNAL(print(const QString&)), scriptEnv.get(), SIGNAL(print(const QString&)));
 
           if (!colscript->compile()) {
             delete colscript;

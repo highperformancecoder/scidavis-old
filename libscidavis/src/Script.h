@@ -41,6 +41,8 @@
 #include "customevents.h"
 #include "ScriptingEnv.h"
 
+#include <memory>
+
 class ApplicationWindow;
 
 //! A chunk of scripting code. Abstract.
@@ -55,10 +57,9 @@ class Script : public QObject
 
 public:
   Script() {}
-  Script(ScriptingEnv *env, const QString &code, QObject *context=0, const QString &name="<input>")
+  Script(ScriptingEnv* env, const QString &code, QObject *context=0, const QString &name="<input>")
     : QObject(context), Env(env), Code(code), Name(name), compiled(notCompiled)
-  { Env->incref(); Context = context; EmitErrors=true; }
-  ~Script() { Env->decref(); }
+  {Context = context; EmitErrors=true; }
 
   //! Return the code that will be executed when calling exec() or eval()
   QString code() const { return Code; }
@@ -104,7 +105,7 @@ signals:
   void print(const QString & output);
     
 protected:
-  ScriptingEnv *Env=nullptr;
+  ScriptingEnv* Env;
   QString Code, Name;
   QObject *Context=nullptr;
   enum compileStatus { notCompiled, isCompiled, compileErr };
@@ -120,9 +121,9 @@ class ScriptingLangManager
 {
 public:
   //! Return an instance of the first implementation we can find.
-  static ScriptingEnv *newEnv(ApplicationWindow *parent);
+  static ScriptingEnvPtr newEnv(ApplicationWindow *parent);
   //! Return an instance of the implementation specified by name, NULL on failure.
-  static ScriptingEnv *newEnv(const std::string& name, ApplicationWindow *parent, bool batch=false);
+  static ScriptingEnvPtr newEnv(const std::string& name, ApplicationWindow *parent, bool batch=false);
   //! Return the names of available implementations.
   static QStringList languages();
   //! Return the number of available implementations.
@@ -134,11 +135,10 @@ public:
 class ScriptingChangeEvent : public QEvent
 {
 public:
-  ScriptingChangeEvent(ScriptingEnv *e) : QEvent(SCRIPTING_CHANGE_EVENT), env(e) {}
-  ScriptingEnv *scriptingEnv() const { return env; }
+  ScriptingChangeEvent(const ScriptingEnvPtr e) : QEvent(SCRIPTING_CHANGE_EVENT), env(e) {}
+  //ScriptingEnv *scriptingEnv() const { return env.get(); }
   QEvent::Type type() const { return SCRIPTING_CHANGE_EVENT; }
-private:
-  ScriptingEnv *env;
+  ScriptingEnvPtr env;
 };
 
 //! Interface for maintaining a reference to the current ScriptingEnv
@@ -149,12 +149,12 @@ private:
    */
 class scripted
 {
-  public:
-   scripted(ScriptingEnv* env=nullptr);
-   ~scripted();
-   void scriptingChangeEvent(ScriptingChangeEvent*);
-  protected:
-    ScriptingEnv *scriptEnv;
+public:
+  scripted() {}
+  scripted(const ScriptingEnvPtr& e): scriptEnv(e) {}
+  void scriptingChangeEvent(ScriptingChangeEvent*);
+protected:
+  ScriptingEnvPtr scriptEnv;
 };
 
 #endif

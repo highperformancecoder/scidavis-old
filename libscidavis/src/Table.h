@@ -57,10 +57,12 @@ public:
   enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day = 5, DateTime = 6}; // TODO: remove this in favor of SciDAVis::columnMode
 
   Table() {}
-  Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
-        bool stripSpaces, bool simplifySpaces, bool convertToNumeric, QLocale numericFormat, const QString &label,
+  Table(const ScriptingEnvPtr& env, const QString &fname,const QString &sep,
+        int ignoredLines, bool renameCols, bool stripSpaces, bool simplifySpaces, bool convertToNumeric,
+        QLocale numericFormat, const QString &label,
         QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
-  Table(ScriptingEnv *env, int r,int c, const QString &label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
+  Table(const ScriptingEnvPtr& env, int r,int c, const QString &label,
+        QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
 
   //! Sets the number of significant digits
   //void setNumericPrecision(int prec);

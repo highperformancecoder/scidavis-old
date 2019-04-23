@@ -70,7 +70,6 @@ class Column : public AbstractColumn
 public:
   class Private;
   friend class Private;
-  Column() {}
   
   //! Ctor
   /**

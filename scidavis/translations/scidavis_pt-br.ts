@@ -6655,7 +6655,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
-        <translation>A coluna %1 tem menos pontos que o conjunto de dados ajustado. Por favor, escolha outra coluna!</translation>
+        <translation type="obsolete">A coluna %1 tem menos pontos que o conjunto de dados ajustado. Por favor, escolha outra coluna!</translation>
+    </message>
+    <message>
+        <source>The column %1 has fewer points than the fitted data set. Please choose another column!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

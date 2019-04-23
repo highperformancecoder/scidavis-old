@@ -83,7 +83,6 @@ class AbstractColumn : public AbstractAspect
   Q_OBJECT
 
 public:
-  AbstractColumn() {}
   //! Ctor
   AbstractColumn(const QString& name) : AbstractAspect(name) {}
   //! Dtor

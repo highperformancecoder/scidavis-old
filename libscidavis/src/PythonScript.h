@@ -45,7 +45,7 @@ class PythonScript : public Script
 
 public:
   PythonScript() {}
-  PythonScript(PythonScripting *env, const QString &code, QObject *context=0, const QString &name="<input>");
+  PythonScript(ScriptingEnv *env, const QString &code, QObject *context=0, const QString &name="<input>");
   ~PythonScript();
 
   void write(const char* text) {emit print(text);}
@@ -60,7 +60,7 @@ public slots:
   void setContext(QObject *context);
 
 private:
-  PythonScripting *env() { return (PythonScripting*)Env; }
+  PythonScripting *env() { return (PythonScripting*)(Env); }
   void beginStdoutRedirect();
   void endStdoutRedirect();
 

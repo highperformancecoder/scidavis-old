@@ -44,7 +44,9 @@
 #include <QTextBlock>
 #include <QKeyEvent>
 
-ScriptEdit::ScriptEdit(ScriptingEnv *env, QWidget *parent, QString name)
+using namespace std;
+
+ScriptEdit::ScriptEdit(const ScriptingEnvPtr& env, QWidget *parent, QString name)
   : QTextEdit(parent), scripted(env), d_error(false), d_changing_fmt(false)
 {
 	setObjectName(name);

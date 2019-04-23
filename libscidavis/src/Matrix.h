@@ -88,8 +88,6 @@ public:
     d_future_matrix->importV0x0001XXCreationTime(s);
   }
 
-  Matrix() {}
-
   /*!
    * \brief Constructor
    *
@@ -102,7 +100,7 @@ public:
    * \param name window name
    * \param f window flags
    */
-  Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
+  Matrix(const ScriptingEnvPtr& env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
   ~Matrix();
 
   //! Return the number of rows
@@ -287,7 +285,7 @@ public slots:
   //! Free memory used for a matrix buffer
   static void freeMatrixData(double **data, int rows);
 
-  static Matrix * fromImage(const QImage & image, ScriptingEnv * env);
+  static Matrix * fromImage(const QImage & image, const ScriptingEnvPtr& env);
   void copy(const Matrix& m);
 	
   //! Return the creation date
@@ -311,7 +309,7 @@ private:
   //! Stores the matrix data only before the user opens the matrix dialog in order to avoid data loses during number format changes.
   double **dMatrix=nullptr;
 
-  Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
+  Matrix(future::Matrix *future_matrix, const ScriptingEnvPtr& env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
 };
 
 #endif

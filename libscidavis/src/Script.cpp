@@ -54,7 +54,7 @@ namespace
   };
 }
 
-ScriptingEnv *ScriptingLangManager::newEnv(ApplicationWindow *parent)
+ScriptingEnvPtr ScriptingLangManager::newEnv(ApplicationWindow *parent)
 {
   if (!langs[0])
     return nullptr;
@@ -62,15 +62,15 @@ ScriptingEnv *ScriptingLangManager::newEnv(ApplicationWindow *parent)
     return newEnv(langs[0],parent);
 }
 
-ScriptingEnv *ScriptingLangManager::newEnv(const std::string& name, ApplicationWindow *parent, bool batch)
+ScriptingEnvPtr ScriptingLangManager::newEnv(const std::string& name, ApplicationWindow *parent, bool batch)
 {
 #ifdef SCRIPTING_MUPARSER
   if (name==MuParserScripting::langName)
-    return new MuParserScripting(parent);
+    return ScriptingEnvPtr(new MuParserScripting(parent));
 #endif
 #ifdef SCRIPTING_PYTHON
   if (name==PythonScripting::langName)
-    return new PythonScripting(parent, batch);
+    return ScriptingEnvPtr(new PythonScripting(parent, batch));
 #endif
   return nullptr;
 }
@@ -101,20 +101,7 @@ bool Script::exec()
 	return false;
 }
 
-scripted::scripted(ScriptingEnv *env)
-{
-	env->incref();
-	scriptEnv = env;
-}
-
-scripted::~scripted()
-{
-	scriptEnv->decref();
-}
-
 void scripted::scriptingChangeEvent(ScriptingChangeEvent *sce)
 {
-	scriptEnv->decref();
-	sce->scriptingEnv()->incref();
-	scriptEnv = sce->scriptingEnv();
+  scriptEnv = sce->env;
 }

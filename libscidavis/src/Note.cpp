@@ -42,24 +42,24 @@
 #include <QVBoxLayout>
 #include <QPrintDialog>
 
-Note::Note(ScriptingEnv *env, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
+Note::Note(const ScriptingEnvPtr& env, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 				: MyWidget(label, parent, name, f)
 {
 init(env);	
 }
 
-void Note::init(ScriptingEnv *env)
+void Note::init(const ScriptingEnvPtr& env)
 {
-autoExec = false;
-QDateTime dt = QDateTime::currentDateTime ();
-setBirthDate(dt.toString(Qt::LocalDate));
+  autoExec = false;
+  QDateTime dt = QDateTime::currentDateTime ();
+  setBirthDate(dt.toString(Qt::LocalDate));
 
- te = new ScriptEdit(env, this, name().c_str());
-te->setContext(this);
-this->setWidget(te);
+  te = new ScriptEdit(env, this, name().c_str());
+  te->setContext(this);
+  this->setWidget(te);
 
-setGeometry(0, 0, 500, 200);
-connect(te, SIGNAL(textChanged()), this, SLOT(modifiedNote()));
+  setGeometry(0, 0, 500, 200);
+  connect(te, SIGNAL(textChanged()), this, SLOT(modifiedNote()));
 }
 
 void Note::modifiedNote()

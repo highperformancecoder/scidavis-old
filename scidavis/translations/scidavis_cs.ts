@@ -5081,7 +5081,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Chyba při zadání funkce</translation>
     </message>
     <message>
-        <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
+        <source>The column %1 has fewer points than the fitted data set. Please choose another column!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

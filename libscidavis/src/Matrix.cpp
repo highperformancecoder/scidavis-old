@@ -60,14 +60,14 @@
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_math.h>
 
-Matrix::Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
+Matrix::Matrix(const ScriptingEnvPtr& env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 	: MatrixView(label, parent, name, f), scripted(env)
 {
 	d_future_matrix = new future::Matrix(0, r, c, label);
 	init(r, c);
 }
 	
-Matrix::Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
+Matrix::Matrix(future::Matrix *future_matrix, const ScriptingEnvPtr& env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 	: MatrixView(label, parent, name, f), scripted(env)
 {
 	d_future_matrix = future_matrix;
@@ -156,24 +156,24 @@ QString Matrix::text(int row, int col)
 
 void Matrix::setText(int row, int col, const QString & new_text )
 {
-	bool ok = true;
-    QLocale locale;
-  	double res = locale.toDouble(new_text, &ok);
-	if (ok)
-		d_future_matrix->setCell(row, col, res);
-	else
-	{
-          Script *script = scriptEnv->newScript(new_text, this, QString("<%1_%2_%3>").arg(name().c_str()).arg(row).arg(col));
-		connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
+  bool ok = true;
+  QLocale locale;
+  double res = locale.toDouble(new_text, &ok);
+  if (ok)
+    d_future_matrix->setCell(row, col, res);
+  else
+    {
+      Script *script = scriptEnv->newScript(new_text, this, QString("<%1_%2_%3>").arg(name().c_str()).arg(row).arg(col));
+      connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv.get(), SIGNAL(error(const QString&,const QString&,int)));
 
-		script->setInt(row+1, "row");
-		script->setInt(row+1, "i");
-		script->setInt(col+1, "col");
-		script->setInt(col+1, "j");
+      script->setInt(row+1, "row");
+      script->setInt(row+1, "i");
+      script->setInt(col+1, "col");
+      script->setInt(col+1, "j");
 
-		QVariant ret = script->eval();
-		setCell(row, col, ret.toDouble());
-	}
+      QVariant ret = script->eval();
+      setCell(row, col, ret.toDouble());
+    }
 }
 
 void Matrix::setCoordinates(double xs, double xe, double ys, double ye)
@@ -408,8 +408,8 @@ bool Matrix::recalculate()
 {
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 	Script *script = scriptEnv->newScript(formula(), this, QString("<%1>").arg(name().c_str()));
-	connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv, SIGNAL(error(const QString&,const QString&,int)));
-	connect(script, SIGNAL(print(const QString&)), scriptEnv, SIGNAL(print(const QString&)));
+	connect(script, SIGNAL(error(const QString&,const QString&,int)), scriptEnv.get(), SIGNAL(error(const QString&,const QString&,int)));
+	connect(script, SIGNAL(print(const QString&)), scriptEnv.get(), SIGNAL(print(const QString&)));
 	if (!script->compile())
 	{
 		QApplication::restoreOverrideCursor();
@@ -731,7 +731,7 @@ void Matrix::copy(const Matrix& m)
 	d_future_matrix->copy(m.d_future_matrix);
 }
 
-Matrix * Matrix::fromImage(const QImage & image, ScriptingEnv *env)
+Matrix * Matrix::fromImage(const QImage & image, const ScriptingEnvPtr& env)
 {
 	future::Matrix * fm = future::Matrix::fromImage(image);
 	if (!fm) return NULL;

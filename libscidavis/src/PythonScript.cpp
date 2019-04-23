@@ -57,7 +57,7 @@ namespace py=boost::python;
 #endif
 using namespace std;
 
-PythonScript::PythonScript(PythonScripting *env, const QString &code, QObject *context, const QString &name)
+PythonScript::PythonScript(ScriptingEnv* env, const QString &code, QObject *context, const QString &name)
 : Script(env, code, context, name)
 {
   modLocalDict.update(modDict("__main__"));

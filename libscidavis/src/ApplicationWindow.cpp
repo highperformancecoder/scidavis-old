@@ -167,6 +167,7 @@
   
 #include <iostream>
 #include <memory>
+#include <stdexcept>
 using namespace std;
 
 #ifdef Q_OS_WIN
@@ -350,9 +351,9 @@ ApplicationWindow::ApplicationWindow()
 	connect(&lv, SIGNAL(deleteSelection()), this, SLOT(deleteSelectedItems()));
 	connect(&lv, SIGNAL(itemRenamed(QTreeWidgetItem *, int, const QString &)),
 			this, SLOT(renameWindow_(QTreeWidgetItem *, int, const QString &)));
-	connect(scriptEnv, SIGNAL(error(const QString&,const QString&,int)),
+	connect(scriptEnv.get(), SIGNAL(error(const QString&,const QString&,int)),
 			this, SLOT(scriptError(const QString&,const QString&,int)));
-	connect(scriptEnv, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
+	connect(scriptEnv.get(), SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
 
 #ifdef SEARCH_FOR_UPDATES
 	connect(&http, SIGNAL(finished(QNetworkReply*)), this, SLOT(receivedVersionFile(QNetworkReply*)));
@@ -2157,10 +2158,7 @@ Matrix& ApplicationWindow::importImageDialog()
 		return importImage(fn);
 	}
 	else
-          {
-            static Matrix emptyMatrix;
-            return emptyMatrix;
-          }
+          throw runtime_error("Failed to import "+fn.toStdString());
 }
 
 void ApplicationWindow::loadImage()
@@ -4040,15 +4038,15 @@ bool ApplicationWindow::setScriptingLang(const QString &lang, bool force, bool b
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	ScriptingEnv *newEnv = ScriptingLangManager::newEnv(lang.toStdString(), this, batch);
+	auto newEnv = ScriptingLangManager::newEnv(lang.toStdString(), this, batch);
 	if (!newEnv) {
 		QApplication::restoreOverrideCursor();
 		return false;
 	}
 
-	connect(newEnv, SIGNAL(error(const QString&,const QString&,int)),
+	connect(newEnv.get(), SIGNAL(error(const QString&,const QString&,int)),
 			this, SLOT(scriptError(const QString&,const QString&,int)));
-	connect(newEnv, SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
+	connect(newEnv.get(), SIGNAL(print(const QString&)), this, SLOT(scriptPrint(const QString&)));
 	if (!newEnv->initialize())
 	{
 		QApplication::restoreOverrideCursor();
@@ -7768,9 +7766,9 @@ void ApplicationWindow::customEvent(QEvent *e)
 		// to assume a particular call path for an event; which means that we don't know for sure
 		// at this point whether scriptEnv is connected or not.
 		scriptEnv->disconnect(this);
-		connect(scriptEnv, SIGNAL(error(const QString&,const QString&,int)),
+		connect(scriptEnv.get(), SIGNAL(error(const QString&,const QString&,int)),
 				this, SLOT(scriptError(const QString&,const QString&,int)));
-		connect(scriptEnv, SIGNAL(print(const QString&)),
+		connect(scriptEnv.get(), SIGNAL(print(const QString&)),
 				this, SLOT(scriptPrint(const QString&)));
 	}
 }
@@ -9118,17 +9116,11 @@ void ApplicationWindow::intensityTable()
 
 Matrix& ApplicationWindow::importImage(const QString& fileName)
 {
-  static Matrix emptyMatrix; // TODO - use exceptions for error handling
   QImage image(fileName);
-  if (image.isNull())
-    return emptyMatrix;
+  Matrix *m;
+  if (image.isNull() || !(m = Matrix::fromImage(image, scriptEnv)))
+    throw runtime_error("Failed to import "+fileName.toStdString());
 
-  Matrix* m = Matrix::fromImage(image, scriptEnv);
-  if (!m) 
-    {
-      QMessageBox::information(0, tr("Error importing image"), tr("Import of image '%1' failed").arg(fileName));
-      return emptyMatrix;  
-    }
   QString caption = generateUniqueName(tr("Matrix"));
   m->setName(caption.toStdString());
   d_project->addChild(m->d_future_matrix);
