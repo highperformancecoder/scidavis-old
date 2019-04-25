@@ -4170,11 +4170,11 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
     </message>
     <message>
         <source>Error importing image</source>
-        <translation>Erro ao importar imagem</translation>
+        <translation type="obsolete">Erro ao importar imagem</translation>
     </message>
     <message>
         <source>Import of image &apos;%1&apos; failed</source>
-        <translation>A importação da imagem &apos;%1&apos; falhou</translation>
+        <translation type="obsolete">A importação da imagem &apos;%1&apos; falhou</translation>
     </message>
     <message>
         <source>Undo/Redo &amp;History</source>

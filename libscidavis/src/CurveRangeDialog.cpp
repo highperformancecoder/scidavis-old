@@ -94,22 +94,22 @@ void CurveRangeDialog::accept()
 
 void CurveRangeDialog::setCurveToModify(Graph *g, int curve)
 {
-	if (!g)
-		return;
+  if (!g)
+    return;
 
-	d_graph = g;
-	d_curve = (DataCurve *)d_graph->curve(curve);
-	if (!d_curve)
-		return;
+  d_graph = g;
+  d_curve = dynamic_cast<DataCurve*>(d_graph->curvePtr(curve));
+  if (!d_curve) return;
 
-    Table *t = d_curve->table();
-	if (t)
-	{
-		boxStart->setMaximum(t->numRows());
-		boxEnd->setMaximum(t->numRows());
-	}
 
-	boxName->setText(d_curve->title().text());
-	boxStart->setValue(d_curve->startRow() + 1);
-	boxEnd->setValue(d_curve->endRow() + 1);
+  Table *t = d_curve->table();
+  if (t)
+    {
+      boxStart->setMaximum(t->numRows());
+      boxEnd->setMaximum(t->numRows());
+    }
+
+  boxName->setText(d_curve->title().text());
+  boxStart->setValue(d_curve->startRow() + 1);
+  boxEnd->setValue(d_curve->endRow() + 1);
 }

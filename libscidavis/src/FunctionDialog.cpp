@@ -193,49 +193,48 @@ void FunctionDialog::raiseWidget(int index)
 
 void FunctionDialog::setCurveToModify(Graph *g, int curve)
 {
-	if (!g)
-		return;
+  if (!g)
+    return;
 
-	graph = g;
+  graph = g;
 
-	FunctionCurve *c = (FunctionCurve *)graph->curve(curve);
-	if (!c)
-		return;
+  FunctionCurve* c = dynamic_cast<FunctionCurve*>(graph->curvePtr(curve));
+  if (!c) return;
+      
+  curveID = curve;
 
-	curveID = curve;
+  QStringList formulas = c->formulas();
+  if (c->functionType() == FunctionCurve::Normal)
+    {
+      boxFunction->setText(formulas[0]);
+      boxFrom->setText(QString::number(c->startRange(), 'g', 15));
+      boxTo->setText(QString::number(c->endRange(), 'g', 15));
+      boxPoints->setValue(c->dataSize());
+    }
+  else if (c->functionType() == FunctionCurve::Polar)
+    {
+      optionStack->setCurrentIndex(2);
+      boxType->setCurrentIndex(2);
 
-	QStringList formulas = c->formulas();
-	if (c->functionType() == FunctionCurve::Normal)
-	{
-		boxFunction->setText(formulas[0]);
-		boxFrom->setText(QString::number(c->startRange(), 'g', 15));
-		boxTo->setText(QString::number(c->endRange(), 'g', 15));
-		boxPoints->setValue(c->dataSize());
-	}
-	else if (c->functionType() == FunctionCurve::Polar)
-	{
-		optionStack->setCurrentIndex(2);
-		boxType->setCurrentIndex(2);
+      boxPolarRadius->setItemText(boxPolarRadius->currentIndex(), formulas[0]);
+      boxPolarTheta->setItemText(boxPolarTheta->currentIndex(), formulas[1]);
+      boxPolarParameter->setText(c->variable());
+      boxPolarFrom->setText(QString::number(c->startRange(), 'g', 15));
+      boxPolarTo->setText(QString::number(c->endRange(), 'g', 15));
+      boxPolarPoints->setValue(c->dataSize());
+    }
+  else if (c->functionType() == FunctionCurve::Parametric)
+    {
+      boxType->setCurrentIndex(1);
+      optionStack->setCurrentIndex(1);
 
-		boxPolarRadius->setItemText(boxPolarRadius->currentIndex(), formulas[0]);
-		boxPolarTheta->setItemText(boxPolarTheta->currentIndex(), formulas[1]);
-		boxPolarParameter->setText(c->variable());
-		boxPolarFrom->setText(QString::number(c->startRange(), 'g', 15));
-		boxPolarTo->setText(QString::number(c->endRange(), 'g', 15));
-		boxPolarPoints->setValue(c->dataSize());
-	}
-	else if (c->functionType() == FunctionCurve::Parametric)
-	{
-		boxType->setCurrentIndex(1);
-		optionStack->setCurrentIndex(1);
-
-		boxXFunction->setItemText(boxXFunction->currentIndex(), formulas[0]);
-		boxYFunction->setItemText(boxYFunction->currentIndex(), formulas[1]);
-		boxParameter->setText(c->variable());
-		boxParFrom->setText(QString::number(c->startRange(), 'g', 15));
-		boxParTo->setText(QString::number(c->endRange(), 'g', 15));
-		boxParPoints->setValue(c->dataSize());
-	}
+      boxXFunction->setItemText(boxXFunction->currentIndex(), formulas[0]);
+      boxYFunction->setItemText(boxYFunction->currentIndex(), formulas[1]);
+      boxParameter->setText(c->variable());
+      boxParFrom->setText(QString::number(c->startRange(), 'g', 15));
+      boxParTo->setText(QString::number(c->endRange(), 'g', 15));
+      boxParPoints->setValue(c->dataSize());
+    }
 }
 
 void FunctionDialog::clearList()

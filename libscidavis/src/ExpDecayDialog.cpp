@@ -162,22 +162,17 @@ void ExpDecayDialog::setGraph(Graph *g)
 
 void ExpDecayDialog::activateCurve(const QString& curveName)
 {
-	QwtPlotCurve *c = graph->curve(curveName);
-	if (!c)
-		return;
-
-    ApplicationWindow *app = (ApplicationWindow *)this->parent();
-	if (!app)
-        return;
-
-	int precision = app->fit_output_precision;
-	double start, end;
-	graph->range(graph->curveIndex(curveName), &start, &end);
-	boxStart->setText(QString::number(qMin(start, end)));
-	boxYOffset->setText(QString::number(c->minYValue(), 'g', precision));
-	if (slopes < 2)
-        boxAmplitude->setText(QString::number(c->maxYValue() - c->minYValue(), 'g', precision));
-
+  if (QwtPlotCurve* c = graph->curvePtr(curveName))
+    if (auto app = dynamic_cast<ApplicationWindow *>(this->parent()))
+      {
+        int precision = app->fit_output_precision;
+        double start, end;
+        graph->range(graph->curveIndex(curveName), &start, &end);
+        boxStart->setText(QString::number(qMin(start, end)));
+        boxYOffset->setText(QString::number(c->minYValue(), 'g', precision));
+        if (slopes < 2)
+          boxAmplitude->setText(QString::number(c->maxYValue() - c->minYValue(), 'g', precision));
+      }
 };
 
 void ExpDecayDialog::changeDataRange()
@@ -189,87 +184,84 @@ boxStart->setText(QString::number(qMin(start, end), 'g', 15));
 
 void ExpDecayDialog::fit()
 {
-	QString curve = boxName->currentText();
-	QwtPlotCurve *c = graph->curve(curve);
-	QStringList curvesList = graph->analysableCurvesList();
-	if (!c || !curvesList.contains(curve))
-	{
-		QMessageBox::critical(this,tr("Warning"),
-				tr("The curve <b> %1 </b> doesn't exist anymore! Operation aborted!").arg(curve));
-		boxName->clear();
-		boxName->addItems(curvesList);
-		return;
-	}
+  QString curve = boxName->currentText();
+  QStringList curvesList = graph->analysableCurvesList();
+  QwtPlotCurve* c = graph->curvePtr(curve);
+  if (!c || !curvesList.contains(curve))
+    {
+      QMessageBox::critical(this,tr("Warning"),
+                            tr("The curve <b> %1 </b> doesn't exist anymore! Operation aborted!").arg(curve));
+      boxName->clear();
+      boxName->addItems(curvesList);
+      return;
+    }
 
-	ApplicationWindow *app = (ApplicationWindow *)this->parent();
-	if (!app)
-        return;
+    
+  if (ApplicationWindow *app = dynamic_cast<ApplicationWindow *>(this->parent()))
+    {
+      int precision = app->fit_output_precision;
 
-	int precision = app->fit_output_precision;
-
-	if (fitter)
-        delete fitter;
-
-	if (slopes == 3)
-	{
-		double x_init[7] = {1.0, boxFirst->text().toDouble(), 1.0, boxSecond->text().toDouble(),
-			1.0, boxThird->text().toDouble(), boxYOffset->text().toDouble()};
-		fitter = new ThreeExpFit(app, graph);
-		fitter->setInitialGuesses(x_init);
-	}
-	else if (slopes == 2)
-	{
-		double x_init[5] = {1.0, boxFirst->text().toDouble(), 1.0, boxSecond->text().toDouble(),
-			boxYOffset->text().toDouble()};
-		fitter = new TwoExpFit(app, graph);
-		fitter->setInitialGuesses(x_init);
-	}
-	else if (slopes == 1 || slopes == -1)
-	{
-		double x_init[3] = {boxAmplitude->text().toDouble(), slopes/boxFirst->text().toDouble(), boxYOffset->text().toDouble()};
-		fitter = new ExponentialFit(app, graph, slopes == -1);
-		fitter->setInitialGuesses(x_init);
-	}
-
-  	if (fitter->setDataFromCurve(boxName->currentText(), boxStart->text().toDouble(), c->maxXValue()))
-	{
-		fitter->setColor(btnColor->color());
-		fitter->scaleErrors(app->fit_scale_errors);
-        fitter->setOutputPrecision(app->fit_output_precision);
-		fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);
-		fitter->fit();
-
-		auto& results = fitter->results();
-		boxFirst->setText(QString::number(results[1], 'g', precision));
-		if (slopes < 2)
-		{
-            boxAmplitude->setText(QString::number(results[0], 'g', precision));
-            boxYOffset->setText(QString::number(results[2], 'g', precision));
-        }
-        else if (slopes == 2)
+      if (slopes == 3)
         {
-            boxSecond->setText(QString::number(results[3], 'g', precision));
-            boxYOffset->setText(QString::number(results[4], 'g', precision));
+          double x_init[7] = {1.0, boxFirst->text().toDouble(), 1.0, boxSecond->text().toDouble(),
+                              1.0, boxThird->text().toDouble(), boxYOffset->text().toDouble()};
+          fitter.reset(new ThreeExpFit(app, graph));
+          fitter->setInitialGuesses(x_init);
         }
-        else if (slopes == 3)
+      else if (slopes == 2)
         {
-            boxSecond->setText(QString::number(results[3], 'g', precision));
-            boxThird->setText(QString::number(results[5], 'g', precision));
-            boxYOffset->setText(QString::number(results[6], 'g', precision));
+          double x_init[5] = {1.0, boxFirst->text().toDouble(), 1.0, boxSecond->text().toDouble(),
+                              boxYOffset->text().toDouble()};
+          fitter.reset(new TwoExpFit(app, graph));
+          fitter->setInitialGuesses(x_init);
         }
-	}
+      else if (slopes == 1 || slopes == -1)
+        {
+          double x_init[3] = {boxAmplitude->text().toDouble(), slopes/boxFirst->text().toDouble(), boxYOffset->text().toDouble()};
+          fitter.reset(new ExponentialFit(app, graph, slopes == -1));
+          fitter->setInitialGuesses(x_init);
+        }
+
+      if (fitter->setDataFromCurve(boxName->currentText(), boxStart->text().toDouble(), c->maxXValue()))
+        {
+          fitter->setColor(btnColor->color());
+          fitter->scaleErrors(app->fit_scale_errors);
+          fitter->setOutputPrecision(app->fit_output_precision);
+          fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);
+          fitter->fit();
+
+          auto& results = fitter->results();
+          boxFirst->setText(QString::number(results[1], 'g', precision));
+          if (slopes < 2)
+            {
+              boxAmplitude->setText(QString::number(results[0], 'g', precision));
+              boxYOffset->setText(QString::number(results[2], 'g', precision));
+            }
+          else if (slopes == 2)
+            {
+              boxSecond->setText(QString::number(results[3], 'g', precision));
+              boxYOffset->setText(QString::number(results[4], 'g', precision));
+            }
+          else if (slopes == 3)
+            {
+              boxSecond->setText(QString::number(results[3], 'g', precision));
+              boxThird->setText(QString::number(results[5], 'g', precision));
+              boxYOffset->setText(QString::number(results[6], 'g', precision));
+            }
+        }
+    }
 }
 
 void ExpDecayDialog::closeEvent (QCloseEvent * e )
 {
-	if(fitter)
-	{
-        ApplicationWindow *app = (ApplicationWindow *)this->parent();
-        if (app && app->pasteFitResultsToPlot)
-            fitter->showLegend();
+  if(fitter)
+    {
+      ApplicationWindow *app = (ApplicationWindow *)this->parent();
+      if (app && app->pasteFitResultsToPlot)
+        fitter->showLegend();
+      
+      fitter.reset();
+    }
 
-        delete fitter;
-	}
-
-	e->accept();
+  e->accept();
 }

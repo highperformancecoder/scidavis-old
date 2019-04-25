@@ -37,15 +37,19 @@ class PlotCurve: public QwtPlotCurve
 {
 
 public:
-	PlotCurve(const QString &name = QString::null): QwtPlotCurve(name), d_type(0){};
+  PlotCurve(const QString &name = QString::null): QwtPlotCurve(name), d_type(0){};
 
-	int type() const {return d_type;};
-	void setType(int t){d_type = t;};
+  int type() const {return d_type;};
+  void setType(int t){d_type = t;};
 
-	QwtDoubleRect boundingRect() const;
+  QwtDoubleRect boundingRect() const;
+  
+  void setSymbol(const SciQwtSymbol &s) {QwtPlotCurve::setSymbol(s);}
+  SciQwtSymbol symbol() const {return QwtPlotCurve::symbol();}
+
 
 protected:
-	int d_type;
+  int d_type;
 };
 
 class DataCurve: public PlotCurve

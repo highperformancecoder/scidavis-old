@@ -141,13 +141,12 @@ void SmoothCurveDialog::setGraph(Graph *g)
 }
 
 void SmoothCurveDialog::activateCurve(const QString& curveName)
-{
+try
+  {
     if (smooth_method == SmoothFilter::Average)
-	{
-	QwtPlotCurve *c = graph->curve(curveName);
-	if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
-		return;
-
-	boxPointsLeft->setMaximum(c->dataSize()/2);
-	}
-}
+      {
+        if (QwtPlotCurve* c = graph->curvePtr(curveName))
+          boxPointsLeft->setMaximum(c->dataSize()/2);
+      }
+  }
+ catch (...) {}

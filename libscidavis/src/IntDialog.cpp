@@ -95,121 +95,121 @@ IntDialog::IntDialog( QWidget* parent, Qt::WindowFlags fl )
 
 void IntDialog::accept()
 {
-QString curveName = boxName->currentText();
-QwtPlotCurve *c = graph->curve(curveName);
-QStringList curvesList = graph->analysableCurvesList();
-if (!c || !curvesList.contains(curveName))
-	{
-	QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") +" - "+ tr("Warning"),
-		tr("The curve <b> %1 </b> doesn't exist anymore! Operation aborted!").arg(curveName));
-	boxName->clear();
-	boxName->addItems(curvesList);
-	return;
-	}
+  QString curveName = boxName->currentText();
+  QwtPlotCurve *c=graph->curvePtr(curveName);
+  QStringList curvesList = graph->analysableCurvesList();
+  if (!c || !curvesList.contains(curveName))
+    {
+      QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") +" - "+ tr("Warning"),
+                            tr("The curve <b> %1 </b> doesn't exist anymore! Operation aborted!").arg(curveName));
+      boxName->clear();
+      boxName->addItems(curvesList);
+      return;
+    }
 
-double start = 0, stop = 0;
-double minx = c->minXValue();
-double maxx = c->maxXValue();
+  double start = 0, stop = 0;
+  double minx = c->minXValue();
+  double maxx = c->maxXValue();
 
-// Check the Xmin
-QString from = boxStart->text().toLower();
-if(from=="min")
-	{
-	boxStart->setText(QString::number(minx));
-	return;
-	}
-else if(from=="max")
-	{
-	boxStart->setText(QString::number(maxx));
-	return;
-	}
-else
-	{
-	try
-		{
-		MyParser parser;
-		parser.SetExpr((boxStart->text()).toUtf8().constData());
-		start=parser.Eval();
+  // Check the Xmin
+  QString from = boxStart->text().toLower();
+  if(from=="min")
+    {
+      boxStart->setText(QString::number(minx));
+      return;
+    }
+  else if(from=="max")
+    {
+      boxStart->setText(QString::number(maxx));
+      return;
+    }
+  else
+    {
+      try
+        {
+          MyParser parser;
+          parser.SetExpr((boxStart->text()).toUtf8().constData());
+          start=parser.Eval();
 
-		if(start<minx)
-			{
-			QMessageBox::warning((ApplicationWindow *)parent(), tr("Input error"),
-				tr("Please give a number larger or equal to the minimum value of X, for the lower limit.\n If you do not know that value, type min in the box."));
-			boxStart->clear();
-			boxStart->setFocus();
-			return;
-		}
-		if(start > maxx)
-			{
-			QMessageBox::warning((ApplicationWindow *)parent(), tr("Input error"),
-				tr("Please give a number smaller or equal to the maximum value of X, for the lower limit.\n If you do not know that value, type max in the box."));
-			boxStart->clear();
-			boxStart->setFocus();
-			return;
-			}
-		}
-	catch(mu::ParserError &e)
-		{
-		QMessageBox::critical((ApplicationWindow *)parent(),tr("Start limit error"),QString::fromStdString(e.GetMsg()));
-		boxStart->clear();
-		boxStart->setFocus();
-		return;
-		}
-	}
+          if(start<minx)
+            {
+              QMessageBox::warning((ApplicationWindow *)parent(), tr("Input error"),
+                                   tr("Please give a number larger or equal to the minimum value of X, for the lower limit.\n If you do not know that value, type min in the box."));
+              boxStart->clear();
+              boxStart->setFocus();
+              return;
+            }
+          if(start > maxx)
+            {
+              QMessageBox::warning((ApplicationWindow *)parent(), tr("Input error"),
+                                   tr("Please give a number smaller or equal to the maximum value of X, for the lower limit.\n If you do not know that value, type max in the box."));
+              boxStart->clear();
+              boxStart->setFocus();
+              return;
+            }
+        }
+      catch(mu::ParserError &e)
+        {
+          QMessageBox::critical((ApplicationWindow *)parent(),tr("Start limit error"),QString::fromStdString(e.GetMsg()));
+          boxStart->clear();
+          boxStart->setFocus();
+          return;
+        }
+    }
 
-// Check Xmax
-QString end=boxEnd->text().toLower();
-if(end=="min")
-	{
-	boxEnd->setText(QString::number(minx));
-	return;
-	}
-else if(end=="max")
-	{
-	boxEnd->setText(QString::number(maxx));
-	return;
-	}
-else
-	{
-	try
-		{
-		MyParser parser;
-		parser.SetExpr((boxEnd->text()).toUtf8().constData());
-		stop = parser.Eval();
-		if(stop > maxx)
-			{
-			//FIXME: I don't understand why this doesn't work for FunctionCurves!!(Ion)
-			/*QMessageBox::warning((ApplicationWindow *)parent(), tr("Input error"),
-				tr("Please give a number smaller or equal to the maximum value of X, for the upper limit.\n If you do not know that value, type max in the box."));
-			boxEnd->clear();
-			boxEnd->setFocus();
-			return;
-			*/
-			boxEnd->setText(QString::number(maxx));
-			}
-		if(stop < minx)
-			{
-			QMessageBox::warning((ApplicationWindow *)parent(), tr("Input error"),
-				tr("Please give a number larger or equal to the minimum value of X, for the upper limit.\n If you do not know that value, type min in the box."));
-			boxEnd->clear();
-			boxEnd->setFocus();
-			return;
-			}
-		}
-	catch(mu::ParserError &e)
-		{
-		QMessageBox::critical((ApplicationWindow *)parent(), tr("End limit error"),QString::fromStdString(e.GetMsg()));
-		boxEnd->clear();
-		boxEnd->setFocus();
-		return;
-		}
-	}
+  // Check Xmax
+  QString end=boxEnd->text().toLower();
+  if(end=="min")
+    {
+      boxEnd->setText(QString::number(minx));
+      return;
+    }
+  else if(end=="max")
+    {
+      boxEnd->setText(QString::number(maxx));
+      return;
+    }
+  else
+    {
+      try
+        {
+          MyParser parser;
+          parser.SetExpr((boxEnd->text()).toUtf8().constData());
+          stop = parser.Eval();
+          if(stop > maxx)
+            {
+              //FIXME: I don't understand why this doesn't work for FunctionCurves!!(Ion)
+              /*QMessageBox::warning((ApplicationWindow *)parent(), tr("Input error"),
+                tr("Please give a number smaller or equal to the maximum value of X, for the upper limit.\n If you do not know that value, type max in the box."));
+                boxEnd->clear();
+                boxEnd->setFocus();
+                return;
+              */
+              boxEnd->setText(QString::number(maxx));
+            }
+          if(stop < minx)
+            {
+              QMessageBox::warning((ApplicationWindow *)parent(), tr("Input error"),
+                                   tr("Please give a number larger or equal to the minimum value of X, for the upper limit.\n If you do not know that value, type min in the box."));
+              boxEnd->clear();
+              boxEnd->setFocus();
+              return;
+            }
+        }
+      catch(mu::ParserError &e)
+        {
+          QMessageBox::critical((ApplicationWindow *)parent(), tr("End limit error"),QString::fromStdString(e.GetMsg()));
+          boxEnd->clear();
+          boxEnd->setFocus();
+          return;
+        }
+    }
 
-Integration *i = new Integration((ApplicationWindow *)this->parent(), graph, curveName,
-                                 boxStart->text().toDouble(), boxEnd->text().toDouble());
-i->setMethod((Integration::InterpolationMethod)boxMethod->currentIndex());
-i->run();
-delete i;
+  Integration *i = new Integration((ApplicationWindow *)this->parent(), graph, curveName,
+                                   boxStart->text().toDouble(), boxEnd->text().toDouble());
+  i->setMethod((Integration::InterpolationMethod)boxMethod->currentIndex());
+  i->run();
+  delete i;
 }
 
 void IntDialog::setGraph(Graph *g)
@@ -231,19 +231,15 @@ void IntDialog::setGraph(Graph *g)
 
 void IntDialog::activateCurve(const QString& curveName)
 {
-  ApplicationWindow *app = (ApplicationWindow *)parent();
-  if(!app)
-    return;
-
-  QwtPlotCurve *c = graph->curve(curveName);
-  if (!c)
-    return;
-
-  double start, end;
-  graph->range(graph->curveIndex(curveName), &start, &end);
-  boxStart->setText(QString::number(qMin(start, end), 'g', app->d_decimal_digits));
-  boxEnd->setText(QString::number(qMax(start, end), 'g', app->d_decimal_digits));
-};
+  if (ApplicationWindow *app = dynamic_cast<ApplicationWindow *>(parent()))
+    if (graph->curvePtr(curveName))
+      {
+        double start, end;
+        graph->range(graph->curveIndex(curveName), &start, &end);
+        boxStart->setText(QString::number(qMin(start, end), 'g', app->d_decimal_digits));
+        boxEnd->setText(QString::number(qMax(start, end), 'g', app->d_decimal_digits));
+      }
+}
 
 void IntDialog::changeDataRange()
 {

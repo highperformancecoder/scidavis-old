@@ -16,7 +16,46 @@ namespace py=boost::python;
 struct pyobject;
 #endif
 
-struct QtNamespace
+/// wrap a Qt container with Python accessor method
+template <class T>
+struct PyQtList: public QList<T*>
+{
+  T& __getitem__(int i) {
+    if (i<0)
+      i+=this->size();
+    if (i>=0 && i<this->size())
+      return *(*this)[i];
+    else
+      throw std::out_of_range("index out of bounds");
+  }
+  size_t __len__() const {return this->size();}
+  bool __contains__(const T& x) const {
+    return this->count(const_cast<T*>(&x));
+  }
+};
+
+template <class T>
+struct PyQtVector: public QVector<T>
+{
+  PyQtVector() {}
+  PyQtVector(const QVector<T>& x): QVector<T>(x) {}
+  T __getitem__(int i) {
+    if (i<0)
+      i+=this->size();
+    if (i>=0 && i<this->size())
+      return (*this)[i];
+    else
+      throw std::out_of_range("index out of bounds");
+  }
+  size_t __len__() const {return this->size();}
+  bool __contains__(const T& x) const {
+    return this->count(x);
+  }
+};
+
+
+
+struct QtNamespace: public QtEnums
 {
   static const QColor white;
   static const QColor black;
@@ -39,6 +78,50 @@ struct QtNamespace
   static const QColor color0;
   static const QColor color1;
 
+  struct QBrush: public ::QBrush
+  {
+    QBrush() {}
+    QBrush(QtEnums::BrushStyle bs): ::QBrush(Qt::BrushStyle(bs)) {}
+    QBrush(const QColor &color, QtEnums::BrushStyle bs):
+      ::QBrush(color, Qt::BrushStyle(bs)) {}
+    QBrush(const QColor &color): QBrush(color,QtEnums::SolidPattern) {}
+    //    QBrush(QtEnums::GlobalColor color, QtEnums::BrushStyle bs=Qt::SolidPattern);
+
+    //    QBrush(const QColor &color, const QPixmap &pixmap);
+    //    QBrush(QtEnums::GlobalColor color, const QPixmap &pixmap);
+    //QBrush(const QPixmap &pixmap);
+    //QBrush(const QImage &image);
+
+    QBrush(const ::QBrush &brush): ::QBrush(brush) {}
+
+    //QBrush(const QGradient &gradient);
+
+    QtEnums::BrushStyle style() const {return QtEnums::BrushStyle(::QBrush::style());}
+    void setStyle(QtEnums::BrushStyle s) {::QBrush::setStyle(Qt::BrushStyle(s));}
+
+    //    inline const QMatrix &matrix() const;
+    //    void setMatrix(const QMatrix &mat);
+
+    //    inline QTransform transform() const;
+    //    void setTransform(const QTransform &);
+
+    //    QPixmap texture() const;
+    //    void setTexture(const QPixmap &pixmap);
+
+    //    QImage textureImage() const;
+    //    void setTextureImage(const QImage &image);
+
+    QColor color() const {return ::QBrush::color();}
+    void setColor(const QColor& c) {::QBrush::setColor(c);}
+    //    inline void setColor(Qt::GlobalColor color);
+
+    //    const QGradient *gradient() const;
+
+    bool isOpaque() const {return ::QBrush::isOpaque();}
+
+    bool isDetached() const {return ::QBrush::isDetached();}
+  };
+
   struct QPen: public ::QPen
   {
     QPen() {}
@@ -54,7 +137,7 @@ struct QtNamespace
     QtEnums::PenStyle style() const {return QtEnums::PenStyle(::QPen::style());}
     void setStyle(QtEnums::PenStyle s) {::QPen::setStyle(Qt::PenStyle(s));}
 
-    QVector<qreal> dashPattern() const {return ::QPen::dashPattern();}
+    PyQtVector<qreal> dashPattern() const {return ::QPen::dashPattern();}
     void setDashPattern(const QVector<qreal> &pattern)
     {::QPen::setDashPattern(pattern);}
     void setDashPattern(const pyobject &pattern);
@@ -497,24 +580,6 @@ struct QtGui
   };
 };
 
-
-/// wrap a Qt container with Python accessor method
-template <class T>
-struct PyQtList: public QList<T*>
-{
-  T& __getitem__(int i) {
-    if (i<0)
-      i+=this->size();
-    if (i>=0 && i<this->size())
-      return *(*this)[i];
-    else
-      throw std::out_of_range("index out of bounds");
-  }
-  size_t __len__() const {return this->size();}
-  bool __contains__(const T& x) const {
-    return this->count(const_cast<T*>(&x));
-  }
-};
 
 
 

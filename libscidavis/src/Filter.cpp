@@ -100,7 +100,7 @@ void Filter::setDataCurve(int curve, double start, double end)
     }
 
   d_init_err = false;
-  d_curve = d_graph->curve(curve);
+  d_curve = d_graph->curvePtr(curve);
   if (d_sort_data)
     d_n = sortedCurveData(d_curve, start, end, &d_x, &d_y);
   else

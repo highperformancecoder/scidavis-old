@@ -32,23 +32,23 @@
 #include <qpixmap.h>
 #include <qpainter.h>
 
-const QwtSymbol::Style SymbolBox::symbols[] = {
-  QwtSymbol::NoSymbol,
-  QwtSymbol::Ellipse,
-  QwtSymbol::Rect,
-  QwtSymbol::Diamond,
-  QwtSymbol::Triangle,
-  QwtSymbol::DTriangle,
-  QwtSymbol::UTriangle,
-  QwtSymbol::LTriangle,
-  QwtSymbol::RTriangle, 
-  QwtSymbol::Cross, 
-  QwtSymbol::XCross, 
-  QwtSymbol::HLine,
-  QwtSymbol::VLine,
-  QwtSymbol::Star1, 
-  QwtSymbol::Star2, 
-  QwtSymbol::Hexagon
+const SciQwtSymbol::Style SymbolBox::symbols[] = {
+  SciQwtSymbol::NoSymbol,
+  SciQwtSymbol::Ellipse,
+  SciQwtSymbol::Rect,
+  SciQwtSymbol::Diamond,
+  SciQwtSymbol::Triangle,
+  SciQwtSymbol::DTriangle,
+  SciQwtSymbol::UTriangle,
+  SciQwtSymbol::LTriangle,
+  SciQwtSymbol::RTriangle, 
+  SciQwtSymbol::Cross, 
+  SciQwtSymbol::XCross, 
+  SciQwtSymbol::HLine,
+  SciQwtSymbol::VLine,
+  SciQwtSymbol::Star1, 
+  SciQwtSymbol::Star2, 
+  SciQwtSymbol::Hexagon
 };
 
 SymbolBox::SymbolBox(bool rw, QWidget *parent) : QComboBox(parent)
@@ -74,41 +74,41 @@ void SymbolBox::init()
 
 	this->addItem(tr("No Symbol" ));
 
-	symb.setStyle (QwtSymbol::Ellipse);
+	symb.setStyle (::QwtSymbol::Ellipse);
 	symb.draw(&p, r);
 	this->addItem(icon, tr("Ellipse" ));
 
-	symb.setStyle (QwtSymbol::Rect);
+	symb.setStyle (::QwtSymbol::Rect);
 	p.eraseRect ( r );
 	symb.draw(&p, r);
     this->addItem(icon,tr("Rectangle"));
 
-	symb.setStyle (QwtSymbol::Diamond);
+	symb.setStyle (::QwtSymbol::Diamond);
 	p.eraseRect ( r );
 	symb.draw(&p, r);
     this->addItem(icon,tr("Diamond"));
 
-	symb.setStyle (QwtSymbol::Triangle);
+	symb.setStyle (::QwtSymbol::Triangle);
 	p.eraseRect ( r );
 	symb.draw(&p, r);
     this->addItem(icon,tr("Triangle"));
 
-	symb.setStyle (QwtSymbol::DTriangle);
+	symb.setStyle (::QwtSymbol::DTriangle);
 	p.eraseRect ( r );
 	symb.draw(&p, r);
     this->addItem(icon,tr("Down Triangle"));
 
-	symb.setStyle (QwtSymbol::UTriangle);
+	symb.setStyle (::QwtSymbol::UTriangle);
 	p.eraseRect ( r );
 	symb.draw(&p, r);
     this->addItem(icon,tr("Up Triangle"));
 
-	symb.setStyle (QwtSymbol::LTriangle);
+	symb.setStyle (::QwtSymbol::LTriangle);
 	p.eraseRect ( r );
 	symb.draw(&p, r);
     this->addItem(icon,tr("Left Triangle"));
 
-	symb.setStyle (QwtSymbol::RTriangle);
+	symb.setStyle (::QwtSymbol::RTriangle);
 	p.eraseRect ( r );
 	symb.draw(&p, r);
     this->addItem(icon,tr("Right Triangle"));
@@ -151,12 +151,13 @@ void SymbolBox::init()
 	p.end();
 }
 
-void SymbolBox::setStyle(const QwtSymbol::Style& style)
+void SymbolBox::setStyle(const SciQwtSymbol::Style& style)
 {
   // gcc is being overly picky here. std::find needs a point 1 past the end
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Warray-bounds"
-  const QwtSymbol::Style*ite = std::find(symbols, symbols + sizeof(symbols), style);
+  const SciQwtSymbol::Style*ite =
+    std::find(symbols, symbols + sizeof(symbols), style);
   if (ite == symbols + sizeof(symbols))
     this->setCurrentIndex(0);
   else 
@@ -164,21 +165,21 @@ void SymbolBox::setStyle(const QwtSymbol::Style& style)
 #pragma GCC diagnostic pop        
 }
 
-QwtSymbol::Style SymbolBox::selectedSymbol() const
+SciQwtSymbol::Style SymbolBox::selectedSymbol() const
 {
   size_t i = this->currentIndex();
   if (i < sizeof(symbols))
     return symbols[this->currentIndex()];
   else
-    return QwtSymbol::NoSymbol;
+    return SciQwtSymbol::NoSymbol;
 }
 
-int SymbolBox::symbolIndex(const QwtSymbol::Style& style)
+int SymbolBox::symbolIndex(const SciQwtSymbol::Style& style)
 {
   // gcc is being overly picky here. std::find needs a point 1 past the end
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Warray-bounds"
-  const QwtSymbol::Style*ite = std::find(symbols, symbols + sizeof(symbols), style);
+  auto ite = std::find(symbols, symbols + sizeof(symbols), style);
   if (ite == symbols + sizeof(symbols))
     return 0; 
   else
@@ -186,10 +187,10 @@ int SymbolBox::symbolIndex(const QwtSymbol::Style& style)
 #pragma GCC diagnostic pop        
 }
 
-QwtSymbol::Style SymbolBox::style(int index)
+SciQwtSymbol::Style SymbolBox::style(int index)
 {
   if (index < (int)sizeof(symbols))
     return symbols[index];
   else
-    return QwtSymbol::NoSymbol;
+    return SciQwtSymbol::NoSymbol;
 }

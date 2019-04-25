@@ -29,7 +29,9 @@
 #ifndef EXPDECAYDIALOG_H
 #define EXPDECAYDIALOG_H
 
+#include "Fit.h"
 #include <QDialog>
+#include <memory>
 
 class QPushButton;
 class QLineEdit;
@@ -37,48 +39,47 @@ class QComboBox;
 class QLabel;
 class Graph;
 class ColorButton;
-class Fit;
 
 //! Fit exponential decay dialog
 class ExpDecayDialog : public QDialog
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    ExpDecayDialog( int type, QWidget* parent = 0, Qt::WindowFlags fl = 0 );
-    ~ExpDecayDialog(){};
+  ExpDecayDialog( int type, QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+  ~ExpDecayDialog(){};
 
 public slots:
-	void fit();
-	void setGraph(Graph *g);
+  void fit();
+  void setGraph(Graph *g);
 
 private slots:
-    void activateCurve(const QString& curveName);
-	void changeDataRange();
+  void activateCurve(const QString& curveName);
+  void changeDataRange();
 
 signals:
-	void options(const QString&,double,double,double,double,int);
-	void options(const QString&, double,double,double,int);
-	void options3(const QString&,double,double,double,double,double,int);
+  void options(const QString&,double,double,double,double,int);
+  void options(const QString&, double,double,double,int);
+  void options3(const QString&,double,double,double,double,double,int);
 
 private:
-    void closeEvent (QCloseEvent *);
+  void closeEvent (QCloseEvent *);
 
-    Fit *fitter;
-	Graph *graph;
-	int slopes;
+  std::unique_ptr<Fit> fitter;
+  Graph *graph;
+  int slopes;
 
-	QPushButton* buttonFit;
-	QPushButton* buttonCancel;
-	QComboBox* boxName;
-	QLineEdit* boxAmplitude;
-	QLineEdit* boxFirst;
-	QLineEdit* boxSecond;
-	QLineEdit* boxThird;
-	QLineEdit* boxStart;
-	QLineEdit* boxYOffset;
-	QLabel* thirdLabel, *dampingLabel;
-	ColorButton* btnColor;
+  QPushButton* buttonFit;
+  QPushButton* buttonCancel;
+  QComboBox* boxName;
+  QLineEdit* boxAmplitude;
+  QLineEdit* boxFirst;
+  QLineEdit* boxSecond;
+  QLineEdit* boxThird;
+  QLineEdit* boxStart;
+  QLineEdit* boxYOffset;
+  QLabel* thirdLabel, *dampingLabel;
+  ColorButton* btnColor;
 };
 
 #endif

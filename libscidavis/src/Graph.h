@@ -256,9 +256,14 @@ public slots:
   //! map curve title to index
   int curveIndex(const QString &title) const {return plotItemsList().indexOf(title);}
   //! get curve by index
-  QwtPlotCurve* curve(int index) const;
+  QwtPlotCurve* curvePtr(int index) const;
+  SciQwtPlotCurve curve(int index) const {
+    if (auto r=curvePtr(index)) return *r;
+    throw NoSuchObject();
+  }
   //! get curve by name
-  QwtPlotCurve* curve(const QString &title) const {return curve(curveIndex(title));}
+  QwtPlotCurve* curvePtr(const QString &title) const {return curvePtr(curveIndex(title));}
+  SciQwtPlotCurve curve(const QString &title) const {return curve(curveIndex(title));}
 
   //! Returns the names of all the curves suitable for data analysis, as a string list. The list excludes error bars and spectrograms.
   QStringList analysableCurvesList();
@@ -742,7 +747,7 @@ public slots:
 
   bool plotHistogram(Table *w, QStringList names, int startRow=0, int endRow=-1);
 
-  void setCurveSymbol(int index, const sciqwt::QwtSymbol& s);
+  void setCurveSymbol(int index, const SciQwtSymbol& s);
   void setCurvePen(int index, const QPen& p);
   void setCurveBrush(int index, const QBrush& b);
   void setCurveStyle(int index, int s);

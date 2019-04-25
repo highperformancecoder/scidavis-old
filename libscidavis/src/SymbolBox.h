@@ -30,7 +30,7 @@
 #define SYMBOLBOX_H
 
 #include <QComboBox>
-#include <qwt_symbol.h>
+#include "QwtSymbol.h"
 
 //! Plot symbol combo box
 class SymbolBox : public QComboBox
@@ -40,13 +40,13 @@ public:
   SymbolBox(bool rw, QWidget *parent = 0);
   SymbolBox(QWidget *parent = 0);
 
-  void setStyle(const QwtSymbol::Style& c);
-  QwtSymbol::Style selectedSymbol() const;
+  void setStyle(const SciQwtSymbol::Style& c);
+  SciQwtSymbol::Style selectedSymbol() const;
 
-  static QwtSymbol::Style style(int index);
-  static int symbolIndex(const QwtSymbol::Style& style);
+  static SciQwtSymbol::Style style(int index);
+  static int symbolIndex(const SciQwtSymbol::Style& style);
 
-  static const QwtSymbol::Style symbols[];
+  static const SciQwtSymbol::Style symbols[];
 
 protected:
   void init();

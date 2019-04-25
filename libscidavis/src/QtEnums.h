@@ -4,8 +4,31 @@
 #include <Qt>
 #include <qprinter.h>
 
-namespace QtEnums
+struct QtEnums
 {
+    enum BrushStyle
+      {
+       NoBrush=Qt::NoBrush,
+       SolidPattern=Qt::SolidPattern,
+       Dense1Pattern=Qt::Dense1Pattern,
+       Dense2Pattern=Qt::Dense2Pattern,
+       Dense3Pattern=Qt::Dense3Pattern,
+       Dense4Pattern=Qt::Dense4Pattern,
+       Dense5Pattern=Qt::Dense5Pattern,
+       Dense6Pattern=Qt::Dense6Pattern,
+       Dense7Pattern=Qt::Dense7Pattern,
+       HorPattern=Qt::HorPattern,
+       VerPattern=Qt::VerPattern,
+       CrossPattern=Qt::CrossPattern,
+       BDiagPattern=Qt::BDiagPattern,
+       FDiagPattern=Qt::FDiagPattern,
+       DiagCrossPattern=Qt::DiagCrossPattern,
+       LinearGradientPattern=Qt::LinearGradientPattern,
+       RadialGradientPattern=Qt::RadialGradientPattern,
+       ConicalGradientPattern=Qt::ConicalGradientPattern,
+       TexturePattern=Qt::TexturePattern
+      };
+      
   enum PenStyle
     {
      NoPen=Qt::NoPen,
@@ -63,7 +86,7 @@ namespace QtEnums
        KeepAspectRatioByExpanding=Qt::KeepAspectRatioByExpanding
       };
 
-}
+};
 
 #include "QtEnumWrapper.h"
 

@@ -47,7 +47,7 @@ RangeSelectorTool::RangeSelectorTool(Graph *graph, const QObject *status_target,
 {
 	d_selected_curve = NULL;
 	for (int i=d_graph->curves(); i>=0; --i) {
-		d_selected_curve = d_graph->curve(i);
+		d_selected_curve = d_graph->curvePtr(i);
 		if (d_selected_curve && d_selected_curve->rtti() == QwtPlotItem::Rtti_PlotCurve
 				&& d_selected_curve->dataSize() > 0)
 			break;
@@ -232,8 +232,8 @@ bool RangeSelectorTool::keyEventFilter(QKeyEvent *ke)
 				int n_curves = d_graph->curves();
 				int start = d_graph->curveIndex(d_selected_curve) + 1;
 				for (int i = start; i < start + n_curves; ++i)
-					if (d_graph->curve(i % n_curves)->dataSize() > 0) {
-						setSelectedCurve(d_graph->curve(i % n_curves));
+					if (d_graph->curvePtr(i % n_curves)->dataSize() > 0) {
+						setSelectedCurve(d_graph->curvePtr(i % n_curves));
 						break;
 					}
 				d_graph->plotWidget()->replot();
@@ -244,8 +244,8 @@ bool RangeSelectorTool::keyEventFilter(QKeyEvent *ke)
 				int n_curves = d_graph->curves();
 				int start = d_graph->curveIndex(d_selected_curve) + n_curves - 1;
 				for (int i = start; i > start - n_curves; --i)
-					if (d_graph->curve(i % n_curves)->dataSize() > 0) {
-						setSelectedCurve(d_graph->curve(i % n_curves));
+					if (d_graph->curvePtr(i % n_curves)->dataSize() > 0) {
+						setSelectedCurve(d_graph->curvePtr(i % n_curves));
 						break;
 					}
 				d_graph->plotWidget()->replot();

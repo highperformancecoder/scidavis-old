@@ -76,6 +76,10 @@ for name in dir(SciDAVis):
 for name in dir(QtEnums):
         if not name.startswith("__"):
                 setattr(__main__,name,getattr(QtEnums,name))
+                setattr(scidavis.QtNamespace,name,getattr(QtEnums,name))
+
+# rename SciQwtSymbol to QwtSymbol
+setattr(__main__,"QwtSymbol",getattr(scidavis,"SciQwtSymbol"))
 
 # import selected methods of ApplicationWindow into the global namespace
 appImports = (

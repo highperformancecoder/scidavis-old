@@ -1759,7 +1759,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     </message>
     <message>
         <source>Error importing image</source>
-        <translation type="unfinished">Chyba při zavádění obrázku</translation>
+        <translation type="obsolete">Chyba při zavádění obrázku</translation>
     </message>
     <message>
         <source>Draw arrow</source>
@@ -2581,7 +2581,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     </message>
     <message>
         <source>Import of image &apos;%1&apos; failed</source>
-        <translation type="unfinished">Zavedení obrázku &apos;%1&apos; se nepodařilo</translation>
+        <translation type="obsolete">Zavedení obrázku &apos;%1&apos; se nepodařilo</translation>
     </message>
     <message>
         <source>&amp;Horizontal Bars</source>

@@ -1603,7 +1603,7 @@ void PlotDialog::setActiveCurve(CurveTreeItem *item)
   //symbol page
   const QwtSymbol s = c->symbol();
   boxSymbolSize->setValue(s.size().width()/2);
-  boxSymbolStyle->setStyle(s.style());
+  boxSymbolStyle->setStyle(SciQwtSymbol::Style(s.style()));
   boxSymbolColor->setColor(s.pen().color());
   boxPenWidth->setValue(s.pen().width());
   boxFillSymbol->setChecked(s.brush() != Qt::NoBrush);
@@ -1837,7 +1837,7 @@ bool PlotDialog::acceptParams()
     }
   else if (privateTabWidget->currentWidget()==symbolPage)
     {
-      if (boxSymbolStyle->selectedSymbol() == QwtSymbol::NoSymbol) // no symbol => line plot
+      if (boxSymbolStyle->selectedSymbol() == SciQwtSymbol::NoSymbol) // no symbol => line plot
         boxPlotType->setCurrentIndex(0);
       else {
         int size = 2*boxSymbolSize->value()+1;
@@ -1845,7 +1845,7 @@ bool PlotDialog::acceptParams()
         if (!boxFillSymbol->isChecked())
           br = QBrush();
         QPen pen = QPen(boxSymbolColor->color(),boxPenWidth->value(),Qt::SolidLine);
-        QwtSymbol s = QwtSymbol(boxSymbolStyle->selectedSymbol(), br, pen, QSize(size, size));
+        QwtSymbol s = QwtSymbol(QwtSymbol::Style(boxSymbolStyle->selectedSymbol()), br, pen, QSize(size, size));
         QwtPlotCurve *curve = (QwtPlotCurve *)plotItem;
         curve->setSymbol(s);
       }

@@ -187,13 +187,10 @@ void FFTDialog::setGraph(Graph *g)
 void FFTDialog::activateCurve(const QString& curveName)
 {
 	if (graph)
-	{
-		QwtPlotCurve *c = graph->curve(curveName);
-		if (!c)
-			return;
-
-		boxSampling->setText(QString::number(c->x(1) - c->x(0)));
-	}
+          {
+            if (QwtPlotCurve* c = graph->curvePtr(curveName))
+                boxSampling->setText(QString::number(c->x(1) - c->x(0)));
+          }
 	else if (d_table)
 	{
 	    int col = d_table->colIndex(curveName);

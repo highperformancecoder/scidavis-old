@@ -1317,7 +1317,7 @@ void ApplicationWindow::customToolBars(MyWidget* w)
 			}
 			if (g && g->curves() > 0) {
 				plot_tools->setEnabled(true);
-				QwtPlotCurve *c = g->curve(g->curves()-1);
+				QwtPlotCurve* c = g->curvePtr(g->curves()-1);
 				// plot tools managed by d_plot_mapper
 				for (int i=0; i<=(int)Graph::VerticalSteps; i++) {
 					QAction *a = static_cast<QAction*>(d_plot_mapper->mapping(i));
@@ -2958,53 +2958,49 @@ void ApplicationWindow::defineErrorBars(const QString& name, int type, const QSt
   if (!g)
     return;
 
-  try
-    {
-      Table& w = table(name);
+  Table& w = table(name);
 
-      DataCurve *master_curve = (DataCurve *)g->curve(name);
-      QString xColName = master_curve->xColumnName();
-      if (xColName.isEmpty())
-        return;
-
-      Column * errors = new Column("1", SciDAVis::Numeric);
-      Column * data;
-      if (direction == QwtErrorPlotCurve::Horizontal) {
-        errors->setPlotDesignation(SciDAVis::xErr);
-        data = w.d_future_table->column(xColName);
-      } else {
-        errors->setPlotDesignation(SciDAVis::yErr);
-        data = w.d_future_table->column(name);
-      }
-      if (!data) return;
-
-      int rows = data->rowCount();
-      if (type==0) {
-        double fraction = percent.toDouble()/100.0;
-        for (int i=0; i<rows; i++)
-          errors->setValueAt(i, data->valueAt(i)*fraction);
-      } else if (type==1) {
-        double average=0.0;
-        double dev=0.0;
-        for (int i=0; i<rows; i++)
-          average += data->valueAt(i);
-        average /= rows;
-        for (int i=0; i<rows; i++)
-          dev += pow(data->valueAt(i)-average, 2);
-        dev = sqrt(dev/rows);
-        for (int i=0; i<rows; i++)
-          errors->setValueAt(i, dev);
-      }
-      w.d_future_table->addChild(errors);
-      g->addErrorBars(xColName, name, w, errors->name().c_str(), direction);
-    }
-  catch (NoSuchObject&)
+  DataCurve* master_curve = dynamic_cast<DataCurve*>(g->curvePtr(name));
+  if (!master_curve)
     { //user defined function
       QMessageBox::critical(this,tr("Error bars error"),
                             tr("This feature is not available for user defined function curves!"));
       return;
     }
+  QString xColName = master_curve->xColumnName();
+  if (xColName.isEmpty())
+    return;
 
+  Column * errors = new Column("1", SciDAVis::Numeric);
+  Column * data;
+  if (direction == QwtErrorPlotCurve::Horizontal) {
+    errors->setPlotDesignation(SciDAVis::xErr);
+    data = w.d_future_table->column(xColName);
+  } else {
+    errors->setPlotDesignation(SciDAVis::yErr);
+    data = w.d_future_table->column(name);
+  }
+  if (!data) return;
+
+  int rows = data->rowCount();
+  if (type==0) {
+    double fraction = percent.toDouble()/100.0;
+    for (int i=0; i<rows; i++)
+      errors->setValueAt(i, data->valueAt(i)*fraction);
+  } else if (type==1) {
+    double average=0.0;
+    double dev=0.0;
+    for (int i=0; i<rows; i++)
+      average += data->valueAt(i);
+    average /= rows;
+    for (int i=0; i<rows; i++)
+      dev += pow(data->valueAt(i)-average, 2);
+    dev = sqrt(dev/rows);
+    for (int i=0; i<rows; i++)
+      errors->setValueAt(i, dev);
+  }
+  w.d_future_table->addChild(errors);
+  g->addErrorBars(xColName, name, w, errors->name().c_str(), direction);
 }
 
 void ApplicationWindow::defineErrorBars(const QString& curveName, const QString& errColumnName, int direction)
@@ -5949,70 +5945,73 @@ void ApplicationWindow::showCurvePlotDialog()
 
 QMenu* ApplicationWindow::showCurveContextMenuImpl(int curveKey)
 {
-	if (!d_workspace.activeSubWindow() || !d_workspace.activeSubWindow()->inherits("MultiLayer"))
-		return nullptr;
+  if (!d_workspace.activeSubWindow() || !d_workspace.activeSubWindow()->inherits("MultiLayer"))
+    return nullptr;
 
-	Graph *g = ((MultiLayer*)d_workspace.activeSubWindow())->activeGraph();
-	DataCurve *c = (DataCurve *)g->curve(g->curveIndex(curveKey));
-	if (!c || !c->isVisible())
-		return nullptr;
-
-	auto curveMenu=new QMenu(this);
-	curveMenu->addAction(c->title().text(), this, SLOT(showCurvePlotDialog()));
-	curveMenu->addSeparator();
-
-	curveMenu->addAction(actionHideCurve);
-	actionHideCurve->setData(curveKey);
-
-    if (g->visibleCurves() > 1 && c->type() == Graph::Function)
+  Graph *g = ((MultiLayer*)d_workspace.activeSubWindow())->activeGraph();
+  if (DataCurve* c = dynamic_cast<DataCurve*>(g->curvePtr(g->curveIndex(curveKey))))
     {
-        curveMenu->addAction(actionHideOtherCurves);
-        actionHideOtherCurves->setData(curveKey);
-    }
-    else if (c->type() != Graph::Function)
-    {
-        if ((g->visibleCurves() - c->errorBarsList().count()) > 1)
+      if (!c->isVisible())
+        return nullptr;
+
+      auto curveMenu=new QMenu(this);
+      curveMenu->addAction(c->title().text(), this, SLOT(showCurvePlotDialog()));
+      curveMenu->addSeparator();
+
+      curveMenu->addAction(actionHideCurve);
+      actionHideCurve->setData(curveKey);
+
+      if (g->visibleCurves() > 1 && c->type() == Graph::Function)
         {
-            curveMenu->addAction(actionHideOtherCurves);
-            actionHideOtherCurves->setData(curveKey);
+          curveMenu->addAction(actionHideOtherCurves);
+          actionHideOtherCurves->setData(curveKey);
         }
+      else if (c->type() != Graph::Function)
+        {
+          if ((g->visibleCurves() - c->errorBarsList().count()) > 1)
+            {
+              curveMenu->addAction(actionHideOtherCurves);
+              actionHideOtherCurves->setData(curveKey);
+            }
+        }
+
+      if (g->visibleCurves() != g->curves())
+        curveMenu->addAction(actionShowAllCurves);
+      curveMenu->addSeparator();
+
+      if (c->type() == Graph::Function)
+	{
+          curveMenu->addAction(actionEditFunction);
+          actionEditFunction->setData(curveKey);
+	}
+      else if (c->type() != Graph::ErrorBars)
+	{
+          curveMenu->addAction(actionEditCurveRange);
+          actionEditCurveRange->setData(curveKey);
+
+          curveMenu->addAction(actionCurveFullRange);
+          if (c->isFullRange())
+            actionCurveFullRange->setDisabled(true);
+          else
+            actionCurveFullRange->setEnabled(true);
+          actionCurveFullRange->setData(curveKey);
+
+          curveMenu->addSeparator();
+	}
+
+      curveMenu->addAction(actionShowCurveWorksheet);
+      actionShowCurveWorksheet->setData(curveKey);
+
+      curveMenu->addAction(actionShowCurvePlotDialog);
+      actionShowCurvePlotDialog->setData(curveKey);
+
+      curveMenu->addSeparator();
+
+      curveMenu->addAction(actionRemoveCurve);
+      actionRemoveCurve->setData(curveKey);
+  return curveMenu;
     }
-
-	if (g->visibleCurves() != g->curves())
-		curveMenu->addAction(actionShowAllCurves);
-	curveMenu->addSeparator();
-
-	if (c->type() == Graph::Function)
-	{
-		curveMenu->addAction(actionEditFunction);
-		actionEditFunction->setData(curveKey);
-	}
-	else if (c->type() != Graph::ErrorBars)
-	{
-		curveMenu->addAction(actionEditCurveRange);
-		actionEditCurveRange->setData(curveKey);
-
-		curveMenu->addAction(actionCurveFullRange);
-		if (c->isFullRange())
-			actionCurveFullRange->setDisabled(true);
-		else
-			actionCurveFullRange->setEnabled(true);
-		actionCurveFullRange->setData(curveKey);
-
-		curveMenu->addSeparator();
-	}
-
-	curveMenu->addAction(actionShowCurveWorksheet);
-	actionShowCurveWorksheet->setData(curveKey);
-
-	curveMenu->addAction(actionShowCurvePlotDialog);
-	actionShowCurvePlotDialog->setData(curveKey);
-
-	curveMenu->addSeparator();
-
-	curveMenu->addAction(actionRemoveCurve);
-	actionRemoveCurve->setData(curveKey);
-        return curveMenu;
+  return nullptr;
 }
 
 void ApplicationWindow::showAllCurves()
@@ -9769,12 +9768,14 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                               curve_loaded = ag->plotHistogram(&w, QStringList() << curve[2],
                                                                curve[curve.count()-3].toInt(), curve[curve.count()-2].toInt());
                             if (curve_loaded) {
-                              QwtHistogram *h = (QwtHistogram *)ag->curve(curveID);
-                              if (d_file_version <= 76)
-                                h->setBinning(curve[16].toInt(),curve[17].toDouble(),curve[18].toDouble(),curve[19].toDouble());
-                              else if (curve.count()>20)
-                                h->setBinning(curve[17].toInt(),curve[18].toDouble(),curve[19].toDouble(),curve[20].toDouble());
-                              h->loadData();
+                              if (QwtHistogram* h = dynamic_cast<QwtHistogram*>(ag->curvePtr(curveID)))
+                                {
+                                  if (d_file_version <= 76)
+                                    h->setBinning(curve[16].toInt(),curve[17].toDouble(),curve[18].toDouble(),curve[19].toDouble());
+                                  else if (curve.count()>20)
+                                    h->setBinning(curve[17].toInt(),curve[18].toDouble(),curve[19].toDouble(),curve[20].toDouble());
+                                  h->loadData();
+                                }
                             }
                           } else {
                             if (d_file_version < 72)
@@ -9801,7 +9802,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                             ag->updateCurveLayout(curveID, &cl);
                           if (d_file_version >= 88)
                             {
-                              QwtPlotCurve *c = ag->curve(curveID);
+                              QwtPlotCurve* c = ag->curvePtr(curveID);
                               if (c && c->rtti() == QwtPlotItem::Rtti_PlotCurve)
                                 {
                                   if (d_file_version < 90)
@@ -9873,7 +9874,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 				ag->updateCurveLayout(curveID, &cl);
 			if (d_file_version >= 88)
 			{
-				QwtPlotCurve *c = ag->curve(curveID);
+				QwtPlotCurve* c = ag->curvePtr(curveID);
 				if (c)
 				{
 					if(current_index+1 < curve.size())
@@ -9884,8 +9885,8 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 						c->setVisible(true);
 				}
 			}
-			if (ag->curve(curveID))
-				curveID++;
+                        while (!ag->curvePtr(curveID))
+                          curveID++;
 			}
 		}
 		else if (s.contains ("ErrorBars"))
@@ -10141,8 +10142,8 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 	ag->replot();
 	if (ag->isPiePlot())
 	{
-        QwtPieCurve *c = (QwtPieCurve *)ag->curve(0);
-        if (c) c->updateBoundingRect();
+          QwtPieCurve *c = dynamic_cast<QwtPieCurve *>(ag->curvePtr(0));
+          if (c) c->updateBoundingRect();
     }
 
     ag->blockSignals(false);
@@ -10348,7 +10349,7 @@ void ApplicationWindow::analysis(const QString& whichFit)
     QStringList lst = g->analysableCurvesList();
 	if (lst.count() == 1)
 	{
-		const QwtPlotCurve *c = g->curve(lst[0]);
+		const QwtPlotCurve *c = g->curvePtr(lst[0]);
 		if (c)
 			analyzeCurve(g, whichFit, lst[0]);
 	}

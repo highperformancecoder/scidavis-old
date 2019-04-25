@@ -125,52 +125,53 @@ void AssociationsDialog::updateCurves()
 
 void AssociationsDialog::changePlotAssociation(int curve, const QString& text)
 {
-  DataCurve *c = (DataCurve *)graph->curve(curve); //c_keys[curve]);
-  if (!c)
-    return;
+  DataCurve* c = dynamic_cast<DataCurve*>(graph->curvePtr(curve)); //c_keys[curve]);
 
-  if (c->plotAssociation() == text)
+  if (!c || c->plotAssociation() == text)
     return;
 
   QStringList lst = text.split(",", QString::SkipEmptyParts);
-  if (lst.count() == 2)
+  switch (lst.count())
     {
-      c->setXColumnName(lst[0].remove("(X)"));
-      c->setTitle(lst[1].remove("(Y)"));
-      c->loadData();
-    }
-  else if (lst.count() == 3)
-    {//curve with error bars
-      QwtErrorPlotCurve *er = (QwtErrorPlotCurve *)c;
-      QString xColName = lst[0].remove("(X)");
-      QString yColName = lst[1].remove("(Y)");
-      QString erColName = lst[2].remove("(xErr)").remove("(yErr)");
-      DataCurve *master_curve = graph->masterCurve(xColName, yColName);
-      if (!master_curve)
-        return;
+    case 2:
+        c->setXColumnName(lst[0].remove("(X)"));
+        c->setTitle(lst[1].remove("(Y)"));
+        c->loadData();
+        break;
+    case 3:
+      if (QwtErrorPlotCurve* er = dynamic_cast<QwtErrorPlotCurve*>(c))
+        {//curve with error bars
+          QString xColName = lst[0].remove("(X)");
+          QString yColName = lst[1].remove("(Y)");
+          QString erColName = lst[2].remove("(xErr)").remove("(yErr)");
+          DataCurve *master_curve = graph->masterCurve(xColName, yColName);
+          if (!master_curve)
+            return;
 
-      int type = QwtErrorPlotCurve::Vertical;
-      if (text.contains("(xErr)"))
-        type = QwtErrorPlotCurve::Horizontal;
-      er->setDirection(type);
-      er->setTitle(erColName);
-      if (master_curve != er->masterCurve())
-        er->setMasterCurve(master_curve);
-      else
-        er->loadData();
-    }
-  else if (lst.count() == 4)
-    {
-      VectorCurve *v = (VectorCurve *)c;
-      v->setXColumnName(lst[0].remove("(X)"));
-      v->setTitle(lst[1].remove("(Y)"));
-
-      QString xEndCol = lst[2].remove("(X)").remove("(A)");
-      QString yEndCol = lst[3].remove("(Y)").remove("(M)");
-      if (v->vectorEndXAColName() != xEndCol || v->vectorEndYMColName() != yEndCol)
-        v->setVectorEnd(xEndCol, yEndCol);
-      else
-        v->loadData();
+          int type = QwtErrorPlotCurve::Vertical;
+          if (text.contains("(xErr)"))
+            type = QwtErrorPlotCurve::Horizontal;
+          er->setDirection(type);
+          er->setTitle(erColName);
+          if (master_curve != er->masterCurve())
+            er->setMasterCurve(master_curve);
+          else
+            er->loadData();
+        }
+      break;
+    case 4:
+      if (VectorCurve* v = dynamic_cast<VectorCurve*>(c))
+        {
+          v->setXColumnName(lst[0].remove("(X)"));
+          v->setTitle(lst[1].remove("(Y)"));
+          
+          QString xEndCol = lst[2].remove("(X)").remove("(A)");
+          QString yEndCol = lst[3].remove("(Y)").remove("(M)");
+          if (v->vectorEndXAColName() != xEndCol || v->vectorEndYMColName() != yEndCol)
+            v->setVectorEnd(xEndCol, yEndCol);
+          else
+            v->loadData();
+        }
     }
   graph->notifyChanges();
 }

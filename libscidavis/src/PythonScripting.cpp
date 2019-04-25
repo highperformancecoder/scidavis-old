@@ -200,6 +200,7 @@ namespace classdesc
   DEF_TYPENAME(QwtScaleMap);
   DEF_TYPENAME(QPixmap);
   DEF_TYPENAME(Qt::WindowType);
+  DEF_TYPENAME(QwtSymbol);
 
   template <class T> struct tn<QList<T>>
   {

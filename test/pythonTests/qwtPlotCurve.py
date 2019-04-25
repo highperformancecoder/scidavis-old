@@ -25,17 +25,17 @@ layer.insertCurve(t1,'3',0,1)
 
 symbol = QwtSymbol()
 symbol.setStyle(QwtSymbol.Triangle)
-symbol.setOutlineColor(QtGui.QColor(Qt.red))
-symbol.setFillColor(QtGui.QColor(Qt.green))
+symbol.setOutlineColor(Qt.red)
+symbol.setFillColor(Qt.green)
 symbol.setSize(20)
 curve=layer.curve(0)
 curve.setSymbol(symbol)
 
 # enable RHS curve and axes
-layer.curve(1).setXAxis(Layer.Top)
-layer.curve(1).setYAxis(Layer.Right)
-layer.enableAxis(QwtPlot.xTop,True)
-layer.enableAxis(QwtPlot.yRight,True)
+layer.curve(1).setXAxis(Graph.Top)
+layer.curve(1).setYAxis(Graph.Right)
+layer.enableAxis(Graph.Top,True)
+layer.enableAxis(Graph.Right,True)
 
 layer.replot()
 
@@ -88,7 +88,8 @@ assert pen.miterLimit()==3
 
 pen.setDashPattern([3,1,2,1])
 pen.setDashOffset(2)
-assert pen.dashPattern()==[3,1,2,1]
+print(pen.dashPattern())
+assert [x for x in pen.dashPattern()]==[3,1,2,1]
 assert pen.dashOffset()==2
 assert pen.style()==Qt.CustomDashLine
 

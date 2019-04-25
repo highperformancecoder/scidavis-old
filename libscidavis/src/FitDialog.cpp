@@ -535,15 +535,15 @@ void FitDialog::setGraph(Graph *g)
 
 void FitDialog::activateCurve(const QString& curveName)
 {
-	QwtPlotCurve *c = d_graph->curve(curveName);
-	if (!c)
-		return;
 
-	double start, end;
-    d_graph->range(d_graph->curveIndex(curveName), &start, &end);
-    boxFrom->setText(QLocale().toString(qMin(start, end), 'g', 15));
-    boxTo->setText(QLocale().toString(qMax(start, end), 'g', 15));
-};
+  if (d_graph->curvePtr(curveName))
+    {
+      double start, end;
+      d_graph->range(d_graph->curveIndex(curveName), &start, &end);
+      boxFrom->setText(QLocale().toString(qMin(start, end), 'g', 15));
+      boxTo->setText(QLocale().toString(qMax(start, end), 'g', 15));
+    }
+}
 
 void FitDialog::saveUserFunction()
 {
