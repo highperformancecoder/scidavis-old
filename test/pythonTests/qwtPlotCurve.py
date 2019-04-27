@@ -88,7 +88,6 @@ assert pen.miterLimit()==3
 
 pen.setDashPattern([3,1,2,1])
 pen.setDashOffset(2)
-print(pen.dashPattern())
 assert [x for x in pen.dashPattern()]==[3,1,2,1]
 assert pen.dashOffset()==2
 assert pen.style()==Qt.CustomDashLine

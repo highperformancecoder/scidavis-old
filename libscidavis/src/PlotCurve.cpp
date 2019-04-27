@@ -351,11 +351,11 @@ int DataCurve::tableRow(int point)
 QwtDoubleRect PlotCurve::boundingRect() const
 {
     QwtDoubleRect r = QwtPlotCurve::boundingRect();
-    if (symbol().style() == QwtSymbol::NoSymbol)
+    if (symbol().style() == SciQwtSymbol::NoSymbol)
         return r;
 
     int margin = 1;
-    if (symbol().style() != QwtSymbol::NoSymbol)
+    if (symbol().style() != SciQwtSymbol::NoSymbol)
         margin += symbol().size().width();
 
     const QwtScaleMap &xMap = plot()->canvasMap(xAxis());

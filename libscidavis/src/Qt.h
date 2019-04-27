@@ -53,7 +53,110 @@ struct PyQtVector: public QVector<T>
   }
 };
 
+namespace QtGui
+{
+  class QTransform: public ::QTransform
+  {
+  public:
+    enum TransformationType {
+                             TxNone      = ::QTransform::TxNone,
+                             TxTranslate = ::QTransform::TxTranslate,
+                             TxScale     = ::QTransform::TxScale,
+                             TxRotate    = ::QTransform::TxRotate,
+                             TxShear     = ::QTransform::TxShear,
+                             TxProject   = ::QTransform::TxProject
+    };
 
+    //inline explicit QTransform(Qt::Initialization) : affine(Qt::Uninitialized) {}
+    QTransform() {}
+    QTransform(qreal h11, qreal h12, qreal h13,
+               qreal h21, qreal h22, qreal h23,
+               qreal h31, qreal h32, qreal h33):
+      ::QTransform(h11,h12,h13,h21,h22,h23,h31,h32,h33) {}
+    QTransform(qreal h11, qreal h12, qreal h13,
+               qreal h21, qreal h22, qreal h23,
+               qreal h31, qreal h32):
+      QTransform(h11,h12,h13,h21,h22,h23,h31,h32,1.0) {}
+    QTransform(qreal h11, qreal h12, qreal h21,
+               qreal h22, qreal dx, qreal dy):
+      ::QTransform(h11,h12,h21,h22,dx,dy) {}
+    //explicit QTransform(const QMatrix &mtx);
+    QTransform(const ::QTransform& x): ::QTransform(x) {}
+
+    bool isAffine() const {return ::QTransform::isAffine();}
+    bool isIdentity() const {return ::QTransform::isIdentity();}
+    bool isInvertible() const {return ::QTransform::isInvertible();}
+    bool isScaling() const {return ::QTransform::isScaling();}
+    bool isRotating() const {return ::QTransform::isRotating();}
+    bool isTranslating() const {return ::QTransform::isTranslating();}
+
+    TransformationType type() const {return TransformationType(::QTransform::type());}
+
+    qreal determinant() const {return ::QTransform::determinant();}
+    qreal det() const {return ::QTransform::det();}
+
+    qreal m11() const {return ::QTransform::m11();}
+    qreal m12() const {return ::QTransform::m12();}
+    qreal m13() const {return ::QTransform::m13();}
+    qreal m21() const {return ::QTransform::m21();}
+    qreal m22() const {return ::QTransform::m22();}
+    qreal m23() const {return ::QTransform::m23();}
+    qreal m31() const {return ::QTransform::m23();}
+    qreal m32() const {return ::QTransform::m32();}
+    qreal m33() const {return ::QTransform::m33();}
+    qreal dx() const {return ::QTransform::dx();}
+    qreal dy() const {return ::QTransform::dy();}
+
+    void setMatrix(qreal m11, qreal m12, qreal m13,
+                   qreal m21, qreal m22, qreal m23,
+                   qreal m31, qreal m32, qreal m33)
+    {::QTransform::setMatrix(m11,m12,m13,m21,m22,m23,m31,m32,m33);}
+
+    QtGui::QTransform inverted() const {return ::QTransform::inverted();}
+    QtGui::QTransform adjoint() const {return ::QTransform::adjoint();}
+    QtGui::QTransform transposed() const {return ::QTransform::transposed();}
+
+    QtGui::QTransform &translate(qreal dx, qreal dy) {::QTransform::translate(dx,dy); return *this;}
+    QtGui::QTransform &scale(qreal sx, qreal sy) {::QTransform::scale(sx,sy); return *this;}
+    QtGui::QTransform &shear(qreal sh, qreal sv) {::QTransform::shear(sh,sv); return *this;}
+    QtGui::QTransform &rotate(qreal a, QtEnums::Axis axis) {
+      ::QTransform::rotate(a,Qt::Axis(axis)); return *this;}
+    QtGui::QTransform &rotate(qreal a) {return rotate(a,QtEnums::ZAxis);}
+    QtGui::QTransform &rotateRadians(qreal a, QtEnums::Axis axis) {
+      ::QTransform::rotateRadians(a,Qt::Axis(axis)); return *this;}
+    QtGui::QTransform &rotateRadians(qreal a) {return rotateRadians(a,QtEnums::ZAxis);}
+
+
+    bool __eq__(const QtGui::QTransform& x) const {return ::QTransform::operator==(x);}
+    bool __ne__(const QtGui::QTransform& x) const {return ::QTransform::operator!=(x);}
+
+    //    static bool squareToQuad(const QPolygonF &square, QTransform &result);
+    //    static bool quadToSquare(const QPolygonF &quad, QTransform &result);
+    //    static bool quadToQuad(const QPolygonF &one,
+    //                           const QPolygonF &two,
+    //                           QTransform &result);
+
+    void reset() {::QTransform::reset();}
+    //    QPoint       map(const QPoint &p) const;
+    //    QPointF      map(const QPointF &p) const;
+    //    QLine        map(const QLine &l) const;
+    //    QLineF       map(const QLineF &l) const;
+    //    QPolygonF    map(const QPolygonF &a) const;
+    //    QPolygon     map(const QPolygon &a) const;
+    //    QRegion      map(const QRegion &r) const;
+    //    QPainterPath map(const QPainterPath &p) const;
+    //    QPolygon     mapToPolygon(const QRect &r) const;
+    //    QRect mapRect(const QRect &) const;
+    //    QRectF mapRect(const QRectF &) const;
+    //    void map(int x, int y, int *tx, int *ty) const;
+    //    void map(qreal x, qreal y, qreal *tx, qreal *ty) const;
+
+    //    const QMatrix &toAffine() const;
+
+    static QtGui::QTransform fromTranslate(qreal dx, qreal dy) {return ::QTransform::fromTranslate(dx,dy);}
+    static QtGui::QTransform fromScale(qreal dx, qreal dy) {return ::QTransform::fromScale(dx,dy);}
+  };
+}
 
 struct QtNamespace: public QtEnums
 {
@@ -78,6 +181,8 @@ struct QtNamespace: public QtEnums
   static const QColor color0;
   static const QColor color1;
 
+
+  
   struct QBrush: public ::QBrush
   {
     QBrush() {}
@@ -102,8 +207,8 @@ struct QtNamespace: public QtEnums
     //    inline const QMatrix &matrix() const;
     //    void setMatrix(const QMatrix &mat);
 
-    //    inline QTransform transform() const;
-    //    void setTransform(const QTransform &);
+    QtGui::QTransform transform() const {return ::QBrush::transform();}
+    void setTransform(const QtGui::QTransform & t) {::QBrush::setTransform(t);}
 
     //    QPixmap texture() const;
     //    void setTexture(const QPixmap &pixmap);
@@ -181,7 +286,7 @@ struct QtNamespace: public QtEnums
 
 
 // shims around Qt classes to allow automatic exposure to python
-struct QtCore
+namespace QtCore
 {
   enum QDMonthNameType {DateFormat = ::QDate::DateFormat,
                         StandaloneFormat=::QDate::StandaloneFormat};
@@ -233,17 +338,17 @@ struct QtCore
     void getDate(int& year, int& month, int& day)
     {::QDate::getDate(&year,&month,&day);}
     
-    QDate addDays(int days) const {return ::QDate::addDays(days);}
-    QDate addMonths(int months) const {return ::QDate::addMonths(months);}
-    QDate addYears(int years) const {return ::QDate::addYears(years);}
-    int daysTo(const QDate& x) const {return ::QDate::daysTo(x);}
+    QtCore::QDate addDays(int days) const {return ::QDate::addDays(days);}
+    QtCore::QDate addMonths(int months) const {return ::QDate::addMonths(months);}
+    QtCore::QDate addYears(int years) const {return ::QDate::addYears(years);}
+    int daysTo(const QtCore::QDate& x) const {return ::QDate::daysTo(x);}
 
-    static QDate currentDate() {return ::QDate::currentDate();}
-    static QDate fromString(const std::string& s) 
+    static QtCore::QDate currentDate() {return ::QDate::currentDate();}
+    static QtCore::QDate fromString(const std::string& s) 
     {return ::QDate::fromString(s.c_str());}
-    static QDate fromString(const std::string& s, QtDateFormat f) 
+    static QtCore::QDate fromString(const std::string& s, QtDateFormat f) 
     {return ::QDate::fromString(s.c_str(), f);}
-    static QDate fromString(const std::string& s, const std::string& format)
+    static QtCore::QDate fromString(const std::string& s, const std::string& format)
     {return ::QDate::fromString(s.c_str(), format.c_str());}
     static bool isValid(int y, int m, int d) {return ::QDate::isValid(y,m,d);}
     static bool isLeapYear(int year) {return ::QDate::isLeapYear(year);}
@@ -272,16 +377,16 @@ struct QtCore
     bool setHMS(int h, int m, int s){return ::QTime::setHMS(h,m,s);}
     bool setHMS(int h, int m, int s, int ms){return ::QTime::setHMS(h,m,s,ms);}
 
-    QTime addSecs(int secs) const {return ::QTime::addSecs(secs);}
-    int secsTo(const QTime& t) const {return ::QTime::secsTo(t);}
-    QTime addMSecs(int ms) const {return ::QTime::addMSecs(ms);}
-    int msecsTo(const QTime& t) const {return ::QTime::msecsTo(t);}
+    QtCore::QTime addSecs(int secs) const {return ::QTime::addSecs(secs);}
+    int secsTo(const QtCore::QTime& t) const {return ::QTime::secsTo(t);}
+    QtCore::QTime addMSecs(int ms) const {return ::QTime::addMSecs(ms);}
+    int msecsTo(const QtCore::QTime& t) const {return ::QTime::msecsTo(t);}
 
-    static QTime currentTime() {return ::QTime::currentTime();}
-    static QTime fromString(const std::string &s) {return ::QTime::fromString(s.c_str());}
-    static QTime fromString(const std::string &s, QtDateFormat f)
+    static QtCore::QTime currentTime() {return ::QTime::currentTime();}
+    static QtCore::QTime fromString(const std::string &s) {return ::QTime::fromString(s.c_str());}
+    static QtCore::QTime fromString(const std::string &s, QtDateFormat f)
     {return ::QTime::fromString(s.c_str(),f);}
-    static QTime fromString(const std::string &s, const std::string &f) {
+    static QtCore::QTime fromString(const std::string &s, const std::string &f) {
       return ::QTime::fromString(s.c_str(),f.c_str());}
     static bool isValid(int h, int m, int s) {return ::QTime::isValid(h,m,s);}
     static bool isValid(int h, int m, int s, int ms){return ::QTime::isValid(h,m,s,ms);}
@@ -308,13 +413,13 @@ struct QtCore
     bool isNull() const {return ::QDateTime::isNull();}
     bool isValid() const {return ::QDateTime::isValid();}
 
-    QDate date() const {return ::QDateTime::date();}
-    QTime time() const {return ::QDateTime::time();}
+    QtCore::QDate date() const {return ::QDateTime::date();}
+    QtCore::QTime time() const {return ::QDateTime::time();}
     QtTimeSpec timeSpec() const {return ::QDateTime::timeSpec();}
     qint64 toMSecsSinceEpoch() const {return ::QDateTime::toMSecsSinceEpoch();}
     uint toTime_t() const {return ::QDateTime::toTime_t();}
-    void setDate(const QDate &date) {::QDateTime::setDate(date);}
-    void setTime(const QTime &time) {::QDateTime::setTime(time);}
+    void setDate(const QtCore::QDate &date) {::QDateTime::setDate(date);}
+    void setTime(const QtCore::QTime &time) {::QDateTime::setTime(time);}
     void setTimeSpec(QtTimeSpec spec) {::QDateTime::setTimeSpec(spec);}
     void setMSecsSinceEpoch(qint64 msecs) {::QDateTime::setMSecsSinceEpoch(msecs);}
     void setTime_t(uint secsSince1Jan1970UTC) {::QDateTime::setTime_t(secsSince1Jan1970UTC);}
@@ -323,31 +428,31 @@ struct QtCore
     {return ::QDateTime::toString(Qt::DateFormat(int(f))).toStdString();}
     std::string toString(const std::string &format) const
     {return ::QDateTime::toString(format.c_str()).toStdString();}
-    QDateTime addDays(int days) const {return ::QDateTime::addDays(days);}
-    QDateTime addMonths(int months) const {return ::QDateTime::addMonths(months);}
-    QDateTime addYears(int years) const {return ::QDateTime::addYears(years);}
-    QDateTime addSecs(int secs) const {return ::QDateTime::addSecs(secs);}
-    QDateTime addMSecs(qint64 msecs) const {return ::QDateTime::addMSecs(msecs);}
-    QDateTime toTimeSpec(QtTimeSpec spec) const {return ::QDateTime::toTimeSpec(spec);}
-    QDateTime toLocalTime() const {return ::QDateTime::toLocalTime();}
-    QDateTime toUTC() const {return ::QDateTime::toUTC();}
-    int daysTo(const QDateTime& x) const {return ::QDateTime::daysTo(x);}
-    int secsTo(const QDateTime& x) const {return ::QDateTime::secsTo(x);}
-    qint64 msecsTo(const QDateTime& x) const {return ::QDateTime::msecsTo(x);}
+    QtCore::QDateTime addDays(int days) const {return ::QDateTime::addDays(days);}
+    QtCore::QDateTime addMonths(int months) const {return ::QDateTime::addMonths(months);}
+    QtCore::QDateTime addYears(int years) const {return ::QDateTime::addYears(years);}
+    QtCore::QDateTime addSecs(int secs) const {return ::QDateTime::addSecs(secs);}
+    QtCore::QDateTime addMSecs(qint64 msecs) const {return ::QDateTime::addMSecs(msecs);}
+    QtCore::QDateTime toTimeSpec(QtTimeSpec spec) const {return ::QDateTime::toTimeSpec(spec);}
+    QtCore::QDateTime toLocalTime() const {return ::QDateTime::toLocalTime();}
+    QtCore::QDateTime toUTC() const {return ::QDateTime::toUTC();}
+    int daysTo(const QtCore::QDateTime& x) const {return ::QDateTime::daysTo(x);}
+    int secsTo(const QtCore::QDateTime& x) const {return ::QDateTime::secsTo(x);}
+    qint64 msecsTo(const QtCore::QDateTime& x) const {return ::QDateTime::msecsTo(x);}
 
     void setUtcOffset(int seconds) {::QDateTime::setUtcOffset(seconds);}
     int utcOffset() const {return ::QDateTime::utcOffset();}
 
-    static QDateTime currentDateTime() {return ::QDateTime::currentDateTime();}
-    static QDateTime currentDateTimeUtc() {return ::QDateTime::currentDateTimeUtc();}
-    static QDateTime fromString(const std::string& s) {return ::QDateTime::fromString(s.c_str());}
-    static QDateTime fromString(const std::string& s, QtDateFormat f)
+    static QtCore::QDateTime currentDateTime() {return ::QDateTime::currentDateTime();}
+    static QtCore::QDateTime currentDateTimeUtc() {return ::QDateTime::currentDateTimeUtc();}
+    static QtCore::QDateTime fromString(const std::string& s) {return ::QDateTime::fromString(s.c_str());}
+    static QtCore::QDateTime fromString(const std::string& s, QtDateFormat f)
     {return ::QDateTime::fromString(s.c_str(),f);}
-    static QDateTime fromString(const std::string& s, const std::string& f)
+    static QtCore::QDateTime fromString(const std::string& s, const std::string& f)
     {return ::QDateTime::fromString(s.c_str(),f.c_str());}
-    static QDateTime fromTime_t(uint secsSince1Jan1970UTC)
+    static QtCore::QDateTime fromTime_t(uint secsSince1Jan1970UTC)
     {return ::QDateTime::fromTime_t(secsSince1Jan1970UTC);}
-    static QDateTime fromMSecsSinceEpoch(qint64 msecs)
+    static QtCore::QDateTime fromMSecsSinceEpoch(qint64 msecs)
     {return ::QDateTime::fromMSecsSinceEpoch(msecs);}
     static qint64 currentMSecsSinceEpoch() {return ::QDateTime::currentMSecsSinceEpoch();}
   };
@@ -370,12 +475,12 @@ struct QtCore
 
     void scale(int w, int h, QtEnums::AspectRatioMode mode)
     {::QSize::scale(w,h,Qt::AspectRatioMode(mode));}
-    void scale(const QSize &s, QtEnums::AspectRatioMode mode)
+    void scale(const QtCore::QSize &s, QtEnums::AspectRatioMode mode)
     {::QSize::scale(s,Qt::AspectRatioMode(mode));}
 
-    QSize expandedTo(const QSize & x) const 
+    QtCore::QSize expandedTo(const QtCore::QSize & x) const 
     {return ::QSize::expandedTo(x);}
-    QSize boundedTo(const QSize & x) const
+    QtCore::QSize boundedTo(const QtCore::QSize & x) const
     {return ::QSize::boundedTo(x);}
 
 //    int &rwidth() {return ::QSize::rwidth();}
@@ -384,7 +489,7 @@ struct QtCore
 
 };
 
-struct QtGui
+namespace QtGui
 {
   struct QFont: public ::QFont
     {
@@ -576,7 +681,7 @@ struct QtGui
       // dupicated from QFontInfo
       bool exactMatch() const {return ::QFont::exactMatch();}
 
-      bool isCopyOf(const QFont& f) const {return ::QFont::isCopyOf(f);}
+      bool isCopyOf(const QtGui::QFont& f) const {return ::QFont::isCopyOf(f);}
   };
 };
 

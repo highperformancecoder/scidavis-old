@@ -91,6 +91,31 @@ struct SciQwtPlotCurve
 
   void setSymbol(const SciQwtSymbol &s) {if (ptr) ptr->setSymbol(s);}
   const SciQwtSymbol symbol() const {if (ptr) return ptr->symbol(); else return {};}
+
+  // convenience methods for scripting
+  void setColor(const QColor& color) {
+    setOutlineColor(color);
+    setFillColor(color);
+  }
+  void setColor(int color) {setColor(ColorButton::color(color));}
+  void setOutlineColor(const QColor& color) {
+    auto p = pen();
+    p.setColor(color);
+    setPen(p);
+  }
+  void setOutlineColor(int color) {setOutlineColor(ColorButton::color(color));}
+  void setFillColor(const QColor& color) {
+	QBrush b = brush();
+	b.setColor(color);
+	setBrush(b);
+  }
+  void setFillColor(int color) {setFillColor(ColorButton::color(color));}
+  void setFillStyle(QtEnums::BrushStyle style) {
+	QBrush b = brush();
+	b.setStyle(Qt::BrushStyle(style));
+        setBrush(b);
+  }
+
 };
 
 

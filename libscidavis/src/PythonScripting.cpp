@@ -50,6 +50,9 @@ typedef struct _traceback {
 } PyTracebackObject;
 #endif
 
+// disable these warnings, as automatically generated code sometimes has them
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
 #include "PythonScript.h"
 #include "PythonScript.cd"
 #include "PythonScripting.h"
@@ -201,6 +204,7 @@ namespace classdesc
   DEF_TYPENAME(QPixmap);
   DEF_TYPENAME(Qt::WindowType);
   DEF_TYPENAME(QwtSymbol);
+  DEF_TYPENAME(QTransform);
 
   template <class T> struct tn<QList<T>>
   {

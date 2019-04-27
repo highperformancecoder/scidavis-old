@@ -6,28 +6,36 @@
 
 struct QtEnums
 {
-    enum BrushStyle
-      {
-       NoBrush=Qt::NoBrush,
-       SolidPattern=Qt::SolidPattern,
-       Dense1Pattern=Qt::Dense1Pattern,
-       Dense2Pattern=Qt::Dense2Pattern,
-       Dense3Pattern=Qt::Dense3Pattern,
-       Dense4Pattern=Qt::Dense4Pattern,
-       Dense5Pattern=Qt::Dense5Pattern,
-       Dense6Pattern=Qt::Dense6Pattern,
-       Dense7Pattern=Qt::Dense7Pattern,
-       HorPattern=Qt::HorPattern,
-       VerPattern=Qt::VerPattern,
-       CrossPattern=Qt::CrossPattern,
-       BDiagPattern=Qt::BDiagPattern,
-       FDiagPattern=Qt::FDiagPattern,
-       DiagCrossPattern=Qt::DiagCrossPattern,
-       LinearGradientPattern=Qt::LinearGradientPattern,
-       RadialGradientPattern=Qt::RadialGradientPattern,
-       ConicalGradientPattern=Qt::ConicalGradientPattern,
-       TexturePattern=Qt::TexturePattern
-      };
+  enum Axis
+    {
+     XAxis=::Qt::XAxis,
+     YAxis=::Qt::YAxis,
+     ZAxis=::Qt::ZAxis
+    };
+
+  
+  enum BrushStyle
+    {
+     NoBrush=Qt::NoBrush,
+     SolidPattern=Qt::SolidPattern,
+     Dense1Pattern=Qt::Dense1Pattern,
+     Dense2Pattern=Qt::Dense2Pattern,
+     Dense3Pattern=Qt::Dense3Pattern,
+     Dense4Pattern=Qt::Dense4Pattern,
+     Dense5Pattern=Qt::Dense5Pattern,
+     Dense6Pattern=Qt::Dense6Pattern,
+     Dense7Pattern=Qt::Dense7Pattern,
+     HorPattern=Qt::HorPattern,
+     VerPattern=Qt::VerPattern,
+     CrossPattern=Qt::CrossPattern,
+     BDiagPattern=Qt::BDiagPattern,
+     FDiagPattern=Qt::FDiagPattern,
+     DiagCrossPattern=Qt::DiagCrossPattern,
+     LinearGradientPattern=Qt::LinearGradientPattern,
+     RadialGradientPattern=Qt::RadialGradientPattern,
+     ConicalGradientPattern=Qt::ConicalGradientPattern,
+     TexturePattern=Qt::TexturePattern
+    };
       
   enum PenStyle
     {
@@ -40,18 +48,18 @@ struct QtEnums
      CustomDashLine=Qt::CustomDashLine
     };
   enum PenCapStyle { 
-        FlatCap = Qt::FlatCap,
-        SquareCap = Qt::SquareCap,
-        RoundCap = Qt::RoundCap,
-        MPenCapStyle = Qt::MPenCapStyle
-    };
+                    FlatCap = Qt::FlatCap,
+                    SquareCap = Qt::SquareCap,
+                    RoundCap = Qt::RoundCap,
+                    MPenCapStyle = Qt::MPenCapStyle
+  };
   enum PenJoinStyle {
-        MiterJoin = Qt::MiterJoin,
-        BevelJoin = Qt::BevelJoin,
-        RoundJoin = Qt::RoundJoin,
-        SvgMiterJoin = Qt::SvgMiterJoin,
-        MPenJoinStyle = Qt::MPenJoinStyle
-    };
+                     MiterJoin = Qt::MiterJoin,
+                     BevelJoin = Qt::BevelJoin,
+                     RoundJoin = Qt::RoundJoin,
+                     SvgMiterJoin = Qt::SvgMiterJoin,
+                     MPenJoinStyle = Qt::MPenJoinStyle
+  };
 
   enum DateFormat
     {
@@ -68,9 +76,9 @@ struct QtEnums
   
   enum TimeSpec
     {
-        LocalTime = Qt::LocalTime,
-        UTC = Qt::UTC,
-        OffsetFromUTC = Qt::OffsetFromUTC
+     LocalTime = Qt::LocalTime,
+     UTC = Qt::UTC,
+     OffsetFromUTC = Qt::OffsetFromUTC
     };
 
   enum Orientation
@@ -79,12 +87,12 @@ struct QtEnums
      Vertical = Qt::Vertical
     };
 
-    enum AspectRatioMode
-      {
-       IgnoreAspectRatio=Qt::IgnoreAspectRatio,
-       KeepAspectRatio=Qt::KeepAspectRatio,
-       KeepAspectRatioByExpanding=Qt::KeepAspectRatioByExpanding
-      };
+  enum AspectRatioMode
+    {
+     IgnoreAspectRatio=Qt::IgnoreAspectRatio,
+     KeepAspectRatio=Qt::KeepAspectRatio,
+     KeepAspectRatioByExpanding=Qt::KeepAspectRatioByExpanding
+    };
 
 };
 
