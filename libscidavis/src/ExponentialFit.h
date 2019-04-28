@@ -68,6 +68,10 @@ public:
   TwoExpFit(ApplicationWindow *parent, Graph *g);
   TwoExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
   TwoExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+  TwoExpFit(Graph &g): TwoExpFit(0,&g) {}
+  TwoExpFit(Graph &g, const QString& curveTitle): TwoExpFit(0,&g,curveTitle) {}
+  TwoExpFit(Graph &g, const QString& curveTitle, double start, double end):
+    TwoExpFit(0,&g,curveTitle,start,end) {}
 
 private:
   void init();
@@ -83,6 +87,10 @@ public:
   ThreeExpFit(ApplicationWindow *parent, Graph *g);
   ThreeExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
   ThreeExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+  ThreeExpFit(Graph &g): ThreeExpFit(0,&g) {}
+  ThreeExpFit(Graph &g, const QString& curveTitle): ThreeExpFit(0,&g,curveTitle) {}
+  ThreeExpFit(Graph &g, const QString& curveTitle, double start, double end):
+    ThreeExpFit(0,&g,curveTitle,start,end) {}
 
 private:
   void init();

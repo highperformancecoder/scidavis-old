@@ -131,6 +131,12 @@ public:
   {sortColumns(columns,ascending);}
   void sort(SortType type, SortOrder order, const std::string& leading);
 
+  /// scale data in column(s) to have a maximum of 1.
+  void normalize();
+  void normalize(Column&);
+  void normalize(int i) {normalize(column(i));}
+  void normalize(const std::string& c) {normalize(column(c));}
+                                                                       
 public slots:
   void copy(Table *m);
   int numRows();

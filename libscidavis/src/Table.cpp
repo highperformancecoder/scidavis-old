@@ -1229,6 +1229,18 @@ void Table::sort(SortType type, SortOrder order, const std::string& leading)
   sortColumns(cols,type,order,leading);  
 }  
 
+void Table::normalize()
+{
+  QList<Column*> cols;
+  for (int i=0; i<numCols(); ++i) cols.append(&column(i));
+  d_future_table->normalizeColumns(cols);
+}
+
+void Table::normalize(Column& c)
+{
+  d_future_table->normalizeColumns({&c});
+}
+
 void Table::setNumRows(int rows)
 {
   if (d_future_table)

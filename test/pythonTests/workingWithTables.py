@@ -18,13 +18,13 @@ assert t1.cell(1,1) == pi
 assert t2.text(1,1) == ""
 # need to set the desired column as text first
 c1t2=t2.column("1")
-c1t2.setColumnMode("Text")
+c1t2.setColumnMode(ColumnMode.Text)
 t2.setText(1,1,"pi")
 assert t2.text(1,1) == "pi"
 
-assert t2.colName(2) == "2"
-t2.setColName(2,"two")
-assert t2.colName(2) == "two"
+assert t2.colName(1) == "Table2_2"
+t2.setColName(1,"two")
+assert t2.colName(1) == "Table2_two"
 
 assert t1.numRows() == 30
 assert t1.numCols() == 2
@@ -35,13 +35,13 @@ assert t1.numCols() == 5
 
 # fill columns with x^2, x = row number, to perform the normalization test
 for i in range(1,t1.numRows()+1):
- t1.setCell(1,i,i**2)
- t1.setCell(2,i,i**2)
+ t1.setCell(i,1,i**2)
+ t1.setCell(i,2,i**2)
 
-t1.normalize(1) #normalize only column 1
-assert t1.cell(1,t1.numRows()) == 1.0 # verify only column 1
+t1.normalize("1") #normalize only column 1
+assert t1.cell(t1.numRows(),1) == 1.0 # verify only column 1
 t1.normalize() #normalize all columns
-assert t1.cell(2,t1.numRows()) == 1.0 # verify only column 2
+assert t1.cell(t1.numRows(),2) == 1.0 # verify only column 2
 
 # t.importASCII will not be included in this test file - add it to TODO list
 # t.notifyChanges() will not be included because I guess it is deprecated - add it to a TOCHECK list

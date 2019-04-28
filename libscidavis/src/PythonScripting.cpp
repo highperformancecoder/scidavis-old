@@ -348,6 +348,8 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<MultiPeakFit>();
   p.defineClass<NonLinearFit>();
   p.defineClass<PolynomialFit>();
+  p.defineClass<ThreeExpFit>();
+  p.defineClass<TwoExpFit>();
   p.defineClass<QtNamespace>();
   p.defineClass<Column>();
   p.defineClass<Integration>();
