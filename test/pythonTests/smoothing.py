@@ -20,8 +20,8 @@ t1Name="generic-curve"
 t1=newTable(t1Name,2,51)
 for i in range(1,t1.numRows()+1):
  xx=float(i)
- t1.setCell(1,i,xx)
- t1.setCell(2,i,f1(xx)+random.uniform(0,dp))
+ t1.setCell(i,1,xx)
+ t1.setCell(i,2,f1(xx)+random.uniform(0,dp))
 g1=plot(t1,'2',1) #plotting the curve
 
 g1.confirmClose(False)

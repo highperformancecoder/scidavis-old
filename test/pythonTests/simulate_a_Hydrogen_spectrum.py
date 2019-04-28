@@ -38,8 +38,8 @@ for i in range(1,Npts):
  x=4000+(i-1)*0.25
  y0=np.random.normal(0,dp)
  y=y0+(((I62)*np.exp(-4*np.log(2)*((x-xc1)/w1)**2))+((I52)*np.exp(-4*np.log(2)*((x-xc2)/w2)**2))+((I42)*np.exp(-4*np.log(2)*((x-xc3)/w3)**2))+((I32)*np.exp(-4*np.log(2)*((x-xc4)/w4)**2)))/I32
- t.setCell(1,i,x)
- t.setCell(2,i,y)
+ t.setCell(i,1,x)
+ t.setCell(i,2,y)
 g=plot(t,'2',0)
 l=g.activeLayer()
 l.setXTitle("Wavelength (Angs)")

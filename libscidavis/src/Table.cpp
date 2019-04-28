@@ -1193,6 +1193,41 @@ void Table::closeEvent( QCloseEvent *e )
 	}
 }
 
+void Table::sortColumn(Column& col, SortOrder order)
+{
+  d_future_table->sortColumns(nullptr, {&col}, order==ascending);
+}
+
+void Table::sortColumns(pyobject columns,SortType type, SortOrder order, const std::string& leading)
+{
+#ifdef SCRIPTING_PYTHON
+  QList<Column*> cols;
+  for (int i=0; i<len(columns); ++i)
+    cols.append(&column(py::extract<std::string>(columns[i])));
+  sortColumns(cols,type,order,leading);
+#endif
+}
+
+void Table::sortColumns(const QList<Column*>& cols,SortType type, SortOrder order, const std::string& leading)
+{
+  switch (type)
+    {
+    case together:
+      d_future_table->sortColumns(&column(leading),cols,order==ascending);
+      break;
+    case separate:
+      d_future_table->sortColumns(nullptr,cols,order==ascending);
+      break;
+    }
+}
+
+
+void Table::sort(SortType type, SortOrder order, const std::string& leading)
+{
+  QList<Column*> cols;
+  for (int i=0; i<numCols(); ++i) cols.append(&column(i));
+  sortColumns(cols,type,order,leading);  
+}  
 
 void Table::setNumRows(int rows)
 {

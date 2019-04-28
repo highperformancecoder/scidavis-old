@@ -112,6 +112,8 @@ typedef struct _traceback {
 #include "Integration.cd"
 #include "Filter.h"
 #include "Filter.cd"
+#include "SmoothFilter.h"
+#include "SmoothFilter.cd"
 #include "Interpolation.h"
 #include "Interpolation.cd"
 #include "Legend.h"
@@ -350,6 +352,7 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<Column>();
   p.defineClass<Integration>();
   p.defineClass<Interpolation>();
+  p.defineClass<SmoothFilter>();
   python<SciDAVis::ColumnMode>(p,"");
 
   // redefine Qt as an alias for QtNamespace - unfortunately QtNamespace cannot be called Qt in C++ as Qt is already taken

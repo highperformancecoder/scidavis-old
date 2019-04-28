@@ -37,6 +37,7 @@
 #include <QMap>
 #include <QPointer>
 
+#include "Qt.h"
 #include "Graph.h"
 #include "MyWidget.h"
 #include "ScriptingEnv.h"
@@ -105,6 +106,31 @@ public:
   }
 
   void closeEvent( QCloseEvent *);
+
+  enum SortOrder {descending, ascending};
+  enum SortType {separate, together};
+  void sortColumn(Column& col, SortOrder order);
+  void sortColumn(int col, SortOrder order) {sortColumn(column(col),order);}
+  void sortColumn(int col) {sortColumn(col,ascending);}
+  void sortColumn(const std::string& col, SortOrder order)
+  {sortColumn(column(col),order);}
+  void sortColumn(const std::string& col) {sortColumn(col,ascending);}
+  /** sort a bunch of columns
+  @param columns - a sequence of column names
+  @param together - sort the together according to the sort order of \a leading, or separately
+  @param ascending - ascending or descending order
+  @param leading - gives the column for the sort order if together=true
+  */
+  void sortColumns(pyobject columns,SortType type, SortOrder order, const std::string& leading);
+  void sortColumns(const QList<Column*>& columns,SortType type, SortOrder order, const std::string& leading);
+  void sortColumns(pyobject columns, SortOrder order)
+  {sortColumns(columns,separate,order,{});}
+  void sortColumns(pyobject columns, SortType type, const std::string& leading)
+  {sortColumns(columns,type,ascending,leading);}
+  void sortColumns(pyobject columns)
+  {sortColumns(columns,ascending);}
+  void sort(SortType type, SortOrder order, const std::string& leading);
+
 public slots:
   void copy(Table *m);
   int numRows();

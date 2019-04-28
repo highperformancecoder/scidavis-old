@@ -24,6 +24,7 @@
                     src/future/lib/Interval.h src/future/lib/IntervalAttribute.h \
                     src/Fit.h src/ExponentialFit.h src/PolynomialFit.h src/Qt.h \
                     src/MultiPeakFit.h src/NonLinearFit.h \
+                    src/SmoothFilter.h \
                     src/future/core/column/Column.h \
                     src/future/core/AbstractAspect.h src/future/core/AbstractColumn.h \
                     src/globals.h src/Grid.h src/ImageMarker.h src/Integration.h \
@@ -38,7 +39,8 @@
   isEmpty( PYTHONBIN ) {
     PYTHONBIN = python
   }
-  PYTHON_VERSION=$$system($${PYTHONBIN} --version|cut -f2 -d' '|cut -f1 -d.)
+#  PYTHON_VERSION=$$system($${PYTHONBIN} --version|cut -f2 -d' '|cut -f1 -d.)
+
 
   LIBS+=-lboost_python-p2_7
 
