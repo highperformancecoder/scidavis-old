@@ -19187,7 +19187,7 @@ Wollen sie Zellen einfügen?</translation>
         <translation type="unfinished">Ausblenden</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1418"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1465"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished">%1: Formel auf Spalte angewendet</translation>
     </message>

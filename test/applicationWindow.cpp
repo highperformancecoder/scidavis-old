@@ -109,7 +109,7 @@ SUITE(ApplicationWindow)
 
       // check behaviour on folders
   CHECK(lv.topLevelItem(0));
-  addFolderListViewItem(&current_folder->addChild<Folder>("ImAFolder"));
+  addFolderListViewItem(&current_folder->addQChild<Folder>("ImAFolder"));
   CHECK(lv.topLevelItem(0));
   for (QTreeWidgetItemIterator item(&lv); *item; item++)
     if (auto fli=dynamic_cast<FolderListItem*>(*item))

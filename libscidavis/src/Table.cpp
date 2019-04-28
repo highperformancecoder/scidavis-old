@@ -1198,7 +1198,7 @@ void Table::sortColumn(Column& col, SortOrder order)
   d_future_table->sortColumns(nullptr, {&col}, order==ascending);
 }
 
-void Table::sortColumns(pyobject columns,SortType type, SortOrder order, const std::string& leading)
+void Table::sortColumns(const pyobject& columns,SortType type, SortOrder order, const std::string& leading)
 {
 #ifdef SCRIPTING_PYTHON
   QList<Column*> cols;

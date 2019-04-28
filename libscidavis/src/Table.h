@@ -121,13 +121,13 @@ public:
   @param ascending - ascending or descending order
   @param leading - gives the column for the sort order if together=true
   */
-  void sortColumns(pyobject columns,SortType type, SortOrder order, const std::string& leading);
+  void sortColumns(const pyobject& columns,SortType type, SortOrder order, const std::string& leading);
   void sortColumns(const QList<Column*>& columns,SortType type, SortOrder order, const std::string& leading);
-  void sortColumns(pyobject columns, SortOrder order)
+  void sortColumns(const pyobject& columns, SortOrder order)
   {sortColumns(columns,separate,order,{});}
-  void sortColumns(pyobject columns, SortType type, const std::string& leading)
+  void sortColumns(const pyobject& columns, SortType type, const std::string& leading)
   {sortColumns(columns,type,ascending,leading);}
-  void sortColumns(pyobject columns)
+  void sortColumns(const pyobject& columns)
   {sortColumns(columns,ascending);}
   void sort(SortType type, SortOrder order, const std::string& leading);
 

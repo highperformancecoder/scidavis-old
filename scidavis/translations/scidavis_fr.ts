@@ -16617,7 +16617,7 @@ La première représente le signal et la seconde la réponse de la fonction !</t
         <translation type="unfinished">Cacher</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1418"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1465"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished"></translation>
     </message>

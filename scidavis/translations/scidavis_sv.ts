@@ -16458,7 +16458,7 @@ den första representerar signalen och den andra svarsfunktionen!</translation>
         <translation type="unfinished">Dölja</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1418"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1465"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished"></translation>
     </message>

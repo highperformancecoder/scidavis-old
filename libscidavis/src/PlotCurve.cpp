@@ -354,12 +354,10 @@ QwtDoubleRect PlotCurve::boundingRect() const
     if (symbol().style() == SciQwtSymbol::NoSymbol)
         return r;
 
-    int margin = 1;
-    if (symbol().style() != SciQwtSymbol::NoSymbol)
-        margin += symbol().size().width();
+    int margin = 1 + symbol().size().width();
 
     const QwtScaleMap &xMap = plot()->canvasMap(xAxis());
-	const QwtScaleMap &yMap = plot()->canvasMap(yAxis());
+    const QwtScaleMap &yMap = plot()->canvasMap(yAxis());
 
     int x_right = xMap.transform(r.right());
     double d_x_right = xMap.invTransform(x_right + margin);

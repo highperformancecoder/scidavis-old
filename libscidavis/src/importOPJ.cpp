@@ -613,7 +613,8 @@ bool ImportOPJ::importNotes(const OriginFile &opj)
 }
 
 bool ImportOPJ::importGraphs(const OriginFile &opj)
-{
+  try
+    {
 	double pi=3.141592653589793;
 	int visible_count=0;
 	int tickTypeMap[]={0,3,1,2};
@@ -631,15 +632,14 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 		{
 			mw->setStatusBarText(QString("Graph %1 / %2, layer %3 / %4").arg(g+1).arg(opj.graphCount()).arg(l+1).arg(layers));
 			Origin::GraphLayer& layer = _graph.layers[l];
-			Graph *graph=ml->addLayer();
-			if(!graph)
-				return false;
+			Graph& graph=ml->addLayer();
+
 			if(!layer.legend.text.empty()) {
-				graph->newLegend(parseOriginText(QString::fromLocal8Bit(layer.legend.text.c_str())));
+				graph.newLegend(parseOriginText(QString::fromLocal8Bit(layer.legend.text.c_str())));
 			}
 			//add texts
 			for(unsigned int i = 0; i < layer.texts.size(); ++i) {
-				graph->newLegend(parseOriginText(QString::fromLocal8Bit(layer.texts[i].text.c_str())));
+				graph.newLegend(parseOriginText(QString::fromLocal8Bit(layer.texts[i].text.c_str())));
 			}
 			int auto_color=0;
 			int style=0;
@@ -687,18 +687,18 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
                                       if(style==Graph::ErrorBars)
 					{
                                           int flags=_curve.symbolShape;
-                                          graph->addErrorBars(QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()),
+                                          graph.addErrorBars(QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()),
                                                               ((flags&0x10)==0x10?0:1), ceil(_curve.lineWidth), ceil(_curve.symbolSize), QColor(Qt::black),
                                                               (flags&0x40)==0x40, (flags&2)==2, (flags&1)==1);
 					}
                                       else if(style==Graph::Histogram)
 				        {
 
-                                          graph->insertCurve(&table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
+                                          graph.insertCurve(&table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
 					}
                                       else
 				        {
-                                          graph->insertCurve(&table, QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
+                                          graph.insertCurve(&table, QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
 					}
                                     }
                                   catch (NoSuchObject&) {}
@@ -724,7 +724,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 						formulas << function.formula.c_str();
 						ranges << function.begin << function.end;
 					}
-					graph->addFunctionCurve(mw, type, formulas, "x", ranges, function.totalPoints, function.name.c_str());
+					graph.addFunctionCurve(mw, type, formulas, "x", ranges, function.totalPoints, function.name.c_str());
 
 					mw->updateFunctionLists(type, formulas);
 					break;
@@ -733,7 +733,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 					continue;
 				}
 
-				CurveLayout cl = graph->initCurveLayout(style, layer.curves.size());
+				CurveLayout cl = graph.initCurveLayout(style, layer.curves.size());
 				cl.sSize = ceil(_curve.symbolSize*0.5);
 				cl.penWidth=_curve.symbolThickness;
 				color=_curve.symbolColor.regular;
@@ -891,85 +891,83 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 						break;
 				}
 
-				graph->updateCurveLayout(c, &cl);
+				graph.updateCurveLayout(c, &cl);
 				if (style == Graph::VerticalBars || style == Graph::HorizontalBars)
 				{
-					QwtBarCurve *b = (QwtBarCurve*)graph->curve(c);
-					if (b)
-						b->setGap(qRound(100 -_curve.symbolSize*10));
+                                  if (auto b = dynamic_cast<QwtBarCurve*>(graph.curvePtr(c)))
+                                    b->setGap(qRound(100 -_curve.symbolSize*10));
 				}
 				else if(style == Graph::Histogram)
 				{
-					QwtHistogram *h = (QwtHistogram*)graph->curve(c);
-					if (h)
-					{
-						h->setBinning(false, layer.histogramBin, layer.histogramBegin, layer.histogramEnd);
-						h->loadData();
-					}
+                                  if (auto h = dynamic_cast<QwtHistogram*>(graph.curvePtr(c)))
+                                    {
+                                      h->setBinning(false, layer.histogramBin, layer.histogramBegin, layer.histogramEnd);
+                                      h->loadData();
+                                    }
 				}
 				switch(_curve.lineConnect)
 				{
 				case Origin::GraphCurve::NoLine:
-					graph->setCurveStyle(c, QwtPlotCurve::NoCurve);
+					graph.setCurveStyle(c, QwtPlotCurve::NoCurve);
 					break;
 				case Origin::GraphCurve::Straight:
-					graph->setCurveStyle(c, QwtPlotCurve::Lines);
+					graph.setCurveStyle(c, QwtPlotCurve::Lines);
 					break;
 				case Origin::GraphCurve::BSpline:
 				case Origin::GraphCurve::Bezier:
 				case Origin::GraphCurve::Spline:
-					graph->setCurveStyle(c, 5);
+					graph.setCurveStyle(c, 5);
 					break;
 				case Origin::GraphCurve::StepHorizontal:
 				case Origin::GraphCurve::StepHCenter:
-					graph->setCurveStyle(c, QwtPlotCurve::Steps);
+					graph.setCurveStyle(c, QwtPlotCurve::Steps);
 					break;
 				case Origin::GraphCurve::StepVertical:
 				case Origin::GraphCurve::StepVCenter:
-					graph->setCurveStyle(c, 6);
+					graph.setCurveStyle(c, 6);
 					break;
 				}
 
 			}
 			if(style==Graph::HorizontalBars)
 			{
-				graph->setScale(0,layer.xAxis.min,layer.xAxis.max,layer.xAxis.step,layer.xAxis.majorTicks,layer.xAxis.minorTicks,layer.xAxis.scale);
-				graph->setScale(2,layer.yAxis.min,layer.yAxis.max,layer.yAxis.step,layer.yAxis.majorTicks,layer.yAxis.minorTicks,layer.yAxis.scale);
+				graph.setScale(0,layer.xAxis.min,layer.xAxis.max,layer.xAxis.step,layer.xAxis.majorTicks,layer.xAxis.minorTicks,layer.xAxis.scale);
+				graph.setScale(2,layer.yAxis.min,layer.yAxis.max,layer.yAxis.step,layer.yAxis.majorTicks,layer.yAxis.minorTicks,layer.yAxis.scale);
 			}
 			else
 			{
-				graph->setScale(2,layer.xAxis.min,layer.xAxis.max,layer.xAxis.step,layer.xAxis.majorTicks,layer.xAxis.minorTicks,layer.xAxis.scale);
-				graph->setScale(0,layer.yAxis.min,layer.yAxis.max,layer.yAxis.step,layer.yAxis.majorTicks,layer.yAxis.minorTicks,layer.yAxis.scale);
+				graph.setScale(2,layer.xAxis.min,layer.xAxis.max,layer.xAxis.step,layer.xAxis.majorTicks,layer.xAxis.minorTicks,layer.xAxis.scale);
+				graph.setScale(0,layer.yAxis.min,layer.yAxis.max,layer.yAxis.step,layer.yAxis.majorTicks,layer.yAxis.minorTicks,layer.yAxis.scale);
 			}
 
 			//grid
-			Grid *grid = graph->grid();
+			Grid& grid = graph.grid();
 
-			grid->enableX(!layer.xAxis.majorGrid.hidden);
-			grid->enableXMin(!layer.xAxis.minorGrid.hidden);
-			grid->enableY(!layer.yAxis.majorGrid.hidden);
-			grid->enableYMin(!layer.yAxis.minorGrid.hidden);
+			grid.enableX(!layer.xAxis.majorGrid.hidden);
+			grid.enableXMin(!layer.xAxis.minorGrid.hidden);
+			grid.enableY(!layer.yAxis.majorGrid.hidden);
+			grid.enableYMin(!layer.yAxis.minorGrid.hidden);
 
-			grid->setMajPenX(QPen(ColorButton::color(layer.xAxis.majorGrid.color), ceil(layer.xAxis.majorGrid.width),
+			grid.setXMajorPen(QPen(ColorButton::color(layer.xAxis.majorGrid.color), ceil(layer.xAxis.majorGrid.width),
 							Graph::getPenStyle(translateOrigin2ScidavisLineStyle((Origin::GraphCurve::LineStyle)layer.xAxis.majorGrid.style))));
-			grid->setMinPenX(QPen(ColorButton::color(layer.xAxis.minorGrid.color), ceil(layer.xAxis.minorGrid.width),
+			grid.setXMinorPen(QPen(ColorButton::color(layer.xAxis.minorGrid.color), ceil(layer.xAxis.minorGrid.width),
 						        Graph::getPenStyle(translateOrigin2ScidavisLineStyle((Origin::GraphCurve::LineStyle)layer.xAxis.minorGrid.style))));
-			grid->setMajPenY(QPen(ColorButton::color(layer.yAxis.majorGrid.color), ceil(layer.yAxis.majorGrid.width),
+			grid.setYMajorPen(QPen(ColorButton::color(layer.yAxis.majorGrid.color), ceil(layer.yAxis.majorGrid.width),
 							Graph::getPenStyle(translateOrigin2ScidavisLineStyle((Origin::GraphCurve::LineStyle)layer.yAxis.majorGrid.style))));
-			grid->setMinPenY(QPen(ColorButton::color(layer.yAxis.minorGrid.color), ceil(layer.yAxis.minorGrid.width),
+			grid.setYMinorPen(QPen(ColorButton::color(layer.yAxis.minorGrid.color), ceil(layer.yAxis.minorGrid.width),
 							Graph::getPenStyle(translateOrigin2ScidavisLineStyle((Origin::GraphCurve::LineStyle)layer.yAxis.minorGrid.style))));
 
-			grid->setAxis(2, 0);
-			grid->enableZeroLineX(0);
-			grid->enableZeroLineY(0);
+			grid.setAxis(2, 0);
+			grid.setXZeroLine(false);
+			grid.setYZeroLine(false);
 
 			vector<Origin::GraphAxisFormat> formats;
 			formats.push_back(layer.yAxis.formatAxis[0]); //left
 			formats.push_back(layer.yAxis.formatAxis[1]); //right
 			formats.push_back(layer.xAxis.formatAxis[0]); //bottom
 			formats.push_back(layer.xAxis.formatAxis[1]); //top
-			graph->setXAxisTitle(parseOriginText(QString::fromLocal8Bit(formats[2].label.text.c_str())));
-			graph->setYAxisTitle(parseOriginText(QString::fromLocal8Bit(formats[0].label.text.c_str())));
+			graph.setAxisTitle(Graph::Bottom,parseOriginText(QString::fromLocal8Bit(formats[2].label.text.c_str())));
+			graph.setAxisTitle(Graph::Left,parseOriginText(QString::fromLocal8Bit(formats[0].label.text.c_str())));
 
 			vector<Origin::GraphAxisTick> ticks;
 			ticks.push_back(layer.yAxis.tickAxis[0]); //left
@@ -1047,7 +1045,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 
                                 try
                                   {
-                                    graph->showAxis(i, type, tableName, &mw->table(tableName), !(formats[i].hidden),
+                                    graph.showAxis(i, type, tableName, &mw->table(tableName), !(formats[i].hidden),
                                                     tickTypeMap[formats[i].majorTicksType], tickTypeMap[formats[i].minorTicksType],
                                                     !(ticks[i].showMajorLabels),	ColorButton::color(formats[i].color), format, prec,
                                                     ticks[i].rotation, 0, "", (ticks[i].color==0xF7 ? ColorButton::color(formats[i].color) : ColorButton::color(ticks[i].color)));
@@ -1056,8 +1054,8 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 			}
 
 
-			graph->setAutoscaleFonts(mw->autoScaleFonts);//restore user defined fonts behaviour
-        	graph->setIgnoreResizeEvents(!mw->autoResizeLayers);
+			graph.setAutoscaleFonts(mw->autoScaleFonts);//restore user defined fonts behaviour
+                        graph.setIgnoreResizeEvents(!mw->autoResizeLayers);
 		}
 		//cascade the graphs
 		if(!_graph.hidden)
@@ -1079,7 +1077,8 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 	if(visible_count>0)
 		xoffset++;
 	return true;
-}
+    }
+  catch (...) {return false;}
 
 QString ImportOPJ::parseOriginText(const QString &str)
 {

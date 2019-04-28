@@ -16682,7 +16682,7 @@ Do you want to insert cells?</source>
         <translation type="unfinished">Скрыть</translation>
     </message>
     <message>
-        <location line="+249"/>
+        <location line="+296"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16691,7 +16691,7 @@ Do you want to insert cells?</source>
         <translation type="obsolete">Ошибка</translation>
     </message>
     <message>
-        <location line="-359"/>
+        <location line="-406"/>
         <source>ASCII Export Error</source>
         <translation type="unfinished">Ошибка экспорта в ASCII</translation>
     </message>

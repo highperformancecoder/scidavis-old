@@ -13382,7 +13382,7 @@ Released</source>
         <translation type="unfinished">Skrýt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1418"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1465"/>
         <source>%1: apply formula to column</source>
         <translation type="unfinished">%1: použít vzorec na sloupec</translation>
     </message>
