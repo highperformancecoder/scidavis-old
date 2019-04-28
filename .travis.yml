@@ -50,8 +50,12 @@ before_install:
 #    - libmuparser-dev
 #    - zlib1g-dev
 script: 
-  # required to avoid picking up a bodgy python interpreter
-  - export PATH=/usr/bin:$PATH
+  - git clone https://github.com/highperformancecoder/classdesc.git
+  - pushd classdesc
+  - make install
+  - popd
+# required to avoid picking up a bodgy python interpreter
+  - export PATH=/usr/bin:$HOME/usr/bin:$PATH
   - qmake CONFIG+=aegis
   - make qmake
   - make
