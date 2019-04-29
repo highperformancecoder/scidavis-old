@@ -3043,7 +3043,7 @@ void Graph::updateCurveLayout(int index, const CurveLayout *cL)
 
   QPen pen = QPen(ColorButton::color(cL->symCol),cL->penWidth, Qt::SolidLine);
   if (cL->symbolFill)
-    c->setSymbol(QwtSymbol(QwtSymbol::Style(cL->sType), QBrush(ColorButton::color(cL->fillCol)), pen, QSize(cL->sSize,cL->sSize)));
+    c->setSymbol(QwtSymbol(QwtSymbol::Style(SymbolBox::style(cL->sType)), QBrush(ColorButton::color(cL->fillCol)), pen, QSize(cL->sSize,cL->sSize)));
   else
     c->setSymbol(QwtSymbol(QwtSymbol::Style(SymbolBox::style(cL->sType)), QBrush(), pen, QSize(cL->sSize,cL->sSize)));
 
