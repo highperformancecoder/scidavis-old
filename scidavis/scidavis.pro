@@ -18,7 +18,8 @@ python {
   unix: {
         LIBS+=$$system($$PYTHONBIN findBoostPythonLib.py)
         LIBS+=$$system($$PYTHONBIN-config --libs)
-  }
+      }
+  message($$LIBS)  
 }
 
 QMAKE_CLEAN += $$TARGET
