@@ -189,4 +189,4 @@ void FilterDialog::setGraph(Graph *g)
 {
 graph = g;
 boxName->addItems (g->analysableCurvesList());
-};
+}

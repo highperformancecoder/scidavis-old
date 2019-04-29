@@ -531,7 +531,7 @@ void FitDialog::setGraph(Graph *g)
 
 	connect (d_graph, SIGNAL(closedGraph()), this, SLOT(close()));
 	connect (d_graph, SIGNAL(dataRangeChanged()), this, SLOT(changeDataRange()));
-};
+}
 
 void FitDialog::activateCurve(const QString& curveName)
 {

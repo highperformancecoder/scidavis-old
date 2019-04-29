@@ -182,7 +182,7 @@ void FFTDialog::setGraph(Graph *g)
 	graph = g;
 	boxName->addItems (g->analysableCurvesList());
 	activateCurve(boxName->currentText());
-};
+}
 
 void FFTDialog::activateCurve(const QString& curveName)
 {
@@ -198,7 +198,7 @@ void FFTDialog::activateCurve(const QString& curveName)
             double x1 = stod(d_table->column(col).textAt(1));
             boxSampling->setText(QString::number(x1 - x0));
 	}
-};
+}
 
 void FFTDialog::setTable(Table *t)
 {
@@ -235,4 +235,4 @@ void FFTDialog::setTable(Table *t)
 		boxReal->setCurrentIndex(t->colIndex(l[0]));
 		boxImaginary->setCurrentIndex(t->colIndex(l[1]));
 	}
-};
+}

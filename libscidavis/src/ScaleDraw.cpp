@@ -41,7 +41,7 @@ ScaleDraw::ScaleDraw(const QString& s):
     d_prec(4),
 	d_minTicks(Out),
 	d_majTicks(Out)
-	{};
+	{}
 
 ScaleDraw::ScaleDraw(const ScaleDraw &other, const QString &s) :
 	QwtScaleDraw(other),
@@ -273,7 +273,7 @@ return QwtText(day);
 
 MonthScaleDraw::MonthScaleDraw(NameFormat format):
 		d_format(format)
-{};
+{}
 
 QwtText MonthScaleDraw::label(double value) const
 {

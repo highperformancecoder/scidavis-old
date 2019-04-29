@@ -71,7 +71,7 @@ void MyWidget::updateCaption()
                           setWindowTitle(QString(name().c_str()));
 			break;
 	}
-};
+}
 
 void MyWidget::closeEvent( QCloseEvent *e )
 {

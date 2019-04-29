@@ -487,7 +487,7 @@ namespace QtCore
 //    int &rheight() {return ::QSize::rheight();}
   };
 
-};
+}
 
 namespace QtGui
 {
@@ -683,7 +683,7 @@ namespace QtGui
 
       bool isCopyOf(const QtGui::QFont& f) const {return ::QFont::isCopyOf(f);}
   };
-};
+}
 
 
 

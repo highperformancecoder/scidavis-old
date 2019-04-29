@@ -140,7 +140,7 @@ void PolynomFitDialog::setGraph(Graph *g)
 
 	connect (graph, SIGNAL(closedGraph()), this, SLOT(close()));
 	connect (graph, SIGNAL(dataRangeChanged()), this, SLOT(changeDataRange()));
-};
+}
 
 void PolynomFitDialog::activateCurve(const QString& curveName)
 {
@@ -149,7 +149,7 @@ void PolynomFitDialog::activateCurve(const QString& curveName)
 
 	boxStart->setText(QString::number(start, 'g', 15));
 	boxEnd->setText(QString::number(end, 'g', 15));
-};
+}
 
 void PolynomFitDialog::changeDataRange()
 {

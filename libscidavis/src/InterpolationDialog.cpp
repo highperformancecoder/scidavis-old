@@ -175,7 +175,7 @@ void InterpolationDialog::setGraph(Graph *g)
 
 	connect (graph, SIGNAL(closedGraph()), this, SLOT(close()));
 	connect (graph, SIGNAL(dataRangeChanged()), this, SLOT(changeDataRange()));
-};
+}
 
 void InterpolationDialog::activateCurve(const QString& curveName)
 {
