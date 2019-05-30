@@ -67,7 +67,6 @@ namespace QtGui
                              TxProject   = ::QTransform::TxProject
     };
 
-    //inline explicit QTransform(Qt::Initialization) : affine(Qt::Uninitialized) {}
     QTransform() {}
     QTransform(qreal h11, qreal h12, qreal h13,
                qreal h21, qreal h22, qreal h23,
@@ -80,7 +79,6 @@ namespace QtGui
     QTransform(qreal h11, qreal h12, qreal h21,
                qreal h22, qreal dx, qreal dy):
       ::QTransform(h11,h12,h21,h22,dx,dy) {}
-    //explicit QTransform(const QMatrix &mtx);
     QTransform(const ::QTransform& x): ::QTransform(x) {}
 
     bool isAffine() const {return ::QTransform::isAffine();}
@@ -130,29 +128,7 @@ namespace QtGui
     bool __eq__(const QtGui::QTransform& x) const {return ::QTransform::operator==(x);}
     bool __ne__(const QtGui::QTransform& x) const {return ::QTransform::operator!=(x);}
 
-    //    static bool squareToQuad(const QPolygonF &square, QTransform &result);
-    //    static bool quadToSquare(const QPolygonF &quad, QTransform &result);
-    //    static bool quadToQuad(const QPolygonF &one,
-    //                           const QPolygonF &two,
-    //                           QTransform &result);
-
     void reset() {::QTransform::reset();}
-    //    QPoint       map(const QPoint &p) const;
-    //    QPointF      map(const QPointF &p) const;
-    //    QLine        map(const QLine &l) const;
-    //    QLineF       map(const QLineF &l) const;
-    //    QPolygonF    map(const QPolygonF &a) const;
-    //    QPolygon     map(const QPolygon &a) const;
-    //    QRegion      map(const QRegion &r) const;
-    //    QPainterPath map(const QPainterPath &p) const;
-    //    QPolygon     mapToPolygon(const QRect &r) const;
-    //    QRect mapRect(const QRect &) const;
-    //    QRectF mapRect(const QRectF &) const;
-    //    void map(int x, int y, int *tx, int *ty) const;
-    //    void map(qreal x, qreal y, qreal *tx, qreal *ty) const;
-
-    //    const QMatrix &toAffine() const;
-
     static QtGui::QTransform fromTranslate(qreal dx, qreal dy) {return ::QTransform::fromTranslate(dx,dy);}
     static QtGui::QTransform fromScale(qreal dx, qreal dy) {return ::QTransform::fromScale(dx,dy);}
   };
@@ -190,37 +166,17 @@ struct QtNamespace: public QtEnums
     QBrush(const QColor &color, QtEnums::BrushStyle bs):
       ::QBrush(color, Qt::BrushStyle(bs)) {}
     QBrush(const QColor &color): QBrush(color,QtEnums::SolidPattern) {}
-    //    QBrush(QtEnums::GlobalColor color, QtEnums::BrushStyle bs=Qt::SolidPattern);
-
-    //    QBrush(const QColor &color, const QPixmap &pixmap);
-    //    QBrush(QtEnums::GlobalColor color, const QPixmap &pixmap);
-    //QBrush(const QPixmap &pixmap);
-    //QBrush(const QImage &image);
 
     QBrush(const ::QBrush &brush): ::QBrush(brush) {}
-
-    //QBrush(const QGradient &gradient);
 
     QtEnums::BrushStyle style() const {return QtEnums::BrushStyle(::QBrush::style());}
     void setStyle(QtEnums::BrushStyle s) {::QBrush::setStyle(Qt::BrushStyle(s));}
 
-    //    inline const QMatrix &matrix() const;
-    //    void setMatrix(const QMatrix &mat);
-
     QtGui::QTransform transform() const {return ::QBrush::transform();}
     void setTransform(const QtGui::QTransform & t) {::QBrush::setTransform(t);}
 
-    //    QPixmap texture() const;
-    //    void setTexture(const QPixmap &pixmap);
-
-    //    QImage textureImage() const;
-    //    void setTextureImage(const QImage &image);
-
     QColor color() const {return ::QBrush::color();}
     void setColor(const QColor& c) {::QBrush::setColor(c);}
-    //    inline void setColor(Qt::GlobalColor color);
-
-    //    const QGradient *gradient() const;
 
     bool isOpaque() const {return ::QBrush::isOpaque();}
 
@@ -232,12 +188,7 @@ struct QtNamespace: public QtEnums
     QPen() {}
     QPen(QtEnums::PenStyle x): ::QPen(x) {}
     QPen(const QColor &color): ::QPen(color) {}
-    //    QPen(const QBrush &brush, qreal width, Qt::PenStyle s = Qt::SolidLine,
-    //         Qt::PenCapStyle c = Qt::SquareCap, Qt::PenJoinStyle j = Qt::BevelJoin)
-    
     QPen(const ::QPen &pen): ::QPen(pen) {}
-
-    //    inline void swap(QPen &other) { qSwap(d, other.d); }
 
     QtEnums::PenStyle style() const {return QtEnums::PenStyle(::QPen::style());}
     void setStyle(QtEnums::PenStyle s) {::QPen::setStyle(Qt::PenStyle(s));}
@@ -482,9 +433,6 @@ namespace QtCore
     {return ::QSize::expandedTo(x);}
     QtCore::QSize boundedTo(const QtCore::QSize & x) const
     {return ::QSize::boundedTo(x);}
-
-//    int &rwidth() {return ::QSize::rwidth();}
-//    int &rheight() {return ::QSize::rheight();}
   };
 
 }

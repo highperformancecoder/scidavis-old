@@ -208,31 +208,21 @@ namespace classdesc
   DEF_TYPENAME(QwtSymbol);
   DEF_TYPENAME(QTransform);
 
-  template <class T> struct tn<QList<T>>
-  {
-    static string name() {return "QList<"+typeName<T>()+">";}
-  };
+ #define DEF_TYPENAME_TEMPLATE1(X)                               \
+  template <class T> struct tn<X<T>>                            \
+  {                                                             \
+    static string name() {return "X<"+typeName<T>()+">";}       \
+  };                                                            \
 
-  template <class T> struct tn<QVector<T>>
-  {
-    static string name() {return "QVector<"+typeName<T>()+">";}
-  };
-
-  template <class T> struct tn<QPointer<T>>
-  {
-    static string name() {return "QPointer<"+typeName<T>()+">";}
-  };
+  DEF_TYPENAME_TEMPLATE1(QList);
+  DEF_TYPENAME_TEMPLATE1(QVector);
+  DEF_TYPENAME_TEMPLATE1(QPointer);
+  DEF_TYPENAME_TEMPLATE1(QFlags);
 
   template <class K, class V> struct tn<QMap<K,V>>
   {
     static string name() {return "QMap<"+typeName<K>()+","+typeName<V>()+">";}
   };
-
-  template <class T> struct tn<QFlags<T>>
-  {
-    static string name() {return "QFlags<"+typeName<T>()+">";}
-  };
-
 
   template <class T> struct tn
   {
