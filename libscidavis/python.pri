@@ -13,23 +13,28 @@
 
   DEFINES += SCRIPTING_PYTHON
   HEADERS += src/PythonScript.h src/PythonScripting.h src/Qt.h
-  SOURCES += src/PythonScript.cpp src/PythonScripting.cpp src/Qt.cpp
+  SOURCES += src/PythonScript.cpp src/PythonScripting.cpp src/Qt.cpp src/PythonApplicationWindow.cpp
 
-  CLASSDESC_HEADERS = src/ApplicationWindow.h src/Script.h src/Folder.h \
-                    src/Matrix.h src/future/matrix/MatrixView.h \
-                    src/Note.h src/MyWidget.h src/QtEnums.h \
-                    src/Graph.h src/PythonScripting.h src/PythonScript.h \
-                    src/ArrowMarker.h src/Table.h src/future/table/TableView.h \
-                    src/MultiLayer.h src/QwtSymbol.h \
-                    src/future/lib/Interval.h src/future/lib/IntervalAttribute.h \
-                    src/Fit.h src/ExponentialFit.h src/PolynomialFit.h src/Qt.h \
-                    src/MultiPeakFit.h src/NonLinearFit.h \
-                    src/SmoothFilter.h \
-                    src/future/core/column/Column.h \
+  CLASSDESC_HEADERS = src/ApplicationWindow.h src/ArrowMarker.h \
                     src/future/core/AbstractAspect.h src/future/core/AbstractColumn.h \
-                    src/globals.h src/Grid.h src/ImageMarker.h src/Integration.h \
-                    src/Filter.h src/Interpolation.h src/Legend.h
-  classdesc.input = CLASSDESC_HEADERS
+                    src/CurveRangeDialog.h  src/future/core/column/Column.h \
+                    src/ExponentialFit.h \
+                    src/Filter.h src/Fit.h src/Folder.h \
+                    src/globals.h src/Graph.h src/Graph3D.h  src/Grid.h \
+                    src/ImageMarker.h src/Integration.h src/Interpolation.h \
+                    src/future/lib/Interval.h src/future/lib/IntervalAttribute.h \
+                    src/Legend.h \
+                    src/Matrix.h src/future/matrix/MatrixView.h \
+                    src/MultiPeakFit.h src/MultiLayer.h src/MyWidget.h \
+                    src/Note.h src/NonLinearFit.h \
+                    src/PlotEnrichement.h  src/PolynomialFit.h \
+                    src/PythonScripting.h src/PythonScript.h \
+                    src/Qt.h src/QtEnums.h src/QwtErrorPlotCurve.h src/QwtSymbol.h \
+                    src/SmoothFilter.h src/Script.h src/ScriptingEnv.h \
+                    src/Table.h src/future/table/TableView.h 
+
+
+classdesc.input = CLASSDESC_HEADERS
   classdesc.output = $${TMP_DIR}/${QMAKE_FILE_BASE}.cd
   classdesc.commands = classdesc -qt -respect_private -typeName -use_mbr_pointers -nodef -onbase -overload -i ${QMAKE_FILE_NAME} python >${QMAKE_FILE_OUT}
   classdesc.depends = python.pri
@@ -51,67 +56,3 @@
     } 
   }
 
-
-
-
-##################### SIP generated files #####################
-
-#  HEADERS += $${SIP_DIR}/sipAPIscidavis.h
-#
-#  SOURCES += $${SIP_DIR}/sipscidaviscmodule.cpp\
-#             $${SIP_DIR}/sipscidavisApplicationWindow.cpp\
-#             $${SIP_DIR}/sipscidavisGraph.cpp\
-#             $${SIP_DIR}/sipscidavisArrowMarker.cpp\
-#             $${SIP_DIR}/sipscidavisImageMarker.cpp\
-#             $${SIP_DIR}/sipscidavisLegend.cpp\
-#             $${SIP_DIR}/sipscidavisMultiLayer.cpp\
-#             $${SIP_DIR}/sipscidavisTable.cpp\
-#             $${SIP_DIR}/sipscidavisMatrix.cpp\
-#             $${SIP_DIR}/sipscidavisMyWidget.cpp\
-#             $${SIP_DIR}/sipscidavisScriptEdit.cpp\
-#             $${SIP_DIR}/sipscidavisNote.cpp\
-#             $${SIP_DIR}/sipscidavisPythonScript.cpp\
-#             $${SIP_DIR}/sipscidavisPythonScripting.cpp\
-#             $${SIP_DIR}/sipscidavisFolder.cpp\
-#             $${SIP_DIR}/sipscidavisFit.cpp \
-#             $${SIP_DIR}/sipscidavisExponentialFit.cpp \
-#             $${SIP_DIR}/sipscidavisTwoExpFit.cpp \
-#             $${SIP_DIR}/sipscidavisThreeExpFit.cpp \
-#             $${SIP_DIR}/sipscidavisSigmoidalFit.cpp \
-#             $${SIP_DIR}/sipscidavisGaussAmpFit.cpp \
-#             $${SIP_DIR}/sipscidavisLorentzFit.cpp \
-#             $${SIP_DIR}/sipscidavisNonLinearFit.cpp \
-#             $${SIP_DIR}/sipscidavisPluginFit.cpp \
-#             $${SIP_DIR}/sipscidavisMultiPeakFit.cpp \
-#             $${SIP_DIR}/sipscidavisPolynomialFit.cpp \
-#             $${SIP_DIR}/sipscidavisLinearFit.cpp \
-#             $${SIP_DIR}/sipscidavisGaussFit.cpp \
-#             $${SIP_DIR}/sipscidavisFilter.cpp \
-#             $${SIP_DIR}/sipscidavisDifferentiation.cpp \
-#             $${SIP_DIR}/sipscidavisIntegration.cpp \
-#             $${SIP_DIR}/sipscidavisInterpolation.cpp \
-#             $${SIP_DIR}/sipscidavisSmoothFilter.cpp \
-#             $${SIP_DIR}/sipscidavisFFTFilter.cpp \
-#             $${SIP_DIR}/sipscidavisFFT.cpp \
-#             $${SIP_DIR}/sipscidavisCorrelation.cpp \
-#             $${SIP_DIR}/sipscidavisConvolution.cpp \
-#             $${SIP_DIR}/sipscidavisDeconvolution.cpp \
-#             $${SIP_DIR}/sipscidavisAbstractAspect.cpp \
-#             $${SIP_DIR}/sipscidavisColumn.cpp \
-#				 $${SIP_DIR}/sipscidavisQwtSymbol.cpp \
-#				 $${SIP_DIR}/sipscidavisQwtPlotCurve.cpp \
-#             $${SIP_DIR}/sipscidavisQwtPlot.cpp \
-#				 $${SIP_DIR}/sipscidavisGrid.cpp \
-
-#exists($${SIP_DIR}/sipscidavisQList.cpp) {
-## SIP < 4.9
-#	SOURCES += $${SIP_DIR}/sipscidavisQList.cpp
-#} else {
-#	SOURCES += \
-#			   $${SIP_DIR}/sipscidavisQList0100QDateTime.cpp\
-#			   $${SIP_DIR}/sipscidavisQList0101Folder.cpp\
-#			   $${SIP_DIR}/sipscidavisQList0101MyWidget.cpp\
-#			   $${SIP_DIR}/sipscidavisQList0101QwtPlotCurve.cpp\
-#}
-
-###############################################################

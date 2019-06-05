@@ -10282,7 +10282,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="+188"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="+189"/>
         <source>X axis</source>
         <translation type="unfinished">Ось X</translation>
     </message>

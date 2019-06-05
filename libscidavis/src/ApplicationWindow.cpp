@@ -1179,7 +1179,7 @@ void ApplicationWindow::customMenu(MyWidget* w)
 			format->addAction(actionShowScaleDialog);
 			format->addAction(actionShowAxisDialog);
 			format->addAction(actionShowTitleDialog);
-			if (((Graph3D*)w)->coordStyle() == Qwt3D::NOCOORD)
+			if (((Graph3D*)w)->coordStyle() == Graph3D::NOCOORD)
 				actionShowAxisDialog->setEnabled(false);
 		}
 		else if (w->inherits("Table"))
@@ -1381,7 +1381,7 @@ void ApplicationWindow::customToolBars(MyWidget* w)
 			matrix_plot_tools->setEnabled (false);
 
 			Graph3D* plot= (Graph3D*)w;
-			if (plot->plotStyle() == Qwt3D::NOPLOT)
+			if (plot->plotStyle() == Graph3D::NOPLOT)
 				graph_3D_tools->setEnabled (false);
 			else
 				graph_3D_tools->setEnabled (true);
@@ -5856,13 +5856,13 @@ QDialog* ApplicationWindow::showPlot3dDialog()
 		pd->setLabelsDistance(g->labelsDistance());
 		pd->setNumbersFonts(g->numbersFont());
 
-		if (g->coordStyle() == Qwt3D::NOCOORD)
+		if (g->coordStyle() == Graph3D::NOCOORD)
 			pd->disableAxesOptions();
 
-		Qwt3D::PLOTSTYLE style= g->plotStyle();
+		auto style= g->plotStyle();
 		Graph3D::PointStyle pt=g->pointType();
 
-		if ( style == Qwt3D::USER )
+		if ( style == Graph3D::USER )
 		{
 			switch (pt)
 			{
@@ -5893,9 +5893,9 @@ QDialog* ApplicationWindow::showPlot3dDialog()
 					break;
 			}
 		}
-		else if ( style == Qwt3D::FILLED )
+		else if ( style == Graph3D::FILLED )
 			pd->disableMeshOptions();
-		else if (style == Qwt3D::HIDDENLINE || style == Qwt3D::WIREFRAME)
+		else if (style == Graph3D::HIDDENLINE || style == Graph3D::WIREFRAME)
 			pd->disableLegend();
 
 		if (g->grids() == 0)

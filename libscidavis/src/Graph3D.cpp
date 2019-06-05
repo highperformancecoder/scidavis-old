@@ -53,6 +53,7 @@
 #include <fstream>
 #include <stdexcept>
 using namespace std;
+using namespace Qwt3D;
 
 UserFunction::UserFunction(const QString& s, SurfacePlot& pw)
 : Function(pw)
@@ -166,7 +167,7 @@ void Graph3D::initPlot()
 	crossHairSmooth = true, crossHairBoxed = false;
 	conesQuality = 32; conesRad = 0.5;
 
-	style_ = NOPLOT;
+	style_ = Qwt3D::PLOTSTYLE(NOPLOT);
 	this->setWidget(d_main_widget);
 	initCoord();
 
@@ -206,7 +207,7 @@ void Graph3D::initCoord()
 	sp->coordinates()->axes[Z4].setLabelString(s);
 	labels<<s;
 
-	sp->setCoordinateStyle(BOX);
+	sp->setCoordinateStyle(Qwt3D::BOX);
 	sp->coordinates()->setAutoScale(false);
 }
 
@@ -226,11 +227,11 @@ void Graph3D::addFunction(const QString& s,double xl,double xr,double yl,
 
 	sp->legend()->setLimits(zl,zr);
 
-	if (sp->plotStyle() == NOPLOT)
+	if (sp->plotStyle() == Qwt3D::NOPLOT)
 	{
-		sp->setPlotStyle(FILLED);
-		style_=FILLED;
-		pointStyle = None;
+          sp->setPlotStyle(Qwt3D::FILLED);
+          style_=Qwt3D::FILLED;
+          pointStyle = None;
 	}
   	sp->createCoordinateSystem(Triple(xl, yl, zl), Triple(xr, yr, zr));
 	findBestLayout();
@@ -623,9 +624,9 @@ void Graph3D::updateDataXY(Table* table, int xCol, int yCol)
 
 	if (xmesh<2)
 	{
-		sp->setPlotStyle(NOPLOT);
-		update();
-		return;
+          sp->setPlotStyle(Qwt3D::NOPLOT);
+          update();
+          return;
 	}
 
 	double **data = Matrix::allocateMatrixData(xmesh, ymesh);
@@ -681,9 +682,9 @@ void Graph3D::updateDataXYZ(Table* table, int xCol, int yCol, int zCol)
 
 	if (columns<2)
 	{
-		sp->setPlotStyle(NOPLOT);
-		update();
-		return;
+          sp->setPlotStyle(Qwt3D::NOPLOT);
+          update();
+          return;
 	}
 
 	Qwt3D::Triple **data=allocateData(columns,columns);
@@ -1726,88 +1727,88 @@ void Graph3D::contextMenuEvent(QContextMenuEvent *e)
 
 void Graph3D::setFramed()
 {
-	if (sp->coordinates()->style() == FRAME)
-		return;
+  if (sp->coordinates()->style() == Qwt3D::FRAME)
+    return;
 
-	sp->makeCurrent();
-	sp->setCoordinateStyle(FRAME);
+  sp->makeCurrent();
+  sp->setCoordinateStyle(Qwt3D::FRAME);
 }
 
 void Graph3D::setBoxed()
 {
-	if (sp->coordinates()->style() == BOX)
-		return;
+  if (sp->coordinates()->style() == Qwt3D::BOX)
+    return;
 
-	sp->makeCurrent();
-	sp->setCoordinateStyle(BOX);
+  sp->makeCurrent();
+  sp->setCoordinateStyle(Qwt3D::BOX);
 }
 
 void Graph3D::setNoAxes()
 {
-	if (sp->coordinates()->style() == NOCOORD)
-		return;
-
-	sp->makeCurrent();
-	sp->setCoordinateStyle(NOCOORD);
+  if (sp->coordinates()->style() == Qwt3D::NOCOORD)
+    return;
+  
+  sp->makeCurrent();
+  sp->setCoordinateStyle(Qwt3D::NOCOORD);
 }
 
 void Graph3D::setNoGrid()
 {
-	if (sp->plotStyle() == FILLED)
-		return;
+  if (sp->plotStyle() == Qwt3D::FILLED)
+    return;
 
-	sp->makeCurrent();
-	sp->setPlotStyle(FILLED);
-	sp->updateData();
-	sp->updateGL();
+  sp->makeCurrent();
+  sp->setPlotStyle(Qwt3D::FILLED);
+  sp->updateData();
+  sp->updateGL();
 
-	style_=FILLED;
-	pointStyle = None;
+  style_=Qwt3D::FILLED;
+  pointStyle = None;
 }
 
 void Graph3D::setFilledMesh()
 {
-	if (sp->plotStyle() == FILLEDMESH)
-		return;
+  if (sp->plotStyle() == Qwt3D::FILLEDMESH)
+    return;
 
-	sp->makeCurrent();
-	sp->setPlotStyle(FILLEDMESH);
-	sp->updateData();
-	sp->updateGL();
+  sp->makeCurrent();
+  sp->setPlotStyle(Qwt3D::FILLEDMESH);
+  sp->updateData();
+  sp->updateGL();
 
-	style_=FILLEDMESH;
-	pointStyle = None;
+  style_=Qwt3D::FILLEDMESH;
+  pointStyle = None;
 }
 
 void Graph3D::setHiddenLineGrid()
 {
-	if (sp->plotStyle() == HIDDENLINE)
-		return;
+  if (sp->plotStyle() == Qwt3D::HIDDENLINE)
+    return;
 
-	sp->makeCurrent();
-	sp->setPlotStyle(HIDDENLINE);
-	sp->showColorLegend(false);
-	sp->updateData();
-	sp->updateGL();
+  sp->makeCurrent();
+  sp->setPlotStyle(Qwt3D::HIDDENLINE);
+  sp->showColorLegend(false);
+  sp->updateData();
+  sp->updateGL();
 
-	style_=HIDDENLINE;
-	pointStyle = None;
-	legendOn=false;
+  style_=Qwt3D::HIDDENLINE;
+  pointStyle = None;
+  legendOn=false;
 }
 
 void Graph3D::setLineGrid()
 {
-	if (sp->plotStyle() == WIREFRAME)
+	if (sp->plotStyle() == Qwt3D::WIREFRAME)
 		return;
 
 	sp->makeCurrent();
-	sp->setPlotStyle(WIREFRAME);
+	sp->setPlotStyle(Qwt3D::WIREFRAME);
 	sp->showColorLegend(false);
 	sp->updateData();
 	sp->updateGL();
 
 	pointStyle = None;
-	style_=WIREFRAME;
+	style_=Qwt3D::WIREFRAME;
 	legendOn=false;
 }
 
@@ -1895,33 +1896,33 @@ void Graph3D::setBarsPlot()
 
 void Graph3D::setFloorData()
 {
-	if (sp->floorStyle() == FLOORDATA)
+	if (sp->floorStyle() == Qwt3D::FLOORDATA)
 		return;
 
 	sp->makeCurrent();
-	sp->setFloorStyle(FLOORDATA);
+	sp->setFloorStyle(Qwt3D::FLOORDATA);
 	sp->updateData();
 	sp->updateGL();
 }
 
 void Graph3D::setFloorIsolines()
 {
-	if (sp->floorStyle() == FLOORISO)
+	if (sp->floorStyle() == Qwt3D::FLOORISO)
 		return;
 
 	sp->makeCurrent();
-	sp->setFloorStyle(FLOORISO);
+	sp->setFloorStyle(Qwt3D::FLOORISO);
 	sp->updateData();
 	sp->updateGL();
 }
 
 void Graph3D::setEmptyFloor()
 {
-	if (sp->floorStyle() == NOFLOOR)
+	if (sp->floorStyle() == Qwt3D::NOFLOOR)
 		return;
 
 	sp->makeCurrent();
-	sp->setFloorStyle(NOFLOOR);
+	sp->setFloorStyle(Qwt3D::NOFLOOR);
 	sp->updateData();
 	sp->updateGL();
 }
@@ -1942,7 +1943,7 @@ int Graph3D::grids()
 	return sp->coordinates()->grids();
 }
 
-void Graph3D::setGrid(Qwt3D::SIDE s, bool b)
+void Graph3D::setGrid(Side s, bool b)
 {
 	if (!sp)
 		return;
@@ -1969,27 +1970,27 @@ void Graph3D::setGrid(int grids)
 
 void Graph3D::setLeftGrid(bool b)
 {
-	setGrid(Qwt3D::LEFT,b);
+	setGrid(LEFT,b);
 }
 void Graph3D::setRightGrid(bool b)
 {
-	setGrid(Qwt3D::RIGHT,b);
+	setGrid(RIGHT,b);
 }
 void Graph3D::setCeilGrid(bool b)
 {
-	setGrid(Qwt3D::CEIL,b);
+	setGrid(CEIL,b);
 }
 void Graph3D::setFloorGrid(bool b)
 {
-	setGrid(Qwt3D::FLOOR,b);
+	setGrid(FLOOR,b);
 }
 void Graph3D::setFrontGrid(bool b)
 {
-	setGrid(Qwt3D::FRONT,b);
+	setGrid(FRONT,b);
 }
 void Graph3D::setBackGrid(bool b)
 {
-	setGrid(Qwt3D::BACK,b);
+	setGrid(BACK,b);
 }
 
 void Graph3D::print()
@@ -2198,25 +2199,25 @@ void Graph3D::setCrossOptions(double rad, double linewidth, bool smooth, bool bo
 	crossHairBoxed = boxed;
 }
 
-void Graph3D::setStyle(Qwt3D::COORDSTYLE coord,Qwt3D::FLOORSTYLE floor,
-		Qwt3D::PLOTSTYLE plot, Graph3D::PointStyle point)
+void Graph3D::setStyle(CoordStyle coord,FloorStyle floor,
+		PlotStyle plot, PointStyle point)
 {
-	sp->setCoordinateStyle(coord);
-	sp->setFloorStyle(floor);
+  sp->setCoordinateStyle(Qwt3D::COORDSTYLE(coord));
+  sp->setFloorStyle(Qwt3D::FLOORSTYLE(floor));
 
-	if (point == None)
-		sp->setPlotStyle(plot);
-	else if (point == VerticalBars)
-		sp->setPlotStyle(Bar(barsRad));
-	else if (point == Dots)
-		sp->setPlotStyle(Dot(pointSize, smooth));
-	else if (point == HairCross)
-		sp->setPlotStyle(CrossHair(crossHairRad, crossHairLineWidth, crossHairSmooth, crossHairBoxed));
-	else if (point == Cones)
-		sp->setPlotStyle(Cone3D(conesRad, conesQuality));
+  if (point == None)
+    sp->setPlotStyle(Qwt3D::PLOTSTYLE(plot));
+  else if (point == VerticalBars)
+    sp->setPlotStyle(Bar(barsRad));
+  else if (point == Dots)
+    sp->setPlotStyle(Dot(pointSize, smooth));
+  else if (point == HairCross)
+    sp->setPlotStyle(CrossHair(crossHairRad, crossHairLineWidth, crossHairSmooth, crossHairBoxed));
+  else if (point == Cones)
+    sp->setPlotStyle(Cone3D(conesRad, conesQuality));
 
-	pointStyle=point;
-	style_=sp->plotStyle() ;
+  pointStyle=point;
+  style_=sp->plotStyle() ;
 }
 
 void Graph3D::customPlotStyle(int style)
@@ -2229,8 +2230,8 @@ void Graph3D::customPlotStyle(int style)
 	{
 		case WIREFRAME  :
 			{
-				sp->setPlotStyle(WIREFRAME  );
-				style_= WIREFRAME ;
+				sp->setPlotStyle(Qwt3D::WIREFRAME  );
+				style_= Qwt3D::WIREFRAME ;
 				pointStyle = None;
 
 				legendOn = false;
@@ -2240,24 +2241,24 @@ void Graph3D::customPlotStyle(int style)
 
 		case FILLED :
 			{
-				sp->setPlotStyle(FILLED );
-				style_= FILLED;
+				sp->setPlotStyle(Qwt3D::FILLED );
+				style_= Qwt3D::FILLED;
 				pointStyle = None;
 				break;
 			}
 
 		case FILLEDMESH  :
 			{
-				sp->setPlotStyle(FILLEDMESH);
-				style_= FILLEDMESH;
+				sp->setPlotStyle(Qwt3D::FILLEDMESH);
+				style_= Qwt3D::FILLEDMESH;
 				pointStyle = None;
 				break;
 			}
 
 		case HIDDENLINE:
 			{
-				sp->setPlotStyle(HIDDENLINE);
-				style_= HIDDENLINE;
+				sp->setPlotStyle(Qwt3D::HIDDENLINE);
+				style_= Qwt3D::HIDDENLINE;
 				pointStyle = None;
 				legendOn = false;
 				sp->showColorLegend(legendOn);
@@ -2292,23 +2293,23 @@ void Graph3D::customPlotStyle(int style)
 void Graph3D::setStyle(const QStringList& st)
 {
 	if (st[1] =="nocoord")
-		sp->setCoordinateStyle(NOCOORD);
+		sp->setCoordinateStyle(Qwt3D::NOCOORD);
 	else if (st[1] =="frame")
-		sp->setCoordinateStyle(FRAME);
+		sp->setCoordinateStyle(Qwt3D::FRAME);
 	else if (st[1] =="box")
-		sp->setCoordinateStyle(BOX);
+		sp->setCoordinateStyle(Qwt3D::BOX);
 
 	if (st[2] =="nofloor")
-		sp->setFloorStyle(NOFLOOR);
+		sp->setFloorStyle(Qwt3D::NOFLOOR);
 	else if (st[2] =="flooriso")
-		sp->setFloorStyle(FLOORISO);
+		sp->setFloorStyle(Qwt3D::FLOORISO);
 	else if (st[2] =="floordata")
-		sp->setFloorStyle(FLOORDATA);
+		sp->setFloorStyle(Qwt3D::FLOORDATA);
 
 	if (st[3] =="filledmesh")
-		sp->setPlotStyle(FILLEDMESH);
+		sp->setPlotStyle(Qwt3D::FILLEDMESH);
 	else if (st[3] =="filled")
-		sp->setPlotStyle(FILLED);
+		sp->setPlotStyle(Qwt3D::FILLED);
 	else if (st[3] =="points")
 	{
 		pointSize = st[4].toDouble();
@@ -2321,9 +2322,9 @@ void Graph3D::setStyle(const QStringList& st)
 		pointStyle = Dots;
 	}
 	else if (st[3] =="wireframe")
-		sp->setPlotStyle(WIREFRAME);
+		sp->setPlotStyle(Qwt3D::WIREFRAME);
 	else if (st[3] =="hiddenline")
-		sp->setPlotStyle(HIDDENLINE);
+		sp->setPlotStyle(Qwt3D::HIDDENLINE);
 	else if (st[3] =="bars")
 	{
 		barsRad = (st[4]).toDouble();
@@ -2407,19 +2408,19 @@ void Graph3D::updateScaling(double  xVal,double  yVal,double  zVal)
 	QApplication::restoreOverrideCursor();
 }
 
-Qwt3D::PLOTSTYLE Graph3D::plotStyle()
+Graph3D::PlotStyle Graph3D::plotStyle()
 {
-	return sp->plotStyle();
+  return Graph3D::PlotStyle(sp->plotStyle());
 }
 
-Qwt3D::FLOORSTYLE Graph3D::floorStyle()
+Graph3D::FloorStyle Graph3D::floorStyle()
 {
-	return sp->floorStyle();
+  return Graph3D::FloorStyle(sp->floorStyle());
 }
 
-Qwt3D::COORDSTYLE Graph3D::coordStyle()
+Graph3D::CoordStyle Graph3D::coordStyle()
 {
-	return sp->coordinates()->style();
+  return Graph3D::CoordStyle(sp->coordinates()->style());
 }
 
 QString Graph3D::formula()
@@ -2961,7 +2962,7 @@ void Graph3D::copy(Graph3D* g)
         return;
 
 	Graph3D::PointStyle pt = g->pointType();
-	if (g->plotStyle() == Qwt3D::USER ){
+	if (g->plotStyle() == USER ){
 		switch (pt){
 			case Graph3D::None :
 				break;

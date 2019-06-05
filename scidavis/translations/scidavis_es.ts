@@ -10453,27 +10453,27 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="188"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="189"/>
         <source>X axis</source>
         <translation type="unfinished">Eje X</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="195"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="196"/>
         <source>Y axis</source>
         <translation type="unfinished">Eje Y</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="202"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="203"/>
         <source>Z axis</source>
         <translation type="unfinished">Eje Z</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2019"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2020"/>
         <source>Could not print: &lt;h4&gt;</source>
         <translation type="unfinished">No se pudo imprimir: &lt;h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2089"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2090"/>
         <source> not supported</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10482,17 +10482,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Error</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2076"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2077"/>
         <source>Please provide a valid file name!</source>
         <translation type="unfinished">¡Por favor, introduzca un nombre válido de archivo!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2018"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2019"/>
         <source>IO Error</source>
         <translation type="unfinished">Error E/S</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2076"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2077"/>
         <source>Error</source>
         <translation type="unfinished">Error</translation>
     </message>

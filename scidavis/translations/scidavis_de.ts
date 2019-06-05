@@ -11654,27 +11654,27 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">QtiPlot</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="188"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="189"/>
         <source>X axis</source>
         <translation type="unfinished">X-Achse</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="195"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="196"/>
         <source>Y axis</source>
         <translation type="unfinished">Y-Achse</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="202"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="203"/>
         <source>Z axis</source>
         <translation type="unfinished">Z-Achse</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2019"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2020"/>
         <source>Could not print: &lt;h4&gt;</source>
         <translation type="unfinished">Konnte nicht drucken: &lt;h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2089"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2090"/>
         <source> not supported</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11683,17 +11683,17 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">QtiPlot - Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2076"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2077"/>
         <source>Please provide a valid file name!</source>
         <translation type="unfinished">Bitte einen gültigen Dateinamen eingeben!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2018"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2019"/>
         <source>IO Error</source>
         <translation type="unfinished">Eingabe/Ausgabe-Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2076"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2077"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>

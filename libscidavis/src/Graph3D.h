@@ -39,8 +39,6 @@
 #include "Table.h"
 #include "Matrix.h"
 
-using namespace Qwt3D;
-
 class UserFunction;
 
 /*!\brief 3D graph widget.
@@ -64,6 +62,45 @@ public:
 
   enum PlotType{Scatter=0, Trajectory = 1, Bars = 2};
   enum PointStyle{None=0, Dots=1, VerticalBars=2, HairCross=3, Cones=4};
+  //! Plotting style
+  enum PlotStyle
+    {
+     NOPLOT=Qwt3D::NOPLOT     , //!< No visible data
+     WIREFRAME=Qwt3D::WIREFRAME  , //!< Wireframe style
+     HIDDENLINE=Qwt3D::HIDDENLINE , //!< Hidden Line style
+     FILLED=Qwt3D::FILLED     , //!< Color filled polygons w/o edges 
+     FILLEDMESH=Qwt3D::FILLEDMESH , //!< Color filled polygons w/ separately colored edges
+     POINTS=Qwt3D::POINTS     , //!< User defined style (used by Enrichments)
+     USER=Qwt3D::USER         //!< User defined style (used by Enrichments)
+    };
+
+  //! Style of Coordinate system
+  enum CoordStyle
+    {
+     NOCOORD=Qwt3D::NOCOORD, //!< Coordinate system is not visible 
+     BOX=Qwt3D::BOX,     //!< Boxed
+     FRAME=Qwt3D::FRAME		 //!< Frame - 3 visible axes
+    };
+
+  //! Plotting style for floor data (projections)
+  enum FloorStyle
+    {
+     NOFLOOR=Qwt3D::NOFLOOR,   //!< Empty floor
+     FLOORISO=Qwt3D::FLOORISO,  //!< Isoline projections visible
+     FLOORDATA=Qwt3D::FLOORDATA //!< Projected polygons visible
+    };
+  
+  //! The 6 sides
+  enum Side
+    {
+     NOSIDEGRID = Qwt3D::NOSIDEGRID,
+     LEFT   = Qwt3D::LEFT,
+     RIGHT  = Qwt3D::RIGHT,
+     CEIL   = Qwt3D::CEIL,
+     FLOOR  = Qwt3D::FLOOR,
+     FRONT  = Qwt3D::FRONT,
+     BACK   = Qwt3D::BACK
+};
 
   Qwt3D::SurfacePlot* sp;
   UserFunction *func;
@@ -194,7 +231,7 @@ public slots:
   //! \name Grid
   //@{
   int grids();
-  void setGrid(Qwt3D::SIDE s, bool b);
+  void setGrid(Side s, bool b);
   void setGrid(int grids);
 
   void setLeftGrid(bool b);
@@ -205,8 +242,8 @@ public slots:
   void setBackGrid(bool b);
   //@}
 
-  void setStyle(Qwt3D::COORDSTYLE coord,Qwt3D::FLOORSTYLE floor,
-                Qwt3D::PLOTSTYLE plot, Graph3D::PointStyle point);
+  void setStyle(CoordStyle coord,FloorStyle floor,
+                PlotStyle plot, Graph3D::PointStyle point);
   void setStyle(const QStringList& st);
   void customPlotStyle(int style);
   void resetNonEmptyStyle();
@@ -232,9 +269,9 @@ public slots:
   void setZoom(double  val);
   void updateZoom(double  val);
 
-  Qwt3D::PLOTSTYLE plotStyle();
-  Qwt3D::FLOORSTYLE floorStyle();
-  Qwt3D::COORDSTYLE coordStyle();
+  PlotStyle plotStyle();
+  FloorStyle floorStyle();
+  CoordStyle coordStyle();
 
   void print();
   void copyImage();
@@ -272,7 +309,8 @@ public slots:
 
   QString colorMap(){return color_map;};
   void setDataColorMap(const QString& fileName);
-  bool openColorMap(ColorVector& cv, QString fname);
+
+  bool openColorMap(Qwt3D::ColorVector& cv, QString fname);
 
   void setColors(const QStringList& colors);
   void setColors(const QColor& meshColor,const QColor& axesColor,const QColor& numColor,
@@ -391,14 +429,14 @@ private:
 };
 
 //! Class for user defined functions
-class UserFunction : public Function
+class UserFunction : public Qwt3D::Function
 {
 public:
 
-    UserFunction(const QString& s, SurfacePlot& pw);
-	~UserFunction();
-    double operator()(double x, double y);
-	QString function(){return formula;};
+  UserFunction(const QString& s, Qwt3D::SurfacePlot& pw);
+  ~UserFunction();
+  double operator()(double x, double y);
+  QString function(){return formula;};
 
 private:
 	  QString formula;

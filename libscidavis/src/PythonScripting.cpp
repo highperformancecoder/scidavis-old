@@ -27,7 +27,7 @@
  *                                                                         *
  ***************************************************************************/
 // get rid of a compiler warning
-#include <python_base.h>
+#include "PythonClassdesc.h"
 
 #ifdef _POSIX_C_SOURCE
 #undef _POSIX_C_SOURCE
@@ -53,185 +53,75 @@ typedef struct _traceback {
 // disable these warnings, as automatically generated code sometimes has them
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-#include "PythonScript.h"
-#include "PythonScript.cd"
 #include "PythonScripting.h"
-#include "PythonScripting.cd"
 
-#include "ApplicationWindow.h"
-#include "ApplicationWindow.cd"
-#include "Folder.h"
-#include "Folder.cd"
-#include "Graph.h"
-#include "Graph.cd"
-#include "Graph3D.h"
-#include "MultiLayer.h"
-#include "MyWidget.h"
-#include "MyWidget.cd"
-#include "Matrix.h"
-#include "Matrix.cd"
-#include "MatrixView.cd"
-#include "Note.h"
-#include "Note.cd"
-#include "QtEnums.cd"
-#include "Script.h"
-#include "Script.cd"
+#include "future/core/AbstractAspect.h"
+#include "AbstractAspect.cd"
+#include "future/core/AbstractColumn.h"
+#include "AbstractColumn.cd"
 #include "ArrowMarker.h"
 #include "ArrowMarker.cd"
-#include "Table.h"
-#include "Table.cd"
-#include "TableView.cd"
-#include "MultiLayer.cd"
-#include "QwtSymbol.cd"
-#include "QwtErrorPlotCurve.h"
-#include "IntervalAttribute.cd"
-#include "Interval.cd"
-#include "Fit.h"
-#include "Fit.cd"
+#include "future/core/column/Column.h"
+#include "Column.cd"
 #include "ExponentialFit.h"
 #include "ExponentialFit.cd"
-#include "PolynomialFit.h"
-#include "PolynomialFit.cd"
-#include "MultiPeakFit.h"
-#include "MultiPeakFit.cd"
-#include "NonLinearFit.h"
-#include "NonLinearFit.cd"
-#include "Qt.h"
-#include "Qt.cd"
-#include "AbstractAspect.cd"
-#include "AbstractColumn.cd"
-#include "Column.cd"
+#include "Fit.h"
+#include "Fit.cd"
+#include "Filter.h"
+#include "Filter.cd"
+#include "Folder.cd"
+#include "globals.h"
 #include "globals.cd"
-#include "CurveRangeDialog.h"
-#include "Legend.h"
+#include "Graph.cd"
 #include "Grid.h"
 #include "Grid.cd"
 #include "ImageMarker.h"
 #include "ImageMarker.cd"
 #include "Integration.h"
 #include "Integration.cd"
-#include "Filter.h"
-#include "Filter.cd"
-#include "SmoothFilter.h"
-#include "SmoothFilter.cd"
 #include "Interpolation.h"
 #include "Interpolation.cd"
+#include "future/lib/Interval.h"
+#include "Interval.cd"
+#include "future/lib/IntervalAttribute.h"
+#include "IntervalAttribute.cd"
 #include "Legend.h"
 #include "Legend.cd"
+#include "Matrix.cd"
+#include "MatrixView.cd"
+#include "MultiLayer.cd"
+#include "MultiPeakFit.h"
+#include "MultiPeakFit.cd"
+#include "MyWidget.cd"
+#include "NonLinearFit.h"
+#include "NonLinearFit.cd"
+#include "Note.cd"
+#include "PlotEnrichement.cd"
+#include "PolynomialFit.h"
+#include "PolynomialFit.cd"
+#include "Qt.h"
+#include "Qt.cd"
+#include "QtEnums.h"
+#include "QtEnums.cd"
+#include "QwtSymbol.cd"
+#include "QwtErrorPlotCurve.h"
+#include "QwtErrorPlotCurve.cd"
+#include "Script.h"
+#include "Script.cd"
+#include "ScriptingEnv.cd"
+#include "SmoothFilter.h"
+#include "SmoothFilter.cd"
+#include "Table.h"
+#include "Table.cd"
+#include "TableView.cd"
 
-#include <QTranslator>
-#include <QToolBar>
+#include <QPainter>
 
 using namespace std;
 using boost::python::object;
 using boost::python::exec;
 using boost::python::import;
 
-namespace classdesc_access
-{
-  template <>
-  struct access_python<QString>
-  {
-    template <class C> 
-    void type(classdesc::python_t& targ, const classdesc::string&)
-    {
-      auto& c=targ.getClass<C>();
-      if (!c.completed)
-        c.def("__str__",&QString::toStdString);
-    }
-  };
-
-  template <class T>
-  struct access_python<QList<T>>:
-    public classdesc::NullDescriptor<classdesc::python_t> {};
-
-//  template <>
-//  struct access_python<QStringList>:
-//    public classdesc::NullDescriptor<classdesc::python_t> {};
-
-  template <class E, class Q>
-  struct access_python<QtEnumWrapper<E,Q>>
-  {
-    template <class C> 
-    void type(classdesc::python_t& targ, const classdesc::string& desc)
-    {
-      targ.addEnum<C>(desc,&QtEnumWrapper<E,Q>::value);
-    }
-  };
-}
-
-namespace classdesc
-{
-  template <class E, class Q>
-  struct tn<QtEnumWrapper<E,Q>>
-  {
-    static string name() {return typeName<E>();}
-  };
-  
-  // Use Qt's MOC system for reflection on Qt objects
-  template <class T>
-  typename enable_if<is_base_of<QObject,T>, string>::T
-  mocTypeName() {return T::staticMetaObject.className();}
-
-#define DEF_TYPENAME(X)                         \
-  template <> struct tn<X>                      \
-  {                                             \
-    static string name() {return #X;}           \
-  };
-  
-  DEF_TYPENAME(QString);
-  DEF_TYPENAME(QLocale);
-  DEF_TYPENAME(QColor);
-  DEF_TYPENAME(QSize);
-  DEF_TYPENAME(QFont);
-  DEF_TYPENAME(QPoint);
-  DEF_TYPENAME(QPointF);
-  DEF_TYPENAME(QStringList);
-  DEF_TYPENAME(QChar);
-  DEF_TYPENAME(QRect);
-  DEF_TYPENAME(QRectF);
-  DEF_TYPENAME(QPen);
-  DEF_TYPENAME(QIcon);
-  DEF_TYPENAME(QBrush);
-  DEF_TYPENAME(QPainter);
-  DEF_TYPENAME(QVariant);
-  DEF_TYPENAME(QwtPlotCurve);
-  DEF_TYPENAME(QwtPlotZoomer);
-  DEF_TYPENAME(QTreeWidgetItem);
-  DEF_TYPENAME(QDate);
-  DEF_TYPENAME(QDateTime);
-  DEF_TYPENAME(QTime);
-  DEF_TYPENAME(QwtPlotPrintFilter);
-  DEF_TYPENAME(QwtScaleMap);
-  DEF_TYPENAME(QPixmap);
-  DEF_TYPENAME(Qt::WindowType);
-  DEF_TYPENAME(QwtSymbol);
-  DEF_TYPENAME(QTransform);
-
- #define DEF_TYPENAME_TEMPLATE1(X)                               \
-  template <class T> struct tn<X<T>>                            \
-  {                                                             \
-    static string name() {return "X<"+typeName<T>()+">";}       \
-  };                                                            \
-
-  DEF_TYPENAME_TEMPLATE1(QList);
-  DEF_TYPENAME_TEMPLATE1(QVector);
-  DEF_TYPENAME_TEMPLATE1(QPointer);
-  DEF_TYPENAME_TEMPLATE1(QFlags);
-
-  template <class K, class V> struct tn<QMap<K,V>>
-  {
-    static string name() {return "QMap<"+typeName<K>()+","+typeName<V>()+">";}
-  };
-
-  template <class T> struct tn
-  {
-    static string name() {return mocTypeName<T>();}
-  };
-
-  // generates list semantics for QStringList
-  template <> struct is_sequence<QStringList> {static const bool value=true;};
-}
 
 #include <classdesc_epilogue.h>
 
@@ -325,10 +215,7 @@ BOOST_PYTHON_MODULE(scidavis)
   QString_from_python_str();
 
   classdesc::python_t p;
-  p.defineClass<SciDAVis>();
-  p.defineClass<ApplicationWindow>();
-  p.defineClass<PythonScripting>();
-  p.defineClass<PythonScript>();
+  exposeApplicationWindow(p);
   p.defineClass<ArrowMarker>();
   p.defineClass<ExponentialFit>();
   p.defineClass<GaussFit>();
@@ -341,11 +228,10 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<ThreeExpFit>();
   p.defineClass<TwoExpFit>();
   p.defineClass<QtNamespace>();
-  p.defineClass<Column>();
   p.defineClass<Integration>();
   p.defineClass<Interpolation>();
   p.defineClass<SmoothFilter>();
-  python<SciDAVis::ColumnMode>(p,"");
+  p.defineClass<SciQwtSymbol>();
 
   // redefine Qt as an alias for QtNamespace - unfortunately QtNamespace cannot be called Qt in C++ as Qt is already taken
   modDict("__main__")["Qt"]=modDict("scidavis")["QtNamespace"];
@@ -514,22 +400,6 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
   if (!math)
     PyErr_Print();
 
-//  scidavismod = PyImport_ImportModule("scidavis");
-//  if (scidavismod)
-//    {
-//      PyDict_SetItemString(globals, "scidavis", scidavismod);
-//      PyObject *scidavisDict = PyModule_GetDict(scidavismod);
-//      if (!setQObject(d_parent, "app", scidavisDict))
-//        QMessageBox::warning
-//          (d_parent, tr("Failed to export SciDAVis API"),
-//           tr("Accessing SciDAVis functions or objects from Python code won't work." 
-//              "Probably your version of SIP differs from the one SciDAVis was compiled against;" 
-//              "try updating SIP or recompiling SciDAVis."));
-//      PyDict_SetItemString(scidavisDict, "mathFunctions", math);
-//      Py_DECREF(scidavismod);
-//    } else
-//    PyErr_Print();
-
   sysmod = PyImport_ImportModule("sys");
   if (sysmod)
     {
@@ -554,7 +424,6 @@ void PythonScripting::redirectStdIO()
 bool PythonScripting::initialize()
 {
   if (!d_initialized) return false;
-  //	PyEval_AcquireLock();
 
   if (!d_parent->batchMode()) redirectStdIO();
 
@@ -569,7 +438,6 @@ bool PythonScripting::initialize()
   if(!initialized) initialized = loadInitFile(QCoreApplication::instance()->applicationDirPath()+"/scidavisrc");
   if(!initialized) initialized = loadInitFile("scidavisrc");
 
-  //	PyEval_ReleaseLock();
   return initialized;
 }
 

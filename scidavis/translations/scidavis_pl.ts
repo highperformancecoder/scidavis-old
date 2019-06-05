@@ -7824,42 +7824,42 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Graph3D</name>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="188"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="189"/>
         <source>X axis</source>
         <translation>Oś X</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="195"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="196"/>
         <source>Y axis</source>
         <translation>Oś Y</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="202"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="203"/>
         <source>Z axis</source>
         <translation>Oś Z</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2018"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2019"/>
         <source>IO Error</source>
         <translation>Błąd We/Wyj</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2019"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2020"/>
         <source>Could not print: &lt;h4&gt;</source>
         <translation>Nie można wydrukować: &lt;h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2076"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2077"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2076"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2077"/>
         <source>Please provide a valid file name!</source>
         <translation>Proszę podać prawidłową nazwę pliku!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph3D.cpp" line="2089"/>
+        <location filename="../../libscidavis/src/Graph3D.cpp" line="2090"/>
         <source> not supported</source>
         <translation> nie wspierany</translation>
     </message>

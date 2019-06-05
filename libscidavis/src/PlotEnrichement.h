@@ -84,8 +84,6 @@ public:
 
     //! Return #d_size.
 	QSize size() {return d_size;};
-	//! Set #d_size.
-	void setSize(const QSize& size);
 
 	virtual void updateBoundingRect();
 
