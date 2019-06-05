@@ -33,8 +33,8 @@ python {
         LIBS += -framework Python
       } else {
         LIBS+=$$system($$PYTHONBIN ../scidavis/findBoostPythonLib.py)
-        LIBS += $$system($$PYTHONBIN -c "\"from distutils import sysconfig;import sys; sys.stdout.write('-lpython'+sysconfig.get_config_var('VERSION')+(sysconfig.get_config_var('ABIFLAGS') or ''))\"")
-      }
+        LIBS+=$$system($$PYTHONBIN-config --libs)
+     }
   }
 }
 
