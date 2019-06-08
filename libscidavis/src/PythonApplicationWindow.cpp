@@ -83,7 +83,8 @@
 
 void exposeApplicationWindow(classdesc::python_t& p)
 {
+  // this needs to be done first, otherwise SciDAVis::ColumnMode will
+  // not be exposed
+  p.defineClass<SciDAVis>();
   p.defineClass<ApplicationWindow>();
-  //  p.defineClass<SciDAVis>();
-  p.defineClass<SciDAVis::ColumnMode>();
 }
