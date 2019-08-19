@@ -115,8 +115,8 @@ void RangeSelectorTool::pointSelected(const QPoint &pos)
 		setActivePoint(point);
 	else {
 		// try to be intelligent about selecting the inactive point
-		double min_x = minXValue();
-		double max_x = maxXValue();
+		double min_x = curve->data().boundingRect().left();
+		double max_x = curve->data().boundingRect().right();
 		int n = curve->dataSize();
 		double second_x;
 		if (curve->x(point) == min_x)
