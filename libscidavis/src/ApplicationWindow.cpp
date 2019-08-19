@@ -9642,18 +9642,22 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                       cl.aStyle=curve[14].toInt();
                       if(curve.count() < 16)
                         cl.penWidth = cl.lWidth;
-                      else if ((d_file_version >= 79) && (curve[3].toInt() == Graph::Box))
+                      else if ((d_file_version >= 79) && (curve[3].toInt() == Graph::Box)) {
                         cl.penWidth = curve[15].toInt();
-                      else if ((d_file_version >= 78) && (curve[3].toInt() <= Graph::LineSymbols))
+                        s_offset++;
+                      }
+                      else if ((d_file_version >= 78) && (curve[3].toInt() <= Graph::LineSymbols)) {
                         cl.penWidth = curve[15].toInt();
+                        s_offset++;
+                      }
                       else
                         cl.penWidth = cl.lWidth;
                       if (d_file_version >= 0x011800) // 1.24.0
                         {
                           // custom dash pattern
-                          cl.lCapStyle = curve[15].toInt();
-                          cl.lJoinStyle = curve[16].toInt();
-                          cl.lCustomDash = curve[17];
+                          cl.lCapStyle = curve[15+s_offset].toInt();
+                          cl.lJoinStyle = curve[16+s_offset].toInt();
+                          cl.lCustomDash = curve[17+s_offset];
                           s_offset += 3;
                         }
 
