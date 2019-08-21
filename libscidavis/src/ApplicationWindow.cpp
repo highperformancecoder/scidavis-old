@@ -9761,7 +9761,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains ("FunctionCurve"))
 		{
-			QStringList curve = s.split("\t");
+			QStringList curve = s.split("\t", QString::KeepEmptyParts);
 			CurveLayout cl;
 			cl.connectType=curve[6].toInt();
 			cl.lCol=COLORUINT(curve[7]);
@@ -9795,6 +9795,12 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 				}
 			else
 				cl.penWidth = cl.lWidth;
+
+			if (d_file_version >= 0x011800) // 1.24.0
+				{
+					// skeep capStyle, joinStyle and custom dash pattern values
+					current_index +=3;
+				}
 
 			QStringList func_spec;
 			func_spec << curve[1];
