@@ -35,6 +35,7 @@
 
 #include <QTextStream>
 #include <QStringList>
+#include <QLocale>
 
 #include <vector>
 #include <iostream>
@@ -93,7 +94,7 @@ namespace
 
   template <class C> C conv(const QString& x);
   template <> QString conv<QString>(const QString& x) {return x;}
-  template <> qreal conv<qreal>(const QString& x) {return (qreal)(x.toDouble());}
+  template <> qreal conv<qreal>(const QString& x) {return (qreal)(QLocale().toDouble(x));}
 
   template <class T>
   struct AP: public std::unique_ptr<T>
