@@ -3281,7 +3281,7 @@ ApplicationWindow * ApplicationWindow::plotFile(const QString& fn)
 
 void ApplicationWindow::importASCII()
 {
-	ImportASCIIDialog *import_dialog = new ImportASCIIDialog(d_workspace.activeSubWindow() && d_workspace.activeSubWindow()->inherits("Table"), this, d_extended_import_ASCII_dialog);
+	ImportASCIIDialog *import_dialog = new ImportASCIIDialog(d_workspace.currentSubWindow() && d_workspace.currentSubWindow()->inherits("Table"), this, d_extended_import_ASCII_dialog);
 	import_dialog->setDirectory(asciiDirPath);
 	import_dialog->selectNameFilter(d_ASCII_file_filter);
 	if (import_dialog->exec() != QDialog::Accepted)
@@ -3299,6 +3299,8 @@ void ApplicationWindow::importASCII()
 		saveSettings();
 	}
 
+	QLocale save_locale = QLocale();
+	QLocale::setDefault(import_dialog->decimalSeparators());
 	importASCII(import_dialog->selectedFiles(),
 			import_dialog->importMode(),
 			import_dialog->columnSeparator(),
@@ -3308,6 +3310,7 @@ void ApplicationWindow::importASCII()
 			import_dialog->simplifySpaces(),
 			import_dialog->convertToNumeric(),
 			import_dialog->decimalSeparators());
+	QLocale::setDefault(save_locale);
 }
 
 void ApplicationWindow::importASCII(const QStringList& files, int import_mode, const QString& local_column_separator, int local_ignored_lines,
@@ -3342,7 +3345,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 		return;
 	}
 
-	Table *table = qobject_cast<Table *>(d_workspace.activeSubWindow());
+	Table *table = qobject_cast<Table *>(d_workspace.currentSubWindow());
 	if (!table) return;
 
 	foreach(QString file, files) {
@@ -9761,7 +9764,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains ("FunctionCurve"))
 		{
-			QStringList curve = s.split("\t");
+			QStringList curve = s.split("\t", QString::KeepEmptyParts);
 			CurveLayout cl;
 			cl.connectType=curve[6].toInt();
 			cl.lCol=COLORUINT(curve[7]);
@@ -9795,6 +9798,12 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 				}
 			else
 				cl.penWidth = cl.lWidth;
+
+			if (d_file_version >= 0x011800) // 1.24.0
+				{
+					// skeep capStyle, joinStyle and custom dash pattern values
+					current_index +=3;
+				}
 
 			QStringList func_spec;
 			func_spec << curve[1];
