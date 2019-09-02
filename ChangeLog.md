@@ -1,10 +1,16 @@
 # SciDAVis changelog (main changes)
 
-=== Release 1.24 ===
+=== Release 1.26 ===
+- Added simplified and traditional Chinese translations, courtesy of Anbang Li and Wen Li
+- Updated Czech translation from Pavel Fric
+- some bugs were fixed
+
+=== Release 1.25 ===
 - added support for Qt 5.x;
 - liborigin updated;
 - some bugs were fixed;
 - color picker for symbol edge and fill colors was enhanced
+- Color settings are saved as hex values in .sciprj files
 
 === Release 1.23 - 2018-06-04 ===
 - Bug fix release;
