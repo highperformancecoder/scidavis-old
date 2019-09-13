@@ -4905,6 +4905,7 @@ void Graph::openBoxDiagram(Table *w, const QStringList& l, int fileVersion)
     if (!w)
         return;
 
+    int s_offset = 0;
     int startRow = 0;
     int endRow = w->numRows()-1;
     if (fileVersion >= 90)
@@ -4923,16 +4924,20 @@ void Graph::openBoxDiagram(Table *w, const QStringList& l, int fileVersion)
 	c_type.resize(n_curves);
 	c_type[n_curves-1] = Box;
 
-	c->setMaxStyle(SymbolBox::style(l[16].toInt()));
-	c->setP99Style(SymbolBox::style(l[17].toInt()));
-	c->setMeanStyle(SymbolBox::style(l[18].toInt()));
-	c->setP1Style(SymbolBox::style(l[19].toInt()));
-	c->setMinStyle(SymbolBox::style(l[20].toInt()));
+    if (fileVersion >= 0x011800) // 1.24.0
+    {
+        s_offset = 3;
+    }
+	c->setMaxStyle(SymbolBox::style(l[16+s_offset].toInt()));
+	c->setP99Style(SymbolBox::style(l[17+s_offset].toInt()));
+	c->setMeanStyle(SymbolBox::style(l[18+s_offset].toInt()));
+	c->setP1Style(SymbolBox::style(l[19+s_offset].toInt()));
+	c->setMinStyle(SymbolBox::style(l[20+s_offset].toInt()));
 
-	c->setBoxStyle(l[21].toInt());
-	c->setBoxWidth(l[22].toInt());
-	c->setBoxRange(l[23].toInt(), l[24].toDouble());
-	c->setWhiskersRange(l[25].toInt(), l[26].toDouble());
+	c->setBoxStyle(l[21+s_offset].toInt());
+	c->setBoxWidth(l[22+s_offset].toInt());
+	c->setBoxRange(l[23+s_offset].toInt(), l[24+s_offset].toDouble());
+	c->setWhiskersRange(l[25+s_offset].toInt(), l[26+s_offset].toDouble());
 }
 
 void Graph::setActiveTool(PlotToolInterface *tool) {
