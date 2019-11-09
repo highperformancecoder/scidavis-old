@@ -261,40 +261,40 @@ protected:
 //! Folder list view class
 class FolderListView : public SciDAVisObject<QTreeWidget>
 {
-    Q_OBJECT
+  Q_OBJECT
 
-	friend class FolderListItem;
-	friend class WindowListItem;
+  friend class FolderListItem;
+  friend class WindowListItem;
 
 public:
-	FolderListView(const QString& name = QString() );
+  FolderListView(const QString& name = QString() );
 
 public slots:
-	void adjustColumns();
-	bool isRenaming() { return state() == QAbstractItemView::EditingState; };
+  void adjustColumns();
+  bool isRenaming() { return state() == QAbstractItemView::EditingState; };
 
 protected:
-	void startDrag();
+  void startDrag(Qt::DropActions supportedActions=Qt::MoveAction) override;
 
-    void dropEvent( QDropEvent *e );
-    void mouseMoveEvent( QMouseEvent *e );
-    void mousePressEvent( QMouseEvent *e );
-	void mouseDoubleClickEvent( QMouseEvent* e );
-	void keyPressEvent ( QKeyEvent * e );
-    void mouseReleaseEvent( QMouseEvent *){mousePressed = false;};
-	void enterEvent(QEvent *){mousePressed = false;};
+  void dropEvent( QDropEvent *e ) override;
+  void mouseMoveEvent( QMouseEvent *e ) override;
+  void mousePressEvent( QMouseEvent *e ) override;
+  void mouseDoubleClickEvent( QMouseEvent* e ) override;
+  void keyPressEvent ( QKeyEvent * e ) override;
+  void mouseReleaseEvent( QMouseEvent *) override {mousePressed = false;};
+  void enterEvent(QEvent *) override {mousePressed = false;};
 
 signals:
-	void dragItems(QList<QTreeWidgetItem *> items);
-	void dropItems(QTreeWidgetItem *dest);
-	void renameItem(QTreeWidgetItem *item, int);
-	void itemRenamed(QTreeWidgetItem *item, int, const QString&);
-	void addFolderItem();
-	void deleteSelection();
+  void dragItems(QList<QTreeWidgetItem *> items);
+  void dropItems(QTreeWidgetItem *dest);
+  void renameItem(QTreeWidgetItem *item, int);
+  void itemRenamed(QTreeWidgetItem *item, int, const QString&);
+  void addFolderItem();
+  void deleteSelection();
 
 private:
-	bool mousePressed;
-	QPoint presspos;
+  bool mousePressed;
+  QPoint presspos;
 };
 
 #endif

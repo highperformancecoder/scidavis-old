@@ -50,6 +50,11 @@
 
 using namespace std;
 
+#ifdef SCRIPTING_PYTHON
+#include <boost/python.hpp>
+struct pyobject: public boost::python::object {};
+#endif
+
 Fit::Fit( ApplicationWindow *parent, Graph *g, QString name)
 : Filter( parent, g, name),
 scripted(ScriptingLangManager::newEnv("muParser", parent))

@@ -408,12 +408,12 @@ void Plot::setTickLength (int minLength, int majLength)
 	minTickLength = minLength;
 }
 
-void Plot::print(QPainter *painter, const QRect &plotRect, const QwtPlotPrintFilter &pfilter)
+void Plot::print(QPainter *painter, const QRect &plotRect, const QwtPlotPrintFilter &pfilter) const
 {
-    QwtText t = title();
+  //QwtText t = title();
     printFrame(painter, plotRect);
     QwtPlot::print(painter, plotRect, pfilter);
-    setTitle(t);
+    //setTitle(t);  WTF??
 }
 
 QwtPlotCurve* Plot::curve(int index)

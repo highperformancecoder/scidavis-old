@@ -163,6 +163,9 @@
 
 #ifdef SCRIPTING_PYTHON
 #include <PythonScripting.h>
+#include <boost/python.hpp>
+#include "PythonExtras.h"
+namespace py=boost::python;
 #endif
   
 #include <iostream>
@@ -322,6 +325,7 @@ ApplicationWindow::ApplicationWindow()
 
 	d_workspace.setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	d_workspace.setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+	d_workspace.setActivationOrder(QMdiArea::ActivationHistoryOrder);
 	setCentralWidget(&d_workspace);
 	setAcceptDrops(true);
 
@@ -3342,7 +3346,7 @@ ApplicationWindow* ApplicationWindow::plotFile(const QString& fn)
 
 void ApplicationWindow::importASCII()
 {
-	ImportASCIIDialog *import_dialog = new ImportASCIIDialog(d_workspace.activeSubWindow() && d_workspace.activeSubWindow()->inherits("Table"), this, d_extended_import_ASCII_dialog);
+	ImportASCIIDialog *import_dialog = new ImportASCIIDialog(d_workspace.currentSubWindow() && d_workspace.currentSubWindow()->inherits("Table"), this, d_extended_import_ASCII_dialog);
 	import_dialog->setDirectory(asciiDirPath);
 	import_dialog->selectNameFilter(d_ASCII_file_filter);
 	if (import_dialog->exec() != QDialog::Accepted)
@@ -3360,6 +3364,8 @@ void ApplicationWindow::importASCII()
 		saveSettings();
 	}
 
+	QLocale save_locale = QLocale();
+	QLocale::setDefault(import_dialog->decimalSeparators());
 	importASCII(import_dialog->selectedFiles(),
 			import_dialog->importMode(),
 			import_dialog->columnSeparator(),
@@ -3369,6 +3375,7 @@ void ApplicationWindow::importASCII()
 			import_dialog->simplifySpaces(),
 			import_dialog->convertToNumeric(),
 			import_dialog->decimalSeparators());
+	QLocale::setDefault(save_locale);
 }
 
 void ApplicationWindow::importASCII(const QStringList& files, int import_mode, const QString& local_column_separator, int local_ignored_lines,
@@ -3402,7 +3409,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 		return;
 	}
 
-	Table *table = qobject_cast<Table *>(d_workspace.activeSubWindow());
+	Table *table = qobject_cast<Table *>(d_workspace.currentSubWindow());
 	if (!table) return;
 
 	foreach(QString file, files) {
@@ -3729,7 +3736,6 @@ bool ApplicationWindow::loadProject(const QString& fn)
     d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
 
   projectname = fn;
-  d_file_version = d_file_version;
   setWindowTitle(tr("SciDAVis") + " - " + fn);
 
   QFileInfo fi(fn);
@@ -7516,7 +7522,7 @@ void ApplicationWindow::windowsMenuAboutToShow()
 		return;
 
 	windowsMenu->clear();
-	windowsMenu->addAction(tr("&Cascade"), &d_workspace, SLOT(cascadeSubWindows() ) );
+	windowsMenu->addAction(tr("&Cascade"), this, SLOT(cascade() ) );
 	windowsMenu->addAction(tr("&Tile"), &d_workspace, SLOT(tileSubWindows() ) );
 	windowsMenu->addSeparator();
 	windowsMenu->addAction(actionNextWindow);
@@ -9548,12 +9554,12 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 				c.setAlpha(fList[2].toInt());
 			ag->setBackgroundColor(c);
 		}
-		else if (s.contains ("Margin"))
+		else if (s.startsWith ("Margin"))
 		{
 			QStringList fList=s.split("\t");
 			ag->plotWidget()->setMargin(fList[1].toInt());
 		}
-		else if (s.contains ("Border"))
+		else if (s.startsWith ("Border"))
 		{
 			QStringList fList=s.split("\t");
 			ag->setFrame(fList[1].toInt(), QColor(COLORVALUE(fList[2])));
@@ -9661,6 +9667,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		{
                   bool curve_loaded = false; // Graph::insertCurve may fail
                   QStringList curve = s.split("\t", QString::KeepEmptyParts);
+                  int s_offset = 0;
                   if (curve.count()>14)
                     {
                       if (!app->renamedTables.isEmpty())
@@ -9677,7 +9684,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 
                       CurveLayout cl;
                       cl.connectType=curve[4].toInt();
-                      cl.lCol=curve[5].toUInt();
+                      cl.lCol=COLORUINT(curve[5]);
                       if (d_file_version <= 89)
                         cl.lCol = convertOldToNewColorIndex(cl.lCol);
                       cl.lStyle=curve[6].toInt();
@@ -9688,7 +9695,7 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                       else
                         cl.sType=curve[9].toInt();
 
-                      cl.symCol=curve[10].toUInt();
+                      cl.symCol=COLORUINT(curve[10]);
                       if (d_file_version <= 89)
                         cl.symCol = convertOldToNewColorIndex(cl.symCol);
                       if (curve[11]=="-1")
@@ -9696,36 +9703,44 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                       else
                       {
                         cl.symbolFill = true;
-                        cl.fillCol=curve[11].toUInt();
+                        cl.fillCol=COLORUINT(curve[11]);
                       }
                       if (d_file_version <= 89)
                         cl.fillCol = convertOldToNewColorIndex(cl.fillCol);
                       cl.filledArea=curve[12].toInt();
-                      cl.aCol=curve[13].toUInt();
+                      cl.aCol=COLORUINT(curve[13]);
                       if (d_file_version <= 89)
                         cl.aCol = convertOldToNewColorIndex(cl.aCol);
                       cl.aStyle=curve[14].toInt();
                       if(curve.count() < 16)
                         cl.penWidth = cl.lWidth;
-                      else if ((d_file_version >= 79) && (curve[3].toInt() == Graph::Box))
+                      else if ((d_file_version >= 79) && (curve[3].toInt() == Graph::Box)) {
                         cl.penWidth = curve[15].toInt();
-                      else if ((d_file_version >= 78) && (curve[3].toInt() <= Graph::LineSymbols))
+                        s_offset++;
+                      }
+                      else if ((d_file_version >= 78) && (curve[3].toInt() <= Graph::LineSymbols)) {
                         cl.penWidth = curve[15].toInt();
+                        s_offset++;
+                      }
                       else
                         cl.penWidth = cl.lWidth;
-                      // custom dash pattern
-                      cl.lCapStyle = curve[16].toInt();
-                      cl.lJoinStyle = curve[17].toInt();
-                      cl.lCustomDash = curve[18];
+                      if (d_file_version >= 0x011800) // 1.24.0
+                        {
+                          // custom dash pattern
+                          cl.lCapStyle = curve[15+s_offset].toInt();
+                          cl.lJoinStyle = curve[16+s_offset].toInt();
+                          cl.lCustomDash = curve[17+s_offset];
+                          s_offset += 3;
+                        }
 
                       try
                         {
                           Table& w = app->table(curve[2]);
                           int plotType = curve[3].toInt();
-                          if(curve.count()>21 && (plotType == Graph::VectXYXY || plotType == Graph::VectXYAM))
+                          if(curve.count()>(21+s_offset) && (plotType == Graph::VectXYXY || plotType == Graph::VectXYAM))
                             {
                               QStringList colsList;
-                              colsList<<curve[2]; colsList<<curve[20]; colsList<<curve[21];
+                              colsList<<curve[2]; colsList<<curve[20+s_offset]; colsList<<curve[21+s_offset];
                               if (d_file_version < 72)
                                 colsList.prepend(w.colName(curve[1].toInt()));
                               else
@@ -9751,11 +9766,11 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                               else
                                 {
                                   if(plotType == Graph::VectXYXY)
-                                    ag->updateVectorsLayout(curveID, curve[15], curve[16].toInt(),
-                                                            curve[17].toInt(), curve[18].toInt(), curve[19].toInt(), 0);
-                                  else if (curve.count()>22)
-                                    ag->updateVectorsLayout(curveID, curve[15], curve[16].toInt(), curve[17].toInt(),
-                                                            curve[18].toInt(), curve[19].toInt(), curve[22].toInt());
+                                    ag->updateVectorsLayout(curveID, curve[15+s_offset], curve[16+s_offset].toInt(),
+                                                            curve[17+s_offset].toInt(), curve[18+s_offset].toInt(), curve[19+s_offset].toInt(), 0);
+                                  else if (curve.count()>22+s_offset)
+                                    ag->updateVectorsLayout(curveID, curve[15+s_offset], curve[16+s_offset].toInt(), curve[17+s_offset].toInt(),
+                                                            curve[18+s_offset].toInt(), curve[19+s_offset].toInt(), curve[22+s_offset].toInt());
                                 }
                             }
                           else if(plotType == Graph::Box) {
@@ -9772,8 +9787,8 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                                 {
                                   if (d_file_version <= 76)
                                     h->setBinning(curve[16].toInt(),curve[17].toDouble(),curve[18].toDouble(),curve[19].toDouble());
-                                  else if (curve.count()>20)
-                                    h->setBinning(curve[17].toInt(),curve[18].toDouble(),curve[19].toDouble(),curve[20].toDouble());
+                                  else if (curve.count()>20+s_offset)
+                                    h->setBinning(curve[17+s_offset].toInt(),curve[18+s_offset].toDouble(),curve[19+s_offset].toDouble(),curve[20+s_offset].toDouble());
                                   h->loadData();
                                 }
                             }
@@ -9795,8 +9810,8 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
                             {
                               if (d_file_version <= 76 && curve.count()>15)
                                 ag->setBarsGap(curveID, curve[15].toInt(), 0);
-                              else if (curve.count()>16)
-                                ag->setBarsGap(curveID, curve[15].toInt(), curve[16].toInt());
+                              else if (curve.count()>(16+s_offset))
+                                ag->setBarsGap(curveID, curve[15+s_offset].toInt(), curve[16+s_offset].toInt());
                             }
                           if (curve_loaded)
                             ag->updateCurveLayout(curveID, &cl);
@@ -9821,24 +9836,24 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains ("FunctionCurve"))
 		{
-			QStringList curve = s.split("\t");
+			QStringList curve = s.split("\t", QString::KeepEmptyParts);
 			CurveLayout cl;
 			cl.connectType=curve[6].toInt();
-			cl.lCol=curve[7].toUInt();
+			cl.lCol=COLORUINT(curve[7]);
 			cl.lStyle=curve[8].toInt();
 			cl.lWidth=curve[9].toInt();
 			cl.sSize=curve[10].toInt();
 			cl.sType=curve[11].toInt();
-			cl.symCol=curve[12].toUInt();
+			cl.symCol=COLORUINT(curve[12]);
 			if (curve[13]=="-1")
 				cl.symbolFill = false;
 			else
 			{
 				cl.symbolFill = true;
-				cl.fillCol=curve[13].toUInt();
+				cl.fillCol=COLORUINT(curve[13]);
 			}
 			cl.filledArea=curve[14].toInt();
-			cl.aCol=curve[15].toUInt();
+			cl.aCol=COLORUINT(curve[15]);
 			cl.aStyle=curve[16].toInt();
 			int current_index = 17;
 			if(curve.count() < 16)
@@ -9855,6 +9870,12 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 				}
 			else
 				cl.penWidth = cl.lWidth;
+
+			if (d_file_version >= 0x011800) // 1.24.0
+				{
+					// skeep capStyle, joinStyle and custom dash pattern values
+					current_index +=3;
+				}
 
 			QStringList func_spec;
 			func_spec << curve[1];

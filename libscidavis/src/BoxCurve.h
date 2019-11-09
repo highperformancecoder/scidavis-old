@@ -82,6 +82,7 @@ private:
             const QwtScaleMap &yMap, int from, int to) const;
   void drawBox(QPainter *painter, const QwtScaleMap &xMap,
                const QwtScaleMap &yMap, double *dat, int size) const;
+  using QwtPlotCurve::drawSymbols;
   void drawSymbols(QPainter *painter, const QwtScaleMap &xMap,
                    const QwtScaleMap &yMap, double *dat, int size) const;
 

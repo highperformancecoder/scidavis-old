@@ -155,6 +155,7 @@ struct Application: public QApplication
     }
     return false;
   }
+  Q_OBJECT;
 };
 
 int main( int argc, char ** argv )

@@ -131,7 +131,7 @@ namespace classdesc
     static string name() {return "QMap<"+typeName<K>()+","+typeName<V>()+">";}
   };
 
-  template <class T> struct tn
+  template <class T, class E> struct tn
   {
     static string name() {return mocTypeName<T>();}
   };

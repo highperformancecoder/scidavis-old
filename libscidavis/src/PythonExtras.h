@@ -1,10 +1,8 @@
 /***************************************************************************
-	File                 : PythonScript.h
+	File                 : ModDict.h
 	Project              : SciDAVis
 --------------------------------------------------------------------
-	Copyright            : (C) 2006 by Knut Franke
-	Email (use @ for *)  : knut.franke*gmx.de
-	Description          : Execute Python code from within SciDAVis
+	Copyright            : (C) 2019 Russell Standish
 
  ***************************************************************************/
 
@@ -26,49 +24,33 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
-#ifndef PYTHON_SCRIPT_H
-#define PYTHON_SCRIPT_H
 
-#include "Script.h"
-#include <iostream>
-class QString;
-class QObject;
+// NB do not include this file in anything processed by MOC
+// Only include this file if SCRIPTING_PYTHON is true
 
-typedef struct _object PyObject;
-class PythonScripting;
-class ScriptingEnv;
+#ifndef PYTHONEXTRAS_H
+#include <boost/python.hpp>
+#include <python_base.h>
 
-class PythonScript : public Script
+inline boost::python::dict modDict(const char* mod) {
+  using namespace boost::python;
+  return extract<dict>(import(mod).attr("__dict__"))();
+}
+
+struct pyobject: public boost::python::object {};
+
+namespace classdesc
 {
-  Q_OBJECT
+  template <> struct tn<pyobject>
+  {
+    static string name() {return "boost::python::object";}
+  };
+}
 
-public:
-  PythonScript();
-  PythonScript(ScriptingEnv *env, const QString &code, QObject *context=0, const QString &name="<input>");
-  ~PythonScript();
-
-  void write(const char* text) {emit print(text);}
-
-public slots:
-  bool compile(bool for_eval=true) override;
-  QVariant eval() override;
-  bool exec() override;
-  //  bool setQObject(QObject *val, const char *name);
-  bool setInt(int val, const char* name) override;
-  bool setDouble(double val, const char* name) override;
-  void setContext(QObject *context) override;
-
-private:
-  PythonScripting *env() { return (PythonScripting*)(Env); }
-  void beginStdoutRedirect();
-  void endStdoutRedirect();
-
-  // pimpl pattern to avoid mixing boost.python with MOC
-  struct Impl;
-  std::unique_ptr<Impl> impl;
-  PyObject *PyCode=nullptr;
-  bool isFunction, hasOldGlobals;
-};
-
+namespace classdesc_access
+{
+  template <> struct access_python<pyobject>:
+    public classdesc::NullDescriptor<classdesc::python_t> {};
+}
 
 #endif

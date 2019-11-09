@@ -429,7 +429,7 @@ void Table::pasteIntoSelection()
 		input_col_count = 0;
 		for(int i=0; i<input_row_count; i++)
 		{
-			cell_texts.append(input_rows.at(i).trimmed().split(QRegExp("\\s+")));
+			cell_texts.append(input_rows.at(i).trimmed().split(QRegExp("( +|\\s)"),QString::KeepEmptyParts));
 			if(cell_texts.at(i).count() > input_col_count) input_col_count = cell_texts.at(i).count();
 		}
 

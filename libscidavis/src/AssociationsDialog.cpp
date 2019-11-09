@@ -377,6 +377,7 @@ for (int i=0; i<graph->curves(); i++)
         QString s = ((DataCurve *)it)->plotAssociation();
         QString table = ((DataCurve *)it)->table()->name().c_str();
         plotAssociationsList << table + ": " + s.remove(table + "_");
+        dataCurvesList << i;
         }
 	}
 associations->addItems(plotAssociationsList);

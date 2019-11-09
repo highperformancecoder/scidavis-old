@@ -114,6 +114,7 @@ typedef struct _traceback {
 #include "Table.h"
 #include "Table.cd"
 #include "TableView.cd"
+#include "PythonExtras.h"
 
 #include <QPainter>
 
@@ -121,7 +122,6 @@ using namespace std;
 using boost::python::object;
 using boost::python::exec;
 using boost::python::import;
-
 
 #include <classdesc_epilogue.h>
 
@@ -370,7 +370,7 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
     // if we need to bundle Python libraries with the executable,
     // specify the library location here
 #ifdef PYTHONHOME
-    Py_SetPythonHome(str(PYTHONHOME));
+    Py_SetPythonHome(const_cast<char*>(str(PYTHONHOME)));
 #endif
     //		PyEval_InitThreads ();
 #if PY_MAJOR_VERSION >= 3

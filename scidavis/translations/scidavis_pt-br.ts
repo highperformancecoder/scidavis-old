@@ -1835,7 +1835,7 @@ Deseja sobrescrevê-lo?</translation>
     </message>
     <message>
         <source>Sort Colu&amp;mn</source>
-        <translation type="obsolete">Ordemar Col&amp;una</translation>
+        <translation type="obsolete">Ordenar Col&amp;una</translation>
     </message>
     <message>
         <source>Pr&amp;operties</source>
@@ -2201,11 +2201,11 @@ Tem certeza que quer continuar?</translation>
     </message>
     <message>
         <source>Sort Ta&amp;ble</source>
-        <translation type="obsolete">Ordemar ta&amp;bela</translation>
+        <translation type="obsolete">Ordenar ta&amp;bela</translation>
     </message>
     <message>
         <source>Sort Columns</source>
-        <translation type="obsolete">Ordemar col&amp;unas</translation>
+        <translation type="obsolete">Ordenar col&amp;unas</translation>
     </message>
     <message>
         <source>Co&amp;rrelate</source>
@@ -4170,11 +4170,11 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
     </message>
     <message>
         <source>Error importing image</source>
-        <translation type="obsolete">Erro ao importar imagem</translation>
+        <translation type="unfinished">Erro ao importar imagem</translation>
     </message>
     <message>
         <source>Import of image &apos;%1&apos; failed</source>
-        <translation type="obsolete">A importação da imagem &apos;%1&apos; falhou</translation>
+        <translation type="unfinished">A importação da imagem &apos;%1&apos; falhou</translation>
     </message>
     <message>
         <source>Undo/Redo &amp;History</source>
@@ -12634,7 +12634,7 @@ Deseja sobreescrevê-lo?</translation>
     <name>SortDialog</name>
     <message>
         <source>Sort columns</source>
-        <translation type="obsolete">Ordemar colunas</translation>
+        <translation type="obsolete">Ordenar colunas</translation>
     </message>
     <message>
         <source>Order</source>
@@ -12646,7 +12646,7 @@ Deseja sobreescrevê-lo?</translation>
     </message>
     <message>
         <source>&amp;Sort</source>
-        <translation type="obsolete">&amp;Ordemar</translation>
+        <translation type="obsolete">&amp;Ordenar</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -13113,7 +13113,7 @@ Gostaria de inserir células?</translation>
     </message>
     <message>
         <source>&amp;Sort Table</source>
-        <translation type="obsolete">Ordemar tabela</translation>
+        <translation type="obsolete">Ordenar tabela</translation>
     </message>
     <message>
         <source>&amp;Go to Cell</source>
@@ -13178,7 +13178,7 @@ Gostaria de inserir células?</translation>
     </message>
     <message>
         <source>&amp;Sort Columns</source>
-        <translation type="obsolete">Ordemar colunas</translation>
+        <translation type="obsolete">Ordenar colunas</translation>
     </message>
     <message>
         <source>Column Statisti&amp;cs</source>
@@ -16046,7 +16046,7 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>Sort columns</source>
-        <translation>Ordemar colunas</translation>
+        <translation>Ordenar colunas</translation>
     </message>
     <message>
         <source>Separately</source>
@@ -16074,7 +16074,7 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>&amp;Sort</source>
-        <translation>&amp;Ordemar</translation>
+        <translation>&amp;Ordenar</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -16212,7 +16212,7 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>&amp;Sort Table</source>
-        <translation>Ordemar tabela</translation>
+        <translation>Ordenar tabela</translation>
     </message>
     <message>
         <source>&amp;Go to Cell</source>
@@ -16287,7 +16287,7 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>&amp;Sort Columns</source>
-        <translation>Ordemar colunas</translation>
+        <translation>Ordenar colunas</translation>
     </message>
     <message>
         <source>Column Statisti&amp;cs</source>
@@ -18484,7 +18484,7 @@ Os limites devem estar dentro do  rango de x; si no conhece o máximo (mínimo) 
     <name>sortDialog</name>
     <message>
         <source>Sort columns</source>
-        <translation type="obsolete">Ordemar col&amp;unas</translation>
+        <translation type="obsolete">Ordenar col&amp;unas</translation>
     </message>
     <message>
         <source>Order</source>

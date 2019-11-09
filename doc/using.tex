@@ -160,6 +160,8 @@ the {\em axis} tag and define the axes you want to use. After this,
 the plot is modified but the new axes are not shown. Use the
 \htmlref{Format Axes command}{format-axes-lnk}, select the new axes
 and click on the {\em show} checkbox. You can then customize your plot in order to obtain the result presented in figure \ref{fig-two-axes-plot-1}.
+
+
 %
 %<figure id="fig-two-axes-plot-1">
 %  <title>A 2D plot with two Y and two X axis.</title>
@@ -169,30 +171,43 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%<para>In addition to the customization which has been already described, four arrows were added with the &draw-arrow-lnk;.</para>
-%
-%</sect2>
-%<!--
-%======================================================================
-%
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{tutorial/2axes-2dplot-2.png}}
+  \caption{A 2D plot with two Y and two X axis.}
+  \label{fig-two-axes-plot-1}
+\end{figure}
+
+In addition to the customization which has been already described,
+four arrows were added with the \htmlref{Draw arrow}{draw-arrow-lnk}.
+
+
 %		how to obtain a 2D plot from a function
-%
-%-->
-%<sect2 id="sec-2d-plot-from-function">
-%<title>2D plot from function.</title>
-%<indexterm>
-%  <primary>Plot</primary><secondary>Create from function</secondary>
-%</indexterm>
-%<para>There are two ways to obtain such a plot: you can plot directly a function or fill a table with the values calculated from this function before doing a plot in the classical way.</para>
-%
-%<sect3>
-%<title>Direct plot of a function.</title>
-%
-%<para>If you just want to plot a function, you can use the &new-function-plot-lnk; from the &file-menu-lnk; or with the &new-function-plot-key; or with the &new-function-plot-icon; icon from the &file-toolbar-lnk;.</para>
-%
-%<para>You can then enter the expression of your mathematical function, the X range used for the plot, and the number of points used in this X range. See the &add-function-lnk; for details.</para>
-%
+\subsection{2D plot from function.}
+\label{sec-2d-plot-from-function}
+\index{Plot!Create from function}
+
+There are two ways to obtain such a plot: you can plot directly a
+function or fill a table with the values calculated from this function
+before doing a plot in the classical way.
+
+\subsubsection{Direct plot of a function.}
+
+If you just want to plot a function, you can use the
+\htmlref{New Function Plot}{new-function-plot-lnk} from the
+\htmlref{File Menu}{file-menu-lnk} or with the
+\htmlref{New Function Plot Key}{new-function-plot-key} or with the
+\htmlref{New Function Plot}{new-function-plot-icon} icon from
+the \htmlref{File toolbar}{file-toolbar-lnk}.
+
+You can then enter the expression of your mathematical function, the $X$
+range used for the plot, and the number of points used in this $X$
+range. See the \htmlref{Add Function}{add-function-lnk} for details.
+
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{tutorial/direct-function-plot.png}}
+  \caption{Direct plot of a function.}
+  \label{fig-direct-function-plot-1}
+\end{figure}
 %<figure id="fig-direct-function-plot-1">
 %  <title>Direct plot of a function.</title>
 %  <mediaobject> 
@@ -202,7 +217,16 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %  </mediaobject>
 %</figure>
 %
-%<para>The generic plot which is created by this command can then be customized as explained in the previous section. Beside classical Y=f(X) functions, parametric functions and polar functions can be defined. In parametric coordinates, <emphasis>X</emphasis> and <emphasis>Y</emphasis> are defined as functions of an independant parameter <emphasis>m</emphasis>. You can define these functions, the range for <emphasis>m</emphasis> and the number of points computed in this range.</para>
+
+
+The generic plot which is created by this command can then be
+customized as explained in the previous section. Beside classical
+$Y=f(X)$ functions, parametric functions and polar functions can be
+defined. In parametric coordinates, $X$ and $Y$ are defined as
+functions of an independant parameter $m$. You can define these
+functions, the range for $m$ and the number of points computed in this
+range.
+
 %
 %<figure id="fig-direct-function-plot-2">
 %  <title>Direct plot of a parametric function.</title>
@@ -212,8 +236,18 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{tutorial/direct-function-plot-parametric.png}}
+  \caption{Direct plot of a parametric function.}
+  \label{fig-direct-function-plot-2}
+\end{figure}
 %
-%<para>Polar coordinate are defined as a radius <emphasis>R</emphasis> and an angle <emphasis>theta</emphasis> (in radian). The coordinates are then obtained by <emphasis>X=R.cos(theta)</emphasis> and <emphasis>Y=R.sin(theta)</emphasis>. You can use a parametric definition: <emphasis>R=f(t)</emphasis> and  <emphasis>theta=f(t)</emphasis>, the range for <emphasis>t</emphasis> and the number of points computed in this range.</para>
+Polar coordinate are defined as a radius $R$ and an angle $\theta$ (in
+radian). The coordinates are then obtained by $X=R\cos(\theta)$ and
+$Y=R\sin(\theta)$. You can use a parametric definition: $R=f(t)$ and
+$\theta=f(t)$, the range for $t$ and the number of points computed in
+this range.
+
 %
 %<figure id="fig-direct-function-plot-3">
 %  <title>Direct plot of a function in polar coordinates.</title>
@@ -223,25 +257,40 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%</sect3>
-%<!--
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{tutorial/direct-function-plot-polar.png}}
+  \caption{Direct plot of a function in polar coordinates.}
+  \label{fig-direct-function-plot-3}
+\end{figure}
+
 %**********************************************************************
 %
 %		filling of a table with a function
 %
 %**********************************************************************
-%-->
-%<sect3 id="sec-table-function-plot">
-%<title>Filling of a table with the values of a function.</title>
-%
-%<indexterm>
-%  <primary>Columns</primary><secondary>Assign formula</secondary>
-%</indexterm>
-%<para>If you just want to work not only with the plot but also with the data, you can create a new table as explained in the <link linkend="sec-2d-plot-from-data">previous section</link>. Then you can fill this table with the values of a function with the &assign-formula-lnk;. The main advantage of this method is that you can do further analysis of the calculated data as the are kept in a table.</para>
-%
-%<para>To obtain the same plot as in the previous example, you need to create a new table (key &new-table-key;) and use the &table-dimensions-lnk; to define 300 rows, then select the first column and use the command &assign-formula-lnk; from the context menu, or from the &table-menu-lnk;. The row number symbol is <emphasis>i</emphasis>, so you can enter the function expression <emphasis>i/10</emphasis> (figure <xref xrefstyle="select: labelnumber" linkend="fig-table-function-plot-1"/>).</para>
-%
+
+\subsubsection{Filling of a table with the values of a function.}
+\label{sec-table-function-plot}
+\index{Columns!Assign formula}
+
+If you just want to work not only with the plot but also with the
+data, you can create a new table as explained in the \htmlref{previous
+  section}{sec-2d-plot-from-data}. Then you can fill this table with
+the values of a function with the \htmlref{Assign
+  Formula}{assign-formula-lnk}. The main advantage of this method is
+that you can do further analysis of the calculated data as the are
+kept in a table.
+
+To obtain the same plot as in the previous example, you need to create
+a new table (key \ref{new-table-key}) and use the \htmlref{Table
+  Dimensions}{table-dimensions-lnk} to define 300 rows, then select
+the first column and use the command \htmlref{Assign
+  Formula}{assign-formula-lnk} from the context menu, or from the
+\htmlref{Table menu}{table-menu-lnk}. The row number symbol is $i$, so
+you can enter the function expression $i/10$ (figure
+\ref{fig-table-function-plot-1}).
+
+
 %<figure id="fig-table-function-plot-1">
 %  <title>Function plot: filling of the X column.</title>
 %  <mediaobject> 
@@ -250,8 +299,17 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%<para>The second step is to select the second column and use the same command. The expression is a function of the X values, that is the first column named <emphasis>col(1)</emphasis> (figure <xref xrefstyle="select: labelnumber" linkend="fig-table-function-plot-2"/>).</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{tutorial/table-function-plot1.png}}
+  \caption{Function plot: filling of the X column.}
+  \label{fig-table-function-plot-1}
+\end{figure}
+
+
+The second step is to select the second column and use the same
+command. The expression is a function of the $X$ values, that is the
+first column named $col(1)$ (figure \ref{fig-table-function-plot-2}).
+
 %
 %<figure id="fig-table-function-plot-2">
 %  <title>Function plot: filling of the Y column.</title>
@@ -261,104 +319,119 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%<para>Once the table is ready, you just have to build the plot as explained in the previous section.</para>
-%
-%</sect3>
-%
-%</sect2>
-%
-%<!--
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{tutorial/table-function-plot1.png}}
+  \caption{Function plot: filling of the Y column.}
+  \label{tutorial/table-function-plot2.png}
+\end{figure}
+
+Once the table is ready, you just have to build the plot as explained in the previous section.
+
 %*******************************************************************
 %
 %		Other 2D plots
 %		**************
 %
 %*******************************************************************
-%-->
-%<sect2 id="sec-other-2d-xy-plot">
-%<title>The different types of 2D X-Y plots</title>
-%
-%<para>Beside the conventional X-Y plots with lines and points, other kinds of plots are available in &appname;. Although the presentation of the data can be very different, they are all based on the use of one column for X values and one column for Y values. Follow the links to the corresponding commands to see a description of these plots.</para>
-%
-%<para>The first set is available in the subset <emphasis>Special Lines/Symbol</emphasis> of the &plot-menu-lnk;:</para>
-%
-%<itemizedlist>
-%  <listitem>
-%    <para>Drop lines plot (&vertical-drop-lines-lnk;)</para>
-%  </listitem>
-%  <listitem>
-%    <para>Scatter plot with a smoothed line connection between the points (&spline-lnk;)</para>
-%  </listitem>
-%  <listitem>
-%    <para>Vertical steps plot (&vertical-steps-lnk;)</para>
-%  </listitem>
-%  <listitem>
-%    <para>Horizontal steps plot (&horizontal-steps-lnk;)</para>
-%  </listitem>
-%</itemizedlist>
-%<para>The other ones are more special plots which can be accessed directly in the &plot-menu-lnk;:</para>
-%<itemizedlist>
-%  <listitem>
-%    <para>Vertical bars plot (&columns-lnk;)</para>
-%  </listitem>
-%  <listitem>
-%    <para>Horizontal bars plot (&rows-lnk;)</para>
-%  </listitem>
-%  <listitem>
-%    <para>Area plot (&area-lnk;)</para>
-%  </listitem>
-%</itemizedlist>
-%
-%</sect2>
-%
-%<!--
+
+\subsection{The different types of 2D X-Y plots}
+\label{sec-other-2d-xy-plot}
+
+Beside the conventional X-Y plots with lines and points, other kinds
+of plots are available in \SciDAVis. Although the presentation of the
+data can be very different, they are all based on the use of one
+column for $X$ values and one column for $Y$ values. Follow the links
+to the corresponding commands to see a description of these plots.
+
+The first set is available in the subset {\em Special Lines/Symbol} of
+the \htmlref{Plot menu}{plot-menu-lnk}:
+
+\begin{itemize}
+\item \htmlref{Drop lines plot}{&vertical-drop-lines-lnk}
+\item Scatter plot with a \htmlref{smoothed line}{spline-lnk}
+  connection between the points
+\item \htmlref{Vertical steps plot}{&vertical-steps-lnk;}
+\item \htmlref{Horizontal steps plot}{horizontal-steps-lnk}
+\end{itemize}
+
+The other ones are more special plots which can be accessed directly
+in the \htmlref{Plot menu}{plot-menu-lnk}:
+
+\begin{itemize}
+  \item \htmlref{Vertical bars plot}{columns-lnk}
+  \item \htmlref{Horizontal bars plot}{rows-lnk}
+  \item \htmlref{Area plot}{area-lnk}
+\end{itemize}
+
 %*******************************************************************
 %
 %		customization of 2D plots
 %		*************************
 %
 %*******************************************************************
-%-->
-%<sect2 id="sec-customize-2d-plot">
-%<title>Customization of a 2D plot</title>
-%
-%<para>There are many way to improve and modify the plots:</para>
-%<itemizedlist>
-%  <listitem>
-%    <para>The first part of the commands are used to modify the main elements of the plot, that is axis, labels, etc. They can be accessed through the &format-menu-lnk;.</para>
-%  </listitem>
-%  <listitem>
-%    <para>The second part of commands can be used to insert additional objects likes arrows, images, text labels, etc. They can be accessed in the &graph-menu-lnk;.</para>
-%  </listitem>
-%</itemizedlist>
-%<para>This section will show an overview of the first set of commands. See the &graph-menu-lnk; section for the other commands. There are three main windows which allows to modify the plot:</para>
-%<itemizedlist>
-%  <listitem>
-%    <para>The &format-plot-lnk;, it is entitled "Plot details" and is used to customize the global properties of the plot (background color, etc) and the data series (points shape, line width, etc).</para>
-%  </listitem>
-%  <listitem>
-%    <para>The second one is entitled "General plot options" and contain the commands to format axes (scales, labels, grids, etc), it can be accessed through the &format-scales-lnk;, &format-axes-lnk; and &format-grid-lnk;.</para>
-%  </listitem>
-%  <listitem>
-%    <para>The last one is the &format-title-lnk; which is used to control the properties of the title of the plot.</para>
-%  </listitem>
-%</itemizedlist>
-%<para>All these commands are accessed through the &format-menu-lnk;.</para>
-%
-%<sect3 id="sec-plot-details">
-%<title>"Plot details" window</title>
-%
-%<para>This window has two parts, the left one shows a tree view of the main elements of the plot: the layers and the data series which are plotted in each layer. The main dialog is activated by selecting the &format-plot-lnk; from the &format-menu-lnk;. If it is activated by a double click on a curve in the plot, the same dialog will be opened with the corresponding curve selected (see <link linkend="sec-plot-details-series">next section</link> for details). The right section of the window shows the options which are available for the selected entity. If you do some changes, don't forget to click on the <emphasis>Apply</emphasis> button before switching to another entity.</para>
-%
-%<sect4 id="sec-plot-details-layer">
-%<title>Options for the layer</title>
-%
-%<indexterm>
-%  <primary>Plot details</primary><secondary>Layer options</secondary>
-%</indexterm>
-%
-%<para>This dialog can be used to modify the background color of the global plot area (i.e. the layer), the color of the canvas (that is the area in which curves are plotted), and the border of the plot. This border is for the global plot, if you want to add a border to the canvas, you can use the <emphasis>general</emphasis> tag of the &format-axes-lnk;. If the image format use to save the plots support it, you can also control the transparency of these objects through the opacity parameter. The default value is 255 which means no transparency. See the &export-graph-lnk; for details on image formats.</para> 
+
+\subsection{Customization of a 2D plot}
+\label{sec-customize-2d-plot}
+
+There are many way to improve and modify the plots:
+
+\begin{itemize}
+\item The first part of the commands are used to modify the main
+  elements of the plot, that is axis, labels, etc. They can be
+  accessed through the \htmlref{Format menu}{format-menu-lnk}.
+\item The second part of commands can be used to insert additional
+  objects likes arrows, images, text labels, etc. They can be accessed
+  in the \htmlref{Graph menu}{graph-menu-lnk}.
+\end{itemize}
+
+This section will show an overview of the first set of commands. See
+the \htmlref{Graph menu}{graph-menu-lnk} section for the other commands. There are three main windows which allows to modify the plot:
+
+\begin{itemize}
+\item The \htmlref{Format plot}{format-plot-lnk}, it is entitled
+  ``Plot details'' and is used to customize the global properties of
+  the plot (background color, etc) and the data series (points shape,
+  line width, etc).
+  
+\item The second one is entitled "General plot options" and contain
+  the commands to format axes (scales, labels, grids, etc), it can be
+  accessed through the \htmlref{Format scales}{format-scales-lnk},
+  \htmlref{Format axes}{format-axes-lnk} and \htmlref{format-grid-lnk}.
+\item The last one is the \htmlref{Format title}{format-title-lnk} which is used to control the properties of the title of the plot.
+\end{itemize}
+All these commands are accessed through the \htmlref{Format menu}{format-menu-lnk}
+
+\subsubsection{``Plot details'' window}
+\label{sec-plot-details}
+
+This window has two parts, the left one shows a tree view of the main
+elements of the plot: the layers and the data series which are plotted
+in each layer. The main dialog is activated by selecting the
+\htmlref{Format plot command}{format-plot-lnk} from the
+\htmlref{Format menu}{format-menu-lnk}. If it is activated by a double
+click on a curve in the plot, the same dialog will be opened with the
+corresponding curve selected (see the \htmref{next
+  section}{sec-plot-details-series} for details). The right section of
+the window shows the options which are available for the selected
+entity. If you do some changes, don't forget to click on the
+{\em Apply} button before switching to another entity.
+
+
+\subsubsection{Options for the layer}
+\label{sec-plot-details-layer}
+\index{Plot details!Layer options}
+
+This dialog can be used to modify the background color of the global
+plot area (i.e. the layer), the color of the canvas (that is the area
+in which curves are plotted), and the border of the plot. This border
+is for the global plot, if you want to add a border to the canvas, you
+can use the {\em general} tag of the \htmlref{Format
+  axes}{format-axes-lnk}. If the image format use to save the plots
+support it, you can also control the transparency of these objects
+through the opacity parameter. The default value is 255 which means no
+transparency. See the \htmlref{Export graph}{export-graph-lnk} for
+details on image formats.
+
 %
 %<figure id="fig-plot-details-layer">
 %  <title>The <emphasis>Plot details</emphasis> Dialog: general properties of the layers.</title>
@@ -368,23 +441,35 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%</sect4>
-%
-%<sect4 id="sec-plot-details-series">
-%<title>Custom curves for data series</title>
-%
-%<indexterm>
-%  <primary>Plot details</primary><secondary>Options for lines and symbols</secondary>
-%</indexterm>
-%<para>The commands can be accessed by a double click on a curve, or by using the &format-plot-lnk; and selecting a curve in the window on the left. The right part of the dialog box contains several tabs which depend on the kind of plot that you are using. The left part of the dialog window shows the curves which are plotted in the active layer. All the modifications will be done on the selected curve.</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/plot-details-layer.png}}
+  \caption{The {\em Plot details} Dialog: general properties of the layers.}
+  \label{fig-plot-details-layer}
+\end{figure}
+
+\subsubsection{Custom curves for data series}
+\label{sec-plot-details-series}
+\index{Plot details!Options for lines and symbols}
+
+The commands can be accessed by a double click on a curve, or by using
+the \htmlref{Format plot command}{format-plot-lnk} and selecting a
+curve in the window on the left. The right part of the dialog box
+contains several tabs which depend on the kind of plot that you are
+using. The left part of the dialog window shows the curves which are
+plotted in the active layer. All the modifications will be done on the
+selected curve.
+
 %<!--
 %		remark on plot associations buttons
 %-->
-%<indexterm>
-%  <primary>Plot details</primary><secondary>Specification of X and Y series</secondary>
-%</indexterm>
-%<para>In this dialog box, beside the customization of data curves, you can change the columns which are used by clicking on the <emphasis>Plot Associations...</emphasis> button. This will open a dialog which can be used to select the columns of the table which are used as X and Y values.</para>
+\index{Plot details!Specification of X and Y series}
+
+In this dialog box, beside the customization of data curves, you can
+change the columns which are used by clicking on the {\em Plot
+Associations\ldots} button. This will open a dialog which can
+be used to select the columns of the table which are used as X and Y
+values.
+
 %<figure id="fig-plot-associations">
 %   <title>The <emphasis>Plot details</emphasis> Dialog: Plot Associations.</title>
 %   <mediaobject> 
@@ -393,9 +478,24 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %      </imageobject>
 %   </mediaobject>
 %</figure>
-%
-%<para>The button <emphasis>Worksheet</emphasis> can be used to access to the table which contains the columns selected.</para>
-%<para>The dialog presented in figure <xref xrefstyle="select: labelnumber" linkend="fig-format-lines"/> is activated for plots drawn with <emphasis>symbols</emphasis>, <emphasis>line+symbols</emphasis>, <emphasis>lines</emphasis>, <emphasis>vertical drop lines</emphasis>, <emphasis>steps</emphasis> and <emphasis>splines</emphasis>. The first tab labelled <emphasis>axis</emphasis> can be used to select the axis which are used for each curve of the plot: bottom (default) or top for abscissae, and left (default) or right for Y values. Beware that whatever your choice the right and top axis will not be drawn, you need to use the &format-axes-lnk; to obtain a plot in which these axis are shown.</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/plot-associations.png}}
+  \caption{The {\em Plot details} Dialog: Plot Associations.}
+  \label{fig-plot-associations}
+\end{figure}
+
+The button {\em Worksheet} can be used to access to the table which
+contains the columns selected.
+
+The dialog presented in figure \ref{fig-format-lines} is activated for
+plots drawn with {\em symbols}, {\em line+symbols}, {\em lines}, {\em
+  vertical drop lines}, {\em steps} and {\em splines}. The first tab
+labelled {\em axis} can be used to select the axis which are used for
+each curve of the plot: bottom (default) or top for abscissae, and
+left (default) or right for $Y$ values. Beware that whatever your
+choice the right and top axis will not be drawn, you need to use the
+\htmlref{Format axes command}{format-axes-lnk} to obtain a plot in
+which these axis are shown.
 %
 %<figure id="fig-details-axes">
 %  <title>The <emphasis>Plot details</emphasis> Dialog: Choice of axes.</title>
@@ -405,8 +505,18 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%<para>The second tab allows to modify the style of the line (color, line style, thickness). The connect button allows to change the style which is used to draw the selected curve (steps, droplines, etc). See the &plot-menu-lnk; to see examples of the different types of plot available.</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/plot-details-axes.png}}
+  \caption{The {\em Plot details} Dialog: Choice of axes.}
+  \label{fig-details-axes}
+\end{figure}
+
+The second tab allows to modify the style of the line (color, line
+style, thickness). The connect button allows to change the style which
+is used to draw the selected curve (steps, droplines, etc). See the
+\htmlref{Plot menu}{plot-menu-lnk} to see examples of the different
+types of plot available.
+
 %
 %<figure id="fig-format-lines">
 %  <title>The Plot details Dialog: Line formatting.</title>
@@ -416,8 +526,16 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%<para>If you select a style with symbols (scatter or symbol+lines), a last tab can be activated to select the symbol, and to modify the size, the color and the filling color of the symbols.</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/plot-details-lines.png}}
+  \caption{The Plot details Dialog: Line formatting.}
+  \label{fig-format-lines}
+\end{figure}
+
+If you select a style with symbols (scatter or symbol+lines), a last
+tab can be activated to select the symbol, and to modify the size, the
+color and the filling color of the symbols.
+
 %
 %<figure id="fig-format-symbols">
 %  <title>The Plot details Dialog: Symbol formatting.</title>
@@ -427,9 +545,15 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%<para>When the data are plotted using bars, the <emphasis>Plot details</emphasis> window shows different options. The first tab named <emphasis>Pattern</emphasis> can be used to customize the background and the border lines of the bars.</para>
-%
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/plot-details-symbols.png}}
+  \caption{The Plot details Dialog: Symbol formatting.}
+  \label{fig-format-symbols}
+\end{figure}
+
+When the data are plotted using bars, the {\em Plot details} window
+shows different options. The first tab named {\em Pattern} can be used to customize the background and the border lines of the bars.
+
 %<figure id="fig-format-pattern">
 %  <title>The Plot details Dialog: Pattern formatting for bars.</title>
 %  <mediaobject> 
@@ -438,17 +562,33 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%<para>The second tab named <emphasis>Spacing</emphasis> can be used to modify the geometry of the bars:</para>
-%<itemizedlist>
-%  <listitem>
-%    <para>The default width W of the bar is computed from the smallest difference between two successive abscissae, this correspond to a <emphasis>Gap between bars</emphasis> equal to 0 (which is the default value). All bar are drawn with the same width. The Gap is a percentage of this default width: that is, a value of 50 will decrease the width of all the bars by a factor 2.</para>
-%  </listitem>
-%  <listitem>
-%    <para>The bars are placed in order to be centered around each X value, i.e. between x-W/2 and x+W/2; this correspond to an <emphasis>Offset</emphasis> of 0 (default value). The offset is again a percentage of the default width of the bar. For example, a value of 50 will shift the position of the bar by a half of the default width (W/2) and therefore each bar will placed between x and x+W. Negatives values can be used to shift the bars to the left. If inverted axes are used, the direction of the shift remains the same (i.e. positive offset lead to a shift to the right).</para>
-%  </listitem>
-%</itemizedlist>
-%
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/plot-details-symbols.png}}
+  \caption{The Plot details Dialog: Symbol formatting.}
+  \label{fig-format-symbols}
+\end{figure}
+
+The second tab named {\em Spacing} can be used to
+modify the geometry of the bars:
+
+\begin{itemize}
+\item
+  The default width $W$ of the bar is computed from the smallest
+  difference between two successive abscissae, this correspond to a
+  {\em Gap between bars} equal to 0 (which is the default value). All bar are drawn with the same width. The Gap is a percentage of this default width: that is, a value of 50 will decrease the width of all the bars by a factor 2.
+\item
+  The bars are placed in order to be centered around each $X$ value,
+  i.e. between $x-W/2$ and $x+W/2$; this correspond to an {\em Offset}
+  of 0 (default value). The offset is again a percentage of the
+  default width of the bar. For example, a value of 50 will shift the
+  position of the bar by a half of the default width ($W/2$) and
+  therefore each bar will placed between $x$ and $x+W$. Negatives
+  values can be used to shift the bars to the left. If inverted axes
+  are used, the direction of the shift remains the same (i.e. positive
+  offset lead to a shift to the right).
+  
+\end{itemize}
+
 %<figure id="fig-format-spacing">
 %  <title>The Plot details Dialog: Spacing formatting for bars.</title>
 %  <mediaobject> 
@@ -457,13 +597,12 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %    </imageobject>
 %  </mediaobject>
 %</figure>
-%
-%</sect4>
-%
-%</sect3>
-%
-%</sect2>
-%
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/plot-details-spacing.png}}
+  \caption{The Plot details Dialog: Spacing formatting for bars.}
+  \label{fig-format-spacing}
+\end{figure}
+
 %<!--
 %*******************************************************************
 %
@@ -471,17 +610,31 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %
 %*******************************************************************
 %-->
-%<sect2 id="sec-default-2d-plot">
-%
-%<title>Changing default 2D plot options</title>
-%<indexterm><primary>Options</primary><secondary>2D plot</secondary></indexterm>
-%
-%<para>There are two ways to modify the default style which is used for plots. The first one applies to all plot and is reached by the &preferences-lnk; (in the &edit-menu-lnk;). And the second one is to define templates for a specific family of plots with the &save-as-template-lnk;.</para>
-%
-%<sect3 id="sec-preferences-2d-plot">
-%<title>Modification of default options</title>
-%  <indexterm><primary>Plot</primary><secondary>Change default options</secondary></indexterm>
-%  <para>In the dialog box which is opened by the &preferences-cmd;, the third set of options is used to customize the default aspect of <emphasis>2D plots</emphasis>. The first tab is used to set some general options. Most of them are obvious to understand. If <emphasis>autoscaling</emphasis> is set, the scales of the axes will be reset to their default values each time a modification is done on the data series. The <emphasis>scale font</emphasis> option is set by default, in this case the size of the font are modified each time the window size is modified.</para>
+
+\subsection{Changing default 2D plot options}
+\label{sec-default-2d-plot}
+\index{Options!2D plot}
+
+There are two ways to modify the default style which is used for
+plots. The first one applies to all plot and is reached by the
+\htmlref{Preferences command}{preferences-lnk} (in the \htmlref{Edit menu}{edit-menu-lnk}). And the second one is to
+define templates for a specific family of plots with the
+\htmlref{Save As command}{save-as-template-lnk}.
+
+\subsubsection{Modification of default options}
+\label{sec-preferences-2d-plot}
+\index{Plot!Change default options}
+
+In the dialog box which is opened by the \htmlref{Preference
+  command}{preferences-cmd}, the third set of options is used to
+customize the default aspect of {\em 2D plots}. The first tab is used
+to set some general options. Most of them are obvious to
+understand. If {\em autoscaling} is set, the scales of the axes will
+be reset to their default values each time a modification is done on
+the data series. The {\em scale font} option is set by default, in
+this case the size of the font are modified each time the window size
+is modified.
+
 %  <figure id="fig-preferences-dialog-3a">
 %    <title>The preferences dialog: 2D plot options.</title>
 %    <mediaobject>
@@ -490,7 +643,15 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %      </imageobject>
 %    </mediaobject>
 %  </figure>
-%  <para>The second tab named <emphasis>Curves</emphasis> defines the default style used when you create a new plot.</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/preferences-dialog3a.png}}
+  \caption{The preferences dialog: 2D plot options.}
+  \label{fig-preferences-dialog-3a}
+\end{figure}
+
+The second tab named {\em Curves} defines the default
+style used when you create a new plot.
+
 %  <informalfigure id="fig-preferences-dialog-3b">
 %    <mediaobject>
 %      <imageobject>
@@ -498,7 +659,16 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %      </imageobject>
 %    </mediaobject>
 %  </informalfigure>
-%  <para>The third tab named <emphasis>Ticks</emphasis> defines the default style for the ticks of the axes used when you create a new plot.</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/preferences-dialog3b.png}}
+  \label{fig-preferences-dialog-3b}
+\end{figure}
+
+
+
+The third tab named <emphasis>Ticks</emphasis> defines the default
+style for the ticks of the axes used when you create a new plot.
+
 %  <informalfigure id="fig-preferences-dialog-3c">
 %    <mediaobject>
 %      <imageobject>
@@ -506,7 +676,16 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %      </imageobject>
 %    </mediaobject>
 %  </informalfigure>
-%  <para>The fourth tab named <emphasis>Fonts</emphasis> defines the default style for the fonts used for the axes, used when you create a new plot.</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/preferences-dialog3c.png}}
+  \label{fig-preferences-dialog-3c}
+\end{figure}
+
+
+The fourth tab named {\em Fonts} defines the default
+style for the fonts used for the axes, used when you create a new
+plot.
+
 %  <informalfigure id="fig-preferences-dialog-3d">
 %    <mediaobject>
 %      <imageobject>
@@ -514,7 +693,17 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %      </imageobject>
 %    </mediaobject>
 %  </informalfigure>
-%  <para>The last tab allows to modify two parameters for the printing of plots. The first one is used to re-scale the plot in order to fit the chosen paper size, the other one to print crops marks around the plot (for cutting).</para>
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/preferences-dialog3d.png}}
+  \label{fig-preferences-dialog-3d}
+\end{figure}
+
+
+The last tab allows to modify two parameters for the printing of
+plots. The first one is used to re-scale the plot in order to fit the
+chosen paper size, the other one to print crops marks around the plot
+(for cutting).
+
 %  <informalfigure id="fig-preferences-dialog-3e">
 %    <mediaobject>
 %      <imageobject>
@@ -522,19 +711,23 @@ and click on the {\em show} checkbox. You can then customize your plot in order 
 %      </imageobject>
 %    </mediaobject>
 %  </informalfigure>
-% </sect3>
-%
-%</sect2>
-%<!--
+\begin{figure}
+  \resizebox{\textwidth}{!}{\includegraphics{pics/preferences-dialog3e.png}}
+  \label{fig-preferences-dialog-3e}
+\end{figure}
+
 %=========================================================================
 %
 %		working with templates
 %		======================
-%-->
-%
-%<sect2 id="sec-template-2d-plot">
-%  <title>Working with templates</title>
-%  <para>If you want to build several plots based on the same model, you can use template files. This allows to save geometry of plots, the values, fonts and colors of labels, etc (see &open-template-lnk; for details on the items which are saved).</para>
+
+\subsection{Working with templates}
+\label{sec-template-2d-plot}
+If you want to build several plots based on the same model, you can
+use template files. This allows to save geometry of plots, the values,
+fonts and colors of labels, etc (see &open-template-lnk; for details
+on the items which are saved).
+
 %  <para>In the following example, the pristine figure is the <link linkend="fig-simple-2dplot-3">simple 2D plot</link> presented above, it was saved as a template and an empty plot was created by the &open-template-cmd;.</para>
 %  <informalfigure id="fig-open-template">
 %    <mediaobject> 

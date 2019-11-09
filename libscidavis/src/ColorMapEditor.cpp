@@ -97,14 +97,14 @@ setMaximumWidth(200);
 void ColorMapEditor::updateColorMap()
 {
 int rows = table->rowCount();
-QColor c_min = QColor(table->item(0, 1)->text());
-QColor c_max = QColor(table->item(rows - 1, 1)->text());
+QColor c_min = QColor(COLORVALUE(table->item(0, 1)->text()));
+QColor c_max = QColor(COLORVALUE(table->item(rows - 1, 1)->text()));
 QwtLinearColorMap map(c_min, c_max);
 for (int i = 1; i < rows-1; i++)
 	{
 	QwtDoubleInterval range = QwtDoubleInterval(min_val, max_val);
 	double val = (table->item(i, 0)->text().toDouble() - min_val)/range.width();
-	map.addColorStop (val, QColor(table->item(i, 1)->text()));
+	map.addColorStop (val, QColor(COLORVALUE(table->item(i, 1)->text())));
 	}
 
 color_map = map;
@@ -184,7 +184,7 @@ void ColorMapEditor::showColorDialog(int row, int col)
 if (col != 1)
 	return;
 
-QColor c = QColor(table->item(row, 1)->text());
+QColor c = QColor(COLORVALUE(table->item(row, 1)->text()));
 QColor color = QColorDialog::getColor(c, this);
 if (!color.isValid() || color == c)
 	return;

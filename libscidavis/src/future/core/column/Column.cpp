@@ -39,6 +39,11 @@
 #include <iostream>
 using namespace std;
 
+#ifdef SCRIPTING_PYTHON
+#include <boost/python.hpp>
+struct pyobject: public boost::python::object {};
+#endif
+
 Column::Column(const QString& name, SciDAVis::ColumnMode mode)
   : AbstractColumn(name)
 {
@@ -211,7 +216,7 @@ void Column::replaceTexts(int first, const pyobject& newValues)
 {
 #ifdef SCRIPTING_PYTHON
   QStringList x;
-  for (int i=0; i<len(newValues); ++i)
+  for (int i=0; i<boost::python::len(newValues); ++i)
     x << boost::python::extract<const char*>(newValues[i])();
   replaceTexts(first,x);
 #endif

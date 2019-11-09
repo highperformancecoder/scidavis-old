@@ -42,12 +42,7 @@ class QString;
 
 class ColumnStringIO;
 
-#ifdef SCRIPTING_PYTHON
-#include <boost/python.hpp>
-typedef boost::python::object pyobject;
-#else
 struct pyobject;
-#endif
 
 //! Aspect that manages a column
 /**
@@ -113,13 +108,13 @@ public:
   //! \name aspect related functions
   //@{
   //! Return an icon to be used for decorating the views and table column headers
-  virtual QIcon icon() const;
+  virtual QIcon icon() const override;
   //@}
 
   //! Return the data type of the column
   SciDAVis::ColumnDataType dataType() const override;
   //! Return whether the object is read-only
-  bool isReadOnly() const { return false; };
+  bool isReadOnly() const /*override*/ { return false; };
   //! Return the column mode
   /**
    * This function is most used by tables but can also be used
@@ -167,17 +162,17 @@ public:
    */
   int rowCount() const override;
   //! Insert some empty (or initialized with zero) rows
-  void insertRows(int before, int count);
+  void insertRows(int before, int count) /*override*/;
   //! Remove 'count' rows starting from row 'first'
-  void removeRows(int first, int count);
+  void removeRows(int first, int count) /*override*/;
   //! Return the column plot designation
   SciDAVis::PlotDesignation plotDesignation() const override;
   //! Set the column plot designation
   void setPlotDesignation(SciDAVis::PlotDesignation pd);
   //! Clear the whole column
-  void clear();
+  void clear() /*override*/;
   //! This must be called before the column is replaced by another
-  void notifyReplacement(const AbstractColumn* replacement);
+  void notifyReplacement(const AbstractColumn* replacement) /*override*/;
   //! Return the output filter (for data type -> string  conversion)
   /**
    * This method is mainly used to get a filter that can convert
@@ -194,7 +189,7 @@ public:
   //! Return whether a certain interval of rows contains only invalid values 	 
   bool isInvalidInterval(Interval<int> i) const override;
   //! Return all intervals of invalid rows
-  QList< Interval<int> > invalidIntervals() const;
+  QList< Interval<int> > invalidIntervals() const override;
   //! Return whether a certain row is masked 	 
   bool isMasked(int row) const override;
   //! Return whether a certain interval of rows rows is fully masked 	 
@@ -202,9 +197,9 @@ public:
   //! Return all intervals of masked rows
   QList< Interval<int> > maskedIntervals() const override;
   //! Clear all validity information
-  void clearValidity();
+  void clearValidity() /*override*/;
   //! Clear all masking information
-  void clearMasks();
+  void clearMasks() /*override*/;
   //! Set an interval invalid or valid
   /**
    * \param i the interval
@@ -239,13 +234,13 @@ public:
    * 	list << QString(interval.toString() + ": " + my_column.formula(interval.start()));
    * \endcode
    */
-  QList< Interval<int> > formulaIntervals() const;
+  QList< Interval<int> > formulaIntervals() const /*override*/;
   //! Set a formula string for an interval of rows
   void setFormula(Interval<int> i, QString formula);
   //! Overloaded function for convenience
   void setFormula(int row, QString formula);
   //! Clear all formulas
-  void clearFormulas();
+  void clearFormulas() /*override*/;
   //@}
 		
   //! \name type specific functions

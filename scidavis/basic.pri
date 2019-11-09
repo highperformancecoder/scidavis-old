@@ -54,6 +54,8 @@ TRANSLATIONS    = translations/scidavis_de.ts \
                   translations/scidavis_cs.ts \
                   translations/scidavis_cs-alt.ts \
                   translations/scidavis_pl.ts \
+                  translations/scidavis_zh-cn.ts \
+                  translations/scidavis_zh-tw.ts
 
     exists(translations/scidavis_de.ts){
         translationfiles.files =     translations/scidavis_de.qm \
@@ -66,6 +68,8 @@ TRANSLATIONS    = translations/scidavis_de.ts \
                              translations/scidavis_cs.qm \
                              translations/scidavis_cs-alt.qm \
                              translations/scidavis_pl.qm \
+                             translations/scidavis_zh-cn.qm \
+                             translations/scidavis_zh-tw.qm
 
         unix: tstarget.target = translations/scidavis_de.qm
         win32: tstarget.target = translations\scidavis_de.qm

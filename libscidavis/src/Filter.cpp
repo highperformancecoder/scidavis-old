@@ -179,7 +179,7 @@ bool Filter::setDataFromCurve(const QString& curveTitle, double from, double to,
 
 void Filter::setColor(const QString& colorName)
 {
-    QColor c = QColor(colorName);
+    QColor c = QColor(COLORVALUE(colorName));
     if (colorName == "green")
         c = QColor(Qt::green);
     else if (colorName == "darkYellow")

@@ -1383,7 +1383,7 @@ void ConfigDialog::pickWorkspaceColor()
 
 void ConfigDialog::pickDataMaxColor()
 {
-	QColor c = QColorDialog::getColor(QColor(plot3DColors[0]), this );
+	QColor c = QColorDialog::getColor(QColor(COLORVALUE(plot3DColors[0])), this );
 	if ( !c.isValid() )
 		return;
 
@@ -1392,7 +1392,7 @@ void ConfigDialog::pickDataMaxColor()
 
 void ConfigDialog::pickDataMinColor()
 {
-	QColor c = QColorDialog::getColor(QColor(plot3DColors[4]), this );
+	QColor c = QColorDialog::getColor(QColor(COLORVALUE(plot3DColors[4])), this );
 	if ( !c.isValid() )
 		return;
 
@@ -1401,7 +1401,7 @@ void ConfigDialog::pickDataMinColor()
 
 void ConfigDialog::pick3DBackgroundColor()
 {
-	QColor c = QColorDialog::getColor(QColor(plot3DColors[7]), this );
+	QColor c = QColorDialog::getColor(QColor(COLORVALUE(plot3DColors[7])), this );
 	if ( !c.isValid() )
 		return;
 
@@ -1410,7 +1410,7 @@ void ConfigDialog::pick3DBackgroundColor()
 
 void ConfigDialog::pickMeshColor()
 {
-	QColor c = QColorDialog::getColor(QColor(plot3DColors[2]), this );
+	QColor c = QColorDialog::getColor(QColor(COLORVALUE(plot3DColors[2])), this );
 	if ( !c.isValid() )
 		return;
 
@@ -1419,7 +1419,7 @@ void ConfigDialog::pickMeshColor()
 
 void ConfigDialog::pickGridColor()
 {
-	QColor c = QColorDialog::getColor(QColor(plot3DColors[3]), this );
+	QColor c = QColorDialog::getColor(QColor(COLORVALUE(plot3DColors[3])), this );
 	if ( !c.isValid() )
 		return;
 
@@ -1428,7 +1428,7 @@ void ConfigDialog::pickGridColor()
 
 void ConfigDialog::pick3DAxesColor()
 {
-	QColor c = QColorDialog::getColor(QColor(plot3DColors[6]), this );
+	QColor c = QColorDialog::getColor(QColor(COLORVALUE(plot3DColors[6])), this );
 	if ( !c.isValid() )
 		return;
 
@@ -1437,7 +1437,7 @@ void ConfigDialog::pick3DAxesColor()
 
 void ConfigDialog::pick3DNumbersColor()
 {
-	QColor c = QColorDialog::getColor(QColor(plot3DColors[5]), this );
+	QColor c = QColorDialog::getColor(QColor(COLORVALUE(plot3DColors[5])), this );
 	if ( !c.isValid() )
 		return;
 
@@ -1446,7 +1446,7 @@ void ConfigDialog::pick3DNumbersColor()
 
 void ConfigDialog::pick3DLabelsColor()
 {
-	QColor c = QColorDialog::getColor(QColor(plot3DColors[1]), this );
+	QColor c = QColorDialog::getColor(QColor(COLORVALUE(plot3DColors[1])), this );
 	if ( !c.isValid() )
 		return;
 

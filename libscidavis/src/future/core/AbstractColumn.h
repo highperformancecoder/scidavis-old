@@ -43,6 +43,7 @@
 class Column;
 class AbstractSimpleFilter;
 class QStringList;
+class AbstractFilter;
 
 //! Interface definition for data with column logic
 /**

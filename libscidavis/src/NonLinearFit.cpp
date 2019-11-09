@@ -34,6 +34,11 @@
 #include <QMessageBox>
 using namespace std;
 
+#ifdef SCRIPTING_PYTHON
+#include <boost/python.hpp>
+struct pyobject: public boost::python::object {};
+#endif
+
 	NonLinearFit::NonLinearFit(ApplicationWindow *parent, Graph *g)
 : Fit(parent, g)
 {

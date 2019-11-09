@@ -31,17 +31,11 @@
 
 #include "ScriptingEnv.h"
 #include "PythonScript.h"
-namespace py=boost::python;
 
 class QObject;
 class QString;
 
 typedef struct _object PyObject;
-
-inline py::dict modDict(const char* mod) {
-  using namespace py;
-  return extract<dict>(import(mod).attr("__dict__"))();
-}
 
 /// returns a reference to the current "scidavis.app" object
 ApplicationWindow& theApp();
@@ -56,7 +50,7 @@ public:
   PythonScripting(ApplicationWindow *parent, bool batch=false);
   ~PythonScripting();
   static ScriptingEnv *constructor(ApplicationWindow *parent, bool batch=false) { return new PythonScripting(parent, batch); }
-  bool initialize();
+  bool initialize() override;
   void redirectStdIO() override;
 
   void write(const char* text) { emit print(text); }
@@ -85,14 +79,18 @@ public:
   bool exec(const QString &code, PyObject *argDict=NULL, const char *name="<scidavis>");
   QString errorMsg();
 
-  bool isRunning() const;
-  Script *newScript(const QString &code, QObject *context, const QString &name="<input>")
+  bool isRunning() const override;
+  Script *newScript(const QString &code, QObject *context, const QString &name="<input>") override
   {
     return new PythonScript(this, code, context, name);
   }
 
-  bool setInt(int, const char*, PyObject *dict=NULL);
-  bool setDouble(double, const char*, PyObject *dict=NULL);
+  bool setQObject(QObject*, const char*, PyObject *dict);
+  bool setQObject(QObject *val, const char *name) override { return setQObject(val,name,NULL); }
+  bool setInt(int i, const char* s) override {return setInt(i,s,nullptr);}
+  bool setInt(int, const char*, PyObject *dict);
+  bool setDouble(double x, const char* s) override {return setDouble(x,s,nullptr);}
+  bool setDouble(double, const char*, PyObject *dict);
 
   QStringList mathFunctions() const override;
   QString mathFunctionDoc (const QString &name) const override;

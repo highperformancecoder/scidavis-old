@@ -1955,7 +1955,7 @@ void Graph::drawCanvasFrame(const QStringList& frame)
           d_plot->setFrameStyle(QFrame::Box);
         
 	QPalette pal = d_plot->palette();
-	pal.setColor(QPalette::WindowText,QColor(frame[2]));
+	pal.setColor(QPalette::WindowText,QColor(COLORVALUE(frame[2])));
 	d_plot->setPalette(pal);
 }
 
@@ -2213,7 +2213,7 @@ void Graph::setAxesTitleColor(QStringList l)
 		if (scale)
 		{
   	        QwtText title = scale->title();
-  	        title.setColor(QColor(l[i+1]));
+	        title.setColor(QColor(COLORVALUE(l[i+1])));
   	        scale->setTitle(title);
   	   }
 	}
@@ -2607,9 +2607,9 @@ long Graph::insertTextMarker(const QStringList& list, int fileVersion)
 	}
 	else if (fileVersion < 90)
 	{
-		mrk->setTextColor(QColor(fList[9]));
+		mrk->setTextColor(QColor(COLORVALUE(fList[9])));
 		mrk->setFrameStyle(fList[10].toInt());
-		mrk->setBackgroundColor(QColor(fList[12]));
+		mrk->setBackgroundColor(QColor(COLORVALUE(fList[12])));
 
 		int n=(int)fList.count();
 		for (int i=0;i<n-13;i++)
@@ -2617,9 +2617,9 @@ long Graph::insertTextMarker(const QStringList& list, int fileVersion)
 	}
 	else
 	{
-		mrk->setTextColor(QColor(fList[9]));
+		mrk->setTextColor(QColor(COLORVALUE(fList[9])));
 		mrk->setFrameStyle(fList[10].toInt());
-		QColor c = QColor(fList[12]);
+		QColor c = QColor(COLORVALUE(fList[12]));
 		c.setAlpha(fList[13].toInt());
 		mrk->setBackgroundColor(c);
 
@@ -2649,7 +2649,7 @@ void Graph::addArrowProject(QStringList list, int fileVersion)
 							list[3].toDouble(), list[4].toDouble());
 
 	mrk->setWidth(list[5].toInt());
-	mrk->setColor(QColor(list[6]));
+	mrk->setColor(QColor(COLORVALUE(list[6])));
 	mrk->setStyle(getPenStyle(list[7]));
 	mrk->drawEndArrow(list[8]=="1");
 	mrk->drawStartArrow(list[9]=="1");
@@ -2970,67 +2970,68 @@ bool Graph::canConvertTo(QwtPlotCurve *c, CurveType type)
 
 void Graph::setCurveType(int curve_index, CurveType type, bool update)
 {
-	CurveType old_type = static_cast<CurveType>(c_type[curve_index]);
-	// nothing changed
-	if (type == old_type) return;
-	// not all types can be modified cleanly
-	if (type != Line && type != Scatter && type != LineSymbols && type != VerticalBars
-			&& type != Area && type != VerticalDropLines && type != Spline && type != HorizontalSteps
-			&& type != HorizontalBars && type != VerticalSteps)
-		return;
-	if (old_type != Line && old_type != Scatter && old_type != LineSymbols && old_type != VerticalBars
-			&& old_type != Area && old_type != VerticalDropLines && old_type != Spline && old_type != HorizontalSteps
-			&& old_type != HorizontalBars && old_type != VerticalSteps)
-		return;
+  if (curve_index>=c_type.size()) return;
+  CurveType old_type = static_cast<CurveType>(c_type[curve_index]);
+  // nothing changed
+  if (type == old_type) return;
+  // not all types can be modified cleanly
+  if (type != Line && type != Scatter && type != LineSymbols && type != VerticalBars
+      && type != Area && type != VerticalDropLines && type != Spline && type != HorizontalSteps
+      && type != HorizontalBars && type != VerticalSteps)
+    return;
+  if (old_type != Line && old_type != Scatter && old_type != LineSymbols && old_type != VerticalBars
+      && old_type != Area && old_type != VerticalDropLines && old_type != Spline && old_type != HorizontalSteps
+      && old_type != HorizontalBars && old_type != VerticalSteps)
+    return;
 
-	if ((type == VerticalBars || type == HorizontalBars)
-			!= (old_type == VerticalBars || old_type == HorizontalBars)) {
-		// bar curves are represented by a different class than the other curve types, which makes
-		// changing from/to horizontal or vertical bars more difficult
-		DataCurve *old_curve = static_cast<DataCurve*>(curvePtr(curve_index));
-		DataCurve *new_curve = 0;
-		switch (type) {
-			case Histogram:
-			case Box:
-			case Pie:
-				return;
-			case VerticalBars:
-				new_curve = new QwtBarCurve(QwtBarCurve::Vertical,
-						old_curve->table(), old_curve->xColumnName(), old_curve->yColumnName(),
-						old_curve->startRow(), old_curve->endRow());
-				new_curve->setStyle(QwtPlotCurve::UserCurve);
-				break;
-			case HorizontalBars:
-				new_curve = new QwtBarCurve(QwtBarCurve::Horizontal,
-						old_curve->table(), old_curve->xColumnName(), old_curve->yColumnName(),
-						old_curve->startRow(), old_curve->endRow());
-				new_curve->setStyle(QwtPlotCurve::UserCurve);
-				break;
-			default:
-				new_curve = new DataCurve(
-						old_curve->table(), old_curve->xColumnName(), old_curve->yColumnName(),
-						old_curve->startRow(), old_curve->endRow());
-				break;
-		}
+  if ((type == VerticalBars || type == HorizontalBars)
+      != (old_type == VerticalBars || old_type == HorizontalBars)) {
+    // bar curves are represented by a different class than the other curve types, which makes
+    // changing from/to horizontal or vertical bars more difficult
+    DataCurve *old_curve = static_cast<DataCurve*>(curvePtr(curve_index));
+    DataCurve *new_curve = 0;
+    switch (type) {
+    case Histogram:
+    case Box:
+    case Pie:
+      return;
+    case VerticalBars:
+      new_curve = new QwtBarCurve(QwtBarCurve::Vertical,
+                                  old_curve->table(), old_curve->xColumnName(), old_curve->yColumnName(),
+                                  old_curve->startRow(), old_curve->endRow());
+      new_curve->setStyle(QwtPlotCurve::UserCurve);
+      break;
+    case HorizontalBars:
+      new_curve = new QwtBarCurve(QwtBarCurve::Horizontal,
+                                  old_curve->table(), old_curve->xColumnName(), old_curve->yColumnName(),
+                                  old_curve->startRow(), old_curve->endRow());
+      new_curve->setStyle(QwtPlotCurve::UserCurve);
+      break;
+    default:
+      new_curve = new DataCurve(
+                                old_curve->table(), old_curve->xColumnName(), old_curve->yColumnName(),
+                                old_curve->startRow(), old_curve->endRow());
+      break;
+    }
 
-		old_curve->clearErrorBars();
-		if (int i = d_fit_curves.indexOf(old_curve) >= 0)
-			d_fit_curves.replace(i, new_curve);
+    old_curve->clearErrorBars();
+    if (int i = d_fit_curves.indexOf(old_curve) >= 0)
+      d_fit_curves.replace(i, new_curve);
 
-		d_plot->removeCurve(c_keys[curve_index]);
-		c_keys[curve_index] = d_plot->insertCurve(new_curve);
-		new_curve->loadData();
+    d_plot->removeCurve(c_keys[curve_index]);
+    c_keys[curve_index] = d_plot->insertCurve(new_curve);
+    new_curve->loadData();
 
-		if (d_range_selector && old_curve == d_range_selector->selectedCurve())
-			d_range_selector->setSelectedCurve(new_curve);
-	}
+    if (d_range_selector && old_curve == d_range_selector->selectedCurve())
+      d_range_selector->setSelectedCurve(new_curve);
+  }
 
-	c_type[curve_index] = type;
-	if (!update) return;
+  c_type[curve_index] = type;
+  if (!update) return;
 
-	CurveLayout cl = initCurveLayout(type, 1);
-	updateCurveLayout(curve_index, &cl);
-	updatePlot();
+  CurveLayout cl = initCurveLayout(type, 1);
+  updateCurveLayout(curve_index, &cl);
+  updatePlot();
 }
 
 void Graph::updateCurveLayout(int index, const CurveLayout *cL)
@@ -4958,6 +4959,7 @@ void Graph::openBoxDiagram(Table *w, const QStringList& l, int fileVersion)
     if (!w)
         return;
 
+    int s_offset = 0;
     int startRow = 0;
     int endRow = w->numRows()-1;
     if (fileVersion >= 90)
@@ -4976,16 +4978,20 @@ void Graph::openBoxDiagram(Table *w, const QStringList& l, int fileVersion)
 	c_type.resize(n_curves);
 	c_type[n_curves-1] = Box;
 
-	c->setMaxStyle(SymbolBox::style(l[16].toInt()));
-	c->setP99Style(SymbolBox::style(l[17].toInt()));
-	c->setMeanStyle(SymbolBox::style(l[18].toInt()));
-	c->setP1Style(SymbolBox::style(l[19].toInt()));
-	c->setMinStyle(SymbolBox::style(l[20].toInt()));
+    if (fileVersion >= 0x011800) // 1.24.0
+    {
+        s_offset = 3;
+    }
+	c->setMaxStyle(SymbolBox::style(l[16+s_offset].toInt()));
+	c->setP99Style(SymbolBox::style(l[17+s_offset].toInt()));
+	c->setMeanStyle(SymbolBox::style(l[18+s_offset].toInt()));
+	c->setP1Style(SymbolBox::style(l[19+s_offset].toInt()));
+	c->setMinStyle(SymbolBox::style(l[20+s_offset].toInt()));
 
-	c->setBoxStyle(l[21].toInt());
-	c->setBoxWidth(l[22].toInt());
-	c->setBoxRange(l[23].toInt(), l[24].toDouble());
-	c->setWhiskersRange(l[25].toInt(), l[26].toDouble());
+	c->setBoxStyle(l[21+s_offset].toInt());
+	c->setBoxWidth(l[22+s_offset].toInt());
+	c->setBoxRange(l[23+s_offset].toInt(), l[24+s_offset].toDouble());
+	c->setWhiskersRange(l[25+s_offset].toInt(), l[26+s_offset].toDouble());
 }
 
 void Graph::setActiveTool(PlotToolInterface *tool) {

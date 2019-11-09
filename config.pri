@@ -284,7 +284,9 @@ contains(PRESET, linux_package) {
 
     equals(QT_MAJOR_VERSION, 5) {
         exists(/usr/include/qt5/qwt5-qt5)      {INCLUDEPATH+=/usr/include/qt5/qwt5-qt5}
+        exists(/usr/include/qwt5-qt5)      {INCLUDEPATH+=/usr/include/qwt5-qt5}
         exists(/usr/include/qt5/qwtplot3d-qt5) {INCLUDEPATH+=/usr/include/qt5/qwtplot3d-qt5}
+        exists(/usr/include/qwtplot3d) {INCLUDEPATH+=/usr/include/qwtplot3d}
 
         system (ls /usr/lib*/libqwt5-qt5.so) {
             LIBS+=-lqwt5-qt5
@@ -326,7 +328,10 @@ contains(PRESET, linux_package) {
 
 	INCLUDEPATH  += /usr/include/muParser
 	LIBS         += -lgsl -lgslcblas
-	LIBS         += -lmuparser 
+	LIBS         += -lmuparser
+
+  # disable this warning because StringList has a user defined constructor, but hasn't bother to declare an assignment operator
+  QMAKE_CXXFLAGS+="-Wno-deprecated-copy"
 
 }
 

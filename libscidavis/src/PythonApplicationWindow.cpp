@@ -78,8 +78,11 @@
 #include <QDockWidget>
 #include <classdesc_epilogue.h>
 
+#include "PythonExtras.h"
+
 #include <QTranslator>
 #include <QToolBar>
+
 
 void exposeApplicationWindow(classdesc::python_t& p)
 {

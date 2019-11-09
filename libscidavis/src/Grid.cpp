@@ -135,10 +135,10 @@ void Grid::load(const QStringList& grid)
 
     QPen majPenX, minPenX, majPenY, minPenY;
 	if (grid.count() == 21){ // since 0.9 final
-		majPenX = QPen(QColor(grid[5]), grid[7].toInt(), Graph::getPenStyle(grid[6].toInt()));
-		minPenX = QPen(QColor(grid[8]), grid[10].toInt(), Graph::getPenStyle(grid[9].toInt()));
-		majPenY = QPen(QColor(grid[11]), grid[13].toInt(), Graph::getPenStyle(grid[12].toInt()));
-		minPenY = QPen(QColor(grid[14]), grid[16].toInt(), Graph::getPenStyle(grid[15].toInt()));
+		majPenX = QPen(QColor(COLORVALUE(grid[5])), grid[7].toInt(), Graph::getPenStyle(grid[6].toInt()));
+		minPenX = QPen(QColor(COLORVALUE(grid[8])), grid[10].toInt(), Graph::getPenStyle(grid[9].toInt()));
+		majPenY = QPen(QColor(COLORVALUE(grid[11])), grid[13].toInt(), Graph::getPenStyle(grid[12].toInt()));
+		minPenY = QPen(QColor(COLORVALUE(grid[14])), grid[16].toInt(), Graph::getPenStyle(grid[15].toInt()));
 
 		xZeroOn = grid[17].toInt();
 		yZeroOn = grid[18].toInt();

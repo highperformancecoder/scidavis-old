@@ -1,6 +1,11 @@
 #include "Qt.h"
 #include <qcolor.h>
 
+#ifdef SCRIPTING_PYTHON
+#include <boost/python.hpp>
+struct pyobject: public boost::python::object {};
+#endif
+
 const QColor QtNamespace::white{Qt::white};
 const QColor QtNamespace::black{Qt::black};
 const QColor QtNamespace::red{Qt::red};
@@ -26,7 +31,7 @@ void QtNamespace::QPen::setDashPattern(const pyobject &pattern)
 {
 #ifdef SCRIPTING_PYTHON
   QVector<qreal> p;
-  for (int i=0; i<len(pattern); ++i)
+  for (int i=0; i<boost::python::len(pattern); ++i)
     p.append(boost::python::extract<qreal>(pattern[i]));
   setDashPattern(p);
 #endif

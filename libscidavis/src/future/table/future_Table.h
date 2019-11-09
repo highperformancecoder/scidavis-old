@@ -214,6 +214,7 @@ public:
   //! Return the text displayed in the given cell
   QString text(int row, int col);
   void setSelectionAs(SciDAVis::PlotDesignation pd);
+  using AbstractPart::copy;
   void copy(Table * other);
 
   //! \name serialize/deserialize

@@ -53,6 +53,8 @@
 #include <QMouseEvent>
 #include <QDrag>
 
+#include <assert.h>
+
 Folder::Folder(const QString &name )
 	: d_active_window(0)
 {
@@ -301,37 +303,37 @@ FolderListView::FolderListView(const QString& name )
     setDropIndicatorShown(true);
 }
 
-void FolderListView::startDrag()
+void FolderListView::startDrag(Qt::DropActions supportedActions)
 {
-QTreeWidgetItem *item = currentItem();
-if (!item)
-	return;
+  QTreeWidgetItem *item = currentItem();
+  if (!item)
+    return;
 
-if (item == topLevelItem(0) && item->treeWidget()->rootIsDecorated())
-	return;//it's the project folder so we don't want the user to move it
+  if (item == topLevelItem(0) && item->treeWidget()->rootIsDecorated())
+    return;//it's the project folder so we don't want the user to move it
 
-QPixmap pix;
-if (item->type() == FolderListItem::FolderType)
-	pix = QPixmap(":/folder_closed.xpm");
-else
-	pix = item->icon(0).pixmap(QSize());
+  QPixmap pix;
+  if (item->type() == FolderListItem::FolderType)
+    pix = QPixmap(":/folder_closed.xpm");
+  else
+    pix = item->icon(0).pixmap(QSize());
 
-QDrag *drag = new QDrag(viewport());
-drag->setPixmap(pix);
-drag->setHotSpot(QPoint(pix.width()/2, pix.height()/2 ) );
+  QDrag *drag = new QDrag(viewport());
+  drag->setPixmap(pix);
+  drag->setHotSpot(QPoint(pix.width()/2, pix.height()/2 ) );
 
-QList<QTreeWidgetItem *> lst;
-QTreeWidgetItemIterator it(this);
-while (*it)
-	{
-	if ((*it)->isSelected())
-		lst.append(*it);
-	it++;
-	}
+  QList<QTreeWidgetItem *> lst;
+  QTreeWidgetItemIterator it(this);
+  while (*it)
+    {
+      if ((*it)->isSelected())
+        lst.append(*it);
+      it++;
+    }
 
-emit dragItems(lst);
-	drag->setMimeData(mimeData(lst));
-	drag->exec();
+  emit dragItems(lst);
+  drag->setMimeData(mimeData(lst));
+  drag->exec(supportedActions);
 }
 
 void FolderListView::dropEvent( QDropEvent *e )

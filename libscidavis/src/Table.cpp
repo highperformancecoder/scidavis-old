@@ -59,6 +59,11 @@
 #include <iostream>
 using namespace std;
 
+#ifdef SCRIPTING_PYTHON
+#include <boost/python.hpp>
+struct pyobject: public boost::python::object {};
+#endif
+
 Table::Table(const ScriptingEnvPtr& env, const QString &fname,const QString &sep,
              int ignoredLines, bool renameCols,
              bool stripSpaces, bool simplifySpaces, bool convertToNumeric, QLocale numericLocale,

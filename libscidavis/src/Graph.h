@@ -195,7 +195,7 @@ public slots:
 			const QString &title);
   bool insertPolarCurve(const QString &radial, const QString &angular,
 			double from, double to, const QString &parameter, int points)
-  {return insertPolarCurve(radial,angular,from,to,parameter,points,QString::null);}
+  {return insertPolarCurve(radial,angular,from,to,parameter,points,{});}
   bool insertPolarCurve(const QString &radial, const QString &angular,
 			double from, double to, const QString &parameter)
   {return insertPolarCurve(radial,angular,from,to,parameter,100);}
@@ -213,7 +213,7 @@ public slots:
                              const QString &title);
   bool insertParametricCurve(const QString &x, const QString &y,
                              double from, double to, const QString &parameter, int points)
-  {return insertParametricCurve(x,y,from,to,parameter,points,QString::null);}
+  {return insertParametricCurve(x,y,from,to,parameter,points,{});}
   bool insertParametricCurve(const QString &x, const QString &y,
                              double from, double to, const QString &parameter)
   {return insertParametricCurve(x,y,from,to,parameter,100);}
@@ -709,14 +709,14 @@ public slots:
   bool addFunctionCurve
   (ApplicationWindow *parent, int type, const QStringList &formulas,
    const QString& var,const QList<double> &ranges, int points,
-   const QString& title = QString::null);
+   const QString& title = {});
   //! Used when reading from a project file.
   bool insertFunctionCurve(ApplicationWindow * parent, const QStringList& func_spec, int points, int fileVersion);
   bool insertFunctionCurve(const QString &formula, double from, double to,
                            int points, const QString &title);
   bool insertFunctionCurve
   (const QString &formula, double from, double to, int points)
-  {return insertFunctionCurve(formula,from,to,points,QString::null);}
+  {return insertFunctionCurve(formula,from,to,points,{});}
   bool insertFunctionCurve(const QString &formula, double from, double to)
   {return insertFunctionCurve(formula,from,to,100);}
   bool insertFunctionCurve(const QString &formula, double from)

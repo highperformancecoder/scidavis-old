@@ -34,6 +34,7 @@
 namespace py=boost::python;
 
 #include "PythonScript.h"
+#include "PythonExtras.h"
 #include "PythonScripting.h"
 #include "ApplicationWindow.h"
 #include <classdesc_epilogue.h>
@@ -57,16 +58,22 @@ namespace py=boost::python;
 #endif
 using namespace std;
 
-PythonScript::PythonScript(ScriptingEnv* env, const QString &code, QObject *context, const QString &name)
-: Script(env, code, context, name)
+struct PythonScript::Impl
 {
-  modLocalDict.update(modDict("__main__"));
-  modGlobalDict.update(modLocalDict);
+  boost::python::dict modLocalDict, modGlobalDict;
+  boost::python::object stdoutSave, stderrSave;
+};
+
+PythonScript::PythonScript(ScriptingEnv* env, const QString &code, QObject *context, const QString &name)
+  : Script(env, code, context, name), impl(new Impl)
+{
+  impl->modLocalDict.update(modDict("__main__"));
+  impl->modGlobalDict.update(impl->modLocalDict);
   if (!py::exec(
            "import __main__\n"
            "globals = __main__\n"
            "from __main__ import *",
-           modGlobalDict, modLocalDict))
+           impl->modGlobalDict, impl->modLocalDict))
     PyErr_Print();
 
   // TODO expose context as self
@@ -121,7 +128,7 @@ void PythonScript::setContext(QObject *context)
 bool PythonScript::compile(bool for_eval)
 {
 	hasOldGlobals = Code.contains("\nglobal ") || (0 == Code.indexOf("global "));
-	auto topLevelLocal = hasOldGlobals ? modLocalDict.ptr() : modGlobalDict.ptr();
+	auto topLevelLocal = hasOldGlobals ? impl->modLocalDict.ptr() : impl->modGlobalDict.ptr();
 
 	// Support for the convenient col() and cell() functions.
 	// This can't be done anywhere else, because we need access to the local
@@ -218,8 +225,8 @@ QVariant PythonScript::eval()
 	if (!isFunction) compiled = notCompiled;
 	if (compiled != isCompiled && !compile(true))
 		return QVariant();
-	PyObject *topLevelGlobal = hasOldGlobals ? modDict("__main__").ptr() : modGlobalDict.ptr();
-	PyObject *topLevelLocal = hasOldGlobals ? modLocalDict.ptr() : modGlobalDict.ptr();
+	PyObject *topLevelGlobal = hasOldGlobals ? modDict("__main__").ptr() : impl->modGlobalDict.ptr();
+	PyObject *topLevelLocal = hasOldGlobals ? impl->modLocalDict.ptr() : impl->modGlobalDict.ptr();
 	PyObject *pyret;
 	beginStdoutRedirect();
 	if (PyCallable_Check(PyCode))
@@ -297,8 +304,8 @@ bool PythonScript::exec()
 	if (isFunction) compiled = notCompiled;
 	if (compiled != Script::isCompiled && !compile(false))
 		return false;
-	PyObject *topLevelGlobal = hasOldGlobals ? modDict("__main__").ptr() : modGlobalDict.ptr();
-	PyObject *topLevelLocal = hasOldGlobals ? modLocalDict.ptr() : modGlobalDict.ptr();
+	PyObject *topLevelGlobal = hasOldGlobals ? modDict("__main__").ptr() : impl->modGlobalDict.ptr();
+	PyObject *topLevelLocal = hasOldGlobals ? impl->modLocalDict.ptr() : impl->modGlobalDict.ptr();
 	PyObject *pyret;
 	beginStdoutRedirect();
 	if (PyCallable_Check(PyCode))
@@ -330,8 +337,8 @@ void PythonScript::beginStdoutRedirect()
   if (!batchMode)
     {
       auto sys=modDict("sys");
-      stdoutSave = sys["stdout"];
-      stderrSave = sys["stderr"];
+      impl->stdoutSave = sys["stdout"];
+      impl->stderrSave = sys["stderr"];
       sys["stdout"]=py::ptr(this);
       sys["stderr"]=py::ptr(this);
     }
@@ -339,11 +346,11 @@ void PythonScript::beginStdoutRedirect()
 
 void PythonScript::endStdoutRedirect()
 {
-  if (!batchMode && env() && stdoutSave.ptr() && stderrSave.ptr())
+  if (!batchMode && env() && impl->stdoutSave.ptr() && impl->stderrSave.ptr())
     {
       auto sys=modDict("sys");
-      sys["stdout"]=stdoutSave;
-      sys["stderr"]=stderrSave;
+      sys["stdout"]=impl->stdoutSave;
+      sys["stderr"]=impl->stderrSave;
     }
 }
 
@@ -356,15 +363,15 @@ void PythonScript::endStdoutRedirect()
 
 bool PythonScript::setInt(int val, const char *name)
 {
-  if (!PyDict_Contains(modLocalDict.ptr(), PYUNICODE_FromString(name)))
+  if (!PyDict_Contains(impl->modLocalDict.ptr(), PYUNICODE_FromString(name)))
 		compiled = notCompiled;
-  return (env()->setInt(val, name, modLocalDict.ptr()) && env()->setInt(val, name, modGlobalDict.ptr()));
+  return (env()->setInt(val, name, impl->modLocalDict.ptr()) && env()->setInt(val, name, impl->modGlobalDict.ptr()));
 }
 
 bool PythonScript::setDouble(double val, const char *name)
 {
-  if (!PyDict_Contains(modLocalDict.ptr(), PYUNICODE_FromString(name)))
+  if (!PyDict_Contains(impl->modLocalDict.ptr(), PYUNICODE_FromString(name)))
 		compiled = notCompiled;
-  return (env()->setDouble(val, name, modLocalDict.ptr()) && env()->setDouble(val, name, modGlobalDict.ptr()));
+  return (env()->setDouble(val, name, impl->modLocalDict.ptr()) && env()->setDouble(val, name, impl->modGlobalDict.ptr()));
 }
 
