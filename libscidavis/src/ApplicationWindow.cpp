@@ -163,6 +163,7 @@
 
 #ifdef SCRIPTING_PYTHON
 #include <PythonScripting.h>
+#undef slots
 #include <boost/python.hpp>
 #include "PythonExtras.h"
 namespace py=boost::python;

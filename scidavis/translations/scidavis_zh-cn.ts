@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_CN">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AbstractAspect</name>
     <message>
@@ -1161,11 +1161,11 @@ Are you sure you want to continue?</source>
     </message>
     <message>
         <source>Error importing image</source>
-        <translation>导入图像时出错</translation>
+        <translation type="vanished">导入图像时出错</translation>
     </message>
     <message>
         <source>Import of image &apos;%1&apos; failed</source>
-        <translation>导入图像 &apos;%1&apos; 失败</translation>
+        <translation type="vanished">导入图像 &apos;%1&apos; 失败</translation>
     </message>
     <message>
         <source>Guess best origin for the new layer?</source>
@@ -3318,10 +3318,17 @@ Are you sure you want to continue?</source>
     </message>
 </context>
 <context>
+    <name>Column::D</name>
+    <message>
+        <source>as string</source>
+        <translation type="unfinished">作为字符串</translation>
+    </message>
+</context>
+<context>
     <name>ColumnStringIO</name>
     <message>
         <source>as string</source>
-        <translation>作为字符串</translation>
+        <translation type="vanished">作为字符串</translation>
     </message>
 </context>
 <context>
@@ -6000,7 +6007,7 @@ The following special codes can be used:
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>勾选这个选项，则 ASCII 文件中所有行首和行尾的空白都会被移除。</translation>
+        <translation type="vanished">勾选这个选项，则 ASCII 文件中所有行首和行尾的空白都会被移除。</translation>
     </message>
     <message>
         <source>Warning: checking this option leads to column 
@@ -6013,7 +6020,7 @@ have the same number of rows.</source>
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>为了避免这个问题，你应该精确地用 TAB 和 SPACE 定义列分隔符。</translation>
+        <translation type="vanished">为了避免这个问题，你应该精确地用 TAB 和 SPACE 定义列分隔符。</translation>
     </message>
     <message>
         <source>&amp;Simplify white spaces</source>
@@ -6026,7 +6033,7 @@ lines and each sequence of internal
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>选上这个选项，行首和行尾的空白都会被去掉，
+        <translation type="vanished">选上这个选项，行首和行尾的空白都会被去掉，
 行内的连续空白(包括TAB)都会被替换为单个空格。</translation>
     </message>
     <message>
@@ -6034,7 +6041,7 @@ be replaced with a single space.</source>
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>警告：选上这个选项会导致列重叠，如果ASCII文件中的各列行数不等。</translation>
+        <translation type="vanished">警告：选上这个选项会导致列重叠，如果ASCII文件中的各列行数不等。</translation>
     </message>
     <message>
         <source>&amp;Numeric data</source>
@@ -6100,6 +6107,41 @@ have the same number of rows.</source>
     <message>
         <source>Help</source>
         <translation>帮助</translation>
+    </message>
+    <message>
+        <source>By checking this option all white spaces will be 
+removed from the beginning and the end of 
+the lines in the ASCII file.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished">勾选这个选项，则 ASCII 文件中所有行首和行尾的空白都会被移除。</translation>
+    </message>
+    <message>
+        <source>To avoid this problem you should precisely 
+define the column separator using TAB and 
+SPACE characters.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished">为了避免这个问题，你应该精确地用 TAB 和 SPACE 定义列分隔符。</translation>
+    </message>
+    <message>
+        <source>By checking this option all white spaces will be 
+removed from the beginning and the end of the 
+lines and each sequence of internal 
+whitespaces (including the TAB character) will 
+be replaced with a single space.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished">选上这个选项，行首和行尾的空白都会被去掉，
+行内的连续空白(包括TAB)都会被替换为单个空格。</translation>
+    </message>
+    <message>
+        <source>Warning: checking this option leads to column 
+overlaping if the columns in the ASCII file don&apos;t 
+have the same number of rows.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9172,6 +9214,14 @@ Released</source>
     <message>
         <source>No such object</source>
         <translation type="unfinished">没有此对象</translation>
+    </message>
+    <message>
+        <source>Internal Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;Failed to set axis labels on Graph %1. Maybe you&apos;re trying to open a corrupted project file; or there&apos;s some problem within SciDAVis. Please report this as a bug (together with detailed instructions how to reproduce this message or the corrupted file).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -127,9 +127,12 @@ There is also a section with some notes about \ref future "future plans".
   - For indentations, tabs are preferred because they allow everyone to choose the indentation depth for him/herself.
 */
 
-struct Application: public QApplication
+class Application: public QApplication
 {
+  //Q_OBJECT;
+public:
   Application(int& argc, char ** argv): QApplication(argc, argv) {}
+  //virtual ~Application() {}
 
   // catch exception, and display their contents as modal dialogue
   bool notify(QObject* receiver, QEvent* event)
@@ -155,7 +158,6 @@ struct Application: public QApplication
     }
     return false;
   }
-  Q_OBJECT;
 };
 
 int main( int argc, char ** argv )

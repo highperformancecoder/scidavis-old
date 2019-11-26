@@ -85,8 +85,8 @@ public:
     return new PythonScript(this, code, context, name);
   }
 
-  bool setQObject(QObject*, const char*, PyObject *dict);
-  bool setQObject(QObject *val, const char *name) override { return setQObject(val,name,NULL); }
+//  bool setQObject(QObject*, const char*, PyObject *dict);
+//  bool setQObject(QObject *val, const char *name) override { return setQObject(val,name,NULL); }
   bool setInt(int i, const char* s) override {return setInt(i,s,nullptr);}
   bool setInt(int, const char*, PyObject *dict);
   bool setDouble(double x, const char* s) override {return setDouble(x,s,nullptr);}

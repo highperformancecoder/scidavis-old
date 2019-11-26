@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>AbstractAspect</name>
     <message>
@@ -1759,7 +1759,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     </message>
     <message>
         <source>Error importing image</source>
-        <translation>Chyba při zavádění obrázku</translation>
+        <translation type="vanished">Chyba při zavádění obrázku</translation>
     </message>
     <message>
         <source>Draw arrow</source>
@@ -2581,7 +2581,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     </message>
     <message>
         <source>Import of image &apos;%1&apos; failed</source>
-        <translation>Zavedení obrázku &apos;%1&apos; se nepodařilo</translation>
+        <translation type="vanished">Zavedení obrázku &apos;%1&apos; se nepodařilo</translation>
     </message>
     <message>
         <source>&amp;Horizontal Bars</source>
@@ -3366,10 +3366,17 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     </message>
 </context>
 <context>
+    <name>Column::D</name>
+    <message>
+        <source>as string</source>
+        <translation type="unfinished">Jako řetězec</translation>
+    </message>
+</context>
+<context>
     <name>ColumnStringIO</name>
     <message>
         <source>as string</source>
-        <translation>Jako řetězec</translation>
+        <translation type="vanished">Jako řetězec</translation>
     </message>
 </context>
 <context>
@@ -6096,7 +6103,7 @@ jednoduchou mezerou</translation>
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Varování: zaškrtnutí této volby vede k překrývání 
+        <translation type="vanished">Varování: zaškrtnutí této volby vede k překrývání 
 sloupců, jestliže sloupce v ASCII souboru nemají 
 stejný počet řádků.</translation>
     </message>
@@ -6215,7 +6222,7 @@ Dají se použít následující zvláštní kódy:
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Zaškrtnutím této volby, budou všechny 
+        <translation type="vanished">Zaškrtnutím této volby, budou všechny 
 mezery odstraněny ze začátků a konců řádků 
 v ASCII souboru.</translation>
     </message>
@@ -6224,7 +6231,7 @@ v ASCII souboru.</translation>
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Abyste se vyhnul tomuto problému, měl byste 
+        <translation type="vanished">Abyste se vyhnul tomuto problému, měl byste 
 přesně určit oddělovač sloupců s pomocí znaků 
 pro TAB(ULÁTOR) a MEZERNÍK.</translation>
     </message>
@@ -6235,11 +6242,55 @@ lines and each sequence of internal
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Zaškrtnutím této volby, budou všechny mezery 
+        <translation type="vanished">Zaškrtnutím této volby, budou všechny mezery 
 odstraněny ze začátků a konců řádků 
 a každá posloupnost vnitřních prázdných míst 
 (včetně znaku pro TABULÁTOR) bude nahrazena 
 jednoduchou mezerou</translation>
+    </message>
+    <message>
+        <source>By checking this option all white spaces will be 
+removed from the beginning and the end of 
+the lines in the ASCII file.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished">Zaškrtnutím této volby, budou všechny 
+mezery odstraněny ze začátků a konců řádků 
+v ASCII souboru.</translation>
+    </message>
+    <message>
+        <source>To avoid this problem you should precisely 
+define the column separator using TAB and 
+SPACE characters.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished">Abyste se vyhnul tomuto problému, měl byste 
+přesně určit oddělovač sloupců s pomocí znaků 
+pro TAB(ULÁTOR) a MEZERNÍK.</translation>
+    </message>
+    <message>
+        <source>By checking this option all white spaces will be 
+removed from the beginning and the end of the 
+lines and each sequence of internal 
+whitespaces (including the TAB character) will 
+be replaced with a single space.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished">Zaškrtnutím této volby, budou všechny mezery 
+odstraněny ze začátků a konců řádků 
+a každá posloupnost vnitřních prázdných míst 
+(včetně znaku pro TABULÁTOR) bude nahrazena 
+jednoduchou mezerou</translation>
+    </message>
+    <message>
+        <source>Warning: checking this option leads to column 
+overlaping if the columns in the ASCII file don&apos;t 
+have the same number of rows.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished">Varování: zaškrtnutí této volby vede k překrývání 
+sloupců, jestliže sloupce v ASCII souboru nemají 
+stejný počet řádků.</translation>
     </message>
 </context>
 <context>
@@ -9417,6 +9468,14 @@ Vydáno</translation>
     <message>
         <source>No such object</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal Error</source>
+        <translation type="unfinished">Vnitřní chyba</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;Failed to set axis labels on Graph %1. Maybe you&apos;re trying to open a corrupted project file; or there&apos;s some problem within SciDAVis. Please report this as a bug (together with detailed instructions how to reproduce this message or the corrupted file).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;Nastavení popisů os v nákresu %1 se nepodařilo. Je možné, že se pokoušíte otevřít soubor s projektem, který je poškozen; nebo je nějaký problém ve SciDAVisu . Nahlašte to, prosím, jako chybu (společně s podrobnými údaji o tom, jakým způsobem se dá toto hlášení nebo poškozený soubor vytvořit znovu).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;stopař slídící po chybách: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>

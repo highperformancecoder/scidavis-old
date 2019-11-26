@@ -796,8 +796,8 @@ void Graph::setLabelsTextFormat(int axis, Table *table, const QString& columnNam
     }
   catch (const std::exception&)
     {
-      QMessageBox::critical(this, tr("Internal Error"),
-                            tr("<html>Failed to set axis labels on Graph %1. Maybe you're trying to open a corrupted"
+      QMessageBox::critical(this, QObject::tr("Internal Error"),
+                            QObject::tr("<html>Failed to set axis labels on Graph %1. Maybe you're trying to open a corrupted"
                                " project file; or there's some problem within SciDAVis. Please report this"
                                " as a bug (together with detailed instructions how to reproduce this message or"
                                " the corrupted file).<p>"

@@ -168,7 +168,7 @@ struct QString_from_python_str
     // Determine if obj_ptr can be converted in a QString
     static void* convertible(PyObject* obj_ptr)
     {
-      if (!PyString_Check(obj_ptr)) return 0;
+      if (!PyUnicode_Check(obj_ptr)) return 0;
       return obj_ptr;
     }
  
@@ -178,7 +178,7 @@ struct QString_from_python_str
     boost::python::converter::rvalue_from_python_stage1_data* data)
     {
       // Extract the character data from the python string
-      const char* value = PyString_AsString(obj_ptr);
+      const char* value = PyUnicode_AsUTF8(obj_ptr);
  
       // Verify that obj_ptr is a string (should be ensured by convertible())
       assert(value);
@@ -347,7 +347,7 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
   Py_Initialize ();
   if (!Py_IsInitialized ())
     return;
-  initscidavis();
+  PyInit_scidavis();
   classdesc::addPythonObject("app",*parent);
   
   PyObject *mainmod=NULL, *sysmod=NULL;
