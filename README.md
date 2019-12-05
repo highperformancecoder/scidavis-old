@@ -24,6 +24,11 @@ A copy of this license is provided in the file gpl.txt.
 SciDAVis runs on GNU/Linux, Windows and MacOS X; 
 possibly also on other platforms like `*`BSD.
 
+# Version numbers
+
+Full SciDAVis releases have a major and minor number. Within a major number, the software should support backwards compatibility of data files and scripting APIs. 
+
+Releases with 3 numbers are beta releases, and/or release candidates. These will have the same major/minor number as the full release they were based on. The only exception is a X.0.Y release, as there is no X.0 full release. An X.0.Y release is a beta release prior to the first full release of major version X.
 
 # Installation
 
