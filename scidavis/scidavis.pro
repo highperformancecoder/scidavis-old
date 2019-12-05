@@ -17,7 +17,7 @@ python {
   }
   unix: {
         LIBS+=$$system($$PYTHONBIN findBoostPythonLib.py)
-        LIBS+=$$system($$PYTHONBIN-config --libs)
+        LIBS+=$$system($$PYTHONBIN-config --ldflags)
       }
   message($$LIBS)  
 }
