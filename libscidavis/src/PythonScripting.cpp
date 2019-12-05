@@ -209,6 +209,7 @@ ApplicationWindow& theApp()
 
 BOOST_PYTHON_MODULE(scidavis)
 {
+  cout << "defining module scidavis" << endl;
   // register the Qstring to-python converter
   py::to_python_converter<QString,QString_to_python_str>();
   // register the Qstring from-python converter
@@ -347,7 +348,9 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
   Py_Initialize ();
   if (!Py_IsInitialized ())
     return;
+  cout << "b4 PyInit_scidavis()" << endl;
   PyInit_scidavis();
+  cout << "after PyInit_scidavis()" << endl;
   classdesc::addPythonObject("app",*parent);
   
   PyObject *mainmod=NULL, *sysmod=NULL;
