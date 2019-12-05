@@ -25,7 +25,7 @@ include(../config.pri)
 python {
   PYTHONBIN = $$(PYTHON)
   isEmpty( PYTHONBIN ) {
-    PYTHONBIN = python
+    PYTHONBIN = python3
   }
 
   unix {

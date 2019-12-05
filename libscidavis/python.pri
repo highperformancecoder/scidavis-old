@@ -42,7 +42,7 @@ classdesc.input = CLASSDESC_HEADERS
 
   PYTHONBIN = $$(PYTHON)
   isEmpty( PYTHONBIN ) {
-    PYTHONBIN = python
+    PYTHONBIN = python3
   }
 #  PYTHON_VERSION=$$system($${PYTHONBIN} --version|cut -f2 -d' '|cut -f1 -d.)
 

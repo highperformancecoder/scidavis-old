@@ -13,7 +13,7 @@ include( basic.pri )
 python {
   PYTHONBIN = $$(PYTHON)
   isEmpty( PYTHONBIN ) {
-    PYTHONBIN = python
+    PYTHONBIN = python3
   }
   unix: {
         LIBS+=$$system($$PYTHONBIN findBoostPythonLib.py)

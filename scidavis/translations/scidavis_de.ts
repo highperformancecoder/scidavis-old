@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de">
+<TS version="2.0" language="de">
 <context>
     <name>@default</name>
     <message>
@@ -7124,16 +7124,16 @@ Die erste repräsentiert die Signal- und die zweite die Antwortfunktion!</transl
 <context>
     <name>Column::D</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="365"/>
         <source>as string</source>
-        <translation type="unfinished">Textversion</translation>
+        <translation type="obsolete">Textversion</translation>
     </message>
 </context>
 <context>
     <name>ColumnStringIO</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="365"/>
         <source>as string</source>
-        <translation type="obsolete">Textversion</translation>
+        <translation type="unfinished">Textversion</translation>
     </message>
 </context>
 <context>
@@ -12144,11 +12144,12 @@ The following special codes can be used:
         <translation type="unfinished">Zwischen&amp;raumzeichen von den Zeilenenden entfernen</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="136"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="obsolete">Durch die Auswahl dieser Option werden alle 
+        <translation type="unfinished">Durch die Auswahl dieser Option werden alle 
 Zwischenraumzeichen von den Zeilenanfängen und 
 -enden der ASCII-Datei entfernt.</translation>
     </message>
@@ -12162,11 +12163,13 @@ es zum Überlappen von Spalten kommen, wenn
 die Spalten unterschiedlich viele Zeilen haben.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="obsolete">Um dieses Problem zum umgehen, sollten 
+        <translation type="unfinished">Um dieses Problem zum umgehen, sollten 
 Sie den Spaltentrenner präzise durch 
 Tabulatoren und Leerzeichen definieren.</translation>
     </message>
@@ -12176,23 +12179,25 @@ Tabulatoren und Leerzeichen definieren.</translation>
         <translation type="unfinished">&amp;Zwischenraumzeichen vereinfachen</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="obsolete">Diese Option bewirkt, dass alle Zwischenraumzeichen 
+        <translation type="unfinished">Diese Option bewirkt, dass alle Zwischenraumzeichen 
 am Anfang und Ende der Zeilen in der ASCII-Datei entfernt 
 werden und alle Zwischenraumzeichen (inclusive Tabulatoren) 
 zwischen den Spalten durch ein einzelnes Leerzeichen ersetzt werden.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="obsolete">Warnung: Durch Auswahl dieser Option könnte 
+        <translation type="unfinished">Warnung: Durch Auswahl dieser Option könnte 
 es zum Überlappen von Spalten kommen, wenn 
 die Spalten unterschiedlich viele Zeilen haben.</translation>
     </message>
@@ -12275,30 +12280,26 @@ die Spalten unterschiedlich viele Zeilen haben.</translation>
         <translation type="unfinished">Importiere ASCII-Datei(en)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="136"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Durch die Auswahl dieser Option werden alle 
+        <translation type="obsolete">Durch die Auswahl dieser Option werden alle 
 Zwischenraumzeichen von den Zeilenanfängen und 
 -enden der ASCII-Datei entfernt.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Um dieses Problem zum umgehen, sollten 
+        <translation type="obsolete">Um dieses Problem zum umgehen, sollten 
 Sie den Spaltentrenner präzise durch 
 Tabulatoren und Leerzeichen definieren.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
@@ -12306,19 +12307,18 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Diese Option bewirkt, dass alle Zwischenraumzeichen 
+        <translation type="obsolete">Diese Option bewirkt, dass alle Zwischenraumzeichen 
 am Anfang und Ende der Zeilen in der ASCII-Datei entfernt 
 werden und alle Zwischenraumzeichen (inclusive Tabulatoren) 
 zwischen den Spalten durch ein einzelnes Leerzeichen ersetzt werden.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Warnung: Durch Auswahl dieser Option könnte 
+        <translation type="obsolete">Warnung: Durch Auswahl dieser Option könnte 
 es zum Überlappen von Spalten kommen, wenn 
 die Spalten unterschiedlich viele Zeilen haben.</translation>
     </message>

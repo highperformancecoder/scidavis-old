@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.0" language="ru_RU">
 <context>
     <name>@default</name>
     <message>
@@ -6550,7 +6550,7 @@ Various parts of this file may not be displayed as expected.</source>
     </message>
 </context>
 <context>
-    <name>Column::D</name>
+    <name>ColumnStringIO</name>
     <message>
         <location filename="../../libscidavis/src/future/core/column/Column.h" line="+365"/>
         <source>as string</source>
@@ -10740,16 +10740,17 @@ The following special codes can be used:
         <translation type="unfinished">&amp;Удалить пробелы в конце строк</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="obsolete">При выборе этой опции все пробелы в
+        <translation type="unfinished">При выборе этой опции все пробелы в
 начале и в конце строк в ASCII файле
 будут удалены.</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+1"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
@@ -10758,43 +10759,47 @@ have the same number of rows.</source>
 в колонках в заданном ASCII файле отличается.</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <location line="+9"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="obsolete">Чтобы избежать проблем необходимо
+        <translation type="unfinished">Чтобы избежать проблем необходимо
 определить разделители столбцов, испольуя
 символы табуляции и пробелы.</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="-5"/>
         <source>&amp;Simplify white spaces</source>
         <translation type="unfinished">&amp;Упростить разделители</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="obsolete">При выборе этой функйии все пробелы в начале
+        <translation type="unfinished">При выборе этой функйии все пробелы в начале
 и в конце каждой строки будут удалены и
 каждая последовательность пробелов в строке
 (включая символ табуляции) будет заменена
 на одиночный пробел.</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="obsolete">Предупреждение: использование этого параметра
+        <translation type="unfinished">Предупреждение: использование этого параметра
 приведёт к перекрытию колонки если число строк
 в колонках в заданном ASCII файле отличается.</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+5"/>
         <source>&amp;Numeric data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10872,30 +10877,26 @@ have the same number of rows.</source>
         <translation type="unfinished">Импорт ASCII файла(ов)</translation>
     </message>
     <message>
-        <location line="+87"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">При выборе этой опции все пробелы в
+        <translation type="obsolete">При выборе этой опции все пробелы в
 начале и в конце строк в ASCII файле
 будут удалены.</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location line="+9"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Чтобы избежать проблем необходимо
+        <translation type="obsolete">Чтобы избежать проблем необходимо
 определить разделители столбцов, испольуя
 символы табуляции и пробелы.</translation>
     </message>
     <message>
-        <location line="-2"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
@@ -10903,25 +10904,24 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">При выборе этой функйии все пробелы в начале
+        <translation type="obsolete">При выборе этой функйии все пробелы в начале
 и в конце каждой строки будут удалены и
 каждая последовательность пробелов в строке
 (включая символ табуляции) будет заменена
 на одиночный пробел.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Предупреждение: использование этого параметра
+        <translation type="obsolete">Предупреждение: использование этого параметра
 приведёт к перекрытию колонки если число строк
 в колонках в заданном ASCII файле отличается.</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+107"/>
         <source>default</source>
         <translation type="unfinished"></translation>
     </message>

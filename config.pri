@@ -288,8 +288,8 @@ contains(PRESET, linux_package) {
         exists(/usr/include/qt5/qwtplot3d-qt5) {INCLUDEPATH+=/usr/include/qt5/qwtplot3d-qt5}
         exists(/usr/include/qwtplot3d) {INCLUDEPATH+=/usr/include/qwtplot3d}
 
-        system (ls /usr/lib*/libqwt5-qt5.so) {
-            LIBS+=-lqwt5-qt5
+        system (ls /usr/lib*/libqwt-qt5.so) {
+            LIBS+=-lqwt-qt5
         }
         system (ls /usr/lib*/libqwtplot3d-qt5.so) {
          LIBS+=-lqwtplot3d-qt5

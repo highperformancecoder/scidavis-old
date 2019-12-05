@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>AbstractAspect</name>
     <message>
@@ -1759,7 +1759,7 @@ První představuje funkci signálu a druhý funkci odpovědi!</translation>
     </message>
     <message>
         <source>Error importing image</source>
-        <translation type="vanished">Chyba při zavádění obrázku</translation>
+        <translation type="obsolete">Chyba při zavádění obrázku</translation>
     </message>
     <message>
         <source>Draw arrow</source>
@@ -2581,7 +2581,7 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     </message>
     <message>
         <source>Import of image &apos;%1&apos; failed</source>
-        <translation type="vanished">Zavedení obrázku &apos;%1&apos; se nepodařilo</translation>
+        <translation type="obsolete">Zavedení obrázku &apos;%1&apos; se nepodařilo</translation>
     </message>
     <message>
         <source>&amp;Horizontal Bars</source>
@@ -3369,14 +3369,14 @@ Různé části tohoto souboru se nemusí zobrazovat tak, jak se očekává.</tr
     <name>Column::D</name>
     <message>
         <source>as string</source>
-        <translation type="unfinished">Jako řetězec</translation>
+        <translation type="obsolete">Jako řetězec</translation>
     </message>
 </context>
 <context>
     <name>ColumnStringIO</name>
     <message>
         <source>as string</source>
-        <translation type="vanished">Jako řetězec</translation>
+        <translation>Jako řetězec</translation>
     </message>
 </context>
 <context>
@@ -6103,7 +6103,7 @@ jednoduchou mezerou</translation>
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Varování: zaškrtnutí této volby vede k překrývání 
+        <translation>Varování: zaškrtnutí této volby vede k překrývání 
 sloupců, jestliže sloupce v ASCII souboru nemají 
 stejný počet řádků.</translation>
     </message>
@@ -6222,7 +6222,7 @@ Dají se použít následující zvláštní kódy:
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Zaškrtnutím této volby, budou všechny 
+        <translation>Zaškrtnutím této volby, budou všechny 
 mezery odstraněny ze začátků a konců řádků 
 v ASCII souboru.</translation>
     </message>
@@ -6231,7 +6231,7 @@ v ASCII souboru.</translation>
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Abyste se vyhnul tomuto problému, měl byste 
+        <translation>Abyste se vyhnul tomuto problému, měl byste 
 přesně určit oddělovač sloupců s pomocí znaků 
 pro TAB(ULÁTOR) a MEZERNÍK.</translation>
     </message>
@@ -6242,7 +6242,7 @@ lines and each sequence of internal
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Zaškrtnutím této volby, budou všechny mezery 
+        <translation>Zaškrtnutím této volby, budou všechny mezery 
 odstraněny ze začátků a konců řádků 
 a každá posloupnost vnitřních prázdných míst 
 (včetně znaku pro TABULÁTOR) bude nahrazena 
@@ -6254,7 +6254,7 @@ removed from the beginning and the end of
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Zaškrtnutím této volby, budou všechny 
+        <translation type="obsolete">Zaškrtnutím této volby, budou všechny 
 mezery odstraněny ze začátků a konců řádků 
 v ASCII souboru.</translation>
     </message>
@@ -6264,7 +6264,7 @@ define the column separator using TAB and
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Abyste se vyhnul tomuto problému, měl byste 
+        <translation type="obsolete">Abyste se vyhnul tomuto problému, měl byste 
 přesně určit oddělovač sloupců s pomocí znaků 
 pro TAB(ULÁTOR) a MEZERNÍK.</translation>
     </message>
@@ -6276,7 +6276,7 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Zaškrtnutím této volby, budou všechny mezery 
+        <translation type="obsolete">Zaškrtnutím této volby, budou všechny mezery 
 odstraněny ze začátků a konců řádků 
 a každá posloupnost vnitřních prázdných míst 
 (včetně znaku pro TABULÁTOR) bude nahrazena 
@@ -6288,7 +6288,7 @@ overlaping if the columns in the ASCII file don&apos;t
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Varování: zaškrtnutí této volby vede k překrývání 
+        <translation type="obsolete">Varování: zaškrtnutí této volby vede k překrývání 
 sloupců, jestliže sloupce v ASCII souboru nemají 
 stejný počet řádků.</translation>
     </message>

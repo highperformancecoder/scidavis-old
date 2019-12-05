@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pl_PL">
+<TS version="2.0" language="pl_PL">
 <context>
     <name>AbstractAspect</name>
     <message>
@@ -1804,11 +1804,11 @@ Na pewno kontynuować?</translation>
     </message>
     <message>
         <source>Error importing image</source>
-        <translation type="vanished">Błąd importu obrazu</translation>
+        <translation type="obsolete">Błąd importu obrazu</translation>
     </message>
     <message>
         <source>Import of image &apos;%1&apos; failed</source>
-        <translation type="vanished">Niepowodzenie importu obrazu &apos;%1&apos;</translation>
+        <translation type="obsolete">Niepowodzenie importu obrazu &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9154"/>
@@ -4778,16 +4778,16 @@ Uwaga: to poprzemieszcza istniejące!</translation>
 <context>
     <name>Column::D</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="365"/>
         <source>as string</source>
-        <translation type="unfinished">jako ciąg</translation>
+        <translation type="obsolete">jako ciąg</translation>
     </message>
 </context>
 <context>
     <name>ColumnStringIO</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="365"/>
         <source>as string</source>
-        <translation type="vanished">jako ciąg</translation>
+        <translation>jako ciąg</translation>
     </message>
 </context>
 <context>
@@ -8255,28 +8255,24 @@ Są dostępne poniższe kody:
         <translation>&amp;Usuń białe znaki z końca wierszy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="136"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Po zaznaczeniu tej opcji wszystkie białe znaki
+        <translation type="obsolete">Po zaznaczeniu tej opcji wszystkie białe znaki
 w pliku ASCII zostaną usunięte z końców wierszy.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">By tego uniknąć powinieneś dokładnie określić
+        <translation type="obsolete">By tego uniknąć powinieneś dokładnie określić
 seperator kolumny za pomocą znaków TAB i SPACJI.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
@@ -8284,28 +8280,28 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Po zaznaczeniu tej opcji wszystkie białe znaki
+        <translation type="obsolete">Po zaznaczeniu tej opcji wszystkie białe znaki
 w pliku ASCII zostaną usunięte z końców wierszy
 a wszystkie sekwencje białych znaków (w tym
 TABULATORÓW) będą zastąpione pojedynczą spacją.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Uwaga: zaznaczenie tej opcji spowoduje 
+        <translation type="obsolete">Uwaga: zaznaczenie tej opcji spowoduje 
 nakładanie się kolumn jeżeli nie mają
 jednakowej liczby wierszy.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="136"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Po zaznaczeniu tej opcji wszystkie białe znaki
+        <translation>Po zaznaczeniu tej opcji wszystkie białe znaki
 w pliku ASCII zostaną usunięte z końców wierszy.</translation>
     </message>
     <message>
@@ -8318,11 +8314,13 @@ nakładanie się kolumn jeżeli nie mają
 jednakowej liczby wierszy.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">By tego uniknąć powinieneś dokładnie określić
+        <translation>By tego uniknąć powinieneś dokładnie określić
 seperator kolumny za pomocą znaków TAB i SPACJI.</translation>
     </message>
     <message>
@@ -8331,23 +8329,25 @@ seperator kolumny za pomocą znaków TAB i SPACJI.</translation>
         <translation>&amp;Uprość białe znaki</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Po zaznaczeniu tej opcji wszystkie białe znaki
+        <translation>Po zaznaczeniu tej opcji wszystkie białe znaki
 w pliku ASCII zostaną usunięte z końców wierszy
 a wszystkie sekwencje białych znaków (w tym
 TABULATORÓW) będą zastąpione pojedynczą spacją.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Uwaga: zaznaczenie tej opcji spowoduje 
+        <translation>Uwaga: zaznaczenie tej opcji spowoduje 
 nakładanie się kolumn jeżeli nie mają
 jednakowej liczby wierszy.</translation>
     </message>
