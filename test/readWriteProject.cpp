@@ -36,27 +36,29 @@ SUITE(ReadWriteProject)
 
   TEST_FIXTURE(ApplicationWindow, exportTestProject)
     {
-      {
-        unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
-        CHECK(app.get());
-        QList<MyWidget*> windows = app->windowsList();
-        for (auto i: windows)
-          if (auto w=dynamic_cast<MultiLayer*>(i))
-            {
-              w->exportSVG(i->windowTitle()+".svg");
-              w->exportImage((i->windowTitle()+".png"));
-            }
-      }
-  
-      {
-        unique_ptr<ApplicationWindow> app(open("3dplot.sciprj"));
-        CHECK(app.get());
-        QList<MyWidget*> windows = app->windowsList();
-        for (auto i: windows)
-          if (auto w=dynamic_cast<Graph3D*>(i))
-            w->exportImage(i->windowTitle()+".png");
-      }
+      unique_ptr<ApplicationWindow> app(open("testProject.sciprj"));
+      CHECK(app.get());
+      QList<MyWidget*> windows = app->windowsList();
+      for (auto i: windows)
+        if (auto w=dynamic_cast<MultiLayer*>(i))
+          {
+            w->exportSVG(i->windowTitle()+".svg");
+            w->exportImage((i->windowTitle()+".png"));
+          }
     }
+  
+   TEST_FIXTURE(ApplicationWindow, export3dplot)
+     {
+       // this test crashes in Travis
+       if (getenv("TRAVIS")) return;
+
+       unique_ptr<ApplicationWindow> app(open("3dplot.sciprj"));
+       CHECK(app.get());
+       QList<MyWidget*> windows = app->windowsList();
+       for (auto i: windows)
+         if (auto w=dynamic_cast<Graph3D*>(i))
+           w->exportImage(i->windowTitle()+".png");
+     }
 
   // checks that the large file Origin import problem (ticket #238) remains fixed
   TEST_FIXTURE(ApplicationWindow, largeOriginImport)
