@@ -96,3 +96,6 @@ hdiutil create -srcfolder scidavis/scidavis.app -volname SciDAVis -fs HFS+ -fsar
 hdiutil convert -format UDZO -imagekey zlib-level=9 -o scidavis-$version-mac-dist.dmg temp.dmg 
 rm -f temp.dmg
 codesign -s "Developer ID Application" scidavis-$version-mac-dist.dmg
+xcrun altool --notarize-app --primary-bundle-id SciDAVis --username apple@hpcoders.com.au --password "@keychain:Minsky" --file scidavis-$version-mac-dist.dmg
+# check using xcrun altool --notarization-history 0 -u apple@hpcoders.com.au -p "@keychain:Minsky"
+xcrun stapler staple scidavis-$version-mac-dist.dmg
