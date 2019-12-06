@@ -9611,7 +9611,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../libscidavis/src/Graph.cpp" line="1404"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="4374"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="4378"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5202"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5207"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9964,7 +9964,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Bandsspärr-FFT-filter av </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5202"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5207"/>
         <source>There are no curves available on this plot!</source>
         <translation type="unfinished">Det finns inga kurvor tillgängliga på detta diagram!</translation>
     </message>
@@ -9973,7 +9973,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Fel</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5218"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5223"/>
         <source>There are no curves with more than two points on this plot. Operation aborted!</source>
         <translation type="unfinished">Det finns inga kurvor med mer än två punkter i detta diagram. Åtgärd avbruten!</translation>
     </message>
@@ -10054,7 +10054,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../libscidavis/src/Graph.cpp" line="1360"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="1378"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="1392"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5217"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5222"/>
         <source>Error</source>
         <translation type="unfinished">Fel</translation>
     </message>

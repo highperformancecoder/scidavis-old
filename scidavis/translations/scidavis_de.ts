@@ -11385,7 +11385,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">Band FFT Filter von</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5202"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5207"/>
         <source>There are no curves available on this plot!</source>
         <translation type="unfinished">In diesem Diagramm existieren keine Kurven!</translation>
     </message>
@@ -11394,7 +11394,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <translation type="obsolete">QtiPlot - Fehler</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5218"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5223"/>
         <source>There are no curves with more than two points on this plot. Operation aborted!</source>
         <translation type="unfinished">Es gibt keine Kurven mit mehr als 2 Punkten in diesem Diagramm. Operation abgebrochen!</translation>
     </message>
@@ -11564,7 +11564,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <location filename="../../libscidavis/src/Graph.cpp" line="1360"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="1378"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="1392"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5217"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5222"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
@@ -11598,7 +11598,7 @@ die Reihenfolge der Parameter ist wichtig!</translation>
         <location filename="../../libscidavis/src/Graph.cpp" line="1404"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="4374"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="4378"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5202"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5207"/>
         <source>Warning</source>
         <translation type="unfinished">Warnung</translation>
     </message>

@@ -9974,7 +9974,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">БПФ режекторный фильтр</translation>
     </message>
     <message>
-        <location line="+723"/>
+        <location line="+728"/>
         <source>There are no curves available on this plot!</source>
         <translation type="unfinished">На данном графике нет доступных кривых!</translation>
     </message>
@@ -10076,7 +10076,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Приближение по Больцману (Сигмоидальное)</translation>
     </message>
     <message>
-        <location line="-843"/>
+        <location line="-848"/>
         <source>The columns</source>
         <translation type="unfinished">Колонки</translation>
     </message>
@@ -10240,12 +10240,12 @@ p, li { white-space: pre-wrap; }
         <location line="+547"/>
         <location line="+18"/>
         <location line="+14"/>
-        <location line="+3825"/>
+        <location line="+3830"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location line="-1421"/>
+        <location line="-1426"/>
         <location line="+30"/>
         <source>File open error</source>
         <translation type="unfinished">Ошибка открытия файла</translation>
@@ -10254,7 +10254,7 @@ p, li { white-space: pre-wrap; }
         <location line="-2422"/>
         <location line="+2970"/>
         <location line="+4"/>
-        <location line="+824"/>
+        <location line="+829"/>
         <source>Warning</source>
         <translation type="unfinished">Предупреждение</translation>
     </message>

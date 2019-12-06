@@ -7654,7 +7654,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../libscidavis/src/Graph.cpp" line="1360"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="1378"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="1392"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5217"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5222"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
@@ -7717,7 +7717,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../libscidavis/src/Graph.cpp" line="1404"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="4374"/>
         <location filename="../../libscidavis/src/Graph.cpp" line="4378"/>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5202"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5207"/>
         <source>Warning</source>
         <translation>Ostrzeżenie</translation>
     </message>
@@ -7800,12 +7800,12 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Skala...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5202"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5207"/>
         <source>There are no curves available on this plot!</source>
         <translation>Na tym wykresie brak krzywych!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Graph.cpp" line="5218"/>
+        <location filename="../../libscidavis/src/Graph.cpp" line="5223"/>
         <source>There are no curves with more than two points on this plot. Operation aborted!</source>
         <translation>Na tym wykresie brak krzywych o więcej niż dwóch punktach. Czynność wstrzymano!</translation>
     </message>
