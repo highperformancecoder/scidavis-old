@@ -1,6 +1,6 @@
 git clone https://github.com/highperformancecoder/classdesc.git
 pushd classdesc
-make install
+make install PREFIX=/usr
 popd
 qmake-qt5 CONFIG+=aegis
 make qmake
