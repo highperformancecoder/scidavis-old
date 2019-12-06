@@ -60,9 +60,7 @@
 using namespace std;
 
 #ifdef SCRIPTING_PYTHON
-#undef slots
 #include <boost/python.hpp>
-struct pyobject: public boost::python::object {};
 #endif
 
 Table::Table(const ScriptingEnvPtr& env, const QString &fname,const QString &sep,

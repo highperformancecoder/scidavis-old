@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es">
+<TS version="2.1" language="es">
 <context>
     <name>@default</name>
     <message>
@@ -6654,16 +6654,16 @@ Varias partes de este archivo pueden no mostrarse como se esperaba.</translation
 <context>
     <name>Column::D</name>
     <message>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="365"/>
         <source>as string</source>
-        <translation type="obsolete">como string</translation>
+        <translation type="unfinished">como string</translation>
     </message>
 </context>
 <context>
     <name>ColumnStringIO</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="365"/>
         <source>as string</source>
-        <translation type="unfinished">como string</translation>
+        <translation type="obsolete">como string</translation>
     </message>
 </context>
 <context>
@@ -10920,12 +10920,11 @@ The following special codes can be used:
         <translation type="unfinished">Quita&amp;r espacios en blanco de los finales de línea</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="136"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Marcando esta opción todos los espacios 
+        <translation type="obsolete">Marcando esta opción todos los espacios 
 serán quitados, los del comienzo y los del 
 final de las líneas, en archivos ASCII.</translation>
     </message>
@@ -10939,13 +10938,11 @@ superposición de columnas, si las del archivo
 ASCII no tienen el mismo número de filas.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Para evitar este problema debería definir 
+        <translation type="obsolete">Para evitar este problema debería definir 
 con precisión el separador de columnas 
 usando los caracteres TAB o ESPACIO.</translation>
     </message>
@@ -10955,25 +10952,23 @@ usando los caracteres TAB o ESPACIO.</translation>
         <translation type="unfinished">&amp;Simplificar espacios en blanco</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Marcando esta opción todos los espacios en blanco 
+        <translation type="obsolete">Marcando esta opción todos los espacios en blanco 
 serán eliminados del principio y el final de las líneas 
 y cada secuencia de espacios internos (incluyendo el carácter TAB) 
 serán reemplazados por un único espacio en blanco.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Atención: marcar esta opción conduce a la superposición de columnas, si las del archivo ASCII no tienen el mismo número de filas.</translation>
+        <translation type="obsolete">Atención: marcar esta opción conduce a la superposición de columnas, si las del archivo ASCII no tienen el mismo número de filas.</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="154"/>
@@ -11054,26 +11049,30 @@ have the same number of rows.</source>
         <translation type="unfinished">Importar archivo(s) ASCII</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="136"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="obsolete">Marcando esta opción todos los espacios 
+        <translation type="unfinished">Marcando esta opción todos los espacios 
 serán quitados, los del comienzo y los del 
 final de las líneas, en archivos ASCII.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="obsolete">Para evitar este problema debería definir 
+        <translation type="unfinished">Para evitar este problema debería definir 
 con precisión el separador de columnas 
 usando los caracteres TAB o ESPACIO.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
@@ -11081,10 +11080,19 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="obsolete">Marcando esta opción todos los espacios en blanco 
+        <translation type="unfinished">Marcando esta opción todos los espacios en blanco 
 serán eliminados del principio y el final de las líneas 
 y cada secuencia de espacios internos (incluyendo el carácter TAB) 
 serán reemplazados por un único espacio en blanco.</translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
+        <source>Warning: checking this option leads to column 
+overlaping if the columns in the ASCII file don&apos;t 
+have the same number of rows.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="233"/>

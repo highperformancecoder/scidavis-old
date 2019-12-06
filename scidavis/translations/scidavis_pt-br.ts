@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pt_BR">
+<TS version="2.1" language="pt_BR">
 <context>
     <name>@default</name>
     <message>
@@ -4844,14 +4844,14 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
     <name>Column::D</name>
     <message>
         <source>as string</source>
-        <translation type="obsolete">como cadeia de caracteres</translation>
+        <translation type="unfinished">como cadeia de caracteres</translation>
     </message>
 </context>
 <context>
     <name>ColumnStringIO</name>
     <message>
         <source>as string</source>
-        <translation>como cadeia de caracteres</translation>
+        <translation type="vanished">como cadeia de caracteres</translation>
     </message>
 </context>
 <context>
@@ -8118,7 +8118,7 @@ The following special codes can be used:
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Marcando esta opção todos os espaços serão 
+        <translation type="vanished">Marcando esta opção todos os espaços serão 
 removidos do início e final das 
 linhas nos arquivos ASCII.</translation>
     </message>
@@ -8135,7 +8135,7 @@ ASCII não tiverem o mesmo número de linhas.</translation>
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Para evitar este problema é necessário 
+        <translation type="vanished">Para evitar este problema é necessário 
 definir exatamente o separador de colunas 
 usando os caracteres TAB ou ESPAÇO.</translation>
     </message>
@@ -8150,7 +8150,7 @@ lines and each sequence of internal
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Marcando esta opção, todos os espaços em branco 
+        <translation type="vanished">Marcando esta opção, todos os espaços em branco 
 serão eliminados do início e do final das linhas 
 e cada sequência de espaços internos (incluindo o caracter TAB) 
 será substituída por um único espaço em branco.</translation>
@@ -8160,7 +8160,7 @@ será substituída por um único espaço em branco.</translation>
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Atenção: a marcação desta opção conduz à superposição 
+        <translation type="vanished">Atenção: a marcação desta opção conduz à superposição 
 de colunas se as colunas do arquivo ASCII não 
 tiverem o mesmo número de linhas.</translation>
     </message>
@@ -8242,7 +8242,7 @@ removed from the beginning and the end of
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="obsolete">Marcando esta opção todos os espaços serão 
+        <translation type="unfinished">Marcando esta opção todos os espaços serão 
 removidos do início e final das 
 linhas nos arquivos ASCII.</translation>
     </message>
@@ -8252,7 +8252,7 @@ define the column separator using TAB and
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="obsolete">Para evitar este problema é necessário 
+        <translation type="unfinished">Para evitar este problema é necessário 
 definir exatamente o separador de colunas 
 usando os caracteres TAB ou ESPAÇO.</translation>
     </message>
@@ -8264,10 +8264,18 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="obsolete">Marcando esta opção, todos os espaços em branco 
+        <translation type="unfinished">Marcando esta opção, todos os espaços em branco 
 serão eliminados do início e do final das linhas 
 e cada sequência de espaços internos (incluindo o caracter TAB) 
 será substituída por um único espaço em branco.</translation>
+    </message>
+    <message>
+        <source>Warning: checking this option leads to column 
+overlaping if the columns in the ASCII file don&apos;t 
+have the same number of rows.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

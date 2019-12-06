@@ -28,7 +28,7 @@
  ***************************************************************************/
 
 #ifdef SCRIPTING_PYTHON
-#include <Python.h>
+#include <boost/python/detail/wrap_python.hpp>
 #endif
 #include "globals.h"
 #include "qwt_global.h"

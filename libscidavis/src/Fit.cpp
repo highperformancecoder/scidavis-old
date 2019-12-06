@@ -51,9 +51,7 @@
 using namespace std;
 
 #ifdef SCRIPTING_PYTHON
-#undef slots
 #include <boost/python.hpp>
-struct pyobject: public boost::python::object {};
 #endif
 
 Fit::Fit( ApplicationWindow *parent, Graph *g, QString name)

@@ -11,7 +11,7 @@
 
   TMP_DIR = ../tmp/scidavis
 
-  DEFINES += SCRIPTING_PYTHON
+  DEFINES += SCRIPTING_PYTHON BOOST_PYTHON_STATIC_LIB
   HEADERS += src/PythonScript.h src/PythonScripting.h src/Qt.h
   SOURCES += src/PythonScript.cpp src/PythonScripting.cpp src/Qt.cpp src/PythonApplicationWindow.cpp
 

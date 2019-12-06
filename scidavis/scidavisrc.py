@@ -70,6 +70,10 @@ import_to_global("math", None, True)
 # import SciDAVis' classes to the global namespace (particularly useful for fits)
 for name in dir(scidavis):
 	setattr(__main__, name, getattr(scidavis, name))
+
+# redefine Qt as an alias for QtNamespace - unfortunately QtNamespace cannot be called Qt in C++ as Qt is already taken
+setattr(__main__, "Qt", getattr(scidavis, "QtNamespace"))
+
 for name in dir(SciDAVis):
         if not name.startswith("__"):
 	        setattr(__main__, name, getattr(SciDAVis, name))

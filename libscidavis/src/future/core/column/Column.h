@@ -42,8 +42,6 @@ class QString;
 
 class ColumnStringIO;
 
-struct pyobject;
-
 //! Aspect that manages a column
 /**
   This class represents a column, i.e., (mathematically) a 1D vector of 

@@ -32,7 +32,6 @@
 #ifdef _POSIX_C_SOURCE
 #undef _POSIX_C_SOURCE
 #endif
-#include <Python.h>
 #include <compile.h>
 #include <eval.h>
 #include <frameobject.h>
@@ -233,9 +232,6 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<Interpolation>();
   p.defineClass<SmoothFilter>();
   p.defineClass<SciQwtSymbol>();
-
-  // redefine Qt as an alias for QtNamespace - unfortunately QtNamespace cannot be called Qt in C++ as Qt is already taken
-  modDict("__main__")["Qt"]=modDict("scidavis")["QtNamespace"];
 }
 
 QString PythonScripting::toString(PyObject *object, bool decref)
@@ -340,18 +336,17 @@ QString PythonScripting::errorMsg()
 	return msg;
 }
 
-PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
+PythonScripting::PythonScripting(ApplicationWindow *parent, bool)
   : ScriptingEnv(parent, langName)
 {
-  Q_UNUSED(batch);
 
+  PyImport_AppendInittab("scidavis", &PyInit_scidavis);
   Py_Initialize ();
-  if (!Py_IsInitialized ())
-    return;
-  cout << "b4 PyInit_scidavis()" << endl;
-  PyInit_scidavis();
-  cout << "after PyInit_scidavis()" << endl;
+  if (!Py_IsInitialized ())  return;
+ 
+  PyImport_ImportModule("scidavis");
   classdesc::addPythonObject("app",*parent);
+
   
   PyObject *mainmod=NULL, *sysmod=NULL;
   math = NULL;
@@ -375,20 +370,15 @@ PythonScripting::PythonScripting(ApplicationWindow *parent, bool batch)
 #ifdef PYTHONHOME
     Py_SetPythonHome(const_cast<char*>(str(PYTHONHOME)));
 #endif
-    //		PyEval_InitThreads ();
-#if PY_MAJOR_VERSION >= 3
-    PyImport_AppendInittab("scidavis", &PyInit_scidavis);
-#endif
-
-
-    mainmod = PyImport_AddModule("__main__");
-    if (!mainmod)
-      {
-        //			PyEval_ReleaseLock();
-        PyErr_Print();
-        return;
-      }
-    globals = PyModule_GetDict(mainmod);
+  
+  mainmod = PyImport_AddModule("__main__");
+  if (!mainmod)
+    {
+      //			PyEval_ReleaseLock();
+      PyErr_Print();
+      return;
+    }
+  globals = PyModule_GetDict(mainmod);
   }
 
   if (!globals)

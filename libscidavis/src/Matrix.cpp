@@ -61,9 +61,7 @@
 #include <gsl/gsl_math.h>
 
 #ifdef SCRIPTING_PYTHON
-#undef slots
 #include <boost/python.hpp>
-struct pyobject: public boost::python::object {};
 #endif
 
 Matrix::Matrix(const ScriptingEnvPtr& env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)

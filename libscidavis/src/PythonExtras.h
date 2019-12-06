@@ -37,20 +37,4 @@ inline boost::python::dict modDict(const char* mod) {
   return extract<dict>(import(mod).attr("__dict__"))();
 }
 
-struct pyobject: public boost::python::object {};
-
-namespace classdesc
-{
-  template <> struct tn<pyobject>
-  {
-    static string name() {return "boost::python::object";}
-  };
-}
-
-namespace classdesc_access
-{
-  template <> struct access_python<pyobject>:
-    public classdesc::NullDescriptor<classdesc::python_t> {};
-}
-
 #endif

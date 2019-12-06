@@ -9,13 +9,14 @@
 #include <QtEnums.h>
 
 #ifdef SCRIPTING_PYTHON
-// boost/python.hpp is incompatible with moc :(
-//#include <boost/python.hpp>
-//typedef boost::python::object pyobject;
-namespace boost{namespace python {}}
+#undef slots
+#include <boost/python/object_fwd.hpp>
+#define slots 
 namespace py=boost::python;
-#endif
+using pyobject=boost::python::object;
+#else
 struct pyobject;
+#endif
 
 /// wrap a Qt container with Python accessor method
 template <class T>
