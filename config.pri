@@ -222,7 +222,7 @@ DEFINES  += ORIGIN_IMPORT
 }
 
 ### python support
-osx_dist|aegis {
+aegis {
 CONFIG+=python
 }
 
