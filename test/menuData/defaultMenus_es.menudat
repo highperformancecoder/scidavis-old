@@ -1,22 +1,22 @@
 :Vectores &XYXY|Vectores XYXY||Vectores XYXY|1|
 :Vectores XY&AM|Vectores XYAM||Vectores XYAM|1|
- LÌnea/SÌmb&olo especial: LÌneas  &verticales|LÌneas  verticales||LÌneas  verticales|1|
- LÌnea/SÌmb&olo especial:&Suavizado|Suavizado||Suavizado|1|
- LÌnea/SÌmb&olo especial:Escalones &verticales|Escalones verticales||Escalones verticales|1|
- LÌnea/SÌmb&olo especial:Escalones &horizontales|Escalones horizontales||Escalones horizontales|1|
-&An·lisis:&Traducir|Traducir||Traducir|1|
-&An·lisis:||||1|
-&An·lisis:&Derivar|Derivar||Derivar|1|
-&An·lisis:&Integrar ...|Integrar||Integrar|1|
-&An·lisis:||||1|
-&An·lisis:&Suavizar|Suavizar||Suavizar|1|
-&An·lisis:Filtro &FFT|Filtro FFT||Filtro FFT|1|
-&An·lisis:||||1|
-&An·lisis:Inte&rpolar...|Interpolar||Interpolar|1|
-&An·lisis:&FFT...|FFT||FFT|1|
-&An·lisis:||||1|
-&An·lisis:Ajuste &r·pido|Ajuste r·pido||Ajuste r·pido|1|
-&An·lisis:Asistente de a&juste...|Asistente de ajuste||Asistente de ajuste|1|
+ L√≠nea/S√≠mb&olo especial: L√≠neas  &verticales|L√≠neas  verticales||L√≠neas  verticales|1|
+ L√≠nea/S√≠mb&olo especial:&Suavizado|Suavizado||Suavizado|1|
+ L√≠nea/S√≠mb&olo especial:Escalones &verticales|Escalones verticales||Escalones verticales|1|
+ L√≠nea/S√≠mb&olo especial:Escalones &horizontales|Escalones horizontales||Escalones horizontales|1|
+&An√°lisis:&Traducir|Traducir||Traducir|1|
+&An√°lisis:||||1|
+&An√°lisis:&Derivar|Derivar||Derivar|1|
+&An√°lisis:&Integrar ...|Integrar||Integrar|1|
+&An√°lisis:||||1|
+&An√°lisis:&Suavizar|Suavizar||Suavizar|1|
+&An√°lisis:Filtro &FFT|Filtro FFT||Filtro FFT|1|
+&An√°lisis:||||1|
+&An√°lisis:Inte&rpolar...|Interpolar||Interpolar|1|
+&An√°lisis:&FFT...|FFT||FFT|1|
+&An√°lisis:||||1|
+&An√°lisis:Ajuste &r√°pido|Ajuste r√°pido||Ajuste r√°pido|1|
+&An√°lisis:Asistente de a&juste...|Asistente de ajuste||Asistente de ajuste|1|
 &Archivo:&Nuevo|Nuevo||Nuevo|1|
 &Archivo:&Abrir...|Abrir||Abrir proyecto|1|
 &Archivo:&Proyectos recientes|Proyectos recientes||Proyectos recientes|1|
@@ -30,9 +30,9 @@
 &Archivo:Abrir pla&ntilla...|Abrir plantilla||Abrir plantilla|1|
 &Archivo:Guardar como plan&tilla...|Guardar como plantilla||Guardar ventana como plantilla|1|
 &Archivo:||||1|
-&Archivo:&Exportar gr·fico|Exportar gr·fico||Exportar gr·fico|1|
+&Archivo:&Exportar gr√°fico|Exportar gr√°fico||Exportar gr√°fico|1|
 &Archivo:Im&primir...|Imprimir||Imprimir ventana|1|
-&Archivo:Imprimir &todos los gr·ficos...|Imprimir todos los gr·ficos||Imprimir todos los gr·ficos|1|
+&Archivo:Imprimir &todos los gr√°ficos...|Imprimir todos los gr√°ficos||Imprimir todos los gr√°ficos|1|
 &Archivo:||||1|
 &Archivo:E&xportar ASCII...|Exportar ASCII||Exportar ASCII|1|
 &Archivo:&Importar ASCII...|Importar ASCII||Importar archivo(s) de datos|1|
@@ -41,47 +41,47 @@
 &Editar:&Deshacer|Deshacer||Deshacer cambios|1|
 &Editar:&Rehacer|Rehacer||Rehacer cambios|1|
 &Editar:||||1|
-&Editar:Cor&tar selecciÛn|Cortar selecciÛn||Cortar selecciÛn|1|
-&Editar:&Copiar selecciÛn|Copiar selecciÛn||Copiar selecciÛn|1|
-&Editar:&Pegar selecciÛn|Pegar selecciÛn||Pegar selecciÛn|1|
-&Editar:&Borrar selecciÛn|Borrar selecciÛn||Borrar selecciÛn|1|
+&Editar:Cor&tar selecci√≥n|Cortar selecci√≥n||Cortar selecci√≥n|1|
+&Editar:&Copiar selecci√≥n|Copiar selecci√≥n||Copiar selecci√≥n|1|
+&Editar:&Pegar selecci√≥n|Pegar selecci√≥n||Pegar selecci√≥n|1|
+&Editar:&Borrar selecci√≥n|Borrar selecci√≥n||Borrar selecci√≥n|1|
 &Editar:||||1|
 &Editar:Borrar tablas de a&juste|Borrar tablas de ajuste||Borrar tablas de ajuste|1|
-&Editar:Borrar informaciÛn de&l registro|Borrar informaciÛn del registro||Borrar informaciÛn del registro|1|
+&Editar:Borrar informaci√≥n de&l registro|Borrar informaci√≥n del registro||Borrar informaci√≥n del registro|1|
 &Editar:||||1|
 &Editar:&Preferencias...|Preferencias||Preferencias|1|
-&Exportar gr·fico:A&ctual...|Actual||Exportar gr·fico actual|1|
-&Exportar gr·fico:&Todo...|Todo||Exportar todos los gr·ficos|1|
-&Gr·fico:&LÌnea|LÌnea||Dibujar como lÌnea|1|
-&Gr·fico:&SÌmbolos|SÌmbolos||Dibujar como sÌmbolos|1|
-&Gr·fico:LÌnea + SÌ&mbolo|LÌnea + SÌmbolo||Dibujar como lÌnea+siÌmbolos|1|
-&Gr·fico: LÌnea/SÌmb&olo especial|LÌnea/SÌmbolo especial||LÌnea/SÌmbolo especial|1|
-&Gr·fico:||||1|
-&Gr·fico: Barras &verticales|Barras verticales||Dibujar con barras verticales|1|
-&Gr·fico:Barras &horizontales|Barras horizontales||Dibujar con barras horizontales|1|
-&Gr·fico:&¡rea|¡rea||Dibujar ·rea|1|
-&Gr·fico:&Porciones|Porciones||Dibujar con porciones|1|
-&Gr·fico:Vectores &XYXY|Vectores XYXY||Vectores XYXY|1|
-&Gr·fico:Vectores XY&AM|Vectores XYAM||Vectores XYAM|1|
-&Gr·fico:||||1|
-&Gr·fico:&Gr·ficos estadÌsticos|Gr·ficos estadÌsticos||Gr·ficos estadÌsticos|1|
-&Gr·fico:Pa&nel|Panel||Panel|1|
-&Gr·fico:||||1|
-&Gr·fico:Gr·fico 3&D|Gr·fico 3D||Gr·fico 3D|1|
-&Gr·fico 3D:Es&queleto 3D|Esqueleto 3D||Esqueleto 3D|1|
-&Gr·fico 3D:LÌnea &oculta 3D|LÌnea oculta 3D||LÌnea oculta 3D|1|
-&Gr·fico 3D:&PolÌgonos 3D|PolÌgonos 3D||PolÌgonos 3D|1|
-&Gr·fico 3D:&Superficie de hilos 3D|Superficie de hilos 3D||Superficie de hilos 3D|1|
-&Gr·fico 3D:||||1|
-&Gr·fico 3D:&Barras|Barras||Gr·fico barras 3D|1|
-&Gr·fico 3D:&SÌmbolos|SÌmbolos||Gr·fico sÌmbolos 3D|1|
-&Gr·fico 3D:||||1|
-&Gr·fico 3D:Contorno + relleno de &color|Contorno + relleno de color||LÌneas de contorno + relleno de color|1|
-&Gr·fico 3D:&LÌneas de contorno|LÌneas de contorno||LÌneas de contorno|1|
-&Gr·fico 3D:Escala de &grises|Escala de grises||Escala de grises|1|
-&Gr·ficos estadÌsticos:Gr·fico de &caja|Gr·fico de caja||Gr·fico de cajas y bigotes|1|
-&Gr·ficos estadÌsticos:&Histograma|Histograma||Histograma|1|
-&Gr·ficos estadÌsticos:Hi&stograma apilado|Histograma apilado||Histograma apilado|1|
+&Exportar gr√°fico:A&ctual...|Actual||Exportar gr√°fico actual|1|
+&Exportar gr√°fico:&Todo...|Todo||Exportar todos los gr√°ficos|1|
+&Gr√°fico:&L√≠nea|L√≠nea||Dibujar como l√≠nea|1|
+&Gr√°fico:&S√≠mbolos|S√≠mbolos||Dibujar como s√≠mbolos|1|
+&Gr√°fico:L√≠nea + S√≠&mbolo|L√≠nea + S√≠mbolo||Dibujar como l√≠nea+si√≠mbolos|1|
+&Gr√°fico: L√≠nea/S√≠mb&olo especial|L√≠nea/S√≠mbolo especial||L√≠nea/S√≠mbolo especial|1|
+&Gr√°fico:||||1|
+&Gr√°fico: Barras &verticales|Barras verticales||Dibujar con barras verticales|1|
+&Gr√°fico:Barras &horizontales|Barras horizontales||Dibujar con barras horizontales|1|
+&Gr√°fico:&√Årea|√Årea||Dibujar √°rea|1|
+&Gr√°fico:&Porciones|Porciones||Dibujar con porciones|1|
+&Gr√°fico:Vectores &XYXY|Vectores XYXY||Vectores XYXY|1|
+&Gr√°fico:Vectores XY&AM|Vectores XYAM||Vectores XYAM|1|
+&Gr√°fico:||||1|
+&Gr√°fico:&Gr√°ficos estad√≠sticos|Gr√°ficos estad√≠sticos||Gr√°ficos estad√≠sticos|1|
+&Gr√°fico:Pa&nel|Panel||Panel|1|
+&Gr√°fico:||||1|
+&Gr√°fico:Gr√°fico 3&D|Gr√°fico 3D||Gr√°fico 3D|1|
+&Gr√°fico 3D:Es&queleto 3D|Esqueleto 3D||Esqueleto 3D|1|
+&Gr√°fico 3D:L√≠nea &oculta 3D|L√≠nea oculta 3D||L√≠nea oculta 3D|1|
+&Gr√°fico 3D:&Pol√≠gonos 3D|Pol√≠gonos 3D||Pol√≠gonos 3D|1|
+&Gr√°fico 3D:&Superficie de hilos 3D|Superficie de hilos 3D||Superficie de hilos 3D|1|
+&Gr√°fico 3D:||||1|
+&Gr√°fico 3D:&Barras|Barras||Gr√°fico barras 3D|1|
+&Gr√°fico 3D:&S√≠mbolos|S√≠mbolos||Gr√°fico s√≠mbolos 3D|1|
+&Gr√°fico 3D:||||1|
+&Gr√°fico 3D:Contorno + relleno de &color|Contorno + relleno de color||L√≠neas de contorno + relleno de color|1|
+&Gr√°fico 3D:&L√≠neas de contorno|L√≠neas de contorno||L√≠neas de contorno|1|
+&Gr√°fico 3D:Escala de &grises|Escala de grises||Escala de grises|1|
+&Gr√°ficos estad√≠sticos:Gr√°fico de &caja|Gr√°fico de caja||Gr√°fico de cajas y bigotes|1|
+&Gr√°ficos estad√≠sticos:&Histograma|Histograma||Histograma|1|
+&Gr√°ficos estad√≠sticos:Hi&stograma apilado|Histograma apilado||Histograma apilado|1|
 &Herramientas:Desactivar herramien&tas|Desactivar herramientas||Puntero|1|
 &Herramientas:Aumentar &zoom|Aumentar zoom||Aumentar zoom|1|
 &Herramientas:Ale&jar|Alejar||Disminuir zoom|1|
@@ -96,23 +96,23 @@
 &Nuevo:Nuevo &proyecto|Nuevo proyecto||Abrir un nuevo proyecto|1|
 &Nuevo:Nueva &tabla|Nueva tabla||Nueva tabla|1|
 &Nuevo:Nueva &matriz|Nueva matriz||Nueva matriz|1|
-&Nuevo:Nueva &nota / script|Nueva nota / script||Crear una ventana de notas/programaciÛn vacÌa|1|
-&Nuevo:Nuevo &gr·fico|Nuevo gr·fico||Crear un gr·fico 2D vacÌo|1|
-&Nuevo:Nuevo gr·fico de &funciÛn|Nuevo gr·fico de funciÛn||Crear nuevo gr·fico de funciÛn 2D|1|
-&Nuevo:Nueva &superficie 3D|Nueva superficie 3D||Crear nuevo gr·fico 3D|1|
+&Nuevo:Nueva &nota / script|Nueva nota / script||Crear una ventana de notas/programaci√≥n vac√≠a|1|
+&Nuevo:Nuevo &gr√°fico|Nuevo gr√°fico||Crear un gr√°fico 2D vac√≠o|1|
+&Nuevo:Nuevo gr√°fico de &funci√≥n|Nuevo gr√°fico de funci√≥n||Crear nuevo gr√°fico de funci√≥n 2D|1|
+&Nuevo:Nueva &superficie 3D|Nueva superficie 3D||Crear nuevo gr√°fico 3D|1|
 &Suavizar:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
-&Suavizar:Promedio de vent&ana mÛvil...|Promedio de ventana mÛvil||Promedio de ventana mÛvil|1|
+&Suavizar:Promedio de vent&ana m√≥vil...|Promedio de ventana m√≥vil||Promedio de ventana m√≥vil|1|
 &Suavizar:Filtro &FFT...|Filtro FFT||Filtro FFT|1|
 &Traducir:&Vertical|Vertical||Vertical|1|
 &Traducir:&Horizontal|Horizontal||Horizontal|1|
 &Ver:Barras de herramientas|Barras de herramientas||Barras de herramientas|1|
 &Ver:&Lock Toolbars|Lock Toolbars||Lock Toolbars|1|
 &Ver:||||1|
-&Ver:Asistente de gr·&fico|Asistente de gr·fico||Asistente de gr·fico|1|
+&Ver:Asistente de gr√°&fico|Asistente de gr√°fico||Asistente de gr√°fico|1|
 &Ver:&Explorador de proyecto|Explorador de proyecto||Mostrar explorador de proyecto|1|
-&Ver:Registro de resu&ltados|Registro de resultados||Mostrar resultados del an·lisis|1|
+&Ver:Registro de resu&ltados|Registro de resultados||Mostrar resultados del an√°lisis|1|
 &Ver:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
-&Ver:&Consola|Consola||Mostrar consola de programaciÛn|1|
+&Ver:&Consola|Consola||Mostrar consola de programaci√≥n|1|
 A&yuda:A&yuda|Ayuda||Ayuda|1|
 A&yuda:||||1|
 A&yuda:Sitio &web de SciDAVis|Sitio web de SciDAVis||Sitio web de SciDAVis|1|
@@ -123,34 +123,34 @@ A&yuda:||||1|
 A&yuda:&Acerca de SciDAVis|Acerca de SciDAVis||Acerca de SciDAVis|1|
 Ajuste &multi-picos:&Gaussiana...|Gaussiana||Gaussiana|1|
 Ajuste &multi-picos:&Lorentziana...|Lorentziana||Lorentziana|1|
-Ajuste &r·pido:Ajuste &lineal|Ajuste lineal||Ajuste lineal|1|
-Ajuste &r·pido:Ajuste &polinomial ...|Ajuste polinomial||Ajuste polinomial|1|
-Ajuste &r·pido:||||1|
-Ajuste &r·pido:Ajuste a decaimiento e&ponencial|Ajuste a decaimiento eponencial||Ajuste a decaimiento eponencial|1|
-Ajuste &r·pido:Ajustar a crecimiento e&xponencial...|Ajustar a crecimiento exponencial||Ajustar a crecimiento exponencial|1|
-Ajuste &r·pido:Ajustar &Boltzmann (Sigmoidal)|Ajustar Boltzmann (Sigmoidal)||Ajustar Boltzmann (Sigmoidal)|1|
-Ajuste &r·pido:Ajuste &Gaussiano|Ajuste Gaussiano||Ajuste Gaussiano|1|
-Ajuste &r·pido:Ajuste Loren&ziano|Ajuste Lorenziano||Ajuste Lorenziano|1|
-Ajuste &r·pido:Ajuste &multi-picos|Ajuste multi-picos||Ajuste multi-picos|1|
-Ajuste &r·pido:||||1|
+Ajuste &r√°pido:Ajuste &lineal|Ajuste lineal||Ajuste lineal|1|
+Ajuste &r√°pido:Ajuste &polinomial ...|Ajuste polinomial||Ajuste polinomial|1|
+Ajuste &r√°pido:||||1|
+Ajuste &r√°pido:Ajuste a decaimiento e&ponencial|Ajuste a decaimiento eponencial||Ajuste a decaimiento eponencial|1|
+Ajuste &r√°pido:Ajustar a crecimiento e&xponencial...|Ajustar a crecimiento exponencial||Ajustar a crecimiento exponencial|1|
+Ajuste &r√°pido:Ajustar &Boltzmann (Sigmoidal)|Ajustar Boltzmann (Sigmoidal)||Ajustar Boltzmann (Sigmoidal)|1|
+Ajuste &r√°pido:Ajuste &Gaussiano|Ajuste Gaussiano||Ajuste Gaussiano|1|
+Ajuste &r√°pido:Ajuste Loren&ziano|Ajuste Lorenziano||Ajuste Lorenziano|1|
+Ajuste &r√°pido:Ajuste &multi-picos|Ajuste multi-picos||Ajuste multi-picos|1|
+Ajuste &r√°pido:||||1|
 Ajuste a decaimiento e&ponencial:&Primer orden ...|Primer orden||Primer orden|1|
 Ajuste a decaimiento e&ponencial:&Segundo orden ...|Segundo orden||Segundo orden|1|
 Ajuste a decaimiento e&ponencial:&Tercer orden ...|Tercer orden||Tercer orden|1|
 Barras de herramientas:Archivo|Archivo||Archivo|1|
 Barras de herramientas:Editar|Editar||Editar|1|
-Barras de herramientas:Gr·fico|Gr·fico||Gr·fico|1|
-Barras de herramientas:Gr·fica|Gr·fica||Gr·fica|1|
+Barras de herramientas:Gr√°fico|Gr√°fico||Gr√°fico|1|
+Barras de herramientas:Gr√°fica|Gr√°fica||Gr√°fica|1|
 Barras de herramientas:Tabla|Tabla||Tabla|1|
-Barras de herramientas:Gr·fico de matriz|Gr·fico de matriz||Gr·fico de matriz|1|
+Barras de herramientas:Gr√°fico de matriz|Gr√°fico de matriz||Gr√°fico de matriz|1|
 Barras de herramientas:Superficie 3D|Superficie 3D||Superficie 3D|1|
 Filtro &FFT:Pasa &bajo...|Pasa bajo||Pasa bajo|1|
 Filtro &FFT:Pasa &Alto...|Pasa Alto||Pasa Alto|1|
 Filtro &FFT:Pasa &Banda...|Pasa Banda||Pasa Banda|1|
 Filtro &FFT:Bloquear &Banda...|Bloquear Banda||Bloquear Banda|1|
-Gr·fico 3&D:&Cinta|Cinta||Gr·fico cinta 3D|1|
-Gr·fico 3&D:&Barras|Barras||Gr·fico barras 3D|1|
-Gr·fico 3&D:&SÌmbolos|SÌmbolos||Gr·fico sÌmbolos 3D|1|
-Gr·fico 3&D:&Trayectoria|Trayectoria||Gr·fico trayectoria 3D|1|
+Gr√°fico 3&D:&Cinta|Cinta||Gr√°fico cinta 3D|1|
+Gr√°fico 3&D:&Barras|Barras||Gr√°fico barras 3D|1|
+Gr√°fico 3&D:&S√≠mbolos|S√≠mbolos||Gr√°fico s√≠mbolos 3D|1|
+Gr√°fico 3&D:&Trayectoria|Trayectoria||Gr√°fico trayectoria 3D|1|
 Pa&nel:&2 capas &verticales|2 capas verticales||2 capas verticales|1|
 Pa&nel:2 capas &horizontales|2 capas horizontales||2 capas horizontales|1|
 Pa&nel:&4 capas|4 capas||4 capas|1|

@@ -48,19 +48,19 @@ Legend::Legend(Plot *plot):
 	d_frame (0),
 	d_angle(0)
 {
-	d_text = new QwtText(QString::null, QwtText::RichText);
-	d_text->setFont(QFont("Arial",12, QFont::Normal, false));
-	d_text->setRenderFlags(Qt::AlignTop|Qt::AlignLeft);
-	d_text->setBackgroundBrush(QBrush(Qt::NoBrush));
-	d_text->setColor(Qt::black);
-	d_text->setBackgroundPen (QPen(Qt::NoPen));
-	d_text->setPaintAttribute(QwtText::PaintBackground);
+  d_text = new QwtText({}, QwtText::RichText);
+  d_text->setFont(QFont("Arial",12, QFont::Normal, false));
+  d_text->setRenderFlags(Qt::AlignTop|Qt::AlignLeft);
+  d_text->setBackgroundBrush(QBrush(Qt::NoBrush));
+  d_text->setColor(Qt::black);
+  d_text->setBackgroundPen (QPen(Qt::NoPen));
+  d_text->setPaintAttribute(QwtText::PaintBackground);
 
-	hspace = 30;
-	left_margin = 10;
-	top_margin = 5;
-	d_shadow_size_x = 5;
-	d_shadow_size_y = 5;
+  hspace = 30;
+  left_margin = 10;
+  top_margin = 5;
+  d_shadow_size_x = 5;
+  d_shadow_size_y = 5;
 }
 
 void Legend::draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &) const

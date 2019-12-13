@@ -1,7 +1,7 @@
 :Vektorer &XYXY|Vektorer XYXY||Vektorer XYXY|1|
 :Vektorer XYA&M|Vektorer XYAM||Vektorer XYAM|1|
 &Arkiv:&Ny|Ny||Ny|1|
-&Arkiv:&÷ppna...|÷ppna||÷ppna projekt|1|
+&Arkiv:&√ñppna...|√ñppna||√ñppna projekt|1|
 &Arkiv:&Recent Projects|Recent Projects||Recent Projects|1|
 &Arkiv:||||1|
 &Arkiv:Open Image &File...|Open Image File||Open Image File|1|
@@ -10,11 +10,11 @@
 &Arkiv:Spara pro&jet|Spara projet||Save project|1|
 &Arkiv:Sp&ara projet som...|Spara projet som||Spara projet som|1|
 &Arkiv:||||1|
-&Arkiv:÷ppna &mall...|÷ppna mall||Open template|1|
+&Arkiv:√ñppna &mall...|√ñppna mall||Open template|1|
 &Arkiv:Save As &Template...|Save As Template||Save window as template|1|
 &Arkiv:||||1|
 &Arkiv:&Exportera diagram|Exportera diagram||Exportera diagram|1|
-&Arkiv:&Skriv ut...|Skriv ut||Skriv ut fˆnster|1|
+&Arkiv:&Skriv ut...|Skriv ut||Skriv ut f√∂nster|1|
 &Arkiv:Skriv u&t alla diagram...|Skriv ut alla diagram||Skriv ut alla diagram|1|
 &Arkiv:||||1|
 &Arkiv:Ex&portera ASCII...|Exportera ASCII||Exportera ASCII|1|
@@ -28,11 +28,11 @@
 &Betrakta:Project &Explorer|Project Explorer||Visa projektutforskaren|1|
 &Betrakta:Resultat&logg|Resultatlogg||Show analysis results|1|
 &Betrakta:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
-&Betrakta:&Konsol|Konsol||Visa konsol fˆr skript|1|
+&Betrakta:&Konsol|Konsol||Visa konsol f√∂r skript|1|
 &Diagram:&Linje|Linje||Plot as line|1|
 &Diagram:S&pridning|Spridning||Plot as symbols|1|
 &Diagram:Linje + s&ymbol|Linje + symbol||Plot as line + symbols|1|
-&Diagram:S‰rskild linje/symb&ol|S‰rskild linje/symbol||S‰rskild linje/symbol|1|
+&Diagram:S√§rskild linje/symb&ol|S√§rskild linje/symbol||S√§rskild linje/symbol|1|
 &Diagram:||||1|
 &Diagram:&Vertical Bars|Vertical Bars||Rita med vertikala staplar|1|
 &Diagram:&Horizontal Bars|Horizontal Bars||Rita med horisontella staplar|1|
@@ -47,42 +47,42 @@
 &Diagram:3&D Plot|3D Plot||3D Plot|1|
 &Exportera diagram:&Aktuellt...|Aktuellt||Exportera aktuellt diagram|1|
 &Exportera diagram:&Allt...|Allt||Exportera alla diagram|1|
-&FFT Filter:&LÂgpass...|LÂgpass||LÂgpass|1|
-&FFT Filter:&Hˆgpass...|Hˆgpass||Hˆgpass|1|
+&FFT Filter:&L√•gpass...|L√•gpass||L√•gpass|1|
+&FFT Filter:&H√∂gpass...|H√∂gpass||H√∂gpass|1|
 &FFT Filter:&Bandpass...|Bandpass||Bandpass|1|
-&FFT Filter:&Bandsp‰rr...|Bandsp‰rr||Bandsp‰rr|1|
-&Fˆrskju&t:&Vertikal|Vertikal||Vertikal|1|
-&Fˆrskju&t:&Horisontell|Horisontell||Horisontell|1|
-&Hj‰lp:&Hj‰lp|Hj‰lp||Hj‰lp|1|
-&Hj‰lp:||||1|
-&Hj‰lp:&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
-&Hj‰lp:||||1|
-&Hj‰lp:Visit SciDAVis &Forums|Visit SciDAVis Forums||Visit SciDAVis Forums|1|
-&Hj‰lp:Report a &Bug|Report a Bug||Report a Bug|1|
-&Hj‰lp:||||1|
-&Hj‰lp:&About SciDAVis|About SciDAVis||About SciDAVis|1|
-&J‰mna ut:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
-&J‰mna ut:Flytt&ar fˆnstermedelv‰rdesbildning...|Flyttar fˆnstermedelv‰rdesbildning||Flyttar fˆnstermedelv‰rdesbildning|1|
-&J‰mna ut:&FFT-filter...|FFT-filter||FFT-filter|1|
-&Ny:Nytt &projekt|Nytt projekt||÷ppna ett nytt projekt|1|
+&FFT Filter:&Bandsp√§rr...|Bandsp√§rr||Bandsp√§rr|1|
+&F√∂rskju&t:&Vertikal|Vertikal||Vertikal|1|
+&F√∂rskju&t:&Horisontell|Horisontell||Horisontell|1|
+&Hj√§lp:&Hj√§lp|Hj√§lp||Hj√§lp|1|
+&Hj√§lp:||||1|
+&Hj√§lp:&SciDAVis Homepage|SciDAVis Homepage||SciDAVis Homepage|1|
+&Hj√§lp:||||1|
+&Hj√§lp:Visit SciDAVis &Forums|Visit SciDAVis Forums||Visit SciDAVis Forums|1|
+&Hj√§lp:Report a &Bug|Report a Bug||Report a Bug|1|
+&Hj√§lp:||||1|
+&Hj√§lp:&About SciDAVis|About SciDAVis||About SciDAVis|1|
+&J√§mna ut:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
+&J√§mna ut:Flytt&ar f√∂nstermedelv√§rdesbildning...|Flyttar f√∂nstermedelv√§rdesbildning||Flyttar f√∂nstermedelv√§rdesbildning|1|
+&J√§mna ut:&FFT-filter...|FFT-filter||FFT-filter|1|
+&Ny:Nytt &projekt|Nytt projekt||√ñppna ett nytt projekt|1|
 &Ny:Ny &tabell|Ny tabell||New table|1|
 &Ny:Ny &matris|Ny matris||Ny matris|1|
 &Ny:Ny a&nteckning|Ny anteckning||Create an empty note / script window|1|
 &Ny:Nytt dia&gram|Nytt diagram||Skapa ett tomt 2D-diagram|1|
 &Ny:Nytt &funktionsdiagram|Nytt funktionsdiagram||Skapa ett nytt 2D-funktionsdiagram|1|
 &Ny:New 3D &Surface Plot|New 3D Surface Plot||Skapa ett nytt 3D-ytdiagram|1|
-&Quick Fit:Anpassa &linj‰rt|Anpassa linj‰rt||Anpassa linj‰rt|1|
+&Quick Fit:Anpassa &linj√§rt|Anpassa linj√§rt||Anpassa linj√§rt|1|
 &Quick Fit:Anpassa &polynom ...|Anpassa polynom||Anpassa polynom|1|
 &Quick Fit:||||1|
 &Quick Fit:Anpassa e&xponetiellt avtagande|Anpassa exponetiellt avtagande||Anpassa exponetiellt avtagande|1|
-&Quick Fit:Anpassa exponetiell till&v‰xt ...|Anpassa exponetiell tillv‰xt||Anpassa exponetiell tillv‰xt|1|
+&Quick Fit:Anpassa exponetiell till&v√§xt ...|Anpassa exponetiell tillv√§xt||Anpassa exponetiell tillv√§xt|1|
 &Quick Fit:Anpassa &Boltzmann (Sigmoidal)|Anpassa Boltzmann (Sigmoidal)||Anpassa Boltzmann (Sigmoidal)|1|
 &Quick Fit:Anpassa &Gaussiskt|Anpassa Gaussiskt||Anpassa Gaussiskt|1|
 &Quick Fit:Anpassa Lorent&ziskt|Anpassa Lorentziskt||Anpassa Lorentziskt|1|
 &Quick Fit:Fit &Multi-Peak|Fit Multi-Peak||Fit Multi-Peak|1|
 &Quick Fit:||||1|
-&Redigera:&≈ngra|≈ngra||≈ngra ‰ndringar|1|
-&Redigera:Gˆ&r om|Gˆr om||Gˆr om ‰ndringar|1|
+&Redigera:&√Öngra|√Öngra||√Öngra √§ndringar|1|
+&Redigera:G√∂&r om|G√∂r om||G√∂r om √§ndringar|1|
 &Redigera:||||1|
 &Redigera:Cu&t Selection|Cut Selection||Klipp ut det valda|1|
 &Redigera:&Copy Selection|Copy Selection||Kopiera det valda|1|
@@ -92,39 +92,39 @@
 &Redigera:Delete &Fit Tables|Delete Fit Tables||Delete Fit Tables|1|
 &Redigera:Clear &Log Information|Clear Log Information||Clear Log Information|1|
 &Redigera:||||1|
-&Redigera:&Inst‰llningar...|Inst‰llningar||Inst‰llningar|1|
-&Tools:St‰ng av verk&tyg|St‰ng av verktyg||Pekare|1|
+&Redigera:&Inst√§llningar...|Inst√§llningar||Inst√§llningar|1|
+&Tools:St√§ng av verk&tyg|St√§ng av verktyg||Pekare|1|
 &Tools:&Zooma in|Zooma in||Zooma in|1|
 &Tools:Z&ooma ut|Zooma ut||Zooma ut|1|
-&Tools:&Rescale to Show All|Rescale to Show All||B‰sta anpassning|1|
+&Tools:&Rescale to Show All|Rescale to Show All||B√§sta anpassning|1|
 &Tools:||||1|
-&Tools:S&creen Reader|Screen Reader||Sk‰rml‰sare|1|
-&Tools:&Data Reader|Data Reader||Datal‰sare|1|
-&Tools:&Select Data Range|Select Data Range||V‰lj dataomrÂde|1|
+&Tools:S&creen Reader|Screen Reader||Sk√§rml√§sare|1|
+&Tools:&Data Reader|Data Reader||Datal√§sare|1|
+&Tools:&Select Data Range|Select Data Range||V√§lj dataomr√•de|1|
 &Tools:||||1|
 &Tools:&Flytta datapunkter...|Flytta datapunkter||Flytta datapunkter|1|
-&Tools:Tag bort &dÂliga datapunkter...|Tag bort dÂliga datapunkter||Tab bort datapunkter|1|
+&Tools:Tag bort &d√•liga datapunkter...|Tag bort d√•liga datapunkter||Tab bort datapunkter|1|
 3&D Plot:&Band|Band||Plot 3D ribbon|1|
 3&D Plot:&Staplar|Staplar||Plot 3D bars|1|
 3&D Plot:S&pridning|Spridning||Plot 3D scatter|1|
-3&D Plot:SpÂ&r|SpÂr||Plot 3D trajectory|1|
-3D &Plot:3D-t&rÂdram|3D-trÂdram||3D-trÂdram|1|
+3&D Plot:Sp√•&r|Sp√•r||Plot 3D trajectory|1|
+3D &Plot:3D-t&r√•dram|3D-tr√•dram||3D-tr√•dram|1|
 3D &Plot:3D &Dold linje|3D Dold linje||3D Dold linje|1|
 3D &Plot:3D &Polygoner|3D Polygoner||3D Polygoner|1|
-3D &Plot:3D TrÂd&yta|3D TrÂdyta||3D TrÂdyta|1|
+3D &Plot:3D Tr√•d&yta|3D Tr√•dyta||3D Tr√•dyta|1|
 3D &Plot:||||1|
 3D &Plot:&Staplar|Staplar||Plot 3D bars|1|
 3D &Plot:S&pridning|Spridning||Plot 3D scatter|1|
 3D &Plot:||||1|
-3D &Plot:Kontur - &f‰rgfyllnad|Kontur - f‰rgfyllnad||Konturlinjer + f‰rgfyllnad|1|
+3D &Plot:Kontur - &f√§rgfyllnad|Kontur - f√§rgfyllnad||Konturlinjer + f√§rgfyllnad|1|
 3D &Plot:Kontur&linjer|Konturlinjer||Konturlinjer|1|
-3D &Plot:&GrÂskalekarta|GrÂskalekarta||GrÂskalekarta|1|
-Anal&ys:&Fˆrskju&t|Fˆrskjut||Fˆrskjut|1|
+3D &Plot:&Gr√•skalekarta|Gr√•skalekarta||Gr√•skalekarta|1|
+Anal&ys:&F√∂rskju&t|F√∂rskjut||F√∂rskjut|1|
 Anal&ys:||||1|
 Anal&ys:&Differentieria|Differentieria||Differentieria|1|
 Anal&ys:&Integrering...|Integrering||Integrering|1|
 Anal&ys:||||1|
-Anal&ys:&J‰mna ut|J‰mna ut||J‰mna ut|1|
+Anal&ys:&J√§mna ut|J√§mna ut||J√§mna ut|1|
 Anal&ys:&FFT Filter|FFT Filter||FFT Filter|1|
 Anal&ys:||||1|
 Anal&ys:Inte&rpolering...|Interpolering||Interpolering|1|
@@ -132,22 +132,22 @@ Anal&ys:&FFT...|FFT||FFT|1|
 Anal&ys:||||1|
 Anal&ys:&Quick Fit|Quick Fit||Quick Fit|1|
 Anal&ys:Fit &Wizard...|Fit Wizard||Fit Wizard|1|
-Anpassa e&xponetiellt avtagande:&Fˆrsta ordningens ...|Fˆrsta ordningens||Fˆrsta ordningens|1|
+Anpassa e&xponetiellt avtagande:&F√∂rsta ordningens ...|F√∂rsta ordningens||F√∂rsta ordningens|1|
 Anpassa e&xponetiellt avtagande:&Andra ordningens ...|Andra ordningens||Andra ordningens|1|
 Anpassa e&xponetiellt avtagande:&tredje ordningens ...|tredje ordningens||tredje ordningens|1|
-Dia&gram:L‰gg till/tag bort &kurva...|L‰gg till/tag bort kurva||L‰gg till kurva till diagram|1|
-Dia&gram:L‰gg till f&elstaplar...|L‰gg till felstaplar||L‰gg till felstaplar...|1|
-Dia&gram:L‰gg till &funktion...|L‰gg till funktion||L‰gg till funktion...|1|
+Dia&gram:L√§gg till/tag bort &kurva...|L√§gg till/tag bort kurva||L√§gg till kurva till diagram|1|
+Dia&gram:L√§gg till f&elstaplar...|L√§gg till felstaplar||L√§gg till felstaplar...|1|
+Dia&gram:L√§gg till &funktion...|L√§gg till funktion||L√§gg till funktion...|1|
 Dia&gram:||||1|
-Dia&gram:L‰gg till &text|L‰gg till text||L‰gg till text|1|
+Dia&gram:L√§gg till &text|L√§gg till text||L√§gg till text|1|
 Dia&gram:Rita &pil|Rita pil||Rita pil|1|
 Dia&gram:Rita &linje|Rita linje||Rita linje|1|
 Dia&gram:Add Time Stamp|Add Time Stamp||Date & time |1|
-Dia&gram:L‰gg till b&ild|L‰gg till bild||L‰gg till bild|1|
-Dia&gram:Ny &beskrivning|Ny beskrivning||L‰gg till ny beskrivning|1|
+Dia&gram:L√§gg till b&ild|L√§gg till bild||L√§gg till bild|1|
+Dia&gram:Ny &beskrivning|Ny beskrivning||L√§gg till ny beskrivning|1|
 Dia&gram:||||1|
 Dia&gram:Automatisk layout|Automatisk layout||Automatisk layout|1|
-Dia&gram:L&‰gg till lager|L‰gg till lager||L‰gg till lager|1|
+Dia&gram:L&√§gg till lager|L√§gg till lager||L√§gg till lager|1|
 Dia&gram:&Tag bort lager|Tag bort lager||Tag bort lager|1|
 Dia&gram:Arran&gera lager...|Arrangera lager||Arrangera lager|1|
 Fit &Multi-Peak:&Gaussiskt...|Gaussiskt||Gaussiskt|1|
@@ -156,13 +156,13 @@ Pa&nel:&Vertikalt 2 lager|Vertikalt 2 lager||Vertikalt 2 lager|1|
 Pa&nel:&Horisontellt 2 lager|Horisontellt 2 lager||Horisontellt 2 lager|1|
 Pa&nel:&4 Lager|4 Lager||4 Lager|1|
 Pa&nel:&Staplade lager|Staplade lager||Staplade lager|1|
-Statistiska dia&gram:&LÂddiagram|LÂddiagram||Box and whiskers plot|1|
+Statistiska dia&gram:&L√•ddiagram|L√•ddiagram||Box and whiskers plot|1|
 Statistiska dia&gram:&Histogram|Histogram||Histogram|1|
 Statistiska dia&gram:&Staplade histogram|Staplade histogram||Staplade histogram|1|
-S‰rskild linje/symb&ol:Vertical &Drop Lines|Vertical Drop Lines||Vertical Drop Lines|1|
-S‰rskild linje/symb&ol:Anpa&ssad kurva|Anpassad kurva||Anpassad kurva|1|
-S‰rskild linje/symb&ol: &Vertikala steg|Vertikala steg||Vertikala steg|1|
-S‰rskild linje/symb&ol:&Horisontella steg|Horisontella steg||Horisontella steg|1|
+S√§rskild linje/symb&ol:Vertical &Drop Lines|Vertical Drop Lines||Vertical Drop Lines|1|
+S√§rskild linje/symb&ol:Anpa&ssad kurva|Anpassad kurva||Anpassad kurva|1|
+S√§rskild linje/symb&ol: &Vertikala steg|Vertikala steg||Vertikala steg|1|
+S√§rskild linje/symb&ol:&Horisontella steg|Horisontella steg||Horisontella steg|1|
 Toolbars:Arkiv|Arkiv||Arkiv|1|
 Toolbars:Redigera|Redigera||Redigera|1|
 Toolbars:Diagram|Diagram||Diagram|1|

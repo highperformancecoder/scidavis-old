@@ -61,7 +61,7 @@ using namespace std;
 void NonLinearFit::init()
 {
 	setObjectName(tr("NonLinear"));
-	d_formula = QString::null;
+	d_formula.clear();
 	d_f = user_f;
 	d_df = user_df;
 	d_fdf = user_fdf;

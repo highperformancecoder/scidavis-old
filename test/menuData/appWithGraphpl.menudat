@@ -3,83 +3,83 @@
 :&Delete|Delete||Delete|1|
 :||||1|
 :&Properties...|Properties||Properties|1|
-&Analiza:&Przemie??|Przemie??||Przemie??|1|
+&Analiza:&Przemieść|Przemieść||Przemieść|1|
 &Analiza:||||1|
-&Analiza:&R�?niczkuj|R�?niczkuj||R�?niczkuj|1|
-&Analiza:&Ca?kuj...|Ca?kuj||Ca?kuj|1|
+&Analiza:&Różniczkuj|Różniczkuj||Różniczkuj|1|
+&Analiza:&Całkuj...|Całkuj||Całkuj|1|
 &Analiza:||||1|
-&Analiza:&Wyg?ad?|Wyg?ad?||Wyg?ad?|1|
+&Analiza:&Wygładź|Wygładź||Wygładź|1|
 &Analiza:&Filtr FFT|Filtr FFT||Filtr FFT|1|
 &Analiza:||||1|
 &Analiza:Inte&rpoluj...|Interpoluj||Interpoluj|1|
 &Analiza:&FFT...|FFT||FFT|1|
 &Analiza:||||1|
 &Analiza:&Szybkie Dopasowanie|Szybkie Dopasowanie||Szybkie Dopasowanie|1|
-&Analiza:&Kreator Dopasowa?...|Kreator Dopasowa?||Kreator Dopasowa?|1|
+&Analiza:&Kreator Dopasowań...|Kreator Dopasowań||Kreator Dopasowań|1|
 &Edycja:&Cofnij|Cofnij||Cofnij zmiany|1|
-&Edycja:&Pon�w|Pon�w||Przywr�? zmiany|1|
+&Edycja:&Ponów|Ponów||Przywróć zmiany|1|
 &Edycja:||||1|
 &Edycja:Wy&tnij Zaznaczenie|Wytnij Zaznaczenie||Wytnij zaznaczenie|1|
 &Edycja:&Kopiuj Zaznaczenie|Kopiuj Zaznaczenie||Kopiuj zaznaczenie|1|
 &Edycja:&Wklej Zaznaczenie|Wklej Zaznaczenie||Wklej zaznaczenie|1|
-&Edycja:&Usu? Zaznaczenie|Usu? Zaznaczenie||Usu? zaznaczenie|1|
+&Edycja:&Usuń Zaznaczenie|Usuń Zaznaczenie||Usuń zaznaczenie|1|
 &Edycja:||||1|
-&Edycja:Wyczy?? Tabele Do&pasowa?|Wyczy?? Tabele Dopasowa?||Wyczy?? Tabele Dopasowa?|1|
-&Edycja:Wyczy?? &Dziennik|Wyczy?? Dziennik||Wyczy?? Dziennik|1|
+&Edycja:Wyczyść Tabele Do&pasowań|Wyczyść Tabele Dopasowań||Wyczyść Tabele Dopasowań|1|
+&Edycja:Wyczyść &Dziennik|Wyczyść Dziennik||Wyczyść Dziennik|1|
 &Edycja:||||1|
 &Edycja:&Preferencje...|Preferencje||Preferencje|1|
 &Eksportuj Wykres:Obe&cny...|Obecny||Eksportuj obecny wykres|1|
 &Eksportuj Wykres:&Wszystkie...|Wszystkie||Eksportuj wszystkie wykresy|1|
 &Filtr FFT:&Dolnoprzepustowy...|Dolnoprzepustowy||Dolnoprzepustowy|1|
-&Filtr FFT:&G�rnoprzepustowy...|G�rnoprzepustowy||G�rnoprzepustowy|1|
+&Filtr FFT:&Górnoprzepustowy...|Górnoprzepustowy||Górnoprzepustowy|1|
 &Filtr FFT:&Pasmowoprzepustowy...|Pasmowoprzepustowy||Pasmowoprzepustowy|1|
 &Filtr FFT:&Pasmowozaporowy...|Pasmowozaporowy||Pasmowozaporowy|1|
-&Kre?l:&Liniowy|Liniowy||Wykre?l jako liniowy|1|
-&Kre?l:&Punktowy|Punktowy||Wykre?l jako punktowy|1|
-&Kre?l:Liniowy + Punktow&y|Liniowy + Punktowy||Wykre?l jako liniowy + punktowy|1|
-&Kre?l:Specjalna Linia lub Symb&ol|Specjalna Linia lub Symbol||Specjalna Linia lub Symbol|1|
-&Kre?l:||||1|
-&Kre?l:&Pionowe S?upki|Pionowe S?upki||Wykre?l za pomoc? pionowych linii|1|
-&Kre?l:&Poziome S?upki|Poziome S?upki||Wykre?l jako poziomy s?upkowy|1|
-&Kre?l:&Powierzchniowy|Powierzchniowy||Wykre?l powierzchniowy|1|
-&Kre?l:&Ko?owy|Ko?owy||Wykre?l ko?owy|1|
-&Kre?l:Wektorowy XYXY|Wektorowy XYXY||Wektory XYXY|1|
-&Kre?l:Wektorowy XYAM|Wektorowy XYAM||Wektory XYAM|1|
-&Kre?l:||||1|
-&Kre?l:Wykresy Statystyczne|Wykresy Statystyczne||Wykresy Statystyczne|1|
-&Kre?l:Pa&nel|Panel||Panel|1|
-&Kre?l:||||1|
-&Kre?l:Wykres 3&D|Wykres 3D||Wykres 3D|1|
-&Narz?dzia:Wy??cz &narz?dzia|Wy??cz narz?dzia||Wska?nik|1|
-&Narz?dzia:&Zbli?|Zbli?||Przybli?|1|
-&Narz?dzia:&Oddal|Oddal||Oddal|1|
-&Narz?dzia:P&rzeskaluj by Pokaza? Wszystko|Przeskaluj by Pokaza? Wszystko||Najlepsze dopasowanie|1|
-&Narz?dzia:||||1|
-&Narz?dzia:&Czytnik ekranu|Czytnik ekranu||Czytnik ekranu|1|
-&Narz?dzia:Czytnik &Danych|Czytnik Danych||Czytnik danych|1|
-&Narz?dzia:Zaznacz zakre&s danych|Zaznacz zakres danych||Wybierz zakres danych|1|
-&Narz?dzia:||||1|
-&Narz?dzia:&Przesu? punkty danych|Przesu? punkty danych||Przemie?? punkty|1|
-&Narz?dzia:Usu? &B??dne Punkty...|Usu? B??dne Punkty||Usu? punkty|1|
+&Kreśl:&Liniowy|Liniowy||Wykreśl jako liniowy|1|
+&Kreśl:&Punktowy|Punktowy||Wykreśl jako punktowy|1|
+&Kreśl:Liniowy + Punktow&y|Liniowy + Punktowy||Wykreśl jako liniowy + punktowy|1|
+&Kreśl:Specjalna Linia lub Symb&ol|Specjalna Linia lub Symbol||Specjalna Linia lub Symbol|1|
+&Kreśl:||||1|
+&Kreśl:&Pionowe Słupki|Pionowe Słupki||Wykreśl za pomocą pionowych linii|1|
+&Kreśl:&Poziome Słupki|Poziome Słupki||Wykreśl jako poziomy słupkowy|1|
+&Kreśl:&Powierzchniowy|Powierzchniowy||Wykreśl powierzchniowy|1|
+&Kreśl:&Kołowy|Kołowy||Wykreśl kołowy|1|
+&Kreśl:Wektorowy XYXY|Wektorowy XYXY||Wektory XYXY|1|
+&Kreśl:Wektorowy XYAM|Wektorowy XYAM||Wektory XYAM|1|
+&Kreśl:||||1|
+&Kreśl:Wykresy Statystyczne|Wykresy Statystyczne||Wykresy Statystyczne|1|
+&Kreśl:Pa&nel|Panel||Panel|1|
+&Kreśl:||||1|
+&Kreśl:Wykres 3&D|Wykres 3D||Wykres 3D|1|
+&Narzędzia:Wyłącz &narzędzia|Wyłącz narzędzia||Wskaźnik|1|
+&Narzędzia:&Zbliż|Zbliż||Przybliż|1|
+&Narzędzia:&Oddal|Oddal||Oddal|1|
+&Narzędzia:P&rzeskaluj by Pokazać Wszystko|Przeskaluj by Pokazać Wszystko||Najlepsze dopasowanie|1|
+&Narzędzia:||||1|
+&Narzędzia:&Czytnik ekranu|Czytnik ekranu||Czytnik ekranu|1|
+&Narzędzia:Czytnik &Danych|Czytnik Danych||Czytnik danych|1|
+&Narzędzia:Zaznacz zakre&s danych|Zaznacz zakres danych||Wybierz zakres danych|1|
+&Narzędzia:||||1|
+&Narzędzia:&Przesuń punkty danych|Przesuń punkty danych||Przemieść punkty|1|
+&Narzędzia:Usuń &Błędne Punkty...|Usuń Błędne Punkty||Usuń punkty|1|
 &Nowy:Nowy &Projekt|Nowy Projekt||Otwiera nowy projekt|1|
 &Nowy:Nowa &Tabela|Nowa Tabela||Nowa tabela|1|
 &Nowy:Nowa &Macierz|Nowa Macierz||Nowa macierz|1|
-&Nowy:Nowa &Notatka lub Skrypt|Nowa Notatka lub Skrypt||Tworzy pust? notatk? lub skrypt|1|
+&Nowy:Nowa &Notatka lub Skrypt|Nowa Notatka lub Skrypt||Tworzy pustą notatkę lub skrypt|1|
 &Nowy:Nowy &Wykres|Nowy Wykres||Tworzy pusty wykres 2D|1|
 &Nowy:Nowy Wykres &Funkcji|Nowy Wykres Funkcji||Tworzy nowy wykres funkcji 2D|1|
 &Nowy:Nowy Wykre&s Powierzchniowy 3D|Nowy Wykres Powierzchniowy 3D||Tworzy nowy wykres powierzchniowy 3D|1|
 &Ostatnie Projekty:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
 &Plik:&Nowy|Nowy||Nowy|1|
-&Plik:&Otw�rz...|Otw�rz||Otwiera projekt|1|
+&Plik:&Otwórz...|Otwórz||Otwiera projekt|1|
 &Plik:&Ostatnie Projekty|Ostatnie Projekty||Ostatnie Projekty|1|
 &Plik:||||1|
-&Plik:Otw�rz Plik O&brazu...|Otw�rz Plik Obrazu||Otw�rz Plik Obrazu|1|
+&Plik:Otwórz Plik O&brazu...|Otwórz Plik Obrazu||Otwórz Plik Obrazu|1|
 &Plik:I&mportuj Obraz...|Importuj Obraz||Importuj Obraz|1|
 &Plik:||||1|
 &Plik:&Zapisz Projekt|Zapisz Projekt||Zapisuje projekt|1|
 &Plik:Z&apisz Projekt Jako...|Zapisz Projekt Jako||Zapisz Projekt Jako|1|
 &Plik:||||1|
-&Plik:Otw�rz Wzo&rzec...|Otw�rz Wzorzec||Otw�rz wzorzec|1|
+&Plik:Otwórz Wzo&rzec...|Otwórz Wzorzec||Otwórz wzorzec|1|
 &Plik:Zapisz Jako Wzo&rzec|Zapisz Jako Wzorzec||Zapisuje okno jako wzorzec|1|
 &Plik:||||1|
 &Plik:&Eksportuj Wykres|Eksportuj Wykres||Eksportuj Wykres|1|
@@ -89,121 +89,121 @@
 &Plik:E&ksportuj ASCII...|Eksportuj ASCII||Eksportuj ASCII|1|
 &Plik:&Impurtuj ASCII...|Impurtuj ASCII||Importuj plik(i) z danymi|1|
 &Plik:||||1|
-&Plik:&Wyjd?|Wyjd?||Wyjd?|1|
+&Plik:&Wyjdź|Wyjdź||Wyjdź|1|
 &Pomoc:&Pomoc|Pomoc||Pomoc|1|
 &Pomoc:||||1|
 &Pomoc:&Strona Domowa SciDAVis|Strona Domowa SciDAVis||Strona Domowa SciDAVis|1|
 &Pomoc:||||1|
-&Pomoc:Odwied? &Forum SciDAVis|Odwied? Forum SciDAVis||Odwied? Forum SciDAVis|1|
-&Pomoc:Zg?o? &B??d|Zg?o? B??d||Zg?o? B??d|1|
+&Pomoc:Odwiedź &Forum SciDAVis|Odwiedź Forum SciDAVis||Odwiedź Forum SciDAVis|1|
+&Pomoc:Zgłoś &Błąd|Zgłoś Błąd||Zgłoś Błąd|1|
 &Pomoc:||||1|
 &Pomoc:&O Programie SciDAVis|O Programie SciDAVis||O Programie SciDAVis|1|
-&Przemie??:P&ionowo|Pionowo||Pionowo|1|
-&Przemie??:&Poziomo|Poziomo||Poziomo|1|
-&Szybkie Dopasowanie:Dopasuj &Prost?|Dopasuj Prost?||Dopasuj Prost?|1|
+&Przemieść:P&ionowo|Pionowo||Pionowo|1|
+&Przemieść:&Poziomo|Poziomo||Poziomo|1|
+&Szybkie Dopasowanie:Dopasuj &Prostą|Dopasuj Prostą||Dopasuj Prostą|1|
 &Szybkie Dopasowanie:Dopasuj &Wielomian...|Dopasuj Wielomian||Dopasuj Wielomian|1|
 &Szybkie Dopasowanie:||||1|
-&Szybkie Dopasowanie:Dopasuj Zanik W&yk?adniczy|Dopasuj Zanik Wyk?adniczy||Dopasuj Zanik Wyk?adniczy|1|
-&Szybkie Dopasowanie:Dopasuj &Wzrost Wyk?adniczy...|Dopasuj Wzrost Wyk?adniczy||Dopasuj Wzrost Wyk?adniczy|1|
-&Szybkie Dopasowanie:Dopasuj Sigmoid? (Bolzmanna)|Dopasuj Sigmoid? (Bolzmanna)||Dopasuj Sigmoid? (Bolzmanna)|1|
+&Szybkie Dopasowanie:Dopasuj Zanik W&ykładniczy|Dopasuj Zanik Wykładniczy||Dopasuj Zanik Wykładniczy|1|
+&Szybkie Dopasowanie:Dopasuj &Wzrost Wykładniczy...|Dopasuj Wzrost Wykładniczy||Dopasuj Wzrost Wykładniczy|1|
+&Szybkie Dopasowanie:Dopasuj Sigmoidę (Bolzmanna)|Dopasuj Sigmoidę (Bolzmanna)||Dopasuj Sigmoidę (Bolzmanna)|1|
 &Szybkie Dopasowanie:Dopasuj &Gauss|Dopasuj Gauss||Dopasuj Gauss|1|
 &Szybkie Dopasowanie:Dopasuj Lorent&za|Dopasuj Lorentza||Dopasuj Lorentza|1|
 &Szybkie Dopasowanie:Dopasuj &Multi-Pik|Dopasuj Multi-Pik||Dopasuj Multi-Pik|1|
 &Szybkie Dopasowanie:||||1|
 &Tabela:&Ustaw Kolumny Jako|Ustaw Kolumny Jako||Ustaw Kolumny Jako|1|
 &Tabela:||||1|
-&Tabela:Wype?ni&j Zaznaczenie|Wype?nij Zaznaczenie||Wype?nij Zaznaczenie|1|
+&Tabela:Wypełni&j Zaznaczenie|Wypełnij Zaznaczenie||Wypełnij Zaznaczenie|1|
 &Tabela:||||1|
 &Tabela:Show/Hide comments|Show/Hide comments||Show/Hide comments|1|
 &Tabela:Show/Hide Controls|Show/Hide Controls||Show/Hide Controls|1|
-&Tabela:Tryb Edycji R�wnania|Tryb Edycji R�wnania||Tryb Edycji R�wnania|1|
+&Tabela:Tryb Edycji Równania|Tryb Edycji Równania||Tryb Edycji Równania|1|
 &Tabela:Edytuj &Opis Kolumny|Edytuj Opis Kolumny||Edytuj Opis Kolumny|1|
-&Tabela:Zmie? &Typ i Format|Zmie? Typ i Format||Zmie? Typ i Format|1|
+&Tabela:Zmień &Typ i Format|Zmień Typ i Format||Zmień Typ i Format|1|
 &Tabela:||||1|
-&Tabela:Wyczy?? Tabel?|Wyczy?? Tabel?||Wyczy?? Tabel?|1|
-&Tabela:&Sortuj Tabel?|Sortuj Tabel?||Sortuj Tabel?|1|
+&Tabela:Wyczyść Tabelę|Wyczyść Tabelę||Wyczyść Tabelę|1|
+&Tabela:&Sortuj Tabelę|Sortuj Tabelę||Sortuj Tabelę|1|
 &Tabela:||||1|
-&Tabela:Przypisz &R�wnanie|Przypisz R�wnanie||Przypisz R�wnanie|1|
+&Tabela:Przypisz &Równanie|Przypisz Równanie||Przypisz Równanie|1|
 &Tabela:Przelicz|Przelicz||Przelicz|1|
 &Tabela:||||1|
-&Tabela:&Dodaj Kolumn?|Dodaj Kolumn?||append a new column to the table|1|
+&Tabela:&Dodaj Kolumnę|Dodaj Kolumnę||append a new column to the table|1|
 &Tabela:&Wymiary|Wymiary||change the table size|1|
 &Tabela:||||1|
-&Tabela:&Id? do Kom�rki|Id? do Kom�rki||Id? do Kom�rki|1|
+&Tabela:&Idź do Komórki|Idź do Komórki||Idź do Komórki|1|
 &Tabela:||||1|
 &Tabela:E&ksportuj ASCII...|Eksportuj ASCII||Eksportuj ASCII|1|
 &Tabela:||||1|
 &Tabela:Konwertuj na &Macierz|Konwertuj na Macierz||Konwertuj na Macierz|1|
-&Widok:Narz?dzia|Narz?dzia||Narz?dzia|1|
+&Widok:Narzędzia|Narzędzia||Narzędzia|1|
 &Widok:&Lock Toolbars|Lock Toolbars||Lock Toolbars|1|
 &Widok:||||1|
 &Widok:&Kreator Wykresu|Kreator Wykresu||Kreator Wykresu|1|
-&Widok:&Eksplorator Projektu|Eksplorator Projektu||Poka? eksplorator projektu|1|
-&Widok:&Dziennik Wynik�w|Dziennik Wynik�w||Poka? dziennik wynik�w|1|
+&Widok:&Eksplorator Projektu|Eksplorator Projektu||Pokaż eksplorator projektu|1|
+&Widok:&Dziennik Wyników|Dziennik Wyników||Pokaż dziennik wyników|1|
 &Widok:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
-&Widok:&Konsola|Konsola||Poka? konsol? skrypt�w|1|
-&Wyg?ad?:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
-&Wyg?ad?:?redni&a Ruchoma...|?rednia Ruchoma||?rednia Ruchoma|1|
-&Wyg?ad?:&Filtr FFT...|Filtr FFT||Filtr FFT|1|
-&Wykres:Dodaj lub Usu? &Krzyw?...|Dodaj lub Usu? Krzyw?||Dodaj krzyw? do wykresu|1|
-&Wykres:Dodaj S?upki &B??d�w...|Dodaj S?upki B??d�w||Dodaj S?upki B??d�w...|1|
-&Wykres:Dodaj &Funkcj?...|Dodaj Funkcj?||Dodaj Funkcj?...|1|
+&Widok:&Konsola|Konsola||Pokaż konsolę skryptów|1|
+&Wygładź:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
+&Wygładź:Średni&a Ruchoma...|Średnia Ruchoma||Średnia Ruchoma|1|
+&Wygładź:&Filtr FFT...|Filtr FFT||Filtr FFT|1|
+&Wykres:Dodaj lub Usuń &Krzywą...|Dodaj lub Usuń Krzywą||Dodaj krzywą do wykresu|1|
+&Wykres:Dodaj Słupki &Błędów...|Dodaj Słupki Błędów||Dodaj Słupki Błędów...|1|
+&Wykres:Dodaj &Funkcję...|Dodaj Funkcję||Dodaj Funkcję...|1|
 &Wykres:||||1|
 &Wykres:Dodaj &Tekst|Dodaj Tekst||Dodaj Tekst|1|
-&Wykres:Rysuj &Strza?k?|Rysuj Strza?k?||Rysuj strza?k?|1|
-&Wykres:Rysuj &Lini?|Rysuj Lini?||Rysuj lini?|1|
+&Wykres:Rysuj &Strzałkę|Rysuj Strzałkę||Rysuj strzałkę|1|
+&Wykres:Rysuj &Linię|Rysuj Linię||Rysuj linię|1|
 &Wykres:Dodaj Znacznik Czasu|Dodaj Znacznik Czasu||Data i czas|1|
 &Wykres:Dodaj &Obraz|Dodaj Obraz||Dodaj Obraz|1|
-&Wykres:Nowa &Legenda|Nowa Legenda||Dodaj now? legend?|1|
+&Wykres:Nowa &Legenda|Nowa Legenda||Dodaj nową legendę|1|
 &Wykres:||||1|
 &Wykres:Automatyczne Rozmieszczenie|Automatyczne Rozmieszczenie||Automatyczne Rozmieszczenie|1|
-&Wykres:&Dodaj Warstw?|Dodaj Warstw?||Dodaj Warstw?|1|
-&Wykres:&Zmie? Nazw? Warstwy|Zmie? Nazw? Warstwy||Zmie? Nazw? Warstwy|1|
-&Wykres:&Rozmieszczanie Warstw...|Rozmieszczanie Warstw||Rozmie?? Warstwy|1|
-&Wykres 3D:3D &Kraw?dziowy|3D Kraw?dziowy||3D Kraw?dziowy|1|
+&Wykres:&Dodaj Warstwę|Dodaj Warstwę||Dodaj Warstwę|1|
+&Wykres:&Zmień Nazwę Warstwy|Zmień Nazwę Warstwy||Zmień Nazwę Warstwy|1|
+&Wykres:&Rozmieszczanie Warstw...|Rozmieszczanie Warstw||Rozmieść Warstwy|1|
+&Wykres 3D:3D &Krawędziowy|3D Krawędziowy||3D Krawędziowy|1|
 &Wykres 3D:3D &Ukryte Linie|3D Ukryte Linie||3D Ukryte Linie|1|
 &Wykres 3D:3D &Powierzchniowy|3D Powierzchniowy||3D Powierzchniowy|1|
-&Wykres 3D:3&D Powierzchniowy i Kraw?dziowy|3D Powierzchniowy i Kraw?dziowy||3D Powierzchniowy i Kraw?dziowy|1|
+&Wykres 3D:3&D Powierzchniowy i Krawędziowy|3D Powierzchniowy i Krawędziowy||3D Powierzchniowy i Krawędziowy|1|
 &Wykres 3D:||||1|
-&Wykres 3D:&S?upkowy|S?upkowy||Wykre?l s?upkowy 3D|1|
-&Wykres 3D:&Punktowy|Punktowy||Wykre?l punktowy 3D|1|
+&Wykres 3D:&Słupkowy|Słupkowy||Wykreśl słupkowy 3D|1|
+&Wykres 3D:&Punktowy|Punktowy||Wykreśl punktowy 3D|1|
 &Wykres 3D:||||1|
-&Wykres 3D:Obwiednia i Wype?nienie &Kolorem|Obwiednia i Wype?nienie Kolorem||Linie Obwiedni i Wype?nienie Kolorem|1|
+&Wykres 3D:Obwiednia i Wypełnienie &Kolorem|Obwiednia i Wypełnienie Kolorem||Linie Obwiedni i Wypełnienie Kolorem|1|
 &Wykres 3D:&Linie Obwiedni|Linie Obwiedni||Linie Obwiedni|1|
-&Wykres 3D:Mapa Skali &Szaro?ci|Mapa Skali Szaro?ci||Mapa Skali Szaro?ci|1|
+&Wykres 3D:Mapa Skali &Szarości|Mapa Skali Szarości||Mapa Skali Szarości|1|
 Dopasuj &Multi-Pik:&Gaussowskie...|Gaussowskie||Gaussowskie|1|
 Dopasuj &Multi-Pik:&Lorentza...|Lorentza||Lorentza|1|
-Dopasuj Zanik W&yk?adniczy:&Pierwszego Rz?du...|Pierwszego Rz?du||Pierwszego Rz?du|1|
-Dopasuj Zanik W&yk?adniczy:&Drugiego Rz?du...|Drugiego Rz?du||Drugiego Rz?du|1|
-Dopasuj Zanik W&yk?adniczy:&Trzeciego Rz?du...|Trzeciego Rz?du||Trzeciego Rz?du|1|
+Dopasuj Zanik W&ykładniczy:&Pierwszego Rzędu...|Pierwszego Rzędu||Pierwszego Rzędu|1|
+Dopasuj Zanik W&ykładniczy:&Drugiego Rzędu...|Drugiego Rzędu||Drugiego Rzędu|1|
+Dopasuj Zanik W&ykładniczy:&Trzeciego Rzędu...|Trzeciego Rzędu||Trzeciego Rzędu|1|
 For&mat:&Wykres...|Wykres||Wykres|1|
 For&mat:||||1|
 For&mat:&Skale...|Skale||Skale|1|
 For&mat:&Osie...|Osie||Osie|1|
 For&mat:||||1|
 For&mat:&Siatka...|Siatka||Siatka|1|
-For&mat:&Tytu?...|Tytu?||Tytu?|1|
-Narz?dzia:Plik|Plik||Plik|1|
-Narz?dzia:Edycja|Edycja||Edycja|1|
-Narz?dzia:Wykres|Wykres||Wykres|1|
-Narz?dzia:Wykres|Wykres||Wykres|1|
-Narz?dzia:Tabela|Tabela||Tabela|1|
-Narz?dzia:Wykres Macierzy|Wykres Macierzy||Wykres Macierzy|1|
-Narz?dzia:Powierzchniowy 3D|Powierzchniowy 3D||Powierzchniowy 3D|1|
+For&mat:&Tytuł...|Tytuł||Tytuł|1|
+Narzędzia:Plik|Plik||Plik|1|
+Narzędzia:Edycja|Edycja||Edycja|1|
+Narzędzia:Wykres|Wykres||Wykres|1|
+Narzędzia:Wykres|Wykres||Wykres|1|
+Narzędzia:Tabela|Tabela||Tabela|1|
+Narzędzia:Wykres Macierzy|Wykres Macierzy||Wykres Macierzy|1|
+Narzędzia:Powierzchniowy 3D|Powierzchniowy 3D||Powierzchniowy 3D|1|
 Pa&nel:2 &Pionowe Warstwy|2 Pionowe Warstwy||2 Pionowe Warstwy|1|
 Pa&nel:2 P&oziome Warstwy|2 Poziome Warstwy||2 Poziome Warstwy|1|
 Pa&nel:&4 Warstwy|4 Warstwy||4 Warstwy|1|
 Pa&nel:&Stos Warstw|Stos Warstw||Stos Warstw|1|
-Skrypty:&J?zyk Skrypt�w|J?zyk Skrypt�w||J?zyk Skrypt�w|1|
-Skrypty:&Uruchom Ponownie Silnik Skrypt�w|Uruchom Ponownie Silnik Skrypt�w||Uruchom Ponownie Silnik Skrypt�w|1|
+Skrypty:&Język Skryptów|Język Skryptów||Język Skryptów|1|
+Skrypty:&Uruchom Ponownie Silnik Skryptów|Uruchom Ponownie Silnik Skryptów||Uruchom Ponownie Silnik Skryptów|1|
 Specjalna Linia lub Symb&ol:Pio&nowe Linie|Pionowe Linie||Pionowe Linie|1|
 Specjalna Linia lub Symb&ol:&Splajn|Splajn||Splajn|1|
 Specjalna Linia lub Symb&ol:P&ionowe Schody|Pionowe Schody||Pionowe Schody|1|
 Specjalna Linia lub Symb&ol:&Poziome Schody|Poziome Schody||Poziome Schody|1|
-Wykres 3&D:&Wst??kowy|Wst??kowy||Wykre?l wst??kowy 3D|1|
-Wykres 3&D:&S?upkowy|S?upkowy||Wykre?l s?upkowy 3D|1|
-Wykres 3&D:&Punktowy|Punktowy||Wykre?l punktowy 3D|1|
-Wykres 3&D:&Trajektoria|Trajektoria||Wykre?l trajektori? 3D|1|
-Wykresy Statystyczne:Wykres &Pude?kowy|Wykres Pude?kowy||Wykres pude?kowy|1|
+Wykres 3&D:&Wstążkowy|Wstążkowy||Wykreśl wstążkowy 3D|1|
+Wykres 3&D:&Słupkowy|Słupkowy||Wykreśl słupkowy 3D|1|
+Wykres 3&D:&Punktowy|Punktowy||Wykreśl punktowy 3D|1|
+Wykres 3&D:&Trajektoria|Trajektoria||Wykreśl trajektorię 3D|1|
+Wykresy Statystyczne:Wykres &Pudełkowy|Wykres Pudełkowy||Wykres pudełkowy|1|
 Wykresy Statystyczne:&Histogram|Histogram||Histogram|1|
-Wykresy Statystyczne:&Stos Histogram�w|Stos Histogram�w||Stos Histogram�w|1|
+Wykresy Statystyczne:&Stos Histogramów|Stos Histogramów||Stos Histogramów|1|

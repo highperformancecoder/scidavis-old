@@ -93,7 +93,7 @@ namespace QtGui
     TransformationType type() const {return TransformationType(::QTransform::type());}
 
     qreal determinant() const {return ::QTransform::determinant();}
-    qreal det() const {return ::QTransform::det();}
+    //    qreal det() const {return ::QTransform::det();}
 
     qreal m11() const {return ::QTransform::m11();}
     qreal m12() const {return ::QTransform::m12();}
@@ -262,22 +262,22 @@ namespace QtCore
     int weekNumber() const {return ::QDate::weekNumber();}
     int weekNumber(int& yearNum) const {return ::QDate::weekNumber(&yearNum);}
 
-    static std::string shortMonthName(int month)
-    {return ::QDate::shortMonthName(month).toStdString();}
-    static std::string shortMonthName(int month, QDMonthNameType type)
-    {return ::QDate::shortMonthName(month,::QDate::MonthNameType(int(type))).toStdString();}
-    static std::string shortDayName(int weekday)
-    {return ::QDate::shortDayName(weekday).toStdString();}
-    static std::string shortDayName(int weekday, QDMonthNameType type)
-    {return ::QDate::shortDayName(weekday,::QDate::MonthNameType(int(type))).toStdString();}
-    static std::string longMonthName(int month)
-    {return ::QDate::longMonthName(month).toStdString();}
-    static std::string longMonthName(int month, QDMonthNameType type)
-    {return ::QDate::longMonthName(month,::QDate::MonthNameType(int(type))).toStdString();}
-    static std::string longDayName(int weekday)
-    {return ::QDate::longDayName(weekday).toStdString();}
-    static std::string longDayName(int weekday, QDMonthNameType type)
-    {return ::QDate::longDayName(weekday,::QDate::MonthNameType(int(type))).toStdString();}
+//    static std::string shortMonthName(int month)
+//    {return ::QDate::shortMonthName(month).toStdString();}
+//    static std::string shortMonthName(int month, QDMonthNameType type)
+//    {return ::QDate::shortMonthName(month,::QDate::MonthNameType(int(type))).toStdString();}
+//    static std::string shortDayName(int weekday)
+//    {return ::QDate::shortDayName(weekday).toStdString();}
+//    static std::string shortDayName(int weekday, QDMonthNameType type)
+//    {return ::QDate::shortDayName(weekday,::QDate::MonthNameType(int(type))).toStdString();}
+//    static std::string longMonthName(int month)
+//    {return ::QDate::longMonthName(month).toStdString();}
+//    static std::string longMonthName(int month, QDMonthNameType type)
+//    {return ::QDate::longMonthName(month,::QDate::MonthNameType(int(type))).toStdString();}
+//    static std::string longDayName(int weekday)
+//    {return ::QDate::longDayName(weekday).toStdString();}
+//    static std::string longDayName(int weekday, QDMonthNameType type)
+//    {return ::QDate::longDayName(weekday,::QDate::MonthNameType(int(type))).toStdString();}
     std::string toString() const
     {return ::QDate::toString().toStdString();}
     std::string toString(QtEnums::DateFormat f) const
@@ -393,8 +393,8 @@ namespace QtCore
     int secsTo(const QtCore::QDateTime& x) const {return ::QDateTime::secsTo(x);}
     qint64 msecsTo(const QtCore::QDateTime& x) const {return ::QDateTime::msecsTo(x);}
 
-    void setUtcOffset(int seconds) {::QDateTime::setUtcOffset(seconds);}
-    int utcOffset() const {return ::QDateTime::utcOffset();}
+    //    void setUtcOffset(int seconds) {::QDateTime::setUtcOffset(seconds);}
+    //    int utcOffset() const {return ::QDateTime::utcOffset();}
 
     static QtCore::QDateTime currentDateTime() {return ::QDateTime::currentDateTime();}
     static QtCore::QDateTime currentDateTimeUtc() {return ::QDateTime::currentDateTimeUtc();}

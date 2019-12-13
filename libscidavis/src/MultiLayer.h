@@ -251,22 +251,22 @@ private:
 //! Button with layer number
 class LayerButton: public QPushButton
 {
-	Q_OBJECT
+  Q_OBJECT
 
 public:
-    LayerButton (const QString& text = QString::null, QWidget* parent = 0);
-	~LayerButton(){};
+  LayerButton (const QString& text = {}, QWidget* parent = 0);
+  ~LayerButton(){};
 
-	static int btnSize(){return 20;};
+  static int btnSize(){return 20;};
 
 protected:
-	void mousePressEvent( QMouseEvent * );
-	void mouseDoubleClickEvent ( QMouseEvent * );
+  void mousePressEvent( QMouseEvent * );
+  void mouseDoubleClickEvent ( QMouseEvent * );
 
 signals:
-	void showCurvesDialog();
-	void clicked(LayerButton*);
-	void showContextMenu();
+  void showCurvesDialog();
+  void clicked(LayerButton*);
+  void showContextMenu();
 };
 
 #endif

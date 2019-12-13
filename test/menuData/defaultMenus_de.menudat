@@ -9,16 +9,16 @@
 &Ansicht:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
 &Ansicht:&Konsole|Konsole||Skriptkonsole anzeigen|1|
 &Datei:&Neu|Neu||Neu|1|
-&Datei:Ö&ffnen...|Öffnen||Projekt öffnen|1|
-&Datei:&Zuletzt geöffnete Projekte|Zuletzt geöffnete Projekte||Zuletzt geöffnete Projekte|1|
+&Datei:Ã–&ffnen...|Ã–ffnen||Projekt Ã¶ffnen|1|
+&Datei:&Zuletzt geÃ¶ffnete Projekte|Zuletzt geÃ¶ffnete Projekte||Zuletzt geÃ¶ffnete Projekte|1|
 &Datei:||||1|
-&Datei:Bilddatei ö&ffnen...|Bilddatei öffnen||Bilddatei öffnen|1|
+&Datei:Bilddatei Ã¶&ffnen...|Bilddatei Ã¶ffnen||Bilddatei Ã¶ffnen|1|
 &Datei:Bild i&mportieren...|Bild importieren||Bild importieren|1|
 &Datei:||||1|
 &Datei:Projekt &speichern|Projekt speichern||Projekt speichern|1|
 &Datei:Speichere Projekt &als...|Speichere Projekt als||Speichere Projekt als|1|
 &Datei:||||1|
-&Datei:&Vorlage öffnen...|Vorlage öffnen||Vorlage öffnen|1|
+&Datei:&Vorlage Ã¶ffnen...|Vorlage Ã¶ffnen||Vorlage Ã¶ffnen|1|
 &Datei:Als &Vorlage speichern...|Als Vorlage speichern||Fenster als Vorlage speichern|1|
 &Datei:||||1|
 &Datei:Grafik &exportieren|Grafik exportieren||Grafik exportieren|1|
@@ -37,22 +37,22 @@
 &Feld:2 &horizontale Ebenen|2 horizontale Ebenen||2 horizontale Ebenen|1|
 &Feld:&4 Ebenen|4 Ebenen||4 Ebenen|1|
 &Feld:Ge&stapelte Ebenen|Gestapelte Ebenen||Gestapelte Ebenen|1|
-&Glätten:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
-&Glätten:&Gleitender Fensterdurchschnitt...|Gleitender Fensterdurchschnitt||Gleitender Fensterdurchschnitt|1|
-&Glätten:&FFT Filter...|FFT Filter||FFT Filter|1|
-&Grafik:&Kurve hinzufügen/entfernen...|Kurve hinzufügen/entfernen||Kurve zu Grafik hinzufügen|1|
-&Grafik:F&ehlerbalken hinzufügen...|Fehlerbalken hinzufügen||Fehlerbalken hinzufügen...|1|
-&Grafik:&Funktion hinzufügen...|Funktion hinzufügen||Funktion hinzufügen...|1|
+&GlÃ¤tten:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
+&GlÃ¤tten:&Gleitender Fensterdurchschnitt...|Gleitender Fensterdurchschnitt||Gleitender Fensterdurchschnitt|1|
+&GlÃ¤tten:&FFT Filter...|FFT Filter||FFT Filter|1|
+&Grafik:&Kurve hinzufÃ¼gen/entfernen...|Kurve hinzufÃ¼gen/entfernen||Kurve zu Grafik hinzufÃ¼gen|1|
+&Grafik:F&ehlerbalken hinzufÃ¼gen...|Fehlerbalken hinzufÃ¼gen||Fehlerbalken hinzufÃ¼gen...|1|
+&Grafik:&Funktion hinzufÃ¼gen...|Funktion hinzufÃ¼gen||Funktion hinzufÃ¼gen...|1|
 &Grafik:||||1|
-&Grafik:&Text hinzufügen|Text hinzufügen||Text hinzufügen|1|
+&Grafik:&Text hinzufÃ¼gen|Text hinzufÃ¼gen||Text hinzufÃ¼gen|1|
 &Grafik:&Pfeil zeichnen|Pfeil zeichnen||Pfeil zeichnen|1|
 &Grafik:&Linie zeichnen|Linie zeichnen||Linien zeichnen|1|
-&Grafik:Zeitstempel hinzufügen|Zeitstempel hinzufügen||Datum & Zeit |1|
-&Grafik:Bild h&inzufügen|Bild hinzufügen||Bild hinzufügen|1|
-&Grafik:Neue &Legende|Neue Legende||Neue Legende hinzufügen|1|
+&Grafik:Zeitstempel hinzufÃ¼gen|Zeitstempel hinzufÃ¼gen||Datum & Zeit |1|
+&Grafik:Bild h&inzufÃ¼gen|Bild hinzufÃ¼gen||Bild hinzufÃ¼gen|1|
+&Grafik:Neue &Legende|Neue Legende||Neue Legende hinzufÃ¼gen|1|
 &Grafik:||||1|
 &Grafik:Automatisches Layout|Automatisches Layout||Automatisches Layout|1|
-&Grafik:&Ebene hinzufügen|Ebene hinzufügen||Ebene hinzufügen|1|
+&Grafik:&Ebene hinzufÃ¼gen|Ebene hinzufÃ¼gen||Ebene hinzufÃ¼gen|1|
 &Grafik:Ebene &entfernen|Ebene entfernen||Ebene entfernen|1|
 &Grafik:Ebenen &anordnen...|Ebenen anordnen||Ebenen anordnen|1|
 &Hilfe:&Hilfe|Hilfe||Hilfe|1|
@@ -62,14 +62,14 @@
 &Hilfe:SciDAVis &Foren besuchen|SciDAVis Foren besuchen||SciDAVis Foren besuchen|1|
 &Hilfe:Einen &Bug melden|Einen Bug melden||Einen Bug melden|1|
 &Hilfe:||||1|
-&Hilfe:Ü&ber SciDAVis|Über SciDAVis||Über SciDAVis|1|
-&Neu:Neues &Projekt|Neues Projekt||Ein neues Projekt öffnen|1|
+&Hilfe:Ãœ&ber SciDAVis|Ãœber SciDAVis||Ãœber SciDAVis|1|
+&Neu:Neues &Projekt|Neues Projekt||Ein neues Projekt Ã¶ffnen|1|
 &Neu:Neue &Tabelle|Neue Tabelle||Neue Tabelle|1|
 &Neu:Neue &Matrix|Neue Matrix||Neue Matrix|1|
 &Neu:Neue &Notiz / Script|Neue Notiz / Script||Ein leeres Notiz-/Skriptfenster erstellen|1|
 &Neu:Neue &Grafik|Neue Grafik||Ein leeres 2D Diagramm erstellen|1|
 &Neu:Neues &Funktionsdiagramm|Neues Funktionsdiagramm||Eine neue 2D Funktion darstellen|1|
-&Neu:Neues &3D-Oberflächendiagramm|Neues 3D-Oberflächendiagramm||Ein neues 3D Oberflächendiagramm erstellen|1|
+&Neu:Neues &3D-OberflÃ¤chendiagramm|Neues 3D-OberflÃ¤chendiagramm||Ein neues 3D OberflÃ¤chendiagramm erstellen|1|
 &Schnellanpassung:&Lineare Anpassung|Lineare Anpassung||Lineare Anpassung|1|
 &Schnellanpassung:&Polynomiale Anpassung...|Polynomiale Anpassung||Polynomiale Anpassung|1|
 &Schnellanpassung:||||1|
@@ -89,10 +89,10 @@
 &Werkzeuge:||||1|
 &Werkzeuge:&Bildschirmleser|Bildschirmleser||Bildschirmleser|1|
 &Werkzeuge:&Datenleser|Datenleser||Datenleser|1|
-&Werkzeuge:Datenbereich au&swählen|Datenbereich auswählen||Datenbereich setzen|1|
+&Werkzeuge:Datenbereich au&swÃ¤hlen|Datenbereich auswÃ¤hlen||Datenbereich setzen|1|
 &Werkzeuge:||||1|
 &Werkzeuge:Datenpunkte &verschieben...|Datenpunkte verschieben||Datenpunkte verschieben|1|
-&Werkzeuge:Datenausreißer &entfernen...|Datenausreißer entfernen||Datenpunkte löschen|1|
+&Werkzeuge:DatenausreiÃŸer &entfernen...|DatenausreiÃŸer entfernen||Datenpunkte lÃ¶schen|1|
 3&D-Diagramm:&Band|Band||3D-Band zeichnen|1|
 3&D-Diagramm:&Balken|Balken||3D-Balken zeichnen|1|
 3&D-Diagramm:&Punkte|Punkte||3D-Punkte zeichnen|1|
@@ -100,20 +100,20 @@
 3D-Dia&gramm:3D-&Drahtgitter|3D-Drahtgitter||3D-Drahtgitter|1|
 3D-Dia&gramm:3D &verdeckte Linien|3D verdeckte Linien||3D verdeckte Linien|1|
 3D-Dia&gramm:3D-&Polygone|3D-Polygone||3D-Polygone|1|
-3D-Dia&gramm:3D-Drahtgitter-&Oberfläche|3D-Drahtgitter-Oberfläche||3D-Drahtgitter-Oberfläche|1|
+3D-Dia&gramm:3D-Drahtgitter-&OberflÃ¤che|3D-Drahtgitter-OberflÃ¤che||3D-Drahtgitter-OberflÃ¤che|1|
 3D-Dia&gramm:||||1|
 3D-Dia&gramm:&Balken|Balken||3D-Balken zeichnen|1|
 3D-Dia&gramm:&Punkte|Punkte||3D-Punkte zeichnen|1|
 3D-Dia&gramm:||||1|
-3D-Dia&gramm:&Konturlinien + Farbfüllung|Konturlinien + Farbfüllung||Konturlinien + Farbfüllung|1|
+3D-Dia&gramm:&Konturlinien + FarbfÃ¼llung|Konturlinien + FarbfÃ¼llung||Konturlinien + FarbfÃ¼llung|1|
 3D-Dia&gramm:Kontur&linien|Konturlinien||Konturlinien|1|
-3D-Dia&gramm:&Graustufenoberfläche|Graustufenoberfläche||Graustufenoberfläche|1|
+3D-Dia&gramm:&GraustufenoberflÃ¤che|GraustufenoberflÃ¤che||GraustufenoberflÃ¤che|1|
 Ana&lyse:&Verschieben|Verschieben||Verschieben|1|
 Ana&lyse:||||1|
 Ana&lyse:&Differenzieren|Differenzieren||Differenzieren|1|
 Ana&lyse:&Integrieren ...|Integrieren||Integrieren|1|
 Ana&lyse:||||1|
-Ana&lyse:&Glätten|Glätten||Glätten|1|
+Ana&lyse:&GlÃ¤tten|GlÃ¤tten||GlÃ¤tten|1|
 Ana&lyse:&FFT Filter|FFT Filter||FFT Filter|1|
 Ana&lyse:||||1|
 Ana&lyse:Inte&rpolieren...|Interpolieren||Interpolieren|1|
@@ -123,16 +123,16 @@ Ana&lyse:&Schnellanpassung|Schnellanpassung||Schnellanpassung|1|
 Ana&lyse:Kurvenanpassungs&assistent...|Kurvenanpassungsassistent||Kurvenanpassungsassistent|1|
 Anpassung mit &mehreren Scheitelpunkten:&Gauss...|Gauss||Gauss|1|
 Anpassung mit &mehreren Scheitelpunkten:&Lorentz...|Lorentz||Lorentz|1|
-B&earbeiten:&Rückgängig|Rückgängig||Änderungen rückgängig machen|1|
+B&earbeiten:&RÃ¼ckgÃ¤ngig|RÃ¼ckgÃ¤ngig||Ã„nderungen rÃ¼ckgÃ¤ngig machen|1|
 B&earbeiten:Wiede&rholen|Wiederholen||Wiederherstellen|1|
 B&earbeiten:||||1|
 B&earbeiten:Auswahl ausschnei&den|Auswahl ausschneiden||Auswahl ausschneiden|1|
 B&earbeiten:Auswahl &kopieren|Auswahl kopieren||Auswahl kopieren|1|
-B&earbeiten:Auswahl ein&fügen|Auswahl einfügen||Einfügen|1|
-B&earbeiten:Auswahl &löschen|Auswahl löschen||Auswahl löschen|1|
+B&earbeiten:Auswahl ein&fÃ¼gen|Auswahl einfÃ¼gen||EinfÃ¼gen|1|
+B&earbeiten:Auswahl &lÃ¶schen|Auswahl lÃ¶schen||Auswahl lÃ¶schen|1|
 B&earbeiten:||||1|
-B&earbeiten:&Anpassungstabellen löschen|Anpassungstabellen löschen||Anpassungstabellen löschen|1|
-B&earbeiten:Alle &Log-Einträge löschen|Alle Log-Einträge löschen||Alle Log-Einträge löschen|1|
+B&earbeiten:&Anpassungstabellen lÃ¶schen|Anpassungstabellen lÃ¶schen||Anpassungstabellen lÃ¶schen|1|
+B&earbeiten:Alle &Log-EintrÃ¤ge lÃ¶schen|Alle Log-EintrÃ¤ge lÃ¶schen||Alle Log-EintrÃ¤ge lÃ¶schen|1|
 B&earbeiten:||||1|
 B&earbeiten:&Einstellungen...|Einstellungen||Einstellungen|1|
 D&iagramm:&Linie|Linie||Als Linie darstellen|1|
@@ -142,7 +142,7 @@ D&iagramm:Spezielle Linie/Symb&ol|Spezielle Linie/Symbol||Spezielle Linie/Symbol
 D&iagramm:||||1|
 D&iagramm:&Vertikale Balken|Vertikale Balken||Mit vertikalen Balken darstellen|1|
 D&iagramm:&Horizontale Balken|Horizontale Balken||Mit horizontalen Balken darstellen|1|
-D&iagramm:&Fläche|Fläche||Diagrammfläche|1|
+D&iagramm:&FlÃ¤che|FlÃ¤che||DiagrammflÃ¤che|1|
 D&iagramm:&Tortengrafik|Tortengrafik||Tortengrafik zeichnen|1|
 D&iagramm:Vektoren &XYXY|Vektoren XYXY||Vektoren XYXY|1|
 D&iagramm:Verktoren XY&AM|Verktoren XYAM||Vektoren XYAM|1|
@@ -169,4 +169,4 @@ Toolbars:Grafik|Grafik||Grafik|1|
 Toolbars:Diagramm|Diagramm||Diagramm|1|
 Toolbars:Tabelle|Tabelle||Tabelle|1|
 Toolbars:Matrix-Diagramm|Matrix-Diagramm||Matrix-Diagramm|1|
-Toolbars:3D-Oberflächendiagramm|3D-Oberflächendiagramm||3D-Oberflächendiagramm|1|
+Toolbars:3D-OberflÃ¤chendiagramm|3D-OberflÃ¤chendiagramm||3D-OberflÃ¤chendiagramm|1|

@@ -3,74 +3,74 @@
 :&Delete|Delete||Delete|1|
 :||||1|
 :&Properties...|Properties||Properties|1|
-&FFT filtr:&Nízké posunutí...|Nízké posunutí||Nízké posunutí|1|
-&FFT filtr:&Vysoké posunutí...|Vysoké posunutí||Vysoké posunutí|1|
-&FFT filtr:&Pásmové posunutí...|Pásmové posunutí||Pásmové posunutí|1|
-&FFT filtr:&Pásmovou závoru...|Pásmovou závoru||Pásmovou závoru|1|
-&Formát:&Nákres...|Nákres||Nákres|1|
-&Formát:||||1|
-&Formát:&Stupnice...|Stupnice||Stupnice|1|
-&Formát:&Osy...|Osy||Osy|1|
-&Formát:||||1|
-&Formát:&M?í?ka...|M?í?ka||M?í?ka|1|
-&Formát:&Název...|Název||Název|1|
-&Naposledy otev?ené projekty:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
-&Novı:Novı &projekt|Novı projekt||Otev?ít novı projekt|1|
-&Novı:Nová &tabulka|Nová tabulka||Nová tabulka|1|
-&Novı:Nová &matice|Nová matice||Nová matice|1|
-&Novı:Nová &poznámka/Skript|Nová poznámka/Skript||Vytvo?it prázdné okno pro poznámky/skripty|1|
-&Novı:Novı &nákres|Novı nákres||Vytvo?it prázdnı dvojrozm?rnı nákres|1|
-&Novı:Novı &nákres funkce|Novı nákres funkce||Vytvo?it novı dvojrozm?rnı nákres funkce|1|
-&Novı:Novı trojrozm?rnı &nákres povrchu|Novı trojrozm?rnı nákres povrchu||Vytvo?it novı trojrozm?rnı nákres povrchu|1|
-&Nákres:&?ára|?ára||Nakreslit jako ?áru|1|
-&Nákres:&Body|Body||Nakreslit jako symboly|1|
-&Nákres:?ára + &Zna?ky|?ára + Zna?ky||Nakreslit jako ?áru + symboly|1|
-&Nákres:Zvlá?tní ?ára/Symb&ol|Zvlá?tní ?ára/Symbol||Zvlá?tní ?ára/Symbol|1|
-&Nákres:||||1|
-&Nákres:&Svislé pruhy|Svislé pruhy||Nakreslit se svislımi pruhy|1|
-&Nákres:&Vodorovné pruhy|Vodorovné pruhy||Nakreslit s vodorovnımi pruhy|1|
-&Nákres:&Oblast|Oblast||Nakreslit oblast|1|
-&Nákres:&Kolá?ovı obrazec|Kolá?ovı obrazec||Nakreslit kolá?ovı obrazec|1|
-&Nákres:Vektory &XYXY|Vektory XYXY||Vektory XYXY|1|
-&Nákres:Vektory XY&AM|Vektory XYAM||Vektory XYAM|1|
-&Nákres:||||1|
-&Nákres:Statistické &nákresy|Statistické nákresy||Statistické nákresy|1|
-&Nákres:Pa&nel|Panel||Panel|1|
-&Nákres:||||1|
-&Nákres:&Trojrozm?rnı nákres|Trojrozm?rnı nákres||Trojrozm?rnı nákres|1|
-&Nápov?da:&Nápov?da|Nápov?da||Nápov?da|1|
-&Nápov?da:||||1|
-&Nápov?da:&Domovská stránka programu SciDAVis|Domovská stránka programu SciDAVis||Domovská stránka programu SciDAVis|1|
-&Nápov?da:||||1|
-&Nápov?da:Nav?tívit &fóra programu SciDAVis|Nav?tívit fóra programu SciDAVis||Nav?tívit fóra programu SciDAVis|1|
-&Nápov?da:Ohlásit &chybu|Ohlásit chybu||Ohlásit chybu|1|
-&Nápov?da:||||1|
-&Nápov?da:&O programu SciDAVis|O programu SciDAVis||O programu SciDAVis|1|
-&Nástroje:Zakázat &nástroje|Zakázat nástroje||Ukazovátko|1|
-&Nástroje:&P?iblí?it|P?iblí?it||P?iblí?it|1|
-&Nástroje:&Oddálit|Oddálit||Oddálit|1|
-&Nástroje:&Zm?nit m??ítko na Ukázat v?e|Zm?nit m??ítko na Ukázat v?e||Nejlep?í umíst?ní|1|
-&Nástroje:||||1|
-&Nástroje:?&te?ka obrazovky|?te?ka obrazovky||?te?ka obrazovky|1|
-&Nástroje:&?te?ka dat|?te?ka dat||?te?ka dat|1|
-&Nástroje:&Vybrat rozsah dat|Vybrat rozsah dat||Vybrat rozsah dat|1|
-&Nástroje:||||1|
-&Nástroje:&P?esunout datové body...|P?esunout datové body||P?esunout datové body|1|
-&Nástroje:Odstranit &?patné datové body...|Odstranit ?patné datové body||Odstranit datové body|1|
-&Pohled:Nástrojové li?ty|Nástrojové li?ty||Nástrojové li?ty|1|
+&FFT filtr:&NÃ­zkÃ© posunutÃ­...|NÃ­zkÃ© posunutÃ­||NÃ­zkÃ© posunutÃ­|1|
+&FFT filtr:&VysokÃ© posunutÃ­...|VysokÃ© posunutÃ­||VysokÃ© posunutÃ­|1|
+&FFT filtr:&PÃ¡smovÃ© posunutÃ­...|PÃ¡smovÃ© posunutÃ­||PÃ¡smovÃ© posunutÃ­|1|
+&FFT filtr:&PÃ¡smovou zÃ¡voru...|PÃ¡smovou zÃ¡voru||PÃ¡smovou zÃ¡voru|1|
+&FormÃ¡t:&NÃ¡kres...|NÃ¡kres||NÃ¡kres|1|
+&FormÃ¡t:||||1|
+&FormÃ¡t:&Stupnice...|Stupnice||Stupnice|1|
+&FormÃ¡t:&Osy...|Osy||Osy|1|
+&FormÃ¡t:||||1|
+&FormÃ¡t:&MÅ™Ã­Å¾ka...|MÅ™Ã­Å¾ka||MÅ™Ã­Å¾ka|1|
+&FormÃ¡t:&NÃ¡zev...|NÃ¡zev||NÃ¡zev|1|
+&Naposledy otevÅ™enÃ© projekty:&1 testProject.sciprj|1 testProject.sciprj||1 testProject.sciprj|1|
+&NovÃ½:NovÃ½ &projekt|NovÃ½ projekt||OtevÅ™Ã­t novÃ½ projekt|1|
+&NovÃ½:NovÃ¡ &tabulka|NovÃ¡ tabulka||NovÃ¡ tabulka|1|
+&NovÃ½:NovÃ¡ &matice|NovÃ¡ matice||NovÃ¡ matice|1|
+&NovÃ½:NovÃ¡ &poznÃ¡mka/Skript|NovÃ¡ poznÃ¡mka/Skript||VytvoÅ™it prÃ¡zdnÃ© okno pro poznÃ¡mky/skripty|1|
+&NovÃ½:NovÃ½ &nÃ¡kres|NovÃ½ nÃ¡kres||VytvoÅ™it prÃ¡zdnÃ½ dvojrozmÄ›rnÃ½ nÃ¡kres|1|
+&NovÃ½:NovÃ½ &nÃ¡kres funkce|NovÃ½ nÃ¡kres funkce||VytvoÅ™it novÃ½ dvojrozmÄ›rnÃ½ nÃ¡kres funkce|1|
+&NovÃ½:NovÃ½ trojrozmÄ›rnÃ½ &nÃ¡kres povrchu|NovÃ½ trojrozmÄ›rnÃ½ nÃ¡kres povrchu||VytvoÅ™it novÃ½ trojrozmÄ›rnÃ½ nÃ¡kres povrchu|1|
+&NÃ¡kres:&ÄŒÃ¡ra|ÄŒÃ¡ra||Nakreslit jako ÄÃ¡ru|1|
+&NÃ¡kres:&Body|Body||Nakreslit jako symboly|1|
+&NÃ¡kres:ÄŒÃ¡ra + &ZnaÄky|ÄŒÃ¡ra + ZnaÄky||Nakreslit jako ÄÃ¡ru + symboly|1|
+&NÃ¡kres:ZvlÃ¡Å¡tnÃ­ ÄÃ¡ra/Symb&ol|ZvlÃ¡Å¡tnÃ­ ÄÃ¡ra/Symbol||ZvlÃ¡Å¡tnÃ­ ÄÃ¡ra/Symbol|1|
+&NÃ¡kres:||||1|
+&NÃ¡kres:&SvislÃ© pruhy|SvislÃ© pruhy||Nakreslit se svislÃ½mi pruhy|1|
+&NÃ¡kres:&VodorovnÃ© pruhy|VodorovnÃ© pruhy||Nakreslit s vodorovnÃ½mi pruhy|1|
+&NÃ¡kres:&Oblast|Oblast||Nakreslit oblast|1|
+&NÃ¡kres:&KolÃ¡ÄovÃ½ obrazec|KolÃ¡ÄovÃ½ obrazec||Nakreslit kolÃ¡ÄovÃ½ obrazec|1|
+&NÃ¡kres:Vektory &XYXY|Vektory XYXY||Vektory XYXY|1|
+&NÃ¡kres:Vektory XY&AM|Vektory XYAM||Vektory XYAM|1|
+&NÃ¡kres:||||1|
+&NÃ¡kres:StatistickÃ© &nÃ¡kresy|StatistickÃ© nÃ¡kresy||StatistickÃ© nÃ¡kresy|1|
+&NÃ¡kres:Pa&nel|Panel||Panel|1|
+&NÃ¡kres:||||1|
+&NÃ¡kres:&TrojrozmÄ›rnÃ½ nÃ¡kres|TrojrozmÄ›rnÃ½ nÃ¡kres||TrojrozmÄ›rnÃ½ nÃ¡kres|1|
+&NÃ¡povÄ›da:&NÃ¡povÄ›da|NÃ¡povÄ›da||NÃ¡povÄ›da|1|
+&NÃ¡povÄ›da:||||1|
+&NÃ¡povÄ›da:&DomovskÃ¡ strÃ¡nka programu SciDAVis|DomovskÃ¡ strÃ¡nka programu SciDAVis||DomovskÃ¡ strÃ¡nka programu SciDAVis|1|
+&NÃ¡povÄ›da:||||1|
+&NÃ¡povÄ›da:NavÅ¡tÃ­vit &fÃ³ra programu SciDAVis|NavÅ¡tÃ­vit fÃ³ra programu SciDAVis||NavÅ¡tÃ­vit fÃ³ra programu SciDAVis|1|
+&NÃ¡povÄ›da:OhlÃ¡sit &chybu|OhlÃ¡sit chybu||OhlÃ¡sit chybu|1|
+&NÃ¡povÄ›da:||||1|
+&NÃ¡povÄ›da:&O programu SciDAVis|O programu SciDAVis||O programu SciDAVis|1|
+&NÃ¡stroje:ZakÃ¡zat &nÃ¡stroje|ZakÃ¡zat nÃ¡stroje||UkazovÃ¡tko|1|
+&NÃ¡stroje:&PÅ™iblÃ­Å¾it|PÅ™iblÃ­Å¾it||PÅ™iblÃ­Å¾it|1|
+&NÃ¡stroje:&OddÃ¡lit|OddÃ¡lit||OddÃ¡lit|1|
+&NÃ¡stroje:&ZmÄ›nit mÄ›Å™Ã­tko na UkÃ¡zat vÅ¡e|ZmÄ›nit mÄ›Å™Ã­tko na UkÃ¡zat vÅ¡e||NejlepÅ¡Ã­ umÃ­stÄ›nÃ­|1|
+&NÃ¡stroje:||||1|
+&NÃ¡stroje:ÄŒ&teÄka obrazovky|ÄŒteÄka obrazovky||ÄŒteÄka obrazovky|1|
+&NÃ¡stroje:&ÄŒteÄka dat|ÄŒteÄka dat||ÄŒteÄka dat|1|
+&NÃ¡stroje:&Vybrat rozsah dat|Vybrat rozsah dat||Vybrat rozsah dat|1|
+&NÃ¡stroje:||||1|
+&NÃ¡stroje:&PÅ™esunout datovÃ© body...|PÅ™esunout datovÃ© body||PÅ™esunout datovÃ© body|1|
+&NÃ¡stroje:Odstranit &Å¡patnÃ© datovÃ© body...|Odstranit Å¡patnÃ© datovÃ© body||Odstranit datovÃ© body|1|
+&Pohled:NÃ¡strojovÃ© liÅ¡ty|NÃ¡strojovÃ© liÅ¡ty||NÃ¡strojovÃ© liÅ¡ty|1|
 &Pohled:&Lock Toolbars|Lock Toolbars||Lock Toolbars|1|
 &Pohled:||||1|
-&Pohled:Pr?vodce &nákresem|Pr?vodce nákresem||Pr?vodce nákresem|1|
-&Pohled:&Pr?zkumník projektu|Pr?zkumník projektu||Ukázat pr?zkumníka projektu|1|
-&Pohled:Zápis &vısledk?|Zápis vısledk?||Ukázat vısledky vıpo?t?|1|
+&Pohled:PrÅ¯vodce &nÃ¡kresem|PrÅ¯vodce nÃ¡kresem||PrÅ¯vodce nÃ¡kresem|1|
+&Pohled:&PrÅ¯zkumnÃ­k projektu|PrÅ¯zkumnÃ­k projektu||UkÃ¡zat prÅ¯zkumnÃ­ka projektu|1|
+&Pohled:ZÃ¡pis &vÃ½sledkÅ¯|ZÃ¡pis vÃ½sledkÅ¯||UkÃ¡zat vÃ½sledky vÃ½poÄtÅ¯|1|
 &Pohled:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
-&Pohled:&Ovládací panel|Ovládací panel||Ukázat skriptovací konzoli|1|
-&P?elo?it:&Svisle|Svisle||Svisle|1|
-&P?elo?it:&Vodorovn?|Vodorovn?||Vodorovn?|1|
-&Rozbor:&P?elo?it|P?elo?it||P?elo?it|1|
+&Pohled:&OvlÃ¡dacÃ­ panel|OvlÃ¡dacÃ­ panel||UkÃ¡zat skriptovacÃ­ konzoli|1|
+&PÅ™eloÅ¾it:&Svisle|Svisle||Svisle|1|
+&PÅ™eloÅ¾it:&VodorovnÄ›|VodorovnÄ›||VodorovnÄ›|1|
+&Rozbor:&PÅ™eloÅ¾it|PÅ™eloÅ¾it||PÅ™eloÅ¾it|1|
 &Rozbor:||||1|
 &Rozbor:&Diferencovat|Diferencovat||Diferencovat|1|
-&Rozbor:&Za?lenit...|Za?lenit||Za?lenit|1|
+&Rozbor:&ZaÄlenit...|ZaÄlenit||ZaÄlenit|1|
 &Rozbor:||||1|
 &Rozbor:&Vyhladit|Vyhladit||Vyhladit|1|
 &Rozbor:&FFT filtr|FFT filtr||FFT filtr|1|
@@ -78,117 +78,117 @@
 &Rozbor:&Interpolovat...|Interpolovat||Interpolovat|1|
 &Rozbor:&FFT...|FFT||FFT|1|
 &Rozbor:||||1|
-&Rozbor:&Rychlé umíst?ní|Rychlé umíst?ní||Rychlé umíst?ní|1|
-&Rozbor:&Pr?vodce umíst?ním k?ivek...|Pr?vodce umíst?ním k?ivek||Pr?vodce umíst?ním k?ivek|1|
-&Rychlé umíst?ní:&Lineární umíst?ní|Lineární umíst?ní||Lineární umíst?ní|1|
-&Rychlé umíst?ní:&Mnoho?lenné umíst?ní..|Mnoho?lenné umíst?ní..||Mnoho?lenné umíst?ní..|1|
-&Rychlé umíst?ní:||||1|
-&Rychlé umíst?ní:Umístit ex&ponenciální pokles|Umístit exponenciální pokles||Umístit exponenciální pokles|1|
-&Rychlé umíst?ní:Umístit exponenciální &r?st...|Umístit exponenciální r?st||Umístit exponenciální r?st|1|
-&Rychlé umíst?ní:&Boltzmannovo umíst?ní (esovité)|Boltzmannovo umíst?ní (esovité)||Boltzmannovo umíst?ní (esovité)|1|
-&Rychlé umíst?ní:&Gaussovo umíst?ní|Gaussovo umíst?ní||Gaussovo umíst?ní|1|
-&Rychlé umíst?ní:&Lorentzovo umíst?ní|Lorentzovo umíst?ní||Lorentzovo umíst?ní|1|
-&Rychlé umíst?ní:Umíst?ní s &mnoha?etnımi vrcholy|Umíst?ní s mnoha?etnımi vrcholy||Umíst?ní s mnoha?etnımi vrcholy|1|
-&Rychlé umíst?ní:||||1|
-&Skriptování:Skriptovací &jazyk|Skriptovací jazyk||Skriptovací jazyk|1|
-&Skriptování:&Spustit podporu skriptování znovu|Spustit podporu skriptování znovu||Spustit podporu skriptování znovu|1|
-&Soubor:&Novı|Novı||Novı|1|
-&Soubor:&Otev?ít...|Otev?ít||Otev?ít projekt|1|
-&Soubor:&Naposledy otev?ené projekty|Naposledy otev?ené projekty||Naposledy otev?ené projekty|1|
+&Rozbor:&RychlÃ© umÃ­stÄ›nÃ­|RychlÃ© umÃ­stÄ›nÃ­||RychlÃ© umÃ­stÄ›nÃ­|1|
+&Rozbor:&PrÅ¯vodce umÃ­stÄ›nÃ­m kÅ™ivek...|PrÅ¯vodce umÃ­stÄ›nÃ­m kÅ™ivek||PrÅ¯vodce umÃ­stÄ›nÃ­m kÅ™ivek|1|
+&RychlÃ© umÃ­stÄ›nÃ­:&LineÃ¡rnÃ­ umÃ­stÄ›nÃ­|LineÃ¡rnÃ­ umÃ­stÄ›nÃ­||LineÃ¡rnÃ­ umÃ­stÄ›nÃ­|1|
+&RychlÃ© umÃ­stÄ›nÃ­:&MnohoÄlennÃ© umÃ­stÄ›nÃ­..|MnohoÄlennÃ© umÃ­stÄ›nÃ­..||MnohoÄlennÃ© umÃ­stÄ›nÃ­..|1|
+&RychlÃ© umÃ­stÄ›nÃ­:||||1|
+&RychlÃ© umÃ­stÄ›nÃ­:UmÃ­stit ex&ponenciÃ¡lnÃ­ pokles|UmÃ­stit exponenciÃ¡lnÃ­ pokles||UmÃ­stit exponenciÃ¡lnÃ­ pokles|1|
+&RychlÃ© umÃ­stÄ›nÃ­:UmÃ­stit exponenciÃ¡lnÃ­ &rÅ¯st...|UmÃ­stit exponenciÃ¡lnÃ­ rÅ¯st||UmÃ­stit exponenciÃ¡lnÃ­ rÅ¯st|1|
+&RychlÃ© umÃ­stÄ›nÃ­:&Boltzmannovo umÃ­stÄ›nÃ­ (esovitÃ©)|Boltzmannovo umÃ­stÄ›nÃ­ (esovitÃ©)||Boltzmannovo umÃ­stÄ›nÃ­ (esovitÃ©)|1|
+&RychlÃ© umÃ­stÄ›nÃ­:&Gaussovo umÃ­stÄ›nÃ­|Gaussovo umÃ­stÄ›nÃ­||Gaussovo umÃ­stÄ›nÃ­|1|
+&RychlÃ© umÃ­stÄ›nÃ­:&Lorentzovo umÃ­stÄ›nÃ­|Lorentzovo umÃ­stÄ›nÃ­||Lorentzovo umÃ­stÄ›nÃ­|1|
+&RychlÃ© umÃ­stÄ›nÃ­:UmÃ­stÄ›nÃ­ s &mnohaÄetnÃ½mi vrcholy|UmÃ­stÄ›nÃ­ s mnohaÄetnÃ½mi vrcholy||UmÃ­stÄ›nÃ­ s mnohaÄetnÃ½mi vrcholy|1|
+&RychlÃ© umÃ­stÄ›nÃ­:||||1|
+&SkriptovÃ¡nÃ­:SkriptovacÃ­ &jazyk|SkriptovacÃ­ jazyk||SkriptovacÃ­ jazyk|1|
+&SkriptovÃ¡nÃ­:&Spustit podporu skriptovÃ¡nÃ­ znovu|Spustit podporu skriptovÃ¡nÃ­ znovu||Spustit podporu skriptovÃ¡nÃ­ znovu|1|
+&Soubor:&NovÃ½|NovÃ½||NovÃ½|1|
+&Soubor:&OtevÅ™Ã­t...|OtevÅ™Ã­t||OtevÅ™Ã­t projekt|1|
+&Soubor:&Naposledy otevÅ™enÃ© projekty|Naposledy otevÅ™enÃ© projekty||Naposledy otevÅ™enÃ© projekty|1|
 &Soubor:||||1|
-&Soubor:Otev?ít soubor s &obrázkem...|Otev?ít soubor s obrázkem||Otev?ít soubor s obrázkem|1|
-&Soubor:Zavést &obrázek...|Zavést obrázek||Zavést obrázek|1|
+&Soubor:OtevÅ™Ã­t soubor s &obrÃ¡zkem...|OtevÅ™Ã­t soubor s obrÃ¡zkem||OtevÅ™Ã­t soubor s obrÃ¡zkem|1|
+&Soubor:ZavÃ©st &obrÃ¡zek...|ZavÃ©st obrÃ¡zek||ZavÃ©st obrÃ¡zek|1|
 &Soubor:||||1|
-&Soubor:&Ulo?it projekt|Ulo?it projekt||Ulo?it projekt|1|
-&Soubor:Ulo?it projekt &jako...|Ulo?it projekt jako||Ulo?it projekt jako|1|
+&Soubor:&UloÅ¾it projekt|UloÅ¾it projekt||UloÅ¾it projekt|1|
+&Soubor:UloÅ¾it projekt &jako...|UloÅ¾it projekt jako||UloÅ¾it projekt jako|1|
 &Soubor:||||1|
-&Soubor:Otev?ít p?ed&lohu...|Otev?ít p?edlohu||Otev?ít p?edlohu|1|
-&Soubor:Ulo?it jako &p?edlohu...|Ulo?it jako p?edlohu||Ulo?it okno jako p?edlohu|1|
+&Soubor:OtevÅ™Ã­t pÅ™ed&lohu...|OtevÅ™Ã­t pÅ™edlohu||OtevÅ™Ã­t pÅ™edlohu|1|
+&Soubor:UloÅ¾it jako &pÅ™edlohu...|UloÅ¾it jako pÅ™edlohu||UloÅ¾it okno jako pÅ™edlohu|1|
 &Soubor:||||1|
-&Soubor:&Vyvést nákres|Vyvést nákres||Vyvést nákres|1|
+&Soubor:&VyvÃ©st nÃ¡kres|VyvÃ©st nÃ¡kres||VyvÃ©st nÃ¡kres|1|
 &Soubor:&Tisk...|Tisk||Tisk okna|1|
-&Soubor:Tisk v?ech ná&kres?...|Tisk v?ech nákres?||Tisk v?ech nákres?|1|
+&Soubor:Tisk vÅ¡ech nÃ¡&kresÅ¯...|Tisk vÅ¡ech nÃ¡kresÅ¯||Tisk vÅ¡ech nÃ¡kresÅ¯|1|
 &Soubor:||||1|
-&Soubor:&Vyvést jako ASCII...|Vyvést jako ASCII||Vyvést jako ASCII|1|
-&Soubor:&Zavedení ASCII...|Zavedení ASCII||Zavést soubor(y) s daty|1|
+&Soubor:&VyvÃ©st jako ASCII...|VyvÃ©st jako ASCII||VyvÃ©st jako ASCII|1|
+&Soubor:&ZavedenÃ­ ASCII...|ZavedenÃ­ ASCII||ZavÃ©st soubor(y) s daty|1|
 &Soubor:||||1|
-&Soubor:&Ukon?it|Ukon?it||Ukon?it|1|
-&Tabulka:&P?i?azení k nákresu: nastavit sloupce jako|P?i?azení k nákresu: nastavit sloupce jako||P?i?azení k nákresu: nastavit sloupce jako|1|
+&Soubor:&UkonÄit|UkonÄit||UkonÄit|1|
+&Tabulka:&PÅ™iÅ™azenÃ­ k nÃ¡kresu: nastavit sloupce jako|PÅ™iÅ™azenÃ­ k nÃ¡kresu: nastavit sloupce jako||PÅ™iÅ™azenÃ­ k nÃ¡kresu: nastavit sloupce jako|1|
 &Tabulka:||||1|
-&Tabulka:Vyplnit &vıb?r|Vyplnit vıb?r||Vyplnit vıb?r|1|
+&Tabulka:Vyplnit &vÃ½bÄ›r|Vyplnit vÃ½bÄ›r||Vyplnit vÃ½bÄ›r|1|
 &Tabulka:||||1|
 &Tabulka:Show/Hide comments|Show/Hide comments||Show/Hide comments|1|
 &Tabulka:Show/Hide Controls|Show/Hide Controls||Show/Hide Controls|1|
-&Tabulka:Re?im zadávání vzorc?|Re?im zadávání vzorc?||Re?im zadávání vzorc?|1|
+&Tabulka:ReÅ¾im zadÃ¡vÃ¡nÃ­ vzorcÅ¯|ReÅ¾im zadÃ¡vÃ¡nÃ­ vzorcÅ¯||ReÅ¾im zadÃ¡vÃ¡nÃ­ vzorcÅ¯|1|
 &Tabulka:Upravit &popis sloupce|Upravit popis sloupce||Upravit popis sloupce|1|
-&Tabulka:Zm?nit &typ && formát|Zm?nit typ & formát||Zm?nit typ & formát|1|
+&Tabulka:ZmÄ›nit &typ && formÃ¡t|ZmÄ›nit typ & formÃ¡t||ZmÄ›nit typ & formÃ¡t|1|
 &Tabulka:||||1|
-&Tabulka:Vyprázdnit tabulku|Vyprázdnit tabulku||Vyprázdnit tabulku|1|
-&Tabulka:&Set?ídit tabulku|Set?ídit tabulku||Set?ídit tabulku|1|
+&Tabulka:VyprÃ¡zdnit tabulku|VyprÃ¡zdnit tabulku||VyprÃ¡zdnit tabulku|1|
+&Tabulka:&SetÅ™Ã­dit tabulku|SetÅ™Ã­dit tabulku||SetÅ™Ã­dit tabulku|1|
 &Tabulka:||||1|
-&Tabulka:&P?i?adit vzorec|P?i?adit vzorec||P?i?adit vzorec|1|
-&Tabulka:Znovu spo?ítat|Znovu spo?ítat||Znovu spo?ítat|1|
+&Tabulka:&PÅ™iÅ™adit vzorec|PÅ™iÅ™adit vzorec||PÅ™iÅ™adit vzorec|1|
+&Tabulka:Znovu spoÄÃ­tat|Znovu spoÄÃ­tat||Znovu spoÄÃ­tat|1|
 &Tabulka:||||1|
-&Tabulka:&P?idat sloupec|P?idat sloupec||append a new column to the table|1|
-&Tabulka:&Rozm?ry|Rozm?ry||change the table size|1|
+&Tabulka:&PÅ™idat sloupec|PÅ™idat sloupec||append a new column to the table|1|
+&Tabulka:&RozmÄ›ry|RozmÄ›ry||change the table size|1|
 &Tabulka:||||1|
-&Tabulka:&Jdi na bu?ku|Jdi na bu?ku||Jdi na bu?ku|1|
+&Tabulka:&Jdi na buÅˆku|Jdi na buÅˆku||Jdi na buÅˆku|1|
 &Tabulka:||||1|
-&Tabulka:&Vyvést jako ASCII...|Vyvést jako ASCII||Vyvést jako ASCII|1|
+&Tabulka:&VyvÃ©st jako ASCII...|VyvÃ©st jako ASCII||VyvÃ©st jako ASCII|1|
 &Tabulka:||||1|
-&Tabulka:P?evést na &matici|P?evést na matici||P?evést na matici|1|
-&Trojrozm?rnı nákres:&Stuha|Stuha||Nakreslit trojrozm?rnou stuhu|1|
-&Trojrozm?rnı nákres:&Pruhy|Pruhy||Nakreslit trojrozm?rné pruhy|1|
-&Trojrozm?rnı nákres:&Body|Body||Nakreslit trojrozm?rné body|1|
-&Trojrozm?rnı nákres:&Dráha|Dráha||Nakreslit trojrozm?rnou dráhu|1|
+&Tabulka:PÅ™evÃ©st na &matici|PÅ™evÃ©st na matici||PÅ™evÃ©st na matici|1|
+&TrojrozmÄ›rnÃ½ nÃ¡kres:&Stuha|Stuha||Nakreslit trojrozmÄ›rnou stuhu|1|
+&TrojrozmÄ›rnÃ½ nÃ¡kres:&Pruhy|Pruhy||Nakreslit trojrozmÄ›rnÃ© pruhy|1|
+&TrojrozmÄ›rnÃ½ nÃ¡kres:&Body|Body||Nakreslit trojrozmÄ›rnÃ© body|1|
+&TrojrozmÄ›rnÃ½ nÃ¡kres:&DrÃ¡ha|DrÃ¡ha||Nakreslit trojrozmÄ›rnou drÃ¡hu|1|
 &Vyhladit:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
-&Vyhladit:Klouzající &okenní pr?m?r...|Klouzající okenní pr?m?r||Klouzající okenní pr?m?r|1|
+&Vyhladit:KlouzajÃ­cÃ­ &okennÃ­ prÅ¯mÄ›r...|KlouzajÃ­cÃ­ okennÃ­ prÅ¯mÄ›r||KlouzajÃ­cÃ­ okennÃ­ prÅ¯mÄ›r|1|
 &Vyhladit:&FFT filtr...|FFT filtr||FFT filtr|1|
-&Vyvést nákres:&Nyn?j?í...|Nyn?j?í||Vyvést nyn?j?í nákres|1|
-&Vyvést nákres:&V?e...|V?e||Vyvést v?echny nákresy|1|
-&Úpravy:&Zp?t|Zp?t||Zm?ny vrátit zp?t|1|
-&Úpravy:&Znovu|Znovu||Zm?ny provést znovu|1|
-&Úpravy:||||1|
-&Úpravy:Vyj&mout vıb?r|Vyjmout vıb?r||Vyjmout vıb?r|1|
-&Úpravy:&Kopírovat vıb?r|Kopírovat vıb?r||Kopírovat vıb?r|1|
-&Úpravy:&Vlo?it vıb?r|Vlo?it vıb?r||Vlo?it vıb?r|1|
-&Úpravy:&Smazat vıb?r|Smazat vıb?r||Smazat vıb?r|1|
-&Úpravy:||||1|
-&Úpravy:&Smazat tabulky umíst?ní|Smazat tabulky umíst?ní||Smazat tabulky umíst?ní|1|
-&Úpravy:Smazat v?echny informace v &zápisu|Smazat v?echny informace v zápisu||Smazat v?echny informace v zápisu|1|
-&Úpravy:||||1|
-&Úpravy:&Nastavení...|Nastavení||Nastavení|1|
-Nástrojové li?ty:Soubor|Soubor||Soubor|1|
-Nástrojové li?ty:Upravit|Upravit||Upravit|1|
-Nástrojové li?ty:Nákres|Nákres||Nákres|1|
-Nástrojové li?ty:Nákres|Nákres||Nákres|1|
-Nástrojové li?ty:Tabulka|Tabulka||Tabulka|1|
-Nástrojové li?ty:Nákres matice|Nákres matice||Nákres matice|1|
-Nástrojové li?ty:Nákres trojrozm?rného povrchu|Nákres trojrozm?rného povrchu||Nákres trojrozm?rného povrchu|1|
-Pa&nel:&Dv? svislé vrstvy|Dv? svislé vrstvy||Dv? svislé vrstvy|1|
-Pa&nel:Dv? vodo&rovné vrstvy|Dv? vodorovné vrstvy||Dv? vodorovné vrstvy|1|
-Pa&nel:&?ty?i vrstvy|?ty?i vrstvy||?ty?i vrstvy|1|
-Pa&nel:&Skládané vrstvy|Skládané vrstvy||Skládané vrstvy|1|
-Statistické &nákresy:&Krabicovı nákres|Krabicovı nákres||Krabicovı a vousatı nákres|1|
-Statistické &nákresy:&Histogram|Histogram||Histogram|1|
-Statistické &nákresy:&Naskládanı histogram|Naskládanı histogram||Naskládanı histogram|1|
-Trojrozm?rnı &nákres:Trojrozm?rná &drát?ná m?í?ka|Trojrozm?rná drát?ná m?í?ka||Trojrozm?rná drát?ná m?í?ka|1|
-Trojrozm?rnı &nákres:Trojrozm?rné &skryté ?áry|Trojrozm?rné skryté ?áry||Trojrozm?rné skryté ?áry|1|
-Trojrozm?rnı &nákres:Trojrozm?rné &mnohoúhelníky|Trojrozm?rné mnohoúhelníky||Trojrozm?rné mnohoúhelníky|1|
-Trojrozm?rnı &nákres:Trojrozm?rnı &povrch drát?né m?í?ky|Trojrozm?rnı povrch drát?né m?í?ky||Trojrozm?rnı povrch drát?né m?í?ky|1|
-Trojrozm?rnı &nákres:||||1|
-Trojrozm?rnı &nákres:&Pruhy|Pruhy||Nakreslit trojrozm?rné pruhy|1|
-Trojrozm?rnı &nákres:&Body|Body||Nakreslit trojrozm?rné body|1|
-Trojrozm?rnı &nákres:||||1|
-Trojrozm?rnı &nákres:Obrysové ?áry + &Barevná vıpl?|Obrysové ?áry + Barevná vıpl?||Obrysové ?áry + Barevná vıpl?|1|
-Trojrozm?rnı &nákres:Obrysové &?áry|Obrysové ?áry||Obrysové ?áry|1|
-Trojrozm?rnı &nákres:&Zobrazení povrchu v odstínech ?edi|Zobrazení povrchu v odstínech ?edi||Zobrazení povrchu v odstínech ?edi|1|
-Umístit ex&ponenciální pokles:&První ?ád...|První ?ád||První ?ád|1|
-Umístit ex&ponenciální pokles:&Druhı ?ád...|Druhı ?ád||Druhı ?ád|1|
-Umístit ex&ponenciální pokles:&T?etí ?ád...|T?etí ?ád||T?etí ?ád|1|
-Umíst?ní s &mnoha?etnımi vrcholy:&Gauss?v...|Gauss?v||Gauss?v|1|
-Umíst?ní s &mnoha?etnımi vrcholy:&Lorentz?v...|Lorentz?v||Lorentz?v|1|
-Zvlá?tní ?ára/Symb&ol:Svislé &?áry|Svislé ?áry||Svislé ?áry|1|
-Zvlá?tní ?ára/Symb&ol:&K?ivka (spline)|K?ivka (spline)||K?ivka (spline)|1|
-Zvlá?tní ?ára/Symb&ol:&Svislé schody|Svislé schody||Svislé schody|1|
-Zvlá?tní ?ára/Symb&ol:&Vodorovné schody|Vodorovné schody||Vodorovné schody|1|
+&VyvÃ©st nÃ¡kres:&NynÄ›jÅ¡Ã­...|NynÄ›jÅ¡Ã­||VyvÃ©st nynÄ›jÅ¡Ã­ nÃ¡kres|1|
+&VyvÃ©st nÃ¡kres:&VÅ¡e...|VÅ¡e||VyvÃ©st vÅ¡echny nÃ¡kresy|1|
+&Ãšpravy:&ZpÄ›t|ZpÄ›t||ZmÄ›ny vrÃ¡tit zpÄ›t|1|
+&Ãšpravy:&Znovu|Znovu||ZmÄ›ny provÃ©st znovu|1|
+&Ãšpravy:||||1|
+&Ãšpravy:Vyj&mout vÃ½bÄ›r|Vyjmout vÃ½bÄ›r||Vyjmout vÃ½bÄ›r|1|
+&Ãšpravy:&KopÃ­rovat vÃ½bÄ›r|KopÃ­rovat vÃ½bÄ›r||KopÃ­rovat vÃ½bÄ›r|1|
+&Ãšpravy:&VloÅ¾it vÃ½bÄ›r|VloÅ¾it vÃ½bÄ›r||VloÅ¾it vÃ½bÄ›r|1|
+&Ãšpravy:&Smazat vÃ½bÄ›r|Smazat vÃ½bÄ›r||Smazat vÃ½bÄ›r|1|
+&Ãšpravy:||||1|
+&Ãšpravy:&Smazat tabulky umÃ­stÄ›nÃ­|Smazat tabulky umÃ­stÄ›nÃ­||Smazat tabulky umÃ­stÄ›nÃ­|1|
+&Ãšpravy:Smazat vÅ¡echny informace v &zÃ¡pisu|Smazat vÅ¡echny informace v zÃ¡pisu||Smazat vÅ¡echny informace v zÃ¡pisu|1|
+&Ãšpravy:||||1|
+&Ãšpravy:&NastavenÃ­...|NastavenÃ­||NastavenÃ­|1|
+NÃ¡strojovÃ© liÅ¡ty:Soubor|Soubor||Soubor|1|
+NÃ¡strojovÃ© liÅ¡ty:Upravit|Upravit||Upravit|1|
+NÃ¡strojovÃ© liÅ¡ty:NÃ¡kres|NÃ¡kres||NÃ¡kres|1|
+NÃ¡strojovÃ© liÅ¡ty:NÃ¡kres|NÃ¡kres||NÃ¡kres|1|
+NÃ¡strojovÃ© liÅ¡ty:Tabulka|Tabulka||Tabulka|1|
+NÃ¡strojovÃ© liÅ¡ty:NÃ¡kres matice|NÃ¡kres matice||NÃ¡kres matice|1|
+NÃ¡strojovÃ© liÅ¡ty:NÃ¡kres trojrozmÄ›rnÃ©ho povrchu|NÃ¡kres trojrozmÄ›rnÃ©ho povrchu||NÃ¡kres trojrozmÄ›rnÃ©ho povrchu|1|
+Pa&nel:&DvÄ› svislÃ© vrstvy|DvÄ› svislÃ© vrstvy||DvÄ› svislÃ© vrstvy|1|
+Pa&nel:DvÄ› vodo&rovnÃ© vrstvy|DvÄ› vodorovnÃ© vrstvy||DvÄ› vodorovnÃ© vrstvy|1|
+Pa&nel:&ÄŒtyÅ™i vrstvy|ÄŒtyÅ™i vrstvy||ÄŒtyÅ™i vrstvy|1|
+Pa&nel:&SklÃ¡danÃ© vrstvy|SklÃ¡danÃ© vrstvy||SklÃ¡danÃ© vrstvy|1|
+StatistickÃ© &nÃ¡kresy:&KrabicovÃ½ nÃ¡kres|KrabicovÃ½ nÃ¡kres||KrabicovÃ½ a vousatÃ½ nÃ¡kres|1|
+StatistickÃ© &nÃ¡kresy:&Histogram|Histogram||Histogram|1|
+StatistickÃ© &nÃ¡kresy:&NasklÃ¡danÃ½ histogram|NasklÃ¡danÃ½ histogram||NasklÃ¡danÃ½ histogram|1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:TrojrozmÄ›rnÃ¡ &drÃ¡tÄ›nÃ¡ mÅ™Ã­Å¾ka|TrojrozmÄ›rnÃ¡ drÃ¡tÄ›nÃ¡ mÅ™Ã­Å¾ka||TrojrozmÄ›rnÃ¡ drÃ¡tÄ›nÃ¡ mÅ™Ã­Å¾ka|1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:TrojrozmÄ›rnÃ© &skrytÃ© ÄÃ¡ry|TrojrozmÄ›rnÃ© skrytÃ© ÄÃ¡ry||TrojrozmÄ›rnÃ© skrytÃ© ÄÃ¡ry|1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:TrojrozmÄ›rnÃ© &mnohoÃºhelnÃ­ky|TrojrozmÄ›rnÃ© mnohoÃºhelnÃ­ky||TrojrozmÄ›rnÃ© mnohoÃºhelnÃ­ky|1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:TrojrozmÄ›rnÃ½ &povrch drÃ¡tÄ›nÃ© mÅ™Ã­Å¾ky|TrojrozmÄ›rnÃ½ povrch drÃ¡tÄ›nÃ© mÅ™Ã­Å¾ky||TrojrozmÄ›rnÃ½ povrch drÃ¡tÄ›nÃ© mÅ™Ã­Å¾ky|1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:||||1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:&Pruhy|Pruhy||Nakreslit trojrozmÄ›rnÃ© pruhy|1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:&Body|Body||Nakreslit trojrozmÄ›rnÃ© body|1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:||||1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:ObrysovÃ© ÄÃ¡ry + &BarevnÃ¡ vÃ½plÅˆ|ObrysovÃ© ÄÃ¡ry + BarevnÃ¡ vÃ½plÅˆ||ObrysovÃ© ÄÃ¡ry + BarevnÃ¡ vÃ½plÅˆ|1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:ObrysovÃ© &ÄÃ¡ry|ObrysovÃ© ÄÃ¡ry||ObrysovÃ© ÄÃ¡ry|1|
+TrojrozmÄ›rnÃ½ &nÃ¡kres:&ZobrazenÃ­ povrchu v odstÃ­nech Å¡edi|ZobrazenÃ­ povrchu v odstÃ­nech Å¡edi||ZobrazenÃ­ povrchu v odstÃ­nech Å¡edi|1|
+UmÃ­stit ex&ponenciÃ¡lnÃ­ pokles:&PrvnÃ­ Å™Ã¡d...|PrvnÃ­ Å™Ã¡d||PrvnÃ­ Å™Ã¡d|1|
+UmÃ­stit ex&ponenciÃ¡lnÃ­ pokles:&DruhÃ½ Å™Ã¡d...|DruhÃ½ Å™Ã¡d||DruhÃ½ Å™Ã¡d|1|
+UmÃ­stit ex&ponenciÃ¡lnÃ­ pokles:&TÅ™etÃ­ Å™Ã¡d...|TÅ™etÃ­ Å™Ã¡d||TÅ™etÃ­ Å™Ã¡d|1|
+UmÃ­stÄ›nÃ­ s &mnohaÄetnÃ½mi vrcholy:&GaussÅ¯v...|GaussÅ¯v||GaussÅ¯v|1|
+UmÃ­stÄ›nÃ­ s &mnohaÄetnÃ½mi vrcholy:&LorentzÅ¯v...|LorentzÅ¯v||LorentzÅ¯v|1|
+ZvlÃ¡Å¡tnÃ­ ÄÃ¡ra/Symb&ol:SvislÃ© &ÄÃ¡ry|SvislÃ© ÄÃ¡ry||SvislÃ© ÄÃ¡ry|1|
+ZvlÃ¡Å¡tnÃ­ ÄÃ¡ra/Symb&ol:&KÅ™ivka (spline)|KÅ™ivka (spline)||KÅ™ivka (spline)|1|
+ZvlÃ¡Å¡tnÃ­ ÄÃ¡ra/Symb&ol:&SvislÃ© schody|SvislÃ© schody||SvislÃ© schody|1|
+ZvlÃ¡Å¡tnÃ­ ÄÃ¡ra/Symb&ol:&VodorovnÃ© schody|VodorovnÃ© schody||VodorovnÃ© schody|1|

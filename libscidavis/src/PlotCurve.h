@@ -37,7 +37,7 @@ class PlotCurve: public QwtPlotCurve
 {
 
 public:
-  PlotCurve(const QString &name = QString::null): QwtPlotCurve(name), d_type(0){};
+  PlotCurve(const QString &name = {}): QwtPlotCurve(name), d_type(0){};
 
   int type() const {return d_type;};
   void setType(int t){d_type = t;};

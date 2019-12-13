@@ -61,7 +61,7 @@ FindDialog::FindDialog( QWidget* parent, Qt::WindowFlags fl )
 	boxFind->setEditable(true);
 	boxFind->setDuplicatesEnabled(false);
 	boxFind->setInsertPolicy( QComboBox::InsertAtTop );
-	boxFind->setAutoCompletion(true);
+	//boxFind->setAutoCompletion(true); QComboBox by default has a completer
 	boxFind->setMaxCount ( 10 );
 	boxFind->setMaxVisibleItems ( 10 );
 	boxFind->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));

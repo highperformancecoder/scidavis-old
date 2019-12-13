@@ -70,7 +70,7 @@ public:
   //! Sets the data set to be used as source of Y errors.
   bool setYErrorSource(ErrorSource err, const QString& colName, bool fail_silently);
   bool setYErrorSource(ErrorSource e, const QString& c) {return setYErrorSource(e,c,false);}
-  bool setYErrorSource(ErrorSource err) {return setYErrorSource(err,QString::null);}
+  bool setYErrorSource(ErrorSource err) {return setYErrorSource(err,"");}
 
   void setDataCurve(int curve, double start, double end);
 

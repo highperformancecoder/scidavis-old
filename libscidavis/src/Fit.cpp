@@ -67,10 +67,10 @@ scripted(ScriptingLangManager::newEnv("muParser", parent))
 	d_points = 100;
 	d_max_iterations = 1000;
 	d_curve = 0;
-	d_formula = QString::null;
-	d_explanation = QString::null;
+	d_formula.clear();
+	d_explanation = "";
 	d_y_error_source = UnknownErrors;
-	d_y_error_dataset = QString::null;
+	d_y_error_dataset = "";
         if (parent)
           d_prec = parent->fit_output_precision;
 	d_init_err = false;
@@ -215,7 +215,7 @@ void Fit::setDataCurve(int curve, double start, double end)
     Filter::setDataCurve(curve, start, end);
 
     d_y_errors.resize(d_n);
-    if (!setYErrorSource(AssociatedErrors, QString::null, true))
+    if (!setYErrorSource(AssociatedErrors, "", true))
       setYErrorSource(UnknownErrors);
 }
 
@@ -356,7 +356,7 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
     {
     case UnknownErrors:
       {
-        d_y_error_dataset = QString::null;
+        d_y_error_dataset.clear();
         // using 1.0 here is important for correct error estimates,
         // cmp. Fit::fitGslMultifit and Fit::fitGslMultimin
         for (unsigned i=0; i<d_n; i++)

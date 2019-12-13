@@ -8,12 +8,12 @@
 &Aide:Rapporter un &Bug|Rapporter un Bug||Rapporter un Bug|1|
 &Aide:||||1|
 &Aide:&A propos de SciDAVis|A propos de SciDAVis||A propos de SciDAVis|1|
-&Ajustement rapide:Ajustement &linéaire|Ajustement linéaire||Ajustement linéaire|1|
+&Ajustement rapide:Ajustement &linÃ©aire|Ajustement linÃ©aire||Ajustement linÃ©aire|1|
 &Ajustement rapide:Ajustement &Polynomial...|Ajustement Polynomial||Ajustement Polynomial|1|
 &Ajustement rapide:||||1|
-&Ajustement rapide:Ajustement décroissance e&xponentielle|Ajustement décroissance exponentielle||Ajustement décroissance exponentielle|1|
+&Ajustement rapide:Ajustement dÃ©croissance e&xponentielle|Ajustement dÃ©croissance exponentielle||Ajustement dÃ©croissance exponentielle|1|
 &Ajustement rapide:Ajustement &croissance exponentielle...|Ajustement croissance exponentielle||Ajustement croissance exponentielle|1|
-&Ajustement rapide:Ajustement de &Boltzmann (Sigmoïdal)|Ajustement de Boltzmann (Sigmoïdal)||Ajustement de Boltzmann (Sigmoïdal)|1|
+&Ajustement rapide:Ajustement de &Boltzmann (SigmoÃ¯dal)|Ajustement de Boltzmann (SigmoÃ¯dal)||Ajustement de Boltzmann (SigmoÃ¯dal)|1|
 &Ajustement rapide:Ajustement &Gaussien|Ajustement Gaussien||Ajustement Gaussien|1|
 &Ajustement rapide:Ajustement &Lorentzien|Ajustement Lorentzien||Ajustement Lorentzien|1|
 &Ajustement rapide:S'adapter &Multi-Pic|S'adapter Multi-Pic||S'adapter Multi-Pic|1|
@@ -21,20 +21,20 @@
 &Edition:Ann&uler|Annuler||Annuler les modifications|1|
 &Edition:&Refaire|Refaire||Refaire|1|
 &Edition:||||1|
-&Edition:Couper Sélection (&t)|Couper Sélection (t)||Couper|1|
-&Edition:&Copier Sélection|Copier Sélection||Copier|1|
-&Edition:Coller Sélection (&P)|Coller Sélection (P)||Coller|1|
-&Edition:Effacer la sélection|Effacer la sélection||Effacer|1|
+&Edition:Couper SÃ©lection (&t)|Couper SÃ©lection (t)||Couper|1|
+&Edition:&Copier SÃ©lection|Copier SÃ©lection||Copier|1|
+&Edition:Coller SÃ©lection (&P)|Coller SÃ©lection (P)||Coller|1|
+&Edition:Effacer la sÃ©lection|Effacer la sÃ©lection||Effacer|1|
 &Edition:||||1|
 &Edition:Supprimer les Tableaux de &Fits|Supprimer les Tableaux de Fits||Supprimer les Tableaux de Fits|1|
 &Edition:Effacer le journal (&L)|Effacer le journal (L)||Effacer le journal (L)|1|
 &Edition:||||1|
-&Edition:&Préférences...|Préférences||Préférences|1|
+&Edition:&PrÃ©fÃ©rences...|PrÃ©fÃ©rences||PrÃ©fÃ©rences|1|
 &Exporter le Graphique:A&ctuel...|Actuel||Exporter le graphe actif|1|
 &Exporter le Graphique:&Tous les graphes...|Tous les graphes||Exporter tous les graphes|1|
 &Fichier:&Nouveau|Nouveau||Nouveau|1|
 &Fichier:&Ouvrir...|Ouvrir||Ouvrir un projet|1|
-&Fichier:Projets &Récents|Projets Récents||Projets Récents|1|
+&Fichier:Projets &RÃ©cents|Projets RÃ©cents||Projets RÃ©cents|1|
 &Fichier:||||1|
 &Fichier:Ouvrir un &Fichier Image...|Ouvrir un Fichier Image||Ouvrir un Fichier Image|1|
 &Fichier:Importer I&mage|Importer Image||Importer Image|1|
@@ -42,21 +42,21 @@
 &Fichier:Enregi&strer le projet|Enregistrer le projet||Sauver Projet|1|
 &Fichier:E&nregistrer le projet sous...|Enregistrer le projet sous||Enregistrer le projet sous|1|
 &Fichier:||||1|
-&Fichier:Ouvrir un &modèle...|Ouvrir un modèle||Ouvrir Template|1|
-&Fichier:Sauver comme &Template|Sauver comme Template||Sauver fenêtre comme Template|1|
+&Fichier:Ouvrir un &modÃ¨le...|Ouvrir un modÃ¨le||Ouvrir Template|1|
+&Fichier:Sauver comme &Template|Sauver comme Template||Sauver fenÃªtre comme Template|1|
 &Fichier:||||1|
 &Fichier:&Exporter le Graphique|Exporter le Graphique||Exporter le Graphique|1|
-&Fichier:Im&primer...|Imprimer||Imprimer la fenêtre|1|
+&Fichier:Im&primer...|Imprimer||Imprimer la fenÃªtre|1|
 &Fichier:Imprimer &tous les graphes...|Imprimer tous les graphes||Imprimer tous les graphes|1|
 &Fichier:||||1|
 &Fichier:E&xporter en ASCII...|Exporter en ASCII||Exporter en ASCII|1|
-&Fichier:&Importer ASCII...|Importer ASCII||Importer les données|1|
+&Fichier:&Importer ASCII...|Importer ASCII||Importer les donnÃ©es|1|
 &Fichier:||||1|
 &Fichier:&Quitter|Quitter||Quitter|1|
 &Graphe:&Trait|Trait||Grapher commes Lignes|1|
 &Graphe:&Nuage|Nuage||Grapher commes symboles|1|
 &Graphe:Trait + S&ymbole|Trait + Symbole||Grapher commes lignes et symboles|1|
-&Graphe:Trait/Symb&ole spécial|Trait/Symbole spécial||Trait/Symbole spécial|1|
+&Graphe:Trait/Symb&ole spÃ©cial|Trait/Symbole spÃ©cial||Trait/Symbole spÃ©cial|1|
 &Graphe:||||1|
 &Graphe:Barres &Verticales|Barres Verticales||Barres verticales|1|
 &Graphe:Barres &Horizontales|Barres Horizontales||Barres horizontales|1|
@@ -69,22 +69,22 @@
 &Graphe:Pa&nneau|Panneau||Panneau|1|
 &Graphe:||||1|
 &Graphe:Graphique 3&D|Graphique 3D||Graphique 3D|1|
-&Graphes statistiques:Graphe de boîtes|Graphe de boîtes||Graphe Whiskers|1|
+&Graphes statistiques:Graphe de boÃ®tes|Graphe de boÃ®tes||Graphe Whiskers|1|
 &Graphes statistiques:&Histogramme|Histogramme||Histogramme|1|
-&Graphes statistiques:Hi&stogramme empilé|Histogramme empilé||Histogramme empilé|1|
+&Graphes statistiques:Hi&stogramme empilÃ©|Histogramme empilÃ©||Histogramme empilÃ©|1|
 &Nouveau:Nouveau &Projet|Nouveau Projet||Nouveau projet|1|
 &Nouveau:Nouvelle &Table|Nouvelle Table||Nouveau Tableau|1|
 &Nouveau:Nouvelle &Matrice|Nouvelle Matrice||Nouvelle matrice|1|
-&Nouveau:Commentaires|Commentaires||Créer un commentaire / fenêtre script vide|1|
-&Nouveau:Graphe|Graphe||Créer un graphe 2D vide|1|
-&Nouveau:Nouvelle &Fonction de Graphe|Nouvelle Fonction de Graphe||Créer un nouveau graphe de fonction 2D|1|
-&Nouveau:Nouvelle graphique &Surface 3D|Nouvelle graphique Surface 3D||Créer un nouveau graphe 3D|1|
+&Nouveau:Commentaires|Commentaires||CrÃ©er un commentaire / fenÃªtre script vide|1|
+&Nouveau:Graphe|Graphe||CrÃ©er un graphe 2D vide|1|
+&Nouveau:Nouvelle &Fonction de Graphe|Nouvelle Fonction de Graphe||CrÃ©er un nouveau graphe de fonction 2D|1|
+&Nouveau:Nouvelle graphique &Surface 3D|Nouvelle graphique Surface 3D||CrÃ©er un nouveau graphe 3D|1|
 &Translation:&Verticale|Verticale||Verticale|1|
 &Translation:&Horizontale|Horizontale||Horizontale|1|
 A&nalyse:&Translation|Translation||Translation|1|
 A&nalyse:||||1|
-A&nalyse:&Différencier|Différencier||Différencier|1|
-A&nalyse:&Intégrer...|Intégrer||Intégrer|1|
+A&nalyse:&DiffÃ©rencier|DiffÃ©rencier||DiffÃ©rencier|1|
+A&nalyse:&IntÃ©grer...|IntÃ©grer||IntÃ©grer|1|
 A&nalyse:||||1|
 A&nalyse:Li&sser|Lisser||Lisser|1|
 A&nalyse:Filtre &FFT|Filtre FFT||Filtre FFT|1|
@@ -99,30 +99,30 @@ Affi&chage:&Lock Toolbars|Lock Toolbars||Lock Toolbars|1|
 Affi&chage:||||1|
 Affi&chage:Assistant de graphique (&W)|Assistant de graphique (W)||Assistant de graphique (W)|1|
 Affi&chage:&Explorateur de projet|Explorateur de projet||Afficher l'explorateur de projets|1|
-Affi&chage:&Historique des résultats|Historique des résultats||Montrer les résultats d'analyse|1|
+Affi&chage:&Historique des rÃ©sultats|Historique des rÃ©sultats||Montrer les rÃ©sultats d'analyse|1|
 Affi&chage:Undo/Redo &History|Undo/Redo History||Undo/Redo History|1|
-Affi&chage:&Console|Console||Afficher la console d'édition de scripts|1|
-Ajustement décroissance e&xponentielle:&Premier ordre...|Premier ordre||Premier ordre|1|
-Ajustement décroissance e&xponentielle:&Second ordre...|Second ordre||Second ordre|1|
-Ajustement décroissance e&xponentielle:&Troisième ordre...|Troisième ordre||Troisième ordre|1|
+Affi&chage:&Console|Console||Afficher la console d'Ã©dition de scripts|1|
+Ajustement dÃ©croissance e&xponentielle:&Premier ordre...|Premier ordre||Premier ordre|1|
+Ajustement dÃ©croissance e&xponentielle:&Second ordre...|Second ordre||Second ordre|1|
+Ajustement dÃ©croissance e&xponentielle:&TroisiÃ¨me ordre...|TroisiÃ¨me ordre||TroisiÃ¨me ordre|1|
 Barres d'outils:Fichier|Fichier||Fichier|1|
 Barres d'outils:Edition|Edition||Edition|1|
 Barres d'outils:Graphe|Graphe||Graphe|1|
 Barres d'outils:Graphique|Graphique||Graphique|1|
 Barres d'outils:Tableau|Tableau||Tableau|1|
-Barres d'outils:Tracé de matrice|Tracé de matrice||Tracé de matrice|1|
+Barres d'outils:TracÃ© de matrice|TracÃ© de matrice||TracÃ© de matrice|1|
 Barres d'outils:Surface 3D|Surface 3D||Surface 3D|1|
 Filtre &FFT:Passe ba&s...|Passe bas||Passe bas|1|
 Filtre &FFT:Passe &haut...|Passe haut||Passe haut|1|
 Filtre &FFT:Passe &bande...|Passe bande||Passe bande|1|
-Filtre &FFT:Réjecteur...|Réjecteur||Réjecteur|1|
+Filtre &FFT:RÃ©jecteur...|RÃ©jecteur||RÃ©jecteur|1|
 Graphique 3&D:&Rubans|Rubans||Grapher un rubans 3D|1|
 Graphique 3&D:&Barres|Barres||Grapher avec barres 3D|1|
 Graphique 3&D:&Nuage|Nuage||Nuage 3D|1|
-Graphique 3&D:&Trajectoire|Trajectoire||Graphe à trajectoire 3D|1|
+Graphique 3&D:&Trajectoire|Trajectoire||Graphe Ã  trajectoire 3D|1|
 Graphique 3D (&P):&Fil de fer 3D|Fil de fer 3D||Fil de fer 3D|1|
-Graphique 3D (&P):Lignes &cachées 3D|Lignes cachées 3D||Lignes cachées 3D|1|
-Graphique 3D (&P):&Polygônes 3D|Polygônes 3D||Polygônes 3D|1|
+Graphique 3D (&P):Lignes &cachÃ©es 3D|Lignes cachÃ©es 3D||Lignes cachÃ©es 3D|1|
+Graphique 3D (&P):&PolygÃ´nes 3D|PolygÃ´nes 3D||PolygÃ´nes 3D|1|
 Graphique 3D (&P):&Surface 3D|Surface 3D||Surface 3D|1|
 Graphique 3D (&P):||||1|
 Graphique 3D (&P):&Barres|Barres||Grapher avec barres 3D|1|
@@ -130,28 +130,28 @@ Graphique 3D (&P):&Nuage|Nuage||Nuage 3D|1|
 Graphique 3D (&P):||||1|
 Graphique 3D (&P):Contour + &couleur de remplissage|Contour + couleur de remplissage||Traits du contour + Couleur de remplissage|1|
 Graphique 3D (&P):&Trait du contour|Trait du contour||Traits du contour|1|
-Graphique 3D (&P):Carte d'échelle de &gris|Carte d'échelle de gris||Carte d'échelle de gris|1|
+Graphique 3D (&P):Carte d'Ã©chelle de &gris|Carte d'Ã©chelle de gris||Carte d'Ã©chelle de gris|1|
 Li&sser:&Savitzky-Golay...|Savitzky-Golay||Savitzky-Golay|1|
 Li&sser:&Moyenne glissante...|Moyenne glissante||Moyenne glissante|1|
 Li&sser:&Filtre Passe bas...|Filtre Passe bas||Filtre Passe bas|1|
 Ou&tils:Poin&teur|Pointeur||Pointeur|1|
 Ou&tils:&Zoom +|Zoom +||Zoom +|1|
 Ou&tils:Zo&om -|Zoom -||Zoom -|1|
-Ou&tils:Mettre à l'échelle pour montrer tous (&R)|Mettre à l'échelle pour montrer tous (R)||Meilleur ajustement|1|
+Ou&tils:Mettre Ã  l'Ã©chelle pour montrer tous (&R)|Mettre Ã  l'Ã©chelle pour montrer tous (R)||Meilleur ajustement|1|
 Ou&tils:||||1|
-Ou&tils:Le&cteur d'écran|Lecteur d'écran||Curseur libre|1|
-Ou&tils:Lecteur de &Données|Lecteur de Données||Curseur sur courbe|1|
-Ou&tils:&Sélectionner les données|Sélectionner les données||Sélectionner la plage de données|1|
+Ou&tils:Le&cteur d'Ã©cran|Lecteur d'Ã©cran||Curseur libre|1|
+Ou&tils:Lecteur de &DonnÃ©es|Lecteur de DonnÃ©es||Curseur sur courbe|1|
+Ou&tils:&SÃ©lectionner les donnÃ©es|SÃ©lectionner les donnÃ©es||SÃ©lectionner la plage de donnÃ©es|1|
 Ou&tils:||||1|
-Ou&tils:Déplacer une valeur...|Déplacer une valeur||Déplacer une valeur|1|
+Ou&tils:DÃ©placer une valeur...|DÃ©placer une valeur||DÃ©placer une valeur|1|
 Ou&tils:Supprimer une valeur...|Supprimer une valeur||Supprimer une valeur|1|
 Pa&nneau:&Colonne de 2 calques|Colonne de 2 calques||Colonne de 2 calques|1|
-Pa&nneau:&Rangée de 2 calques|Rangée de 2 calques||Rangée de 2 calques|1|
+Pa&nneau:&RangÃ©e de 2 calques|RangÃ©e de 2 calques||RangÃ©e de 2 calques|1|
 Pa&nneau:Tableau de &4 calques|Tableau de 4 calques||Tableau de 4 calques|1|
-Pa&nneau:&Calques empilés|Calques empilés||Calques empilés|1|
+Pa&nneau:&Calques empilÃ©s|Calques empilÃ©s||Calques empilÃ©s|1|
 S'adapter &Multi-Pic:&Gaussienne...|Gaussienne||Gaussienne|1|
 S'adapter &Multi-Pic:&Lorentzienne...|Lorentzienne||Lorentzienne|1|
-Trait/Symb&ole spécial:Lignes verticales et baisse (&D)|Lignes verticales et baisse (D)||Lignes verticales et baisse (D)|1|
-Trait/Symb&ole spécial:&Spline|Spline||Spline|1|
-Trait/Symb&ole spécial:Marches &verticales|Marches verticales||Marches verticales|1|
-Trait/Symb&ole spécial:Pas &horizontaux|Pas horizontaux||Pas horizontaux|1|
+Trait/Symb&ole spÃ©cial:Lignes verticales et baisse (&D)|Lignes verticales et baisse (D)||Lignes verticales et baisse (D)|1|
+Trait/Symb&ole spÃ©cial:&Spline|Spline||Spline|1|
+Trait/Symb&ole spÃ©cial:Marches &verticales|Marches verticales||Marches verticales|1|
+Trait/Symb&ole spÃ©cial:Pas &horizontaux|Pas horizontaux||Pas horizontaux|1|

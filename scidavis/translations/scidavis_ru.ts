@@ -6488,7 +6488,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>Column</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="+415"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="+413"/>
         <source>column type missing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6552,7 +6552,7 @@ Various parts of this file may not be displayed as expected.</source>
 <context>
     <name>Column::D</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="+365"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="+363"/>
         <source>as string</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8704,7 +8704,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Пожалуйста, введите правильное название кривой!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="+252"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="+250"/>
         <source>fit of dataset</source>
         <translation type="unfinished">приближение по набору данных</translation>
     </message>
@@ -12030,7 +12030,7 @@ The limits must be within the range of x; If you do not know the maximum (minimu
         <translation type="obsolete">Да</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="+555"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="+553"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>
@@ -13117,7 +13117,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>NonLinearFit</name>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="+65"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="+63"/>
         <source>NonLinear</source>
         <translation type="unfinished">Нелинейное</translation>
     </message>
@@ -16571,7 +16571,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">Нет</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="+1175"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="+1173"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>

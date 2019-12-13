@@ -102,7 +102,7 @@ void Graph3D::initPlot()
 	QDateTime dt = QDateTime::currentDateTime ();
 	setBirthDate(dt.toString(Qt::LocalDate));
 
-    color_map = QString::null;
+    color_map = "";
     animation_redraw_wait = 50;
     d_timer = new QTimer(this);
     connect(d_timer, SIGNAL(timeout()), this, SLOT(rotate()) );

@@ -22,7 +22,7 @@ namespace
   {
     o<<"\"";
     auto data=x.bits();
-    for (int i=0; i<x.byteCount(); i++)
+    for (int i=0; i<x.sizeInBytes(); i++)
       o<<std::hex<<int(data[i]);
     return o<<"\"";
   }

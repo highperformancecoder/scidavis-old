@@ -4714,63 +4714,63 @@ Uwaga: to poprzemieszcza istniejące!</translation>
 <context>
     <name>Column</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="415"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="413"/>
         <source>column type missing</source>
         <translation>brakuje typu kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="421"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="419"/>
         <source>column type invalid</source>
         <translation>nieprawidłowy typ kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="428"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="426"/>
         <source>column mode missing</source>
         <translation>brakujący tryb kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="434"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="432"/>
         <source>column mode invalid</source>
         <translation>nieprawidłowy tryb kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="440"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="438"/>
         <source>column type or mode invalid</source>
         <translation>nieprawidłowy typ lub tryb kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="450"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="448"/>
         <source>column plot designation invalid</source>
         <translation>nieprawidłowe przypisanie kolumny do wykreślania</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="486"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="484"/>
         <source>unknown element &apos;%1&apos;</source>
         <translation>nieznany element &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="495"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="493"/>
         <source>no column element found</source>
         <translation>nie znaleziono żadnej kolumny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="546"/>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="565"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="544"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="563"/>
         <source>invalid or missing start or end row</source>
         <translation>błędny lub brakujący wiersz początkowy lub końcowy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="586"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="584"/>
         <source>invalid or missing row type</source>
         <translation>nieprawidłowy lub brakujący typ wiersza</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="594"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="592"/>
         <source>invalid or missing row index</source>
         <translation>nieprawidłowy lub brakujący indeks wiersza</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="606"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="604"/>
         <source>invalid row value</source>
         <translation>nieprawidłowa wartość wiersza</translation>
     </message>
@@ -4778,7 +4778,7 @@ Uwaga: to poprzemieszcza istniejące!</translation>
 <context>
     <name>Column::D</name>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.h" line="365"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.h" line="363"/>
         <source>as string</source>
         <translation type="unfinished">jako ciąg</translation>
     </message>
@@ -6800,114 +6800,114 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Fit</name>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="251"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="249"/>
         <source>Plot</source>
         <translation>Wykres</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="252"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="250"/>
         <source>fit of dataset</source>
         <translation>dopasowanie danych</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="254"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="252"/>
         <source>using function</source>
         <translation>funkcją</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="258"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="256"/>
         <source>Y standard errors</source>
         <translation>Błąd standardowy Y</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="262"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="260"/>
         <source>Unknown</source>
         <translation>Nieznane</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="265"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="263"/>
         <source>Associated dataset (%1)</source>
         <translation>Powiązane dane (%1)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="268"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="266"/>
         <source>Statistical (assuming Poisson distribution)</source>
         <translation>Statystyczny (zakładając rozkład Poissona)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="271"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="269"/>
         <source>Arbitrary Dataset</source>
         <translation>Dowolne Dane</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="279"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="277"/>
         <source>Nelder-Mead Simplex</source>
         <translation>Simplex Neldera-Meada</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="281"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="279"/>
         <source>Unscaled Levenberg-Marquardt</source>
         <translation>Nieskalowany Levenberg-Marquardt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="283"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="281"/>
         <source>Scaled Levenberg-Marquardt</source>
         <translation>Skalowany Levenberg-Marquardt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="285"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="283"/>
         <source> algorithm with tolerance = </source>
         <translation> tolerancja algorytmu = </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="288"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="286"/>
         <source>From x</source>
         <translation>Od x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="288"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="286"/>
         <source>to x</source>
         <translation>do x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="301"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="341"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="299"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="339"/>
         <source>R^2</source>
         <translation>R^2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="305"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="303"/>
         <source>Iterations</source>
         <translation>Iteracje</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="306"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="304"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="336"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="334"/>
         <source>Dataset</source>
         <translation>Dane</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="337"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="335"/>
         <source>Function</source>
         <translation>Funkcja</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="423"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="445"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="421"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="443"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="424"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="422"/>
         <source>The column %1 has fewer points than the fitted data set. Please choose another column!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="390"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="388"/>
         <source>The curve %1 has no associated Y error bars.</source>
         <translation>Krzywej %1 nie przypisano słupków błędów Y.</translation>
     </message>
@@ -6920,50 +6920,50 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Kolumna %1 ma mniej punktów niż dopasowane dane. Proszę wybrać inną!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="445"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="443"/>
         <source>Parameter</source>
         <translation>Współczynnik</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="445"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="443"/>
         <source>Value</source>
         <translation>Wartość</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="502"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="508"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="514"/>
-        <location filename="../../libscidavis/src/Fit.cpp" line="520"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="500"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="506"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="512"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="518"/>
         <source>Fit Error</source>
         <translation>Błąd dopasowania</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="503"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="501"/>
         <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
         <translation>Dla tej czynności nie podano prawidłowych danych. Czynność przerwano!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="509"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="507"/>
         <source>There are no parameters specified for this fit operation. Operation aborted!</source>
         <translation>Dla tego dopasowania nie podano żadnych współczynników. Czynność przerwano!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="515"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="513"/>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
         <translation>Do tej czynności potrzeba przynajmniej %1 punktów. Czynność przerwano!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="521"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="519"/>
         <source>You must specify a valid fit function first. Operation aborted!</source>
         <translation>Najpierw musisz podać prawidłową funkcję. Czynność przerwano!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="551"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="549"/>
         <source>Input function error</source>
         <translation>Błąd wprowadzonej funkcji</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Fit.cpp" line="640"/>
+        <location filename="../../libscidavis/src/Fit.cpp" line="638"/>
         <source>Fit</source>
         <translation>Dopasowanie</translation>
     </message>
@@ -9233,53 +9233,53 @@ Granice całkowania muszą się mieścić w zakresie wartości odciętych. Jeśl
 <context>
     <name>Matrix</name>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="326"/>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="357"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="324"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="355"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="327"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="325"/>
         <source>Calculation failed, the matrix is not square!</source>
         <translation>Nieudane obliczenie, macierz nie jest kwadratowa!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="358"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="356"/>
         <source>Inversion failed, the matrix is not square!</source>
         <translation>Odwrócenie nie powiodło się, macierz nie jest kwadratowa!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="553"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="551"/>
         <source>SciDAVis</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="554"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="552"/>
         <source>Do you want to hide or delete</source>
         <translation>Chcesz ukryć czy skasować</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="555"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="553"/>
         <source>Delete</source>
         <translation>&amp;Usuń</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="555"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="553"/>
         <source>Hide</source>
         <translation>Ukryj</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="555"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="553"/>
         <source>Cancel</source>
         <translation>Anuluj</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="744"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="742"/>
         <source>Matrix %1</source>
         <translation>Macierz %1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Matrix.cpp" line="750"/>
+        <location filename="../../libscidavis/src/Matrix.cpp" line="748"/>
         <source>%1: apply formula to selection</source>
         <translation>%1: zastosuj równanie do zaznaczenia</translation>
     </message>
@@ -10153,22 +10153,22 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>NonLinearFit</name>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="65"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="63"/>
         <source>NonLinear</source>
         <translation>NieLiniowe</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="71"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="69"/>
         <source>Non-linear</source>
         <translation>Nieliniowe</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="84"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="82"/>
         <source>Fit Error</source>
         <translation>Błąd dopasowania</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="85"/>
+        <location filename="../../libscidavis/src/NonLinearFit.cpp" line="83"/>
         <source>You must provide a list containing at least one parameter for this type of fit. Operation aborted!</source>
         <translation>Do tego typu doposowania potrzeba listy z przynajmniej jednym parametrem. Czynność przerwano!</translation>
     </message>
@@ -12063,7 +12063,7 @@ p, li { white-space: pre-wrap; }
         <translation>%1: przenieś %2 do %3.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="98"/>
+        <location filename="../../libscidavis/src/future/core/column/Column.cpp" line="96"/>
         <location filename="../../libscidavis/src/future/core/column/columncommands.cpp" line="40"/>
         <location filename="../../libscidavis/src/future/table/TableView.cpp" line="676"/>
         <location filename="../../libscidavis/src/future/table/TableView.cpp" line="698"/>
@@ -13068,47 +13068,47 @@ Released</source>
 <context>
     <name>Table</name>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1065"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1063"/>
         <source>ASCII Export Error</source>
         <translation>Błąd Eksportu do ASCII</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1066"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1064"/>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;</source>
         <translation>Nie można zapisać do pliku: &lt;br&gt;&lt;h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1066"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1064"/>
         <source>&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
         <translation>&lt;/h4&gt;&lt;p&gt;Sprawdź, czy masz prawa zapisu w tym położeniu!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1173"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1171"/>
         <source>SciDAVis</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1174"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1172"/>
         <source>Do you want to hide or delete</source>
         <translation>Chcesz ukryć czy skasować</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1175"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1173"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1175"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1173"/>
         <source>Hide</source>
         <translation>Ukryj</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1175"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1173"/>
         <source>Cancel</source>
         <translation>Anuluj</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/Table.cpp" line="1471"/>
+        <location filename="../../libscidavis/src/Table.cpp" line="1469"/>
         <source>%1: apply formula to column</source>
         <translation>%1: zastosuj równanie do kolumny</translation>
     </message>

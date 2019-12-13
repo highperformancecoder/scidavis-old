@@ -318,7 +318,7 @@ void SmoothFilter::smoothSavGol(double *, double *y_inout) {
 	gsl_matrix_free(h);
 
 	// write result into *y_inout
-	qCopy(result.begin(), result.end(), y_inout);
+        std::copy(result.begin(), result.end(), y_inout);
 }
 
 /**
@@ -395,7 +395,7 @@ void SmoothFilter::smoothModifiedSavGol(double *x_in, double *y_inout)
 	gsl_matrix_free(vandermonde);
 
 	// write result into *y_inout
-	qCopy(result.begin(), result.end(), y_inout);
+        std::copy(result.begin(), result.end(), y_inout);
 }
 
 void SmoothFilter::setSmoothPoints(int points, int left_points)

@@ -251,15 +251,15 @@ QString day;
 switch(d_format)
 	{
 	case  ShortName:
-		day = QDate::shortDayName (val);
+          day = QLocale().dayName(val,QLocale::ShortFormat);
 	break;
 
 	case  LongName:
-		day = QDate::longDayName (val);
+          day = QLocale().dayName(val,QLocale::LongFormat);
 	break;
 
 	case  Initial:
-		day = (QDate::shortDayName (val)).left(1);
+          day = QLocale().dayName(val,QLocale::ShortFormat).left(1);
 	break;
 	}
 return QwtText(day);
@@ -288,15 +288,15 @@ QString day;
 switch(d_format)
 	{
 	case  ShortName:
-		day = QDate::shortMonthName (val);
+          day = QLocale().monthName(val,QLocale::ShortFormat);
 	break;
 
 	case  LongName:
-		day = QDate::longMonthName (val);
+          day = QLocale().monthName(val,QLocale::LongFormat);
 	break;
 
 	case  Initial:
-		day = (QDate::shortMonthName (val)).left(1);
+          day = QLocale().monthName(val,QLocale::ShortFormat).left(1);
 	break;
 	}
 return QwtText(day);
