@@ -26,6 +26,8 @@
 ############################################################################
 
 
+import os
+import warnings
 import sys, sipconfig
 config = sipconfig.Configuration()
 
@@ -44,6 +46,15 @@ except ImportError:
 
 sipBin = config.sip_bin
 sipDir = config.default_sip_dir+'/'+pyqt
+if sys.version_info[0] >= 3 and sys.version_info[1] >= 7 and pyqt == 'PyQt5':
+    from importlib.metadata import distribution
+    dist = distribution(pyqt)
+    sip = [p for p in dist.files if p.name == 'QtCoremod.sip']
+    assert len(sip) == 1
+    sipDir = str(dist.locate_file(sip[0]).parent.parent)
+else:
+    if not os.path.exists(sipDir):
+        warnings.warn('sipDir does not exists, %s' % sipDir)
 
 sipFlags =  PYQT_CONFIGURATION['sip_flags']
 
