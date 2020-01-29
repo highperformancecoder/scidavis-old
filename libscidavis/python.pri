@@ -26,8 +26,12 @@
     osx_dist {
       DEFINES += PYTHONHOME=/Applications/scidavis.app/Contents/Resources
     } 
+    SIP_FAILURE = TRUE
     system(mkdir -p $${SIP_DIR})
-    system($$system($$PYTHONBIN python-sipcmd.py PyQt$$QT_MAJOR_VERSION) $$system($$PYTHONBIN-config --includes) -c $${SIP_DIR}  src/scidavis.sip)
+    system($$system($$PYTHONBIN python-sipcmd.py PyQt$$QT_MAJOR_VERSION) $$system($$PYTHONBIN-config --includes) -c $${SIP_DIR}  src/scidavis.sip): SIP_FAILURE = FALSE
+    equals(SIP_FAILURE, "TRUE") {
+        error(`$$PYTHONBIN python-sipcmd.py PyQt$$QT_MAJOR_VERSION` `$$PYTHONBIN-config --includes` -c $${SIP_DIR}  src/scidavis.sip FAILED in $$PWD)
+    }
   }
 
   win32 {
