@@ -19,7 +19,25 @@ python {
         LIBS+=$$system($$PYTHONBIN findBoostPythonLib.py)
         LIBS+=$$system($$PYTHONBIN-config --ldflags)
       }
-  message($$LIBS)  
+  message($$LIBS)
+           
+  compiledScidavisrc.target = scidavisrc.pyc
+  compiledScidavisrc.depends = scidavisrc.py
+  compiledScidavisrc.commands = $$PYTHONBIN -m py_compile scidavisrc.py
+  compiledScidavisUtil.target = scidavisUtil.pyc
+  compiledScidavisUtil.depends = scidavisUtil.py
+  compiledScidavisUtil.commands = $$PYTHONBIN -m py_compile scidavisUtil.py
+  QMAKE_EXTRA_TARGETS += compiledScidavisrc compiledScidavisUtil
+  PRE_TARGETDEPS += scidavisrc.pyc scidavisUtil.pyc
+  
+  INSTALLS += pythonconfig
+  pythonconfig.path = /etc
+  pythonconfig.files += scidavisrc.py  scidavisrc.pyc
+#  DEFINES       += PYTHON_CONFIG_PATH="\\\"$$replace(pythonconfig.path," ","\\ ")\\\""
+#
+#  INSTALLS += pythonutils
+#  pythonutils.files += scidavisUtil.py*
+  
 }
 
 QMAKE_CLEAN += $$TARGET
