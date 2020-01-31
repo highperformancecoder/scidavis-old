@@ -12399,12 +12399,12 @@ p, li { white-space: pre-wrap; }
         <translation>%1: przemieść kolumnę %2 z położenia %3 do %4.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="164"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="159"/>
         <source>About SciDAVis</source>
         <translation>O Programie SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="173"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="168"/>
         <source>
 Released</source>
         <translation type="unfinished"></translation>

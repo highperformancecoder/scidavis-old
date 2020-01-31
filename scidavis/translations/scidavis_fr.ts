@@ -15529,12 +15529,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="164"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="159"/>
         <source>About SciDAVis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="173"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="168"/>
         <source>
 Released</source>
         <translation type="unfinished"></translation>

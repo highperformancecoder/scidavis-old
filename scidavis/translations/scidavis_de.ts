@@ -17943,12 +17943,12 @@ Absolutbetrag von x.</translation>
         <translation type="unfinished">%1: Spalte %2 von %3 nach %4 verschoben</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="164"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="159"/>
         <source>About SciDAVis</source>
         <translation type="unfinished">Über SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="173"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="168"/>
         <source>
 Released</source>
         <translation type="unfinished"></translation>

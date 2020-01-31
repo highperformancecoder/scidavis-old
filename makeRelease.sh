@@ -10,9 +10,11 @@ if [ "$major" = "$branch" ]; then
   # we have a full release, not beta release
   minor=$delta
   delta=0
+  extra_version=""
 else
   # we have a beta release
   minor=${branch##*.}
+  extra_version="-beta"
 fi
 echo $major $minor $delta
 scidavis_version=$[$major*65536 + $minor*256 + $delta]
@@ -21,6 +23,7 @@ cat >libscidavis/src/version.cpp <<EOF
 #include "globals.h"
 const int SciDAVis::scidavis_versionNo = $scidavis_version;
 const char* SciDAVis::scidavis_version = "$version";
+const char* SciDAVis::extra_version = "$extra_version";
 const char * SciDAVis::release_date = "`date +"%b %d, %Y"`";
 EOF
 
