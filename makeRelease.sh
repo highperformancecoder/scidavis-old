@@ -19,12 +19,9 @@ scidavis_version=$[$major*65536 + $minor*256 + $delta]
 rm -f libscidavis/src/version.cpp
 cat >libscidavis/src/version.cpp <<EOF
 #include "globals.h"
-namespace SciDAVis
-{
-  const int scidavis_versionNo = $scidavis_version;
-  const char* scidavis_version = "$version";
-  const char * release_date = "`date +"%b %d, %Y"`";
-}
+const int SciDAVis::scidavis_versionNo = $scidavis_version;
+const char* SciDAVis::scidavis_version = "$version";
+const char * SciDAVis::release_date = "`date +"%b %d, %Y"`";
 EOF
 
 # also check that all translation files have been included
