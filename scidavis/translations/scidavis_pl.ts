@@ -171,8 +171,8 @@
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="254"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12945"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13308"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12949"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13312"/>
         <source>Folder</source>
         <translation>Folder</translation>
     </message>
@@ -186,12 +186,12 @@
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="291"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="725"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12905"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12945"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13271"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13276"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13281"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13286"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13291"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12949"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13275"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13280"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13285"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13290"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13295"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
@@ -204,17 +204,18 @@
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="291"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="727"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12922"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12926"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12950"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13294"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12923"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12925"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12930"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12954"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13298"/>
         <source>Created</source>
         <translation>Utworzony</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="291"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="728"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13266"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13270"/>
         <source>Label</source>
         <translation>Etykieta</translation>
     </message>
@@ -279,8 +280,8 @@
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7251"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11620"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11681"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13240"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13286"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13244"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13290"/>
         <location filename="../../libscidavis/src/ApplicationWindow.h" line="583"/>
         <source>Graph</source>
         <translation>Wykres</translation>
@@ -437,8 +438,8 @@
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2571"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="2794"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7240"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13232"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13276"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13236"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13280"/>
         <source>Table</source>
         <translation>Tabela</translation>
     </message>
@@ -684,26 +685,26 @@
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12018"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12775"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12784"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13901"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13906"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13911"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13916"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13929"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13935"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13938"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13941"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13905"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13910"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13915"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13920"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13933"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13939"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13942"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13945"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1534"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13941"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13945"/>
         <source>Please set a default X column for this table, first!</source>
         <translation>Proszę najpierw wybrać dla tej tabeli domyślną kolumnę X!</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1544"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13929"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13933"/>
         <source>Please select a column to plot!</source>
         <translation>Proszę wybrać kolumnę do wykreślenia!</translation>
     </message>
@@ -752,7 +753,7 @@
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11865"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11897"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11910"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13626"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13630"/>
         <source>Warning</source>
         <translation>Ostrzeżenie</translation>
     </message>
@@ -783,8 +784,8 @@
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1789"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="1831"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="9130"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13228"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13271"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13232"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13275"/>
         <location filename="../../libscidavis/src/ApplicationWindow.h" line="409"/>
         <location filename="../../libscidavis/src/ApplicationWindow.h" line="414"/>
         <source>Matrix</source>
@@ -1054,7 +1055,7 @@
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="6255"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7734"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="11974"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13417"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13421"/>
         <source>SciDAVis</source>
         <translation></translation>
     </message>
@@ -1176,7 +1177,7 @@ Różne części tego pliku mogą nie być wyświetlane zgodnie z oczekiwaniami.
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="4940"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="5538"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13628"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13632"/>
         <source>&amp;Yes</source>
         <translation>&amp;Tak</translation>
     </message>
@@ -1528,7 +1529,7 @@ Na pewno kontynuować?</translation>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7595"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7597"/>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12685"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13816"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13820"/>
         <source>&amp;Properties...</source>
         <translation>&amp;Właściwości...</translation>
     </message>
@@ -1549,13 +1550,13 @@ Na pewno kontynuować?</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7734"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12983"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12987"/>
         <source>Yes</source>
         <translation>Tak</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="7734"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12983"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12987"/>
         <source>No</source>
         <translation>Nie</translation>
     </message>
@@ -3807,8 +3808,8 @@ Uwaga: to poprzemieszcza istniejące!</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12908"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12946"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13293"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12950"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13297"/>
         <source>Path</source>
         <translation>Ścieżka</translation>
     </message>
@@ -3824,201 +3825,201 @@ Uwaga: to poprzemieszcza istniejące!</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12914"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12947"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12951"/>
         <source>Contents</source>
         <translation>Zawartość</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12914"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12947"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12951"/>
         <source>windows</source>
         <translation>okien</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12916"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12948"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12952"/>
         <source>folders</source>
         <translation>folderów</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12923"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12927"/>
         <source>Modified</source>
         <translation>Zmodyfikowany</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12928"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12953"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13260"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12932"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12957"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13264"/>
         <source>Properties</source>
         <translation>Właściwości</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12963"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12967"/>
         <source>New Folder</source>
         <translation>Nowy Folder</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12981"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12985"/>
         <source>Delete folder?</source>
         <translation>Usunąć folder?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12982"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="12986"/>
         <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
         <translation>Czy na pewno usunąć folder &apos;%1&apos; wraz ze wszystkim zawartimi w nim oknami?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13236"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13281"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13240"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13285"/>
         <source>Note</source>
         <translation>Notatka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13244"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13291"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13248"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13295"/>
         <source>3D Graph</source>
         <translation>Wykres 3D</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13295"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13299"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13375"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13379"/>
         <source>No match found</source>
         <translation>Nie znaleziono dopasowań</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13376"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13380"/>
         <source>Sorry, no match found for string: &apos;%1&apos;</source>
         <translation>Przykro mi, nie znaleziono dopasowań dla ciągu: &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13397"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13401"/>
         <source>Cannot move an object to itself!</source>
         <translation>Nie można przenieść obiektu do niego samego!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13403"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13407"/>
         <source>Cannot move a parent folder into a child folder!</source>
         <translation>Nie można przenieć folderu nadrzędnego do podrzędnego!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13417"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13421"/>
         <source>Skipped moving folder</source>
         <translation>Pominięto przenoszenie folderu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13418"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13422"/>
         <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
         <translation>Folder docelowy już zawiera folder o nazwie &apos;%1&apos;. Folder pominięto!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13511"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13515"/>
         <source>SciDAVis will now try to determine whether a new version of SciDAVis is available. Please modify your firewall settings in order to allow SciDAVis to connect to the internet.</source>
         <translation>SciDAVis spróbuje teraz ustalić, czy jest dostępna jego nowsza wersja. Proszę sprawdzić ustawienia zapory ogniowej, tak by SciDAVis mógł połączyć się z internetem.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13512"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13516"/>
         <source>Do you wish to continue?</source>
         <translation>Czy chcesz kontynuować?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13528"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13532"/>
         <source>HTTP get version file</source>
         <translation>Pobranie pliku wersji przez HTTP</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13529"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13533"/>
         <source>Error while fetching version file with HTTP: %1.</source>
         <translation>Błąd pobrania pliku wersji przez HTTP: %1.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13561"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13565"/>
         <source>Updates Available</source>
         <translation>Dostępna jest Aktualizacja</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13562"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13566"/>
         <source>There is a newer version of SciDAVis (%1) available for download. Would you like to download it now?</source>
         <translation>Nowsza wersja programu (%1) jest dostępna do pobrania. Czy chcesz ściągnąć ją teraz?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13569"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13573"/>
         <source>No updates available. You are already running the latest version.</source>
         <translation>Brak aktualizacji. Właśnie używasz najnowszej wersji.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13572"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13576"/>
         <source>Invalid version file</source>
         <translation>Nieprawidłowy plik wersji</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13573"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13577"/>
         <source>The version file (contents: &quot;%1&quot;) could not be decoded into a valid version number.</source>
         <translation>Pliku wersji (zawartość: &quot;%1&quot;) nie można przełożyć na prawidłowy numer wersji.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13627"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13631"/>
         <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
         <translation>To usunie wszystkie dane powiązane z tabelą. Jesteś pewien?</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13628"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13632"/>
         <source>&amp;No</source>
         <translation>&amp;Nie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13829"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13833"/>
         <source>D&amp;epending Graphs</source>
         <translation>&amp;Zależne rysunki</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13843"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13847"/>
         <source>D&amp;epending 3D Graphs</source>
         <translation>&amp;Zależne Rysunki 3D</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13857"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13875"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13881"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13861"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13879"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13885"/>
         <source>D&amp;epends on</source>
         <translation>&amp;Zależy od</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13901"/>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13938"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13905"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13942"/>
         <source>You need at least two columns for this operation!</source>
         <translation>Do tej czynności proszę wybrać dwie kolumny!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13906"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13910"/>
         <source>Please select a Z column for this operation!</source>
         <translation>Do tej czynności proszę wybrać kolumnę Z!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13911"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13915"/>
         <source>You need to define a X column first!</source>
         <translation>Najpierw należy wybrać kolumnę X!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13916"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13920"/>
         <source>You need to define a Y column first!</source>
         <translation>Najpierw należy wybrać kolumnę X!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13935"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="13939"/>
         <source>Please select a Y column to plot!</source>
         <translation>Proszę wybrać kolumnę Y do wykreślenia!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="14032"/>
+        <location filename="../../libscidavis/src/ApplicationWindow.cpp" line="14036"/>
         <source>Undo/Redo History</source>
         <translation>Historia Cofnij/Powtórz</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1534"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1545"/>
         <source>English</source>
         <comment>translate this to the language of the translation file, NOT to the meaning of English!</comment>
         <translation>Polski</translation>
@@ -4142,7 +4143,7 @@ Uwaga: to poprzemieszcza istniejące!</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="123"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="418"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="433"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
@@ -4168,370 +4169,370 @@ Uwaga: to poprzemieszcza istniejące!</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="156"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="432"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="447"/>
         <source>Major Ticks</source>
         <translation>Działki Główne</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="163"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="441"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="456"/>
         <source>Minor Ticks</source>
         <translation>Działki Poboczne</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="179"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="275"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="360"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="280"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="370"/>
         <source>Bottom</source>
         <translation>Dół</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="180"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="280"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="361"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="285"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="371"/>
         <source>Left</source>
         <translation>Lewo</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="181"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="276"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="362"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="281"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="372"/>
         <source>Top</source>
         <translation>Góra</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/AxesDialog.cpp" line="182"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="281"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="363"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="286"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="373"/>
         <source>Right</source>
         <translation>Prawo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="203"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="208"/>
         <source>Scale</source>
         <translation>Skala</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="222"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="227"/>
         <source>Major Grids</source>
         <translation>Siatka Główna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="227"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="232"/>
         <source>Minor Grids</source>
         <translation>Siatka Poboczna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="231"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="236"/>
         <source>Line Color</source>
         <translation>Kolor Linii</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="240"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="245"/>
         <source>Line Type</source>
         <translation>Styl Linii</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="259"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="264"/>
         <source>Thickness</source>
         <translation>Grubość</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="272"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="566"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="277"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="581"/>
         <source>Axes</source>
         <translation>Osie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="284"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="289"/>
         <source>Additional lines</source>
         <translation>Dodatkowe linie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="287"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="292"/>
         <source>X=0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="292"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="297"/>
         <source>Y=0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="302"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="307"/>
         <source>Horizontal</source>
         <translation>Pozioma</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="303"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="308"/>
         <source>Vertical</source>
         <translation>Pionowa</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="322"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="332"/>
         <source>Grid</source>
         <translation>Siatka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="350"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="360"/>
         <source>Numeric</source>
         <translation>Liczbowa</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="351"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="361"/>
         <source>Text from table</source>
         <translation>Tekst z tabeli</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="352"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="362"/>
         <source>Day of the week</source>
         <translation>Dni tygodnia</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="353"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="363"/>
         <source>Month</source>
         <translation>Miesiąc</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="354"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="364"/>
         <source>Time</source>
         <translation>Czas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="355"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="365"/>
         <source>Date</source>
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="356"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="366"/>
         <source>Date &amp; Time</source>
         <translation>Data i Czas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="357"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="367"/>
         <source>Column Headings</source>
         <translation>Nagłówki Kolumn</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="382"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="397"/>
         <source>Show</source>
         <translation>Pokaż</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="386"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="401"/>
         <source>Title</source>
         <translation>Tytuł</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="401"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="416"/>
         <source>&amp;Font</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="422"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="437"/>
         <source>Font</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="425"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="440"/>
         <source>Axis &amp;Font</source>
         <translation>&amp;Font Osi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="428"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="494"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="555"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="443"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="509"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="570"/>
         <source>Color</source>
         <translation>Kolor</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="435"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="444"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="450"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="459"/>
         <source>None</source>
         <translation>Brak</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="436"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="445"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="451"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="460"/>
         <source>Out</source>
         <translation>Zewnętrzne</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="437"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="446"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="452"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="461"/>
         <source>In &amp; Out</source>
         <translation>Wewnętrzne i zewnętrzne </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="438"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="447"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="453"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="462"/>
         <source>In</source>
         <translation>Wewnętrzne</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="450"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="465"/>
         <source>Stand-off</source>
         <translation>Odsunięcie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="455"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="470"/>
         <source>Show Labels</source>
         <translation>Pokaż Etykiety</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="462"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="477"/>
         <source>Column</source>
         <translation>Kolumna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="468"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="483"/>
         <source>Table</source>
         <translation>Tabela</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="474"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="489"/>
         <source>Format</source>
         <translation>Format</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="481"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="496"/>
         <source>Precision</source>
         <translation>Dokładność</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="487"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="502"/>
         <source>Angle</source>
         <translation>Kąt</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="498"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="513"/>
         <source>For&amp;mula</source>
         <translation>Rów&amp;nanie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="517"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="532"/>
         <source>Axis</source>
         <translation>Oś</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="551"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="566"/>
         <source>Canvas frame</source>
         <translation>Rama płótna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="559"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="574"/>
         <source>Width</source>
         <translation>Szerokość</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="569"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="584"/>
         <source>Draw backbones</source>
         <translation>Rysuj Linie Osi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="572"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="587"/>
         <source>Line Width</source>
         <translation>Szerokość linii</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="577"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="592"/>
         <source>Major ticks length</source>
         <translation>Długość działek głównych</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="582"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="597"/>
         <source>Minor ticks length</source>
         <translation>Długość działek pobocznych</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="593"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="608"/>
         <source>General</source>
         <translation>Ogólne</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="685"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="700"/>
         <source>Automatic</source>
         <translation>Automatyczny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="686"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="701"/>
         <source>Decimal: 100.0</source>
         <translation>Dziesiętny: 100.0</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="687"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="702"/>
         <source>Scientific: 1e2</source>
         <translation>Naukowy: 1e2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="688"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="703"/>
         <source>Scientific: 10^2</source>
         <translation>Naukowy: 10^2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1212"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1227"/>
         <source>Start limit error</source>
         <translation>Błąd dolnej granicy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1224"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1239"/>
         <source>End limit error</source>
         <translation>Błąd górnej granicy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1238"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1245"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1253"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1260"/>
         <source>Step input error</source>
         <translation>Błąd kroku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1245"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1260"/>
         <source>Please enter a positive step value!</source>
         <translation>Proszę podać dodatnią wartość kroku!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1338"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1353"/>
         <source>Formula input error</source>
         <translation>Błąd równania</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1339"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1354"/>
         <source>Valid variables are &apos;x&apos; for Top/Bottom axes and &apos;y&apos; for Left/Right axes!</source>
         <translation>Prawidłowe zmienne to &apos;x&apos; dla osi odciętych i &apos;y&apos; dla rzędnych!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1495"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1509"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1510"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1524"/>
         <source>millisec.</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1496"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1510"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1511"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1525"/>
         <source>sec.</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1497"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1511"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1512"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1526"/>
         <source>min.</source>
         <translation>min</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1498"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1512"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1513"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1527"/>
         <source>hours</source>
         <translation>godz.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1503"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1513"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1518"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1528"/>
         <source>days</source>
         <translation>dni</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1504"/>
-        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1514"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1519"/>
+        <location filename="../../libscidavis/src/AxesDialog.cpp" line="1529"/>
         <source>weeks</source>
         <translation>tyg.</translation>
     </message>
@@ -4827,19 +4828,19 @@ Są dostępne poniższe kody:
     </message>
     <message>
         <location filename="../../libscidavis/src/ConfigDialog.cpp" line="816"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="885"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="891"/>
         <source>Tables</source>
         <translation>Tabele</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ConfigDialog.cpp" line="817"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="887"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="893"/>
         <source>2D Plots</source>
         <translation>Wykresy 2D</translation>
     </message>
     <message>
         <location filename="../../libscidavis/src/ConfigDialog.cpp" line="818"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="886"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="892"/>
         <source>3D Plots</source>
         <translation>Wykresy 3D</translation>
     </message>
@@ -4849,608 +4850,608 @@ Są dostępne poniższe kody:
         <translation>Dopasowywanie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="839"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="845"/>
         <source>Options</source>
         <translation>Opcje</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="840"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="846"/>
         <source>Curves</source>
         <translation>Krzywe</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="841"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="847"/>
         <source>Ticks</source>
         <translation>Działki</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="842"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="968"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1025"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="848"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="974"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1031"/>
         <source>Fonts</source>
         <translation>Fonty</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="844"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="850"/>
         <source>Do not &amp;resize layers when window size changes</source>
         <translation>Nie zmieniaj &amp;rozmiaru warstw, gdy zmienia się rozmiar okna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="846"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="849"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="852"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="855"/>
         <source>Length</source>
         <translation>Długość</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="848"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="854"/>
         <source>Axes linewidth</source>
         <translation>Grubość osi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="850"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="856"/>
         <source>Major Ticks</source>
         <translation>Działki Główne</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="851"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="857"/>
         <source>Minor Ticks</source>
         <translation>Działki Poboczne</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="853"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="859"/>
         <source>Margin</source>
         <translation>Margines</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="854"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="860"/>
         <source>Frame width</source>
         <translation>Szerokość obramowania</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="855"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="861"/>
         <source>Axes &amp;backbones</source>
         <translation>&amp;Linie Osi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="856"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="862"/>
         <source>Canvas Fra&amp;me</source>
         <translation>Obra&amp;mowanie Płótna</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="857"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="863"/>
         <source>Sho&amp;w all axes</source>
         <translation>Pokaż &amp;wszystkie osie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="858"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="864"/>
         <source>Show &amp;Title</source>
         <translation>Pokaż &amp;Tytuł</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="859"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="865"/>
         <source>Scale &amp;Fonts</source>
         <translation>Skaluj &amp;Fonty</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="860"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="866"/>
         <source>Auto&amp;scaling</source>
         <translation>Auto&amp;skalowanie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="861"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="867"/>
         <source>Antia&amp;liasing</source>
         <translation>Antya&amp;liasing</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="864"/>
         <location filename="../../libscidavis/src/ConfigDialog.cpp" line="870"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="876"/>
         <source>None</source>
         <translation>Brak</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="865"/>
         <location filename="../../libscidavis/src/ConfigDialog.cpp" line="871"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="877"/>
         <source>Out</source>
         <translation>Zewnętrzne</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="866"/>
         <location filename="../../libscidavis/src/ConfigDialog.cpp" line="872"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="878"/>
         <source>In &amp; Out</source>
         <translation>Wewnętrzne i zewnętrzne </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="867"/>
         <location filename="../../libscidavis/src/ConfigDialog.cpp" line="873"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="879"/>
         <source>In</source>
         <translation>Wewnętrzne</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="878"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="884"/>
         <source>Print</source>
         <translation>Drukuj</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="879"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="885"/>
         <source>Print Crop &amp;Marks</source>
         <translation>Drukuj Linie &amp;Cięcia</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="880"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="886"/>
         <source>&amp;Scale layers to paper size</source>
         <translation>&amp;Skaluj warstwy do rozmiaru papieru</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="883"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="889"/>
         <source>Prompt on closing</source>
         <translation>Pytaj gdy są zamykane</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="884"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="890"/>
         <source>Folders</source>
         <translation>Foldery</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="888"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="894"/>
         <source>Matrices</source>
         <translation>Macierze</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="889"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="895"/>
         <source>&amp;Notes</source>
         <translation>&amp;Notatki</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="891"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="897"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="892"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="898"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Anuluj</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="893"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="899"/>
         <source>&amp;Apply</source>
         <translation>&amp;Zastosuj</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="894"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="900"/>
         <source>&amp;Text Font</source>
         <translation>Font &amp;Tekstu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="895"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="901"/>
         <source>&amp;Labels Font</source>
         <translation>Font &amp;Etykiet</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="896"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="902"/>
         <source>A&amp;xes Labels</source>
         <translation>Etykiety &amp;Osi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="897"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="903"/>
         <source>Axes &amp;Numbers</source>
         <translation>&amp;Liczby Osi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="898"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="904"/>
         <source>&amp;Legend</source>
         <translation>&amp;Legenda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="899"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="905"/>
         <source>T&amp;itle</source>
         <translation>&amp;Tytuł</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="902"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="908"/>
         <source>Application</source>
         <translation>Program</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="903"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="909"/>
         <source>Confirmations</source>
         <translation>Potwierdzenia</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="904"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="952"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1024"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="910"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="958"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1030"/>
         <source>Colors</source>
         <translation>Kolory</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="905"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="911"/>
         <source>Numeric Format</source>
         <translation>Format Liczb</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="907"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="913"/>
         <source>Language</source>
         <translation>Język</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="908"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="914"/>
         <source>Style</source>
         <translation>Styl</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="909"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="915"/>
         <source>Main Font</source>
         <translation>Główny Font</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="910"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="916"/>
         <source>Choose &amp;font</source>
         <translation>Wybierz &amp;font</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="911"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="917"/>
         <source>Workspace</source>
         <translatorcomment>There may be a better translation.</translatorcomment>
         <translation>Przestrzeń robocza</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="912"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="918"/>
         <source>Panels text</source>
         <translation>Tekst paneli</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="913"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="919"/>
         <source>Panels</source>
         <translation>Panele</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="914"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="920"/>
         <source>Undo/Redo History limit</source>
         <translation>Ograniczenie historii Cofnij/Ponów</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="915"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="921"/>
         <source>Save every</source>
         <translatorcomment>Not literal</translatorcomment>
         <translation>Pamiętaj wszystko</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="917"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="923"/>
         <source>Check for new versions at startup</source>
         <translation>Podczas startu sprawdzaj, czy dostępna jest nowa wersja</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="919"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="925"/>
         <source> minutes</source>
         <translatorcomment>Not sure of gramatical case</translatorcomment>
         <translation> minut</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="920"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="926"/>
         <source>Default scripting language</source>
         <translation>Domyślny język skryptów</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="922"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="928"/>
         <source>Default numeric format</source>
         <translation>Domyślny format liczb</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="924"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="930"/>
         <source>Decimal</source>
         <translation>Dziesiętny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="925"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="931"/>
         <source>Scientific (e)</source>
         <translation>Naukowy (e)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="926"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="932"/>
         <source>Scientific (E)</source>
         <translation>Naukowy (E)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="927"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="933"/>
         <source>Automatic (e)</source>
         <translation>Automatyczny (e)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="928"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="934"/>
         <source>Automatic (E)</source>
         <translation>Automatyczny (E)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="932"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="938"/>
         <source>Use group separator</source>
         <comment>option: use separator every 3 digits</comment>
         <translation>Używaj separatora tysięcy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="933"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="939"/>
         <source>Default Number of Decimal Digits</source>
         <translation>Domyślna Liczba Miejsc Dziesiętnych</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="934"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="940"/>
         <source>Decimal Separators</source>
         <translation>Separator Dziesiętny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="936"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="942"/>
         <source>default</source>
         <translation>domyślnie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="948"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1589"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="954"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1600"/>
         <source>Preview:</source>
         <comment>preview of the decimal separator</comment>
         <translation>Podgląd:</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="951"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="957"/>
         <source>&amp;Display Comments in Header</source>
         <translation>&amp;Wyświetlaj Komentarze w Nagłówku</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="953"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="959"/>
         <source>Default Column Separator</source>
         <translation>Domyślny Separator Kolumn</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="955"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="957"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="958"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1063"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="961"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="963"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="964"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1069"/>
         <source>TAB</source>
         <translation>TABULATOR</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="956"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="959"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="960"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1065"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="962"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="965"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="966"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1071"/>
         <source>SPACE</source>
         <translation>SPACJA</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="965"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="971"/>
         <source>Background</source>
         <translation>Tło</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="966"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="972"/>
         <source>Text</source>
         <translation>Tekst</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="967"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="973"/>
         <source>Labels</source>
         <translation>Etykiety</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="971"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="977"/>
         <source>Default curve style</source>
         <translation>Domyślny styl krzywej</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="972"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="978"/>
         <source>Line width</source>
         <translation>Szerokość linii</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="973"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="979"/>
         <source>Symbol size</source>
         <translation>Rozmiar punktu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="976"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="982"/>
         <source> Line</source>
         <translation> Liniowy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="977"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="983"/>
         <source> Scatter</source>
         <translation> Punktowy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="978"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="984"/>
         <source> Line + Symbol</source>
         <translation> Liniowy + Punktowy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="979"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="985"/>
         <source> Vertical drop lines</source>
         <translation> Pionowe linie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="980"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="986"/>
         <source> Spline</source>
         <translation> Spline</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="981"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="987"/>
         <source> Vertical steps</source>
         <translation> Pionowe schody</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="982"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="988"/>
         <source> Horizontal steps</source>
         <translation> Poziome schody</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="983"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="989"/>
         <source> Area</source>
         <translation> Powierzchniowy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="984"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="990"/>
         <source> Vertical Bars</source>
         <translation> Pionowe Słupki</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="985"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="991"/>
         <source> Horizontal Bars</source>
         <translation> Poziome Słupki</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1010"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1016"/>
         <source>Resolution</source>
         <translation>Rozdzielczość</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1011"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1017"/>
         <source>(all data shown)</source>
         <translation>(pokazuj wszystkie dane)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1012"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1018"/>
         <source>&amp;Show Legend</source>
         <translation>Pokaż &amp;Legendę</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1013"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1019"/>
         <source>Show &amp;Projection</source>
         <translation>Pokarz &amp;Rzut</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1014"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1020"/>
         <source>&amp;Data Max</source>
         <translation>Maksimum &amp;Danych</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1015"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1021"/>
         <source>Smoot&amp;h Line</source>
         <translation>&amp;Wygładź Linie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1016"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1022"/>
         <source>O&amp;rthogonal</source>
         <translatorcomment>Thats noun. Or should be adj?</translatorcomment>
         <translation>&amp;Ortogonalny</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1017"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1023"/>
         <source>Lab&amp;els</source>
         <translation>&amp;Etykiety</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1018"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1024"/>
         <source>Mesh &amp;Line</source>
         <translation>&amp;Linie Siatki</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1019"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1025"/>
         <source>&amp;Grid</source>
         <translation>&amp;Siatka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1020"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1026"/>
         <source>Data &amp;Min</source>
         <translation>&amp;Minimum Danych</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1021"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1028"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1027"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1034"/>
         <source>&amp;Numbers</source>
         <translation>&amp;Liczby</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1022"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1028"/>
         <source>A&amp;xes</source>
         <translation>&amp;Osie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1023"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1029"/>
         <source>&amp;Background</source>
         <translation>Tł&amp;o</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1026"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1032"/>
         <source>&amp;Title</source>
         <translation>&amp;Tytuł</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1027"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1033"/>
         <source>&amp;Axes Labels</source>
         <translation>Etykiety &amp;Osi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1029"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1035"/>
         <source>Autosca&amp;ling</source>
         <translation>Autoska&amp;lowanie</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1032"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1038"/>
         <source>Generated Fit Curve</source>
         <translation>Wygenerowana Linia Dopasowania</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1033"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1039"/>
         <source>Uniform X Function</source>
         <translation>Ciągła Funkcja X</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1034"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1040"/>
         <source>Points</source>
         <translation>Punkty</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1035"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1041"/>
         <source>Same X as Fitting Data</source>
         <translation>Te same Xksy jak w Dopasowanych Danych</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1036"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1042"/>
         <source>2 points for linear fits</source>
         <translation>2 punkty dla dopasowań liniowych</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1038"/>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1045"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1044"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1051"/>
         <source>Display Peak Curves for Multi-peak Fits</source>
         <translatorcomment>Lack of proper translation of &quot;Peak&quot;</translatorcomment>
         <translation>Wyświetl Krzywe Pików w dopasowaniach MultiPik</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1040"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1046"/>
         <source>Parameters Output</source>
         <translatorcomment>nonliteral</translatorcomment>
         <translation>Wynikowe Parametry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1041"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1047"/>
         <source>Significant Digits</source>
         <translation>Cyfry Znaczące</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1042"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1048"/>
         <source>Write Parameters to Result Log</source>
         <translation>Zapisuj Parametry do Dziennika Wyników</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1043"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1049"/>
         <source>Paste Parameters to Plot</source>
         <translation>Skopiuj Parametry do Wykresu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1044"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1050"/>
         <source>Scale Errors with sqrt(Chi^2/doF)</source>
         <translation>Skaluj błędy używając sqrt(Chi^2/doF)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1046"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1052"/>
         <source>Peaks Color</source>
         <translation>Kolory Pików</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1070"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1076"/>
         <source>Import options error</source>
         <translation>Błąd importu opcji</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1071"/>
+        <location filename="../../libscidavis/src/ConfigDialog.cpp" line="1077"/>
         <source>The separator must not contain the following characters: 0-9eE.+-</source>
         <translation>Separator nie może zawierać następujących symboli: 0-9eE.+-</translation>
     </message>
@@ -8255,28 +8256,24 @@ Są dostępne poniższe kody:
         <translation>&amp;Usuń białe znaki z końca wierszy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="136"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Po zaznaczeniu tej opcji wszystkie białe znaki
+        <translation type="obsolete">Po zaznaczeniu tej opcji wszystkie białe znaki
 w pliku ASCII zostaną usunięte z końców wierszy.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">By tego uniknąć powinieneś dokładnie określić
+        <translation type="obsolete">By tego uniknąć powinieneś dokładnie określić
 seperator kolumny za pomocą znaków TAB i SPACJI.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
@@ -8284,28 +8281,28 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Po zaznaczeniu tej opcji wszystkie białe znaki
+        <translation type="obsolete">Po zaznaczeniu tej opcji wszystkie białe znaki
 w pliku ASCII zostaną usunięte z końców wierszy
 a wszystkie sekwencje białych znaków (w tym
 TABULATORÓW) będą zastąpione pojedynczą spacją.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Uwaga: zaznaczenie tej opcji spowoduje 
+        <translation type="obsolete">Uwaga: zaznaczenie tej opcji spowoduje 
 nakładanie się kolumn jeżeli nie mają
 jednakowej liczby wierszy.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="136"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Po zaznaczeniu tej opcji wszystkie białe znaki
+        <translation>Po zaznaczeniu tej opcji wszystkie białe znaki
 w pliku ASCII zostaną usunięte z końców wierszy.</translation>
     </message>
     <message>
@@ -8318,11 +8315,13 @@ nakładanie się kolumn jeżeli nie mają
 jednakowej liczby wierszy.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">By tego uniknąć powinieneś dokładnie określić
+        <translation>By tego uniknąć powinieneś dokładnie określić
 seperator kolumny za pomocą znaków TAB i SPACJI.</translation>
     </message>
     <message>
@@ -8331,23 +8330,25 @@ seperator kolumny za pomocą znaków TAB i SPACJI.</translation>
         <translation>&amp;Uprość białe znaki</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Po zaznaczeniu tej opcji wszystkie białe znaki
+        <translation>Po zaznaczeniu tej opcji wszystkie białe znaki
 w pliku ASCII zostaną usunięte z końców wierszy
 a wszystkie sekwencje białych znaków (w tym
 TABULATORÓW) będą zastąpione pojedynczą spacją.</translation>
     </message>
     <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Uwaga: zaznaczenie tej opcji spowoduje 
+        <translation>Uwaga: zaznaczenie tej opcji spowoduje 
 nakładanie się kolumn jeżeli nie mają
 jednakowej liczby wierszy.</translation>
     </message>

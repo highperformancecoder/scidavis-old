@@ -6007,7 +6007,7 @@ The following special codes can be used:
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">勾選這個選項，則 ASCII 檔中所有行首和行尾的空白都會被移除。</translation>
+        <translation>勾選這個選項，則 ASCII 檔中所有行首和行尾的空白都會被移除。</translation>
     </message>
     <message>
         <source>Warning: checking this option leads to column 
@@ -6020,7 +6020,7 @@ have the same number of rows.</source>
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">為了避免這個問題，你應該精確地用 TAB 和 SPACE 定義列分隔符號。</translation>
+        <translation>為了避免這個問題，你應該精確地用 TAB 和 SPACE 定義列分隔符號。</translation>
     </message>
     <message>
         <source>&amp;Simplify white spaces</source>
@@ -6033,7 +6033,7 @@ lines and each sequence of internal
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">選上這個選項，行首和行尾的空白都會被去掉，
+        <translation>選上這個選項，行首和行尾的空白都會被去掉，
 行內的連續空白(包括TAB)都會被替換為單個空格。</translation>
     </message>
     <message>
@@ -6041,7 +6041,7 @@ be replaced with a single space.</source>
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">警告：選上這個選項會導致列重疊，如果ASCII檔中的各列行數不等。</translation>
+        <translation>警告：選上這個選項會導致列重疊，如果ASCII檔中的各列行數不等。</translation>
     </message>
     <message>
         <source>&amp;Numeric data</source>
@@ -6114,7 +6114,7 @@ removed from the beginning and the end of
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">勾選這個選項，則 ASCII 檔中所有行首和行尾的空白都會被移除。</translation>
+        <translation type="obsolete">勾選這個選項，則 ASCII 檔中所有行首和行尾的空白都會被移除。</translation>
     </message>
     <message>
         <source>To avoid this problem you should precisely 
@@ -6122,7 +6122,7 @@ define the column separator using TAB and
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">為了避免這個問題，你應該精確地用 TAB 和 SPACE 定義列分隔符號。</translation>
+        <translation type="obsolete">為了避免這個問題，你應該精確地用 TAB 和 SPACE 定義列分隔符號。</translation>
     </message>
     <message>
         <source>By checking this option all white spaces will be 
@@ -6132,16 +6132,8 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">選上這個選項，行首和行尾的空白都會被去掉，
+        <translation type="obsolete">選上這個選項，行首和行尾的空白都會被去掉，
 行內的連續空白(包括TAB)都會被替換為單個空格。</translation>
-    </message>
-    <message>
-        <source>Warning: checking this option leads to column 
-overlaping if the columns in the ASCII file don&apos;t 
-have the same number of rows.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
-&apos;s correctly</comment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

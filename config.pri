@@ -291,9 +291,13 @@ contains(PRESET, linux_package) {
         system (ls /usr/lib*/libqwt5-qt5.so) {
             LIBS+=-lqwt5-qt5
         } else {
+         system (ls /usr/lib*/*/libqwt5-qt5.so) {
+            LIBS+=-lqwt5-qt5
+        } else {
           system (ls /usr/lib*/libqwt-qt5.so) {
             LIBS+=-lqwt-qt5
             }
+        }
         }
         system (ls /usr/lib*/libqwtplot3d-qt5.so) {
          LIBS+=-lqwtplot3d-qt5
