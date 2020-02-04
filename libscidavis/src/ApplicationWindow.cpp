@@ -12919,7 +12919,7 @@ void ApplicationWindow::projectProperties()
 	if (projectname != "untitled")
 	{
 		QFileInfo fi(projectname);
-#if QT_VERSION<51000
+#if QT_VERSION<0x51000
 		s += tr("Created") + ": " + fi.created().toString(Qt::LocalDate) + "\n\n";
 #else
 		s += tr("Created") + ": " + fi.birthTime().toString(Qt::LocalDate) + "\n\n";

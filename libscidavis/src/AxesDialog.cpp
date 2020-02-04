@@ -188,8 +188,13 @@ void AxesDialog::initScalesPage()
 	QFontMetrics fm(axesList->font());
 	int width = 32,i;
 	for(i=0 ; i<axesList->count() ; i++)
-		if( fm.horizontalAdvance(axesList->item(i)->text()) > width)
-			width = fm.horizontalAdvance(axesList->item(i)->text());
+#if QT_VERSION<0x51100
+          if( fm.width(axesList->item(i)->text()) > width)
+            width = fm.width(axesList->item(i)->text());
+#else
+          if( fm.horizontalAdvance(axesList->item(i)->text()) > width)
+            width = fm.horizontalAdvance(axesList->item(i)->text());
+#endif
 
 	axesList->setMaximumWidth( axesList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
@@ -309,9 +314,14 @@ void AxesDialog::initGridPage()
 	QFontMetrics fm(axesGridList->font());
 	int width = 32,i;
 	for(i=0 ; i<axesGridList->count() ; i++)
-		if( fm.horizontalAdvance(axesGridList->item(i)->text()) > width)
-			width = fm.horizontalAdvance(axesGridList->item(i)->text());
-	axesGridList->setMaximumWidth( axesGridList->iconSize().width() + width + 50 );
+#if QT_VERSION<0x51100
+          if( fm.width(axesGridList->item(i)->text()) > width)
+            width = fm.width(axesGridList->item(i)->text());
+#else
+        if( fm.horizontalAdvance(axesGridList->item(i)->text()) > width)
+          width = fm.horizontalAdvance(axesGridList->item(i)->text());
+#endif
+        axesGridList->setMaximumWidth( axesGridList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
 	axesGridList->resize(axesGridList->maximumWidth(),axesGridList->height());
 
@@ -371,9 +381,14 @@ void AxesDialog::initAxesPage()
 	QFontMetrics fm(axesTitlesList->font());
 	int width = 32,i;
 	for(i=0 ; i<axesTitlesList->count() ; i++)
-		if( fm.horizontalAdvance(axesTitlesList->item(i)->text()) > width)
-			width = fm.horizontalAdvance(axesTitlesList->item(i)->text());
-	axesTitlesList->setMaximumWidth( axesTitlesList->iconSize().width() + width + 50 );
+#if QT_VERSION<0x51100
+          if( fm.width(axesTitlesList->item(i)->text()) > width)
+            width = fm.width(axesTitlesList->item(i)->text());
+#else
+          if( fm.horizontalAdvance(axesTitlesList->item(i)->text()) > width)
+            width = fm.horizontalAdvance(axesTitlesList->item(i)->text());
+#endif
+          axesTitlesList->setMaximumWidth( axesTitlesList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
 	axesTitlesList->resize(axesTitlesList->maximumWidth(),axesTitlesList->height());
 
