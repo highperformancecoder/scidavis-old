@@ -1,5 +1,5 @@
 #include "globals.h"
-const int SciDAVis::scidavis_versionNo = 131081;
-const char* SciDAVis::scidavis_version = "2.0.9";
+const int SciDAVis::scidavis_versionNo = 131082;
+const char* SciDAVis::scidavis_version = "2.0.10";
 const char* SciDAVis::extra_version = "-beta";
-const char * SciDAVis::release_date = "Feb 04, 2020";
+const char * SciDAVis::release_date = "Feb 17, 2020";
