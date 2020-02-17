@@ -301,6 +301,10 @@ contains(PRESET, linux_package) {
         }
         system (ls /usr/lib*/libqwtplot3d-qt5.so) {
          LIBS+=-lqwtplot3d-qt5
+        } else {
+                     system (ls /usr/lib*/*/libqwtplot3d-qt5.so) {
+                     LIBS+=-lqwtplot3d-qt5
+               }                    
         }
     } else {
         exists(/usr/include/qwt5) {INCLUDEPATH+=/usr/include/qwt5}
