@@ -17,7 +17,11 @@ python {
   }
   unix: {
         LIBS+=$$system($$PYTHONBIN findBoostPythonLib.py)
-        LIBS+=$$system($$PYTHONBIN-config --libs --embed)
+        system($$PYTHONBIN-config --embed > /dev/null) {
+            LIBS+=$$system($$PYTHONBIN-config --libs --embed)
+        } else {
+            LIBS+=$$system($$PYTHONBIN-config --libs)
+        }
       }
   message($$LIBS)
            

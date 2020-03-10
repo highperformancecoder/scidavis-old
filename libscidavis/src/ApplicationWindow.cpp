@@ -14042,7 +14042,7 @@ void ApplicationWindow::showHistory()
 
 QStringList ApplicationWindow::tableWindows()
 {
-	QList<AbstractAspect *> tables = d_project->descendantsThatInherit("::future::Table");
+	QList<AbstractAspect *> tables = d_project->descendantsThatInherit("future::Table");
 	QStringList result;
 	foreach(AbstractAspect *aspect, tables)
           result.append(aspect->name().c_str());
