@@ -2655,7 +2655,7 @@ TableStatistics *ApplicationWindow::newTableStatistics(Table *base, int type, QL
 
 void ApplicationWindow::removeDependentTableStatistics(const AbstractAspect *aspect)
 {
-	future::Table *future_table = qobject_cast<future::Table *>(const_cast<AbstractAspect *>(aspect));
+	::future::Table *future_table = qobject_cast<::future::Table *>(const_cast<AbstractAspect *>(aspect));
 	if (!future_table) return;
 	QList<MyWidget*> windows = windowsList();
 	foreach(MyWidget *win, windows)
@@ -13984,13 +13984,13 @@ void ApplicationWindow::selectPlotType(int type)
 void ApplicationWindow::handleAspectAdded(const AbstractAspect *parent, int index)
 {
 	AbstractAspect * aspect = parent->child(index);
-	future::Matrix * matrix = qobject_cast<future::Matrix *>(aspect);
+	::future::Matrix * matrix = qobject_cast<::future::Matrix *>(aspect);
 	if (matrix)
 	{
 		initMatrix(static_cast<Matrix *>(matrix->view()));
 		return;
 	}
-	future::Table * table = qobject_cast<future::Table *>(aspect);
+	::future::Table * table = qobject_cast<::future::Table *>(aspect);
 	if (table)
 	{
 		initTable(static_cast<Table *>(table->view()));
@@ -14001,13 +14001,13 @@ void ApplicationWindow::handleAspectAdded(const AbstractAspect *parent, int inde
 void ApplicationWindow::handleAspectAboutToBeRemoved(const AbstractAspect *parent, int index)
 {
 	AbstractAspect * aspect = parent->child(index);
-	future::Matrix * matrix = qobject_cast<future::Matrix *>(aspect);
+	::future::Matrix * matrix = qobject_cast<::future::Matrix *>(aspect);
 	if (matrix)
 	{
 		closeWindow(static_cast<Matrix *>(matrix->view()));
 		return;
 	}
-	future::Table * table = qobject_cast<future::Table *>(aspect);
+	::future::Table * table = qobject_cast<::future::Table *>(aspect);
 	if (table)
 	{
 		closeWindow(static_cast<Table *>(table->view()));
