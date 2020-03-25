@@ -43,7 +43,7 @@ class AbstractScriptingEngine;
  * Project manages an undo stack and is responsible for creating ProjectWindow instances
  * as views on itself.
  */
-class Project : public future::Folder
+class Project : public ::future::Folder
 {
 	Q_OBJECT
 
@@ -73,7 +73,7 @@ class Project : public future::Folder
 #endif
 		virtual QMenu *createContextMenu() const;
 		//@}
-		virtual QMenu *createFolderContextMenu(const future::Folder * folder) const;
+		virtual QMenu *createFolderContextMenu(const ::future::Folder * folder) const;
 
 		AbstractScriptingEngine * scriptingEngine() const;
 
