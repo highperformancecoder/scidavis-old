@@ -8332,7 +8332,38 @@ The following special codes can be used:
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
+        <source>To avoid this problem you should precisely 
+define the column separator using TAB and 
+SPACE characters.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
+        <source>By checking this option all white spaces will be 
+removed from the beginning and the end of the 
+lines and each sequence of internal 
+whitespaces (including the TAB character) will 
+be replaced with a single space.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
+        <source>Warning: checking this option leads to column 
+overlaping if the columns in the ASCII file don&apos;t 
+have the same number of rows.</source>
+        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
+&apos;s correctly</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8343,35 +8374,8 @@ have the same number of rows.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
-        <source>To avoid this problem you should precisely 
-define the column separator using TAB and 
-SPACE characters.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="142"/>
         <source>&amp;Simplify white spaces</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
-        <source>By checking this option all white spaces will be 
-removed from the beginning and the end of the 
-lines and each sequence of internal 
-whitespaces (including the TAB character) will 
-be replaced with a single space.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
-        <source>Warning: checking this option leads to column 
-overlaping if the columns in the ASCII file don&apos;t 
-have the same number of rows.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
