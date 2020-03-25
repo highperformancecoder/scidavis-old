@@ -53,6 +53,7 @@ typedef struct _traceback {
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 #include "PythonScripting.h"
+#include "PythonScripting.cd"
 
 #include "future/core/AbstractAspect.h"
 #include "AbstractAspect.cd"
@@ -232,6 +233,7 @@ BOOST_PYTHON_MODULE(scidavis)
   p.defineClass<Interpolation>();
   p.defineClass<SmoothFilter>();
   p.defineClass<SciQwtSymbol>();
+  p.defineClass<PythonScripting>();
 }
 
 QString PythonScripting::toString(PyObject *object, bool decref)
@@ -410,8 +412,16 @@ void PythonScripting::redirectStdIO()
   // Redirect output to the print(const QString&) signal.
   // Also see method write(const QString&) and Python documentation on
   // sys.stdout and sys.stderr.
-  classdesc::addPythonObject("sys.stdout",*this);
-  classdesc::addPythonObject("sys.stderr",*this);
+    try
+      {
+        classdesc::addPythonObject("sys.stdout",*this);
+        classdesc::addPythonObject("sys.stderr",*this);
+      }
+    catch (const boost::python::error_already_set&)
+      {
+        PyErr_Print();
+      }
+
 }
 
 bool PythonScripting::initialize()
