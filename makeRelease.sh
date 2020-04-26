@@ -5,22 +5,23 @@ delta=${version##*.}
 delta=`echo $delta|sed -e 's/^0*//'`
 branch=${version%.*}
 major=${branch%.*}
-echo "$branch minor=$minor"
 if [ "$major" = "$branch" ]; then
   # we have a full release, not beta release
   minor=$delta
   delta=0
+  sem_version="$major.$minor.0"
 else
   # we have a beta release
   minor=${branch##*.}
+  sem_version="$branch.0-beta$delta"
 fi
-echo $major $minor $delta
+echo "semantic version $sem_version"
 scidavis_version=$[$major*65536 + $minor*256 + $delta]
 rm -f libscidavis/src/version.cpp
 cat >libscidavis/src/version.cpp <<EOF
 #include "globals.h"
 const int SciDAVis::scidavis_versionNo = $scidavis_version;
-const char* SciDAVis::scidavis_version = "$version";
+const char* SciDAVis::scidavis_version = "$sem_version";
 const char * SciDAVis::release_date = "`date +"%b %d, %Y"`";
 EOF
 
@@ -36,7 +37,7 @@ done
 
 # update Doxyversion
 rm -f Doxyversion
-echo "PROJECT_NUMBER=$version" >Doxyversion
-echo "$1" >doc/version.tex
-git commit -a -m "Release $1"
-git tag -a -m "" $1
+echo "PROJECT_NUMBER=$sem_version" >Doxyversion
+echo "$sem_version" >doc/version.tex
+git commit -a -m "Release $sem_version"
+git tag -a -m "" $sem_version
