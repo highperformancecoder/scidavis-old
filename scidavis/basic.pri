@@ -45,7 +45,6 @@ win32 {
 
 TRANSLATIONS    = translations/scidavis_de.ts \
                   translations/scidavis_es.ts \
-                  translations/scidavis_nl.ts \
                   translations/scidavis_fr.ts \
                   translations/scidavis_ru.ts \
                   translations/scidavis_ja.ts \
