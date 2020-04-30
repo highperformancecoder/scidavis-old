@@ -3,7 +3,7 @@ fullversion=$1
 version=${fullversion%%-*}
 extra=-${fullversion##*-}
 if [ $extra = "-$version" ]; then
-    extra = ""
+    extra=""
 fi
 echo $version $extra
 # strip any leading 0s from patch
