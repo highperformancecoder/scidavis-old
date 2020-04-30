@@ -33,4 +33,4 @@ rm -f Doxyversion
 echo "PROJECT_NUMBER=$version" >Doxyversion
 echo "$version" >doc/version.tex
 git commit -a -m "Release $fullversion"
-git tag -a -m "" $version
+git tag -a -m "" $fullversion
