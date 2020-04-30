@@ -278,50 +278,15 @@ osx_dist {
 
 contains(PRESET, linux_package) {
 	### dynamically link against Qwt(3D) installed system-wide
-	### WARNING: make sure they are compiled against >= Qt4.2
-	### Mixing Qt 4.2 and Qt >= 4.3 compiled stuff may also 
-	### cause problems.
 
-    equals(QT_MAJOR_VERSION, 5) {
         exists(/usr/include/qt5/qwt5-qt5)      {INCLUDEPATH+=/usr/include/qt5/qwt5-qt5}
         exists(/usr/include/qt5/qwtplot3d-qt5) {INCLUDEPATH+=/usr/include/qt5/qwtplot3d-qt5}
         exists(/usr/include/qwt5-qt5) {INCLUDEPATH+=/usr/include/qwt5-qt5}
         exists(/usr/include/qwtplot3d) {INCLUDEPATH+=/usr/include/qwtplot3d}
 
-        system (ls /usr/lib*/libqwt5-qt5.so) {
-            LIBS+=-lqwt5-qt5
-        }
-        system (ls /usr/lib*/libqwtplot3d-qt5.so) {
-         LIBS+=-lqwtplot3d-qt5
-        }
-    } else {
-        exists(/usr/include/qwt5) {INCLUDEPATH+=/usr/include/qwt5}
-        exists (/usr/include/qwt-qt4) {INCLUDEPATH+=/usr/include/qwt-qt4}
-        exists(/usr/include/qwt5-qt4) {INCLUDEPATH+=/usr/include/qwt5-qt4}
-        exists(/usr/include/qwtplot3d-qt4) {INCLUDEPATH+=/usr/include/qwtplot3d-qt4} #debianish
-        else {INCLUDEPATH  += /usr/include/qwtplot3d} #standard
-
-        system (ls /usr/lib*/libqwt5.so) {
-           LIBS+=-lqwt5
-        } else {
-           system (ls /usr/lib*/libqwt5-qt4.so) {
-              LIBS+=-lqwt5-qt4
-           } else {
-             system (ls /usr/lib*/libqwt-qt4.so) {
-               LIBS+=-lqwt-qt4
-             } else {LIBS+=-lqwt}
-           }
-        }
-
-        system (ls /usr/lib*/libqwtplot3d-qt4.so) {
-         LIBS+=-lqwtplot3d-qt4
-        } else {
-         LIBS+=-lqwtplot3d
-        }
-    }
-
-        INCLUDEPATH = "$(HOME)/usr/include" $$INCLUDEPATH
-        QMAKE_LIBDIR = "$(HOME)/usr/lib" $$QMAKE_LIBDIR
+        system (ls /usr/lib*/libqwt5-qt5.so) {LIBS+=-lqwt5-qt5}
+        system (ls /usr/lib*/libqwt-qt5.so) {LIBS+=-lqwt-qt5}
+        system (ls /usr/lib*/libqwtplot3d-qt5.so) {LIBS+=-lqwtplot3d-qt5}
 
 
 	LIBS         += -lz -lGLU 
@@ -329,6 +294,11 @@ contains(PRESET, linux_package) {
 	INCLUDEPATH  += /usr/include/muParser
 	LIBS         += -lgsl -lgslcblas
 	LIBS         += -lmuparser 
+
+        # enable user installed packages
+        INCLUDEPATH = "$(HOME)/usr/include" $$INCLUDEPATH
+        QMAKE_LIBDIR = "$(HOME)/usr/lib" $$QMAKE_LIBDIR
+
 
 }
 
