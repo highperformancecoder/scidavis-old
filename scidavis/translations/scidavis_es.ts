@@ -16124,12 +16124,12 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
         <translation type="unfinished">%1: mover columna %2 desde  la posición %3 a la %4</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="164"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="159"/>
         <source>About SciDAVis</source>
         <translation type="unfinished">Acerca de SciDAVis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="173"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="168"/>
         <source>
 Released</source>
         <translation type="unfinished"></translation>

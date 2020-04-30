@@ -401,10 +401,10 @@ gcov {
 ### installation.                                                           #
 #############################################################################
 
-exists(/usr/bin/lupdate-qt4) {
+exists(/usr/bin/lupdate-qt5) {
 	# Debian, Ubuntu, Fedora
-	LUPDATE_BIN = lupdate-qt4
-	LRELEASE_BIN = lrelease-qt4
+	LUPDATE_BIN = lupdate-qt5
+	LRELEASE_BIN = lrelease-qt5
 } else {
 	# anything else
 	LUPDATE_BIN = lupdate

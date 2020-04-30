@@ -12691,12 +12691,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">%1: sloupec %2 přesunut z pozice %3 na %4</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="164"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="159"/>
         <source>About SciDAVis</source>
         <translation type="unfinished">O SciDAVisu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="173"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="168"/>
         <source>
 Released</source>
         <translation type="unfinished"></translation>

@@ -15203,7 +15203,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">&amp;Удалить</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/globals.cpp" line="+164"/>
+        <location filename="../../libscidavis/src/globals.cpp" line="+159"/>
         <source>About SciDAVis</source>
         <translation type="unfinished">О SciDAVis</translation>
     </message>
