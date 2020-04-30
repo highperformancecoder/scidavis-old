@@ -17,7 +17,7 @@ cat >libscidavis/src/version.cpp <<EOF
 #include "globals.h"
 const int SciDAVis::scidavis_versionNo = $scidavis_version;
 const char* SciDAVis::scidavis_version = "$version";
-const char* SciDAVis::extra_version = "-$extra";
+const char* SciDAVis::extra_version = "$extra";
 const char * SciDAVis::release_date = "`date +"%b %d, %Y"`";
 EOF
 
