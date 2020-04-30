@@ -40,11 +40,6 @@
 #include <QtDebug>
 #include "ui_SciDAVisAbout.h"
 
-//  Don't forget to change the Doxyfile, the splash screen and the Windows
-//  installer when changing these!
-
-const char * SciDAVis::extra_version = "";
-
 const char * SciDAVis::copyright_string = "\
 === Credits ===\n\
 \n\
