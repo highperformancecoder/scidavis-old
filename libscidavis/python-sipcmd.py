@@ -34,10 +34,10 @@ config = sipconfig.Configuration()
 try:
     pyqt = sys.argv[1]
 except IndexError:
-    pyqt = 'PyQt4'
+    pyqt = 'PyQt5'
 
 if (pyqt not in ['PyQt4','PyQt5']):
-    pyqt = 'PyQt4'
+    pyqt = 'PyQt5'
 
 try:
     exec("from "+pyqt+".QtCore import PYQT_CONFIGURATION")
