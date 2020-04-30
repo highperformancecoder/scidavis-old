@@ -2,7 +2,7 @@ echo "old version=`git describe`"
 fullversion=$1
 version=${fullversion%%-*}
 extra=-${fullversion##*-}
-if [ $extra = -$version ]; then
+if [ $extra = "-$version" ]; then
     extra = ""
 fi
 echo $version $extra
