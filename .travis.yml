@@ -13,6 +13,7 @@ before_install:
   - sudo apt-get install -y python3-dev
   - sudo apt-get install -y pyqt5-dev
   - sudo apt-get install -y python3-pyqt5
+  - sudo apt-get install -y libqwtplot3d-qt5
   - sudo apt-get install -y libqwtplot3d-qt5-dev
   - sudo apt-get install -y libqwt5-qt5
   - sudo apt-get install -y libqwt5-qt5-dev
