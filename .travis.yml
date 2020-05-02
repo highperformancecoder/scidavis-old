@@ -10,18 +10,16 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y libboost-dev
   - sudo apt-get install -y libgsl0-dev
-  - sudo apt-get install -y python
-  - sudo apt-get install -y libpython-dev
-  - sudo apt-get install -y python-sip-dev
-  - sudo apt-get install -y sip-dev
-  - sudo apt-get install -y python-qt4
-  - sudo apt-get install -y python-qt4-dev
-#  - sudo apt-get install -y pyqt4-dev-tools
-  - sudo apt-get install -y libqwtplot3d-qt4-dev
-  - sudo apt-get install -y libqwt5-qt4-dev
-  - sudo apt-get install -y libqtassistantclient-dev
-  - sudo apt-get install -y libqt4-opengl-dev
-  - sudo apt-get install -y libqt4-dev
+  - sudo apt-get install -y python3-dev
+  - sudo apt-get install -y pyqt5-dev
+  - sudo apt-get install -y python3-pyqt5
+  - sudo apt-get install -y libqwtplot3d-qt5-dev
+  - sudo apt-get install -y libqwt5-qt5-dev
+  - sudo apt-get install -y libqt5svg5-dev
+  - sudo apt-get install -y qttools5-dev
+  - sudo apt-get install -y qtbase5-dev
+  - sudo apt-get install -y qt5-default
+  - sudo apt-get install -y libqt5opengl5-dev
   - sudo apt-get install -y libmuparser
   - sudo apt-get install -y libmuparser-dev
   - sudo apt-get install -y zlib1g-dev
@@ -29,31 +27,11 @@ before_install:
   - sudo apt-get install -y python-numpy
   - sudo apt-get install -y libunittest++-dev
   - sudo apt-get install -y libboost-regex-dev
-  # this needs fixing!
-  - sudo ln -sf /usr/include/qwtplot3d-qt4 /usr/include/qwtplot3d
-#addons:
-#  apt:
-#    packages:
-#    - libboost-dev
-#    - libgsl0-dev
-#    - python
-#    - python-sip-dev
-#    - sip-dev
-#    - python-qt4-dev
-#    - pyqt4-dev-tools
-#    - libpython-dev
-#    - libqwtplot3d-qt4-dev
-#    - libqwt5-qt4-dev
-#    - libqtassistantclient-dev
-#    - libqt4-opengl-dev
-#    - libqt4-dev
-#    - libmuparser-dev
-#    - zlib1g-dev
 script: 
   # required to avoid picking up a bodgy python interpreter
   - export PATH=/usr/bin:$PATH
+  - export PYTHON=python3
   - qmake CONFIG+=aegis
-  - make qmake
   - make
   - Xvfb :0 &
   - export DISPLAY=:0
