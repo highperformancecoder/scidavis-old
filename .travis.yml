@@ -13,9 +13,10 @@ before_install:
   - sudo apt-get install -y python3-dev
   - sudo apt-get install -y pyqt5-dev
   - sudo apt-get install -y python3-pyqt5
-  - sudo apt-get install -y libqwtplot3d-qt5
+  - sudo apt-get install -y python3-sip-dev
+#  - sudo apt-get install -y libqwtplot3d-qt5
   - sudo apt-get install -y libqwtplot3d-qt5-dev
-  - sudo apt-get install -y libqwt5-qt5
+#  - sudo apt-get install -y libqwt5-qt5
   - sudo apt-get install -y libqwt5-qt5-dev
   - sudo apt-get install -y libqt5svg5-dev
   - sudo apt-get install -y qttools5-dev
@@ -26,7 +27,7 @@ before_install:
   - sudo apt-get install -y libmuparser-dev
   - sudo apt-get install -y zlib1g-dev
   - sudo apt-get install -y xvfb
-  - sudo apt-get install -y python-numpy
+  - sudo apt-get install -y python3-numpy
   - sudo apt-get install -y libunittest++-dev
   - sudo apt-get install -y libboost-regex-dev
 script: 

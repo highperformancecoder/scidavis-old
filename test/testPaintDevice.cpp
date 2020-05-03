@@ -22,7 +22,12 @@ namespace
   {
     o<<"\"";
     auto data=x.bits();
-    for (int i=0; i<x.byteCount(); i++)
+#if QT_VERSION>=0x51000
+    auto size=x.sizeInBytes();
+#else
+    auto size=x.byteCount();
+#endif
+    for (int i=0; i<size; i++)
       o<<std::hex<<int(data[i]);
     return o<<"\"";
   }
