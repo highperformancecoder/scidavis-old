@@ -8288,12 +8288,11 @@ Mohou být použuty následující kódy:
         <translation type="unfinished">&amp;Odstranit bílé mezery z konce řádků</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="136"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Zaškrtnutím této volby budou všechny 
+        <translation type="obsolete">Zaškrtnutím této volby budou všechny 
 bílé mezery ze začátků a konců řádků 
 ASCII-souboru odstraněny.</translation>
     </message>
@@ -8307,13 +8306,11 @@ sloupců pokud sloupce v ASCII souboru nemají
 stejný počet řádků.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="138"/>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="147"/>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Abyste se tomuto problému vyhnuli, měli byste 
+        <translation type="obsolete">Abyste se tomuto problému vyhnuli, měli byste 
 přesně definovat oddělovač sloupců 
 pomocí Tabelátorů a Mezer.</translation>
     </message>
@@ -8323,25 +8320,23 @@ pomocí Tabelátorů a Mezer.</translation>
         <translation type="unfinished">&amp;Zjednodušit mezery</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Při zaškrtnutí této volby budou odstraněny všechny mezery 
+        <translation type="obsolete">Při zaškrtnutí této volby budou odstraněny všechny mezery 
 ze začátků a konců řádků v ASCII-souboru 
 a všechny znaky mezer (včetně Tabelátorů) 
 mezi sloupci budou nahrazeny jediným znakem mezery.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="unfinished">Varování: zaškrtnutí této volby může vést k překryvu 
+        <translation type="obsolete">Varování: zaškrtnutí této volby může vést k překryvu 
 sloupců pokud sloupce v ASCII souboru nemají 
 stejný počet řádků.</translation>
     </message>
@@ -8420,39 +8415,30 @@ stejný počet řádků.</translation>
         <translation type="unfinished">Importovat ASCII-soubor(y)</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="135"/>
-=======
->>>>>>> Stashed changes
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="obsolete">Zaškrtnutím této volby budou všechny 
+        <translation type="unfinished">Zaškrtnutím této volby budou všechny 
 bílé mezery ze začátků a konců řádků 
 ASCII-souboru odstraněny.</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="137"/>
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="146"/>
-=======
->>>>>>> Stashed changes
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="obsolete">Abyste se tomuto problému vyhnuli, měli byste 
+        <translation type="unfinished">Abyste se tomuto problému vyhnuli, měli byste 
 přesně definovat oddělovač sloupců 
 pomocí Tabelátorů a Mezer.</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="144"/>
-=======
->>>>>>> Stashed changes
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of the 
 lines and each sequence of internal 
@@ -8460,22 +8446,19 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="obsolete">Při zaškrtnutí této volby budou odstraněny všechny mezery 
+        <translation type="unfinished">Při zaškrtnutí této volby budou odstraněny všechny mezery 
 ze začátků a konců řádků v ASCII-souboru 
 a všechny znaky mezer (včetně Tabelátorů) 
 mezi sloupci budou nahrazeny jediným znakem mezery.</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../../libscidavis/src/ImportASCIIDialog.cpp" line="145"/>
-=======
->>>>>>> Stashed changes
         <source>Warning: checking this option leads to column 
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="obsolete">Varování: zaškrtnutí této volby může vést k překryvu 
+        <translation type="unfinished">Varování: zaškrtnutí této volby může vést k překryvu 
 sloupců pokud sloupce v ASCII souboru nemají 
 stejný počet řádků.</translation>
     </message>
