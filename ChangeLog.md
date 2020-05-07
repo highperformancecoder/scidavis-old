@@ -1,5 +1,8 @@
 # SciDAVis changelog (main changes)
 
+=== Release 2.1 ===
+- Qt4 support was dropped
+
 === Release 1.26 ===
 - Added simplified and traditional Chinese translations, courtesy of Anbang Li and Wen Li
 - Updated Czech translation from Pavel Fric
