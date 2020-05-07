@@ -474,7 +474,7 @@ Deseja sobrescrevê-lo?</translation>
     </message>
     <message>
         <source>Error </source>
-        <translation>Erro</translation>
+        <translation>Erro </translation>
     </message>
     <message>
         <source> sending event </source>
@@ -4844,7 +4844,7 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
     <name>Column::D</name>
     <message>
         <source>as string</source>
-        <translation type="unfinished">como cadeia de caracteres</translation>
+        <translation>como cadeia de caracteres</translation>
     </message>
 </context>
 <context>
@@ -6506,11 +6506,13 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>fit of dataset</source>
-        <translation>ajuste do conjunto de dados</translation>
+        <translatorcomment>The &quot;; &quot; is a temporary workarround to make the fit description to be good looking (the current way is a little uggly).
+O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do ajuste ter uma aparência melhor (a aparência atual é um pouco feia).</translatorcomment>
+        <translation>; ajuste do conjunto de dados</translation>
     </message>
     <message>
         <source>using function</source>
-        <translation>usando função</translation>
+        <translation>utilizando a função</translation>
     </message>
     <message>
         <source>Weighting Method</source>
@@ -6654,7 +6656,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>The curve %1 has no associated Y error bars.</source>
-        <translation>A curva %1 não está associada a barras de erro em Y</translation>
+        <translation>A curva %1 não está associada a barras de erro em Y.</translation>
     </message>
     <message>
         <source>Input function error</source>
@@ -8234,7 +8236,7 @@ removed from the beginning and the end of
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Marcando esta opção todos os espaços serão 
+        <translation>Ao selecionar esta opção todos os espaços serão 
 removidos do início e final das 
 linhas nos arquivos ASCII.</translation>
     </message>
@@ -8244,7 +8246,7 @@ define the column separator using TAB and
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Para evitar este problema é necessário 
+        <translation>Para evitar este problema é necessário 
 definir exatamente o separador de colunas 
 usando os caracteres TAB ou ESPAÇO.</translation>
     </message>
@@ -8256,7 +8258,7 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished">Marcando esta opção, todos os espaços em branco 
+        <translation>Ao selecionar esta opção, todos os espaços em branco 
 serão eliminados do início e do final das linhas 
 e cada sequência de espaços internos (incluindo o caracter TAB) 
 será substituída por um único espaço em branco.</translation>
@@ -8267,7 +8269,9 @@ overlaping if the columns in the ASCII file don&apos;t
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="unfinished"></translation>
+        <translation>Atenção: selecionar esta opção leva à sobreposição 
+de colunas se as colunas no arquivo ASCII 
+não tem o mesmo número de linhas.</translation>
     </message>
 </context>
 <context>
