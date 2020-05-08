@@ -151,7 +151,7 @@ void SmoothFilter::smoothAverage(double *, double *y)
 	for (unsigned i=d_n-p2; i<d_n-1; i++)
 	{
 		aux = 0.0;
-		for (unsigned j=d_n-i-1; j>=i-d_n+1; j--)
+		for (int j=(int)(i+1-d_n); j<(int)(d_n-i); j++)
 			aux += y[i+j];
 
 		s[i] = aux/(double)(2*(d_n-i-1)+1);
