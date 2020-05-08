@@ -4995,7 +4995,7 @@ void Graph::setArrowDefaults(int lineWidth,  const QColor& c, Qt::PenStyle style
 
 QString Graph::parentPlotName()
 {
-	QWidget *w = (QWidget *)parent()->parent();
+	QWidget *w = (QWidget *)parent()->parent()->parent();
 	return QString(w->objectName());
 }
 
