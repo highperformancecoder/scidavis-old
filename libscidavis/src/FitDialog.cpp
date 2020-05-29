@@ -1054,12 +1054,12 @@ void FitDialog::accept()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(CONFS(from).toUtf8().constData());
+		parser.SetExpr(CONFS(from));
 		start=parser.Eval();
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(this, tr("Start limit error"),QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(this, tr("Start limit error"),QStringFromString(e.GetMsg()));
 		boxFrom->setFocus();
 		return;
 	}
@@ -1067,12 +1067,12 @@ void FitDialog::accept()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(CONFS(to).toUtf8().constData());
+		parser.SetExpr(CONFS(to));
 		end=parser.Eval();
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(this, tr("End limit error"),QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(this, tr("End limit error"),QStringFromString(e.GetMsg()));
 		boxTo->setFocus();
 		return;
 	}
@@ -1088,12 +1088,12 @@ void FitDialog::accept()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(CONFS(tolerance).toUtf8().constData());
+		parser.SetExpr(CONFS(tolerance));
 		eps=parser.Eval();
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(0, tr("Tolerance input error"),QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(0, tr("Tolerance input error"),QStringFromString(e.GetMsg()));
 		boxTolerance->setFocus();
 		return;
 	}
@@ -1306,12 +1306,12 @@ bool FitDialog::validInitialValues()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr(CONFS(boxParams->item(i,1)->text()).toUtf8().constData());
+			parser.SetExpr(CONFS(boxParams->item(i,1)->text()));
 			parser.Eval();
 		}
 		catch (mu::ParserError &e)
 		{
-			QMessageBox::critical(0, tr("Start limit error"), QString::fromStdString(e.GetMsg()));
+			QMessageBox::critical(0, tr("Start limit error"), QStringFromString(e.GetMsg()));
 			boxParams->setCurrentCell (i,1);
 			return false;
 		}

@@ -66,7 +66,7 @@ public:
   virtual void fit();
 
   //! Sets the data set to be used as source of Y errors.
-  bool setYErrorSource(ErrorSource err, const QString& colName = QString::null, bool fail_silently=false);
+  bool setYErrorSource(ErrorSource err, const QString& colName = {}, bool fail_silently=false);
 
   void setDataCurve(int curve, double start, double end);
 

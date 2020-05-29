@@ -133,8 +133,8 @@ Graph::Graph(QWidget* parent, QString name, Qt::WindowFlags f)
 	for (int i=0; i<QwtPlot::axisCnt; i++)
 	{
 		axisType << Numeric;
-		axesFormatInfo << QString::null;
-		axesFormulas << QString::null;
+		axesFormatInfo << QString();
+		axesFormulas << QString();
 		d_user_step[i] = 0.0;
 	}
 
@@ -1537,7 +1537,7 @@ QString Graph::selectedCurveTitle()
 	if (d_range_selector)
 		return d_range_selector->selectedCurve()->title().text();
 	else
-		return QString::null;
+          return {};
 }
 
 bool Graph::markerSelected()
@@ -2327,7 +2327,7 @@ QString Graph::savePieCurveLayout()
 
 QString Graph::saveCurveLayout(int index)
 {
-	QString s = QString::null;
+	QString s;
 	int style = c_type[index];
 	QwtPlotCurve *c = (QwtPlotCurve*)curve(index);
 	if (c)
@@ -3168,7 +3168,7 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 		d_plot->enableAxis(i, false);
 	scalePicker->refresh();
 
-	d_plot->setTitle(QString::null);
+	d_plot->setTitle(QString());
 
 	static_cast<QwtPlotCanvas*>(d_plot->canvas())->setLineWidth(1);
 
@@ -3546,7 +3546,7 @@ void Graph::removePie()
 	{
 		Legend* mrk=(Legend*) d_plot->marker(legendMarkerID);
 		if (mrk)
-			mrk->setText(QString::null);
+                  mrk->setText({});
 	}
 
 	d_plot->removeCurve(c_keys[0]);
@@ -3649,7 +3649,7 @@ void Graph::removeLegendItem(int index)
 
 	if (isPiePlot())
 	{
-		mrk->setText(QString::null);
+          mrk->setText({});
 		return;
 	}
 
@@ -3955,7 +3955,7 @@ bool Graph::insertFunctionCurve(ApplicationWindow * parent, const QStringList& f
 {
 	int type= FunctionCurve::Normal;
 	QStringList formulas;
-	QString var, name = QString::null;
+	QString var, name;
 	QList<double> ranges;
 
 	QStringList curve = func_spec[0].split(",");
@@ -4403,9 +4403,9 @@ void Graph::copyTitle()
 
 void Graph::removeAxisTitle()
 {
-	int axis = (selectedAxis + 2)%4;//unconsistent notation in Qwt enumerations between
+	int axis = (selectedAxis + 2)%4;//inconsistent notation in Qwt enumerations between
   	//QwtScaleDraw::alignment and QwtPlot::Axis
-  	d_plot->setAxisTitle(axis, QString::null);
+  	d_plot->setAxisTitle(axis, QString());
 	d_plot->replot();
 	emit modifiedGraph();
 }

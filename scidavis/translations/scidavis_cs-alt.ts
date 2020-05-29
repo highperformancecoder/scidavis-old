@@ -9785,64 +9785,64 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MuParserScript</name>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="272"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="274"/>
         <source>col() works only on tables!</source>
         <translation type="unfinished">col() funguje pouze na tabulky!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="275"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="310"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="352"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="277"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="311"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="353"/>
         <source>There&apos;s no column %1 in table %2!</source>
         <translation type="unfinished">V tabulce %2 neexistuje sloupec %1!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="303"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="305"/>
         <source>tablecol() works only on tables!</source>
         <translation type="unfinished">tablecol() funguje pouze na tabulky!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="306"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="446"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="455"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="461"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="308"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="445"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="454"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="460"/>
         <source>Couldn&apos;t find a table named %1.</source>
         <translation type="unfinished">Nemohu najít tabulku nazvanou %1.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="349"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="369"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="350"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="370"/>
         <source>cell() works only on tables and matrices!</source>
         <translation type="unfinished">cell() funguje pouze na tabulky a matice!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="373"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="374"/>
         <source>There&apos;s no row %1 in matrix %2!</source>
         <translation type="unfinished">V matici %2 neexistuje buňka %1!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="376"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="377"/>
         <source>There&apos;s no column %1 in matrix %2!</source>
         <translation type="unfinished">V matici %2 neexistuje sloupec %1!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="423"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="424"/>
         <location filename="../../libscidavis/src/MuParserScript.cpp" line="429"/>
         <source>Accessing table values is not (yet) supported in this context.</source>
         <translation type="unfinished">Přístup k hodnotám v tabulce není (zatím) podporován v tomto konextu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="468"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="467"/>
         <source>There&apos;s no column named %1 in table %2!</source>
         <translation type="unfinished">V tabulce %2 neexistuje sloupec %1!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="579"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="578"/>
         <source>tablecol: wrong number of arguments (need 2, got %1)</source>
         <translation type="unfinished">tablecol: chybný počet argumentů (nutné 2, zadány %1)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="606"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="605"/>
         <source>cell: wrong number of arguments (need 2, got %1)</source>
         <translation type="unfinished">cell: chybný počet argumentů (nutné 2, zadány %1)</translation>
     </message>
@@ -9850,119 +9850,119 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MuParserScripting</name>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="47"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="49"/>
         <source>abs(x):
  Absolute value of x.</source>
         <translation type="unfinished">abs(x):
  Absolutní hodnota x.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="48"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="50"/>
         <source>acos(x):
  Inverse cos function.</source>
         <translation type="unfinished">acos(x):
  Inverzní funkce cosinu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="49"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="51"/>
         <source>acosh(x):
  Hyperbolic inverse cos function.</source>
         <translation type="unfinished">acosh(x):
  Hyperbolická inverzní funkce cosinu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="50"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="52"/>
         <source>asin(x):
  Inverse sin function.</source>
         <translation type="unfinished">asin(x):
  Inverzní funkce sinu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="51"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="53"/>
         <source>asinh(x):
  Hyperbolic inverse sin function.</source>
         <translation type="unfinished">asinh(x):
  Hyperbolická inverzní funkce sinu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="52"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="54"/>
         <source>atan(x):
  Inverse tan function.</source>
         <translation type="unfinished">atan(x):
  Inverzní funkce tangentu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="53"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="55"/>
         <source>atanh(x):
   Hyperbolic inverse tan function.</source>
         <translation type="unfinished">atanh(x):
  Hyperbolická inverzní funkce tangentu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="54"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="56"/>
         <source>avg(x,y,...):
   Mean value of all arguments.</source>
         <translation type="unfinished">avg(x,y,...):
  Průměrná hodnota všech argumentů.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="55"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="57"/>
         <source>bessel_j0(x):
   Regular cylindrical Bessel function of zeroth order, J_0(x).</source>
         <translation type="unfinished">bessel_j0(x):
   Pravidelná cylindrická Besselova funkce nulového řádu, J_0(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="56"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="58"/>
         <source>bessel_j1(x):
   Regular cylindrical Bessel function of first order, J_1(x).</source>
         <translation type="unfinished">bessel_j1(x):
   Pravidelná cylindrická Besselova funkce prvního řádu, J_1(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="57"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="59"/>
         <source>bessel_jn(double x, int n):
  Regular cylindrical Bessel function of order n, J_n(x).</source>
         <translation type="unfinished">bessel_jn(double x, int n):
  Pravidelná cylindrická Besselova funkce n-tého řádu, J_n(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="58"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="60"/>
         <source>bessel_jn_zero(double n, unsigned int s):
  s-th positive zero x_s of regular cylindrical Bessel function of order n, J_n(x_s)=0</source>
         <translation type="unfinished">bessel_jn_zero(double n, unsigned int s):
  s-th kladná nula x_s pravidelné cylindrické Besselovy funkce n-tého řádu, J_n(x_s)=0</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="59"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="61"/>
         <source>bessel_y0(x):
  Irregular cylindrical Bessel function of zeroth order, Y_0(x), for x&gt;0.</source>
         <translation type="unfinished">bessel_y0(x):
   Nepravidelná cylindrická Besselova funkce nulového řádu, Y_0(x), pro x&gt;0.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="60"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="62"/>
         <source>bessel_y1(x):
  Irregular cylindrical Bessel function of first order, Y_1(x), for x&gt;0.</source>
         <translation type="unfinished">bessel_y1(x):
   Nepravidelná cylindrická Besselova funkce prvního řádu, Y_1(x), pro x&gt;0.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="61"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="63"/>
         <source>bessel_yn(double x, int n):
  Irregular cylindrical Bessel function of order n, Y_n(x), for x&gt;0.</source>
         <translation type="unfinished">bessel_yn(double x, int n):
  Nepravidelná cylindrická Besselova funkce n-tého řádu, Y_n(x), for x&gt;0.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="62"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="64"/>
         <source>beta(a,b):
  Computes the Beta Function, B(a,b) = Gamma(a)*Gamma(b)/Gamma(a+b) for a &gt; 0, b &gt; 0.</source>
         <translation type="unfinished">beta(a,b):
  Vypočte Beta funkci, B(a,b) = Gamma(a)*Gamma(b)/Gamma(a+b) for a &gt; 0, b &gt; 0.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="63"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="65"/>
         <source>ceil(x):
  Round to the next larger integer,
  smallest integer larger or equal to x.</source>
@@ -9971,56 +9971,56 @@ p, li { white-space: pre-wrap; }
  nejnižší celé číslo vyšší nebo rovno x.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="64"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="66"/>
         <source>cos(x):
  Calculate cosine.</source>
         <translation type="unfinished">cos(x):
  Vypočte cosinus.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="65"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="67"/>
         <source>cosh(x):
  Hyperbolic cos function.</source>
         <translation type="unfinished">cosh(x):
  Hyperbolická funkce cosinu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="66"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="68"/>
         <source>erf(x):
   The error function.</source>
         <translation type="unfinished">erf(x):
   Chybová funkce.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="67"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="69"/>
         <source>erfc(x):
  Complementary error function erfc(x) = 1 - erf(x).</source>
         <translation type="unfinished">erfc(x):
  Doplňková chybová funkce erfc(x) = 1 - erf(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="68"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="70"/>
         <source>erfz(x):
  The Gaussian probability density function Z(x).</source>
         <translation type="unfinished">erfz(x):
  Gaussovská pravděpodobnostní funkce hustoty Z(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="69"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="71"/>
         <source>erfq(x):
  The upper tail of the Gaussian probability function Q(x).</source>
         <translation type="unfinished">erfq(x):
  Horní konec (&quot;ocas&quot;) Gaussovské pravděpodobnostní funkce Q(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="70"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="72"/>
         <source>exp(x):
  Exponential function: e raised to the power of x.</source>
         <translation type="unfinished">exp(x):
  Exponenciální funkce: e umocněné na x.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="71"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="73"/>
         <source>floor(x):
  Round to the next smaller integer,
  largest integer smaller or equal to x.</source>
@@ -10029,77 +10029,77 @@ p, li { white-space: pre-wrap; }
  nejvyšší celé číslo nižší nebo rovno x.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="72"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="74"/>
         <source>gamma(x):
  Computes the Gamma function, subject to x not being a negative integer.</source>
         <translation type="unfinished">gamma(x):
  Vypočte funkci Gamma function, za pomínky, že x není záporné celé číslo.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="73"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="75"/>
         <source>gammaln(x):
  Computes the logarithm of the Gamma function, subject to x not a being negative integer. For x&lt;0, log(|Gamma(x)|) is returned.</source>
         <translation type="unfinished">gammaln(x):
  Vypočte logaritmus funkce Gamma, za podmínky, že x není záporné celé číslo. Pro x&lt;0, vrátí log(|Gamma(x)|) .</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="74"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="76"/>
         <source>hazard(x):
  Computes the hazard function for the normal distribution h(x) = erfz(x)/erfq(x).</source>
         <translation type="unfinished">hazard(x):
  Vypočte funkci rizika pro normální rozdělení h(x) = erfz(x)/erfq(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="75"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="77"/>
         <source>if(e1, e2, e3):
  if e1 then e2 else e3.</source>
         <translation type="unfinished">if(e1, e2, e3):
  když e1 pak e2 jinak e3.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="76"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="78"/>
         <source>ln(x):
  Calculate natural logarithm log_e.</source>
         <translation type="unfinished">ln(x):
  Vypočte přirozený logaritmus log_e.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="77"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="79"/>
         <source>log(x):
  Calculate decimal logarithm log_10.</source>
         <translation type="unfinished">log(x):
  Vypočte dekadický logaritmus log_10.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="78"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="80"/>
         <source>log10(x):
  Calculate decimal logarithm log_10.</source>
         <translation type="unfinished">log10(x):
  Vypočte dekadický logaritmus log_10.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="79"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="81"/>
         <source>log2(x):
  Calculate binary logarithm log_2.</source>
         <translation type="unfinished">log2(x):
  Vypočte binární logaritmus log_2.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="80"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="82"/>
         <source>min(x,y,...):
  Calculate minimum of all arguments.</source>
         <translation type="unfinished">min(x,y,...):
  Vypočte minimum ze všech argumentů.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="81"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="83"/>
         <source>max(x,y,...):
  Calculate maximum of all arguments.</source>
         <translation type="unfinished">max(x,y,...):
  Vypočte maximum ze všech argumentů.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="82"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="84"/>
         <source>mod(x,y):
  Calculate rest of integer division x/y,
  x modulo y.</source>
@@ -10108,70 +10108,70 @@ p, li { white-space: pre-wrap; }
  x modulo y.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="83"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="85"/>
         <source>pow(x,y):
  Raise x to the power of y, x^y.</source>
         <translation type="unfinished">pow(x,y):
  Umocní x na y, x^y.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="84"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="86"/>
         <source>rint(x):
  Round to nearest integer.</source>
         <translation type="unfinished">rint(x):
  Zaokrouhlí na nejbližší celé číslo.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="85"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="87"/>
         <source>sign(x):
  Sign function: -1 if x&lt;0; 1 if x&gt;0.</source>
         <translation type="unfinished">sign(x):
  Znaménková funkce: -1 if x&lt;0; 1 if x&gt;0.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="86"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="88"/>
         <source>sin(x):
  Calculate sine.</source>
         <translation type="unfinished">sin(x):
  Vypočte sinus.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="87"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="89"/>
         <source>sinh(x):
  Hyperbolic sin function.</source>
         <translation type="unfinished">sinh(x):
  Hyperbolická funkce sinu.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="88"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="90"/>
         <source>sqrt(x):
  Square root function.</source>
         <translation type="unfinished">sqrt(x):
  Odmocnina x.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="89"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="91"/>
         <source>sum(x,y,...):
  Calculate sum of all arguments.</source>
         <translation type="unfinished">sum(x,y,...):
  Vypočte součet všech argumentů.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="90"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="92"/>
         <source>tan(x):
  Calculate tangent function.</source>
         <translation type="unfinished">tan(x):
  Vypočte funkci tangens.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="91"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="93"/>
         <source>tanh(x):
  Hyperbolic tan function.</source>
         <translation type="unfinished">tanh(x):
  Hyperbolická funkce tangens.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="92"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="94"/>
         <source>w0(x):
  Compute the principal branch of Lambert&apos;s W function, W_0(x).
  W is defined as a solution to the equation W(x)*exp(W(x))=x.
@@ -10182,7 +10182,7 @@ p, li { white-space: pre-wrap; }
  Pro x&lt;0, existují dvě větve reálných čísel; tato funkce vypočte tu, u které W&gt;-1 pro x&lt;0 (také se podívejte na wm1(x)).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="93"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="95"/>
         <source>wm1(x):
  Compute the secondary branch of Lambert&apos;s W function, W_{-1}(x).
  W is defined as a solution to the equation W(x)*exp(W(x))=x.
@@ -11063,913 +11063,913 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PlotDialog</name>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="88"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="89"/>
         <source>Plot type</source>
         <translation type="unfinished">Typ grafu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="515"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1321"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1333"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1451"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="516"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1322"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1334"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1452"/>
         <source>Line</source>
         <translation type="unfinished">Čára</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1452"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1453"/>
         <source>Scatter</source>
         <translation type="unfinished">Body</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1453"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1454"/>
         <source>Line + Symbol</source>
         <translation type="unfinished">Čára + Symbol</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1433"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1434"/>
         <source>Vertical Bars</source>
         <translation type="unfinished">Svislé sloupečky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1435"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1436"/>
         <source>Horizontal Bars</source>
         <translation type="unfinished">Vodorovné sloupečky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1437"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1438"/>
         <source>Histogram</source>
         <translation type="unfinished">Histogram</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1440"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1441"/>
         <source>Vector XYXY</source>
         <translation type="unfinished">Vektor XYXY</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="884"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1362"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1429"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="885"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1363"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1430"/>
         <source>Error Bars</source>
         <translation type="unfinished">Chybové úsečky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="127"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1136"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1586"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="128"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1137"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1587"/>
         <source>&amp;Plot Associations...</source>
         <translation type="unfinished">&amp;Asociace grafu...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="118"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="119"/>
         <source>&amp;Worksheet</source>
         <translation type="unfinished">&amp;Pracovní list</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="125"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="126"/>
         <source>&amp;Apply</source>
         <translation type="unfinished">&amp;Použít</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="120"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="121"/>
         <source>&amp;OK</source>
         <translation type="unfinished">&amp;OK</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="123"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="124"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished">Z&amp;rušit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="484"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="485"/>
         <source>Connect</source>
         <translation type="unfinished">Spojit</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="393"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="528"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="785"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="849"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="394"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="529"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="786"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="850"/>
         <source>Style</source>
         <translation type="unfinished">Styl</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="346"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="402"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="781"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="809"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="347"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="403"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="782"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="810"/>
         <source>Width</source>
         <translation type="unfinished">Šířka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="388"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="776"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="851"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="950"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="389"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="777"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="852"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="951"/>
         <source>Color</source>
         <translation type="unfinished">Barva</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="503"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="504"/>
         <source>Fill color</source>
         <translation type="unfinished">Barva výplně</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="416"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="506"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1342"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1368"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="417"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="507"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1343"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1369"/>
         <source>Pattern</source>
         <translation type="unfinished">Šablona</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="536"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="696"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="537"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="697"/>
         <source>Fill Color</source>
         <translation type="unfinished">Barva výplně</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="531"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="690"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="532"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="691"/>
         <source>Size</source>
         <translation type="unfinished">Velikost</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="554"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="688"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1327"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1334"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="555"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="689"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1328"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1335"/>
         <source>Symbol</source>
         <translation type="unfinished">Symbol</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="837"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="838"/>
         <source>Direction</source>
         <translation type="unfinished">Směr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="840"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="841"/>
         <source>Plus</source>
         <translation type="unfinished">Plus</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="842"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="843"/>
         <source>Minus</source>
         <translation type="unfinished">Mínus</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="844"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="845"/>
         <source>&amp;X Error Bar</source>
         <translation type="unfinished">&amp;X-chybová úsečka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="856"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="953"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="857"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="954"/>
         <source>Line Width</source>
         <translation type="unfinished">Šířka čáry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="858"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="859"/>
         <source>1</source>
         <translation type="unfinished">1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="859"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="860"/>
         <source>2</source>
         <translation type="unfinished">2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="860"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="861"/>
         <source>3</source>
         <translation type="unfinished">3</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="861"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="862"/>
         <source>4</source>
         <translation type="unfinished">4</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="862"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="863"/>
         <source>5</source>
         <translation type="unfinished">5</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="866"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="867"/>
         <source>Cap Width</source>
         <translation type="unfinished">Šířka koncovky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="868"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="869"/>
         <source>8</source>
         <translation type="unfinished">8</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="869"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="870"/>
         <source>10</source>
         <translation type="unfinished">10</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="870"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="871"/>
         <source>12</source>
         <translation type="unfinished">12</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="871"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="872"/>
         <source>16</source>
         <translation type="unfinished">16</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="872"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="873"/>
         <source>20</source>
         <translation type="unfinished">20</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="876"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="877"/>
         <source>Through Symbol</source>
         <translation type="unfinished">Skrz symbol</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="896"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="897"/>
         <source>Automatic Binning</source>
         <translation type="unfinished">Automatické dělení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="899"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="900"/>
         <source>&amp;Show statistics</source>
         <translation type="unfinished">&amp;Zobrazit statistiky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="904"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="905"/>
         <source>Bin Size</source>
         <translation type="unfinished">Šířka intervalu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="907"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="908"/>
         <source>Begin</source>
         <translation type="unfinished">Počátek</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="910"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="911"/>
         <source>End</source>
         <translation type="unfinished">Konec</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="920"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1347"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="921"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1348"/>
         <source>Histogram Data</source>
         <translation type="unfinished">Data histogramu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="931"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="932"/>
         <source>Gap Between Bars (in %)</source>
         <translation type="unfinished">Mezera mezi sloupečky (v %)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="943"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1343"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="944"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1344"/>
         <source>Spacing</source>
         <translation type="unfinished">Odsazení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="958"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="959"/>
         <source>Arrowheads</source>
         <translation type="unfinished">Konce šipek</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="960"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="961"/>
         <source>Length</source>
         <translation type="unfinished">Délka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="964"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2186"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="965"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2187"/>
         <source>Angle</source>
         <translation type="unfinished">Úhel</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="969"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="970"/>
         <source>&amp;Filled</source>
         <translation type="unfinished">&amp;Plný</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="973"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2193"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="974"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2194"/>
         <source>End Point</source>
         <translation type="unfinished">Koncový bod</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="975"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2194"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="976"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2195"/>
         <source>X End</source>
         <translation type="unfinished">X-konec</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="980"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2195"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="981"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2196"/>
         <source>Y End</source>
         <translation type="unfinished">Y-konec</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1004"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1356"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1005"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1357"/>
         <source>Vector</source>
         <translation type="unfinished">Vektor</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="488"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="489"/>
         <source>No line</source>
         <translation type="unfinished">Žádné čáry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="489"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="490"/>
         <source>Lines</source>
         <translation type="unfinished">Čáry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="490"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="491"/>
         <source>Sticks</source>
         <translation type="unfinished">Svislé čáry</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="492"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="493"/>
         <source>Dots</source>
         <translation type="unfinished">Body</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="493"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="494"/>
         <source>Spline</source>
         <translation type="unfinished">Spline</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="500"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="501"/>
         <source>Fill area under curve</source>
         <translation type="unfinished">Vyplnit oblast pod křivkou</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="540"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="701"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="541"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="702"/>
         <source>Edge Color</source>
         <translation type="unfinished">Barva orámování</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="543"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="705"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="544"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="706"/>
         <source>Edge Width</source>
         <translation type="unfinished">Šířka orámování</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="562"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1446"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="563"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1447"/>
         <source>Box</source>
         <translation type="unfinished">Krabička</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="564"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="664"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="565"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="665"/>
         <source>Type</source>
         <translation type="unfinished">Typ</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="568"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="569"/>
         <source>No Box</source>
         <translation type="unfinished">Žádné</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="569"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="570"/>
         <source>Rectangle</source>
         <translation type="unfinished">Obdélník</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="570"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="571"/>
         <source>Diamond</source>
         <translation type="unfinished">Kosočtverec</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="571"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="572"/>
         <source>Perc 10, 25, 75, 90</source>
         <translation type="unfinished">Proc 10, 25, 75, 90</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="572"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="573"/>
         <source>Notch</source>
         <translation type="unfinished">Zářez</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="575"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="612"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="576"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="613"/>
         <source>Range</source>
         <translation type="unfinished">Rozsah</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="579"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="618"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1099"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="580"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="619"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1100"/>
         <source>Standard Deviation</source>
         <translation type="unfinished">Směrodatná odchylka</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="580"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="619"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="581"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="620"/>
         <source>Standard Error</source>
         <translation type="unfinished">Standardní chyba</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="581"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="582"/>
         <source>Perc 25, 75</source>
         <translation type="unfinished">Proc 25, 75</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="582"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="583"/>
         <source>Perc 10, 90</source>
         <translation type="unfinished">Proc 10, 90</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="583"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="584"/>
         <source>Perc 5, 95</source>
         <translation type="unfinished">Proc 5, 95</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="584"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="585"/>
         <source>Perc 1, 99</source>
         <translation type="unfinished">Proc 1, 99</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="585"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="624"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="586"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="625"/>
         <source>Max-Min</source>
         <translation type="unfinished">Max-Min</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="586"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="625"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="587"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="626"/>
         <source>Constant</source>
         <translation type="unfinished">Konstanta</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="589"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="628"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="590"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="629"/>
         <source>Percentile (%)</source>
         <translation type="unfinished">Percentil (%)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="635"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="636"/>
         <source>Coef</source>
         <translation type="unfinished">Koeficient</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="604"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="605"/>
         <source>Box Width</source>
         <translation type="unfinished">Velikost krabičky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="610"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="611"/>
         <source>Whiskers</source>
         <translation type="unfinished">Fousy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="617"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="618"/>
         <source>No Whiskers</source>
         <translation type="unfinished">Bez fousů</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="620"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="621"/>
         <source>75-25</source>
         <translation type="unfinished">75-25</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="621"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="622"/>
         <source>90-10</source>
         <translation type="unfinished">90-10</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="622"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="623"/>
         <source>95-5</source>
         <translation type="unfinished">95-5</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="623"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="624"/>
         <source>99-1</source>
         <translation type="unfinished">99-1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="655"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1369"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="656"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1370"/>
         <source>Box/Whiskers</source>
         <translation type="unfinished">Krabička/Fousy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="666"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="667"/>
         <source>Max</source>
         <translation type="unfinished">Max</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="671"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="672"/>
         <source>99%</source>
         <translation type="unfinished">99%</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="675"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1098"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="676"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1099"/>
         <source>Mean</source>
         <translation type="unfinished">Průměr</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="679"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="680"/>
         <source>1%</source>
         <translation type="unfinished">1%</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="683"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="684"/>
         <source>Min</source>
         <translation type="unfinished">Min</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="715"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1370"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="716"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1371"/>
         <source>Percentile</source>
         <translation type="unfinished">Percentil</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="936"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="937"/>
         <source>Offset (in %)</source>
         <translation type="unfinished">Posun (in %)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="985"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="986"/>
         <source>Position</source>
         <translation type="unfinished">Pozice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="988"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="989"/>
         <source>Tail</source>
         <translation type="unfinished">Vzadu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="989"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="990"/>
         <source>Middle</source>
         <translation type="unfinished">Střed</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="990"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="991"/>
         <source>Head</source>
         <translation type="unfinished">Hlava</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1129"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1130"/>
         <source>&amp;Delete</source>
         <translation type="unfinished">&amp;Smazat</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1134"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1584"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1135"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1585"/>
         <source>&amp;Edit...</source>
         <translation type="unfinished">&amp;Upravit...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1441"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1442"/>
         <source>Vector XYAM</source>
         <translation type="unfinished">Vektor XYAM</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1995"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1996"/>
         <source>Please enter a valid start limit!</source>
         <translation type="unfinished">Zadejte prosím platnou počáteční hodnotu!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2002"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2003"/>
         <source>Please enter a valid end limit!</source>
         <translation type="unfinished">Zadejte prosím platnou konečnou hodnotu!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2009"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2010"/>
         <source>Please enter a valid bin size value!</source>
         <translation type="unfinished">Zadejte prosím platnou šířku intervalu!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2068"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2069"/>
         <source>Please enter limits that satisfy: begin &lt; end!</source>
         <translation type="unfinished">Zadejte prosím limity pro které platí: počátek &lt; Konec!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2094"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2095"/>
         <source>Please enter a positive bin size value!</source>
         <translation type="unfinished">Zadejte prosím kladnou hodnotu šíře intervalu!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2185"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2186"/>
         <source>Vector Data</source>
         <translation type="unfinished">Vektorová data</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2187"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2188"/>
         <source>Magnitude</source>
         <translation type="unfinished">Velikost</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="457"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="458"/>
         <source>Attach curve to: </source>
         <translation type="unfinished">Připojit křivku k: </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="459"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="460"/>
         <source>x Axis</source>
         <translation type="unfinished">X-Osa</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="462"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="805"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="463"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="806"/>
         <source>Bottom</source>
         <translation type="unfinished">Dole</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="463"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="806"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="464"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="807"/>
         <source>Top</source>
         <translation type="unfinished">Nahoře</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="465"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="466"/>
         <source>y Axis</source>
         <translation type="unfinished">Y-Osa</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="468"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="803"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="469"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="804"/>
         <source>Left</source>
         <translation type="unfinished">Vlevo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="469"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="804"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="470"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="805"/>
         <source>Right</source>
         <translation type="unfinished">Vpravo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="477"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1317"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="478"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1318"/>
         <source>Axes</source>
         <translation type="unfinished">Osy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="491"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="492"/>
         <source>Horizontal Steps</source>
         <translation type="unfinished">Vodorovné kroky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="494"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="495"/>
         <source>Vertical Steps</source>
         <translation type="unfinished">Svislé kroky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="730"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="820"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1448"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="731"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="821"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1449"/>
         <source>Image</source>
         <translation type="unfinished">Obrázek</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="734"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="735"/>
         <source>&amp;Gray Scale</source>
         <translation type="unfinished">&amp;Stupně šedi</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="749"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="750"/>
         <source>Contour Lines</source>
         <translation type="unfinished">Vrstevnice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="753"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="754"/>
         <source>Levels</source>
         <translation type="unfinished">Úrovně</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="763"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="764"/>
         <source>Use &amp;Color Map</source>
         <translation type="unfinished">Po&amp;užít barevnou paletu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="767"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="768"/>
         <source>Use Default &amp;Pen</source>
         <translation type="unfinished">&amp;Použít výchozí pero</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="796"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="797"/>
         <source>Color Bar Scale</source>
         <translation type="unfinished">Barevná stupnice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="800"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="801"/>
         <source>Axis</source>
         <translation type="unfinished">Osa</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="820"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1375"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1448"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="821"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1376"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1449"/>
         <source>Contour</source>
         <translation type="unfinished">Kontura</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1375"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1376"/>
         <source>Colors</source>
         <translation type="unfinished">Barvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="596"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="597"/>
         <source>Coefficient</source>
         <translation type="unfinished">Koeficient</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="737"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="738"/>
         <source>&amp;Default Color Map</source>
         <translation type="unfinished">&amp;Výchozí barevná paleta</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="740"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="741"/>
         <source>&amp;Custom Color Map</source>
         <translation type="unfinished">&amp;Vlastní barevná paleta</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1075"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1092"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1102"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1076"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1093"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1103"/>
         <source>Bins</source>
         <translation type="unfinished">Dílky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1076"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1097"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1077"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1098"/>
         <source>Histogram and Probabilities for</source>
         <translation type="unfinished">Histogram a Pravděpodobnosti pro</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1092"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1093"/>
         <source>Quantity</source>
         <translation type="unfinished">Množství</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1092"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1093"/>
         <source>Sum</source>
         <translation type="unfinished">Součet</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1092"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1093"/>
         <source>Percent</source>
         <translation type="unfinished">Procent</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1100"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1101"/>
         <source>Minimum</source>
         <translation type="unfinished">Minimum</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1101"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1102"/>
         <source>Maximum</source>
         <translation type="unfinished">Maximum</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="290"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="291"/>
         <source>Titles</source>
         <translation type="unfinished">Nadpis</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="291"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="292"/>
         <source>Axes Labels</source>
         <translation type="unfinished">Popisky os</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="292"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="293"/>
         <source>Axes Numbers</source>
         <translation type="unfinished">Čísla os</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="293"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="294"/>
         <source>Legends</source>
         <translation type="unfinished">Legendy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="305"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1297"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="306"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1298"/>
         <source>Fonts</source>
         <translation type="unfinished">Písma</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="320"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="321"/>
         <source>Background Color</source>
         <translation type="unfinished">Barva pozadí</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="323"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="334"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="324"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="335"/>
         <source>Opacity</source>
         <translation type="unfinished">Průhlednost</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="328"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="339"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="329"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="340"/>
         <source>Transparent</source>
         <translation type="unfinished">Průhledný</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="331"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="332"/>
         <source>Canvas Color</source>
         <translation type="unfinished">Barva podkladu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="342"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="343"/>
         <source>Border Color</source>
         <translation type="unfinished">Barva ohraničení</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="354"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="355"/>
         <source>Margin</source>
         <translation type="unfinished">Okraj</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="360"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="361"/>
         <source>Antialiasing</source>
         <translation type="unfinished">Potlačení roztřepení čar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="363"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="364"/>
         <source>Apply to all layers</source>
         <translation type="unfinished">Použít na všechny vrstvy</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="371"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1028"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1288"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="372"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1029"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1289"/>
         <source>Layer</source>
         <translation type="unfinished">Vrstva</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="407"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="408"/>
         <source>Border</source>
         <translation type="unfinished">Hranice</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="411"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="412"/>
         <source>First color</source>
         <translation type="unfinished">První barva</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="419"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="420"/>
         <source>Pie radius</source>
         <translation type="unfinished">Průměr koláče</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="428"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="429"/>
         <source>Fill</source>
         <translation type="unfinished">Výplň</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="436"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1311"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1431"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="437"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1312"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1432"/>
         <source>Pie</source>
         <translation type="unfinished">Koláč</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="443"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="444"/>
         <source>&amp;Scale layers to paper size</source>
         <translation type="unfinished">&amp;Přizpůsobit vrstvy velikosti stránky</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="452"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1296"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="453"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1297"/>
         <source>Print</source>
         <translation type="unfinished">Tisknout</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="72"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="73"/>
         <source>Plot details</source>
         <translation type="unfinished">Detaily grafu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1995"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2002"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2009"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2068"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1996"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2003"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2010"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2069"/>
         <source>Input error</source>
         <translation type="unfinished">Chyba vstupu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2038"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2039"/>
         <source>Start limit error</source>
         <translation type="unfinished">Chyba počáteční hodnoty</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2057"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2058"/>
         <source>End limit error</source>
         <translation type="unfinished">Chyba konečné hodnoty</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2083"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2094"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2084"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2095"/>
         <source>Bin size input error</source>
         <translation type="unfinished">Chyba zadání velikosti intervalu</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="445"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="446"/>
         <source>Print Crop &amp;Marks</source>
         <translation type="unfinished">&amp;Tisknout značky ořezu</translation>
     </message>

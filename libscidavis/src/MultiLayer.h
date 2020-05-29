@@ -243,7 +243,7 @@ class LayerButton: public QPushButton
 	Q_OBJECT
 
 public:
-    LayerButton (const QString& text = QString::null, QWidget* parent = 0);
+  LayerButton (const QString& text = {}, QWidget* parent = 0);
 	~LayerButton(){};
 
 	static int btnSize(){return 20;};

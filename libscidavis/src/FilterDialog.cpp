@@ -115,12 +115,12 @@ double from = 0.0, to = 0.0;
 try
 	{
 	MyParser parser;
-	parser.SetExpr(boxStart->text().replace(",", ".").toUtf8().constData());
+	parser.SetExpr(boxStart->text().replace(",", "."));
 	from = parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(this, tr("Frequency input error"), QString::fromStdString(e.GetMsg()));
+	QMessageBox::critical(this, tr("Frequency input error"), QStringFromString(e.GetMsg()));
 	boxStart->setFocus();
 	return;
 	}
@@ -138,12 +138,12 @@ if (filter_type >= FFTFilter::BandPass)
 	try
 		{
 		MyParser parser;
-		parser.SetExpr(boxEnd->text().replace(",", ".").toStdString());
+		parser.SetExpr(boxEnd->text().replace(",", "."));
 		to=parser.Eval();
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical(this, tr("High Frequency input error"), QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(this, tr("High Frequency input error"), QStringFromString(e.GetMsg()));
 		boxEnd->setFocus();
 		return;
 		}

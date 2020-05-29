@@ -834,12 +834,12 @@ bool Plot3DDialog::updatePlot()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr(from.toUtf8().constData());
+			parser.SetExpr(from);
 			start=parser.Eval();
 		}
 		catch(mu::ParserError &e)
 		{
-			QMessageBox::critical(0,tr("Start limit error"),  QString::fromStdString(e.GetMsg()));
+			QMessageBox::critical(0,tr("Start limit error"),  QStringFromString(e.GetMsg()));
 			boxFrom->setFocus();
 			error=true;
 			return false;
@@ -847,12 +847,12 @@ bool Plot3DDialog::updatePlot()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr(to.toUtf8().constData());
+			parser.SetExpr(to);
 			end=parser.Eval();
 		}
 		catch(mu::ParserError &e)
 		{
-			QMessageBox::critical(0,tr("End limit error"), QString::fromStdString(e.GetMsg()));
+			QMessageBox::critical(0,tr("End limit error"), QStringFromString(e.GetMsg()));
 			boxTo->setFocus();
 			error=true;
 			return false;

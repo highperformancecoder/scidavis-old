@@ -270,24 +270,24 @@ bool FunctionDialog::acceptFunction()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(from.toUtf8().constData());
+		parser.SetExpr(from);
 		start=parser.Eval();
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(0, tr("Start limit error"), QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(0, tr("Start limit error"), QStringFromString(e.GetMsg()));
 		boxFrom->setFocus();
 		return false;
 	}
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(to.toUtf8().constData());
+		parser.SetExpr(to);
 		end=parser.Eval();
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(0, tr("End limit error"), QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(0, tr("End limit error"), QStringFromString(e.GetMsg()));
 		boxTo->setFocus();
 		return false;
 	}
@@ -335,12 +335,12 @@ bool FunctionDialog::acceptParametric()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(from.toUtf8().constData());
+		parser.SetExpr(from);
 		start=parser.Eval();
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(0, tr("Start limit error"), QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(0, tr("Start limit error"), QStringFromString(e.GetMsg()));
 		boxParFrom->setFocus();
 		return false;
 	}
@@ -348,12 +348,12 @@ bool FunctionDialog::acceptParametric()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(to.toUtf8().constData());
+		parser.SetExpr(to);
 		end=parser.Eval();
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(0, tr("End limit error"), QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(0, tr("End limit error"), QStringFromString(e.GetMsg()));
 		boxParTo->setFocus();
 		return false;
 	}
@@ -403,12 +403,12 @@ bool FunctionDialog::acceptPolar()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(from.toUtf8().constData());
+		parser.SetExpr(from);
 		start=parser.Eval();
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(0, tr("Start limit error"), QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(0, tr("Start limit error"), QStringFromString(e.GetMsg()));
 		boxPolarFrom->setFocus();
 		return false;
 	}
@@ -416,12 +416,12 @@ bool FunctionDialog::acceptPolar()
 	try
 	{
 		MyParser parser;
-		parser.SetExpr(to.toUtf8().constData());
+		parser.SetExpr(to);
 		end=parser.Eval();
 	}
 	catch(mu::ParserError &e)
 	{
-		QMessageBox::critical(0, tr("End limit error"), QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical(0, tr("End limit error"), QStringFromString(e.GetMsg()));
 		boxPolarTo->setFocus();
 		return false;
 	}

@@ -71,7 +71,7 @@ class MuParserScripting: public ScriptingEnv
 
     struct mathFunction
     {
-      const char *name;
+      const mu::string_type::value_type *name;
       int numargs;
       double (*fun1)(double);
       double (*fun2)(double,double);

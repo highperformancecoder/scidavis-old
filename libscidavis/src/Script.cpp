@@ -61,7 +61,12 @@ ScriptingEnv *ScriptingLangManager::newEnv(ApplicationWindow *parent)
     return newEnv(langs[0],parent);
 }
 
-ScriptingEnv *ScriptingLangManager::newEnv(const std::string& name, ApplicationWindow *parent, bool batch)
+ScriptingEnv *ScriptingLangManager::newEnv
+(const std::string& name, ApplicationWindow *parent, bool
+#ifdef SCRIPTING_PYTHON // avoids unused warning
+ batch
+#endif
+ )
 {
 #ifdef SCRIPTING_MUPARSER
   if (name==MuParserScripting::langName)

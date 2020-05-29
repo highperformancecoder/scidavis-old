@@ -12486,32 +12486,32 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MuParserScript</name>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="+272"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="+274"/>
         <source>col() works only on tables!</source>
         <translation type="unfinished">col() работает только с таблицами!</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+35"/>
+        <location line="+34"/>
         <location line="+42"/>
         <source>There&apos;s no column %1 in table %2!</source>
         <translation type="unfinished">В таблице %2 нет колонки %1!</translation>
     </message>
     <message>
-        <location line="-49"/>
+        <location line="-48"/>
         <source>tablecol() works only on tables!</source>
         <translation type="unfinished">tablecol() работает только с таблицами!</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+140"/>
+        <location line="+137"/>
         <location line="+9"/>
         <location line="+6"/>
         <source>Couldn&apos;t find a table named %1.</source>
         <translation type="unfinished">Таблица с именем %1 не найдена.</translation>
     </message>
     <message>
-        <location line="-112"/>
+        <location line="-110"/>
         <location line="+20"/>
         <source>cell() works only on tables and matrices!</source>
         <translation type="unfinished">cell() работает только для таблиц и матриц!</translation>
@@ -12528,12 +12528,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+47"/>
-        <location line="+6"/>
+        <location line="+5"/>
         <source>Accessing table values is not (yet) supported in this context.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+38"/>
         <source>There&apos;s no column named %1 in table %2!</source>
         <translation type="unfinished">В таблице %2 нет колонки с именем %1!</translation>
     </message>
@@ -12551,7 +12551,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MuParserScripting</name>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="+47"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="+49"/>
         <source>abs(x):
  Absolute value of x.</source>
         <translation type="unfinished"></translation>
@@ -13900,7 +13900,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">QtiPlot - Пользовательские кривые</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="+127"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="+128"/>
         <location line="+1009"/>
         <location line="+450"/>
         <source>&amp;Plot Associations...</source>

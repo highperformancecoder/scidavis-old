@@ -607,7 +607,7 @@ public slots:
 		//@{
 		bool modifyFunctionCurve(ApplicationWindow * parent, int curve, int type, const QStringList &formulas, const QString &var,QList<double> &ranges, int points);
 		bool addFunctionCurve(ApplicationWindow *parent, int type, const QStringList &formulas, const QString& var,
-				QList<double> &ranges, int points, const QString& title = QString::null);
+                                      QList<double> &ranges, int points, const QString& title = {});
 		//! Used when reading from a project file.
 		bool insertFunctionCurve(ApplicationWindow * parent, const QStringList& func_spec, int points, int fileVersion);
 		//! Returns an unique function name

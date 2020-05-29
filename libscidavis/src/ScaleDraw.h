@@ -40,41 +40,41 @@
 class ScaleDraw: public QwtScaleDraw
 {
 public:
-	enum TicksStyle{None = 0, Out = 1, Both = 2, In = 3};
+  enum TicksStyle{None = 0, Out = 1, Both = 2, In = 3};
 
-	ScaleDraw(const QString& s = QString::null);
-	ScaleDraw(const ScaleDraw &other, const QString &s = QString::null);
-	virtual ~ScaleDraw(){};
+  ScaleDraw(const QString& s = {});
+  ScaleDraw(const ScaleDraw &other, const QString &s = {});
+  virtual ~ScaleDraw(){};
 
-	QString formulaString() {return formula_string;};
-	void setFormulaString(const QString& formula) {formula_string = formula;};
+  QString formulaString() {return formula_string;};
+  void setFormulaString(const QString& formula) {formula_string = formula;};
 
-	double transformValue(double value) const;
+  double transformValue(double value) const;
 
-	virtual QwtText label(double value) const
-	{
-	return QwtText(QLocale().toString(transformValue(value), d_fmt, d_prec));
-	};
+  virtual QwtText label(double value) const
+  {
+    return QwtText(QLocale().toString(transformValue(value), d_fmt, d_prec));
+  };
 
-	void labelFormat(char &f, int &prec) const;
-	void setLabelFormat(char f, int prec);
+  void labelFormat(char &f, int &prec) const;
+  void setLabelFormat(char f, int prec);
 
-	int labelNumericPrecision() const { return d_prec; };
+  int labelNumericPrecision() const { return d_prec; };
 
-	int majorTicksStyle() const { return d_majTicks; };
-	void setMajorTicksStyle(TicksStyle type){d_majTicks = type;};
+  int majorTicksStyle() const { return d_majTicks; };
+  void setMajorTicksStyle(TicksStyle type){d_majTicks = type;};
 
-	int minorTicksStyle() const { return d_minTicks; };
-	void setMinorTicksStyle(TicksStyle type){d_minTicks = type;};
+  int minorTicksStyle() const { return d_minTicks; };
+  void setMinorTicksStyle(TicksStyle type){d_minTicks = type;};
 
 protected:
-	void drawTick(QPainter *p, double value, int len) const;
+  void drawTick(QPainter *p, double value, int len) const;
 
 private:
-	QString formula_string;
-	char d_fmt;
-    int d_prec;
-	int d_minTicks, d_majTicks;
+  QString formula_string;
+  char d_fmt;
+  int d_prec;
+  int d_minTicks, d_majTicks;
 };
 
 class QwtTextScaleDraw: public ScaleDraw
@@ -191,15 +191,15 @@ private:
 class QwtSupersciptsScaleDraw: public ScaleDraw
 {
 public:
-	QwtSupersciptsScaleDraw(const QString& s = QString::null);
-	QwtSupersciptsScaleDraw(const ScaleDraw &other, const QString& s = QString::null) :
-		ScaleDraw(other)
-	{
-		setFormulaString(s);
-	}
-	~QwtSupersciptsScaleDraw(){};
+  QwtSupersciptsScaleDraw(const QString& s = {});
+  QwtSupersciptsScaleDraw(const ScaleDraw &other, const QString& s = {}) :
+    ScaleDraw(other)
+  {
+    setFormulaString(s);
+  }
+  ~QwtSupersciptsScaleDraw(){};
 
-	QwtText label(double value) const;
+  QwtText label(double value) const;
 };
 
 #endif

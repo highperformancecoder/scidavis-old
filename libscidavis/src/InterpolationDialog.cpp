@@ -118,12 +118,12 @@ double from, to;
 try
 	{
 	MyParser parser;
-	parser.SetExpr(boxStart->text().replace(",", ".").toUtf8().constData());
+	parser.SetExpr(boxStart->text().replace(",", "."));
 	from = parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(this, tr("Start limit error"), QString::fromStdString(e.GetMsg()));
+	QMessageBox::critical(this, tr("Start limit error"), QStringFromString(e.GetMsg()));
 	boxStart->setFocus();
 	return;
 	}
@@ -131,12 +131,12 @@ catch(mu::ParserError &e)
 try
 	{
 	MyParser parser;
-	parser.SetExpr(boxEnd->text().replace(",", ".").toUtf8().constData());
+	parser.SetExpr(boxEnd->text().replace(",", "."));
 	to = parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(this, tr("End limit error"), QString::fromStdString(e.GetMsg()));
+	QMessageBox::critical(this, tr("End limit error"), QStringFromString(e.GetMsg()));
 	boxEnd->setFocus();
 	return;
 	}
@@ -158,20 +158,20 @@ delete i;
 
 void InterpolationDialog::setGraph(Graph *g)
 {
-	graph = g;
-	boxName->addItems(g->analysableCurvesList());
+  graph = g;
+  boxName->addItems(g->analysableCurvesList());
 
-    QString selectedCurve = g->selectedCurveTitle();
-	if (!selectedCurve.isEmpty())
-	{
-	    int index = boxName->findText (selectedCurve);
-		boxName->setCurrentIndex(index);
-	}
+  QString selectedCurve = g->selectedCurveTitle();
+  if (!selectedCurve.isEmpty())
+    {
+      int index = boxName->findText (selectedCurve);
+      boxName->setCurrentIndex(index);
+    }
 
-    activateCurve(boxName->currentText());
+  activateCurve(boxName->currentText());
 
-	connect (graph, SIGNAL(closedGraph()), this, SLOT(close()));
-	connect (graph, SIGNAL(dataRangeChanged()), this, SLOT(changeDataRange()));
+  connect (graph, SIGNAL(closedGraph()), this, SLOT(close()));
+  connect (graph, SIGNAL(dataRangeChanged()), this, SLOT(changeDataRange()));
 };
 
 void InterpolationDialog::activateCurve(const QString& curveName)

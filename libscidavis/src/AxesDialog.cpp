@@ -1203,24 +1203,24 @@ bool AxesDialog::updatePlot()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr(from.toUtf8().constData());
+			parser.SetExpr(from);
 			start=parser.Eval();
 		}
 		catch(mu::ParserError &e)
 		{
-			QMessageBox::critical(0, tr("Start limit error"),QString::fromStdString(e.GetMsg()));
+			QMessageBox::critical(0, tr("Start limit error"),QStringFromString(e.GetMsg()));
 			boxStart->setFocus();
 			return false;
 		}
 		try
 		{
 			MyParser parser;
-			parser.SetExpr(to.toUtf8().constData());
+			parser.SetExpr(to);
 			end=parser.Eval();
 		}
 		catch(mu::ParserError &e)
 		{
-			QMessageBox::critical(0, tr("End limit error"),QString::fromStdString(e.GetMsg()));
+			QMessageBox::critical(0, tr("End limit error"),QStringFromString(e.GetMsg()));
 			boxEnd->setFocus();
 			return false;
 		}
@@ -1234,7 +1234,7 @@ bool AxesDialog::updatePlot()
 			}
 			catch(mu::ParserError &e)
 			{
-				QMessageBox::critical(0, tr("Step input error"),QString::fromStdString(e.GetMsg()));
+				QMessageBox::critical(0, tr("Step input error"),QStringFromString(e.GetMsg()));
 				boxStep->setFocus();
 				return false;
 			}
@@ -1326,15 +1326,15 @@ bool AxesDialog::updatePlot()
 					double value = 1.0;
 					MyParser parser;
 					if (formula.contains("x"))
-						parser.DefineVar("x", &value);
+                                          parser.DefineVar(_T("x"), &value);
 					else if (formula.contains("y"))
-						parser.DefineVar("y", &value);
+                                          parser.DefineVar(_T("y"), &value);
 					parser.SetExpr(formula.toUtf8().constData());
 					parser.Eval();
 				}
 				catch(mu::ParserError &e)
 				{
-					QMessageBox::critical(0, tr("Formula input error"), QString::fromStdString(e.GetMsg())+"\n"+
+					QMessageBox::critical(0, tr("Formula input error"), QStringFromString(e.GetMsg())+"\n"+
 							tr("Valid variables are 'x' for Top/Bottom axes and 'y' for Left/Right axes!"));
 					boxFormula->setFocus();
 					return false;
@@ -1600,7 +1600,7 @@ void AxesDialog::pickAxisNumColor()
 	int axis=mapToQwtAxisId();
 	QString formula = boxFormula->toPlainText();
 	if (!boxShowFormula->isChecked())
-		formula = QString::null;
+          formula = QString();
 
 	showAxis(axis, currentSelectedAxisType(), formatInfo[axis], boxShowAxis->isChecked(), boxMajorTicksType->currentIndex(), boxMinorTicksType->currentIndex(),
 			boxShowLabels->isChecked(), boxAxisColor->color(), boxFormat->currentIndex(), boxPrecision->value(),

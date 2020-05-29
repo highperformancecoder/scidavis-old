@@ -12956,64 +12956,64 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MuParserScript</name>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="272"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="274"/>
         <source>col() works only on tables!</source>
         <translation type="unfinished">col() funciona sólo en tablas!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="275"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="310"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="352"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="277"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="311"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="353"/>
         <source>There&apos;s no column %1 in table %2!</source>
         <translation type="unfinished">¡No hay columna llamada %1 en la tabla %2!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="303"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="305"/>
         <source>tablecol() works only on tables!</source>
         <translation type="unfinished">tablecol() trabaja sólo sobre tablas!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="306"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="446"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="455"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="461"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="308"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="445"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="454"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="460"/>
         <source>Couldn&apos;t find a table named %1.</source>
         <translation type="unfinished">No se pudo hallar la tabla llamada %1.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="349"/>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="369"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="350"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="370"/>
         <source>cell() works only on tables and matrices!</source>
         <translation type="unfinished">cell() trabaja sólo sobre tablas y matrices!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="373"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="374"/>
         <source>There&apos;s no row %1 in matrix %2!</source>
         <translation type="unfinished">No hay fila %1 en la matriz %2!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="376"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="377"/>
         <source>There&apos;s no column %1 in matrix %2!</source>
         <translation type="unfinished">No hay columna llamada %1 en la matriz %2!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="423"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="424"/>
         <location filename="../../libscidavis/src/MuParserScript.cpp" line="429"/>
         <source>Accessing table values is not (yet) supported in this context.</source>
         <translation type="unfinished">El acceso a los valores de las tablas no estan soportados todavía en este contexto. </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="468"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="467"/>
         <source>There&apos;s no column named %1 in table %2!</source>
         <translation type="unfinished">¡No hay columna llamada %1 en la tabla %2!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="579"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="578"/>
         <source>tablecol: wrong number of arguments (need 2, got %1)</source>
         <translation type="unfinished">tablecol: número incorrecto de argumentos (necesita 2, obtuvo %1) </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScript.cpp" line="606"/>
+        <location filename="../../libscidavis/src/MuParserScript.cpp" line="605"/>
         <source>cell: wrong number of arguments (need 2, got %1)</source>
         <translation type="unfinished">cell: número de argumentos erróneo (necesita 2, ubtuvo %1)</translation>
     </message>
@@ -13021,119 +13021,119 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MuParserScripting</name>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="47"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="49"/>
         <source>abs(x):
  Absolute value of x.</source>
         <translation type="unfinished">abs(x):
  Valor absoluto de x.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="48"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="50"/>
         <source>acos(x):
  Inverse cos function.</source>
         <translation type="unfinished">acos(x):
 Función coseno inverso.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="49"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="51"/>
         <source>acosh(x):
  Hyperbolic inverse cos function.</source>
         <translation type="unfinished">acosh(x):
 Función coseno hiperbólico inverso.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="50"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="52"/>
         <source>asin(x):
  Inverse sin function.</source>
         <translation type="unfinished">asin(x):
 Función seno inverso.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="51"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="53"/>
         <source>asinh(x):
  Hyperbolic inverse sin function.</source>
         <translation type="unfinished">asinh(x):
 Función seno hiperbólico inverso.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="52"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="54"/>
         <source>atan(x):
  Inverse tan function.</source>
         <translation type="unfinished">atan(x):
 Función tangente inversa.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="53"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="55"/>
         <source>atanh(x):
   Hyperbolic inverse tan function.</source>
         <translation type="unfinished">atanh(x):
 Función tangente hiperbólica inversa.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="54"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="56"/>
         <source>avg(x,y,...):
   Mean value of all arguments.</source>
         <translation type="unfinished">avg(x,y,...):
 Valor medio de todos los argumentos.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="55"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="57"/>
         <source>bessel_j0(x):
   Regular cylindrical Bessel function of zeroth order, J_0(x).</source>
         <translation type="unfinished">bessel_j0(x):
 Función de Bessel cilíndrica regular de orden cero, J_0(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="56"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="58"/>
         <source>bessel_j1(x):
   Regular cylindrical Bessel function of first order, J_1(x).</source>
         <translation type="unfinished">bessel_j1(x):
 Función de Bessel cilíndrica regular de primer orden, J_1(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="57"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="59"/>
         <source>bessel_jn(double x, int n):
  Regular cylindrical Bessel function of order n, J_n(x).</source>
         <translation type="unfinished">bessel_jn(double x, int n):
 Función de Bessel cilíndrica regular de orden n, J_n(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="58"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="60"/>
         <source>bessel_jn_zero(double n, unsigned int s):
  s-th positive zero x_s of regular cylindrical Bessel function of order n, J_n(x_s)=0</source>
         <translation type="unfinished">bessel_jn_zero(double n, unsigned int s):
 s-th cero positivo x_s de la Función de Bessel cilíndrica regular de orden n, J_n(x_s)=0</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="59"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="61"/>
         <source>bessel_y0(x):
  Irregular cylindrical Bessel function of zeroth order, Y_0(x), for x&gt;0.</source>
         <translation type="unfinished">bessel_y0(x):
 Función de Bessel cilíndrica irregular de orden cero, Y_0(x), for x&gt;0.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="60"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="62"/>
         <source>bessel_y1(x):
  Irregular cylindrical Bessel function of first order, Y_1(x), for x&gt;0.</source>
         <translation type="unfinished">bessel_y1(x):
 Función de Bessel cilíndrica irregular de primer orden, Y_1(x), for x&gt;0.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="61"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="63"/>
         <source>bessel_yn(double x, int n):
  Irregular cylindrical Bessel function of order n, Y_n(x), for x&gt;0.</source>
         <translation type="unfinished">bessel_yn(double x, int n):
 Función de Bessel cilíndrica irregular de orden n, Y_n(x), for x&gt;0.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="62"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="64"/>
         <source>beta(a,b):
  Computes the Beta Function, B(a,b) = Gamma(a)*Gamma(b)/Gamma(a+b) for a &gt; 0, b &gt; 0.</source>
         <translation type="unfinished">beta(a,b):
 Calcula la función Beta, B(a,b) = Gamma(a)*Gamma(b)/Gamma(a+b) para a &gt; 0, b &gt; 0.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="63"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="65"/>
         <source>ceil(x):
  Round to the next larger integer,
  smallest integer larger or equal to x.</source>
@@ -13142,55 +13142,55 @@ redondea al siguiente mayor entero,
 menor entero mayor o igual a x.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="64"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="66"/>
         <source>cos(x):
  Calculate cosine.</source>
         <translation type="unfinished">cos(x):
 Calcula el coseno.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="65"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="67"/>
         <source>cosh(x):
  Hyperbolic cos function.</source>
         <translation type="unfinished">cosh(x):
 Función coseno hiperbólico.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="66"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="68"/>
         <source>erf(x):
   The error function.</source>
         <translation type="unfinished">Función error.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="67"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="69"/>
         <source>erfc(x):
  Complementary error function erfc(x) = 1 - erf(x).</source>
         <translation type="unfinished">erfc(x):
 Función error complementario erfc(x) = 1 - erf(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="68"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="70"/>
         <source>erfz(x):
  The Gaussian probability density function Z(x).</source>
         <translation type="unfinished">erfz(x):
 Función de densidad de probabilidad Gaussiana Z(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="69"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="71"/>
         <source>erfq(x):
  The upper tail of the Gaussian probability function Q(x).</source>
         <translation type="unfinished">erfq(x):
 La cola mayor de la función de probabilidad Gaussiana Q(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="70"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="72"/>
         <source>exp(x):
  Exponential function: e raised to the power of x.</source>
         <translation type="unfinished">exp(x):
 Función exponencial: e elevada a la potencia de x.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="71"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="73"/>
         <source>floor(x):
  Round to the next smaller integer,
  largest integer smaller or equal to x.</source>
@@ -13199,77 +13199,77 @@ Redondea al siguiente menor entero,
 mayor entero menor o igual a x.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="72"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="74"/>
         <source>gamma(x):
  Computes the Gamma function, subject to x not being a negative integer.</source>
         <translation type="unfinished">gamma(x):
 calcula la función Gamma, siendo x un entero positivo.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="73"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="75"/>
         <source>gammaln(x):
  Computes the logarithm of the Gamma function, subject to x not a being negative integer. For x&lt;0, log(|Gamma(x)|) is returned.</source>
         <translation type="unfinished">gammaln(x):
 Calcula el logarítmo de la función Gamma, siendo x un entero positivo. Para x&lt;0, log(|Gamma(x)|) es devuelto.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="74"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="76"/>
         <source>hazard(x):
  Computes the hazard function for the normal distribution h(x) = erfz(x)/erfq(x).</source>
         <translation type="unfinished">hazard(x):
 Calcula la función aleatoria para la distribución normal h(x) = erfz(x)/erfq(x).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="75"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="77"/>
         <source>if(e1, e2, e3):
  if e1 then e2 else e3.</source>
         <translation type="unfinished">if(e1, e2, e3):
 Si e1 entonces e2 sino e3.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="76"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="78"/>
         <source>ln(x):
  Calculate natural logarithm log_e.</source>
         <translation type="unfinished">ln(x):
 Función logarítmo natural log_e.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="77"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="79"/>
         <source>log(x):
  Calculate decimal logarithm log_10.</source>
         <translation type="unfinished">log(x):
 Función logarítmo decimal log_10.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="78"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="80"/>
         <source>log10(x):
  Calculate decimal logarithm log_10.</source>
         <translation type="unfinished">log10(x):
 Función logarítmo decimal log_10.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="79"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="81"/>
         <source>log2(x):
  Calculate binary logarithm log_2.</source>
         <translation type="unfinished">log2(x):
 Función logarítmo en base 2 log_2.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="80"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="82"/>
         <source>min(x,y,...):
  Calculate minimum of all arguments.</source>
         <translation type="unfinished">min(x,y,...):
 Calcula el mínimo de todos los argumentos.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="81"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="83"/>
         <source>max(x,y,...):
  Calculate maximum of all arguments.</source>
         <translation type="unfinished">max(x,y,...):
 Calcula el máximo de todos los argumentos.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="82"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="84"/>
         <source>mod(x,y):
  Calculate rest of integer division x/y,
  x modulo y.</source>
@@ -13278,70 +13278,70 @@ Calcula el resto de la división de enteros x/y,
  x modulo y.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="83"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="85"/>
         <source>pow(x,y):
  Raise x to the power of y, x^y.</source>
         <translation type="unfinished">pow(x,y):
 x elevado a la potencia y, x^y.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="84"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="86"/>
         <source>rint(x):
  Round to nearest integer.</source>
         <translation type="unfinished">rint(x):
 Redondea al entero más cercano.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="85"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="87"/>
         <source>sign(x):
  Sign function: -1 if x&lt;0; 1 if x&gt;0.</source>
         <translation type="unfinished">sign(x):
 Función signo: -1 si x&lt;0; 1 si x&gt;0.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="86"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="88"/>
         <source>sin(x):
  Calculate sine.</source>
         <translation type="unfinished">sin(x):
 Función seno.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="87"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="89"/>
         <source>sinh(x):
  Hyperbolic sin function.</source>
         <translation type="unfinished">sinh(x):
 Función seno hiperbólico.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="88"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="90"/>
         <source>sqrt(x):
  Square root function.</source>
         <translation type="unfinished">sqrt(x):
 Función raíz cuadrada.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="89"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="91"/>
         <source>sum(x,y,...):
  Calculate sum of all arguments.</source>
         <translation type="unfinished">sum(x,y,...):
 Calcula la suma de todos los argumentos.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="90"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="92"/>
         <source>tan(x):
  Calculate tangent function.</source>
         <translation type="unfinished">tan(x):
 Función tangente.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="91"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="93"/>
         <source>tanh(x):
  Hyperbolic tan function.</source>
         <translation type="unfinished">tanh(x):
 Función tangente hiperbólico.</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="92"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="94"/>
         <source>w0(x):
  Compute the principal branch of Lambert&apos;s W function, W_0(x).
  W is defined as a solution to the equation W(x)*exp(W(x))=x.
@@ -13352,7 +13352,7 @@ W es definida como una solución para la ecuación W(x)*exp(W(x))=x.
 Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&gt;-1 para x&lt;0 (también vea wm1(x)).</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="93"/>
+        <location filename="../../libscidavis/src/MuParserScripting.cpp" line="95"/>
         <source>wm1(x):
  Compute the secondary branch of Lambert&apos;s W function, W_{-1}(x).
  W is defined as a solution to the equation W(x)*exp(W(x))=x.
@@ -14427,9 +14427,9 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
 <context>
     <name>PlotDialog</name>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="127"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1136"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1586"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="128"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1137"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1587"/>
         <source>&amp;Plot Associations...</source>
         <translation type="unfinished">&amp;Asociaciones de gráficos...</translation>
     </message>
@@ -14438,724 +14438,724 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
         <translation type="obsolete">&amp;Editar Función...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="88"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="89"/>
         <source>Plot type</source>
         <translation type="unfinished">Tipo de gráfico</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="118"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="119"/>
         <source>&amp;Worksheet</source>
         <translation type="unfinished">&amp;Tabla</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="125"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="126"/>
         <source>&amp;Apply</source>
         <translation type="unfinished">&amp;Aplicar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="120"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="121"/>
         <source>&amp;OK</source>
         <translation type="unfinished">&amp;OK</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="123"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="124"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished">&amp;Cancelar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="457"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="458"/>
         <source>Attach curve to: </source>
         <translation type="unfinished">Fijar curva a: </translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="459"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="460"/>
         <source>x Axis</source>
         <translation type="unfinished">Eje x</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="462"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="805"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="463"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="806"/>
         <source>Bottom</source>
         <translation type="unfinished">Inferior</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="463"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="806"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="464"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="807"/>
         <source>Top</source>
         <translation type="unfinished">Superior</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="465"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="466"/>
         <source>y Axis</source>
         <translation type="unfinished">Eje y</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="468"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="803"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="469"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="804"/>
         <source>Left</source>
         <translation type="unfinished">Izquierda</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="469"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="804"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="470"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="805"/>
         <source>Right</source>
         <translation type="unfinished">Derecha</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="477"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1317"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="478"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1318"/>
         <source>Axes</source>
         <translation type="unfinished">Ejes</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="484"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="485"/>
         <source>Connect</source>
         <translation type="unfinished">Conectar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="488"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="489"/>
         <source>No line</source>
         <translation type="unfinished">Sin línea</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="489"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="490"/>
         <source>Lines</source>
         <translation type="unfinished">Líneas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="490"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="491"/>
         <source>Sticks</source>
         <translation type="unfinished">Palos</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="491"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="492"/>
         <source>Horizontal Steps</source>
         <translation type="unfinished"> Escalones horizontales</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="492"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="493"/>
         <source>Dots</source>
         <translation type="unfinished">Puntos</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="493"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="494"/>
         <source>Spline</source>
         <translation type="unfinished">Spline</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="494"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="495"/>
         <source>Vertical Steps</source>
         <translation type="unfinished">Escalones verticales</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="393"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="528"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="785"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="849"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="394"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="529"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="786"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="850"/>
         <source>Style</source>
         <translation type="unfinished">Estilo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="346"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="402"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="781"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="809"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="347"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="403"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="782"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="810"/>
         <source>Width</source>
         <translation type="unfinished">Ancho</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="388"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="776"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="851"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="950"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="389"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="777"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="852"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="951"/>
         <source>Color</source>
         <translation type="unfinished">Color</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="500"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="501"/>
         <source>Fill area under curve</source>
         <translation type="unfinished">Rellenar área bajo la curva</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="503"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="504"/>
         <source>Fill color</source>
         <translation type="unfinished">Color de relleno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="416"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="506"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1342"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1368"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="417"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="507"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1343"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1369"/>
         <source>Pattern</source>
         <translation type="unfinished">Patrón</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="515"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1321"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1333"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1451"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="516"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1322"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1334"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1452"/>
         <source>Line</source>
         <translation type="unfinished">Línea</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="531"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="690"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="532"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="691"/>
         <source>Size</source>
         <translation type="unfinished">Tamaño</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="536"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="696"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="537"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="697"/>
         <source>Fill Color</source>
         <translation type="unfinished">Color de relleno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="540"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="701"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="541"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="702"/>
         <source>Edge Color</source>
         <translation type="unfinished">Color del borde</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="543"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="705"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="544"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="706"/>
         <source>Edge Width</source>
         <translation type="unfinished">Ancho del Borde</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="554"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="688"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1327"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1334"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="555"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="689"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1328"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1335"/>
         <source>Symbol</source>
         <translation type="unfinished">Símbolo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="562"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1446"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="563"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1447"/>
         <source>Box</source>
         <translation type="unfinished">Caja</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="564"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="664"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="565"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="665"/>
         <source>Type</source>
         <translation type="unfinished">Tipo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="568"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="569"/>
         <source>No Box</source>
         <translation type="unfinished">Sin Caja</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="569"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="570"/>
         <source>Rectangle</source>
         <translation type="unfinished">Rectángulo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="570"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="571"/>
         <source>Diamond</source>
         <translation type="unfinished">Diamante</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="571"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="572"/>
         <source>Perc 10, 25, 75, 90</source>
         <translation type="unfinished">Perc 10, 25, 75, 90</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="572"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="573"/>
         <source>Notch</source>
         <translation type="unfinished">Muesca</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="575"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="612"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="576"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="613"/>
         <source>Range</source>
         <translation type="unfinished">Rango</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="579"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="618"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1099"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="580"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="619"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1100"/>
         <source>Standard Deviation</source>
         <translation type="unfinished">Desvío estándar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="580"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="619"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="581"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="620"/>
         <source>Standard Error</source>
         <translation type="unfinished">Error estándar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="581"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="582"/>
         <source>Perc 25, 75</source>
         <translation type="unfinished">Perc 25, 75</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="582"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="583"/>
         <source>Perc 10, 90</source>
         <translation type="unfinished">Perc 10, 90</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="583"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="584"/>
         <source>Perc 5, 95</source>
         <translation type="unfinished">Perc 5, 95</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="584"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="585"/>
         <source>Perc 1, 99</source>
         <translation type="unfinished">Perc 1, 99</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="585"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="624"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="586"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="625"/>
         <source>Max-Min</source>
         <translation type="unfinished">Max-min</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="586"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="625"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="587"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="626"/>
         <source>Constant</source>
         <translation type="unfinished">Constante</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="589"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="628"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="590"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="629"/>
         <source>Percentile (%)</source>
         <translation type="unfinished">Porcentaje (%)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="596"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="597"/>
         <source>Coefficient</source>
         <translation type="unfinished">coeficiente</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="604"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="605"/>
         <source>Box Width</source>
         <translation type="unfinished">Ancho de Caja</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="610"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="611"/>
         <source>Whiskers</source>
         <translation type="unfinished">Bigotes</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="617"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="618"/>
         <source>No Whiskers</source>
         <translation type="unfinished">Sin Bigotes</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="620"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="621"/>
         <source>75-25</source>
         <translation type="unfinished">75-25</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="621"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="622"/>
         <source>90-10</source>
         <translation type="unfinished">90-10</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="622"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="623"/>
         <source>95-5</source>
         <translation type="unfinished">95-5</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="623"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="624"/>
         <source>99-1</source>
         <translation type="unfinished">99-1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="635"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="636"/>
         <source>Coef</source>
         <translation type="unfinished">Coef</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="655"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1369"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="656"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1370"/>
         <source>Box/Whiskers</source>
         <translation type="unfinished">Caja/Bigotes</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="666"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="667"/>
         <source>Max</source>
         <translation type="unfinished">Max</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="671"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="672"/>
         <source>99%</source>
         <translation type="unfinished">99%</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="675"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1098"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="676"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1099"/>
         <source>Mean</source>
         <translation type="unfinished">Media</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="679"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="680"/>
         <source>1%</source>
         <translation type="unfinished">1%</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="683"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="684"/>
         <source>Min</source>
         <translation type="unfinished">Min</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="715"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1370"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="716"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1371"/>
         <source>Percentile</source>
         <translation type="unfinished">Porcentaje</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="730"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="820"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1448"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="731"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="821"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1449"/>
         <source>Image</source>
         <translation type="unfinished">Imagen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="734"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="735"/>
         <source>&amp;Gray Scale</source>
         <translation type="unfinished">Escala de &amp;grises</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="737"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="738"/>
         <source>&amp;Default Color Map</source>
         <translation type="unfinished">Mapa de color por &amp;defecto</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="740"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="741"/>
         <source>&amp;Custom Color Map</source>
         <translation type="unfinished">Mapa de &amp;color personalizado</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="749"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="750"/>
         <source>Contour Lines</source>
         <translation type="unfinished">Líneas de contorno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="753"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="754"/>
         <source>Levels</source>
         <translation type="unfinished">Niveles</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="763"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="764"/>
         <source>Use &amp;Color Map</source>
         <translation type="unfinished">Usar mapa de &amp;colores</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="767"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="768"/>
         <source>Use Default &amp;Pen</source>
         <translation type="unfinished">Usar &amp;pluma por defecto</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="796"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="797"/>
         <source>Color Bar Scale</source>
         <translation type="unfinished">Escala de barra de color</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="800"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="801"/>
         <source>Axis</source>
         <translation type="unfinished">Eje</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="820"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1375"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1448"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="821"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1376"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1449"/>
         <source>Contour</source>
         <translation type="unfinished">Contorno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="837"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="838"/>
         <source>Direction</source>
         <translation type="unfinished">Dirección</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="840"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="841"/>
         <source>Plus</source>
         <translation type="unfinished">Más</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="842"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="843"/>
         <source>Minus</source>
         <translation type="unfinished">Menos</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="844"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="845"/>
         <source>&amp;X Error Bar</source>
         <translation type="unfinished">Barra de error &amp;X</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="856"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="953"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="857"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="954"/>
         <source>Line Width</source>
         <translation type="unfinished">Ancho de línea</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="858"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="859"/>
         <source>1</source>
         <translation type="unfinished">1</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="859"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="860"/>
         <source>2</source>
         <translation type="unfinished">2</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="860"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="861"/>
         <source>3</source>
         <translation type="unfinished">3</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="861"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="862"/>
         <source>4</source>
         <translation type="unfinished">4</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="862"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="863"/>
         <source>5</source>
         <translation type="unfinished">5</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="866"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="867"/>
         <source>Cap Width</source>
         <translation type="unfinished">Ancho de mayúsculas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="868"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="869"/>
         <source>8</source>
         <translation type="unfinished">8</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="869"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="870"/>
         <source>10</source>
         <translation type="unfinished">10</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="870"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="871"/>
         <source>12</source>
         <translation type="unfinished">12</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="871"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="872"/>
         <source>16</source>
         <translation type="unfinished">16</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="872"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="873"/>
         <source>20</source>
         <translation type="unfinished">20</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="876"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="877"/>
         <source>Through Symbol</source>
         <translation type="unfinished">Mediante Símbolo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="884"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1362"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1429"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="885"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1363"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1430"/>
         <source>Error Bars</source>
         <translation type="unfinished">Barras de Error</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="896"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="897"/>
         <source>Automatic Binning</source>
         <translation type="unfinished">Binning Automático</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="899"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="900"/>
         <source>&amp;Show statistics</source>
         <translation type="unfinished">&amp;Mostrar estadísticas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="904"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="905"/>
         <source>Bin Size</source>
         <translation type="unfinished">Tamaño de Bin</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="907"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="908"/>
         <source>Begin</source>
         <translation type="unfinished">Empezar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="910"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="911"/>
         <source>End</source>
         <translation type="unfinished">Fin</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="920"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1347"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="921"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1348"/>
         <source>Histogram Data</source>
         <translation type="unfinished">Datos del histograma</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="931"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="932"/>
         <source>Gap Between Bars (in %)</source>
         <translation type="unfinished">Espacio entre barras (en %)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="936"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="937"/>
         <source>Offset (in %)</source>
         <translation type="unfinished">Desplazamiento (en %)</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="943"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1343"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="944"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1344"/>
         <source>Spacing</source>
         <translation type="unfinished">Espaciado</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="958"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="959"/>
         <source>Arrowheads</source>
         <translation type="unfinished">Puntas de flecha</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="960"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="961"/>
         <source>Length</source>
         <translation type="unfinished">Longitud</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="964"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2186"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="965"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2187"/>
         <source>Angle</source>
         <translation type="unfinished">Angulo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="969"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="970"/>
         <source>&amp;Filled</source>
         <translation type="unfinished">Re&amp;lleno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="973"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2193"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="974"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2194"/>
         <source>End Point</source>
         <translation type="unfinished">Punto final</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="975"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2194"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="976"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2195"/>
         <source>X End</source>
         <translation type="unfinished">X final</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="980"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2195"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="981"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2196"/>
         <source>Y End</source>
         <translation type="unfinished">Y final</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="985"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="986"/>
         <source>Position</source>
         <translation type="unfinished">Posición</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="988"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="989"/>
         <source>Tail</source>
         <translation type="unfinished">Cola</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="989"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="990"/>
         <source>Middle</source>
         <translation type="unfinished">Medio</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="990"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="991"/>
         <source>Head</source>
         <translation type="unfinished">Cabeza</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1004"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1356"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1005"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1357"/>
         <source>Vector</source>
         <translation type="unfinished">Vector</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1075"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1092"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1102"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1076"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1093"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1103"/>
         <source>Bins</source>
         <translation type="unfinished">Bins</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1076"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1097"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1077"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1098"/>
         <source>Histogram and Probabilities for</source>
         <translation type="unfinished">Histograma y probabilidades para</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1092"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1093"/>
         <source>Quantity</source>
         <translation type="unfinished">Cantidad</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1092"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1093"/>
         <source>Sum</source>
         <translation type="unfinished">Suma</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1092"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1093"/>
         <source>Percent</source>
         <translation type="unfinished">Porcentaje</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1100"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1101"/>
         <source>Minimum</source>
         <translation type="unfinished">Mínimo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1101"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1102"/>
         <source>Maximum</source>
         <translation type="unfinished">Máximo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1129"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1130"/>
         <source>&amp;Delete</source>
         <translation type="unfinished">&amp;Eliminar</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1134"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1584"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1135"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1585"/>
         <source>&amp;Edit...</source>
         <translation type="unfinished">&amp;Editar...</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1375"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1376"/>
         <source>Colors</source>
         <translation type="unfinished">Colores</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1433"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1434"/>
         <source>Vertical Bars</source>
         <translation type="unfinished">Barras verticales</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1435"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1436"/>
         <source>Horizontal Bars</source>
         <translation type="unfinished">Barras horizontales</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1437"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1438"/>
         <source>Histogram</source>
         <translation type="unfinished">Histograma</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1440"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1441"/>
         <source>Vector XYXY</source>
         <translation type="unfinished">Vector XYXY</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1441"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1442"/>
         <source>Vector XYAM</source>
         <translation type="unfinished">Vector XYAM</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1452"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1453"/>
         <source>Scatter</source>
         <translation type="unfinished">Símbolos</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1453"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1454"/>
         <source>Line + Symbol</source>
         <translation type="unfinished"> Línea + símbolo</translation>
     </message>
@@ -15164,17 +15164,17 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
         <translation type="obsolete">QtiPlot - Error de entrada</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1995"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1996"/>
         <source>Please enter a valid start limit!</source>
         <translation type="unfinished">¡Por favor, introduzca un límite inicial válido!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2002"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2003"/>
         <source>Please enter a valid end limit!</source>
         <translation type="unfinished">¡Por favor, introduzca un límite final válido!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2009"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2010"/>
         <source>Please enter a valid bin size value!</source>
         <translation type="unfinished">¡Por favor, introduzca un valor de bin válido!</translation>
     </message>
@@ -15187,7 +15187,7 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
         <translation type="obsolete">QtiPlot - Error en el límite final</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2068"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2069"/>
         <source>Please enter limits that satisfy: begin &lt; end!</source>
         <translation type="unfinished">¡Por favor, introduzca límites en tales que: inicio &lt; fin!</translation>
     </message>
@@ -15196,164 +15196,164 @@ Para x&lt;0, donde hay dos ramas reales; esta función calcula una donde W&lt;-1
         <translation type="obsolete">QtiPlot - Error en el tamaño del bin</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2094"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2095"/>
         <source>Please enter a positive bin size value!</source>
         <translation type="unfinished">¡Por favor, introduzca un valor positivo de bin!</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2185"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2186"/>
         <source>Vector Data</source>
         <translation type="unfinished">Datos vectoriales</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2187"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2188"/>
         <source>Magnitude</source>
         <translation type="unfinished">Magnitud</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="290"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="291"/>
         <source>Titles</source>
         <translation type="unfinished">Títulos</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="291"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="292"/>
         <source>Axes Labels</source>
         <translation type="unfinished">Etiquetas de ejes</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="292"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="293"/>
         <source>Axes Numbers</source>
         <translation type="unfinished">Números de ejes</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="293"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="294"/>
         <source>Legends</source>
         <translation type="unfinished">Leyendas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="305"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1297"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="306"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1298"/>
         <source>Fonts</source>
         <translation type="unfinished">Fuentes</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="320"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="321"/>
         <source>Background Color</source>
         <translation type="unfinished">Color de fondo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="323"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="334"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="324"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="335"/>
         <source>Opacity</source>
         <translation type="unfinished">Opacidad</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="328"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="339"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="329"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="340"/>
         <source>Transparent</source>
         <translation type="unfinished">Transparente</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="331"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="332"/>
         <source>Canvas Color</source>
         <translation type="unfinished">Color del lienzo</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="342"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="343"/>
         <source>Border Color</source>
         <translation type="unfinished">Color de borde</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="354"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="355"/>
         <source>Margin</source>
         <translation type="unfinished">Márgen</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="360"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="361"/>
         <source>Antialiasing</source>
         <translation type="unfinished">Antialiasing</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="363"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="364"/>
         <source>Apply to all layers</source>
         <translation type="unfinished">Aplicar a todas las capas</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="371"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1028"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1288"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="372"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1029"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1289"/>
         <source>Layer</source>
         <translation type="unfinished">Capa</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="407"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="408"/>
         <source>Border</source>
         <translation type="unfinished">Borde</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="411"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="412"/>
         <source>First color</source>
         <translation type="unfinished">Primer color</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="419"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="420"/>
         <source>Pie radius</source>
         <translation type="unfinished">Radio de la porción</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="428"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="429"/>
         <source>Fill</source>
         <translation type="unfinished">Relleno</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="436"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1311"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1431"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="437"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1312"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1432"/>
         <source>Pie</source>
         <translation type="unfinished">Porción</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="443"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="444"/>
         <source>&amp;Scale layers to paper size</source>
         <translation type="unfinished">&amp;Escalar las capas al tamaño del papel</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="452"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1296"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="453"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1297"/>
         <source>Print</source>
         <translation type="unfinished">Imprimir</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="72"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="73"/>
         <source>Plot details</source>
         <translation type="unfinished">Detalles del gráfico</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1995"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2002"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2009"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2068"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="1996"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2003"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2010"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2069"/>
         <source>Input error</source>
         <translation type="unfinished">Error de entrada</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2038"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2039"/>
         <source>Start limit error</source>
         <translation type="unfinished">Error de límite inicial</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2057"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2058"/>
         <source>End limit error</source>
         <translation type="unfinished">Error de límite final</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2083"/>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2094"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2084"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="2095"/>
         <source>Bin size input error</source>
         <translation type="unfinished">Error de tamaño de Bin</translation>
     </message>
     <message>
-        <location filename="../../libscidavis/src/PlotDialog.cpp" line="445"/>
+        <location filename="../../libscidavis/src/PlotDialog.cpp" line="446"/>
         <source>Print Crop &amp;Marks</source>
         <translation type="unfinished">Imprimir &amp;marcas y bastones</translation>
     </message>

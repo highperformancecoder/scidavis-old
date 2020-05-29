@@ -381,7 +381,7 @@ public slots:
   void exportASCII(const QString& tableName, const QString& sep, bool colNames, bool expSelection);
 
   TableStatistics *newTableStatistics(Table *base, int type, QList<int>,
-                                      const QString &caption=QString::null);
+                                      const QString &caption={});
   //@}
 
   //! \name Graphs

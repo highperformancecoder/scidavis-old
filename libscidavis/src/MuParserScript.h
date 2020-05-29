@@ -31,6 +31,7 @@
 #define MU_PARSER_SCRIPT_H
 
 #include "Script.h"
+#include "QStringStdString.h"
 #include <QtCore/QMap>
 #include <muParser.h>
 
@@ -41,6 +42,12 @@ class MuParserScript : public Script
 {
   Q_OBJECT
 
+  struct MuException: public mu::Parser::exception_type
+  {
+    MuException(const QString& x):
+      mu::Parser::exception_type(toString<mu::string_type>(x)) {}
+  };
+  
 public:
   MuParserScript(ScriptingEnv *environment, const QString &code, QObject *context=0, const QString &name="<input>");
 
@@ -53,12 +60,12 @@ public slots:
   bool setInt(int value, const char *name) override { return setDouble(static_cast<double>(value), name); }
 
 private:
-  static double *variableFactory(const char *name, void *self);
+  static double *variableFactory(const mu::string_type::value_type *name, void *self);
   static double statementSeparator(double a, double b);
-  static double tableColumnFunction(const char *columnPath);
+  static double tableColumnFunction(const mu::string_type::value_type *columnPath);
   static double tableColumn_Function(double columnIndex);
-  static double tableColumn__Function(const char *tableName, double columnIndex);
-  static double tableCellFunction(const char *columnPath, double rowIndex);
+  static double tableColumn__Function(const mu::string_type::value_type *tableName, double columnIndex);
+  static double tableCellFunction(const mu::string_type::value_type *columnPath, double rowIndex);
   static double tableCell_Function(double columnIndex, double rowIndex);
   static double matrixCellFunction(double rowIndex, double columnIndex);
 
@@ -68,7 +75,7 @@ protected:
 
 private:
   mu::Parser m_parser;
-  QMap<QByteArray, double> m_variables;
+  QMap<QString, double> m_variables;
 
   static MuParserScript *s_currentInstance;
 };

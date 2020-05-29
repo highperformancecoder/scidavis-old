@@ -31,24 +31,24 @@
 MyParser::MyParser()
 :Parser()
 {
-DefineConst("pi", M_PI);
-DefineConst("Pi", M_PI);
-DefineConst("PI", M_PI);
+  DefineConst(_T("pi"), M_PI);
+  DefineConst(_T("Pi"), M_PI);
+  DefineConst(_T("PI"), M_PI);
 
-DefineFun("bessel_j0", bessel_J0);
-DefineFun("bessel_j1", bessel_J1);
-DefineFun("bessel_jn", bessel_Jn);
-DefineFun("bessel_y0", bessel_Y0);
-DefineFun("bessel_y1", bessel_Y1);
-DefineFun("bessel_yn", bessel_Yn);
-DefineFun("beta", beta);
-DefineFun("erf", erf);
-DefineFun("erfc", erfc);
-DefineFun("erfz", erfz);
-DefineFun("erfq", erfq);
-DefineFun("gamma", gamma);
-DefineFun("gammaln", gammaln);
-DefineFun("hazard", hazard);
+  DefineFun(_T("bessel_j0"), bessel_J0);
+  DefineFun(_T("bessel_j1"), bessel_J1);
+  DefineFun(_T("bessel_jn"), bessel_Jn);
+  DefineFun(_T("bessel_y0"), bessel_Y0);
+  DefineFun(_T("bessel_y1"), bessel_Y1);
+  DefineFun(_T("bessel_yn"), bessel_Yn);
+  DefineFun(_T("beta"), beta);
+  DefineFun(_T("erf"), erf);
+  DefineFun(_T("erfc"), erfc);
+  DefineFun(_T("erfz"), erfz);
+  DefineFun(_T("erfq"), erfq);
+  DefineFun(_T("gamma"), gamma);
+  DefineFun(_T("gammaln"), gammaln);
+  DefineFun(_T("hazard"), hazard);
 }
 
 QStringList MyParser::functionsList()

@@ -61,24 +61,24 @@ UserFunction::UserFunction(const QString& s, SurfacePlot& pw)
 
 double UserFunction::operator()(double x, double y)
 {
-	if (formula.isEmpty())
-		return 0.0;
+  if (formula.isEmpty())
+    return 0.0;
 
-	MyParser parser;
-	double result=0.0;
-	try
-	{
-		parser.DefineVar("x", &x);
-		parser.DefineVar("y", &y);
+  MyParser parser;
+  double result=0.0;
+  try
+    {
+      parser.DefineVar(_T("x"), &x);
+      parser.DefineVar(_T("y"), &y);
 
-		parser.SetExpr((const std::string)formula.toUtf8().constData());
-		result=parser.Eval();
-	}
-	catch(mu::ParserError &e)
-	{
-		QMessageBox::critical(0,"Input function error",QString::fromStdString(e.GetMsg()));
-	}
-	return result;
+      parser.SetExpr(formula);
+      result=parser.Eval();
+    }
+  catch(mu::ParserError &e)
+    {
+      QMessageBox::critical(0,"Input function error",QStringFromString(e.GetMsg()));
+    }
+  return result;
 }
 
 UserFunction::~UserFunction()
@@ -93,86 +93,86 @@ UserFunction::~UserFunction()
 
 void Graph3D::initPlot()
 {
-	worksheet = 0;
-	d_matrix = 0;
-    plotAssociation = QString();
+  worksheet = 0;
+  d_matrix = 0;
+  plotAssociation = QString();
 
-	QDateTime dt = QDateTime::currentDateTime ();
-	setBirthDate(dt.toString(Qt::LocalDate));
+  QDateTime dt = QDateTime::currentDateTime ();
+  setBirthDate(dt.toString(Qt::LocalDate));
 
-    color_map = QString::null;
-    animation_redraw_wait = 50;
-    d_timer = new QTimer(this);
-    connect(d_timer, SIGNAL(timeout()), this, SLOT(rotate()) );
-	ignoreFonts = false;
+  color_map = QString();
+  animation_redraw_wait = 50;
+  d_timer = new QTimer(this);
+  connect(d_timer, SIGNAL(timeout()), this, SLOT(rotate()) );
+  ignoreFonts = false;
 
-	QWidget* d_main_widget = new QWidget();
-	sp = new SurfacePlot(d_main_widget);
-	sp->resize(500,400);
-	sp->installEventFilter(this);
-	sp->setRotation(30,0,15);
-	sp->setScale(1,1,1);
-	sp->setShift(0.15,0,0);
-	sp->setZoom(0.9);
-	sp->setOrtho(false);
+  QWidget* d_main_widget = new QWidget();
+  sp = new SurfacePlot(d_main_widget);
+  sp->resize(500,400);
+  sp->installEventFilter(this);
+  sp->setRotation(30,0,15);
+  sp->setScale(1,1,1);
+  sp->setShift(0.15,0,0);
+  sp->setZoom(0.9);
+  sp->setOrtho(false);
 
-	smoothMesh = true;
-	sp->setSmoothMesh(smoothMesh);
+  smoothMesh = true;
+  sp->setSmoothMesh(smoothMesh);
 
-	d_autoscale = true;
+  d_autoscale = true;
 
-	title = QString();
-	sp->setTitle(title);
+  title = QString();
+  sp->setTitle(title);
 
-	titleCol = QColor(Qt::black);
-	sp->setTitleColor(Qt2GL(titleCol));
+  titleCol = QColor(Qt::black);
+  sp->setTitleColor(Qt2GL(titleCol));
 
-	titleFnt = QFont("Times New Roman",14);
-	titleFnt.setBold(true);
+  titleFnt = QFont("Times New Roman",14);
+  titleFnt.setBold(true);
 
-	sp->setTitleFont(titleFnt.family(),titleFnt.pointSize(),
-			titleFnt.weight(),titleFnt.italic());
+  sp->setTitleFont(titleFnt.family(),titleFnt.pointSize(),
+                   titleFnt.weight(),titleFnt.italic());
 
-	axesCol=QColor(Qt::black);
-	labelsCol=QColor(Qt::black);
-	numCol=QColor(Qt::black);
-	meshCol=QColor(Qt::black);
-	gridCol=QColor(Qt::black);
-	bgCol=QColor(255, 255, 255);
-	fromColor=QColor(Qt::red);
-	toColor=QColor(Qt::blue);
+  axesCol=QColor(Qt::black);
+  labelsCol=QColor(Qt::black);
+  numCol=QColor(Qt::black);
+  meshCol=QColor(Qt::black);
+  gridCol=QColor(Qt::black);
+  bgCol=QColor(255, 255, 255);
+  fromColor=QColor(Qt::red);
+  toColor=QColor(Qt::blue);
 
-	col_ = 0;
+  col_ = 0;
 
-	legendOn = false;
-	legendMajorTicks = 5;
-	sp->showColorLegend(legendOn);
-	sp->legend()->setAutoScale(true);
-	sp->legend()->setMajors (legendMajorTicks) ;
+  legendOn = false;
+  legendMajorTicks = 5;
+  sp->showColorLegend(legendOn);
+  sp->legend()->setAutoScale(true);
+  sp->legend()->setMajors (legendMajorTicks) ;
 
-	labelsDist=0;
+  labelsDist=0;
 
-	scaleType=QVector<int>(3);
-	for (int j=0;j<3;j++)
-		scaleType[j]=0;
+  scaleType=QVector<int>(3);
+  for (int j=0;j<3;j++)
+    scaleType[j]=0;
 
-	pointStyle = None;
-	func = 0;
-	alpha = 1.0;
-	barsRad = 0.007;
-	pointSize = 5; smooth = false;
-	crossHairRad = 0.03, crossHairLineWidth = 2;
-	crossHairSmooth = true, crossHairBoxed = false;
-	conesQuality = 32; conesRad = 0.5;
+  pointStyle = None;
+  func = 0;
+  alpha = 1.0;
+  barsRad = 0.007;
+  pointSize = 5; smooth = false;
+  crossHairRad = 0.03, crossHairLineWidth = 2;
+  crossHairSmooth = true, crossHairBoxed = false;
+  conesQuality = 32; conesRad = 0.5;
 
-	style_ = NOPLOT;
-	this->setWidget(d_main_widget);
-	initCoord();
+  style_ = NOPLOT;
+  this->setWidget(d_main_widget);
+  initCoord();
 
-	connect(sp,SIGNAL(rotationChanged(double, double, double)),this,SLOT(rotationChanged(double, double, double)));
-	connect(sp,SIGNAL(zoomChanged(double)),this,SLOT(zoomChanged(double)));
-	connect(sp,SIGNAL(scaleChanged(double, double, double)),this,SLOT(scaleChanged(double, double, double)));
-	connect(sp,SIGNAL(shiftChanged(double, double, double)),this,SLOT(shiftChanged(double, double, double)));
+  connect(sp,SIGNAL(rotationChanged(double, double, double)),this,SLOT(rotationChanged(double, double, double)));
+  connect(sp,SIGNAL(zoomChanged(double)),this,SLOT(zoomChanged(double)));
+  connect(sp,SIGNAL(scaleChanged(double, double, double)),this,SLOT(scaleChanged(double, double, double)));
+  connect(sp,SIGNAL(shiftChanged(double, double, double)),this,SLOT(shiftChanged(double, double, double)));
 }
 
 void Graph3D::initCoord()

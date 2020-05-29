@@ -110,7 +110,8 @@ HEADERS  += src/ApplicationWindow.h \
             src/TeXTableSettings.h \
             src/TeXTableSettingsWidget.h \
             src/TeXTableExportDialog.h \
-            src/PenWidget.h
+            src/PenWidget.h \
+            src/QStringStdString.h
 
 ###################### SOURCES ##############################################
 

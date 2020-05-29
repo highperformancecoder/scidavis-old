@@ -62,9 +62,9 @@ double ScaleDraw::transformValue(double value) const
 			{
 			MyParser parser;
 			if (formula_string.contains("x"))
-				parser.DefineVar("x", &value);
+                          parser.DefineVar(_T("x"), &value);
 			else if (formula_string.contains("y"))
-				parser.DefineVar("y", &value);
+                          parser.DefineVar(_T("y"), &value);
 
 			parser.SetExpr(formula_string.toUtf8().constData());
 			lbl=parser.Eval();

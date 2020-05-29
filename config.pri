@@ -345,14 +345,13 @@ win32: {
 # Mingw cross compilation environment on Linux. 
 mxe {
   # these need to go in CXXFLAGS to ensure they appear before $$QMAKE_INCDIR_QT and $$QMAKE_INCDIR_QT
-  QMAKE_CXXFLAGS+=-g "-I$$QMAKE_INCDIR_QT/qwt5"
-  QMAKE_LFLAGS+="-L$$QMAKE_LIBDIR_QT/qwt5"
   DEFINES += CONSOLE
-  QMAKE_INCDIR  += . "$$(HOME)/usr/mxe/include" "$$QMAKE_INCDIR_QT/../../include/qwtplot3d"
-  QMAKE_LIBDIR += "$(HOME)/usr/mxe/lib" "$(HOME)/usr/mxe/lib64"
-  LIBS +=  -mwindows -lqwt -lqwtplot3d -lmuparser -lgsl -lgslcblas
+  DEFINES -= UNICODE _UNICODE
+  QMAKE_INCDIR  += . "$$(HOME)/usr/mxe/include"  "$$[QT_INSTALL_PREFIX]/include/qwt5-qt5"
+  QMAKE_LIBDIR += "$(HOME)/usr/mxe/lib" "$(HOME)/usr/mxe/lib64" "$$[QT_INSTALL_PREFIX]/lib"
+  LIBS +=  -mwindows -lqwt5-qt5 -lqwtplot3d -lmuparser -lgsl -lgslcblas
   # Qt libraries specified here to get around a dependency bug in qmake
-  LIBS += -lQtOpenGL -lQtGui -lQtNetwork -lQtCore
+  LIBS += -lQt5OpenGL -lQt5Gui -lQt5Network -lQt5Core
   LIBS += -lole32 -loleaut32 -limm32 -lcomdlg32 -luuid 
   LIBS += -lwinspool -lssl -lcrypto -lwinmm -lgdi32 -lws2_32
   LIBS += -ljpeg -lpng -lmng -ltiff -lz -llzma -llcms2

@@ -161,24 +161,24 @@ double fromX, toX, fromY,toY, fromZ,toZ;
 try
 	{
 	MyParser parser;
-	parser.SetExpr(Xfrom.toUtf8().constData());
+	parser.SetExpr(Xfrom);
 	fromX=parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("X Start limit error"), QString::fromStdString(e.GetMsg()));
+	QMessageBox::critical(0, tr("X Start limit error"), QStringFromString(e.GetMsg()));
 	boxXFrom->setFocus();
 	return;
 	}
 try
 	{
 	MyParser parser;
-	parser.SetExpr(Xto.toUtf8().constData());
+	parser.SetExpr(Xto);
 	toX=parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("X End limit error"), QString::fromStdString(e.GetMsg()));
+	QMessageBox::critical(0, tr("X End limit error"), QStringFromString(e.GetMsg()));
 	boxXTo->setFocus();
 	return;
 	}
@@ -186,48 +186,48 @@ catch(mu::ParserError &e)
 try
 	{
 	MyParser parser;
-	parser.SetExpr(Yfrom.toUtf8().constData());
+	parser.SetExpr(Yfrom);
 	fromY=parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("Y Start limit error"), QString::fromStdString(e.GetMsg()));
+	QMessageBox::critical(0, tr("Y Start limit error"), QStringFromString(e.GetMsg()));
 	boxYFrom->setFocus();
 	return;
 	}
 try
 	{
 	MyParser parser;
-	parser.SetExpr(Yto.toUtf8().constData());
+	parser.SetExpr(Yto);
 	toY=parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("Y End limit error"), QString::fromStdString(e.GetMsg()));
+	QMessageBox::critical(0, tr("Y End limit error"), QStringFromString(e.GetMsg()));
 	boxYTo->setFocus();
 	return;
 	}
 try
 	{
 	MyParser parser;
-	parser.SetExpr(Zfrom.toUtf8().constData());
+	parser.SetExpr(Zfrom);
 	fromZ=parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("Z Start limit error"), QString::fromStdString(e.GetMsg()));
+	QMessageBox::critical(0, tr("Z Start limit error"), QStringFromString(e.GetMsg()));
 	boxZFrom->setFocus();
 	return;
 	}
 try
 	{
 	MyParser parser;
-	parser.SetExpr(Zto.toUtf8().constData());
+	parser.SetExpr(Zto);
 	toZ=parser.Eval();
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("Z End limit error"), QString::fromStdString(e.GetMsg()));
+	QMessageBox::critical(0, tr("Z End limit error"), QStringFromString(e.GetMsg()));
 	boxZTo->setFocus();
 	return;
 	}
@@ -246,9 +246,9 @@ bool error=false;
 try
 	{
 	MyParser parser;
-	parser.DefineVar("x", &x);
-	parser.DefineVar("y", &y);
-	parser.SetExpr(formula.toUtf8().constData());
+	parser.DefineVar(_T("x"), &x);
+	parser.DefineVar(_T("y"), &y);
+	parser.SetExpr(formula);
 
 	x=fromX; y=fromY;
 	parser.Eval();
@@ -257,7 +257,7 @@ try
 	}
 catch(mu::ParserError &e)
 	{
-	QMessageBox::critical(0, tr("Input function error"), QString::fromStdString(e.GetMsg()));
+	QMessageBox::critical(0, tr("Input function error"), QStringFromString(e.GetMsg()));
 	boxFunction->setFocus();
 	error=true;
 	}

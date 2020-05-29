@@ -149,7 +149,7 @@ else
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical((ApplicationWindow *)parent(),tr("Start limit error"),QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical((ApplicationWindow *)parent(),tr("Start limit error"),QStringFromString(e.GetMsg()));
 		boxStart->clear();
 		boxStart->setFocus();
 		return;
@@ -173,7 +173,7 @@ else
 	try
 		{
 		MyParser parser;
-		parser.SetExpr((boxEnd->text()).toUtf8().constData());
+		parser.SetExpr(boxEnd->text());
 		stop = parser.Eval();
 		if(stop > maxx)
 			{
@@ -197,7 +197,7 @@ else
 		}
 	catch(mu::ParserError &e)
 		{
-		QMessageBox::critical((ApplicationWindow *)parent(), tr("End limit error"),QString::fromStdString(e.GetMsg()));
+		QMessageBox::critical((ApplicationWindow *)parent(), tr("End limit error"),QStringFromString(e.GetMsg()));
 		boxEnd->clear();
 		boxEnd->setFocus();
 		return;

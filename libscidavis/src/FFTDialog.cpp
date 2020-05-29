@@ -139,12 +139,12 @@ void FFTDialog::accept()
   try
     {
       MyParser parser;
-      parser.SetExpr(boxSampling->text().toUtf8().constData());
+      parser.SetExpr(boxSampling->text());
       sampling=parser.Eval();
     }
   catch(mu::ParserError &e)
     {
-      QMessageBox::critical(this, tr("Sampling value error"), QString::fromStdString(e.GetMsg()));
+      QMessageBox::critical(this, tr("Sampling value error"), QStringFromString(e.GetMsg()));
       boxSampling->setFocus();
       return;
     }

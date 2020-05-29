@@ -42,6 +42,7 @@
 #include "Spectrogram.h"
 #include "QwtPieCurve.h"
 #include "ColorMapEditor.h"
+#include "QStringStdString.h"
 #include "core/column/Column.h"
 
 #include <QTreeWidget>
@@ -2030,12 +2031,12 @@ bool PlotDialog::validInput()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr((histogramBeginBox->text()).toUtf8().constData());
+			parser.SetExpr(histogramBeginBox->text());
 			start=parser.Eval();
 		}
 		catch(mu::ParserError &e)
 		{
-			QMessageBox::critical(this, tr("Start limit error"), QString::fromStdString(e.GetMsg()));
+			QMessageBox::critical(this, tr("Start limit error"), QStringFromString(e.GetMsg()));
 			histogramBeginBox->setFocus();
 			// error = true;
 			return false;
@@ -2049,12 +2050,12 @@ bool PlotDialog::validInput()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr((histogramEndBox->text()).toUtf8().constData());
+			parser.SetExpr(histogramEndBox->text());
 			end=parser.Eval();
 		}
 		catch(mu::ParserError &e)
 		{
-			QMessageBox::critical(this, tr("End limit error"), QString::fromStdString(e.GetMsg()));
+			QMessageBox::critical(this, tr("End limit error"), QStringFromString(e.GetMsg()));
 			histogramEndBox->setFocus();
 			// error=true;
 			return false;
@@ -2075,12 +2076,12 @@ bool PlotDialog::validInput()
 		try
 		{
 			MyParser parser;
-			parser.SetExpr((binSizeBox->text()).toUtf8().constData());
+			parser.SetExpr(binSizeBox->text());
 			stp=parser.Eval();
 		}
 		catch(mu::ParserError &e)
 		{
-			QMessageBox::critical(this, tr("Bin size input error"),QString::fromStdString(e.GetMsg()));
+			QMessageBox::critical(this, tr("Bin size input error"),QStringFromString(e.GetMsg()));
 			binSizeBox->setFocus();
 			// error=true;
 			return false;
