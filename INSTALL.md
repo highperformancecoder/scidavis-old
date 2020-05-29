@@ -5,7 +5,7 @@
 ## Generic requirements
 In order to compile SciDAVis, you need to install the following
 libraries. Easiest is to use your package manager to install prebuilt versions.
-- Qt version 4
+- Qt version 5
 - Qwt version 5
 - QwtPlot3D
 - GSL
@@ -13,7 +13,7 @@ libraries. Easiest is to use your package manager to install prebuilt versions.
 - zlib
 
 For the optional Python scripting feature, you also need:
-- Python
+- Python version 3
 - PyQt
 - sip
 
@@ -52,12 +52,12 @@ contains needed packages not in the official mxe fork
 
 2. Install necessary libraries:
    - cd mxe
-   - make boost gsl muparser qwt5_qt4 qwtplot3d_qt4<br>
+   - make boost gsl muparser qwt5_qt5 qwtplot3d<br>
    Note: currently python support is unavailable with MXE.
 
 3. Configure scidavis for MXE. If the location of your MXE dist is
 MXE_HOME, do
-   - $MXE_HOME/usr/bin/i686-w64-mingw32.static-qmake-qt4 CONFIG+=mxe
+   - $MXE_HOME/usr/bin/i686-w64-mingw32.static-qmake-qt5 CONFIG+=mxe
 
 4. Build scidavis
    - make qmake
