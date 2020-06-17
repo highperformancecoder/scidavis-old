@@ -7,3 +7,6 @@
 *.so.*
 \#*\#
 Makefile
+3rdparty/qwt*/
+build/
+CMakeLists.txt.user*
