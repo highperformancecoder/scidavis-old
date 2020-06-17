@@ -169,15 +169,15 @@ bool QwtHistogram::loadData()
 	for (int i = 0; i<size; i++ )
 		gsl_histogram_increment (h, Y[i]);
 
-	double X[n]; //stores ranges (x) and bins (y)
+    std::vector<double> X(n); //stores ranges (x) and bins (y)
 	Y.resize(n);
 	for (int i = 0; i<n; i++ ){
 		Y[i] = gsl_histogram_get (h, i);
 		double lower, upper;
 		gsl_histogram_get_range (h, i, &lower, &upper);
 		X[i] = lower;
-	}
-	setData(X, Y.data(), n);
+    }
+    setData(X.data(), Y.data(), n);
 
 	d_mean = gsl_histogram_mean(h);
 	d_standard_deviation = gsl_histogram_sigma(h);
@@ -202,7 +202,7 @@ void QwtHistogram::initData(const QVector<double>& Y, int size)
 		return;
 	}
 
-	int n = 10;//default value
+	const int n = 10;//default value
 	double x[n], y[n]; //store ranges (x) and bins (y)
 	gsl_histogram * h = gsl_histogram_alloc (n);
 	if (!h)

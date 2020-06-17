@@ -47,6 +47,9 @@
 #include <QDockWidget>
 #include <QMdiArea>
 
+#ifdef _MSC_VER
+#define NOMINMAX
+#endif
 #include "Folder.h"
 #include "Table.h"
 #include "ScriptingEnv.h"
