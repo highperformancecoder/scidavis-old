@@ -6,7 +6,7 @@
     Copyright            : (C) 2006-2009 Tilman Benkert (thzs*gmx.net)
     Copyright            : (C) 2006-2009 Knut Franke (knut.franke*gmx.de)
     Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
-                           (replace * with @ in the email addresses) 
+                           (replace * with @ in the email addresses)
 
  ***************************************************************************/
 
@@ -95,11 +95,11 @@ Table::Table(ScriptingEnv *env, int r, int c, const QString& label, QWidget* par
 
 void Table::init()
 {
-	TableView::setTable(d_future_table);	
+	TableView::setTable(d_future_table);
 
         if (d_future_table)
           {
-            d_future_table->setView(this);	
+            d_future_table->setView(this);
             birthdate = d_future_table->creationTime().toString(Qt::LocalDate);
           }
 
@@ -114,18 +114,18 @@ void Table::init()
 
 
 	for (int i=0; i<columnCount(); i++)
-		ui.add_reference_combobox->addItem("col(\""+column(i)->name()+"\")"); 
+		ui.add_reference_combobox->addItem("col(\""+column(i)->name()+"\")");
 
 	ui.add_function_combobox->addItems(scriptEnv->mathFunctions());
 	updateFunctionDoc();
-	
-	connect(ui.add_function_combobox, SIGNAL(currentIndexChanged(int)), 
+
+	connect(ui.add_function_combobox, SIGNAL(currentIndexChanged(int)),
 		this, SLOT(updateFunctionDoc()));
-	connect(ui.set_formula_button, SIGNAL(pressed()), 
+	connect(ui.set_formula_button, SIGNAL(pressed()),
 		this, SLOT(applyFormula()));
-	connect(ui.add_function_button, SIGNAL(pressed()), 
+	connect(ui.add_function_button, SIGNAL(pressed()),
 		this, SLOT(addFunction()));
-	connect(ui.add_reference_button, SIGNAL(pressed()), 
+	connect(ui.add_reference_button, SIGNAL(pressed()),
 		this, SLOT(addReference()));
 
 	connect(d_future_table, SIGNAL(columnsAboutToBeRemoved(int, int)), this, SLOT(handleColumnsAboutToBeRemoved(int, int)));
@@ -144,9 +144,9 @@ void Table::init()
 	connect(d_future_table, SIGNAL(headerDataChanged(Qt::Orientation, int, int)), this, SLOT(handleChange()));
 	connect(d_future_table, SIGNAL(recalculate()), this, SLOT(recalculate()));
 
-	connect(d_future_table, SIGNAL(aspectDescriptionChanged(const AbstractAspect*)), 
+	connect(d_future_table, SIGNAL(aspectDescriptionChanged(const AbstractAspect*)),
 			this, SLOT(handleAspectDescriptionChange(const AbstractAspect *)));
-	connect(d_future_table, SIGNAL(aspectDescriptionAboutToChange(const AbstractAspect*)), 
+	connect(d_future_table, SIGNAL(aspectDescriptionAboutToChange(const AbstractAspect*)),
 			this, SLOT(handleAspectDescriptionAboutToChange(const AbstractAspect *)));
 }
 
@@ -500,7 +500,7 @@ bool Table::recalculate(int col, bool only_selected_rows)
 							results << QLocale().toString(ret.toDouble(), 'g', 14);
 						else if(ret.canConvert(QVariant::String))
 							results << ret.toString();
-						else 
+						else
 							results << QString();
 					}
 					col_ptr->asStringColumn()->replaceTexts(start_row, results);
@@ -702,8 +702,8 @@ QStringList Table::selectedErrColumns()
 	QStringList names;
 	for (int i=0;i<numCols();i++)
 	{
-		if (isColumnSelected(i) && 
-				(column(i)->plotDesignation() == SciDAVis::xErr || 
+		if (isColumnSelected(i) &&
+				(column(i)->plotDesignation() == SciDAVis::xErr ||
 				 column(i)->plotDesignation() == SciDAVis::yErr) )
 			names << name() + "_" + column(i)->name();
 	}
@@ -722,8 +722,8 @@ QStringList Table::drawableColumnSelection()
 
 	for (int i=0; i<numCols(); i++)
 	{
-		if (isColumnSelected(i) && 
-				(column(i)->plotDesignation() == SciDAVis::xErr || 
+		if (isColumnSelected(i) &&
+				(column(i)->plotDesignation() == SciDAVis::xErr ||
 				 column(i)->plotDesignation() == SciDAVis::yErr) )
 			names << name() + "_" + column(i)->name();
 	}
@@ -879,9 +879,10 @@ void Table::removeCol()
 
 void Table::removeCol(const QStringList& list)
 {
-  if (d_future_table)
+  if (d_future_table) {
     foreach(QString name, list)
       d_future_table->removeColumns(colIndex(name), 1);
+  }
 }
 
 int Table::numRows()
@@ -1190,7 +1191,7 @@ void Table::copy(Table *m)
 {
 	if (!m || !d_future_table)
         return;
-	
+
 	d_future_table->copy(m->d_future_table);
 }
 
@@ -1226,8 +1227,8 @@ void Table::restore(const QStringList& list_in)
 	{
 		temp_list.removeFirst();
 		setCommands(temp_list);
-	} 
-	else if (temp_list[0] == "<com>") 
+	}
+	else if (temp_list[0] == "<com>")
 	{
 		QStringList commands;
 		for (int col=0; col<numCols(); col++)
@@ -1337,8 +1338,8 @@ void Table::setColumnTypes(QList<int> ctl)
     }
 }
 
-void Table::setColumnType(int col, SciDAVis::ColumnMode mode) 
-{ 
+void Table::setColumnType(int col, SciDAVis::ColumnMode mode)
+{
 	column(col)->setColumnMode(mode);
 }
 
@@ -1463,7 +1464,7 @@ void Table::handleAspectDescriptionChange(const AbstractAspect *aspect)
 	}
 }
 
-// this function is for backwards compatibility (used by Python), 
+// this function is for backwards compatibility (used by Python),
 void Table::importASCII(const QString &fname, const QString &sep, int ignoredLines,
 		bool renameCols, bool stripSpaces, bool simplifySpaces, bool newTable) {
   	Q_UNUSED(newTable)

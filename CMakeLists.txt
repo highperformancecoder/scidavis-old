@@ -6,7 +6,7 @@ project( scidavis
   HOMEPAGE_URL "https://scidavis.sourceforge.net"
   LANGUAGES CXX C )
 
-set( CMAKE_CXX_STANDARD 11)
+set( CMAKE_CXX_STANDARD 17)
 set( CMAKE_CXX_STANDARD_REQUIRED TRUE )
 set( CMAKE_CXX_EXTENSIONS OFF )
 
@@ -32,13 +32,12 @@ set( CMAKE_AUTOUIC ON )
 set( CMAKE_AUTORCC ON )
 
 if( MSVC )
-  # /wd4100 Silent unreferenced formal parameter (unused-parameter)
   # /wd4456 /wd4457 /wd4458 Silent "declaration of %1 hides %2 ..."
   # /wd4251 Silent dll-related warnings
   # /wd4127 Silent conditional expression is constant (Qt headers)
   # /wd4310 Silent cast truncates constant value (muParser headers)
   set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /W4 /permissive- \
-       /wd4100 /wd4456 /wd4457 /wd4458 /wd4251 /wd4127 /wd4310" )
+       /wd4456 /wd4457 /wd4458 /wd4251 /wd4127 /wd4310" )
   set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4 /permissive-" )
   if( CMAKE_CXX_COMPILER_ID STREQUAL "Clang" )
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-nonportable-include-path" )
@@ -46,8 +45,7 @@ if( MSVC )
     add_compile_options( "/MP" )
   endif()
 else()
-  set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -Wall -Wextra \
-       -pedantic -Wno-unused-parameter" )
+  set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -Wall -Wextra -pedantic" )
   set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic" )
 endif()
 

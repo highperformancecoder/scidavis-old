@@ -6,7 +6,7 @@
                            Knut Franke
     Email (use @ for *)  : thzs*gmx.net, knut.franke*gmx.de
     Description          : Auxiliary class for interval based data
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -42,10 +42,6 @@ template<class T> class IntervalBase
 {
 	public:
 		IntervalBase() : d_start(-1), d_end(-1){}
-		IntervalBase(const IntervalBase<T>& other) {
-			d_start = other.start();
-			d_end = other.end();
-		}
 		IntervalBase(T start, T end) {
 			d_start = start;
 			d_end = end;
@@ -62,17 +58,12 @@ template<class T> class IntervalBase
 		/**
 		 * This function returns an invalid interval if the two intervals do not intersect.
 		 */
-		static Interval<T> intersection(const Interval<T>& first, const Interval<T>& second) 
-		{ 
-			return Interval<T>( qMax(first.start(), second.start()), qMin(first.end(), second.end()) ); 
+		static Interval<T> intersection(const Interval<T>& first, const Interval<T>& second)
+		{
+			return Interval<T>( qMax(first.start(), second.start()), qMin(first.end(), second.end()) );
 		}
 		void translate(T offset) { d_start += offset; d_end += offset; }
 		bool operator==(const Interval<T>& other) const { return ( d_start == other.start() && d_end == other.end() ); }
-		Interval<T>& operator=(const Interval<T>& other) {
-			d_start = other.start();
-			d_end = other.end();
-			return *this;
-		}
 		//! Returns true if no gap is between two intervals.
 		virtual bool touches(const Interval<T>& other) const = 0;
 		//! Merge two intervals that touch or intersect
@@ -139,7 +130,7 @@ template<class T> class IntervalBase
 		/**
 		 * Remark: This may decrease the list size.
 		 */
-		static void restrictList(QList< Interval<T> > * list, Interval<T> i) 
+		static void restrictList(QList< Interval<T> > * list, Interval<T> i)
 		{
 			Interval<T> temp;
 			for(int c=0; c<list->size(); c++)
@@ -150,7 +141,7 @@ template<class T> class IntervalBase
 				else
 					list->replace(c, temp);
 			}
-			
+
 		}
 		//! Subtract an interval from all intervals in the list
 		/**
@@ -212,7 +203,6 @@ template<class T> class Interval : public IntervalBase<T>
 	public:
 		Interval() {}
 		Interval(T start, T end) : IntervalBase<T>(start, end) {}
-		Interval(const Interval<T>& other) : IntervalBase<T>(other) {}
 		T size() const {
 			return IntervalBase<T>::d_end - IntervalBase<T>::d_start + 1;
 		}

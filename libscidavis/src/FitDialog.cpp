@@ -530,7 +530,7 @@ void FitDialog::setGraph(Graph *g)
 
 	connect (d_graph, SIGNAL(closedGraph()), this, SLOT(close()));
 	connect (d_graph, SIGNAL(dataRangeChanged()), this, SLOT(changeDataRange()));
-};
+}
 
 void FitDialog::activateCurve(const QString& curveName)
 {
@@ -542,7 +542,7 @@ void FitDialog::activateCurve(const QString& curveName)
     d_graph->range(d_graph->curveIndex(curveName), &start, &end);
     boxFrom->setText(QLocale().toString(qMin(start, end), 'g', 15));
     boxTo->setText(QLocale().toString(qMax(start, end), 'g', 15));
-};
+}
 
 void FitDialog::saveUserFunction()
 {
@@ -1035,7 +1035,7 @@ void FitDialog::accept()
 {
 	QString curve = boxCurve->currentText();
 	QStringList curvesList = d_graph->curvesList();
-	if (curvesList.contains(curve) <= 0)
+    if (!curvesList.contains(curve))
 	{
 		QMessageBox::critical(this,tr("Warning"),
 				tr("The curve <b> %1 </b> doesn't exist anymore! Operation aborted!").arg(curve));
@@ -1335,7 +1335,7 @@ void FitDialog::setSrcTables(QList<MyWidget*>* tables)
 		colNamesBox->addItem(tr("No data tables"));
 		return;
 	}
-	
+
 	d_src_table = tables;
 	tableNamesBox->clear();
 	foreach(QWidget *i, *d_src_table)
@@ -1348,7 +1348,7 @@ void FitDialog::setSrcTables(QList<MyWidget*>* tables)
 void FitDialog::selectSrcTable(int tabnr)
 {
 	colNamesBox->clear();
-	
+
 	if (tabnr >= 0 && tabnr < d_src_table->count())
 	{
 		Table *t = (Table*)d_src_table->at(tabnr);

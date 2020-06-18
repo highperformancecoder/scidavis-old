@@ -153,9 +153,7 @@ MuParserScript::MuParserScript(ScriptingEnv *environment, const QString &code, Q
         // work around muparser bug number 6 https://code.google.com/p/muparser/issues/detail?id=6
 	m_parser.DefineInfixOprtChars(opChars);
 
-	// statement separation needs lower precedence than everything else; assignment has precedence
-	// -1, everything else defined in mu::Parser has non-negative precedence
-	m_parser.DefineOprt(_T(";"), statementSeparator, -2);
+    m_parser.DefineOprt(_T(";"), statementSeparator, 0);
 
 	// aliases for _pi and _e
 	m_parser.DefineConst(_T("pi"), M_PI);
@@ -694,7 +692,7 @@ QVariant MuParserScript::eval() {
 		// see documentation of s_currentInstance for explanation
 		s_currentInstance = this;
 		return m_parser.Eval();
-	} catch (EmptySourceError *e) {
+    } catch (EmptySourceError*) {
 		// formula tried to access a table cell marked as invalid
 		return "";
 	} catch (mu::ParserError &e) {

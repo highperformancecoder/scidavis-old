@@ -155,15 +155,11 @@ void PatternBox::init()
 
 void PatternBox::setPattern(const Qt::BrushStyle& style)
 {
-  // gcc is being overly picky here. std::find needs a point 1 past the end
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Warray-bounds"
-  const Qt::BrushStyle*ite = std::find(patterns, patterns + sizeof(patterns), style);
-  if (ite == patterns + sizeof(patterns))
+    const Qt::BrushStyle*ite = std::find(patterns, patterns + std::size(patterns), style);
+    if (ite == patterns + std::size(patterns))
     this->setCurrentIndex(0); // default pattern is solid.
   else
     this->setCurrentIndex(ite - patterns);
-#pragma GCC diagnostic pop        
 }
 
 Qt::BrushStyle PatternBox::getSelectedPattern() const
@@ -177,13 +173,9 @@ Qt::BrushStyle PatternBox::getSelectedPattern() const
 
 int PatternBox::patternIndex(const Qt::BrushStyle& style)
 {
-  // gcc is being overly picky here. std::find needs a point 1 past the end
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Warray-bounds"
-  const Qt::BrushStyle*ite = std::find(patterns, patterns + sizeof(patterns), style);
-  if (ite == patterns + sizeof(patterns))
+    const Qt::BrushStyle*ite = std::find(patterns, patterns + std::size(patterns), style);
+    if (ite == patterns + std::size(patterns))
     return 0; // default pattern is solid.
   else
     return (ite - patterns);
-#pragma GCC diagnostic pop        
 }

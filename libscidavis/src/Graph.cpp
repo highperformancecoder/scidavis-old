@@ -1564,7 +1564,7 @@ void Graph::removeMarker()
 		if (selectedMarker==legendMarkerID)
 			legendMarkerID=-1;
 
-		if (d_lines.contains(selectedMarker)>0)
+        if (d_lines.contains(selectedMarker))
 		{
 			int index = d_lines.indexOf(selectedMarker);
             int last_line_marker = (int)d_lines.size() - 1;
@@ -1572,7 +1572,7 @@ void Graph::removeMarker()
 				d_lines[i]=d_lines[i+1];
 			d_lines.resize(last_line_marker);
 		}
-		else if(d_texts.contains(selectedMarker)>0)
+        else if(d_texts.contains(selectedMarker))
 		{
 			int index=d_texts.indexOf(selectedMarker);
 			int last_text_marker = d_texts.size() - 1;
@@ -1580,7 +1580,7 @@ void Graph::removeMarker()
 				d_texts[i]=d_texts[i+1];
 			d_texts.resize(last_text_marker);
 		}
-		else if(d_images.contains(selectedMarker)>0)
+        else if(d_images.contains(selectedMarker))
 		{
 			int index=d_images.indexOf(selectedMarker);
 			int last_image_marker = d_images.size() - 1;
@@ -2225,7 +2225,7 @@ QString Graph::saveTitle()
 
 QString Graph::saveScaleTitles()
 {
-	int a;
+    int a{};
 	QString s="";
 	for (int i=0; i<4; i++)
 	{
