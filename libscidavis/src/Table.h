@@ -6,7 +6,7 @@
     Copyright            : (C) 2006-2009 Tilman Benkert (thzs*gmx.net)
     Copyright            : (C) 2006-2009 Knut Franke (knut.franke*gmx.de)
     Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
-                           (replace * with @ in the email addresses) 
+                           (replace * with @ in the email addresses)
 
  ***************************************************************************/
 
@@ -58,14 +58,14 @@ public:
 
    	Table(ScriptingEnv *env, const QString &fname,const QString &sep, int ignoredLines, bool renameCols,
 		 bool stripSpaces, bool simplifySpaces, bool convertToNumeric, QLocale numericFormat, const QString &label,
-		 QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
-	Table(ScriptingEnv *env, int r,int c, const QString &label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
+		 QWidget* parent=0, const char* name=0, Qt::WindowFlags f = Qt::Widget);
+	Table(ScriptingEnv *env, int r,int c, const QString &label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f = Qt::Widget);
 
 	//! Sets the number of significant digits
 	void setNumericPrecision(int prec);
 
   //! Return the window name
-  virtual QString name() { return d_future_table? d_future_table->name(): QString();} 
+  virtual QString name() { return d_future_table? d_future_table->name(): QString();}
   //! Set the window name
   virtual void setName(const QString& s) { if (d_future_table) d_future_table->setName(s); }
   //! Return the window label
@@ -73,12 +73,12 @@ public:
   //! Set the window label
   virtual void setWindowLabel(const QString& s) { if (d_future_table) d_future_table->setComment(s); updateCaption(); }
 	//! Set the caption policy
-	void setCaptionPolicy(CaptionPolicy policy) 
+	void setCaptionPolicy(CaptionPolicy policy)
 	{
           if (d_future_table)
             {
               caption_policy = policy;
-              updateCaption(); 
+              updateCaption();
               switch (policy)
 		{
 			case Name:
@@ -97,7 +97,7 @@ public:
 	virtual void setBirthDate(const QString& s)
 	{
 		birthdate = s;
-                if (d_future_table) 
+                if (d_future_table)
                   d_future_table->importV0x0001XXCreationTime(s);
 	}
 
@@ -121,8 +121,8 @@ public slots:
   Column* column(int index) const { return d_future_table? d_future_table->column(index): nullptr; }
 	//! Return the column determined by the given name
 	/**
-	 * This method should not be used unless absolutely necessary. 
-	 * Columns should be addressed by their index. 
+	 * This method should not be used unless absolutely necessary.
+	 * Columns should be addressed by their index.
 	 * This method is mainly meant to be used in scripts.
 	 */
   Column* column(const QString & name) const { return d_future_table? d_future_table->column(name): nullptr; }

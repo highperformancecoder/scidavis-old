@@ -340,9 +340,15 @@ void PenWidget::updateCustomDash()
 
 QVector<qreal> PenWidget::dashPattern()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QStringList custDash = d_custom_dash.split(' ', Qt::SkipEmptyParts);
+    QVector<qreal> custDashF;
+    for (auto s: d_custom_dash.split(' ', Qt::SkipEmptyParts))
+#else
     QStringList custDash = d_custom_dash.split(' ', QString::SkipEmptyParts);
     QVector<qreal> custDashF;
     for (auto s: d_custom_dash.split(' ', QString::SkipEmptyParts))
+#endif
         custDashF << s.toDouble();
     return custDashF;
 }

@@ -251,15 +251,15 @@ QString day;
 switch(d_format)
 	{
 	case  ShortName:
-		day = QDate::shortDayName (val);
+		day = QLocale().dayName(val, QLocale::ShortFormat);
 	break;
 
 	case  LongName:
-		day = QDate::longDayName (val);
+		day = QLocale().dayName(val, QLocale::LongFormat);
 	break;
 
 	case  Initial:
-		day = (QDate::shortDayName (val)).left(1);
+		day = (QLocale().dayName(val, QLocale::ShortFormat)).left(1);
 	break;
 	}
 return QwtText(day);
@@ -284,22 +284,22 @@ if (val < 0)
 else if (val == 0)
 	val = 12;
 
-QString day;
+QString month;
 switch(d_format)
 	{
 	case  ShortName:
-		day = QDate::shortMonthName (val);
+		month = QLocale().monthName(val, QLocale::ShortFormat);
 	break;
 
 	case  LongName:
-		day = QDate::longMonthName (val);
+		month = QLocale().monthName(val, QLocale::LongFormat);
 	break;
 
 	case  Initial:
-		day = (QDate::shortMonthName (val)).left(1);
+		month = (QLocale().monthName(val, QLocale::ShortFormat)).left(1);
 	break;
 	}
-return QwtText(day);
+return QwtText(month);
 }
 
 /*****************************************************************************
@@ -320,7 +320,11 @@ int prec;
 labelFormat(f, prec);
 
 QString txt = QLocale().toString(transformValue(value), 'e', prec);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+QStringList list = txt.split( "e", Qt::SkipEmptyParts);
+#else
 QStringList list = txt.split( "e", QString::SkipEmptyParts);
+#endif
 if (list[0].toDouble() == 0.0)
 	return QString("0");
 

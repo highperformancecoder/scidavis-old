@@ -100,7 +100,7 @@ void Table::init()
         if (d_future_table)
           {
             d_future_table->setView(this);
-            birthdate = d_future_table->creationTime().toString(Qt::LocalDate);
+            birthdate = QLocale().toString(d_future_table->creationTime());
           }
 
 	ui.gridLayout1->removeWidget(ui.formula_box);
@@ -1219,7 +1219,11 @@ void Table::restore(const QStringList& list_in)
 	temp_list.removeFirst();
 	importV0x0001XXHeader(temp_list);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	setColWidths((*iterator).right((*iterator).length()-9).split("\t", Qt::SkipEmptyParts));
+#else
 	setColWidths((*iterator).right((*iterator).length()-9).split("\t", QString::SkipEmptyParts));
+#endif
 	iterator++;
 
 	temp_list = (*iterator++).split("\t");

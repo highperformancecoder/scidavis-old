@@ -46,7 +46,8 @@ class Note: public MyWidget
 
 public:
 
-  Note(ScriptingEnv *env, const QString& label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
+  Note(ScriptingEnv *env, const QString& label, QWidget* parent=0, const char* name=0,
+       Qt::WindowFlags f = Qt::Widget);
   ~Note(){};
 
 

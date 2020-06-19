@@ -62,7 +62,7 @@ public:
 	 * \param f window flags
 	 * \sa setCaptionPolicy(), captionPolicy()
 	 */
-	MyWidget(const QString& label = QString(), QWidget * parent = 0, const QString name = 0, Qt::WindowFlags f = 0);
+	MyWidget(const QString& label = QString(), QWidget * parent = 0, const QString name = 0, Qt::WindowFlags f = Qt::Widget);
 
 	//! Possible window captions.
 	enum CaptionPolicy{

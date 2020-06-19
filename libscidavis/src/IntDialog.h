@@ -44,7 +44,7 @@ class IntDialog : public QDialog
     Q_OBJECT
 
 public:
-    IntDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    IntDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
     ~IntDialog(){};
 
     QPushButton* buttonOk;

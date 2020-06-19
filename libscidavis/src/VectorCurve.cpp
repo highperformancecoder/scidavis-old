@@ -275,6 +275,23 @@ void VectorCurve::updateColumnNames(const QString& oldName, const QString& newNa
     if (updateTableName)
     {
         QString s = title().text();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        QStringList lst = s.split("_", Qt::SkipEmptyParts);
+        if (lst[0] == oldName)
+            setTitle(newName + "_" + lst[1]);
+
+        lst = d_x_column.split("_", Qt::SkipEmptyParts);
+        if (lst[0] == oldName)
+            d_x_column = newName + "_" + lst[1];
+
+		lst = d_end_x_a.split("_", Qt::SkipEmptyParts);
+        if (lst[0] == oldName)
+            d_end_x_a = newName + "_" + lst[1];
+
+		lst = d_end_y_m.split("_", Qt::SkipEmptyParts);
+        if (lst[0] == oldName)
+            d_end_y_m = newName + "_" + lst[1];
+#else
         QStringList lst = s.split("_", QString::SkipEmptyParts);
         if (lst[0] == oldName)
             setTitle(newName + "_" + lst[1]);
@@ -290,6 +307,7 @@ void VectorCurve::updateColumnNames(const QString& oldName, const QString& newNa
 		lst = d_end_y_m.split("_", QString::SkipEmptyParts);
         if (lst[0] == oldName)
             d_end_y_m = newName + "_" + lst[1];
+#endif
     }
     else
     {

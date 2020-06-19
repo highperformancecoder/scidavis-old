@@ -6,7 +6,7 @@
     Copyright            : (C) 2006-2009 Tilman Benkert (thzs*gmx.net)
     Copyright            : (C) 2006-2009 Knut Franke (knut.franke*gmx.de)
     Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
-                           (replace * with @ in the email addresses) 
+                           (replace * with @ in the email addresses)
 
  ***************************************************************************/
 
@@ -56,7 +56,7 @@ public:
 	future::Matrix *d_future_matrix;
 
 	//! Return the window name
-	virtual QString name() { return d_future_matrix->name();} 
+	virtual QString name() { return d_future_matrix->name();}
 	//! Set the window name
 	virtual void setName(const QString& s) { d_future_matrix->setName(s); }
 	//! Return the window label
@@ -64,9 +64,9 @@ public:
 	//! Set the window label
 	virtual void setWindowLabel(const QString& s) { d_future_matrix->setComment(s); updateCaption(); }
 	//! Set the caption policy
-	void setCaptionPolicy(CaptionPolicy policy) 
-	{ 
-		caption_policy = policy; updateCaption(); 
+	void setCaptionPolicy(CaptionPolicy policy)
+	{
+		caption_policy = policy; updateCaption();
 		switch (policy)
 		{
 			case Name:
@@ -99,7 +99,8 @@ public:
 	 * \param name window name
 	 * \param f window flags
 	 */
-	Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
+	Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent=0,
+			const char* name=0, Qt::WindowFlags f = Qt::Widget);
 	~Matrix();
 
 	//! Return the number of rows
@@ -283,9 +284,9 @@ public slots:
 
 	static Matrix * fromImage(const QImage & image, ScriptingEnv * env);
     void copy(Matrix *m);
-	
+
 	//! Return the creation date
-	virtual QString birthDate(){return d_future_matrix->creationTime().toString(Qt::LocalDate); };
+	virtual QString birthDate(){return QLocale().toString(d_future_matrix->creationTime()); };
 
 signals:
 	//! Show the context menu
@@ -305,7 +306,8 @@ private:
 	//! Stores the matrix data only before the user opens the matrix dialog in order to avoid data loses during number format changes.
 	double **dMatrix;
 
-	Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent=0, const char* name=0, Qt::WindowFlags f=0);
+	Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label,
+QWidget* parent=0, const char* name=0, Qt::WindowFlags f = Qt::Widget);
 };
 
 #endif

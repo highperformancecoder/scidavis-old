@@ -50,8 +50,8 @@
 Folder::Folder(const QString &name )
 	: d_active_window(0)
 {
-	QObject::setObjectName(name);
-	birthdate = QDateTime::currentDateTime ().toString(Qt::LocalDate);
+    QObject::setObjectName(name);
+    birthdate = QLocale().toString(QDateTime::currentDateTime());
 
 	// FIXME: This doesn't work anymore in Qt4, need alternative method
 	// lstWindows.setAutoDelete( true );

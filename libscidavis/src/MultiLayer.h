@@ -68,7 +68,8 @@ class MultiLayer: public MyWidget
 	Q_OBJECT
 
 public:
-	MultiLayer (const QString& label, QWidget* parent=0, const QString name=QString(), Qt::WindowFlags f=0);
+	MultiLayer (const QString& label, QWidget* parent=0, const QString name=QString(),
+             Qt::WindowFlags f = Qt::Widget);
 	QWidgetList graphPtrs(){return graphsList;};
 	Graph *layer(int num);
 	QWidgetList layerWidgets() const { return graphsList; }
@@ -164,7 +165,7 @@ public slots:
 	void exportSVG(const QString& fname);
     void exportPDF(const QString& fname);
 	void exportVector(const QString& fileName, int res = 0, bool color = true,
-                    bool keepAspect = true, QPrinter::PageSize pageSize = QPrinter::Custom, 
+                    bool keepAspect = true, QPrinter::PageSize pageSize = QPrinter::Custom,
 					QPrinter::Orientation orientation = QPrinter::Portrait);
     void exportPainter(QPaintDevice &paintDevice, bool keepAspect = false, QRect rect = QRect());
     void exportPainter(QPainter &painter, bool keepAspect = false, QRect rect = QRect(), QSize size = QSize());

@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Text label/axis label options dialog
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -37,20 +37,20 @@ class QTextCursor;
 class QComboBox;
 class QLabel;
 class QSpinBox;
-	
+
 #include "ColorButton.h"
 #include "TextFormatButtons.h"
 
 //! Options dialog for text labels/axes labels
 class TextDialog : public QDialog
-{ 
+{
 	Q_OBJECT
 
 public:
 	//! Label types
 	enum TextType{
-		TextMarker, /*!< normal text label */ 
-		AxisTitle   /*!< axis label */ 
+		TextMarker, /*!< normal text label */
+		AxisTitle   /*!< axis label */
 	};
 
 	//! Constructor
@@ -59,7 +59,7 @@ public:
 	 * \param parent parent widget
 	 * \param fl window flags
 	 */
-	TextDialog(TextType type, QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+	TextDialog(TextType type, QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
 	//! Destructor
 	~TextDialog(){};
 
@@ -120,7 +120,7 @@ signals:
 	 * \param backgroundColor the backgroundcolor
 	 */
 	void values(const QString& text, int angle, int bkg, const QFont& fnt, const QColor& textColor, const QColor& backgroundColor);
-	
+
 	//! Signal for axes labels: change text
 	void changeText(const QString &);
 	//! Signal for axes labels: change text color

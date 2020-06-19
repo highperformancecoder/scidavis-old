@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Image geometry dialog
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -40,7 +40,7 @@ class ImageDialog : public QDialog
     Q_OBJECT
 
 public:
-    ImageDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    ImageDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
     ~ImageDialog(){};
 
 	void setOrigin(const QPoint& o);
@@ -57,7 +57,7 @@ signals:
 
 protected:
 	double aspect_ratio;
-	
+
 private:
     QPushButton* buttonOk;
 	QPushButton* buttonCancel;

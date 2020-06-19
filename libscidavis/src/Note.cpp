@@ -8,7 +8,7 @@
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
                            knut.franke*gmx.de
     Description          : Notes window class
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -44,14 +44,14 @@
 Note::Note(ScriptingEnv *env, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 				: MyWidget(label, parent, name, f)
 {
-init(env);	
+init(env);
 }
 
 void Note::init(ScriptingEnv *env)
 {
 autoExec = false;
 QDateTime dt = QDateTime::currentDateTime ();
-setBirthDate(dt.toString(Qt::LocalDate));
+setBirthDate(QLocale().toString(dt));
 
 te = new ScriptEdit(env, this, name());
 te->setContext(this);

@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Filter options dialog
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -37,14 +37,14 @@ class QComboBox;
 class QCheckBox;
 class Graph;
 class ColorButton;
-	
+
 //! Filter options dialog
 class FilterDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    FilterDialog(int type, QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    FilterDialog(int type, QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
     ~FilterDialog(){};
 
 	QPushButton* buttonFilter;
