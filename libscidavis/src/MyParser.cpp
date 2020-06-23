@@ -59,7 +59,7 @@ l << "atanh()" << "avg(,)" << "bessel_j0()" << "bessel_j1()" << "bessel_jn(,)";
 l << "bessel_y0()" << "bessel_y1()" << "bessel_yn(,)" << "beta(,)";
 l << "cos()" << "cosh()" << "erf()" << "erfc()" << "erfz()" << "erfq()";
 l << "exp()" << "gamma()" << "gammaln()" << "hazard()";
-l << "if( , , )" << "ln()" << "log()" << "log2()" << "min()" << "max()";
+l << "() ? () : ()" << "ln()" << "log()" << "log2()" << "min()" << "max()";
 l << "rint()" << "sign()" << "sin()" << "sinh()" << "sqrt()" << "tan()" << "tanh()";
 return l;
 }
@@ -149,7 +149,7 @@ case 24:
 	blabla="hazard(x):\n Computes the hazard function for the normal distribution h(x) = erfz(x)/erfq(x).";
 break;
 case 25:
-	blabla="if(e1, e2, e3):	if e1 then e2 else e3.";
+	blabla="(e1) ? (e2) : (e3): if e1 then e2 else e3.";
 break;
 case 26:
 	blabla="ln(x):\n Calculate natural logarithm.";
