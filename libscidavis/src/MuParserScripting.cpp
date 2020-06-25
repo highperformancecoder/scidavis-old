@@ -74,7 +74,7 @@ const MuParserScripting::mathFunction MuParserScripting::math_functions[] =
   { _T("gamma"), 1, gamma, NULL,NULL, QT_TR_NOOP("gamma(x):\n Computes the Gamma function, subject to x not being a negative integer.") },
   { _T("gammaln"), 1, lngamma,NULL,NULL, QT_TR_NOOP("gammaln(x):\n Computes the logarithm of the Gamma function, subject to x not a being negative integer. For x<0, log(|Gamma(x)|) is returned.") },
   { _T("hazard"), 1, hazard,NULL,NULL, QT_TR_NOOP("hazard(x):\n Computes the hazard function for the normal distribution h(x) = erfz(x)/erfq(x).") },
-  { _T("if"), 3, NULL,NULL,NULL, QT_TR_NOOP("if(e1, e2, e3):\n if e1 then e2 else e3.") },
+  { _T("()?():"), 3, NULL,NULL,NULL, QT_TR_NOOP("(e1)?(e2):(e3):\n if e1 then e2 else e3.") },
   { _T("ln"), 1, NULL,NULL,NULL, QT_TR_NOOP("ln(x):\n Calculate natural logarithm log_e.") },
   { _T("log"), 1, NULL,NULL,NULL, QT_TR_NOOP("log(x):\n Calculate decimal logarithm log_10.") },
   { _T("log10"), 1, NULL,NULL,NULL, QT_TR_NOOP("log10(x):\n Calculate decimal logarithm log_10.") },
