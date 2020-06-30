@@ -65,7 +65,7 @@ class PlotCurve;
 class QwtErrorPlotCurve;
 
 //! Structure containing curve layout parameters
-typedef struct{
+typedef struct CurveLayout_struct{
   unsigned int lCol; //!< line color
   int lWidth;      //!< line width
   int lStyle;      //!< line style
