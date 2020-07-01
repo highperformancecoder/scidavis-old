@@ -209,5 +209,4 @@ double QwtBarCurve::dataOffset()
 		else
 			return 0.5*bar_offset*0.01*bar_width;
 	}
-return 0;
 }

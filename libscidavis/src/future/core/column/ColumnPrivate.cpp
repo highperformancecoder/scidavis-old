@@ -205,8 +205,8 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *f
 	void * old_data = d_data;
 	// remark: the deletion of the old data will be done in the dtor of a command
 
-	AbstractSimpleFilter *new_in_filter, *new_out_filter;
-	bool filter_is_temporary; // it can also become outputFilter(), which we may not delete here
+    AbstractSimpleFilter *new_in_filter, *new_out_filter;
+    bool filter_is_temporary{}; // it can also become outputFilter(), which we may not delete here
 	Column* temp_col = 0;
 	if (filter)
 		filter_is_temporary = false;

@@ -79,9 +79,10 @@ public:
 
 	int windowCount(bool recursive = false) const {
 	    int result = lstWindows.size();
-	    if (recursive)
-		foreach (Folder *folder, folders())
-		    result += folder->windowCount(true);
+	    if (recursive) {
+            foreach (Folder *folder, folders())
+                result += folder->windowCount(true);
+	    }
 	    return result;
 	};
 

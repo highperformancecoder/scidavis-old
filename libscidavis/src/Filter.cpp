@@ -254,10 +254,10 @@ int Filter::sortedCurveData(QwtPlotCurve *c, double start, double end, double **
     // find indices that, when permuted by the sort result, give start and end
     int i_start, i_end;
     for (i_start = 0; i_start < datasize; i_start++)
-  	    if (c->x(p[i_start]) >= start)
+        if (c->x(static_cast<int>(p[i_start])) >= start)
           break;
     for (i_end = datasize-1; i_end >= 0; i_end--)
-  	    if (c->x(p[i_end]) <= end)
+        if (c->x(static_cast<int>(p[i_end])) <= end)
           break;
     
     // make result arrays
@@ -266,8 +266,8 @@ int Filter::sortedCurveData(QwtPlotCurve *c, double start, double end, double **
     (*x) = new double[n];
     (*y) = new double[n];
     for (int j = 0, i = i_start; i <= i_end; i++, j++) {
-        (*x)[j] = c->x(p[i]);
-        (*y)[j] = c->y(p[i]);
+        (*x)[j] = c->x(static_cast<int>(p[i]));
+        (*y)[j] = c->y(static_cast<int>(p[i]));
     }
     return n;
 }

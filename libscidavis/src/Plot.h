@@ -42,7 +42,7 @@ class Grid;
 //! Plot window class
 class Plot: public QwtPlot
 {
-  Q_OBJECT;
+  Q_OBJECT
 
   friend class Graph; // part of axes gaps workaround
 
@@ -54,7 +54,7 @@ public:
   Grid *grid(){return (Grid *)d_grid;};
   QList<int> curveKeys(){return d_curves.keys();};
   QList<QwtPlotItem *> curvesList(){return d_curves.values();};
-	
+
   int insertCurve(QwtPlotItem *c);
   void removeCurve(int index);
 

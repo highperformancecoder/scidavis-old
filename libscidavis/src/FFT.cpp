@@ -121,7 +121,7 @@ QList<Column *> FFT::fftTable()
 
 	for(size_t i=0; i<d_n; i++)
 	{
-		int i2 = 2*i;
+        size_t i2 = 2*i;
 		double a = sqrt(d_y[i2]*d_y[i2] + d_y[i2+1]*d_y[i2+1]);
 		amp[i]= a;
 		if (a > aMax)
@@ -132,7 +132,7 @@ QList<Column *> FFT::fftTable()
 	columns << new Column(tr("Imaginary"), SciDAVis::Numeric);
 	columns << new Column(tr("Amplitude"), SciDAVis::Numeric);
 	columns << new Column(tr("Angle"), SciDAVis::Numeric);
-	for (size_t i=0; i<d_n; i++)
+    for (int i=0; i<static_cast<int>(d_n); i++)
 	{
 		int i2 = 2*i;
 		columns.at(0)->setValueAt(i, d_x[i]);

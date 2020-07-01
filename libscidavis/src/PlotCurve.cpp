@@ -155,59 +155,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 		Column *col = cols[i];
 
 		switch (col->columnMode()) {
-			case Table::Time:
-				{
-					QTime time;
-					QString format;
-					if (g && g->axesType()[axes[i]] == Table::Time) {
-						QStringList lst = g->axisFormatInfo(axes[i]).split(";");
-						time = QTime::fromString(lst[0]);
-						if (lst.size() >= 2) format = lst[1];
-					}
-					if (!time.isValid()) {
-						foreach (int row, valid_rows) {
-							time = col->timeAt(row);
-							if (time.isValid()) break;
-						}
-					}
-
-					if (format.isEmpty())
-						format = static_cast<DateTime2StringFilter *>(col->outputFilter())->format();
-
-					reference_dates.push_back(QDate());
-					reference_times.push_back(time);
-					if (g)
-						g->setLabelsDateTimeFormat(axes[i], Graph::Time, time.toString() + ";" + format);
-					break;
-				}
-			case Table::Date:
-				{
-					QDate date;
-					QString format;
-
-					if (g && g->axesType()[axes[i]] == Table::Time) {
-						QStringList lst = g->axisFormatInfo(axes[i]).split(";");
-						date = QDate::fromString(lst[0], "yyyy-MM-dd");
-						if (lst.size() >= 2) format = lst[1];
-					}
-
-					if (!date.isValid()) {
-						foreach (int row, valid_rows) {
-							date = col->dateAt(row);
-							if (date.isValid()) break;
-						}
-					}
-
-					if (format.isEmpty())
-						format = static_cast<DateTime2StringFilter *>(col->outputFilter())->format();
-
-					reference_dates.push_back(date);
-					reference_times.push_back(QTime());
-					if (g)
-						g->setLabelsDateTimeFormat(axes[i], Graph::Date, date.toString("yyyy-MM-dd") + ";" + format);
-					break;
-				}
-			case Table::DateTime:
+			case SciDAVis::DateTime:
 				{
 					QDateTime datetime;
 					QString format;
@@ -234,7 +182,7 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 						g->setLabelsDateTimeFormat(axes[i], Graph::DateTime, datetime.toString("yyyy-MM-ddThh:mm:ss") + ";" + format);
 					break;
 				}
-			case Table::Text:
+			case SciDAVis::Text:
 				if (g)
 					g->setLabelsTextFormat(axes[i], col, d_start_row, end_row);
 				reference_dates.push_back(QDate());
@@ -251,18 +199,10 @@ QList< QVector<double> > DataCurve::convertData(const QList<Column*> &cols, cons
 	for (int i=0; i<valid_rows.size(); i++)
 		for (int j=0; j<cols.size(); j++)
 			switch (cols[j]->columnMode()) {
-                        case Table::Text:
+                case SciDAVis::Text:
 					result[j][i] = static_cast<double>(valid_rows[i] + 1);
 					break;
-                          // TODO: Time and Date need to be removed or otherwise dealt with. There is a comment in globals.h that reads:
-                          // 2 and 3 are skipped to avoid problems with old obsolete values
-				case Table::Time:
-					result[j][i] = reference_times[j].msecsTo(cols[j]->timeAt(valid_rows[i]));
-					break;
-				case Table::Date:
-					result[j][i] = reference_dates[j].daysTo(cols[j]->dateAt(valid_rows[i]));
-					break;
-				case Table::DateTime:
+				case SciDAVis::DateTime:
 					{
 						QDateTime dt = cols[j]->dateTimeAt(valid_rows[i]);
 						result[j][i] = dt.toMSecsSinceEpoch()/86400000.+2440587.5;
@@ -285,7 +225,7 @@ bool DataCurve::loadData()
 		remove();
 		return false;
 	}
-	
+
 	QList< QVector<double> > points = convertData(
 			d_type == Graph::HorizontalBars ? (QList<Column*>() << y_col_ptr << x_col_ptr) : (QList<Column*>() << x_col_ptr << y_col_ptr),
 			QList<int>() << xAxis() << yAxis());

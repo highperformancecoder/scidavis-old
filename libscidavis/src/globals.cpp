@@ -4,7 +4,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2006-2009 Tilman Benkert (thzs*gmx.net)
     Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
-                           (replace * with @ in the email addresses) 
+                           (replace * with @ in the email addresses)
 
  ***************************************************************************/
 
@@ -40,7 +40,7 @@
 #include <QtDebug>
 #include "ui_SciDAVisAbout.h"
 
-const char * SciDAVis::copyright_string = "\
+const QString SciDAVis::copyright_string = "\
 === Credits ===\n\
 \n\
 --- Developers ---\n\
@@ -62,7 +62,7 @@ Knut Franke, Roger Gadiou\n\
 The following people have contributed translations or parts thereof.\n\
 In alphabetical order.\n\
 \n\
-Tilman Benkert[1], Markus Bongard, Tobias Burnus, Rémy Claverie, f0ma, José Antonio Lorenzo Fernández, \
+Tilman Benkert[1], Markus Bongard, Tobias Burnus, RÃ©my Claverie, f0ma, JosÃ© Antonio Lorenzo FernÃ¡ndez, \
 Pavel Fric, Jan Helebrant, Daniel Klaer, Peter Landgren, Fellype do Nascimento, Tomomasa Ohkubo, \
 Mikhail Shevyakov, Russell Standish, Mauricio Troviano\n\
 \n\
@@ -78,7 +78,7 @@ Eric Tanguy (Fedora), Mauricio Troviano (Windows installer)\n\
 \n\
 SciDAVis uses code from QtiPlot, which consisted (at the time of the fork, i.e. QtiPlot 0.9-rc2) of code by the following people:\n\
 \n\
-Tilman Benkert[1], Shen Chen, Borries Demeler, José Antonio Lorenzo Fernández, Knut Franke, Vasileios Gkanis, Gudjon Gudjonsson, \
+Tilman Benkert[1], Shen Chen, Borries Demeler, JosÃ© Antonio Lorenzo FernÃ¡ndez, Knut Franke, Vasileios Gkanis, Gudjon Gudjonsson, \
 Alex Kargovsky, Michael Mac-Vicar, Tomomasa Ohkubo, Aaron Van Tassle, Branimir Vasilic, Ion Vasilief, Vincent Wagelaar\n\
 \n\
 The SciDAVis manual is based on the QtiPlot manual, written by (in alphabetical order):\n\
@@ -86,7 +86,7 @@ The SciDAVis manual is based on the QtiPlot manual, written by (in alphabetical 
 Knut Franke, Roger Gadiou, Ion Vasilief\n\
 \n\
 footnotes:\n\
-[1] birth name: Tilman Höner zu Siederdissen\n\
+[1] birth name: Tilman HÃ¶ner zu Siederdissen\n\
 \n\
 === Special Thanks ===\n\
 \n\
@@ -114,8 +114,8 @@ int SciDAVis::version()
 
 QString SciDAVis::schemaVersion()
 {
-  return "SciDAVis " + 
-    QString::number((version() & 0xFF0000) >> 16)+"."+ 
+  return "SciDAVis " +
+    QString::number((version() & 0xFF0000) >> 16)+"."+
     QString::number((version() & 0x00FF00) >> 8)+"."+
     QString::number(version() & 0x0000FF);
 }
@@ -124,7 +124,7 @@ QString SciDAVis::versionString()
 {
   return QString("SciDAVis ") + scidavis_version;
 }
-			
+
 QString SciDAVis::extraVersion()
 {
 	return	QString(extra_version);
@@ -132,11 +132,11 @@ QString SciDAVis::extraVersion()
 
 void SciDAVis::about()
 {
-	QString text = QString(SciDAVis::copyright_string);
+	QString text = SciDAVis::copyright_string;
 	text.replace(QRegExp("\\[1\\]"), "<sup>1</sup>");
-	text.replace("é","&eacute;");
-	text.replace("á","&aacute;");
-	text.replace("ö", "&ouml;");
+	text.replace("Ã©","&eacute;");
+	text.replace("Ã¡","&aacute;");
+	text.replace("Ã¶", "&ouml;");
 	text.replace("\n", "<br>");
 	text.replace("=== ", "<h1>");
 	text.replace(" ===","</h1>");

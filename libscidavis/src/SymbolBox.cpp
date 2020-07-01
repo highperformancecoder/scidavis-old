@@ -153,15 +153,11 @@ void SymbolBox::init()
 
 void SymbolBox::setStyle(const QwtSymbol::Style& style)
 {
-  // gcc is being overly picky here. std::find needs a point 1 past the end
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Warray-bounds"
-  const QwtSymbol::Style*ite = std::find(symbols, symbols + sizeof(symbols), style);
-  if (ite == symbols + sizeof(symbols))
+    const QwtSymbol::Style*ite = std::find(symbols, symbols + std::size(symbols), style);
+    if (ite == symbols + std::size(symbols))
     this->setCurrentIndex(0);
   else 
     this->setCurrentIndex(ite - symbols);
-#pragma GCC diagnostic pop        
 }
 
 QwtSymbol::Style SymbolBox::selectedSymbol() const
@@ -175,15 +171,11 @@ QwtSymbol::Style SymbolBox::selectedSymbol() const
 
 int SymbolBox::symbolIndex(const QwtSymbol::Style& style)
 {
-  // gcc is being overly picky here. std::find needs a point 1 past the end
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Warray-bounds"
-  const QwtSymbol::Style*ite = std::find(symbols, symbols + sizeof(symbols), style);
-  if (ite == symbols + sizeof(symbols))
+    const QwtSymbol::Style*ite = std::find(symbols, symbols + std::size(symbols), style);
+    if (ite == symbols + std::size(symbols))
     return 0; 
   else
     return (ite - symbols);
-#pragma GCC diagnostic pop        
 }
 
 QwtSymbol::Style SymbolBox::style(int index)

@@ -67,26 +67,26 @@ class AsciiTableImportFilter : public AbstractImportFilter
 		virtual QString name() const { return QObject::tr("ASCII table"); }
 
 		ACCESSOR(int, ignored_lines);
-		Q_PROPERTY(int ignored_lines READ ignored_lines WRITE set_ignored_lines);
+		Q_PROPERTY(int ignored_lines READ ignored_lines WRITE set_ignored_lines)
 
 		QString separator() const { QString result = d_separator; return result.replace("\t", "\\t"); }
 		void set_separator(const QString &value) { d_separator = value; d_separator.replace("\\t","\t"); }
 		Q_PROPERTY(QString separator READ separator WRITE set_separator);
 
 		ACCESSOR(bool, first_row_names_columns);
-		Q_PROPERTY(bool first_row_names_columns READ first_row_names_columns WRITE set_first_row_names_columns);
+		Q_PROPERTY(bool first_row_names_columns READ first_row_names_columns WRITE set_first_row_names_columns)
 
 		ACCESSOR(bool, trim_whitespace);
-		Q_PROPERTY(bool trim_whitespace READ trim_whitespace WRITE set_trim_whitespace);
+		Q_PROPERTY(bool trim_whitespace READ trim_whitespace WRITE set_trim_whitespace)
 
 		ACCESSOR(bool, simplify_whitespace);
-		Q_PROPERTY(bool simplify_whitespace READ simplify_whitespace WRITE set_simplify_whitespace);
+		Q_PROPERTY(bool simplify_whitespace READ simplify_whitespace WRITE set_simplify_whitespace)
 
 		ACCESSOR(bool, convert_to_numeric);
-		Q_PROPERTY(bool convert_to_numeric READ convert_to_numeric WRITE set_convert_to_numeric);
+		Q_PROPERTY(bool convert_to_numeric READ convert_to_numeric WRITE set_convert_to_numeric)
 
 		ACCESSOR(QLocale, numeric_locale);
-		Q_PROPERTY(QLocale numeric_locale READ numeric_locale WRITE set_numeric_locale);
+		Q_PROPERTY(QLocale numeric_locale READ numeric_locale WRITE set_numeric_locale)
 
 	private:
 		int d_ignored_lines;

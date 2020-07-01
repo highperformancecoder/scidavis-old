@@ -5176,7 +5176,7 @@ bool ApplicationWindow::renameWindow(MyWidget *w, const QString &text)
 
 	if (w->inherits("Table")){
 		QStringList labels=((Table *)w)->colNames();
-		if (labels.contains(newName)>0){
+        if (labels.contains(newName)){
 			QMessageBox::critical(this, tr("Error"),
 					tr("The table name must be different from the names of its columns!")+"<p>"+tr("Please choose another name!"));
 			return false;
@@ -7852,13 +7852,13 @@ QStringList ApplicationWindow::dependingPlots(const QString& name)
 				Graph *g = (Graph *)widget;
 				onPlot = g->curvesList();
 				onPlot = onPlot.filter(QRegExp("^"+name+"_.*"));
-				if (onPlot.count() > 0 && plots.contains(w->name()) <= 0 )
+                if (onPlot.count() > 0 && !plots.contains(w->name()) )
 					plots << w->name();
 			}
 		}
 		else if (w->inherits("Graph3D"))
 		{
-			if ((((Graph3D*)w)->formula()).contains(name,Qt::CaseSensitive) && plots.contains(w->name())<=0)
+            if ((((Graph3D*)w)->formula()).contains(name,Qt::CaseSensitive) && !plots.contains(w->name()))
 				plots << w->name();
 		}
 	}
@@ -7877,7 +7877,7 @@ QStringList ApplicationWindow::multilayerDependencies(MyWidget *w)
 		for (int j=0; j<onPlot.count(); j++)
 		{
 			QStringList tl = onPlot[j].split("_", QString::SkipEmptyParts);
-			if (tables.contains(tl[0])<=0)
+            if (!tables.contains(tl[0]))
 				tables << tl[0];
 		}
 	}
@@ -10106,7 +10106,7 @@ Graph3D* ApplicationWindow::openSurfacePlot(ApplicationWindow* app, const QStrin
 	if (fList[1].endsWith("(Y)",Qt::CaseSensitive))//Ribbon plot
 		plot=app->dataPlot3D(caption, fList[1],fList[2].toDouble(),fList[3].toDouble(),
 				fList[4].toDouble(),fList[5].toDouble(),fList[6].toDouble(),fList[7].toDouble());
-	else if (fList[1].contains("(Z)",Qt::CaseSensitive) > 0)
+    else if (fList[1].contains("(Z)",Qt::CaseSensitive))
 		plot=app->dataPlotXYZ(caption, fList[1], fList[2].toDouble(),fList[3].toDouble(),
 				fList[4].toDouble(),fList[5].toDouble(),fList[6].toDouble(),fList[7].toDouble());
 	else if (fList[1].startsWith("matrix<",Qt::CaseSensitive) && fList[1].endsWith(">",Qt::CaseInsensitive))
@@ -11612,7 +11612,7 @@ MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
 	return g;
 }
 
-ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename)
+ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename [[maybe_unused]])
 {
 #ifdef ORIGIN_IMPORT
     if (filename.endsWith(".opj", Qt::CaseInsensitive) || filename.endsWith(".ogg", Qt::CaseInsensitive) || filename.endsWith(".org", Qt::CaseInsensitive))

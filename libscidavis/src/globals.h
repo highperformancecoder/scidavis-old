@@ -5,7 +5,7 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2006-2009 Tilman Benkert (thzs*gmx.net)
     Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
-                           (replace * with @ in the email addresses) 
+                           (replace * with @ in the email addresses)
 
  ***************************************************************************/
 
@@ -55,7 +55,7 @@ class SciDAVis : public QObject
 		{
 			noDesignation = 0, //!< no plot designation
 			X = 1,  //!< x values
-			Y = 2, //!< y values 
+			Y = 2, //!< y values
 			Z = 3, //!< z values
 			xErr = 4, //!< x errors
 			yErr = 5 //!< y errors
@@ -117,7 +117,7 @@ class SciDAVis : public QObject
 		//! Extra version information string (like "-alpha", "-beta", "-rc1", etc...)
 		static const char * extra_version;
 		//! Copyright string containing the author names etc.
-		static const char * copyright_string;
+		static const QString copyright_string;
 		//! Release date as a string
 		static const char * release_date;
 };
