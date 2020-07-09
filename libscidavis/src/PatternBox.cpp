@@ -49,6 +49,8 @@ const Qt::BrushStyle PatternBox::patterns[] = {
   Qt::Dense7Pattern,
 };
 
+auto patternsSize=sizeof(PatternBox::patterns)/sizeof(PatternBox::patterns[0]);
+
 PatternBox::PatternBox(bool rw, QWidget *parent) : QComboBox(parent)
 {
   setEditable(rw);
@@ -155,8 +157,8 @@ void PatternBox::init()
 
 void PatternBox::setPattern(const Qt::BrushStyle& style)
 {
-    const Qt::BrushStyle*ite = std::find(patterns, patterns + std::size(patterns), style);
-    if (ite == patterns + std::size(patterns))
+    const Qt::BrushStyle*ite = std::find(patterns, patterns + patternsSize, style);
+    if (ite == patterns + patternsSize)
     this->setCurrentIndex(0); // default pattern is solid.
   else
     this->setCurrentIndex(ite - patterns);
@@ -173,8 +175,8 @@ Qt::BrushStyle PatternBox::getSelectedPattern() const
 
 int PatternBox::patternIndex(const Qt::BrushStyle& style)
 {
-    const Qt::BrushStyle*ite = std::find(patterns, patterns + std::size(patterns), style);
-    if (ite == patterns + std::size(patterns))
+    const Qt::BrushStyle*ite = std::find(patterns, patterns + patternsSize, style);
+    if (ite == patterns + patternsSize)
     return 0; // default pattern is solid.
   else
     return (ite - patterns);

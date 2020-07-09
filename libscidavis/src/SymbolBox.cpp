@@ -51,6 +51,8 @@ const QwtSymbol::Style SymbolBox::symbols[] = {
   QwtSymbol::Hexagon
 };
 
+auto symbolsSize=sizeof(SymbolBox::symbols)/sizeof(SymbolBox::symbols[0]);
+
 SymbolBox::SymbolBox(bool rw, QWidget *parent) : QComboBox(parent)
 {
   setEditable(rw);
@@ -153,8 +155,8 @@ void SymbolBox::init()
 
 void SymbolBox::setStyle(const QwtSymbol::Style& style)
 {
-    const QwtSymbol::Style*ite = std::find(symbols, symbols + std::size(symbols), style);
-    if (ite == symbols + std::size(symbols))
+    const QwtSymbol::Style*ite = std::find(symbols, symbols + symbolsSize, style);
+    if (ite == symbols + symbolsSize)
     this->setCurrentIndex(0);
   else 
     this->setCurrentIndex(ite - symbols);
@@ -171,8 +173,8 @@ QwtSymbol::Style SymbolBox::selectedSymbol() const
 
 int SymbolBox::symbolIndex(const QwtSymbol::Style& style)
 {
-    const QwtSymbol::Style*ite = std::find(symbols, symbols + std::size(symbols), style);
-    if (ite == symbols + std::size(symbols))
+    const QwtSymbol::Style*ite = std::find(symbols, symbols + symbolsSize, style);
+    if (ite == symbols + symbolsSize)
     return 0; 
   else
     return (ite - symbols);
