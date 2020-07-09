@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Add error bars dialog
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -52,7 +52,7 @@ ErrDialog::ErrDialog( QWidget* parent, Qt::WindowFlags fl )
 
 	QVBoxLayout *vbox1 = new QVBoxLayout();
 	vbox1->setSpacing (5);
-	
+
 	QHBoxLayout *hbox1 = new QHBoxLayout();
 	vbox1->addLayout(hbox1);
 
@@ -68,15 +68,15 @@ ErrDialog::ErrDialog( QWidget* parent, Qt::WindowFlags fl )
 
 	buttonGroup1 = new QButtonGroup();
 	buttonGroup1->setExclusive( true );
-	
+
 	columnBox = new QRadioButton();
     columnBox->setChecked( true );
 	buttonGroup1->addButton(columnBox);
 	gridLayout->addWidget(columnBox, 0, 0 );
-	
+
 	colNamesBox = new QComboBox();
     tableNamesBox = new QComboBox();
-	
+
     QHBoxLayout * comboBoxes = new QHBoxLayout();
 	comboBoxes->addWidget(tableNamesBox);
 	comboBoxes->addWidget(colNamesBox);
@@ -91,7 +91,7 @@ ErrDialog::ErrDialog( QWidget* parent, Qt::WindowFlags fl )
     valueBox->setAlignment( Qt::AlignHCenter );
 	valueBox->setEnabled(false);
 	gridLayout->addWidget(valueBox, 1, 1);
-	
+
 	standardBox = new QRadioButton();
 	buttonGroup1->addButton(standardBox);
 	gridLayout->addWidget(standardBox, 2, 0 );
@@ -102,7 +102,7 @@ ErrDialog::ErrDialog( QWidget* parent, Qt::WindowFlags fl )
 
 	buttonGroup2 = new QButtonGroup();
 	buttonGroup2->setExclusive( true );
-	
+
     xErrBox = new QRadioButton();
 	buttonGroup2->addButton(xErrBox);
 	hbox2->addWidget(xErrBox );
@@ -111,7 +111,7 @@ ErrDialog::ErrDialog( QWidget* parent, Qt::WindowFlags fl )
 	buttonGroup2->addButton(yErrBox);
 	hbox2->addWidget(yErrBox );
     yErrBox->setChecked( true );
-	
+
 	QVBoxLayout * vbox2 = new QVBoxLayout();
 	buttonAdd = new QPushButton();
     buttonAdd->setDefault( true );
@@ -121,11 +121,11 @@ ErrDialog::ErrDialog( QWidget* parent, Qt::WindowFlags fl )
 	vbox2->addWidget(buttonCancel);
 
 	vbox2->addStretch(1);
-	
+
 	QHBoxLayout * hlayout1 = new QHBoxLayout(this);
 	hlayout1->addLayout(vbox1);
     hlayout1->addLayout(vbox2);
-	
+
     languageChange();
 
   // signals and slots connections
@@ -152,7 +152,11 @@ void ErrDialog::setSrcTables(QList<MyWidget*>* tables)
 		tableNamesBox->addItem((*i)->objectName());
 
 	if (!nameLabel->currentText().contains("="))
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+		tableNamesBox->setCurrentIndex(tableNamesBox->findText(nameLabel->currentText().split("_", Qt::SkipEmptyParts)[0]));
+#else
 		tableNamesBox->setCurrentIndex(tableNamesBox->findText(nameLabel->currentText().split("_", QString::SkipEmptyParts)[0]));
+#endif
 	selectSrcTable(tableNamesBox->currentIndex());
 }
 
@@ -166,19 +170,19 @@ void ErrDialog::selectSrcTable(int tabnr)
 void ErrDialog::add()
 {
 	int direction=-1;
-	if (xErrBox->isChecked()) 
-		direction = 0; 
-	else 
+	if (xErrBox->isChecked())
+		direction = 0;
+	else
 		direction = 1;
 
 	if (columnBox->isChecked())
-		emit options(nameLabel->currentText(), tableNamesBox->currentText()+"_"+colNamesBox->currentText(), direction);	
+		emit options(nameLabel->currentText(), tableNamesBox->currentText()+"_"+colNamesBox->currentText(), direction);
 	else
 	{
 		int type;
-		if (percentBox->isChecked()) 
-			type = 0; 
-		else 
+		if (percentBox->isChecked())
+			type = 0;
+		else
 			type = 1;
 
 		emit options(nameLabel->currentText(),type, valueBox->text(), direction);

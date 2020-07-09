@@ -6,7 +6,7 @@
     Copyright            : (C) 2006-2009 Tilman Benkert (thzs*gmx.net)
     Copyright            : (C) 2006-2009 Knut Franke (knut.franke*gmx.de)
     Copyright            : (C) 2006-2007 Ion Vasilief (ion_vasilief*yahoo.fr)
-                           (replace * with @ in the email addresses) 
+                           (replace * with @ in the email addresses)
 
  ***************************************************************************/
 
@@ -66,7 +66,7 @@ Matrix::Matrix(ScriptingEnv *env, int r, int c, const QString& label, QWidget* p
 	d_future_matrix = new future::Matrix(0, r, c, label);
 	init(r, c);
 }
-	
+
 Matrix::Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, const QString& label, QWidget* parent, const char* name, Qt::WindowFlags f)
 	: MatrixView(label, parent, name, f), scripted(env)
 {
@@ -75,15 +75,15 @@ Matrix::Matrix(future::Matrix *future_matrix, ScriptingEnv *env, int r, int c, c
 }
 
 void Matrix::init(int, int)
-{	
-	MatrixView::setMatrix(d_future_matrix);	
-	d_future_matrix->setView(this);	
+{
+	MatrixView::setMatrix(d_future_matrix);
+	d_future_matrix->setView(this);
 	d_future_matrix->setNumericFormat('f');
 	d_future_matrix->setDisplayedDigits(6);
 	d_future_matrix->setCoordinates(1.0, 10.0, 1.0, 10.0);
 	dMatrix = 0;
 
-	birthdate = d_future_matrix->creationTime().toString(Qt::LocalDate);
+	birthdate = QLocale().toString(d_future_matrix->creationTime());
 
 	// this is not very nice but works for the moment
 	ui.gridLayout2->removeWidget(ui.formula_box);
@@ -98,14 +98,14 @@ void Matrix::init(int, int)
 	ui.add_cell_combobox->addItem("cell(i, j)");
 	ui.add_function_combobox->addItems(scriptEnv->mathFunctions());
 	updateFunctionDoc();
-	
-	connect(ui.add_function_combobox, SIGNAL(currentIndexChanged(int)), 
+
+	connect(ui.add_function_combobox, SIGNAL(currentIndexChanged(int)),
 		this, SLOT(updateFunctionDoc()));
-	connect(ui.button_set_formula, SIGNAL(pressed()), 
+	connect(ui.button_set_formula, SIGNAL(pressed()),
 		this, SLOT(applyFormula()));
-	connect(ui.add_function_button, SIGNAL(pressed()), 
+	connect(ui.add_function_button, SIGNAL(pressed()),
 		this, SLOT(addFunction()));
-	connect(ui.add_cell_button, SIGNAL(pressed()), 
+	connect(ui.add_cell_button, SIGNAL(pressed()),
 		this, SLOT(addCell()));
 
 	connect(d_future_matrix, SIGNAL(columnsInserted(int, int)), this, SLOT(handleChange()));
@@ -118,7 +118,7 @@ void Matrix::init(int, int)
 	connect(d_future_matrix, SIGNAL(formatChanged()), this, SLOT(handleChange()));
 	connect(d_future_matrix, SIGNAL(recalculate()), this, SLOT(recalculate()));
 
-	connect(d_future_matrix, SIGNAL(aspectDescriptionChanged(const AbstractAspect*)), 
+	connect(d_future_matrix, SIGNAL(aspectDescriptionChanged(const AbstractAspect*)),
 			this, SLOT(handleAspectDescriptionChange(const AbstractAspect *)));
 }
 
@@ -135,7 +135,7 @@ double Matrix::cell(int row, int col)
 {
 	if(dMatrix)
 		return dMatrix[row][col];
-	else 
+	else
 		return d_future_matrix->cell(row, col);
 }
 
@@ -719,7 +719,7 @@ void Matrix::copy(Matrix *m)
 {
 	if (!m)
         return;
-	
+
 	d_future_matrix->copy(m->d_future_matrix);
 }
 

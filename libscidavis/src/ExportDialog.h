@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Export ASCII dialog
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -46,7 +46,7 @@ public:
 	 * \param parent parent widget
 	 * \param fl window flags
 	 */
-    ExportDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    ExportDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget );
 	//! Destructor
     ~ExportDialog();
 

@@ -4,7 +4,7 @@
     Description          : View class for Table
     --------------------------------------------------------------------
     Copyright            : (C) 2007 Tilman Benkert (thzs*gmx.net)
-                           (replace * with @ in the email addresses) 
+                           (replace * with @ in the email addresses)
 
  ***************************************************************************/
 
@@ -45,7 +45,7 @@
 #include <QTextEdit>
 #include <QPushButton>
 #include <QComboBox>
-#include <QSpinBox> 
+#include <QSpinBox>
 #include <QScrollArea>
 #include "ui_controltabs.h"
 #include <QtDebug>
@@ -94,7 +94,7 @@ class TableView : public MyWidget
 #ifndef LEGACY_CODE_0_2_x
 		TableView(future::Table * table);
 #else
-		TableView(const QString & label, QWidget * parent=0, const QString name=0, Qt::WindowFlags f=0);
+		TableView(const QString & label, QWidget * parent=0, const QString name=0, Qt::WindowFlags f = Qt::Widget);
 		void setTable(future::Table * table);
 #endif
 		//! Destructor
@@ -109,7 +109,7 @@ class TableView : public MyWidget
 		//@{
 		//! Return how many columns are selected
 		/**
-		 * If full is true, this function only returns the number of fully 
+		 * If full is true, this function only returns the number of fully
 		 * selected columns.
 		 */
 		int selectedColumnCount(bool full = false);
@@ -117,49 +117,49 @@ class TableView : public MyWidget
 		int selectedColumnCount(SciDAVis::PlotDesignation pd);
 		//! Returns true if column 'col' is selected; otherwise false
 		/**
-		 * If full is true, this function only returns true if the whole 
+		 * If full is true, this function only returns true if the whole
 		 * column is selected.
 		 */
 		bool isColumnSelected(int col, bool full = false);
 		//! Return all selected columns
 		/**
-		 * If full is true, this function only returns a column if the whole 
+		 * If full is true, this function only returns a column if the whole
 		 * column is selected.
 		 */
 		QList<Column *> selectedColumns(bool full = false);
 		//! Return how many rows are (at least partly) selected
 		/**
-		 * If full is true, this function only returns the number of fully 
+		 * If full is true, this function only returns the number of fully
 		 * selected rows.
 		 */
 		int selectedRowCount(bool full = false);
 		//! Returns true if row 'row' is selected; otherwise false
 		/**
-		 * If full is true, this function only returns true if the whole 
+		 * If full is true, this function only returns true if the whole
 		 * row is selected.
 		 */
 		bool isRowSelected(int row, bool full = false);
 		//! Return the index of the first selected column
 		/**
-		 * If full is true, this function only looks for fully 
+		 * If full is true, this function only looks for fully
 		 * selected columns.
 		 */
 		int firstSelectedColumn(bool full = false);
 		//! Return the index of the last selected column
 		/**
-		 * If full is true, this function only looks for fully 
+		 * If full is true, this function only looks for fully
 		 * selected columns.
 		 */
 		int lastSelectedColumn(bool full = false);
 		//! Return the index of the first selected row
 		/**
-		 * If full is true, this function only looks for fully 
+		 * If full is true, this function only looks for fully
 		 * selected rows.
 		 */
 		int firstSelectedRow(bool full = false);
 		//! Return the index of the last selected row
 		/**
-		 * If full is true, this function only looks for fully 
+		 * If full is true, this function only looks for fully
 		 * selected rows.
 		 */
 		int lastSelectedRow(bool full = false);
@@ -192,7 +192,7 @@ class TableView : public MyWidget
 		void showControlDescriptionTab();
 		void showControlTypeTab();
 		void showControlFormulaTab();
-		void handleHorizontalSectionResized(int logicalIndex, int oldSize, int newSize); 
+		void handleHorizontalSectionResized(int logicalIndex, int oldSize, int newSize);
 		void goToNextColumn();
 		void goToPreviousColumn();
 

@@ -131,7 +131,11 @@ void AssociationsDialog::changePlotAssociation(int curve, const QString& text)
   if (c->plotAssociation() == text)
     return;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+  QStringList lst = text.split(",", Qt::SkipEmptyParts);
+#else
   QStringList lst = text.split(",", QString::SkipEmptyParts);
+#endif
   if (lst.count() == 2)
     {
       c->setXColumnName(lst[0].remove("(X)"));
@@ -177,8 +181,13 @@ void AssociationsDialog::changePlotAssociation(int curve, const QString& text)
 QString AssociationsDialog::plotAssociation(const QString& text)
 {
 QString s = text;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+QStringList lst= s.split(": ", Qt::SkipEmptyParts);
+QStringList cols = lst[1].split(",", Qt::SkipEmptyParts);
+#else
 QStringList lst= s.split(": ", QString::SkipEmptyParts);
 QStringList cols = lst[1].split(",", QString::SkipEmptyParts);
+#endif
 
 QString tableName = lst[0];
 s = tableName + "_" + cols[0];
@@ -201,7 +210,11 @@ associations->setCurrentRow (curve);
 Table * AssociationsDialog::findTable(int index)
 {
 QString text = associations->item(index)->text();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+QStringList lst= text.split(":", Qt::SkipEmptyParts);
+#else
 QStringList lst= text.split(":", QString::SkipEmptyParts);
+#endif
 for (int i=0; i < (int)tables->count(); i++ )
 	{
 	if (tables->at(i)->objectName() == lst[0])
@@ -252,8 +265,13 @@ updateColumnTypes();
 void AssociationsDialog::updateColumnTypes()
 {
 QString text = associations->currentItem()->text();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+QStringList lst= text.split(": ", Qt::SkipEmptyParts);
+QStringList cols = lst[1].split(",", Qt::SkipEmptyParts);
+#else
 QStringList lst= text.split(": ", QString::SkipEmptyParts);
 QStringList cols = lst[1].split(",", QString::SkipEmptyParts);
+#endif
 
 QString xColName = cols[0].remove("(X)");
 QString yColName = cols[1].remove("(Y)");
@@ -386,8 +404,13 @@ void AssociationsDialog::updatePlotAssociation(int row, int col)
 {
 int index = associations->currentRow();
 QString text = associations->currentItem()->text();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+QStringList lst = text.split(": ", Qt::SkipEmptyParts);
+QStringList cols = lst[1].split(",", Qt::SkipEmptyParts);
+#else
 QStringList lst = text.split(": ", QString::SkipEmptyParts);
 QStringList cols = lst[1].split(",", QString::SkipEmptyParts);
+#endif
 
 if (col == 1)
 	{
@@ -445,7 +468,11 @@ for (int i=0; i<(int)plotAssociationsList.count(); i++)
 	QString as = plotAssociationsList[i];
 	if (as.contains(old_as) && (as.contains("(xErr)") || as.contains("(yErr)")))
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+		QStringList ls = as.split(",", Qt::SkipEmptyParts);
+#else
 		QStringList ls = as.split(",", QString::SkipEmptyParts);
+#endif
 		as = text + "," + ls[2];
 		plotAssociationsList[i] = as;
 		}

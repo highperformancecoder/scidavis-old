@@ -755,8 +755,8 @@ void Graph::setLabelsTextFormat(int axis, const Column *column, int startRow, in
 	// TODO: The whole text labels functionality is very limited. Specifying
 	// only one column for the labels will always mean that the labels
 	// correspond to 1, 2, 3, 4, etc.. Other label mappings such as
-	// a -> 1.5, b -> 4.5, c -> 16.5 (with step set to 0.5) or similar 
-	// require to have an additional column with numeric values. 
+	// a -> 1.5, b -> 4.5, c -> 16.5 (with step set to 0.5) or similar
+	// require to have an additional column with numeric values.
 	// This should be supported in our new plotting framework.
 	if (!column) return;
 	future::Table *table = qobject_cast<future::Table*>(column->parentAspect());
@@ -808,7 +808,11 @@ void Graph::setLabelsColHeaderFormat(int axis, Table *table) {
 
 void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInfo)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	QStringList list = formatInfo.split(";", Qt::KeepEmptyParts);
+#else
 	QStringList list = formatInfo.split(";", QString::KeepEmptyParts);
+#endif
 	if ((int)list.count() < 2 || list[1].isEmpty()) {
 		QMessageBox::critical(this, tr("Error"), tr("Couldn't change the axis type to the requested format!"));
 		return;
@@ -1677,7 +1681,7 @@ void Graph::pasteMarker()
 		mrk->setTextColor(auxMrkColor);
 		mrk->setBackgroundColor(auxMrkBkgColor);
 	}
-	
+
 	d_plot->replot();
 	deselectMarker();
 }
@@ -1931,7 +1935,7 @@ void Graph::drawCanvasFrame(const QStringList& frame)
 	d_plot->setLineWidth((frame[1]).toInt());
         if ((frame[1]).toInt())
           d_plot->setFrameStyle(QFrame::Box);
-        
+
 	QPalette pal = d_plot->palette();
 	pal.setColor(QPalette::WindowText,QColor(COLORVALUE(frame[2])));
 	d_plot->setPalette(pal);
@@ -2392,7 +2396,11 @@ QString Graph::saveCurveLayout(int index)
 		s+=QString::number(v->headAngle())+"\t";
 		s+=QString::number(v->filledArrowHead())+"\t";
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+		QStringList colsList = v->plotAssociation().split(",", Qt::SkipEmptyParts);
+#else
 		QStringList colsList = v->plotAssociation().split(",", QString::SkipEmptyParts);
+#endif
 		s+=colsList[2].remove("(X)").remove("(A)")+"\t";
 		s+=colsList[3].remove("(Y)").remove("(M)");
 		if (style == VectXYAM)
@@ -2509,7 +2517,7 @@ Legend* Graph::newLegend()
 
 void Graph::addTimeStamp()
 {
-	Legend* mrk= newLegend(QDateTime::currentDateTime().toString(Qt::LocalDate));
+	Legend* mrk= newLegend(QLocale().toString(QDateTime::currentDateTime()));
 	mrk->setOrigin(QPoint(d_plot->canvas()->width()/2, 10));
 	emit modifiedGraph();
 	d_plot->replot();
@@ -2773,8 +2781,11 @@ QString Graph::saveMarkers()
 		s+=QString::number(mrk->angle())+"\t";
 		s+=COLORNAME(mrk->backgroundColor())+"\t";
 		s+=QString::number(mrk->backgroundColor().alpha())+"\t";
-
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+		QStringList textList=mrk->text().split("\n", Qt::KeepEmptyParts);
+#else
 		QStringList textList=mrk->text().split("\n", QString::KeepEmptyParts);
+#endif
 		s+=textList.join ("\t");
 		if (d_texts[i]!=legendMarkerID)
   	        s+="</text>\n";
@@ -2938,7 +2949,7 @@ bool Graph::canConvertTo(QwtPlotCurve *c, CurveType type)
 	// line/symbol, area and bar curves can be converted to each other
 	if (dynamic_cast<DataCurve*>(c))
 		return
-			type == Line || type == Scatter || type == LineSymbols || 
+			type == Line || type == Scatter || type == LineSymbols ||
 			type == VerticalBars || type == HorizontalBars ||
 			type == HorizontalSteps || type == VerticalSteps ||
 			type == Area || type == VerticalDropLines ||
@@ -3031,7 +3042,11 @@ void Graph::updateCurveLayout(int index, const CurveLayout *cL)
   pen.setCapStyle(static_cast<Qt::PenCapStyle>(cL->lCapStyle));
   pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(cL->lJoinStyle));
   QVector<qreal> customDash;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+  for (auto v: (cL->lCustomDash).split(" ", Qt::SkipEmptyParts))
+#else
   for (auto v: (cL->lCustomDash).split(" ", QString::SkipEmptyParts))
+#endif
     customDash << v.toDouble();
   if (pen.style()==Qt::CustomDashLine)
     pen.setDashPattern(customDash);
@@ -3157,7 +3172,7 @@ void Graph::plotPie(Table* w, const QString& name, int startRow, int endRow)
 	int ycol = w->colIndex(name);
 	int size = 0;
 	double sum = 0.0;
-	
+
 	Column *y_col_ptr = w->column(ycol);
 	int yColType = w->columnType(ycol);
 
@@ -3271,7 +3286,7 @@ bool Graph::plotHistogram(Table *w, QStringList names, int startRow, int endRow)
 		updateCurveLayout(n_curves-1, &cl);
 
 		addLegendItem(col);
-		
+
 		success = true;
 	}
 
@@ -3654,7 +3669,11 @@ void Graph::removeLegendItem(int index)
 	}
 
 	QString text=mrk->text();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	QStringList items=text.split( "\n", Qt::SkipEmptyParts);
+#else
 	QStringList items=text.split( "\n", QString::SkipEmptyParts);
+#endif
 
 	if (index >= (int) items.count())
 		return;
@@ -3779,7 +3798,7 @@ ImageMarker* Graph::addImage(ImageMarker* mrk)
 {
 	if (!mrk)
 		return 0;
-	
+
 	ImageMarker* mrk2 = new ImageMarker(mrk->fileName());
 
 	int imagesOnPlot = d_images.size();
@@ -3797,7 +3816,7 @@ ImageMarker* Graph::addImage(const QString& fileName)
 				tr("Image file: <p><b> %1 </b><p>does not exist anymore!").arg(fileName));
 		return 0;
 	}
-	
+
 	ImageMarker* mrk = new ImageMarker(fileName);
 	int imagesOnPlot = d_images.size();
 	d_images.resize(++imagesOnPlot);
@@ -3807,7 +3826,7 @@ ImageMarker* Graph::addImage(const QString& fileName)
 	int w = d_plot->canvas()->width();
 	if (picSize.width()>w)
 		picSize.setWidth(w);
-	
+
 	int h=d_plot->canvas()->height();
 	if (picSize.height()>h)
 		picSize.setHeight(h);
@@ -3829,7 +3848,7 @@ void Graph::insertImageMarker(const QStringList& lst, int fileVersion)
 		ImageMarker* mrk = new ImageMarker(fn);
 		if (!mrk)
 			return;
-		
+
         int imagesOnPlot = d_images.size();
 		d_images.resize(++imagesOnPlot);
 		d_images[imagesOnPlot-1] = d_plot->insertMarker(mrk);
@@ -4468,8 +4487,8 @@ void Graph::showAxisContextMenu(int axis)
 	{
 		if (d_plot->grid()->yEnabled())
 			gridsID->setChecked(true);
-	} 
-	else 
+	}
+	else
 	{
 		if (d_plot->grid()->xEnabled())
 			gridsID->setChecked(true);
@@ -4553,14 +4572,14 @@ void Graph::copy(ApplicationWindow *parent, Graph* g)
 	setAxesBaseline(g->axesBaseline());
 
 	grid()->copy(g->grid());
-	
+
 
 	d_plot->setTitle (g->plotWidget()->title());
 
 	drawCanvasFrame(g->framed(),g->canvasFrameWidth(), g->canvasFrameColor());
 
 	for (i=0;i<4;i++)
-	{	
+	{
 		setAxisTitle(i, g->axisTitle(i));
 		setAxisFont(i,g->axisFont(i));
 	}
@@ -4781,7 +4800,7 @@ void Graph::copy(ApplicationWindow *parent, Graph* g)
 	QVector<int> imag = g->imageMarkerKeys();
 	for (i=0; i<(int)imag.size(); i++)
 		addImage((ImageMarker*)g->imageMarker(imag[i]));
-	
+
 	QVector<int> txtMrkKeys=g->textMarkerKeys();
 	for (i=0; i<(int)txtMrkKeys.size(); i++){
 		Legend* mrk = (Legend*)g->textMarker(txtMrkKeys[i]);
@@ -5323,7 +5342,11 @@ void Graph::updateCurveNames(const QString& oldName, const QString& newName, boo
 		Legend * mrk = (Legend*) d_plot->marker(legendMarkerID);
 		if (mrk)
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+            QStringList lst = mrk->text().split("\n", Qt::SkipEmptyParts);
+#else
             QStringList lst = mrk->text().split("\n", QString::SkipEmptyParts);
+#endif
             lst.replaceInStrings(oldName, newName);
 			mrk->setText(lst.join("\n"));
 			d_plot->replot();

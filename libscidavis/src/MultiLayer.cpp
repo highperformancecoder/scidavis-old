@@ -90,8 +90,8 @@ MultiLayer::MultiLayer(const QString& label, QWidget* parent, const QString name
 	if ( name.isEmpty() )
 		setObjectName( "multilayer plot" );
 
-	QDateTime dt = QDateTime::currentDateTime ();
-	setBirthDate(dt.toString(Qt::LocalDate));
+    QDateTime dt = QDateTime::currentDateTime ();
+    setBirthDate(QLocale().toString(dt));
 
 	graphs=0; cols=1; rows=1;
 	graph_width=500; graph_height=400;
@@ -1029,8 +1029,13 @@ void MultiLayer::wheelEvent ( QWheelEvent * e )
 	QSize intSize;
 	Graph *resize_graph = 0;
 	// Get the position of the mouse
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	int xMouse=e->position().x();
+	int yMouse=e->position().y();
+#else
 	int xMouse=e->x();
 	int yMouse=e->y();
+#endif
 	for (int i=0;i<(int)graphsList.count();i++)
 	{
 		Graph *gr=(Graph *)graphsList.at(i);
@@ -1048,39 +1053,39 @@ void MultiLayer::wheelEvent ( QWheelEvent * e )
 	if(resize && (e->modifiers()==Qt::AltModifier || e->modifiers()==Qt::ControlModifier || e->modifiers()==Qt::ShiftModifier))
 	{
 		intSize=resize_graph->plotWidget()->size();
-		// If alt is pressed then change the width
+		// If Alt is pressed then change the width
 		if(e->modifiers()==Qt::AltModifier)
 		{
-			if(e->delta()>0)
+			if(e->angleDelta().y()>0)
 			{
 				intSize.rwidth()+=5;
 			}
-			else if(e->delta()<0)
+			else if(e->angleDelta().y()<0)
 			{
 				intSize.rwidth()-=5;
 			}
 		}
-		// If crt is pressed then changed the height
+		// If Ctrl is pressed then changed the height
 		else if(e->modifiers()==Qt::ControlModifier)
 		{
-			if(e->delta()>0)
+			if(e->angleDelta().y()>0)
 			{
 				intSize.rheight()+=5;
 			}
-			else if(e->delta()<0)
+			else if(e->angleDelta().y()<0)
 			{
 				intSize.rheight()-=5;
 			}
 		}
-		// If shift is pressed then resize
+		// If Shift is pressed then resize
 		else if(e->modifiers()==Qt::ShiftModifier)
 		{
-			if(e->delta()>0)
+			if(e->angleDelta().y()>0)
 			{
 				intSize.rwidth()+=5;
 				intSize.rheight()+=5;
 			}
-			else if(e->delta()<0)
+			else if(e->angleDelta().y()<0)
 			{
 				intSize.rwidth()-=5;
 				intSize.rheight()-=5;
@@ -1287,7 +1292,7 @@ void MultiLayer::copy(ApplicationWindow * parent, MultiLayer* ml)
 {
 	hide();//FIXME: find a better way to avoid a resize event
     resize(ml->size());
-	
+
 	setSpacing(ml->rowsSpacing(), ml->colsSpacing());
 	setAlignement(ml->horizontalAlignement(), ml->verticalAlignement());
 	setMargins(ml->leftMargin(), ml->rightMargin(), ml->topMargin(), ml->bottomMargin());

@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Rename window dialog
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -48,7 +48,7 @@ class RenameWindowDialog : public QDialog
     Q_OBJECT
 
 public:
-    RenameWindowDialog(QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    RenameWindowDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
 
 private:
     QPushButton * buttonOk;

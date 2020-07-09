@@ -31,6 +31,7 @@
 
 #include <QObject>
 #include <QDateTime>
+#include <QLocale>
 
 class AspectPrivate;
 class Project;
@@ -64,7 +65,7 @@ class QAction;
  * ancestor, project() will return 0 and undo does not work). Children are organized using
  * addChild(), removeChild(), child(), indexOfChild() and childCount() on the parent's side as well
  * as the equivalent convenience methods index() and remove() on the child's side.
- * 
+ *
  * AbstractAspect manages for every Aspect the properties #name, #comment, #caption_spec and
  * #creation_time. All of these translate into the caption() as described in the documentation
  * of setCaptionSpec().
@@ -78,7 +79,7 @@ class QAction;
  * you can supply an icon() to be used by different views (including the ProjectExplorer)
  * and/or reimplement createContextMenu() for a custom context menu of views.
  *
- * The private data of AbstractAspect is contained in a separate class AbstractAspect::Private. 
+ * The private data of AbstractAspect is contained in a separate class AbstractAspect::Private.
  * The write access to AbstractAspect::Private should always be done using aspect commands
  * to allow undo/redo.
  */
@@ -202,11 +203,11 @@ class AbstractAspect : public QObject
 		//! Load from XML
 		/**
 		 * XmlStreamReader supports errors as well as warnings. If only
-		 * warnings (non-critial errors) occur, this function must return 
-		 * the reader at the end element corresponding to the current 
-		 * element at the time the function was called. 
+		 * warnings (non-critial errors) occur, this function must return
+		 * the reader at the end element corresponding to the current
+		 * element at the time the function was called.
 		 *
-		 * This function is normally intended to be called directly 
+		 * This function is normally intended to be called directly
 		 * after the ctor. If you want to call load on an aspect that
 		 * has been altered, you must make sure beforehand that
 		 * it is in the same state as after creation, e.g., remove
@@ -254,7 +255,7 @@ class AbstractAspect : public QObject
 	public:
 		void importV0x0001XXCreationTime(const QString& str)
 		{
-			setCreationTime(QDateTime::fromString(str, Qt::LocalDate));
+			setCreationTime(QLocale().toDateTime(str));
 		}
 
 

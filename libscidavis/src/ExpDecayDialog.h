@@ -45,7 +45,7 @@ class ExpDecayDialog : public QDialog
     Q_OBJECT
 
 public:
-    ExpDecayDialog( int type, QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    ExpDecayDialog(int type, QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
     ~ExpDecayDialog(){};
 
 public slots:

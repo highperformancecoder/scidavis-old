@@ -53,7 +53,7 @@ class FitDialog : public QDialog
     Q_OBJECT
 
 public:
-    FitDialog(QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    FitDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
 
 protected:
 	//! On closing show the fit function in the plot window if that option is selected

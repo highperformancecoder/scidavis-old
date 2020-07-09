@@ -43,7 +43,7 @@ class CurvesDialog : public QDialog
     Q_OBJECT
 
 public:
-    CurvesDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    CurvesDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
 
 	void setGraph(Graph *graph);
 

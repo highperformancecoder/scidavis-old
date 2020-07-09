@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Find dialog
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -43,7 +43,7 @@ class FindDialog : public QDialog
     Q_OBJECT
 
 public:
-    FindDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    FindDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
     ~FindDialog();
 
 private:
@@ -64,7 +64,7 @@ private:
 
 public slots:
 
-	//! Displays the project current folder path 
+	//! Displays the project current folder path
 	void setStartPath();
 
 protected slots:

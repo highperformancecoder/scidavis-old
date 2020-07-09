@@ -1095,7 +1095,7 @@ void PlotDialog::showStatistics()
     }
 
   QDateTime dt = QDateTime::currentDateTime();
-  QString info = dt.toString(Qt::LocalDate)+"\t"+tr("Histogram and Probabilities for") + " " + h->title().text()+"\n";
+  QString info = QLocale().toString(dt)+"\t"+tr("Histogram and Probabilities for") + " " + h->title().text()+"\n";
   info += tr("Mean")+" = "+QString::number(h->mean())+"\t";
   info += tr("Standard Deviation")+" = "+QString::number(h->standardDeviation())+"\n";
   info += tr("Minimum")+" = "+QString::number(h->minimum())+"\t";
@@ -1705,8 +1705,13 @@ void PlotDialog::setActiveCurve(CurveTreeItem *item)
 
 void PlotDialog::updateEndPointColumns(const QString& text)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	QStringList cols=text.split(",", Qt::SkipEmptyParts);
+	QStringList aux=cols[0].split(":", Qt::SkipEmptyParts);
+#else
 	QStringList cols=text.split(",", QString::SkipEmptyParts);
 	QStringList aux=cols[0].split(":", QString::SkipEmptyParts);
+#endif
 	QString table=aux[0];
 	QStringList list;
 	for (int i=0; i<(int)columnNames.count(); i++)
@@ -1858,8 +1863,13 @@ bool PlotDialog::acceptParams()
         return false;
 
       QString text = item->text(0);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+      QStringList t = text.split(": ", Qt::SkipEmptyParts);
+      QStringList list = t[1].split(",", Qt::SkipEmptyParts);
+#else
       QStringList t = text.split(": ", QString::SkipEmptyParts);
       QStringList list = t[1].split(",", QString::SkipEmptyParts);
+#endif
       text = t[0] + "_" + list[1].remove("(Y)");
       bool accept = validInput();
       if (accept)
@@ -1897,10 +1907,18 @@ bool PlotDialog::acceptParams()
                                  filledHeadBox->isChecked(), vectPosBox->currentIndex(), xEndCol, yEndCol);
 
       QString text = item->text(0);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+      QStringList t = text.split(": ", Qt::SkipEmptyParts);
+#else
       QStringList t = text.split(": ", QString::SkipEmptyParts);
+#endif
       QString table = t[0];
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+      QStringList cols = t[1].split(",", Qt::SkipEmptyParts);
+#else
       QStringList cols = t[1].split(",", QString::SkipEmptyParts);
+#endif
       if (graph->curveType(index) == Graph::VectXYXY)
         {
           xEndCol = xEndCol.remove(table + "_") + "(X)";

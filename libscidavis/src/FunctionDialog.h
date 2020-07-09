@@ -46,7 +46,7 @@ class FunctionDialog : public QDialog
     Q_OBJECT
 
 public:
-    FunctionDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    FunctionDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
 
 protected:
 	QComboBox* boxXFunction;

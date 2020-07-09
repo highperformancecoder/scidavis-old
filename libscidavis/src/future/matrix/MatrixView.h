@@ -4,7 +4,7 @@
     Description          : View class for Matrix
     --------------------------------------------------------------------
     Copyright            : (C) 2008-2009 Tilman Benkert (thzs*gmx.net)
-                           (replace * with @ in the email addresses) 
+                           (replace * with @ in the email addresses)
 
  ***************************************************************************/
 
@@ -45,7 +45,7 @@
 #include <QTextEdit>
 #include <QPushButton>
 #include <QComboBox>
-#include <QSpinBox> 
+#include <QSpinBox>
 #include <QScrollArea>
 #include <QPointer>
 #include "globals.h"
@@ -88,7 +88,8 @@ class MatrixView : public MyWidget
 #ifndef LEGACY_CODE_0_2_x
 		MatrixView(future::Matrix * matrix);
 #else
-		MatrixView(const QString & label, QWidget * parent=0, const QString name=0, Qt::WindowFlags f=0);
+		MatrixView(const QString & label, QWidget * parent=0, const QString name=0,
+					Qt::WindowFlags f = Qt::Widget);
 		void setMatrix(future::Matrix * matrix);
 #endif
 		//! Destructor
@@ -99,49 +100,49 @@ class MatrixView : public MyWidget
 		//@{
 		//! Return how many columns are selected
 		/**
-		 * If full is true, this function only returns the number of fully 
+		 * If full is true, this function only returns the number of fully
 		 * selected columns.
 		 */
 		int selectedColumnCount(bool full = false);
 		//! Returns true if column 'col' is selected; otherwise false
 		/**
-		 * If full is true, this function only returns true if the whole 
+		 * If full is true, this function only returns true if the whole
 		 * column is selected.
 		 */
 		bool isColumnSelected(int col, bool full = false);
 		//! Return how many rows are (at least partly) selected
 		/**
-		 * If full is true, this function only returns the number of fully 
+		 * If full is true, this function only returns the number of fully
 		 * selected rows.
 		 */
 		int selectedRowCount(bool full = false);
 		//! Returns true if row 'row' is selected; otherwise false
 		/**
-		 * If full is true, this function only returns true if the whole 
+		 * If full is true, this function only returns true if the whole
 		 * row is selected.
 		 */
 		bool isRowSelected(int row, bool full = false);
 		//! Return the index of the first selected column
 		/**
-		 * If full is true, this function only looks for fully 
+		 * If full is true, this function only looks for fully
 		 * selected columns.
 		 */
 		int firstSelectedColumn(bool full = false);
 		//! Return the index of the last selected column
 		/**
-		 * If full is true, this function only looks for fully 
+		 * If full is true, this function only looks for fully
 		 * selected columns.
 		 */
 		int lastSelectedColumn(bool full = false);
 		//! Return the index of the first selected row
 		/**
-		 * If full is true, this function only looks for fully 
+		 * If full is true, this function only looks for fully
 		 * selected rows.
 		 */
 		int firstSelectedRow(bool full = false);
 		//! Return the index of the last selected row
 		/**
-		 * If full is true, this function only looks for fully 
+		 * If full is true, this function only looks for fully
 		 * selected rows.
 		 */
 		int lastSelectedRow(bool full = false);
@@ -154,7 +155,7 @@ class MatrixView : public MyWidget
 		//! Determine the current cell (-1 if no cell is designated as the current)
 		void getCurrentCell(int * row, int * col);
 		//@}
-		
+
 		void setRowHeight(int row, int height);
 		void setColumnWidth(int col, int width);
 		int rowHeight(int row) const;
@@ -177,8 +178,8 @@ class MatrixView : public MyWidget
 #endif
 		void updateFormatTab();
 		void applyFormat();
-		void handleHorizontalSectionResized(int logicalIndex, int oldSize, int newSize); 
-		void handleVerticalSectionResized(int logicalIndex, int oldSize, int newSize); 
+		void handleHorizontalSectionResized(int logicalIndex, int oldSize, int newSize);
+		void handleVerticalSectionResized(int logicalIndex, int oldSize, int newSize);
 
 	signals:
 		void controlTabBarStatusChanged(bool visible);

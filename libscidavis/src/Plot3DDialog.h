@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Surface plot options dialog
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -44,18 +44,18 @@ class QTabWidget;
 class QWidget;
 class QStringList;
 class QStackedWidget;
-	
+
 using namespace Qwt3D;
 
 //! Surface plot options dialog
 class Plot3DDialog : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
-    Plot3DDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    Plot3DDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
     ~Plot3DDialog();
-	
+
 public slots:
 	void accept();
 	bool updatePlot();
@@ -81,7 +81,7 @@ public slots:
 	void setResolution(int r);
 	void showLegend(bool show);
 	void setOrthogonal(bool on){boxOrthogonal->setChecked(on);};
-	
+
 	void setAxesLabels(const QStringList& list);
 	void viewAxisOptions(int axis);
 
@@ -92,7 +92,7 @@ public slots:
 	void pickNumbersFont();
 	void setNumbersFonts(const QFont& f){numbersFont=f;};
 
-	QStringList scaleOptions(int axis, double start, double end, 
+	QStringList scaleOptions(int axis, double start, double end,
 												const QString& majors, const QString& minors);
 	void setScales(const QStringList& list);
 	void viewScaleLimits(int axis);
@@ -109,14 +109,14 @@ public slots:
 	void showPointsTab(double rad, bool smooth);
 	void showConesTab(double rad, int quality);
 	void showCrossHairTab(double rad, double linewidth, bool smooth, bool boxed);
-	
+
 	void customWorksheetBtn(const QString& text);
 	void worksheet();
 	void setZoom(double zoom);
 	void setScaling(double xVal, double yVal, double zVal);
 	void showTitleTab();
 	void showAxisTab();
-	
+
 	void initPointsOptionsStack();
 	void changeZoom(double);
 	void changeTransparency(int val);
@@ -128,7 +128,7 @@ public slots:
 
     void pickDataColorMap();
     void setPlot(Graph3D *plot){d_plot = plot;};
-    
+
 signals:
 	void showWorksheet();
 	void updatePoints(double, bool);
@@ -151,7 +151,7 @@ signals:
 	void updateCones(double, int);
 	void updateCross(double, double, bool, bool);
 	void setDataColorMap(const QString&);
-	
+
 private:
     void initScalesPage();
 	void initAxesPage();

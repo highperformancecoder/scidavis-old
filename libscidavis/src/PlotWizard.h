@@ -48,7 +48,7 @@ public:
 	 * \param parent parent widget
 	 * \param fl Qt window flags
 	 */
-    PlotWizard( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    PlotWizard(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
 	 //! Destructor
     ~PlotWizard();
 

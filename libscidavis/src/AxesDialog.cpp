@@ -94,7 +94,7 @@ AxesDialog::AxesDialog()
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
 	mainLayout->addWidget(&generalDialog);
 	mainLayout->addLayout(bottomButtons);
-        
+
 	lastPage = scalesPage;
 
 	connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
@@ -187,8 +187,8 @@ void AxesDialog::initScalesPage()
 	QFontMetrics fm(axesList->font());
 	int width = 32,i;
 	for(i=0 ; i<axesList->count() ; i++)
-		if( fm.width(axesList->item(i)->text()) > width)
-			width = fm.width(axesList->item(i)->text());
+		if( fm.horizontalAdvance(axesList->item(i)->text()) > width)
+			width = fm.horizontalAdvance(axesList->item(i)->text());
 
 	axesList->setMaximumWidth( axesList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
@@ -308,8 +308,8 @@ void AxesDialog::initGridPage()
 	QFontMetrics fm(axesGridList->font());
 	int width = 32,i;
 	for(i=0 ; i<axesGridList->count() ; i++)
-		if( fm.width(axesGridList->item(i)->text()) > width)
-			width = fm.width(axesGridList->item(i)->text());
+		if( fm.horizontalAdvance(axesGridList->item(i)->text()) > width)
+			width = fm.horizontalAdvance(axesGridList->item(i)->text());
 	axesGridList->setMaximumWidth( axesGridList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
 	axesGridList->resize(axesGridList->maximumWidth(),axesGridList->height());
@@ -370,8 +370,8 @@ void AxesDialog::initAxesPage()
 	QFontMetrics fm(axesTitlesList->font());
 	int width = 32,i;
 	for(i=0 ; i<axesTitlesList->count() ; i++)
-		if( fm.width(axesTitlesList->item(i)->text()) > width)
-			width = fm.width(axesTitlesList->item(i)->text());
+		if( fm.horizontalAdvance(axesTitlesList->item(i)->text()) > width)
+			width = fm.horizontalAdvance(axesTitlesList->item(i)->text());
 	axesTitlesList->setMaximumWidth( axesTitlesList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
 	axesTitlesList->resize(axesTitlesList->maximumWidth(),axesTitlesList->height());
@@ -704,9 +704,9 @@ void AxesDialog::showAxisFormatOptions(int format)
 				int day = (QDate::currentDate()).dayOfWeek();
 				label2->show();
 				boxFormat->show();
-				boxFormat->addItem(QDate::shortDayName(day));
-				boxFormat->addItem(QDate::longDayName(day));
-				boxFormat->addItem((QDate::shortDayName(day)).left(1));
+				boxFormat->addItem(QLocale().dayName(day,QLocale::ShortFormat));
+				boxFormat->addItem(QLocale().dayName(day,QLocale::LongFormat));
+				boxFormat->addItem((QLocale().dayName(day,QLocale::ShortFormat)).left(1));
 				boxFormat->setCurrentIndex (formatInfo[axis].toInt());
 			}
 			break;
@@ -716,9 +716,9 @@ void AxesDialog::showAxisFormatOptions(int format)
 				int month = (QDate::currentDate()).month();
 				label2->show();
 				boxFormat->show();
-				boxFormat->addItem(QDate::shortMonthName(month));
-				boxFormat->addItem(QDate::longMonthName(month));
-				boxFormat->addItem((QDate::shortMonthName(month)).left(1));
+				boxFormat->addItem(QLocale().monthName(month,QLocale::ShortFormat));
+				boxFormat->addItem(QLocale().monthName(month,QLocale::LongFormat));
+				boxFormat->addItem((QLocale().monthName(month,QLocale::ShortFormat)).left(1));
 				boxFormat->setCurrentIndex (formatInfo[axis].toInt());
 			}
 			break;
@@ -729,7 +729,11 @@ void AxesDialog::showAxisFormatOptions(int format)
 				boxFormat->show();
 				boxFormat->setEditable(true);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+				QStringList lst = formatInfo[axis].split(";", Qt::KeepEmptyParts);
+#else
 				QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
+#endif
 				if (lst.count() == 2)
 				{
 					boxFormat->addItem(lst[1]);
@@ -758,7 +762,11 @@ void AxesDialog::showAxisFormatOptions(int format)
 				boxFormat->show();
 				boxFormat->setEditable(true);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+				QStringList lst = formatInfo[axis].split(";", Qt::KeepEmptyParts);
+#else
 				QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
+#endif
 				if (lst.count() == 2)
 				{
 					boxFormat->addItem(lst[1]);
@@ -777,7 +785,11 @@ void AxesDialog::showAxisFormatOptions(int format)
 				boxFormat->show();
 				boxFormat->setEditable(true);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+				QStringList lst = formatInfo[axis].split(";", Qt::KeepEmptyParts);
+#else
 				QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
+#endif
 				if (lst.count() == 2)
 				{
 					boxFormat->addItem(lst[1]);
@@ -785,14 +797,14 @@ void AxesDialog::showAxisFormatOptions(int format)
 				}
 
 				const char * date_strings[] = {
-					"yyyy-MM-dd", 	
-					"yyyy/MM/dd", 
-					"dd/MM/yyyy", 
-					"dd/MM/yy", 
-					"dd.MM.yyyy", 	
+					"yyyy-MM-dd",
+					"yyyy/MM/dd",
+					"dd/MM/yyyy",
+					"dd/MM/yy",
+					"dd.MM.yyyy",
 					"dd.MM.yy",
 					"MM/yyyy",
-					"dd.MM.", 
+					"dd.MM.",
 					"yyyyMMdd",
 					0
 				};
@@ -812,7 +824,7 @@ void AxesDialog::showAxisFormatOptions(int format)
 				int j,i;
 				for(i=0; date_strings[i] != 0; i++)
 					for(j=0; time_strings[j] != 0; j++)
-						boxFormat->addItem(QString("%1 %2").arg(date_strings[i]).arg(time_strings[j]), 
+						boxFormat->addItem(QString("%1 %2").arg(date_strings[i]).arg(time_strings[j]),
 							QVariant(QString(date_strings[i]) + " " + QString(time_strings[j])));
 			}
 			break;
@@ -1343,7 +1355,11 @@ bool AxesDialog::updatePlot()
 		}
 		else if (format == Graph::Time || format == Graph::Date || format == Graph::DateTime)
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList lst = formatInfo[axis].split(";", Qt::KeepEmptyParts);
+#else
 			QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
+#endif
 			if (lst.size() < 2 || lst[0].isEmpty()) {
 				lst = QStringList();
 				if (format == Graph::Time)
@@ -1409,12 +1425,12 @@ void AxesDialog::setGraph(Graph *g)
 	yAxisOn = p->axisEnabled(QwtPlot::yLeft);
 	topAxisOn = p->axisEnabled(QwtPlot::xTop);
 	rightAxisOn = p->axisEnabled(QwtPlot::yRight);
-	
+
 	xBottomFont = p->axisFont(QwtPlot::xBottom);
 	yLeftFont = p->axisFont(QwtPlot::yLeft);
 	xTopFont = p->axisFont(QwtPlot::xTop);
 	yRightFont = p->axisFont(QwtPlot::yRight);
-	
+
 	majTicks = p->getMajorTicksType();
 	minTicks = p->getMinorTicksType();
 
@@ -1423,7 +1439,7 @@ void AxesDialog::setGraph(Graph *g)
 
 	xBottomLabelsRotation = g->labelsRotation(QwtPlot::xBottom);
 	xTopLabelsRotation = g->labelsRotation(QwtPlot::xTop);
-	
+
 	tickLabelsOn = g->enabledTickLabels();
 
   	axesBaseline = g->axesBaseline();
@@ -1439,7 +1455,7 @@ void AxesDialog::setGraph(Graph *g)
 
 	boxMinorTicksLength->setValue(p->minorTickLength());
 	boxMajorTicksLength->setValue(p->majorTickLength());
-    
+
 	showGridOptions(axesGridList->currentRow());
 }
 
@@ -1687,7 +1703,11 @@ void AxesDialog::updateTickLabelsList(bool on)
 		formatInfo[axis] = QString::number(boxFormat->currentIndex());
 	else if (type == Graph::Time || type == Graph::Date || type == Graph::DateTime)
 	{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+		QStringList lst = formatInfo[axis].split(";", Qt::SkipEmptyParts);
+#else
 		QStringList lst = formatInfo[axis].split(";", QString::SkipEmptyParts);
+#endif
 		if (lst.size() < 2 || lst[0].isEmpty()) {
 			lst = QStringList();
 			if (type == Graph::Time)
@@ -1773,7 +1793,11 @@ void AxesDialog::setLabelsNumericFormat(int)
 		formatInfo[axis] = QString::number(format);
 	else if (type == Graph::Time || type == Graph::Date || type == Graph::DateTime)
 	{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+		QStringList lst = formatInfo[axis].split(";", Qt::KeepEmptyParts);
+#else
 		QStringList lst = formatInfo[axis].split(";", QString::KeepEmptyParts);
+#endif
 		if (lst.size() < 2 || lst[0].isEmpty()) {
 			lst = QStringList();
 			if (type == Graph::Time)
@@ -1920,7 +1944,7 @@ void AxesDialog::showAxis(int axis, int type, const QString& labelsColName, bool
 	ApplicationWindow *app = qobject_cast<ApplicationWindow *>(parent());
 	if (!app)
 		return;
-	
+
 	Table *w = app->table(labelsColName);
 	if ((type == Graph::Txt || type == Graph::ColHeader) && !w)
 		return;

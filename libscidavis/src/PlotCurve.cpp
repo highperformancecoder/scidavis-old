@@ -91,11 +91,19 @@ void DataCurve::updateColumnNames(const QString& oldName, const QString& newName
     if (updateTableName)
     {
         QString s = title().text();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        QStringList lst = s.split("_", Qt::SkipEmptyParts);
+#else
         QStringList lst = s.split("_", QString::SkipEmptyParts);
+#endif
         if (lst.size()>0 && lst[0] == oldName)
             setTitle(newName + "_" + lst[1]);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        lst = d_x_column.split("_", Qt::SkipEmptyParts);
+#else
         lst = d_x_column.split("_", QString::SkipEmptyParts);
+#endif
         if (lst.size()>0 && lst[0] == oldName)
             d_x_column = newName + "_" + lst[1];
     }

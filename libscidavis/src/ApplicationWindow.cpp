@@ -156,6 +156,7 @@
 #include <QTextCodec>
 #include <QScrollBar>
 #include <QMimeData>
+#include <QElapsedTimer>
 
 #include <zlib.h>
 
@@ -226,11 +227,11 @@ ApplicationWindow::ApplicationWindow()
 	QPixmapCache::setCacheLimit(20*QPixmapCache::cacheLimit ());
 
     d_project = new Project();
-	connect(d_project, SIGNAL(aspectAdded(const AbstractAspect *, int)), 
+	connect(d_project, SIGNAL(aspectAdded(const AbstractAspect *, int)),
 		this, SLOT(handleAspectAdded(const AbstractAspect *, int)));
-	connect(d_project, SIGNAL(aspectAboutToBeRemoved(const AbstractAspect *, int)), 
+	connect(d_project, SIGNAL(aspectAboutToBeRemoved(const AbstractAspect *, int)),
 		this, SLOT(handleAspectAboutToBeRemoved(const AbstractAspect *, int)));
-	
+
 	explorerWindow.setWindowTitle(tr("Project Explorer"));
 	explorerWindow.setObjectName("explorerWindow"); // this is needed for QMainWindow::restoreState()
 	explorerWindow.setMinimumHeight(150);
@@ -501,7 +502,7 @@ void ApplicationWindow::initToolBars()
 	menu_curves->addAction(actionShowCurvesDialog);
 	menu_curves->addAction(actionAddErrorBars);
 	menu_curves->addAction(actionAddFunctionCurve);
-	
+
 	QMenu *menu_plot_enrichments = new QMenu(this);
 	QToolButton *btn_plot_enrichments = new QToolButton(this);
 	btn_plot_enrichments->setMenu(menu_plot_enrichments);
@@ -651,9 +652,9 @@ void ApplicationWindow::initToolBars()
 
 	d_status_info = new QLabel( this  );
 	d_status_info->setFrameStyle( QFrame::Sunken | QFrame::StyledPanel );
-	d_status_info->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed ); 
+	d_status_info->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed );
 	d_status_info->setContextMenuPolicy( Qt::CustomContextMenu );
-	connect(d_status_info, SIGNAL(customContextMenuRequested(const QPoint &)), 
+	connect(d_status_info, SIGNAL(customContextMenuRequested(const QPoint &)),
 		this, SLOT(showStatusBarContextMenu(const QPoint &)) );
 
 	statusBar()->addWidget( d_status_info, 1 );
@@ -837,7 +838,7 @@ void ApplicationWindow::initMainMenu()
 	edit->addAction(actionClearLogInfo);
 
 	edit->addSeparator();
-	
+
 	edit->addAction(actionShowConfigureDialog);
 
 	view = new QMenu(this);
@@ -1392,7 +1393,7 @@ void ApplicationWindow::customToolBars(MyWidget* w)
 		}
 
 	}
-	else 
+	else
 	{
 	  graph_tools->setEnabled (false);
 	  table_tools->setEnabled (false);
@@ -2507,7 +2508,7 @@ Table* ApplicationWindow::newTable(const QString& fname, const QString &sep,
 		bool simplifySpaces, bool convertToNumeric, QLocale numericLocale)
 {
 	Table* w = new Table(scriptEnv, fname, sep, lines, renameCols, stripSpaces,
-			simplifySpaces, convertToNumeric, numericLocale, fname, &d_workspace, 0, 0);
+			simplifySpaces, convertToNumeric, numericLocale, fname, &d_workspace);
 	if (w)
 	{
 		w->setName(generateUniqueName(tr("Table")));
@@ -2599,7 +2600,7 @@ TableStatistics *ApplicationWindow::newTableStatistics(Table *base, int type, QL
 	connect(base, SIGNAL(modifiedData(Table*,const QString&)), s, SLOT(update(Table*,const QString&)));
 	connect(base, SIGNAL(changedColHeader(const QString&, const QString&)), s, SLOT(renameCol(const QString&, const QString&)));
 	connect(base, SIGNAL(removedCol(const QString&)), s, SLOT(removeCol(const QString&)));
-	connect(base->d_future_table, SIGNAL(aspectAboutToBeRemoved(const AbstractAspect *)), 
+	connect(base->d_future_table, SIGNAL(aspectAboutToBeRemoved(const AbstractAspect *)),
 			this, SLOT(removeDependentTableStatistics(const AbstractAspect *)));
 	return s;
 }
@@ -2689,7 +2690,7 @@ void ApplicationWindow::matrixDeterminant()
 		return;
 
 	QDateTime dt = QDateTime::currentDateTime ();
-	QString info=dt.toString(Qt::LocalDate);
+	QString info = QLocale().toString(dt);
 	info+= "\n" + tr("Determinant of ") + QString(m->name()) + ":\t";
 	info+= "det = " + QString::number(m->determinant()) + "\n";
 	info+="-------------------------------------------------------------\n";
@@ -2745,7 +2746,7 @@ void ApplicationWindow::initMatrix(Matrix* m)
 	m->askOnCloseEvent(confirmCloseMatrix);
 	m->setNumericFormat(d_default_numeric_format, d_decimal_digits);
 	m->setFolder(current_folder);
-	
+
 	current_folder->addWindow(m);
 	m->setFolder(current_folder);
 	addListViewItem(m);
@@ -3331,12 +3332,12 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 			if (!w) continue;
 			w->setCaptionPolicy(MyWidget::Both);
 			setListViewLabel(w->name(), sorted_files[i]);
-			if (i==0) 
+			if (i==0)
 			{
 				dx = w->verticalHeaderWidth();
 				dy = w->frameGeometry().height() - w->height();
 				w->move(QPoint(0,0));
-			} 
+			}
 			else
 				w->move(QPoint(i*dx,i*dy));
 
@@ -3351,7 +3352,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 	foreach(QString file, files) {
 		Table *temp = new Table(scriptEnv, file, local_column_separator, local_ignored_lines,
 				local_rename_columns, local_strip_spaces, local_simplify_spaces, local_convert_to_numeric,
-				local_numeric_locale, "temp", 0, 0, 0);
+				local_numeric_locale, "temp");
 		if (!temp) continue;
 
 		// need to check data types of columns for append/overwrite
@@ -3384,7 +3385,7 @@ void ApplicationWindow::importASCII(const QStringList& files, int import_mode, c
 				break;
 			case ImportASCIIDialog::NewRows:
 				{
-					int missing_columns = temp->columnCount() - table->columnCount(); 
+					int missing_columns = temp->columnCount() - table->columnCount();
 					for (int col=0; col<missing_columns; col++) {
 						Column * new_col = new Column(tr("new_by_import") + QString::number(col+1),
 								local_convert_to_numeric ? SciDAVis::Numeric : SciDAVis::Text);
@@ -3637,7 +3638,11 @@ bool ApplicationWindow::loadProject(const QString& fn)
   QStringList list;
 
   s = t.readLine();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+  list = s.split(QRegExp("\\s"), Qt::SkipEmptyParts);
+#else
   list = s.split(QRegExp("\\s"), QString::SkipEmptyParts);
+#endif
   if (list.count() < 2 || (list[0] != "SciDAVis" && list[0] != "QtiPlot")) {
     if (QFile::exists(fn + "~")) {
       int choice = QMessageBox::question(this, tr("File opening error"),
@@ -3656,7 +3661,11 @@ bool ApplicationWindow::loadProject(const QString& fn)
     return false;
   }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+  QStringList vl = list[1].split(".", Qt::SkipEmptyParts);
+#else
   QStringList vl = list[1].split(".", QString::SkipEmptyParts);
+#endif
   if(
      fn.endsWith(".qti",Qt::CaseInsensitive) ||
      fn.endsWith(".qti.gz",Qt::CaseInsensitive) ||
@@ -3669,7 +3678,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
                             tr("SciDAVis does not support QtiPlot project files from versions later than 0.9.0.").arg(fn));
       return false;
     }
-  } else 
+  } else
     d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
 
   projectname = fn;
@@ -3682,7 +3691,11 @@ bool ApplicationWindow::loadProject(const QString& fn)
     t.readLine();
 
   s = t.readLine();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+  list=s.split("\t", Qt::SkipEmptyParts);
+#else
   list=s.split("\t", QString::SkipEmptyParts);
+#endif
   if (list[0] == "<scripting-lang>")
     {
       if (!setScriptingLang(list[1], true))
@@ -3693,7 +3706,11 @@ bool ApplicationWindow::loadProject(const QString& fn)
                              .arg(fn).arg(list[1]).arg(scriptEnv->objectName()));
 
       s = t.readLine();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+      list=s.split("\t", Qt::SkipEmptyParts);
+#else
       list=s.split("\t", QString::SkipEmptyParts);
+#endif
     }
   int aux=0,widgets=list[1].toInt();
 
@@ -3847,6 +3864,16 @@ bool ApplicationWindow::loadProject(const QString& fn)
             }
           if (d_file_version > 83)
             {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+              QStringList lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+              plot->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
+              lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+              plot->setSpacing(lst[1].toInt(),lst[2].toInt());
+              lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+              plot->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
+              lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+              plot->setAlignement(lst[1].toInt(),lst[2].toInt());
+#else
               QStringList lst=t.readLine().split("\t", QString::SkipEmptyParts);
               plot->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
               lst=t.readLine().split("\t", QString::SkipEmptyParts);
@@ -3855,6 +3882,7 @@ bool ApplicationWindow::loadProject(const QString& fn)
               plot->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
               lst=t.readLine().split("\t", QString::SkipEmptyParts);
               plot->setAlignement(lst[1].toInt(),lst[2].toInt());
+#endif
             }
 
           while ( s!="</multiLayer>" )
@@ -4044,7 +4072,11 @@ void ApplicationWindow::openTemplate()
 			QTextStream t(&f);
 			t.setCodec(QTextCodec::codecForName("UTF-8"));
 			f.open(QIODevice::ReadOnly);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList l=t.readLine().split(QRegExp("\\s"), Qt::SkipEmptyParts);
+#else
 			QStringList l=t.readLine().split(QRegExp("\\s"), QString::SkipEmptyParts);
+#endif
 			QString fileType=l[0];
 			if( (fileType != "SciDAVis") && (fileType != "QtiPlot") )
 			{
@@ -4052,7 +4084,11 @@ void ApplicationWindow::openTemplate()
 						tr("The file: <b> %1 </b> was not created using SciDAVis!").arg(fn));
 				return;
 			}
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList vl = l[1].split(".", Qt::SkipEmptyParts);
+#else
 			QStringList vl = l[1].split(".", QString::SkipEmptyParts);
+#endif
 			if( fileType == "QtiPlot" )
 			{
 				d_file_version = 100*(vl[0]).toInt()+10*(vl[1]).toInt()+(vl[2]).toInt();
@@ -4062,7 +4098,7 @@ void ApplicationWindow::openTemplate()
 					return;
 				}
 			}
-			else 
+			else
 				d_file_version = ((vl[0]).toInt() << 16) + ((vl[1]).toInt() << 8) + (vl[2]).toInt();
 
 			QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -4101,6 +4137,16 @@ void ApplicationWindow::openTemplate()
 						restoreWindowGeometry(this, w, geometry);
 						if (d_file_version > 83)
 						{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+							QStringList lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+							((MultiLayer*)w)->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
+							lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+							((MultiLayer*)w)->setSpacing(lst[1].toInt(),lst[2].toInt());
+							lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+							((MultiLayer*)w)->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
+							lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+							((MultiLayer*)w)->setAlignement(lst[1].toInt(),lst[2].toInt());
+#else
 							QStringList lst=t.readLine().split("\t", QString::SkipEmptyParts);
 							((MultiLayer*)w)->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
 							lst=t.readLine().split("\t", QString::SkipEmptyParts);
@@ -4109,6 +4155,7 @@ void ApplicationWindow::openTemplate()
 							((MultiLayer*)w)->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
 							lst=t.readLine().split("\t", QString::SkipEmptyParts);
 							((MultiLayer*)w)->setAlignement(lst[1].toInt(),lst[2].toInt());
+#endif
 						}
 						while (!t.atEnd())
 						{//open layers
@@ -4192,7 +4239,11 @@ void ApplicationWindow::readSettings()
     //(only needed on Windows due to a Qt bug?)
 #ifdef Q_OS_WIN
 	if (!recentProjects.isEmpty() && recentProjects[0].contains("^e"))
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        recentProjects = recentProjects[0].split("^e", Qt::SkipEmptyParts);
+#else
         recentProjects = recentProjects[0].split("^e", QString::SkipEmptyParts);
+#endif
     else if (recentProjects.count() == 1)
     {
         QString s = recentProjects[0];
@@ -4511,9 +4562,9 @@ void ApplicationWindow::saveSettings()
 	settings.setValue("/FitPlugins", fitPluginsPath);
 	settings.setValue("/ASCII", asciiDirPath);
 	settings.setValue("/Images", imagesDirPath);
-	
+
 	settings.setValue("LockToolbars", locktoolbar->isChecked());
-		
+
 	settings.endGroup(); // Paths
 	settings.endGroup();
 	/* ---------------- end group General --------------- */
@@ -5301,7 +5352,7 @@ void ApplicationWindow::showTitleDialog()
 		Graph* g = ((MultiLayer*)w)->activeGraph();
 		if (g)
 		{
-			TextDialog* td= new TextDialog(TextDialog::AxisTitle, this,0);
+			TextDialog* td= new TextDialog(TextDialog::AxisTitle, this, Qt::Widget);
 			td->setAttribute(Qt::WA_DeleteOnClose);
 			connect (td,SIGNAL(changeFont(const QFont &)),g,SLOT(setTitleFont(const QFont &)));
 			connect (td,SIGNAL(changeText(const QString &)),g,SLOT(setTitle(const QString &)));
@@ -5333,7 +5384,7 @@ void ApplicationWindow::showXAxisTitleDialog()
 	Graph* g = ((MultiLayer*)d_workspace.activeSubWindow())->activeGraph();
 	if (g)
 	{
-		TextDialog* td= new TextDialog(TextDialog::AxisTitle, this,0);
+		TextDialog* td= new TextDialog(TextDialog::AxisTitle, this, Qt::Widget);
 		td->setAttribute(Qt::WA_DeleteOnClose);
 		connect (td,SIGNAL(changeFont(const QFont &)),g,SLOT(setXAxisTitleFont(const QFont &)));
 		connect (td,SIGNAL(changeText(const QString &)),g,SLOT(setXAxisTitle(const QString &)));
@@ -5358,7 +5409,7 @@ void ApplicationWindow::showYAxisTitleDialog()
 	Graph* g = ((MultiLayer*)d_workspace.activeSubWindow())->activeGraph();
 	if (g)
 	{
-		TextDialog* td= new TextDialog(TextDialog::AxisTitle, this,0);
+		TextDialog* td= new TextDialog(TextDialog::AxisTitle, this, Qt::Widget);
 		td->setAttribute(Qt::WA_DeleteOnClose);
 		connect (td,SIGNAL(changeFont(const QFont &)),g,SLOT(setYAxisTitleFont(const QFont &)));
 		connect (td,SIGNAL(changeText(const QString &)),g,SLOT(setYAxisTitle(const QString &)));
@@ -5383,7 +5434,7 @@ void ApplicationWindow::showRightAxisTitleDialog()
 	Graph* g = ((MultiLayer*)d_workspace.activeSubWindow())->activeGraph();
 	if (g)
 	{
-		TextDialog* td= new TextDialog(TextDialog::AxisTitle, this, 0);
+		TextDialog* td= new TextDialog(TextDialog::AxisTitle, this, Qt::Widget);
 		td->setAttribute(Qt::WA_DeleteOnClose);
 		connect (td,SIGNAL(changeFont(const QFont &)),g,SLOT(setRightAxisTitleFont(const QFont &)));
 		connect (td,SIGNAL(changeText(const QString &)),g,SLOT(setRightAxisTitle(const QString &)));
@@ -5408,7 +5459,7 @@ void ApplicationWindow::showTopAxisTitleDialog()
 	Graph* g = ((MultiLayer*)d_workspace.activeSubWindow())->activeGraph();
 	if (g)
 	{
-		TextDialog* td= new TextDialog(TextDialog::AxisTitle, this, 0);
+		TextDialog* td= new TextDialog(TextDialog::AxisTitle, this, Qt::Widget);
 		td->setAttribute(Qt::WA_DeleteOnClose);
 		connect (td,SIGNAL(changeFont(const QFont &)),g,SLOT(setTopAxisTitleFont(const QFont &)));
 		connect (td,SIGNAL(changeText(const QString &)),g,SLOT(setTopAxisTitle(const QString &)));
@@ -6766,7 +6817,7 @@ void ApplicationWindow::addImage()
 	Graph* g = (Graph*)plot->activeGraph();
 	if (!g)
 		return;
-		
+
 	QList<QByteArray> list = QImageReader::supportedImageFormats();
 	QString filter = tr("Images") + " (", aux1, aux2;
 	for (int i=0; i<(int)list.count(); i++){
@@ -6909,7 +6960,7 @@ void ApplicationWindow::showTextDialog()
 		if (!m)
 			return;
 
-		TextDialog *td=new TextDialog(TextDialog::TextMarker, this, 0);
+		TextDialog *td=new TextDialog(TextDialog::TextMarker, this, Qt::Widget);
 		td->setAttribute(Qt::WA_DeleteOnClose);
 		connect (td,SIGNAL(values(const QString&,int,int,const QFont&, const QColor&, const QColor&)),
 				g,SLOT(updateTextMarker(const QString&,int,int,const QFont&, const QColor&, const QColor&)));
@@ -7876,7 +7927,11 @@ QStringList ApplicationWindow::multilayerDependencies(MyWidget *w)
 		QStringList onPlot=ag->curvesList();
 		for (int j=0; j<onPlot.count(); j++)
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList tl = onPlot[j].split("_", Qt::SkipEmptyParts);
+#else
 			QStringList tl = onPlot[j].split("_", QString::SkipEmptyParts);
+#endif
             if (!tables.contains(tl[0]))
 				tables << tl[0];
 		}
@@ -8108,7 +8163,7 @@ void ApplicationWindow::showLayerButtonContextMenu()
 		cm.addSeparator();
 		cm.addAction(QPixmap(":/close.xpm"), tr("&Delete Layer"), plot, SLOT(confirmRemoveLayer()));
 		cm.exec(QCursor::pos());
-		
+
 	}
 }
 
@@ -8210,7 +8265,7 @@ void ApplicationWindow::showWindowTitleBarMenu()
 
 void ApplicationWindow::chooseHelpFolder()
 {
-// TODO: move all paths & location handling to anothor class  
+// TODO: move all paths & location handling to anothor class
 #if defined(Q_OS_WIN)
 	const QString locateDefaultHelp = qApp->applicationDirPath() +
         QDir::toNativeSeparators("/manual/index.html");
@@ -8264,7 +8319,7 @@ void ApplicationWindow::showHelp()
         settings.setValue("/HelpFile", helpFilePath);
         settings.endGroup();
 	}
-    
+
     if(!QDesktopServices::openUrl(QUrl(helpFilePath))) {
     	QMessageBox::information(this, tr("unable to open index.html!"),
 	    tr("<b>index.html</b> file cannot be opened"));
@@ -8275,7 +8330,7 @@ void ApplicationWindow::showPlotWizard()
 {
 	if (tableWindows().count()>0)
 	{
-		PlotWizard* pw = new PlotWizard(this, 0);
+		PlotWizard* pw = new PlotWizard(this, Qt::Widget);
 		pw->setAttribute(Qt::WA_DeleteOnClose);
 		connect (pw,SIGNAL(plot(const QStringList&)),this,SLOT(multilayerPlot(const QStringList&)));
 
@@ -9058,7 +9113,7 @@ Matrix* ApplicationWindow::importImage(const QString& fileName)
     return NULL;
 
   Matrix* m = Matrix::fromImage(image, scriptEnv);
-  if (!m) 
+  if (!m)
     {
       QMessageBox::information(0, tr("Error importing image"), tr("Import of image '%1' failed").arg(fileName));
       return NULL;
@@ -9118,7 +9173,11 @@ void ApplicationWindow::deleteLayer()
 
 Note* ApplicationWindow::openNote(ApplicationWindow* app, const QStringList &flist)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	QStringList lst=flist[0].split("\t", Qt::SkipEmptyParts);
+#else
 	QStringList lst=flist[0].split("\t", QString::SkipEmptyParts);
+#endif
 	QString caption = lst[0];
 	Note* w = app->newNote(caption);
 	if (lst.count() == 2)
@@ -9183,7 +9242,7 @@ Matrix* ApplicationWindow::openMatrix(ApplicationWindow* app, const QStringList 
 		if (*line == "<data>") line++;
 
 
-		QTime t;
+		QElapsedTimer t;
 		t.start();
 		//read and set table values
 		for (; line!=flist.end() && *line != "</data>"; line++)
@@ -9310,7 +9369,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 				break;
 		}
 
-		QTime t;
+		QElapsedTimer t;
 		t.start();
 		QApplication::setOverrideCursor(Qt::WaitCursor);
 		for (line++; line!=flist.end() && *line != "</data>"; line++)
@@ -9388,7 +9447,7 @@ Table* ApplicationWindow::openTable(ApplicationWindow* app, QTextStream &stream)
 				msg_text += str + "\n";
 			QMessageBox::warning(this, tr("Project loading partly failed"), msg_text);
 		}
-		w->setBirthDate(w->d_future_table->creationTime().toString(Qt::LocalDate));
+		w->setBirthDate(QLocale().toString(w->d_future_table->creationTime()));
 
 		s = stream.readLine();
 		restoreWindowGeometry(app, w, s);
@@ -9503,7 +9562,11 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains ("AxesBaseline"))
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList fList=s.split("\t", Qt::SkipEmptyParts);
+#else
 			QStringList fList=s.split("\t", QString::SkipEmptyParts);
+#endif
 			ag->setAxesBaseline(fList);
 		}
 		else if (s.contains ("EnabledTicks"))
@@ -9545,7 +9608,11 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains ("AxesNumberColors"))
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList fList=s.split("\t", Qt::KeepEmptyParts);
+#else
 			QStringList fList=s.split("\t", QString::KeepEmptyParts);
+#endif
 			fList.pop_front();
 			ag->setAxesNumColors(fList);
 		}
@@ -9597,7 +9664,11 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		else if (s.left(6)=="curve\t")
 		{
                   bool curve_loaded = false; // Graph::insertCurve may fail
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+                  QStringList curve = s.split("\t", Qt::KeepEmptyParts);
+#else
                   QStringList curve = s.split("\t", QString::KeepEmptyParts);
+#endif
                   int s_offset = 0;
                   if (curve.count()>14)
                     {
@@ -9764,7 +9835,11 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains ("FunctionCurve"))
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList curve = s.split("\t", Qt::KeepEmptyParts);
+#else
 			QStringList curve = s.split("\t", QString::KeepEmptyParts);
+#endif
 			CurveLayout cl;
 			cl.connectType=curve[6].toInt();
 			cl.lCol=COLORUINT(curve[7]);
@@ -9840,7 +9915,11 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains ("ErrorBars"))
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList curve = s.split("\t", Qt::SkipEmptyParts);
+#else
 			QStringList curve = s.split("\t", QString::SkipEmptyParts);
+#endif
 			Table *w = app->table(curve[3]);
 			Table *errTable = app->table(curve[4]);
 			if (w && errTable)
@@ -9910,18 +9989,26 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			legend.pop_front();
 			for (int i=0; i<4; i++)
 			{
-			    if (legend.count() > i) 
+			    if (legend.count() > i)
                     ag->setAxisTitle(Graph::mapToQwtAxis(i), legend[i]);
 			}
 		}
 		else if (s.contains ("AxesTitleColors"))
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList colors=s.split("\t", Qt::SkipEmptyParts);
+#else
 			QStringList colors=s.split("\t", QString::SkipEmptyParts);
+#endif
 			ag->setAxesTitleColor(colors);
 		}
 		else if (s.contains ("AxesTitleAlignment"))
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList align=s.split("\t", Qt::SkipEmptyParts);
+#else
 			QStringList align=s.split("\t", QString::SkipEmptyParts);
+#endif
 			ag->setAxesTitlesAlignment(align);
 		}
 		else if (s.contains ("ScaleFont"))
@@ -9996,22 +10083,38 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 		}
 		else if (s.contains ("Legend"))
 		{// version <= 0.8.9
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList fList=s.split("\t", Qt::KeepEmptyParts);
+#else
 			QStringList fList=s.split("\t", QString::KeepEmptyParts);
+#endif
 			ag->insertLegend(fList, d_file_version);
 		}
 		else if (s.startsWith ("<legend>") && s.endsWith ("</legend>"))
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList fList=s.remove("</legend>").split("\t", Qt::KeepEmptyParts);
+#else
 			QStringList fList=s.remove("</legend>").split("\t", QString::KeepEmptyParts);
+#endif
 			ag->insertLegend(fList, d_file_version);
 		}
 		else if (s.contains ("textMarker"))
 		{// version <= 0.8.9
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList fList=s.split("\t", Qt::KeepEmptyParts);
+#else
 			QStringList fList=s.split("\t", QString::KeepEmptyParts);
+#endif
 			ag->insertTextMarker(fList, d_file_version);
 		}
 		else if (s.startsWith ("<text>") && s.endsWith ("</text>"))
 		{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+			QStringList fList=s.remove("</text>").split("\t", Qt::KeepEmptyParts);
+#else
 			QStringList fList=s.remove("</text>").split("\t", QString::KeepEmptyParts);
+#endif
 			ag->insertTextMarker(fList, d_file_version);
 		}
 		else if (s.contains ("lineMarker"))
@@ -10034,7 +10137,11 @@ Graph* ApplicationWindow::openGraph(ApplicationWindow* app, MultiLayer *plot,
 			QStringList fList=s.split("\t");
 			if (fList.size() >= 5)
 				for (int i=0; i<4; i++) {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+					QStringList lst = fList[i+1].split(";", Qt::SkipEmptyParts);
+#else
 					QStringList lst = fList[i+1].split(";", QString::SkipEmptyParts);
+#endif
 					if (lst.size() < 2) continue;
 					int format = lst[0].toInt();
 					switch(format) {
@@ -10098,9 +10205,13 @@ Graph3D* ApplicationWindow::openSurfacePlot(ApplicationWindow* app, const QStrin
 	QString caption=fList[0];
 	QString date=fList[1];
 	if (date.isEmpty())
-		date = QDateTime::currentDateTime().toString(Qt::LocalDate);
+		date = QLocale().toString(QDateTime::currentDateTime());
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	fList=lst[2].split("\t", Qt::SkipEmptyParts);
+#else
 	fList=lst[2].split("\t", QString::SkipEmptyParts);
+#endif
 	Graph3D *plot=0;
 
 	if (fList[1].endsWith("(Y)",Qt::CaseSensitive))//Ribbon plot
@@ -10125,6 +10236,59 @@ Graph3D* ApplicationWindow::openSurfacePlot(ApplicationWindow* app, const QStrin
 	plot->setIgnoreFonts(true);
 	restoreWindowGeometry(app, plot, lst[1]);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	fList=lst[3].split("\t", Qt::SkipEmptyParts);
+	plot->setStyle(fList);
+
+	fList=lst[4].split("\t", Qt::SkipEmptyParts);
+	plot->setGrid(fList[1].toInt());
+
+	fList=lst[5].split("\t");
+	plot->setTitle(fList);
+
+	fList=lst[6].split("\t", Qt::SkipEmptyParts);
+	plot->setColors(fList);
+
+	fList=lst[7].split("\t", Qt::SkipEmptyParts);
+	fList.pop_front();
+	plot->setAxesLabels(fList);
+
+	fList=lst[8].split("\t", Qt::SkipEmptyParts);
+	plot->setTicks(fList);
+
+	fList=lst[9].split("\t", Qt::SkipEmptyParts);
+	plot->setTickLengths(fList);
+
+	fList=lst[10].split("\t", Qt::SkipEmptyParts);
+	plot->setOptions(fList);
+
+	fList=lst[11].split("\t", Qt::SkipEmptyParts);
+	plot->setNumbersFont(fList);
+
+	fList=lst[12].split("\t", Qt::SkipEmptyParts);
+	plot->setXAxisLabelFont(fList);
+
+	fList=lst[13].split("\t", Qt::SkipEmptyParts);
+	plot->setYAxisLabelFont(fList);
+
+	fList=lst[14].split("\t", Qt::SkipEmptyParts);
+	plot->setZAxisLabelFont(fList);
+
+	fList=lst[15].split("\t", Qt::SkipEmptyParts);
+	plot->setRotation(fList[1].toDouble(),fList[2].toDouble(),fList[3].toDouble());
+
+	fList=lst[16].split("\t", Qt::SkipEmptyParts);
+	plot->setZoom(fList[1].toDouble());
+
+	fList=lst[17].split("\t", Qt::SkipEmptyParts);
+	plot->setScale(fList[1].toDouble(),fList[2].toDouble(),fList[3].toDouble());
+
+	fList=lst[18].split("\t", Qt::SkipEmptyParts);
+	plot->setShift(fList[1].toDouble(),fList[2].toDouble(),fList[3].toDouble());
+
+	fList=lst[19].split("\t", Qt::SkipEmptyParts);
+	plot->setMeshLineWidth(fList[1].toInt());
+#else
 	fList=lst[3].split("\t", QString::SkipEmptyParts);
 	plot->setStyle(fList);
 
@@ -10176,6 +10340,7 @@ Graph3D* ApplicationWindow::openSurfacePlot(ApplicationWindow* app, const QStrin
 
 	fList=lst[19].split("\t", QString::SkipEmptyParts);
 	plot->setMeshLineWidth(fList[1].toInt());
+#endif
 
 	if (d_file_version > 71)
 	{
@@ -10187,7 +10352,11 @@ Graph3D* ApplicationWindow::openSurfacePlot(ApplicationWindow* app, const QStrin
 
 	if (d_file_version >= 88)
 	{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+		fList=lst[21].split("\t", Qt::SkipEmptyParts);
+#else
 		fList=lst[21].split("\t", QString::SkipEmptyParts);
+#endif
 		plot->setOrtho(fList[1].toInt());
 	}
 
@@ -10205,7 +10374,7 @@ void ApplicationWindow::copyActiveLayer()
 
 	Graph *g = ((MultiLayer *)d_workspace.activeSubWindow())->activeGraph();
 	delete lastCopiedLayer;
-	lastCopiedLayer = new Graph (0, 0, 0);
+	lastCopiedLayer = new Graph (0, 0, Qt::Widget);
 	lastCopiedLayer->setAttribute(Qt::WA_DeleteOnClose);
 	lastCopiedLayer->setGeometry(0, 0, g->width(), g->height());
 	lastCopiedLayer->copy(this,g);
@@ -11513,7 +11682,7 @@ Graph3D * ApplicationWindow::openMatrixPlot3D(const QString& caption, const QStr
 	if (!m)
 		return 0;
 
-	Graph3D *plot = new Graph3D("", &d_workspace, 0, 0);
+	Graph3D *plot = new Graph3D("", &d_workspace, 0, Qt::Widget);
 	plot->setAttribute(Qt::WA_DeleteOnClose);
 	plot->setWindowTitle(caption);
 	plot->setName(caption);
@@ -11945,7 +12114,7 @@ void ApplicationWindow::parseCommandLineArguments(const QStringList& args)
         QStringList scriptArgs;
         for (auto i=scriptArg+1; i<num_args; ++i)
           scriptArgs<<args[i];
-        
+
 	if(file_name.startsWith("-")) return; // no file name given
 
 	if (!file_name.isEmpty()){
@@ -12234,12 +12403,18 @@ void ApplicationWindow::appendProject(const QString& fn)
 		t.setCodec(QTextCodec::codecForName("UTF-8"));
 
 		QString s = t.readLine();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+		lst = s.split(QRegExp("\\s"), Qt::SkipEmptyParts);
+		QString version = lst[1];
+		lst = version.split(".", Qt::SkipEmptyParts);
+#else
 		lst = s.split(QRegExp("\\s"), QString::SkipEmptyParts);
 		QString version = lst[1];
 		lst = version.split(".", QString::SkipEmptyParts);
+#endif
 		if(fn.endsWith(".qti",Qt::CaseInsensitive) || fn.endsWith(".qti.gz",Qt::CaseInsensitive) )
 			d_file_version = 100*(lst[0]).toInt()+10*(lst[1]).toInt()+(lst[2]).toInt();
-		else 
+		else
 			d_file_version = ((lst[0]).toInt() << 16) + ((lst[1]).toInt() << 8) + (lst[2]).toInt();
 
 		t.readLine();
@@ -12344,6 +12519,16 @@ void ApplicationWindow::appendProject(const QString& fn)
 
 				if (d_file_version > 83)
 				{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+					QStringList lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+					plot->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
+					lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+					plot->setSpacing(lst[1].toInt(),lst[2].toInt());
+					lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+					plot->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
+					lst=t.readLine().split("\t", Qt::SkipEmptyParts);
+					plot->setAlignement(lst[1].toInt(),lst[2].toInt());
+#else
 					QStringList lst=t.readLine().split("\t", QString::SkipEmptyParts);
 					plot->setMargins(lst[1].toInt(),lst[2].toInt(),lst[3].toInt(),lst[4].toInt());
 					lst=t.readLine().split("\t", QString::SkipEmptyParts);
@@ -12352,6 +12537,7 @@ void ApplicationWindow::appendProject(const QString& fn)
 					plot->setLayerCanvasSize(lst[1].toInt(),lst[2].toInt());
 					lst=t.readLine().split("\t", QString::SkipEmptyParts);
 					plot->setAlignement(lst[1].toInt(),lst[2].toInt());
+#endif
 				}
 
 				while ( s!="</multiLayer>" )
@@ -12837,8 +13023,8 @@ void ApplicationWindow::projectProperties()
 	if (projectname != "untitled")
 	{
 		QFileInfo fi(projectname);
-		s += tr("Created") + ": " + fi.created().toString(Qt::LocalDate) + "\n\n";
-		s += tr("Modified") + ": " + fi.lastModified().toString(Qt::LocalDate) + "\n\n";
+		s += tr("Created") + ": " + QLocale().toString(fi.birthTime()) + "\n\n";
+		s += tr("Modified") + ": " + QLocale().toString(fi.lastModified()) + "\n\n";
 	}
 	else
 		s += tr("Created") + ": " + current_folder->birthDate() + "\n\n";
@@ -13779,7 +13965,11 @@ QMenu* ApplicationWindow::showWindowMenuImpl(MyWidget * widget)
 			cm->addSeparator();
 			if (formula.contains("_"))
 			{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+				QStringList tl = formula.split("_", Qt::SkipEmptyParts);
+#else
 				QStringList tl = formula.split("_", QString::SkipEmptyParts);
+#endif
 
 				depend_menu->addAction(tl[0], this, SLOT(setActiveWindowFromAction()));
 
@@ -13869,11 +14059,11 @@ void ApplicationWindow::selectPlotType(int type)
 			case Graph::Histogram:
 			case Graph::Pie:
 			case Graph::Box:
-				multilayerPlot(table, table->selectedColumns(), (Graph::CurveType)type, 
+				multilayerPlot(table, table->selectedColumns(), (Graph::CurveType)type,
 						table->firstSelectedRow(), table->lastSelectedRow());
 				break;
 			default:
-				multilayerPlot(table, table->drawableColumnSelection(), (Graph::CurveType)type, 
+				multilayerPlot(table, table->drawableColumnSelection(), (Graph::CurveType)type,
 						table->firstSelectedRow(), table->lastSelectedRow());
 		break;
 		}

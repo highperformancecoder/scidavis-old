@@ -7,7 +7,7 @@
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net,
                            knut.franke*gmx.de
     Description          : Import ASCII file(s) dialog
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -64,7 +64,8 @@ public:
 	 * \param extended flag: show/hide the advanced options on start-up
 	 * \param flags window flags
 	 */
-	ImportASCIIDialog(bool importModeEnabled, QWidget * parent = 0, bool extended = true, Qt::WindowFlags flags = 0 );
+	ImportASCIIDialog(bool importModeEnabled, QWidget * parent = 0, bool extended = true,
+                   Qt::WindowFlags flags = Qt::Widget);
 
 	//! Return the selected import mode
 	/**
@@ -86,12 +87,12 @@ public:
 
 	//! Set the selected columns separator.
 	void setColumnSeparator(const QString &sep);
-	
+
 	//! Returns the locale chosen for conversion to numeric format
 	QLocale decimalSeparators();
 	//! Returns whether imported data should be interpreted as numbers
 	bool convertToNumeric() const { return d_convert_to_numeric->isChecked(); };
-		
+
 private slots:
 	//! Display help for advanced options.
 	void displayHelp();

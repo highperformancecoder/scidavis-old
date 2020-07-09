@@ -120,7 +120,7 @@ class Graph: public QWidget
 	Q_OBJECT
 
 	public:
-		Graph (QWidget* parent=0, QString name=QString(), Qt::WindowFlags f=0);
+		Graph (QWidget* parent=0, QString name=QString(), Qt::WindowFlags f = Qt::Widget);
 		~Graph();
 
 		enum Axis{Left, Right, Bottom, Top};
@@ -241,7 +241,7 @@ public slots:
 		void exportToFile(const QString& fileName);
 		void exportSVG(const QString& fname);
 		void exportVector(const QString& fileName, int res = 0, bool color = true,
-                        bool keepAspect = true, QPrinter::PageSize pageSize = QPrinter::Custom, 
+                        bool keepAspect = true, QPrinter::PageSize pageSize = QPrinter::Custom,
 						QPrinter::Orientation orientation = QPrinter::Portrait);
 		void exportImage(const QString& fileName, int quality = -1);
 		//@}
@@ -428,7 +428,7 @@ public slots:
 		void deselectMarker();
 		MarkerType copiedMarkerType(){return selectedMarkerType;};
 		//@}
-    	
+
 		//! \name Axes
 		//@{
 		QList<int> axesType();

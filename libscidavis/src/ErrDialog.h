@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Add error bars dialog
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -40,7 +40,7 @@ class QPushButton;
 class QGroupBox;
 class QButtonGroup;
 class QWidget;
-	
+
 //! Add error bars dialog
 class ErrDialog : public QDialog
 {
@@ -52,7 +52,7 @@ public:
 	 * \param parent parent widget
 	 * \param fl window flags
 	 */
-    ErrDialog( QWidget* parent = 0, Qt::WindowFlags fl = 0 );
+    ErrDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
 	//! Destructor
     ~ErrDialog();
 

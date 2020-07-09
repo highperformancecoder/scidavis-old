@@ -67,7 +67,7 @@ ImportASCIIDialog::ImportASCIIDialog(bool import_mode_enabled, QWidget * parent,
   d_ignored_lines->setValue(app->ignoredLines);
   d_rename_columns->setChecked(app->renameColumns);
   setColumnSeparator(app->columnSeparator);
-		
+
   if (app->d_ASCII_import_locale.name() == QLocale::c().name())
     boxDecimalSeparator->setCurrentIndex(1);
   else if (app->d_ASCII_import_locale.name() == QLocale(QLocale::German).name())
@@ -149,16 +149,16 @@ void ImportASCIIDialog::initAdvancedOptions()
 
 	d_convert_to_numeric = new QCheckBox(tr("&Numeric data"));
 	advanced_layout->addWidget(d_convert_to_numeric, 3, 0, 1, 2);
-	
+
 	advanced_layout->addWidget(new QLabel(tr("Decimal Separators")), 3, 1);
 	boxDecimalSeparator = new QComboBox();
-	boxDecimalSeparator->addItem(tr("default") + " (" + QLocale::system().toString(1000.0, 'f', 1) +")");
+	boxDecimalSeparator->addItem(tr("default") + " (" + QLocale().toString(1000.0, 'f', 1) +")");
 	boxDecimalSeparator->addItem(QLocale::c().toString(1000.0, 'f', 1));
 	boxDecimalSeparator->addItem(QLocale(QLocale::German).toString(1000.0, 'f', 1));
 	boxDecimalSeparator->addItem(QLocale(QLocale::French).toString(1000.0, 'f', 1));
 	connect(d_convert_to_numeric, SIGNAL(toggled(bool)), boxDecimalSeparator, SLOT(setEnabled(bool)));
 	advanced_layout->addWidget(boxDecimalSeparator, 3, 2);
-	
+
 	QHBoxLayout *meta_options_layout = new QHBoxLayout();
 	d_remember_options = new QCheckBox(tr("Re&member the above options"));
 	meta_options_layout->addWidget(d_remember_options);

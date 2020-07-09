@@ -61,11 +61,11 @@ scripted(ScriptingLangManager::newEnv("muParser", parent))
 	d_gen_function = true;
 	d_points = 100;
 	d_max_iterations = 1000;
-	d_curve = 0;
-	d_formula = QString::null;
-	d_explanation = QString::null;
-	d_y_error_source = UnknownErrors;
-	d_y_error_dataset = QString::null;
+    d_curve = 0;
+    d_formula = QString();
+    d_explanation = QString();
+    d_y_error_source = UnknownErrors;
+    d_y_error_dataset = QString();
 	d_prec = parent->fit_output_precision;
 	d_init_err = false;
 	chi_2 = -1;
@@ -209,7 +209,7 @@ void Fit::setDataCurve(int curve, double start, double end)
     Filter::setDataCurve(curve, start, end);
 
     d_y_errors.resize(d_n);
-    if (!setYErrorSource(AssociatedErrors, QString::null, true))
+    if (!setYErrorSource(AssociatedErrors, QString(), true))
       setYErrorSource(UnknownErrors);
 }
 
@@ -229,7 +229,7 @@ void Fit::generateFunction(bool yes, int points)
 QString Fit::logFitInfo(const vector<double>& par, int iterations, int status, const QString& plotName)
 {
 	QDateTime dt = QDateTime::currentDateTime ();
-	QString info = "[" + dt.toString(Qt::LocalDate)+ "\t" + tr("Plot")+ ": ''" + plotName+ "'']\n";
+    QString info = "[" + QLocale().toString(dt)+ "\t" + tr("Plot")+ ": ''" + plotName+ "'']\n";
 	info += d_explanation + " " + tr("fit of dataset") + ": " + d_curve->title().text();
 	if (!d_formula.isEmpty())
 		info +=", " + tr("using function") + ": " + d_formula + "\n";
@@ -338,8 +338,8 @@ bool Fit::setYErrorSource(ErrorSource err, const QString& colName, bool fail_sil
 	switch (d_y_error_source)
 	{
 		case UnknownErrors:
-			{
-				d_y_error_dataset = QString::null;
+            {
+                d_y_error_dataset = QString();
 				// using 1.0 here is important for correct error estimates,
 				// cmp. Fit::fitGslMultifit and Fit::fitGslMultimin
 				for (unsigned i=0; i<d_n; i++)

@@ -47,7 +47,7 @@ Legend::Legend(Plot *plot):
 	d_frame (0),
 	d_angle(0)
 {
-	d_text = new QwtText(QString::null, QwtText::RichText);
+	d_text = new QwtText(QString(), QwtText::RichText);
 	d_text->setFont(QFont("Arial",12, QFont::Normal, false));
 	d_text->setRenderFlags(Qt::AlignTop|Qt::AlignLeft);
 	d_text->setBackgroundBrush(QBrush(Qt::NoBrush));
@@ -264,7 +264,11 @@ void Legend::drawSymbols(QPainter *p, const QRect& rect,
 	int l = symbolLineLength + 2*left_margin;
 
 	QString text = d_text->text().trimmed();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	QStringList titles = text.split("\n", Qt::KeepEmptyParts);
+#else
 	QStringList titles = text.split("\n", QString::KeepEmptyParts);
+#endif
 
 	for (int i=0;i<(int)titles.count();i++)
 	{
@@ -359,7 +363,11 @@ void Legend::drawLegends(QPainter *p, const QRect& rect,
 	int w = rect.x() + left_margin;
 
 	QString text = d_text->text().trimmed();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	QStringList titles=text.split("\n", Qt::KeepEmptyParts);
+#else
 	QStringList titles=text.split("\n", QString::KeepEmptyParts);
+#endif
 
 	for (int i=0; i<(int)titles.count(); i++)
 	{
@@ -396,7 +404,11 @@ QwtArray<long> Legend::itemsHeight(int y, int symbolLineLength, int &width, int 
 	height = 0;
 
 	QString text = d_text->text().trimmed();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	QStringList titles = text.split("\n", Qt::KeepEmptyParts);
+#else
 	QStringList titles = text.split("\n", QString::KeepEmptyParts);
+#endif
 	int n=(int)titles.count();
 	QwtArray<long> heights(n);
 
@@ -443,7 +455,11 @@ int Legend::symbolsMaxLineLength() const
 
 	int maxL=0;
 	QString text = d_text->text().trimmed();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	QStringList titles = text.split("\n", Qt::KeepEmptyParts);
+#else
 	QStringList titles = text.split("\n", QString::KeepEmptyParts);
+#endif
 	for (int i=0;i<(int)titles.count();i++){
 		if (titles[i].contains("\\c{") && (int)cvs.size()>0){
 		    QString aux;

@@ -683,7 +683,7 @@ void ConfigDialog::initFittingPage()
     fittingCurveLayout->addWidget(linearFit2PointsBox, 0, 3);
 
 	showPointsBox(!app->generateUniformFitPoints);
-	
+
 	samePointsBtn = new QRadioButton();
 	samePointsBtn->setChecked(!app->generateUniformFitPoints);
 	fittingCurveLayout->addWidget(samePointsBtn, 1, 0);
@@ -828,8 +828,8 @@ void ConfigDialog::languageChange()
   QFontMetrics fm(itemsList->font());
   int width = 32,i;
   for(i=0 ; i<itemsList->count() ; i++)
-    if( fm.width(itemsList->item(i)->text()) > width)
-      width = fm.width(itemsList->item(i)->text());
+    if( fm.horizontalAdvance(itemsList->item(i)->text()) > width)
+      width = fm.horizontalAdvance(itemsList->item(i)->text());
   itemsList->setMaximumWidth( itemsList->iconSize().width() + width + 50 );
   // resize the list to the maximum width
   itemsList->resize(itemsList->maximumWidth(),itemsList->height());
@@ -1193,8 +1193,8 @@ void ConfigDialog::apply()
 	QFontMetrics fm(itemsList->font());
 	int width = 32,i;
 	for(i=0 ; i<itemsList->count() ; i++)
-		if( fm.width(itemsList->item(i)->text()) > width)
-			width = fm.width(itemsList->item(i)->text());
+        if( fm.horizontalAdvance(itemsList->item(i)->text()) > width)
+            width = fm.horizontalAdvance(itemsList->item(i)->text());
 	itemsList->setMaximumWidth( itemsList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
 	itemsList->resize(itemsList->maximumWidth(),itemsList->height());

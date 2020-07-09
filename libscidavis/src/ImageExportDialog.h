@@ -74,7 +74,8 @@ public:
 	 * \param extended flag: show/hide the advanced options on start-up
 	 * \param flags window flags
 	 */
-	ImageExportDialog(QWidget * parent = 0, bool vector_options = true, bool extended = true, Qt::WindowFlags flags = 0 );
+	ImageExportDialog(QWidget * parent = 0, bool vector_options = true,
+                   bool extended = true, Qt::WindowFlags flags = Qt::Widget);
 	//! For vector formats: returns the output resolution the user selected, defaulting to the screen resolution.
 	int resolution() const { return d_resolution->value(); }
 	//! For vector formats: returns whether colors should be enabled for ouput (default: true).
@@ -90,7 +91,7 @@ public:
 	int quality() const { return d_quality->value(); }
 
 	void selectFilter(const QString & filter);
-	
+
 protected slots:
 	void closeEvent(QCloseEvent*);
 	//! Update which options are visible and enabled based on the output format.
