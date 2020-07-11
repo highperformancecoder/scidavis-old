@@ -338,18 +338,18 @@ target_link_libraries( libscidavis
   Qt5::Svg
   )
 
-if( NOT BUILD_QWT AND QWT_LIB )
-  target_include_directories( libscidavis PUBLIC ${QWT_INCLUDE} )
-  target_link_libraries( libscidavis ${QWT_LIB} )
+if( NOT BUILD_QWT AND QWT_LIBRARY )
+  target_include_directories( libscidavis PUBLIC ${QWT_INCLUDE_DIR} )
+  target_link_libraries( libscidavis ${QWT_LIBRARY} )
 else()
   target_include_directories( libscidavis PUBLIC
     "${CMAKE_SOURCE_DIR}/3rdparty/qwt5-qt5/src" )
   target_link_libraries( libscidavis qwt5-qt5 )
 endif()
 
-if( NOT BUILD_QWTPLOT3D AND QWTPLOT3D_LIB )
-  target_include_directories( libscidavis PUBLIC ${QWTPLOT3D_INCLUDE} )
-  target_link_libraries( libscidavis ${QWTPLOT3D_LIB} )
+if( NOT BUILD_QWTPLOT3D AND QWTPLOT3D_LIBRARY )
+  target_include_directories( libscidavis PUBLIC ${QWTPLOT3D_INCLUDE_DIR} )
+  target_link_libraries( libscidavis ${QWTPLOT3D_LIBRARY} )
 else()
   target_link_libraries( libscidavis qwtplot3d )
 endif()
@@ -395,8 +395,8 @@ endif()
 
 if( ORIGIN_IMPORT )
   target_compile_definitions( libscidavis PUBLIC ORIGIN_IMPORT )
-  if( ORIGIN_LIB_FOUND )
-    target_link_libraries( libscidavis PkgConfig::ORIGIN_LIB )
+  if( LIBORIGIN_FOUND )
+    target_link_libraries( libscidavis PkgConfig::LIBORIGIN )
   else()
     target_link_libraries( libscidavis origin )
     target_include_directories( libscidavis PUBLIC
