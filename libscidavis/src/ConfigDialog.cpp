@@ -828,8 +828,15 @@ void ConfigDialog::languageChange()
   QFontMetrics fm(itemsList->font());
   int width = 32,i;
   for(i=0 ; i<itemsList->count() ; i++)
-    if( fm.horizontalAdvance(itemsList->item(i)->text()) > width)
-      width = fm.horizontalAdvance(itemsList->item(i)->text());
+    {
+#if QT_VERSION<QT_VERSION_CHECK(5,11,0)
+      auto newWidth=fm.width(itemsList->item(i)->text());
+#else
+      auto newWidth=fm.horizontalAdvance(itemsList->item(i)->text());
+#endif
+      if(newWidth > width)
+        width = newWidth;
+    }
   itemsList->setMaximumWidth( itemsList->iconSize().width() + width + 50 );
   // resize the list to the maximum width
   itemsList->resize(itemsList->maximumWidth(),itemsList->height());
@@ -1193,8 +1200,15 @@ void ConfigDialog::apply()
 	QFontMetrics fm(itemsList->font());
 	int width = 32,i;
 	for(i=0 ; i<itemsList->count() ; i++)
-        if( fm.horizontalAdvance(itemsList->item(i)->text()) > width)
-            width = fm.horizontalAdvance(itemsList->item(i)->text());
+          {
+#if QT_VERSION<QT_VERSION_CHECK(5,11,0)
+            auto newWidth=fm.width(itemsList->item(i)->text());
+#else
+            auto newWidth=fm.horizontalAdvance(itemsList->item(i)->text());
+#endif
+            if(newWidth > width)
+              width = newWidth;
+          }
 	itemsList->setMaximumWidth( itemsList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
 	itemsList->resize(itemsList->maximumWidth(),itemsList->height());

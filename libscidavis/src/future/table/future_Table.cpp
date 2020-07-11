@@ -52,7 +52,9 @@
 #include <QToolBar>
 #include <QtDebug>
 #include <QMimeData>
+#if QT_VERSION>=QT_VERSION_CHECK(5,10,0)
 #include <QRandomGenerator>
+#endif
 
 #include "table/TableModel.h"
 #include "table/TableView.h"
@@ -627,64 +629,82 @@ void Table::fillSelectedCellsWithRowNumbers()
 
 void Table::fillSelectedCellsWithRandomNumbers()
 {
-	if (!d_view) return;
-	if(d_view->selectedColumnCount() < 1) return;
-	int first = d_view->firstSelectedRow();
-	int last = d_view->lastSelectedRow();
-	if( first < 0 ) return;
+  if (!d_view) return;
+  if(d_view->selectedColumnCount() < 1) return;
+  int first = d_view->firstSelectedRow();
+  int last = d_view->lastSelectedRow();
+  if( first < 0 ) return;
 
-	WAIT_CURSOR;
-	beginMacro(tr("%1: fill cells with random values").arg(name()));
-    QRandomGenerator(QTime::currentTime().msec());
-	foreach(Column *col_ptr, d_view->selectedColumns()) {
-		int col = columnIndex(col_ptr);
-		switch (col_ptr->columnMode()) {
-			case SciDAVis::Numeric:
-				{
-					QVector<qreal> results(last-first+1);
-					for (int row=first; row<=last; row++)
-						if (d_view->isCellSelected(row, col))
-                            results[row-first] =
-                                QRandomGenerator::global()->generateDouble();
-						else
-							results[row-first] = col_ptr->valueAt(row);
-					col_ptr->replaceValues(first, results);
-					break;
-				}
-			case SciDAVis::Text:
-				{
-					QStringList results;
-					for (int row=first; row<=last; row++)
-						if (d_view->isCellSelected(row, col))
-                            results << QString::number(
-                                QRandomGenerator::global()->generateDouble());
-						else
-							results << col_ptr->textAt(row);
-					col_ptr->replaceTexts(first, results);
-					break;
-				}
-			case SciDAVis::DateTime:
-			case SciDAVis::Month:
-			case SciDAVis::Day:
-				{
-					QList<QDateTime> results;
-					QDate earliestDate(1,1,1);
-					QDate latestDate(2999,12,31);
-					QTime midnight(0,0,0,0);
-					for (int row=first; row<=last; row++)
-						if (d_view->isCellSelected(row, col))
-							results << QDateTime(
-                                    earliestDate.addDays(QRandomGenerator::global()->generateDouble()*((double)earliestDate.daysTo(latestDate))),
-                                    midnight.addMSecs(QRandomGenerator::global()->generate64()*1000*60*60*24/RAND_MAX));
-						else
-							results << col_ptr->dateTimeAt(row);
-					col_ptr->replaceDateTimes(first, results);
-					break;
-				}
-		}
-	}
-	endMacro();
-	RESET_CURSOR;
+  WAIT_CURSOR;
+  beginMacro(tr("%1: fill cells with random values").arg(name()));
+#if QT_VERSION>=QT_VERSION_CHECK(5,10,0)
+  QRandomGenerator(QTime::currentTime().msec());
+#else
+  qsrand(QTime::currentTime().msec());
+#endif
+  foreach(Column *col_ptr, d_view->selectedColumns()) {
+    int col = columnIndex(col_ptr);
+    switch (col_ptr->columnMode()) {
+    case SciDAVis::Numeric:
+      {
+        QVector<qreal> results(last-first+1);
+        for (int row=first; row<=last; row++)
+          if (d_view->isCellSelected(row, col))
+            results[row-first] =
+#if QT_VERSION>=QT_VERSION_CHECK(5,10,0)
+              QRandomGenerator::global()->generateDouble();
+#else
+              double(qrand())/double(RAND_MAX);
+#endif
+            else
+              results[row-first] = col_ptr->valueAt(row);
+        col_ptr->replaceValues(first, results);
+        break;
+      }
+    case SciDAVis::Text:
+      {
+        QStringList results;
+        for (int row=first; row<=last; row++)
+          if (d_view->isCellSelected(row, col))
+            results << QString::number(
+#if QT_VERSION>=QT_VERSION_CHECK(5,10,0)
+                                       QRandomGenerator::global()->generateDouble());
+#else
+        double(qrand())/double(RAND_MAX));
+#endif
+           else
+            results << col_ptr->textAt(row);
+        col_ptr->replaceTexts(first, results);
+        break;
+      }
+    case SciDAVis::DateTime:
+    case SciDAVis::Month:
+    case SciDAVis::Day:
+      {
+        QList<QDateTime> results;
+        QDate earliestDate(1,1,1);
+        QDate latestDate(2999,12,31);
+        QTime midnight(0,0,0,0);
+        for (int row=first; row<=last; row++)
+          if (d_view->isCellSelected(row, col))
+#if QT_VERSION>=QT_VERSION_CHECK(5,10,0)
+            results << QDateTime(
+                                 earliestDate.addDays(QRandomGenerator::global()->generateDouble()*((double)earliestDate.daysTo(latestDate))),
+                                 midnight.addMSecs(QRandomGenerator::global()->generate64()*1000*60*60*24/RAND_MAX));
+#else
+             results << QDateTime(
+                                  earliestDate.addDays(((double)qrand())*((double)earliestDate.daysTo(latestDate))/((double)RAND_MAX)),
+                                  midnight.addMSecs(((qint64)qrand())*1000*60*60*24/RAND_MAX));
+#endif
+          else
+            results << col_ptr->dateTimeAt(row);
+        col_ptr->replaceDateTimes(first, results);
+        break;
+      }
+    }
+  }
+  endMacro();
+  RESET_CURSOR;
 }
 
 void Table::sortTable()

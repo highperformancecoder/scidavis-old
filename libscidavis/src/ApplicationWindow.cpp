@@ -13022,9 +13022,13 @@ void ApplicationWindow::projectProperties()
 
 	if (projectname != "untitled")
 	{
-		QFileInfo fi(projectname);
-		s += tr("Created") + ": " + QLocale().toString(fi.birthTime()) + "\n\n";
-		s += tr("Modified") + ": " + QLocale().toString(fi.lastModified()) + "\n\n";
+          QFileInfo fi(projectname);
+#if QT_VERSION<QT_VERSION_CHECK(5,10,0)
+          s += tr("Created") + ": " + QLocale().toString(fi.created()) + "\n\n";
+#else
+          s += tr("Created") + ": " + QLocale().toString(fi.birthTime()) + "\n\n";
+#endif
+          s += tr("Modified") + ": " + QLocale().toString(fi.lastModified()) + "\n\n";
 	}
 	else
 		s += tr("Created") + ": " + current_folder->birthDate() + "\n\n";

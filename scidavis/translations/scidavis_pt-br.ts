@@ -8112,7 +8112,7 @@ The following special codes can be used:
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Marcando esta opção todos os espaços serão 
+        <translation>Marcando esta opção todos os espaços serão 
 removidos do início e final das 
 linhas nos arquivos ASCII.</translation>
     </message>
@@ -8129,7 +8129,7 @@ ASCII não tiverem o mesmo número de linhas.</translation>
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Para evitar este problema é necessário 
+        <translation>Para evitar este problema é necessário 
 definir exatamente o separador de colunas 
 usando os caracteres TAB ou ESPAÇO.</translation>
     </message>
@@ -8144,7 +8144,7 @@ lines and each sequence of internal
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Marcando esta opção, todos os espaços em branco 
+        <translation>Marcando esta opção, todos os espaços em branco 
 serão eliminados do início e do final das linhas 
 e cada sequência de espaços internos (incluindo o caracter TAB) 
 será substituída por um único espaço em branco.</translation>
@@ -8154,7 +8154,7 @@ será substituída por um único espaço em branco.</translation>
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Atenção: a marcação desta opção conduz à superposição 
+        <translation>Atenção: a marcação desta opção conduz à superposição 
 de colunas se as colunas do arquivo ASCII não 
 tiverem o mesmo número de linhas.</translation>
     </message>
@@ -8236,7 +8236,7 @@ removed from the beginning and the end of
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation>Ao selecionar esta opção todos os espaços serão 
+        <translation type="vanished">Ao selecionar esta opção todos os espaços serão 
 removidos do início e final das 
 linhas nos arquivos ASCII.</translation>
     </message>
@@ -8246,7 +8246,7 @@ define the column separator using TAB and
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation>Para evitar este problema é necessário 
+        <translation type="vanished">Para evitar este problema é necessário 
 definir exatamente o separador de colunas 
 usando os caracteres TAB ou ESPAÇO.</translation>
     </message>
@@ -8258,7 +8258,7 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation>Ao selecionar esta opção, todos os espaços em branco 
+        <translation type="vanished">Ao selecionar esta opção, todos os espaços em branco 
 serão eliminados do início e do final das linhas 
 e cada sequência de espaços internos (incluindo o caracter TAB) 
 será substituída por um único espaço em branco.</translation>
@@ -8269,7 +8269,7 @@ overlaping if the columns in the ASCII file don&apos;t
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation>Atenção: selecionar esta opção leva à sobreposição 
+        <translation type="vanished">Atenção: selecionar esta opção leva à sobreposição 
 de colunas se as colunas no arquivo ASCII 
 não tem o mesmo número de linhas.</translation>
     </message>
@@ -9956,7 +9956,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     <message>
         <source>if(e1, e2, e3):
  if e1 then e2 else e3.</source>
-        <translation>if(e1, e2, e3):￼
+        <translation type="vanished">if(e1, e2, e3):￼
  Se e1 então e2, senão e3.</translation>
     </message>
     <message>
@@ -10076,6 +10076,11 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
  Computa o ramo secundário da função W de Lambert, W_{-1}(x).
  W é definido como uma solução da equação W(x)*exp(W(x))=x.
  Para x&lt;0, existem dois ramos reais avaliados; esta função calcula um deles onde W&lt;-1 para x&lt;0 (veja também w0(x)).</translation>
+    </message>
+    <message>
+        <source>(e1)?(e2):(e3):
+ if e1 then e2 else e3.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

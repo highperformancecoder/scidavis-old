@@ -187,8 +187,15 @@ void AxesDialog::initScalesPage()
 	QFontMetrics fm(axesList->font());
 	int width = 32,i;
 	for(i=0 ; i<axesList->count() ; i++)
-		if( fm.horizontalAdvance(axesList->item(i)->text()) > width)
-			width = fm.horizontalAdvance(axesList->item(i)->text());
+          {
+#if QT_VERSION<QT_VERSION_CHECK(5,11,0)
+            auto newWidth=fm.width(axesList->item(i)->text());
+#else
+            auto newWidth=fm.horizontalAdvance(axesList->item(i)->text());
+#endif
+            if(newWidth > width)
+              width = newWidth;
+          }
 
 	axesList->setMaximumWidth( axesList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
@@ -308,8 +315,15 @@ void AxesDialog::initGridPage()
 	QFontMetrics fm(axesGridList->font());
 	int width = 32,i;
 	for(i=0 ; i<axesGridList->count() ; i++)
-		if( fm.horizontalAdvance(axesGridList->item(i)->text()) > width)
-			width = fm.horizontalAdvance(axesGridList->item(i)->text());
+          {
+#if QT_VERSION<QT_VERSION_CHECK(5,11,0)
+            auto newWidth=fm.width(axesGridList->item(i)->text());
+#else
+            auto newWidth=fm.horizontalAdvance(axesGridList->item(i)->text());
+#endif
+            if(newWidth > width)
+              width = newWidth;
+          }
 	axesGridList->setMaximumWidth( axesGridList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
 	axesGridList->resize(axesGridList->maximumWidth(),axesGridList->height());
@@ -370,8 +384,15 @@ void AxesDialog::initAxesPage()
 	QFontMetrics fm(axesTitlesList->font());
 	int width = 32,i;
 	for(i=0 ; i<axesTitlesList->count() ; i++)
-		if( fm.horizontalAdvance(axesTitlesList->item(i)->text()) > width)
-			width = fm.horizontalAdvance(axesTitlesList->item(i)->text());
+          {
+#if QT_VERSION<QT_VERSION_CHECK(5,11,0)
+            auto newWidth=fm.width(axesTitlesList->item(i)->text());
+#else
+            auto newWidth=fm.horizontalAdvance(axesTitlesList->item(i)->text());
+#endif
+            if(newWidth > width)
+              width = newWidth;
+          }
 	axesTitlesList->setMaximumWidth( axesTitlesList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
 	axesTitlesList->resize(axesTitlesList->maximumWidth(),axesTitlesList->height());
