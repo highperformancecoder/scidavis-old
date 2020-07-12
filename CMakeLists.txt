@@ -63,6 +63,8 @@ endif()
 
 option( SCRIPTING_MUPARSER "Enable muParser Scripting" ON )
 
+option( ENABLE_python "Enable Python binding" ON )
+
 option( ORIGIN_IMPORT "Enable importing OriginLab project files" OFF )
 
 # GSL
