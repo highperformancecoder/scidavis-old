@@ -169,5 +169,5 @@ if( ENABLE_Python3 )
   target_sources( libscidavis PRIVATE ${scidavis_pyqt5_SRC} ${scidavis_pyqt5_HDR} )
 
 else( ENABLE_Python3 )
-  message( STATUS "Python not enabled")
+  message( STATUS "Python3 support not enabled")
 endif( ENABLE_Python3 )
