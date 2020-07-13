@@ -63,7 +63,11 @@ endif()
 
 option( SCRIPTING_MUPARSER "Enable muParser Scripting" ON )
 
-option( ENABLE_python "Enable Python binding" ON )
+if( WIN32 )
+  option( ENABLE_Python3 "Enable Python3 support" OFF )
+else( WIN32 )
+  option( ENABLE_Python3 "Enable Python3 support" ON )
+endif( WIN32 )
 
 option( ORIGIN_IMPORT "Enable importing OriginLab project files" OFF )
 

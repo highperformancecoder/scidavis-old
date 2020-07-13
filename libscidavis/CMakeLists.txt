@@ -315,10 +315,10 @@ if( ORIGIN_IMPORT )
   list( APPEND SRCS "src/importOPJ.cpp" )
 endif()
 
-if( ENABLE_python )
+if( ENABLE_Python3 )
   list( APPEND HEADERS "src/PythonScript.h" "src/PythonScripting.h" )
   list( APPEND SRCS "src/PythonScript.cpp" "src/PythonScripting.cpp" )
-endif( ENABLE_python )
+endif( ENABLE_Python3 )
 
 add_library( libscidavis
   ${SRCS}
@@ -361,13 +361,13 @@ else()
   target_link_libraries( libscidavis qwtplot3d )
 endif()
 
-if( ENABLE_python )
-  target_include_directories( libscidavis PUBLIC ${PYTHON_INCLUDE_PATH} )
-  target_link_libraries( libscidavis  ${PYTHON_LIBRARIES} )
+if( ENABLE_Python3 )
+  target_include_directories( libscidavis PUBLIC ${Python3_INCLUDE_DIRS} )
+  target_link_libraries( libscidavis  ${Python3_LIBRARIES} )
 
   # add sip generated files' directory to include path
   target_include_directories( libscidavis PUBLIC ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-endif( ENABLE_python)
+endif( ENABLE_Python3)
 
 target_compile_definitions( libscidavis PUBLIC
   LEGACY_CODE_0_2_x
@@ -419,13 +419,13 @@ if( ORIGIN_IMPORT )
   endif()
 endif()
 
-if( ENABLE_python )
+if( ENABLE_Python3 )
   target_compile_definitions( libscidavis PUBLIC
     PYTHON_CONFIG_PATH="/etc"
     PYTHON_UTIL_PATH="/usr/share/scidavis"
     SCRIPTING_PYTHON
     )
-endif( ENABLE_python )
+endif( ENABLE_Python3 )
 
 if( SEARCH_FOR_UPDATE OR DOWNLOAD_LINKS )
   target_link_libraries( libscidavis Qt5::Network )

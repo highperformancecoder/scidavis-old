@@ -25,23 +25,17 @@
 #  https://github.com/PLplot/PLplot/blob/master/bindings/qt_gui/pyqt5/CMakeLists.txt
 #  http://cmake.3232098.n2.nabble.com/cmake-PyQT-SIP-td5789749.html
 
-if( ENABLE_python )
-  find_package(PythonInterp 3)
-  if(NOT PYTHONINTERP_FOUND)
+if( ENABLE_Python3 )
+  find_package(Python3 COMPONENTS Interpreter Development)
+  if(NOT Python3_FOUND)
     message(STATUS "WARNING:  "
-      "Python interpreter not found. Disabling Python binding")
-    set(ENABLE_python OFF CACHE BOOL "Enable Python binding" FORCE)
-  endif(NOT PYTHONINTERP_FOUND)
-  message(STATUS "PYTHON_EXECUTABLE = ${PYTHON_EXECUTABLE}")
-
-  find_package(PythonLibs)
-  if(NOT PYTHON_LIBRARIES OR NOT PYTHON_INCLUDE_PATH)
-    message(STATUS "WARNING: "
-      "Python library and/or header not found. Disabling Python binding")
-    set(ENABLE_python OFF CACHE BOOL "Enable Python binding" FORCE)
-  endif(NOT PYTHON_LIBRARIES OR NOT PYTHON_INCLUDE_PATH)
-  message(STATUS "PYTHON_LIBRARIES = ${PYTHON_LIBRARIES}")
-  message(STATUS "PYTHON_INCLUDE_PATH = ${PYTHON_INCLUDE_PATH}")
+      "Python3 Interpreter or Development not found. Disabling Python3 support")
+    set(ENABLE_Python3 OFF CACHE BOOL "Enable Python3 support" FORCE)
+    return()
+  endif(NOT Python3_FOUND)
+  message(STATUS "Python3_EXECUTABLE = ${Python3_EXECUTABLE}")
+  message(STATUS "Python3_LIBRARIES = ${Python3_LIBRARIES}")
+  message(STATUS "Python3_INCLUDE_DIRS = ${Python3_INCLUDE_DIRS}")
 
   find_program(SIP_EXECUTABLE sip)
   message(STATUS "SIP_EXECUTABLE = ${SIP_EXECUTABLE}")
@@ -60,7 +54,7 @@ if( ENABLE_python )
 
     # Look in standard places for sip files.
     execute_process(
-      COMMAND ${PYTHON_EXECUTABLE} -c "import sys; sys.stdout.write(sys.prefix)"
+      COMMAND ${Python3_EXECUTABLE} -c "import sys; sys.stdout.write(sys.prefix)"
       OUTPUT_VARIABLE SYS_PREFIX
       RESULT_VARIABLE SYS_PREFIX_ERR
       OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -79,7 +73,7 @@ if( ENABLE_python )
 
       if(PYQT_SIP_DIR)
         execute_process(
-          COMMAND ${PYTHON_EXECUTABLE} -c "from ${pyqt_module_name}.QtCore import PYQT_CONFIGURATION;import sys;sys.stdout.write(PYQT_CONFIGURATION['sip_flags'].replace(' ',';'))"
+          COMMAND ${Python3_EXECUTABLE} -c "from ${pyqt_module_name}.QtCore import PYQT_CONFIGURATION;import sys;sys.stdout.write(PYQT_CONFIGURATION['sip_flags'].replace(' ',';'))"
           OUTPUT_VARIABLE PYQT_SIP_FLAGS
           RESULT_VARIABLE PYQT_SIP_FLAGS_ERR
           OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -174,6 +168,6 @@ if( ENABLE_python )
 
   target_sources( libscidavis PRIVATE ${scidavis_pyqt5_SRC} ${scidavis_pyqt5_HDR} )
 
-else( ENABLE_python )
+else( ENABLE_Python3 )
   message( STATUS "Python not enabled")
-endif( ENABLE_python )
+endif( ENABLE_Python3 )
