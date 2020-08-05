@@ -822,7 +822,7 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 		case Time:
 			{
 				TimeScaleDraw *sd = new TimeScaleDraw (*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)),
-						list[0].isEmpty() ? QTime(12,0,0,0) : QTime::fromString (list[0]), list[1]);
+						list[0].isEmpty() ? QTime(12,0,0,0) : QTime::fromString (list[0].right(8)), list[1]);
 				sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 				d_plot->setAxisScaleDraw (axis, sd);
@@ -831,7 +831,7 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString& formatInf
 		case Date:
 			{
 				DateScaleDraw *sd = new DateScaleDraw(*static_cast<const ScaleDraw*>(d_plot->axisScaleDraw(axis)),
-						QDate::fromString(list[0], "yyyy-MM-dd"), list[1]);
+						QDate::fromString(list[0].left(10), "yyyy-MM-dd"), list[1]);
 				sd->enableComponent(QwtAbstractScaleDraw::Labels, true);
 				sd->enableComponent (QwtAbstractScaleDraw::Backbone, drawAxesBackbone);
 				d_plot->setAxisScaleDraw (axis, sd);
