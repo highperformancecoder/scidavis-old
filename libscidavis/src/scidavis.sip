@@ -950,7 +950,7 @@ public:
 		sipRes = false;
 %End
 	bool insertFunctionCurve(const QString &formula, double from=0, double to=1, int points=100,
-			const QString &title = QString::null);
+			const QString &title = QString());
 %MethodCode
 	ApplicationWindow *app = sipscidavis_app();
 	if (app)
@@ -961,7 +961,7 @@ public:
 %End
 	bool insertPolarCurve(const QString &radial, const QString &angular,
 			double from=0, double to=2*M_PI, const QString &parameter="t", int points=100,
-			const QString &title = QString::null);
+			const QString &title = QString());
 %MethodCode
 	ApplicationWindow *app = sipscidavis_app();
 	if (app)
@@ -972,7 +972,7 @@ public:
 %End
 	bool insertParametricCurve(const QString &x, const QString &y,
 			double from=0, double to=1, const QString &parameter="t", int points=100,
-			const QString &title =QString::null);
+			const QString &title =QString());
 %MethodCode
 	ApplicationWindow *app = sipscidavis_app();
 	if (app)
@@ -1233,7 +1233,7 @@ public:
 	// which is inconsistent with newTable, newMatrix and newGraph. Not changing in
 	// a bugfix release though, since an unexpected change in behaviour may be even
 	// more confusing than the inconsistency.
-  Note* newNote(const QString& = QString::null);
+  Note* newNote(const QString& = QString());
   MultiLayer *plot(Table*, SIP_PYTUPLE, int style=1, int color=-1);
 %MethodCode
   QStringList l;
@@ -1346,7 +1346,7 @@ public:
 
   virtual void fit();
 
-  bool setYErrorSource(ErrorSource err, const QString& colName = QString::null);
+  bool setYErrorSource(ErrorSource err, const QString& colName = QString());
 
   bool setDataFromCurve(const QString&, Graph*=0);
 

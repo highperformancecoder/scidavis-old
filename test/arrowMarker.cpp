@@ -38,7 +38,7 @@ SUITE(ArrowMarker)
       arrow.setEditable(true);
       layer->replot();
       graph->exportImage("arrowEditable.png");
-      auto oldr=bbox.right(), oldl=bbox.left(), oldt=bbox.top(), oldb=bbox.bottom();
+      auto oldr=qreal(bbox.right()), oldl=qreal(bbox.left()), oldt=qreal(bbox.top()), oldb=qreal(bbox.bottom());
       auto midx=(oldl+oldr)/2, midy=(oldb+oldt)/2;
       {
         // move ending point
