@@ -61,7 +61,6 @@ public slots:
 
 private:
   static double *variableFactory(const mu::string_type::value_type *name, void *self);
-  static double statementSeparator(double a, double b);
   static double tableColumnFunction(const mu::string_type::value_type *columnPath);
   static double tableColumn_Function(double columnIndex);
   static double tableColumn__Function(const mu::string_type::value_type *tableName, double columnIndex);
