@@ -5332,6 +5332,10 @@ void Graph::updateCurveNames(const QString& oldName, const QString& newName, boo
         if (it->rtti() != QwtPlotItem::Rtti_PlotCurve)
             continue;
 
+        PlotCurve *p = (PlotCurve *)it;
+        if (p->type() == Function)
+            continue;
+
         DataCurve *c = (DataCurve *)it;
         if (c->type() != Function && c->plotAssociation().contains(oldName))
             c->updateColumnNames(oldName, newName, updateTableName);
