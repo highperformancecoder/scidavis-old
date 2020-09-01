@@ -118,6 +118,17 @@ int XmlStreamReader::readAttributeInt(const QString & name, bool * ok)
 	return str.toInt(ok);
 }
 
+double XmlStreamReader::readAttributeDouble(const QString & name, bool * ok)
+{
+	QString str = attributes().value(namespaceUri().toString(), name).toString();
+	if (str.isEmpty())
+	{
+		if (ok) *ok = false;
+		return 0;
+	}
+	return str.toDouble(ok);
+}
+
 bool XmlStreamReader::skipToEndElement()
 {
 	int depth = 1;
