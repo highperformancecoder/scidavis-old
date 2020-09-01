@@ -78,6 +78,7 @@ class XmlStreamReader : public QXmlStreamReader
 		 * \return the attriute value if found and converted, otherwise zero (in this case *ok is false)
 		 */
 		int readAttributeInt(const QString & name, bool * ok);
+		double readAttributeDouble(const QString & name, bool * ok);
 
 	private:
 		QStringList d_warnings;

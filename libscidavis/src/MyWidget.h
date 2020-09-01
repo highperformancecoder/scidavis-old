@@ -73,7 +73,7 @@ public:
 	enum Status{Hidden = -1, Normal = 0, Minimized = 1, Maximized = 2};
 
 	//! Return the window label
-	virtual QString windowLabel(){return QString(w_label);};
+	virtual QString windowLabel(){return QString(w_label).replace("\n","\\n");};
 	//! Set the window label
 	virtual void setWindowLabel(const QString& s) { w_label = s; updateCaption();};
 
