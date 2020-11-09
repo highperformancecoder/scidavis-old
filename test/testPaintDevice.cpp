@@ -1,4 +1,5 @@
 #include "testPaintDevice.h"
+#include <QPainterPath>
 using namespace std;
 
 namespace
