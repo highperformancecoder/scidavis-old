@@ -163,6 +163,7 @@ int main( int argc, char ** argv )
 #ifdef Q_OS_MAC // Mac
     QSettings::setDefaultFormat(QSettings::IniFormat);
 #endif
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
     QCoreApplication::setOrganizationName("SciDAVis");
     QCoreApplication::setApplicationName("SciDAVis");
 
