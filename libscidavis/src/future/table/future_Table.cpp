@@ -31,7 +31,6 @@
 #include "table/future_Table.h"
 #include "core/Project.h"
 #include "lib/ActionManager.h"
-
 #include <QItemSelectionModel>
 #include <QTime>
 #include <QtGlobal>
@@ -385,7 +384,12 @@ void Table::copySelection()
 				else if (col_ptr->dataType() == SciDAVis::TypeDouble)
 				{
 					Double2StringFilter * out_fltr = static_cast<Double2StringFilter *>(col_ptr->outputFilter());
-					output_str += QLocale().toString(col_ptr->valueAt(first_row + r),
+                    // create a copy of current locale
+                    QLocale noSeparators;
+                    // we do not need separators on output!
+                    noSeparators.setNumberOptions(noSeparators.numberOptions() | QLocale::OmitGroupSeparator);
+                    // convert using modified locale
+					output_str += noSeparators.toString(col_ptr->valueAt(first_row + r),
 							out_fltr->numericFormat(), 16); // copy with max. precision
 				}
 				else
