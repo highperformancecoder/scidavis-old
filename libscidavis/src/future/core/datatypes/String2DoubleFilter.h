@@ -34,6 +34,7 @@
 #include "lib/XmlStreamReader.h"
 #include <QXmlStreamWriter>
 #include <QtDebug>
+#include <QSettings>
 
 //! Locale-aware conversion filter QString -> double.
 class String2DoubleFilter : public AbstractSimpleFilter
@@ -42,33 +43,35 @@ class String2DoubleFilter : public AbstractSimpleFilter
 
 	public:
 		String2DoubleFilter() : d_use_default_locale(true) {}
+		// I'm not sure what this locale is, I searched through the whole source
+		// code and found zero references to the next two functions.
 		void setNumericLocale(QLocale locale) { d_numeric_locale = locale; d_use_default_locale = false; }
 		void setNumericLocaleToDefault() { d_use_default_locale = true; }
 
+		// Since valueAt() and isInvalid() do the same thing except the &ok part,
+		// I see reason to make a helper function and call it appropriately.
+       	// Please see convertToDouble() and getLocale() below
 		virtual double valueAt(int row) const {
 			if (!d_inputs.value(0)) return 0;
-			if (d_use_default_locale) // we need a new QLocale instance here in case the default changed since the last call
-				return QLocale().toDouble(d_inputs.value(0)->textAt(row));
-			return d_numeric_locale.toDouble(d_inputs.value(0)->textAt(row));
+			// I prefer to initialize doubles with this to catch troubles
+			// if it is inappropriate for some reason, it may be left uninitialized
+			double val=std::numeric_limits<double>::quiet_NaN();
+			convertToDouble(d_inputs.value(0)->textAt(row), val);
+			return val;
 		}
 		virtual bool isInvalid(int row) const { 
 			if (!d_inputs.value(0)) return false;
-			bool ok;
-			if (d_use_default_locale)
-				QLocale().toDouble(d_inputs.value(0)->textAt(row), &ok);
-			else
-				d_numeric_locale.toDouble(d_inputs.value(0)->textAt(row), &ok);
-			return !ok;
+			double val=std::numeric_limits<double>::quiet_NaN();
+			return !convertToDouble(d_inputs.value(0)->textAt(row), val);
 		}
 		virtual bool isInvalid(Interval<int> i) const {
 			if (!d_inputs.value(0)) return false;
-			QLocale locale;
-			if (!d_use_default_locale)
-				locale = d_numeric_locale;
+			double val=std::numeric_limits<double>::quiet_NaN();
+			QLocale locale = getLocale();
+			bool allowForeignSeparator = isAnyDecimalSeparatorAllowed();
 			for (int row = i.start(); row <= i.end(); row++) {
-				bool ok;
-				locale.toDouble(d_inputs.value(0)->textAt(row), &ok);
-				if (ok)
+				if (convertToDouble(d_inputs.value(0)->textAt(row), 
+						val, locale, allowForeignSeparator))
 					return false;
 			}
 			return true;
@@ -95,9 +98,57 @@ class String2DoubleFilter : public AbstractSimpleFilter
 		}
 
 	private:
+		QLocale getLocale() const {
+		    if (d_use_default_locale)
+		        return QLocale(); // new QLocale instance in case it was changed between calls
+				else
+		        return d_numeric_locale;
+		}
+
+	 	bool isAnyDecimalSeparatorAllowed() const
+		{
+	#ifdef Q_OS_MAC // Mac
+		QSettings settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
+	#else
+		QSettings settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
+	#endif
+		return settings.value("/General/UseForeignSeparator").toBool();
+		}
+
 		QLocale d_numeric_locale;
 		bool d_use_default_locale;
+
+		// convenience overload
+		bool convertToDouble(const QString& str, double& value) const {
+		    return convertToDouble(str, value, getLocale(), isAnyDecimalSeparatorAllowed());
+		}
+
+		bool convertToDouble(const QString& str, double& value, const QLocale& locale,
+				             const bool accept_any_decimal_separator) const {
+		    bool ok;
+		    auto tstr = QString(str);
+		    if (accept_any_decimal_separator)
+		    {
+		        QChar decimalSeparator = locale.decimalPoint();    // get the decimal separator for this locale
+		        QChar foreignSeparator = decimalSeparator;         // safeguard initialization just in case there are other decimal separators.
+		        if ('.'==decimalSeparator)
+		            foreignSeparator = ',';
+		        if (','==decimalSeparator)
+		            foreignSeparator = '.';
+
+		        tstr.replace(foreignSeparator, decimalSeparator);  // while I'm not sure about if it is good to replace every occurrence in the input string,
+		                                                           // I think that it does not break anything: if the input value has single decimal
+		                                                           // separator, the replacement is valid; if multiple separators present, but not desired,
+		                                                           // then the conversion will not succeed anyway. If multiple separators present and desired,
+		                                                           // as in QLocale::German(), then user should not enable this option anyway, because there is no
+		                                                           // sense in "universal" decimal separator and no one could tell if 1.234.567 is just
+		                                                           // ill-formed input or 1.234,567 with typo. The only other way is to use a regular expression
+		                                                           // to parse the string, but then it would not be compatible with Qt::QLocale methods.
+		    }
+		    value = locale.toDouble(tstr, &ok);
+
+		    return ok;
+		}
 };
 
 #endif // ifndef STRING2DOUBLE_FILTER_H
-
