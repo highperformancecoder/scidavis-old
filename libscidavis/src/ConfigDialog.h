@@ -146,9 +146,9 @@ private:
 	QCheckBox *boxSearchUpdates, *boxOrthogonal, *logBox, *plotLabelBox, *scaleErrorsBox;
 	QCheckBox *boxTitle, *boxFrame, *boxPlots3D, *boxPlots2D, *boxTables, *boxNotes, *boxFolders;
 	QCheckBox *boxSave, *boxBackbones, *boxAllAxes, *boxShowLegend, *boxSmoothMesh;
-	QCheckBox *boxAutoscaling, *boxShowProjection, *boxMatrices, *boxScaleFonts, *boxResize, *boxUseGroupSeparator;
+	QCheckBox *boxAutoscaling, *boxShowProjection, *boxMatrices, *boxScaleFonts, *boxResize, *boxUseGroupSeparator, *boxUseForeignSeparator;
 	QComboBox *boxMajTicks, *boxMinTicks, *boxStyle, *boxCurveStyle, *boxSeparator, *boxLanguage, *boxDecimalSeparator;
-	QLabel *lblDefaultNumericFormat;
+	QLabel *lblDefaultNumericFormat, *lblForeignSeparator;
 	QComboBox *boxDefaultNumericFormat;
 	QLabel *boxSeparatorPreview;
 	QLabel *lblTableRowHeight;

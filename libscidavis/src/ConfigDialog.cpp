@@ -644,6 +644,20 @@ void ConfigDialog::initAppPage()
 
 	numericFormatLayout->setRowStretch(4, 1);
 
+	#ifdef Q_OS_MAC
+	    QSettings settings(QSettings::IniFormat,QSettings::UserScope,
+		              "SciDAVis", "SciDAVis");
+	#else
+	    QSettings settings(QSettings::NativeFormat,QSettings::UserScope,
+		               "SciDAVis", "SciDAVis");
+	#endif
+
+	    lblForeignSeparator  = new QLabel();
+	    numericFormatLayout->addWidget(lblForeignSeparator,4,0);
+	    boxUseForeignSeparator = new QCheckBox();
+	    boxUseForeignSeparator->setChecked(settings.value("/General/UseForeignSeparator").toBool());
+    numericFormatLayout->addWidget(boxUseForeignSeparator,4,1);
+
 	appTabWidget->addTab( numericFormatPage, QString() );
 
 	connect( boxLanguage, SIGNAL( activated(int) ), this, SLOT( switchToLanguage(int) ) );
@@ -926,6 +940,7 @@ void ConfigDialog::languageChange()
   lblScriptingLanguage->setText(tr("Default scripting language"));
 
   lblDefaultNumericFormat->setText(tr("Default numeric format"));
+  lblForeignSeparator->setText(tr("Consider ',' and '.' interchangeable on input in numerical columns"));
   boxDefaultNumericFormat->clear();
   boxDefaultNumericFormat->addItem(tr("Decimal"), QVariant('f'));
   boxDefaultNumericFormat->addItem(tr("Scientific (e)"), QVariant('e'));
@@ -1223,6 +1238,7 @@ void ConfigDialog::apply()
     settings.beginGroup("[Table]");
     settings.setValue("DefaultRowHeight", boxTableRowHeight->value());
     settings.endGroup();
+    settings.setValue("/General/UseForeignSeparator", boxUseForeignSeparator->isChecked());
 }
 
 int ConfigDialog::curveStyle()

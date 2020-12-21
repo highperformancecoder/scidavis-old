@@ -72,6 +72,7 @@ Column::Private::Private(Column * owner, SciDAVis::ColumnMode mode)
 				settings.beginGroup("/General");
 				static_cast<Double2StringFilter *>(d_output_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
 				static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
+				settings.endGroup(); // possible bug since there was no closing endGroup()
 			}
 #endif
 			connect(static_cast<Double2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
@@ -978,4 +979,3 @@ QString Column::Private::comment() const
 {
 	return d_owner->comment();
 }
-
