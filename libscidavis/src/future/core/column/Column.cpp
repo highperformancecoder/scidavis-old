@@ -595,6 +595,11 @@ AbstractSimpleFilter * Column::outputFilter() const
   return d_column_private->outputFilter(); 
 }
 
+AbstractSimpleFilter * Column::inputFilter() const
+{
+  return d_column_private->inputFilter();
+}
+
 bool Column::isInvalid(int row) const 
 { 
   return d_column_private->isInvalid(row); 

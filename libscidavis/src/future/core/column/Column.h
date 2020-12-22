@@ -162,6 +162,14 @@ public:
    * the column's data type to strings (usualy to display in a view).
    */
   AbstractSimpleFilter * outputFilter() const;
+
+  //! Return the input filter (for string -> data type conversion)
+  /**
+   * This method is mainly used to get a filter that can convert
+   * the column's strings to a data-type (usually to check the input).
+   */
+  AbstractSimpleFilter * inputFilter() const;
+
   //! Return a wrapper column object used for String I/O.
   ColumnStringIO * asStringColumn() const { return d_string_io; }
 
