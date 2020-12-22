@@ -658,6 +658,13 @@ void ConfigDialog::initAppPage()
 	    boxUseForeignSeparator->setChecked(settings.value("/General/UseForeignSeparator").toBool());
     numericFormatLayout->addWidget(boxUseForeignSeparator,4,1);
 
+    lblConvertToTextColumn  = new QLabel();
+    numericFormatLayout->addWidget(lblConvertToTextColumn,5,0);
+
+    boxConvertToTextColumn = new QCheckBox();
+    boxConvertToTextColumn->setChecked(settings.value("/General/SetColumnTypeToTextOnInvalidInput", true).toBool());
+    numericFormatLayout->addWidget(boxConvertToTextColumn,5,1);
+
 	appTabWidget->addTab( numericFormatPage, QString() );
 
 	connect( boxLanguage, SIGNAL( activated(int) ), this, SLOT( switchToLanguage(int) ) );
@@ -941,6 +948,7 @@ void ConfigDialog::languageChange()
 
   lblDefaultNumericFormat->setText(tr("Default numeric format"));
   lblForeignSeparator->setText(tr("Consider ',' and '.' interchangeable on input in numerical columns"));
+  lblConvertToTextColumn->setText(tr("Convert numerical columns to text columns when pasting non-numeric values"));
   boxDefaultNumericFormat->clear();
   boxDefaultNumericFormat->addItem(tr("Decimal"), QVariant('f'));
   boxDefaultNumericFormat->addItem(tr("Scientific (e)"), QVariant('e'));
@@ -1239,6 +1247,7 @@ void ConfigDialog::apply()
     settings.setValue("DefaultRowHeight", boxTableRowHeight->value());
     settings.endGroup();
     settings.setValue("/General/UseForeignSeparator", boxUseForeignSeparator->isChecked());
+    settings.setValue("/General/SetColumnTypeToTextOnInvalidInput", boxConvertToTextColumn->isChecked());
 }
 
 int ConfigDialog::curveStyle()
