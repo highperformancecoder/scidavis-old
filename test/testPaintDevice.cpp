@@ -1,4 +1,5 @@
 #include "testPaintDevice.h"
+#include <QPainterPath>
 using namespace std;
 
 namespace
@@ -22,7 +23,7 @@ namespace
   {
     o<<"\"";
     auto data=x.bits();
-#if QT_VERSION>=0x51000
+#if QT_VERSION>=0x050A00
     auto size=x.sizeInBytes();
 #else
     auto size=x.byteCount();

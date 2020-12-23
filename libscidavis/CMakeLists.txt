@@ -315,6 +315,11 @@ if( ORIGIN_IMPORT )
   list( APPEND SRCS "src/importOPJ.cpp" )
 endif()
 
+if( ENABLE_Python3 )
+  list( APPEND HEADERS "src/PythonScript.h" "src/PythonScripting.h" )
+  list( APPEND SRCS "src/PythonScript.cpp" "src/PythonScripting.cpp" )
+endif( ENABLE_Python3 )
+
 add_library( libscidavis
   ${SRCS}
   ${HEADERS}
@@ -322,6 +327,8 @@ add_library( libscidavis
   )
 
 set_target_properties(libscidavis PROPERTIES OUTPUT_NAME scidavis)
+
+include(scidavis-python)
 
 target_link_libraries( libscidavis
   ZLIB::ZLIB
@@ -338,21 +345,29 @@ target_link_libraries( libscidavis
   Qt5::Svg
   )
 
-if( NOT BUILD_QWT AND QWT_LIB )
-  target_include_directories( libscidavis PUBLIC ${QWT_INCLUDE} )
-  target_link_libraries( libscidavis ${QWT_LIB} )
+if( NOT BUILD_QWT AND QWT_LIBRARY )
+  target_include_directories( libscidavis PUBLIC ${QWT_INCLUDE_DIR} )
+  target_link_libraries( libscidavis ${QWT_LIBRARY} )
 else()
   target_include_directories( libscidavis PUBLIC
     "${CMAKE_SOURCE_DIR}/3rdparty/qwt5-qt5/src" )
   target_link_libraries( libscidavis qwt5-qt5 )
 endif()
 
-if( NOT BUILD_QWTPLOT3D AND QWTPLOT3D_LIB )
-  target_include_directories( libscidavis PUBLIC ${QWTPLOT3D_INCLUDE} )
-  target_link_libraries( libscidavis ${QWTPLOT3D_LIB} )
+if( NOT BUILD_QWTPLOT3D AND QWTPLOT3D_LIBRARY )
+  target_include_directories( libscidavis PUBLIC ${QWTPLOT3D_INCLUDE_DIR} )
+  target_link_libraries( libscidavis ${QWTPLOT3D_LIBRARY} )
 else()
   target_link_libraries( libscidavis qwtplot3d )
 endif()
+
+if( ENABLE_Python3 )
+  target_include_directories( libscidavis PUBLIC ${Python3_INCLUDE_DIRS} )
+  target_link_libraries( libscidavis  ${Python3_LIBRARIES} )
+
+  # add sip generated files' directory to include path
+  target_include_directories( libscidavis PUBLIC ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+endif( ENABLE_Python3)
 
 target_compile_definitions( libscidavis PUBLIC
   LEGACY_CODE_0_2_x
@@ -395,14 +410,22 @@ endif()
 
 if( ORIGIN_IMPORT )
   target_compile_definitions( libscidavis PUBLIC ORIGIN_IMPORT )
-  if( ORIGIN_LIB_FOUND )
-    target_link_libraries( libscidavis PkgConfig::ORIGIN_LIB )
+  if( LIBORIGIN_FOUND )
+    target_link_libraries( libscidavis PkgConfig::LIBORIGIN )
   else()
     target_link_libraries( libscidavis origin )
     target_include_directories( libscidavis PUBLIC
       "${CMAKE_SOURCE_DIR}/3rdparty/liborigin" )
   endif()
 endif()
+
+if( ENABLE_Python3 )
+  target_compile_definitions( libscidavis PUBLIC
+    PYTHON_CONFIG_PATH="/etc"
+    PYTHON_UTIL_PATH="/usr/share/scidavis"
+    SCRIPTING_PYTHON
+    )
+endif( ENABLE_Python3 )
 
 if( SEARCH_FOR_UPDATE OR DOWNLOAD_LINKS )
   target_link_libraries( libscidavis Qt5::Network )

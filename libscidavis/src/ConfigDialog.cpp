@@ -644,6 +644,27 @@ void ConfigDialog::initAppPage()
 
 	numericFormatLayout->setRowStretch(4, 1);
 
+	#ifdef Q_OS_MAC
+	    QSettings settings(QSettings::IniFormat,QSettings::UserScope,
+		              "SciDAVis", "SciDAVis");
+	#else
+	    QSettings settings(QSettings::NativeFormat,QSettings::UserScope,
+		               "SciDAVis", "SciDAVis");
+	#endif
+
+	    lblForeignSeparator  = new QLabel();
+	    numericFormatLayout->addWidget(lblForeignSeparator,4,0);
+	    boxUseForeignSeparator = new QCheckBox();
+	    boxUseForeignSeparator->setChecked(settings.value("/General/UseForeignSeparator").toBool());
+    numericFormatLayout->addWidget(boxUseForeignSeparator,4,1);
+
+    lblConvertToTextColumn  = new QLabel();
+    numericFormatLayout->addWidget(lblConvertToTextColumn,5,0);
+
+    boxConvertToTextColumn = new QCheckBox();
+    boxConvertToTextColumn->setChecked(settings.value("/General/SetColumnTypeToTextOnInvalidInput", true).toBool());
+    numericFormatLayout->addWidget(boxConvertToTextColumn,5,1);
+
 	appTabWidget->addTab( numericFormatPage, QString() );
 
 	connect( boxLanguage, SIGNAL( activated(int) ), this, SLOT( switchToLanguage(int) ) );
@@ -828,8 +849,15 @@ void ConfigDialog::languageChange()
   QFontMetrics fm(itemsList->font());
   int width = 32,i;
   for(i=0 ; i<itemsList->count() ; i++)
-    if( fm.horizontalAdvance(itemsList->item(i)->text()) > width)
-      width = fm.horizontalAdvance(itemsList->item(i)->text());
+    {
+#if QT_VERSION<QT_VERSION_CHECK(5,11,0)
+      auto newWidth=fm.width(itemsList->item(i)->text());
+#else
+      auto newWidth=fm.horizontalAdvance(itemsList->item(i)->text());
+#endif
+      if(newWidth > width)
+        width = newWidth;
+    }
   itemsList->setMaximumWidth( itemsList->iconSize().width() + width + 50 );
   // resize the list to the maximum width
   itemsList->resize(itemsList->maximumWidth(),itemsList->height());
@@ -919,6 +947,8 @@ void ConfigDialog::languageChange()
   lblScriptingLanguage->setText(tr("Default scripting language"));
 
   lblDefaultNumericFormat->setText(tr("Default numeric format"));
+  lblForeignSeparator->setText(tr("Consider ',' and '.' interchangeable on input in numerical columns"));
+  lblConvertToTextColumn->setText(tr("Convert numerical columns to text columns when pasting non-numeric values"));
   boxDefaultNumericFormat->clear();
   boxDefaultNumericFormat->addItem(tr("Decimal"), QVariant('f'));
   boxDefaultNumericFormat->addItem(tr("Scientific (e)"), QVariant('e'));
@@ -1193,8 +1223,15 @@ void ConfigDialog::apply()
 	QFontMetrics fm(itemsList->font());
 	int width = 32,i;
 	for(i=0 ; i<itemsList->count() ; i++)
-        if( fm.horizontalAdvance(itemsList->item(i)->text()) > width)
-            width = fm.horizontalAdvance(itemsList->item(i)->text());
+          {
+#if QT_VERSION<QT_VERSION_CHECK(5,11,0)
+            auto newWidth=fm.width(itemsList->item(i)->text());
+#else
+            auto newWidth=fm.horizontalAdvance(itemsList->item(i)->text());
+#endif
+            if(newWidth > width)
+              width = newWidth;
+          }
 	itemsList->setMaximumWidth( itemsList->iconSize().width() + width + 50 );
 	// resize the list to the maximum width
 	itemsList->resize(itemsList->maximumWidth(),itemsList->height());
@@ -1209,6 +1246,8 @@ void ConfigDialog::apply()
     settings.beginGroup("[Table]");
     settings.setValue("DefaultRowHeight", boxTableRowHeight->value());
     settings.endGroup();
+    settings.setValue("/General/UseForeignSeparator", boxUseForeignSeparator->isChecked());
+    settings.setValue("/General/SetColumnTypeToTextOnInvalidInput", boxConvertToTextColumn->isChecked());
 }
 
 int ConfigDialog::curveStyle()

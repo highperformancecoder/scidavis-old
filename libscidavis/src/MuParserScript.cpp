@@ -140,20 +140,14 @@ MuParserScript::MuParserScript(ScriptingEnv *environment, const QString &code, Q
 	: Script(environment, code, context, name) {
 	m_parser.SetVarFactory(variableFactory, this);
 
-	// redefine characters for operators to include ";"
         static const auto opChars=
           // standard operator chars as defined in mu::Parser::InitCharSets()
           _T("abcdefghijklmnopqrstuvwxyz")
           "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-          "+-*^/?<>=#!$%&|~'_"
-          // our additions
-          ";";
+          "+-*^/?<>=#!$%&|~'_";
         
 	m_parser.DefineOprtChars(opChars);
-        // work around muparser bug number 6 https://code.google.com/p/muparser/issues/detail?id=6
 	m_parser.DefineInfixOprtChars(opChars);
-
-    m_parser.DefineOprt(_T(";"), statementSeparator, 0);
 
 	// aliases for _pi and _e
 	m_parser.DefineConst(_T("pi"), M_PI);
@@ -218,18 +212,6 @@ bool MuParserScript::setDouble(double value, const char *name) {
 		// variable is known and only needs to be updated
 		*entry = value;
 	return true;
-}
-
-/**
- * \brief Implements a;b syntax, where a is evaluated only for side-effects and b is returned.
- *
- * Technically, muParser handles only expressions and doesn't have a "statement" concept. However,
- * it does support assignment to variables, which is an expression with side-effects and can be
- * thought of as a statement.
- */
-double MuParserScript::statementSeparator(double a, double b) {
-	Q_UNUSED(a);
-	return b;
 }
 
 /**

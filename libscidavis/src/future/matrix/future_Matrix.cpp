@@ -1261,9 +1261,9 @@ bool Matrix::readCoordinatesElement(XmlStreamReader * reader)
 	Q_ASSERT(reader->isStartElement() && reader->name() == "coordinates");
 
 	bool ok;
-	int val;
+	double val;
 
-	val = reader->readAttributeInt("x_start", &ok);
+	val = reader->readAttributeDouble("x_start", &ok);
 	if(!ok)
 	{
 		reader->raiseError(tr("invalid x start value"));
@@ -1271,7 +1271,7 @@ bool Matrix::readCoordinatesElement(XmlStreamReader * reader)
 	}
 	setXStart(val);
 
-	val = reader->readAttributeInt("x_end", &ok);
+	val = reader->readAttributeDouble("x_end", &ok);
 	if(!ok)
 	{
 		reader->raiseError(tr("invalid x end value"));
@@ -1279,7 +1279,7 @@ bool Matrix::readCoordinatesElement(XmlStreamReader * reader)
 	}
 	setXEnd(val);
 
-	val = reader->readAttributeInt("y_start", &ok);
+	val = reader->readAttributeDouble("y_start", &ok);
 	if(!ok)
 	{
 		reader->raiseError(tr("invalid y start value"));
@@ -1287,7 +1287,7 @@ bool Matrix::readCoordinatesElement(XmlStreamReader * reader)
 	}
 	setYStart(val);
 
-	val = reader->readAttributeInt("y_end", &ok);
+	val = reader->readAttributeDouble("y_end", &ok);
 	if(!ok)
 	{
 		reader->raiseError(tr("invalid y end value"));

@@ -14,6 +14,8 @@ set( CMAKE_C_STANDARD 11)
 set( CMAKE_C_STANDARD_REQUIRED TRUE )
 set( CMAKE_C_EXTENSIONS OFF )
 
+set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH} )
+
 find_package( Qt5
   COMPONENTS
   Core
@@ -61,6 +63,13 @@ endif()
 
 option( SCRIPTING_MUPARSER "Enable muParser Scripting" ON )
 
+if( WIN32 )
+  option( ENABLE_Python3 "Enable Python3 support" OFF )
+else( WIN32 )
+  option( ENABLE_Python3 "Enable Python3 support" ON )
+  option( ENABLE_Testing "Enable testing" ON )
+endif( WIN32 )
+
 option( ORIGIN_IMPORT "Enable importing OriginLab project files" OFF )
 
 # GSL
@@ -87,6 +96,8 @@ add_subdirectory( libscidavis )
 add_subdirectory( scidavis )
 
 add_subdirectory( fitPlugins )
+
+add_subdirectory( test )
 
 # Documentation
 set( DOC_FILES

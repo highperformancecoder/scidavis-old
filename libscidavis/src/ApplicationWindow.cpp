@@ -3860,7 +3860,14 @@ bool ApplicationWindow::loadProject(const QString& fn)
               QStringList lst=t.readLine().split("\t");
               plot->setWindowLabel(lst[1]);
               setListViewLabel(plot->name(),lst[1]);
-              plot->setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
+              if (lst.length() > 2) {
+                plot->setCaptionPolicy((MyWidget::CaptionPolicy)lst[2].toInt());
+              } else {
+                QMessageBox::warning(this, tr("File opening error"), tr("Invalid WindowLabel line:\n'%1'\nin file %2.").arg(lst.join(" ")).arg(fn));
+                plot->setCaptionPolicy(MyWidget::CaptionPolicy::Name);
+                // Partial fix for sf #403
+                t.readLine();
+              }
             }
           if (d_file_version > 83)
             {
@@ -13022,9 +13029,13 @@ void ApplicationWindow::projectProperties()
 
 	if (projectname != "untitled")
 	{
-		QFileInfo fi(projectname);
-		s += tr("Created") + ": " + QLocale().toString(fi.birthTime()) + "\n\n";
-		s += tr("Modified") + ": " + QLocale().toString(fi.lastModified()) + "\n\n";
+          QFileInfo fi(projectname);
+#if QT_VERSION<QT_VERSION_CHECK(5,10,0)
+          s += tr("Created") + ": " + QLocale().toString(fi.created()) + "\n\n";
+#else
+          s += tr("Created") + ": " + QLocale().toString(fi.birthTime()) + "\n\n";
+#endif
+          s += tr("Modified") + ": " + QLocale().toString(fi.lastModified()) + "\n\n";
 	}
 	else
 		s += tr("Created") + ": " + current_folder->birthDate() + "\n\n";
