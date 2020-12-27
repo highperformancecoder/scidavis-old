@@ -29,7 +29,7 @@ if( NOT BUILD_QWT AND QWT_LIBRARY )
     NAMES qwt_plot.h
     HINTS ${QT_INCLUDE_DIR}
     PATH_SUFFIXES qwt5 qwt5-qt5
-    NO_DEFAULT_PATH
+    REQUIRED
   )
   message( STATUS "Found Qwt5: ${QWT_LIBRARY}, with include: ${QWT_INCLUDE_DIR}" )
 else()
@@ -56,8 +56,8 @@ if( NOT BUILD_QWTPLOT3D AND QWTPLOT3D_LIBRARY )
   find_path ( QWTPLOT3D_INCLUDE_DIR
     NAMES qwt3d_plot.h
     HINTS ${QT_INCLUDE_DIR}
-    PATH_SUFFIXES qwtplot3d-qt5
-    NO_DEFAULT_PATH
+    PATH_SUFFIXES qwtplot3d qwtplot3d-qt5
+    REQUIRED
   )
   message( STATUS "Found QwtPlot3D: ${QWTPLOT3D_LIBRARY}, with include: ${QWTPLOT3D_INCLUDE_DIR}" )
 else()
