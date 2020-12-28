@@ -33,12 +33,13 @@
 
 #include "ApplicationWindow.h"
 #include <OriginFile.h>
+#include <QTextCodec>
 
 //! Origin project import class
 class ImportOPJ
 {
 public:
-	ImportOPJ(ApplicationWindow *app, const QString& filename);
+	ImportOPJ(ApplicationWindow *app, const QString& filename, const QString& codec);
 
 	bool createProjectTree(const OriginFile& opj);
 	bool importTables (const OriginFile& opj);
@@ -48,12 +49,15 @@ public:
 	int error(){return parse_error;};
 
 private:
+	bool setCodec(const QString& codecName);
+	QString decodeMbcs(char const * const input) const;
 	int translateOrigin2ScidavisLineStyle(int linestyle);
 	QString parseOriginText(const QString &str);
 	QString parseOriginTags(const QString &str);
 	int parse_error;
 	int xoffset;
 	ApplicationWindow *mw;
+	QTextCodec* d_codec;
 };
 
 #endif //IMPORTOPJ_H

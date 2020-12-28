@@ -360,7 +360,7 @@ void AbstractAspect::removeAllChildAspects()
 QVariant AbstractAspect::global(const QString &key)
 {
 	QString qualified_key = QString(staticMetaObject.className()) + "/" + key;
-	QVariant result = Private::g_settings->value(qualified_key);
+	QVariant result = Private::g_settings.value(qualified_key);
 	if (result.isValid())
 		return result;
 	else
@@ -369,7 +369,7 @@ QVariant AbstractAspect::global(const QString &key)
 
 void AbstractAspect::setGlobal(const QString &key, const QVariant &value)
 {
-	Private::g_settings->setValue(QString(staticMetaObject.className()) + "/" + key, value);
+	Private::g_settings.setValue(QString(staticMetaObject.className()) + "/" + key, value);
 }
 
 void AbstractAspect::setGlobalDefault(const QString &key, const QVariant &value)

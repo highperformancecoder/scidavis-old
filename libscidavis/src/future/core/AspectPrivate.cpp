@@ -33,12 +33,8 @@
 #include <stdexcept>
 using namespace std;
 
-QSettings * AbstractAspect::Private::g_settings =
-#ifdef Q_OS_MAC
-	new QSettings(QSettings::IniFormat, QSettings::UserScope, "SciDAVis", "SciDAVis");
-#else
-	new QSettings(QSettings::NativeFormat, QSettings::UserScope, "SciDAVis", "SciDAVis");
-#endif
+QSettings AbstractAspect::Private::g_settings = ApplicationWindow::getSettings();
+
 QHash<QString, QVariant> AbstractAspect::Private::g_defaults;
 
 AbstractAspect::Private::Private(AbstractAspect * owner, const QString& name)

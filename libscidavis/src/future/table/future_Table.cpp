@@ -51,7 +51,7 @@
 #include <QToolBar>
 #include <QtDebug>
 #include <QMimeData>
-#include <QSettings>
+#include "ApplicationWindow.h"
 #if QT_VERSION>=QT_VERSION_CHECK(5,10,0)
 #include <QRandomGenerator>
 #endif
@@ -510,18 +510,13 @@ void Table::pasteIntoSelection()
 				cols_texts << cur_column;
 			}
 
-        #ifdef Q_OS_MAC // Mac
-            QSettings settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-        #else
-            QSettings settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-        #endif
+            auto settings = ApplicationWindow::getSettings();
             bool convertToTextColumn = settings.value("/General/SetColumnTypeToTextOnInvalidInput", true).toBool();
 
             for (int c=0; c<cols && c<input_col_count; c++)
             {
                 Column * col_ptr = d_table_private.column(first_col + c);
-                if (convertToTextColumn)
-                if (col_ptr->columnMode() == SciDAVis::Numeric)
+                if (convertToTextColumn && (col_ptr->columnMode() == SciDAVis::Numeric))
                 {
                     auto filter = reinterpret_cast<String2DoubleFilter*>(col_ptr->inputFilter());
                     if (nullptr != filter)

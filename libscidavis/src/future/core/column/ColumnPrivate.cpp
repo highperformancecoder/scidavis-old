@@ -45,7 +45,7 @@
 #include "core/datatypes/Month2DoubleFilter.h"
 #include <QString>
 #include <QStringList>
-#include <QSettings>
+#include "ApplicationWindow.h"
 #include <QtDebug>
 
 #include <stdexcept>
@@ -64,11 +64,7 @@ Column::Private::Private(Column * owner, SciDAVis::ColumnMode mode)
 			d_output_filter = new Double2StringFilter();
 #ifdef LEGACY_CODE_0_2_x  // TODO: in a later version this must use the new global setting method
 			{
-#ifdef Q_OS_MAC // Mac
-				QSettings settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-#else
-				QSettings settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-#endif
+				auto settings = ApplicationWindow::getSettings();
 				settings.beginGroup("/General");
 				static_cast<Double2StringFilter *>(d_output_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
 				static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
@@ -135,11 +131,7 @@ Column::Private::Private(Column * owner, SciDAVis::ColumnDataType type, SciDAVis
 			d_output_filter = new Double2StringFilter();
 #ifdef LEGACY_CODE_0_2_x  // TODO: in a later version this must use the new global setting method
 			{
-#ifdef Q_OS_MAC // Mac
-				QSettings settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-#else
-				QSettings settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-#endif
+				auto settings = ApplicationWindow::getSettings();
 				settings.beginGroup("/General");
 				static_cast<Double2StringFilter *>(d_output_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
 				static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
@@ -346,11 +338,7 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *f
 			new_out_filter = new Double2StringFilter();
 #ifdef LEGACY_CODE_0_2_x  // TODO: in a later version this must use the new global setting method
 			{
-#ifdef Q_OS_MAC // Mac
-				QSettings settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-#else
-				QSettings settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-#endif
+				auto settings = ApplicationWindow::getSettings();
 				settings.beginGroup("/General");
 				static_cast<Double2StringFilter *>(new_out_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
 				static_cast<Double2StringFilter *>(new_out_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
@@ -979,3 +967,4 @@ QString Column::Private::comment() const
 {
 	return d_owner->comment();
 }
+

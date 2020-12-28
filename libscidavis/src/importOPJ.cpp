@@ -50,13 +50,28 @@
 
 #define OBJECTXOFFSET 200
 
+bool ImportOPJ::setCodec(const QString& codecName)
+{
+    auto codec = QTextCodec::codecForName(codecName.toUtf8());
+    if (nullptr != codec)
+        {
+            d_codec = codec;
+            return true;
+        }
+    return false;
+}
+
+QString ImportOPJ::decodeMbcs(char const * const input) const
+{
+    if (nullptr != d_codec)
+        return d_codec->toUnicode(input);
+    return QString(input);
+}
+
 QString strreverse(const QString &str) //QString reversing
 {
-	QString out="";
-	for(int i=str.length()-1; i>=0; --i)
-	{
-		out+=str[i];
-	}
+	QString out=str;
+	std::reverse(out.begin(),out.end());
 	return out;
 }
 
@@ -67,9 +82,10 @@ QString posixTimeToString(time_t pt)
 	return qdt.toString("dd.MM.yyyy hh.mm.ss");
 }
 
-ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename) :
+ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename, const QString& codec) :
 		mw(app)
 {
+	setCodec(codec);
 	xoffset=0;
 	try {
 		mw->setStatusBarText(QString("Import start ..."));
@@ -101,8 +117,8 @@ bool ImportOPJ::createProjectTree(const OriginFile& opj)
 	if(!root.node)
 		return false;
 	FolderListItem* item = (FolderListItem*)mw->folders.topLevelItem(0);
-	item->setText(0, root->name.c_str());
-	item->folder()->setName(root->name.c_str());
+	item->setText(0, decodeMbcs(root->name.c_str()));
+	item->folder()->setName(decodeMbcs(root->name.c_str()));
 	Folder* projectFolder = mw->projectFolder();
 	QHash<tree<Origin::ProjectNode>::iterator, Folder*> parent;
 	parent[root] = projectFolder;
@@ -110,14 +126,14 @@ bool ImportOPJ::createProjectTree(const OriginFile& opj)
 	{
           if(sib->type == Origin::ProjectNode::Folder){
             
-            Folder& f = parent.value(projectTree->parent(sib))->addChild<Folder>(sib->name.c_str());
+            Folder& f = parent.value(projectTree->parent(sib))->addChild<Folder>(decodeMbcs(sib->name.c_str()));
             parent[sib] = &f;
             f.setBirthDate(posixTimeToString(sib->creationDate));
             f.setModificationDate(posixTimeToString(sib->modificationDate));
             mw->addFolderListViewItem(&f);
             f.setFolderListItem(new FolderListItem(mw->current_folder->folderListItem(), &f));
           } else {
-            QString name = sib->name.c_str();
+            QString name = decodeMbcs(sib->name.c_str());
             if(sib->type == Origin::ProjectNode::Note)
               {
                 QRegExp rx("^@\\((\\S+)\\)$");
@@ -206,22 +222,22 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
   if(!columnCount) //remove tables without cols
     return false;
 
-  Table *table = mw->newTable(spread.name.c_str(), maxrows, columnCount);
+  Table *table = mw->newTable(decodeMbcs(spread.name.c_str()), maxrows, columnCount);
   if (!table)
     return false;
   if (spread.hidden || spread.loose)
     mw->hideWindow(table);
 
-  table->setWindowLabel(spread.label.c_str());
+  table->setWindowLabel(decodeMbcs(spread.label.c_str()));
   for(int j = 0; j < columnCount; ++j){
     Origin::SpreadColumn column = spread.columns[j];
     Column *scidavis_column = table->column(j);
 
-    QString name(column.name.c_str());
+    QString name(decodeMbcs(column.name.c_str()));
     scidavis_column->setName(name.replace(QRegExp(".*_"),""));
     if (column.command.size() > 0)
-      scidavis_column->setFormula(Interval<int>(0,maxrows), QString(column.command.c_str()));
-    scidavis_column->setComment(QString(column.comment.c_str()));
+      scidavis_column->setFormula(Interval<int>(0,maxrows), QString(decodeMbcs(column.command.c_str())));
+    scidavis_column->setComment(QString(decodeMbcs(column.comment.c_str())));
     table->setColumnWidth(j, (int)column.width*SciDAVis_scaling_factor);
 
     switch(column.type){
@@ -525,11 +541,11 @@ bool ImportOPJ::importTables(const OriginFile &opj)
 			int columnCount = layer.columnCount;
 			int rowCount = layer.rowCount;
 			mw->setStatusBarText(QString("Matrix %1 / %2, sheet %3 / %4").arg(s+1).arg(opj.matrixCount()).arg(l+1).arg(layers));
-			Matrix* Matrix=mw->newMatrix(matrix.name.c_str(), rowCount, columnCount);
+			Matrix* Matrix=mw->newMatrix(decodeMbcs(matrix.name.c_str()), rowCount, columnCount);
 			if (!Matrix)
 				return false;
-			Matrix->setWindowLabel(matrix.label.c_str());
-			Matrix->setFormula(layer.command.c_str());
+			Matrix->setWindowLabel(decodeMbcs(matrix.label.c_str()));
+			Matrix->setFormula(decodeMbcs(layer.command.c_str()));
 			Matrix->setColumnsWidth(layer.width * SciDAVis_scaling_factor);
 // TODO
 #if 0
@@ -594,7 +610,7 @@ bool ImportOPJ::importNotes(const OriginFile &opj)
 	for(unsigned int n = 0; n < opj.noteCount(); ++n)
 	{
 		Origin::Note _note = opj.note(n);
-		QString name = _note.name.c_str();
+		QString name = decodeMbcs(_note.name.c_str());
 		QRegExp rx("^@(\\S+)$");
 		if(rx.indexIn(name)==0)
 		{
@@ -603,8 +619,8 @@ bool ImportOPJ::importNotes(const OriginFile &opj)
 		Note *note = mw->newNote(name);
 		if(!note)
 			return false;
-		note->setWindowLabel(_note.label.c_str());
-		note->setText(QString(_note.text.c_str()));
+		note->setWindowLabel(decodeMbcs(_note.label.c_str()));
+		note->setText(QString(decodeMbcs(_note.text.c_str())));
 
 		//cascade the notes
 		int dx=20;
@@ -625,12 +641,12 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 	for(unsigned int g = 0; g < opj.graphCount(); ++g)
         {
 		Origin::Graph _graph = opj.graph(g);
-		MultiLayer *ml = mw->multilayerPlot(_graph.name.c_str());//, 0);
+		MultiLayer *ml = mw->multilayerPlot(decodeMbcs(_graph.name.c_str()));//, 0);
 		if (!ml)
 			return false;
 
 		ml->hide();//!hack used in order to avoid resize and repaint events
-		ml->setWindowLabel(_graph.label.c_str());
+		ml->setWindowLabel(decodeMbcs(_graph.label.c_str()));
 		unsigned int layers = _graph.layers.size();
 		for(unsigned int l = 0; l < layers; ++l)
 		{
@@ -640,18 +656,18 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 			if(!graph)
 				return false;
 			if(!layer.legend.text.empty()) {
-				graph->newLegend(parseOriginText(QString::fromLocal8Bit(layer.legend.text.c_str())));
+				graph->newLegend(parseOriginText(decodeMbcs(layer.legend.text.c_str())));
 			}
 			//add texts
 			for(unsigned int i = 0; i < layer.texts.size(); ++i) {
-				graph->newLegend(parseOriginText(QString::fromLocal8Bit(layer.texts[i].text.c_str())));
+				graph->newLegend(parseOriginText(decodeMbcs(layer.texts[i].text.c_str())));
 			}
 			int auto_color=0;
 			int style=0;
 			for(unsigned int c = 0; c < layer.curves.size(); ++c)
 			{
 				Origin::GraphCurve& _curve = layer.curves[c];
-				QString data(_curve.dataName.c_str());
+				QString data(decodeMbcs(_curve.dataName.c_str()));
 				int color=0;
 				switch(_curve.type)
 				{
@@ -693,18 +709,18 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 					if(style==Graph::ErrorBars)
 					{
 						int flags=_curve.symbolShape;
-						graph->addErrorBars(QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()),
+						graph->addErrorBars(QString("%1_%2").arg(tableName, decodeMbcs(_curve.xColumnName.c_str())), table, QString("%1_%2").arg(tableName, decodeMbcs(_curve.yColumnName.c_str())),
 							((flags&0x10)==0x10?0:1), ceil(_curve.lineWidth), ceil(_curve.symbolSize), QColor(Qt::black),
 							(flags&0x40)==0x40, (flags&2)==2, (flags&1)==1);
 					}
 					else if(style==Graph::Histogram)
 				        {
 
-						graph->insertCurve(table, QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
+						graph->insertCurve(table, QString("%1_%2").arg(tableName, decodeMbcs(_curve.yColumnName.c_str())), style);
 					}
 					else
 				        {
-						graph->insertCurve(table, QString("%1_%2").arg(tableName, _curve.xColumnName.c_str()), QString("%1_%2").arg(tableName, _curve.yColumnName.c_str()), style);
+						graph->insertCurve(table, QString("%1_%2").arg(tableName, decodeMbcs(_curve.xColumnName.c_str())), QString("%1_%2").arg(tableName, decodeMbcs(_curve.yColumnName.c_str())), style);
 					}
 					break;
 				     }
@@ -720,16 +736,16 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 					if(function.type == Origin::Function::Polar)
 					{
 						type=2;
-						formulas << function.formula.c_str() << "x";
+						formulas << decodeMbcs(function.formula.c_str()) << "x";
 						ranges << pi/180*function.begin << pi/180*function.end;
 					}
 					else
 					{
 						type=0;
-						formulas << function.formula.c_str();
+						formulas << decodeMbcs(function.formula.c_str());
 						ranges << function.begin << function.end;
 					}
-					graph->addFunctionCurve(mw, type, formulas, "x", ranges, function.totalPoints, function.name.c_str());
+					graph->addFunctionCurve(mw, type, formulas, "x", ranges, function.totalPoints, decodeMbcs(function.name.c_str()));
 
 					mw->updateFunctionLists(type, formulas);
 					break;
@@ -973,8 +989,8 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 			formats.push_back(layer.yAxis.formatAxis[1]); //right
 			formats.push_back(layer.xAxis.formatAxis[0]); //bottom
 			formats.push_back(layer.xAxis.formatAxis[1]); //top
-			graph->setXAxisTitle(parseOriginText(QString::fromLocal8Bit(formats[2].label.text.c_str())));
-			graph->setYAxisTitle(parseOriginText(QString::fromLocal8Bit(formats[0].label.text.c_str())));
+			graph->setXAxisTitle(parseOriginText(decodeMbcs(formats[2].label.text.c_str())));
+			graph->setYAxisTitle(parseOriginText(decodeMbcs(formats[0].label.text.c_str())));
 
 			vector<Origin::GraphAxisTick> ticks;
 			ticks.push_back(layer.yAxis.tickAxis[0]); //left
@@ -983,8 +999,8 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 			ticks.push_back(layer.xAxis.tickAxis[1]); //top
 			for(int i=0; i<4; ++i)
 			{
-				QString data(ticks[i].dataName.c_str());
-				QString tableName=data.right(data.length()-2) + "_" + ticks[i].columnName.c_str();
+				QString data(decodeMbcs(ticks[i].dataName.c_str()));
+				QString tableName=data.right(data.length()-2) + "_" + decodeMbcs(ticks[i].columnName.c_str());
 
 				QString formatInfo;
 				int format = 0;

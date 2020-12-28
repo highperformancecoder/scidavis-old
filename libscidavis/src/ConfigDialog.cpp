@@ -58,7 +58,6 @@
 #include <QVBoxLayout>
 #include <QListWidget>
 #include <QFontMetrics>
-#include <QSettings>
 
 ConfigDialog::ConfigDialog( QWidget* parent, Qt::WindowFlags fl )
     : QDialog( parent, fl )
@@ -222,13 +221,8 @@ void ConfigDialog::initTablesPage()
 	boxTableRowHeight = new QSpinBox();
     boxTableRowHeight->setRange(15, 100);
 	tableRowHeightLayout->addWidget(boxTableRowHeight);
-#ifdef Q_OS_MAC
-    QSettings settings(QSettings::IniFormat,QSettings::UserScope,
-                      "SciDAVis", "SciDAVis");
-#else
-    QSettings settings(QSettings::NativeFormat,QSettings::UserScope,
-                       "SciDAVis", "SciDAVis");
-#endif
+
+	auto settings = ApplicationWindow::getSettings();
     settings.beginGroup("[Table]");
     boxTableRowHeight->setValue(settings.value("DefaultRowHeight", 20).toInt());
     settings.endGroup();
@@ -644,18 +638,11 @@ void ConfigDialog::initAppPage()
 
 	numericFormatLayout->setRowStretch(4, 1);
 
-	#ifdef Q_OS_MAC
-	    QSettings settings(QSettings::IniFormat,QSettings::UserScope,
-		              "SciDAVis", "SciDAVis");
-	#else
-	    QSettings settings(QSettings::NativeFormat,QSettings::UserScope,
-		               "SciDAVis", "SciDAVis");
-	#endif
-
-	    lblForeignSeparator  = new QLabel();
-	    numericFormatLayout->addWidget(lblForeignSeparator,4,0);
-	    boxUseForeignSeparator = new QCheckBox();
-	    boxUseForeignSeparator->setChecked(settings.value("/General/UseForeignSeparator").toBool());
+	auto settings = ApplicationWindow::getSettings();
+	lblForeignSeparator  = new QLabel();
+	numericFormatLayout->addWidget(lblForeignSeparator,4,0);
+	boxUseForeignSeparator = new QCheckBox();
+	boxUseForeignSeparator->setChecked(settings.value("/General/UseForeignSeparator").toBool());
     numericFormatLayout->addWidget(boxUseForeignSeparator,4,1);
 
     lblConvertToTextColumn  = new QLabel();
@@ -1236,13 +1223,7 @@ void ConfigDialog::apply()
 	// resize the list to the maximum width
 	itemsList->resize(itemsList->maximumWidth(),itemsList->height());
 
-#ifdef Q_OS_MAC
-    QSettings settings(QSettings::IniFormat,QSettings::UserScope,
-                      "SciDAVis", "SciDAVis");
-#else
-    QSettings settings(QSettings::NativeFormat,QSettings::UserScope,
-                       "SciDAVis", "SciDAVis");
-#endif
+	auto settings = ApplicationWindow::getSettings();
     settings.beginGroup("[Table]");
     settings.setValue("DefaultRowHeight", boxTableRowHeight->value());
     settings.endGroup();
