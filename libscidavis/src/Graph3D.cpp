@@ -26,6 +26,9 @@
  *   Boston, MA  02110-1301  USA                                           *
  *                                                                         *
  ***************************************************************************/
+#ifdef _MSC_VER
+#define NOMINMAX
+#endif
 #include "Graph3D.h"
 #include "Bar.h"
 #include "Cone3D.h"
