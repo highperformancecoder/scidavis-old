@@ -36,6 +36,7 @@ if( ENABLE_Python3 )
   message(STATUS "Python3_EXECUTABLE = ${Python3_EXECUTABLE}")
   message(STATUS "Python3_LIBRARIES = ${Python3_LIBRARIES}")
   message(STATUS "Python3_INCLUDE_DIRS = ${Python3_INCLUDE_DIRS}")
+  message(STATUS "Python3_SITELIB = ${Python3_SITELIB}")
 
   find_program(SIP_EXECUTABLE sip)
   message(STATUS "SIP_EXECUTABLE = ${SIP_EXECUTABLE}")
@@ -64,11 +65,15 @@ if( ENABLE_Python3 )
       set(sip_dir_HINTS)
       list(APPEND sip_dir_HINTS "${SYS_PREFIX}/share/python3-sip")
       list(APPEND sip_dir_HINTS "${SYS_PREFIX}/share/sip")
+      list(APPEND sip_dir_HINTS "${Python3_SITELIB}")
       set(pyqt_module_name PyQt5)
       set(pyqt_NAMES Py2-Qt5)
       list(APPEND pyqt_NAMES ${pyqt_module_name})
 
       find_file(PYQT_SIP_DIR NAMES ${pyqt_NAMES} HINTS ${sip_dir_HINTS})
+	  if( ${PYQT_SIP_DIR} STREQUAL ${Python3_SITELIB}/PyQt5 )
+	    set( PYQT_SIP_DIR ${PYQT_SIP_DIR}/bindings )
+	  endif()
 
       message(STATUS "PYQT_SIP_DIR = ${PYQT_SIP_DIR}")
 
