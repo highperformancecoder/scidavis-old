@@ -421,8 +421,8 @@ endif()
 
 if( ENABLE_Python3 )
   target_compile_definitions( libscidavis PUBLIC
-    PYTHON_CONFIG_PATH="/etc"
-    PYTHON_UTIL_PATH="/usr/share/scidavis"
+    PYTHON_CONFIG_PATH="${CMAKE_INSTALL_PREFIX}/etc"
+    PYTHON_UTIL_PATH="${CMAKE_INSTALL_PREFIX}/share/scidavis"
     SCRIPTING_PYTHON
     )
 endif( ENABLE_Python3 )
