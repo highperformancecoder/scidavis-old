@@ -345,7 +345,7 @@ target_link_libraries( libscidavis
   Qt5::Svg
   )
 
-if( NOT BUILD_QWT AND QWT_LIBRARY )
+if( NOT BUILD_QWT )
   target_include_directories( libscidavis PUBLIC ${QWT_INCLUDE_DIR} )
   target_link_libraries( libscidavis ${QWT_LIBRARY} )
 else()
@@ -354,7 +354,7 @@ else()
   target_link_libraries( libscidavis qwt5-qt5 )
 endif()
 
-if( NOT BUILD_QWTPLOT3D AND QWTPLOT3D_LIBRARY )
+if( NOT BUILD_QWTPLOT3D )
   target_include_directories( libscidavis PUBLIC ${QWTPLOT3D_INCLUDE_DIR} )
   target_link_libraries( libscidavis ${QWTPLOT3D_LIBRARY} )
 else()
