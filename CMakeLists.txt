@@ -65,6 +65,7 @@ option( SCRIPTING_MUPARSER "Enable muParser Scripting" ON )
 
 if( WIN32 )
   option( ENABLE_Python3 "Enable Python3 support" OFF )
+  option( ENABLE_Testing "Enable testing" OFF )
 else( WIN32 )
   option( ENABLE_Python3 "Enable Python3 support" ON )
   option( ENABLE_Testing "Enable testing" ON )

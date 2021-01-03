@@ -22,9 +22,12 @@ if( NOT BUILD_QWT )
     NAMES qwt5-qt5
     HINTS ${QT_LIBRARY_DIR}
   )
+  if( NOT QWT_LIBRARY )
+    set( BUILD_QWT ON CACHE BOOL "Build Qwt using own code" FORCE )
+  endif()
 endif()
 
-if( NOT BUILD_QWT AND QWT_LIBRARY )
+if( NOT BUILD_QWT )
   find_path ( QWT_INCLUDE_DIR
     NAMES qwt_plot.h
     HINTS ${QT_INCLUDE_DIR}
@@ -50,9 +53,12 @@ if( NOT BUILD_QWTPLOT3D )
     NAMES qwtplot3d-qt5
     HINTS ${QT_LIBRARY_DIR}
   )
+  if( NOT QWTPLOT3D_LIBRARY )
+    set( BUILD_QWTPLOT3D ON CACHE BOOL "Build QwtPlot3D using own code" FORCE )
+  endif()
 endif()
 
-if( NOT BUILD_QWTPLOT3D AND QWTPLOT3D_LIBRARY )
+if( NOT BUILD_QWTPLOT3D )
   find_path ( QWTPLOT3D_INCLUDE_DIR
     NAMES qwt3d_plot.h
     HINTS ${QT_INCLUDE_DIR}
