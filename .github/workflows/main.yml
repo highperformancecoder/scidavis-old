@@ -1,0 +1,168 @@
+name: CI Tests
+
+on: [pull_request,push]
+
+jobs:
+  Ubuntu:
+
+    runs-on: ubuntu-${{ matrix.ubuntu_ver }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ubuntu_ver: [18.04, 20.04]
+
+    name: ubuntu-${{ matrix.ubuntu_ver }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Install prerequisties
+        run: |
+          wget http://download.opensuse.org/repositories/home:hpcoder1/xUbuntu_${{ matrix.ubuntu_ver }}/Release.key
+          sudo apt-key add - < Release.key
+          sudo add-apt-repository -y \
+            'deb http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_${{ matrix.ubuntu_ver }}/ /'
+          sudo apt install -y --no-install-recommends \
+            qtbase5-dev \
+            qttools5-dev \
+            libqt5svg5-dev \
+            libqt5opengl5-dev \
+            libmuparser-dev \
+            libgsl-dev \
+            libqwt5-qt5-dev \
+            libqwtplot3d-qt5-dev \
+            pyqt5-dev \
+            python3-pyqt5 \
+            libunittest++-dev \
+            libboost-regex-dev \
+            python3-numpy \
+            xvfb
+
+      - name: Configuring
+        run: |
+          mkdir build && cd build
+          cmake .. -DSEARCH_FOR_UPDATES=OFF -DDOWNLOAD_LINKS=OFF
+
+      - name: Building
+        run: |
+          make -j$(nproc) -C build
+
+      - name: Testing
+        run: |
+          cd build
+          xvfb-run ctest --output-on-failure
+
+  MSVC:
+
+    runs-on: windows-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        qt_ver: [5.12.10, 5.15.2]
+
+    name: MSVC_Qt_${{ matrix.qt_ver }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: ${{ runner.os }}-${{ matrix.qt_ver }}-QtCache
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ matrix.qt_ver }}
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+
+      - name: Install VCPKG packages
+        uses: lukka/run-vcpkg@v6
+        with:
+          vcpkgGitCommitId: 50ea8c0ab7aca3bb9245bba7fc877ad2f2a4464c
+          vcpkgTriplet: 'x64-windows'
+          vcpkgArguments: 'zlib gsl muparser opengl gl2ps'
+
+      - name: Download Qwt5 and QwtPlot3D
+        run: |
+          cd 3rdparty
+          Invoke-Webrequest `
+            http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_20.04/qwt5-qt5_0.2.7.orig.tar.gz `
+            -OutFile qwt5-qt5.tar.gz
+          tar -xzf qwt5-qt5.tar.gz; rm qwt5-qt5.tar.gz
+          Rename-Item qwt5-qt5-master qwt5-qt5
+          Invoke-Webrequest `
+            http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_20.04/qwtplot3d-qt5_0.2.7.orig.tar.gz `
+            -OutFile qwtplot3d.tar.gz
+          tar -xzf qwtplot3d.tar.gz; rm qwtplot3d.tar.gz
+          git apply --ignore-space-change --ignore-whitespace --whitespace=nowarn qwtplot3d.diff
+
+      - name: Configuring
+        run: |
+          mkdir build; cd build
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}\scripts\buildsystems\vcpkg.cmake
+
+      - uses: microsoft/setup-msbuild@v1.0.2
+      - name: Building
+        run: |
+          MSBuild -maxCpuCount build\scidavis.sln
+
+  MinGW-w64:
+
+    runs-on: windows-latest
+
+    name: MinGW-w64
+
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Install MinGW-w64 packages
+        uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: >-
+            wget
+            patch
+            make
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-qt5
+            mingw-w64-x86_64-muparser
+            mingw-w64-x86_64-gsl
+            mingw-w64-x86_64-gl2ps
+
+      - name: Download Qwt5 and QwtPlot3D
+        run: |
+          cd 3rdparty
+          wget http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_20.04/qwt5-qt5_0.2.7.orig.tar.gz
+          tar -xzf qwt5-qt5_0.2.7.orig.tar.gz && rm qwt5-qt5_0.2.7.orig.tar.gz
+          mv qwt5-qt5* qwt5-qt5
+          wget http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_20.04/qwtplot3d-qt5_0.2.7.orig.tar.gz
+          tar -xzf qwtplot3d-qt5_0.2.7.orig.tar.gz && rm qwtplot3d-qt5_0.2.7.orig.tar.gz
+          patch -p1 < qwtplot3d.diff
+
+      - name: Configuring
+        run: |
+          mkdir build && cd build
+          cmake .. -G"MSYS Makefiles"
+
+      - name: Building
+        run: |
+          make -C build -j$(nproc)
