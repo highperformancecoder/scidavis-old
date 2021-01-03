@@ -26,17 +26,6 @@
 #  http://cmake.3232098.n2.nabble.com/cmake-PyQT-SIP-td5789749.html
 
 if( ENABLE_Python3 )
-  find_package(Python3 COMPONENTS Interpreter Development)
-  if(NOT Python3_FOUND)
-    message(STATUS "WARNING:  "
-      "Python3 Interpreter or Development not found. Disabling Python3 support")
-    set(ENABLE_Python3 OFF CACHE BOOL "Enable Python3 support" FORCE)
-    return()
-  endif(NOT Python3_FOUND)
-  message(STATUS "Python3_EXECUTABLE = ${Python3_EXECUTABLE}")
-  message(STATUS "Python3_LIBRARIES = ${Python3_LIBRARIES}")
-  message(STATUS "Python3_INCLUDE_DIRS = ${Python3_INCLUDE_DIRS}")
-  message(STATUS "Python3_SITELIB = ${Python3_SITELIB}")
 
   find_program(SIP_EXECUTABLE sip)
   message(STATUS "SIP_EXECUTABLE = ${SIP_EXECUTABLE}")

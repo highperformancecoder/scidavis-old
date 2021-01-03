@@ -70,6 +70,21 @@ else( WIN32 )
   option( ENABLE_Testing "Enable testing" ON )
 endif( WIN32 )
 
+if( ENABLE_Python3 )
+  find_package(Python3 COMPONENTS Interpreter Development)
+  if(NOT Python3_FOUND)
+    message(STATUS "WARNING:  "
+      "Python3 Interpreter or Development not found. Disabling Python3 support")
+    set(ENABLE_Python3 OFF CACHE BOOL "Enable Python3 support" FORCE)
+    return()
+  else()
+    message(STATUS "Python3_EXECUTABLE = ${Python3_EXECUTABLE}")
+    message(STATUS "Python3_LIBRARIES = ${Python3_LIBRARIES}")
+    message(STATUS "Python3_INCLUDE_DIRS = ${Python3_INCLUDE_DIRS}")
+    message(STATUS "Python3_SITELIB = ${Python3_SITELIB}")
+  endif()
+endif()
+
 option( ORIGIN_IMPORT "Enable importing OriginLab project files" OFF )
 
 # GSL
