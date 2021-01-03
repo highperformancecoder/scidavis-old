@@ -86,6 +86,10 @@ if( ENABLE_Python3 )
   endif()
 endif()
 
+if( ENABLE_Testing )
+  enable_testing()
+endif()
+
 option( ORIGIN_IMPORT "Enable importing OriginLab project files" OFF )
 
 # GSL
