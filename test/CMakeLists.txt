@@ -20,20 +20,31 @@ if( ENABLE_Testing )
   add_executable( unittest ${SRCS} )
 
   # Find UnitTest++ library and its headers
-  find_library( UNITTEST_LIBRARY UnitTest++ REQUIRED )
-  find_path ( UNITTEST_INCLUDE_DIR
-    NAMES UnitTest++.h
-    PATH_SUFFIXES UnitTest++
-    REQUIRED
-  )
+  find_package( PkgConfig )
+  if( PKG_CONFIG_FOUND )
+    pkg_search_module( UnitTest UnitTest++ IMPORTED_TARGET )
+    if( UnitTest_FOUND )
+      target_link_libraries( unittest PkgConfig::UnitTest )
+    endif()
+  endif()
+    
+  if( NOT PKG_CONFIG_FOUND OR NOT UnitTest_FOUND )
+    find_library( UNITTEST_LIBRARY UnitTest++ REQUIRED )
+    find_path ( UNITTEST_INCLUDE_DIR
+      NAMES UnitTest++.h
+      PATH_SUFFIXES UnitTest++
+      REQUIRED
+      )
+    target_link_libraries( unittest ${UNITTEST_LIBRARY} )
+    target_include_directories( unittest PRIVATE ${UNITTEST_INCLUDE_DIR} )
+  endif()
   # Find Boost-regex library
   find_package(Boost REQUIRED COMPONENTS regex)
 
-  target_link_libraries( unittest libscidavis ${UNITTEST_LIBRARY} Boost::regex pthread )
+  target_link_libraries( unittest libscidavis Boost::regex pthread )
 
   target_include_directories( unittest PRIVATE
     "${CMAKE_BINARY_DIR}/libscidavis/libscidavis_autogen/include"
-    ${UNITTEST_INCLUDE_DIR}
     )
   if( ORIGIN_IMPORT )
     target_compile_definitions( unittest PRIVATE ORIGIN_IMPORT )

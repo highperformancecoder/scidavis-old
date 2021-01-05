@@ -92,7 +92,7 @@ endif()
 # liborigin
 if( ORIGIN_IMPORT )
   find_package( PkgConfig REQUIRED)
-  pkg_check_modules( LIBORIGIN liborigin>=3.0.0 IMPORTED_TARGET GLOBAL)
+  pkg_search_module( LIBORIGIN liborigin>=3.0.0 IMPORTED_TARGET GLOBAL )
   if( NOT LIBORIGIN_FOUND )
     message( STATUS "liborigin: using own code" )
     set( SRCS
