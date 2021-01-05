@@ -57,13 +57,14 @@ SUITE(ReadWriteProject)
             w->exportImage(i->windowTitle()+".png");
       }
     }
-
+#ifdef ORIGIN_IMPORT
   // checks that the large file Origin import problem (ticket #238) remains fixed
   TEST_FIXTURE(ApplicationWindow, largeOriginImport)
     {
       unique_ptr<ApplicationWindow> app(importOPJ("Histo.opj"));
       CHECK(app.get());
     }
+#endif
 
   TEST_FIXTURE(ApplicationWindow, note)
     {

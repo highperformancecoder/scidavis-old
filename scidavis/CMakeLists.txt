@@ -45,6 +45,18 @@ else()
     )
 endif()
 
+if( ENABLE_Python3 )
+  file( COPY scidavisrc.py DESTINATION . )
+  add_custom_command( OUTPUT scidavisrc.pyc
+    COMMAND ${Python3_EXECUTABLE} -m compileall -b ./*.py
+    COMMENT "Compiling python files"
+    )
+  add_custom_target( generate_pyc_files
+    DEPENDS scidavisrc.pyc
+    )
+  add_dependencies( scidavis generate_pyc_files )
+endif()
+	
 if( WIN32 )
   install( TARGETS scidavis RUNTIME DESTINATION . )
   install( FILES ${QM_FILES} DESTINATION translations )
@@ -80,4 +92,9 @@ if( UNIX )
   install( FILES scidavis.1 DESTINATION share/man/man1 )
   install( FILES scidavis.appdata.xml DESTINATION share/appdata )
   install( FILES x-sciprj.desktop DESTINATION share/mimelnk/application )
+endif()
+
+if( ENABLE_Python3 )
+  install( FILES scidavisrc.py ${CMAKE_CURRENT_BINARY_DIR}/scidavisrc.pyc DESTINATION etc )
+  install( FILES scidavisUtil.py DESTINATION share/scidavis )
 endif()
