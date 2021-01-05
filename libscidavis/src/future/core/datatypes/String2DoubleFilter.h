@@ -99,7 +99,7 @@ class String2DoubleFilter : public AbstractSimpleFilter
 
 	 	bool isAnyDecimalSeparatorAllowed() const
 		{
-		    auto settings = ApplicationWindow::getSettings();
+		    auto& settings = ApplicationWindow::getSettings();
 		    return settings.value("/General/UseForeignSeparator").toBool();
 		}
 

@@ -222,7 +222,7 @@ void ConfigDialog::initTablesPage()
     boxTableRowHeight->setRange(15, 100);
 	tableRowHeightLayout->addWidget(boxTableRowHeight);
 
-	auto settings = ApplicationWindow::getSettings();
+	auto& settings = ApplicationWindow::getSettings();
     settings.beginGroup("[Table]");
     boxTableRowHeight->setValue(settings.value("DefaultRowHeight", 20).toInt());
     settings.endGroup();
@@ -638,7 +638,7 @@ void ConfigDialog::initAppPage()
 
 	numericFormatLayout->setRowStretch(4, 1);
 
-	auto settings = ApplicationWindow::getSettings();
+	auto& settings = ApplicationWindow::getSettings();
 	lblForeignSeparator  = new QLabel();
 	numericFormatLayout->addWidget(lblForeignSeparator,4,0);
 	boxUseForeignSeparator = new QCheckBox();
@@ -1223,7 +1223,7 @@ void ConfigDialog::apply()
 	// resize the list to the maximum width
 	itemsList->resize(itemsList->maximumWidth(),itemsList->height());
 
-	auto settings = ApplicationWindow::getSettings();
+	auto& settings = ApplicationWindow::getSettings();
     settings.beginGroup("[Table]");
     settings.setValue("DefaultRowHeight", boxTableRowHeight->value());
     settings.endGroup();

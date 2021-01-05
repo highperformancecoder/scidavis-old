@@ -510,7 +510,7 @@ void Table::pasteIntoSelection()
 				cols_texts << cur_column;
 			}
 
-            auto settings = ApplicationWindow::getSettings();
+            auto& settings = ApplicationWindow::getSettings();
             bool convertToTextColumn = settings.value("/General/SetColumnTypeToTextOnInvalidInput", true).toBool();
 
             for (int c=0; c<cols && c<input_col_count; c++)

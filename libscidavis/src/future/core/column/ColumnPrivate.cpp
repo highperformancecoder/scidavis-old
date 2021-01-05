@@ -60,29 +60,32 @@ Column::Private::Private(Column * owner, SciDAVis::ColumnMode mode)
 	switch(mode)
 	{		
 		case SciDAVis::Numeric:
+		{
 			d_input_filter = new String2DoubleFilter();
 			d_output_filter = new Double2StringFilter();
-#ifdef LEGACY_CODE_0_2_x  // TODO: in a later version this must use the new global setting method
-			{
-				auto settings = ApplicationWindow::getSettings();
-				settings.beginGroup("/General");
-				static_cast<Double2StringFilter *>(d_output_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
-				static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
-				settings.endGroup(); // possible bug since there was no closing endGroup()
-			}
-#endif
+
+			auto& settings = ApplicationWindow::getSettings();
+			settings.beginGroup("/General");
+			static_cast<Double2StringFilter *>(d_output_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
+			static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
+			settings.endGroup(); // possible bug since there was no closing endGroup()
+
 			connect(static_cast<Double2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
-					d_owner, SLOT(notifyDisplayChange()));
+				d_owner, SLOT(notifyDisplayChange()));
 			d_data_type = SciDAVis::TypeDouble;
 			d_data = new QVector<double>();
 			break;
+		}
 		case SciDAVis::Text:
+		{
 			d_input_filter = new SimpleCopyThroughFilter();
 			d_output_filter = new SimpleCopyThroughFilter();
 			d_data_type = SciDAVis::TypeQString;
 			d_data = new QStringList();
 			break;
+		}
 		case SciDAVis::DateTime:
+		{
 			d_input_filter = new String2DateTimeFilter();
 			d_output_filter = new DateTime2StringFilter();
 			connect(static_cast<DateTime2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
@@ -90,7 +93,9 @@ Column::Private::Private(Column * owner, SciDAVis::ColumnMode mode)
 			d_data_type = SciDAVis::TypeQDateTime;
 			d_data = new QList<QDateTime>();
 			break;
+		}
 		case SciDAVis::Month:
+		{
 			d_input_filter = new String2MonthFilter();
 			d_output_filter = new DateTime2StringFilter();
 			static_cast<DateTime2StringFilter *>(d_output_filter)->setFormat("MMMM");
@@ -99,7 +104,9 @@ Column::Private::Private(Column * owner, SciDAVis::ColumnMode mode)
 			d_data_type = SciDAVis::TypeQDateTime;
 			d_data = new QList<QDateTime>();
 			break;
+		}
 		case SciDAVis::Day:
+		{
 			d_input_filter = new String2DayOfWeekFilter();
 			d_output_filter = new DateTime2StringFilter();
 			static_cast<DateTime2StringFilter *>(d_output_filter)->setFormat("dddd");
@@ -108,6 +115,7 @@ Column::Private::Private(Column * owner, SciDAVis::ColumnMode mode)
 			d_data_type = SciDAVis::TypeQDateTime;
 			d_data = new QList<QDateTime>();
 			break;
+		}
 	} // switch(mode)
 
 	d_plot_designation = SciDAVis::noDesignation;
@@ -127,43 +135,51 @@ Column::Private::Private(Column * owner, SciDAVis::ColumnDataType type, SciDAVis
 	switch(mode)
 	{		
 		case SciDAVis::Numeric:
+		{
 			d_input_filter = new String2DoubleFilter();
 			d_output_filter = new Double2StringFilter();
-#ifdef LEGACY_CODE_0_2_x  // TODO: in a later version this must use the new global setting method
-			{
-				auto settings = ApplicationWindow::getSettings();
-				settings.beginGroup("/General");
-				static_cast<Double2StringFilter *>(d_output_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
-				static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
-			}
-#endif
+
+			auto& settings = ApplicationWindow::getSettings();
+			settings.beginGroup("/General");
+			static_cast<Double2StringFilter *>(d_output_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
+			static_cast<Double2StringFilter *>(d_output_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
+
 			connect(static_cast<Double2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
 				d_owner, SLOT(notifyDisplayChange()));
 			break;
+		}
 		case SciDAVis::Text:
+		{
 			d_input_filter = new SimpleCopyThroughFilter();
 			d_output_filter = new SimpleCopyThroughFilter();
 			break;
+		}
 		case SciDAVis::DateTime:
+		{
 			d_input_filter = new String2DateTimeFilter();
 			d_output_filter = new DateTime2StringFilter();
 			connect(static_cast<DateTime2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
 				d_owner, SLOT(notifyDisplayChange()));
 			break;
+		}
 		case SciDAVis::Month:
+		{
 			d_input_filter = new String2MonthFilter();
 			d_output_filter = new DateTime2StringFilter();
 			static_cast<DateTime2StringFilter *>(d_output_filter)->setFormat("MMMM");
 			connect(static_cast<DateTime2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
 				d_owner, SLOT(notifyDisplayChange()));
 			break;
+		}
 		case SciDAVis::Day:
+		{
 			d_input_filter = new String2DayOfWeekFilter();
 			d_output_filter = new DateTime2StringFilter();
 			static_cast<DateTime2StringFilter *>(d_output_filter)->setFormat("dddd");
 			connect(static_cast<DateTime2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
 				d_owner, SLOT(notifyDisplayChange()));
 			break;
+		}
 	} // switch(mode)
 
 	d_plot_designation = SciDAVis::noDesignation;
@@ -334,43 +350,51 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *f
 	switch(mode)
 	{		
 		case SciDAVis::Numeric:
+		{
 			new_in_filter = new String2DoubleFilter();
 			new_out_filter = new Double2StringFilter();
-#ifdef LEGACY_CODE_0_2_x  // TODO: in a later version this must use the new global setting method
-			{
-				auto settings = ApplicationWindow::getSettings();
-				settings.beginGroup("/General");
-				static_cast<Double2StringFilter *>(new_out_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
-				static_cast<Double2StringFilter *>(new_out_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
-			}
-#endif
+
+			auto& settings = ApplicationWindow::getSettings();
+			settings.beginGroup("/General");
+			static_cast<Double2StringFilter *>(new_out_filter)->setNumDigits(settings.value("/DecimalDigits", 14).toInt());
+			static_cast<Double2StringFilter *>(new_out_filter)->setNumericFormat(settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
+
 			connect(static_cast<Double2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),
 				d_owner, SLOT(notifyDisplayChange()));
 			break;
+		}
 		case SciDAVis::Text:
+		{
 			new_in_filter = new SimpleCopyThroughFilter();
 			new_out_filter = new SimpleCopyThroughFilter();
 			break;
+		}
 		case SciDAVis::DateTime:
+		{
 			new_in_filter = new String2DateTimeFilter();
 			new_out_filter = new DateTime2StringFilter();
 			connect(static_cast<DateTime2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),
 				d_owner, SLOT(notifyDisplayChange()));
 			break;
+		}
 		case SciDAVis::Month:
+		{
 			new_in_filter = new String2MonthFilter();
 			new_out_filter = new DateTime2StringFilter();
 			static_cast<DateTime2StringFilter *>(new_out_filter)->setFormat("MMMM");
 			connect(static_cast<DateTime2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),
 				d_owner, SLOT(notifyDisplayChange()));
 			break;
+		}
 		case SciDAVis::Day:
+		{
 			new_in_filter = new String2DayOfWeekFilter();
 			new_out_filter = new DateTime2StringFilter();
 			static_cast<DateTime2StringFilter *>(new_out_filter)->setFormat("dddd");
 			connect(static_cast<DateTime2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),
 				d_owner, SLOT(notifyDisplayChange()));
 			break;
+		}
         default:
           throw runtime_error("invalid mode");
 	} // switch(mode)

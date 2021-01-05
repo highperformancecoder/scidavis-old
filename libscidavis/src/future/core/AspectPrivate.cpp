@@ -33,8 +33,6 @@
 #include <stdexcept>
 using namespace std;
 
-QSettings AbstractAspect::Private::g_settings = ApplicationWindow::getSettings();
-
 QHash<QString, QVariant> AbstractAspect::Private::g_defaults;
 
 AbstractAspect::Private::Private(AbstractAspect * owner, const QString& name)

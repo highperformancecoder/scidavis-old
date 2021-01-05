@@ -3438,7 +3438,7 @@ void ApplicationWindow::open()
 {
 	OpenProjectDialog *open_dialog = new OpenProjectDialog(this, d_extended_open_dialog);
 	open_dialog->setDirectory(workingDir);
-	auto settings = getSettings();
+	auto& settings = getSettings();
 	open_dialog->setCodec(settings.value("/General/Dialogs/LastUsedOriginLocale", "").toString());
 	if (open_dialog->exec() != QDialog::Accepted || open_dialog->selectedFiles().isEmpty())
 		return;
@@ -4233,7 +4233,7 @@ void ApplicationWindow::openTemplate()
 
 void ApplicationWindow::readSettings()
 {
-    auto settings = getSettings();
+    auto& settings = getSettings();
 	/* ---------------- group General --------------- */
 	settings.beginGroup("/General");
 #ifdef SEARCH_FOR_UPDATES
@@ -4509,7 +4509,7 @@ void ApplicationWindow::readSettings()
 
 void ApplicationWindow::saveSettings()
 {
-    auto settings = getSettings();
+    auto& settings = getSettings();
 	/* ---------------- group General --------------- */
 	settings.beginGroup("/General");
 #ifdef SEARCH_FOR_UPDATES
@@ -14156,11 +14156,15 @@ QStringList ApplicationWindow::tableWindows()
 	return result;
 }
 
-QSettings ApplicationWindow::getSettings()
+QSettings& ApplicationWindow::getSettings()
 {
 #ifdef Q_OS_MAC // Mac
-	return QSettings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
+	static QSettings d_settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
 #else
-	return QSettings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
+	static QSettings d_settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
 #endif
+	return d_settings;
 }
+
+// initialize singleton
+static auto& SciDavisSettingsSingleton = ApplicationWindow::getSettings();

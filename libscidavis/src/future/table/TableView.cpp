@@ -98,7 +98,7 @@ void TableView::init()
 	d_main_layout->setContentsMargins(0, 0, 0, 0);
 	
 	d_view_widget = new TableViewWidget(this);
-    auto settings = ApplicationWindow::getSettings();
+    auto& settings = ApplicationWindow::getSettings();
     settings.beginGroup("[Table]");
     int defaultRowHeight = settings.value("DefaultRowHeight", 20).toInt();
     settings.endGroup();

@@ -158,7 +158,7 @@ public:
   QString generateUniqueName(const QString& name, bool increment = true);
 
   bool batchMode() const {return m_batch;} ///< running a python batch script
-  static QSettings getSettings();
+  static QSettings& getSettings();
 
 public slots:
   //! Copy the status bar text to the clipboard
