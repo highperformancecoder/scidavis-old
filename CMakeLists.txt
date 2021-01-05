@@ -72,6 +72,9 @@ else( WIN32 )
 endif( WIN32 )
 
 if( ENABLE_Python3 )
+  if( MINGW )
+    set( Python3_FIND_REGISTRY LAST )
+  endif()
   find_package(Python3 COMPONENTS Interpreter Development)
   if(NOT Python3_FOUND)
     message(STATUS "WARNING:  "
