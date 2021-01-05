@@ -14,6 +14,8 @@ set( CMAKE_C_STANDARD 11)
 set( CMAKE_C_STANDARD_REQUIRED TRUE )
 set( CMAKE_C_EXTENSIONS OFF )
 
+get_property( MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG )
+
 set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH} )
 
 find_package( Qt5
@@ -72,6 +74,9 @@ else( WIN32 )
 endif( WIN32 )
 
 if( ENABLE_Python3 )
+  if( MINGW )
+    set( Python3_FIND_REGISTRY LAST )
+  endif()
   find_package(Python3 COMPONENTS Interpreter Development)
   if(NOT Python3_FOUND)
     message(STATUS "WARNING:  "
