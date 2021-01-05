@@ -43,9 +43,16 @@ if( ENABLE_Testing )
 
   target_link_libraries( unittest libscidavis Boost::regex pthread )
 
-  target_include_directories( unittest PRIVATE
-    "${CMAKE_BINARY_DIR}/libscidavis/libscidavis_autogen/include"
-    )
+  if( MULTI_CONFIG )
+    target_include_directories( unittest PRIVATE
+      "${CMAKE_BINARY_DIR}/libscidavis/libscidavis_autogen/include_$<CONFIG>"
+      )
+  else()
+    target_include_directories( unittest PRIVATE
+      "${CMAKE_BINARY_DIR}/libscidavis/libscidavis_autogen/include"
+      )
+  endif()
+
   if( ORIGIN_IMPORT )
     target_compile_definitions( unittest PRIVATE ORIGIN_IMPORT )
   endif()

@@ -34,7 +34,6 @@ add_executable( scidavis
 
 target_link_libraries( scidavis libscidavis )
 
-get_property( MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG )
 if( MULTI_CONFIG )
   target_include_directories( scidavis PRIVATE
     "${CMAKE_BINARY_DIR}/libscidavis/libscidavis_autogen/include_$<CONFIG>"
