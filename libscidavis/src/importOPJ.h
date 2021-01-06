@@ -57,7 +57,7 @@ private:
 	int parse_error;
 	int xoffset;
 	ApplicationWindow *mw;
-	QTextCodec* d_codec;
+	QTextCodec* d_codec; // the codec object is owned by Qt, this is actually a weak pointer.
 };
 
 #endif //IMPORTOPJ_H
