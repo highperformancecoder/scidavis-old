@@ -345,6 +345,8 @@ target_link_libraries( libscidavis
   Qt5::Svg
   )
 
+target_include_directories( libscidavis PUBLIC ${MUPARSER_INCLUDE_DIR} )
+
 if( NOT BUILD_QWT )
   target_include_directories( libscidavis PUBLIC ${QWT_INCLUDE_DIR} )
   target_link_libraries( libscidavis ${QWT_LIBRARY} )

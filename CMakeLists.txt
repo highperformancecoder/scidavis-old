@@ -107,12 +107,15 @@ find_package( ZLIB "1.2.11" REQUIRED )
 find_package( OpenGL COMPONENTS OpenGL REQUIRED )
 
 # muParser
-find_library( MUPARSER_LIB muparser )
-if( NOT MUPARSER_LIB )
-  message( SEND_ERROR "muParser library not found" )
-else()
-  message( STATUS "Found muParser : ${MUPARSER_LIB}" )
-endif()
+find_library( MUPARSER_LIB
+  NAMES muparser
+  REQUIRED
+  )
+find_path( MUPARSER_INCLUDE_DIR
+  NAMES "muParser.h"
+  REQUIRED
+  )
+message( STATUS "Found muParser : ${MUPARSER_LIB} include: ${MUPARSER_INCLUDE_DIR}" )
 
 add_subdirectory( 3rdparty )
 
