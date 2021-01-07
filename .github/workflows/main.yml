@@ -45,7 +45,7 @@ jobs:
       - name: Configuring
         run: |
           mkdir build && cd build
-          cmake .. -DSEARCH_FOR_UPDATES=OFF -DDOWNLOAD_LINKS=OFF
+          cmake .. -DSEARCH_FOR_UPDATES=OFF -DDOWNLOAD_LINKS=OFF -DORIGIN_IMPORT=ON
 
       - name: Building
         run: |
@@ -110,7 +110,8 @@ jobs:
       - name: Configuring
         run: |
           mkdir build; cd build
-          cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}\scripts\buildsystems\vcpkg.cmake
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}\scripts\buildsystems\vcpkg.cmake `
+            -DORIGIN_IMPORT=ON
 
       - uses: microsoft/setup-msbuild@v1.0.2
       - name: Building
@@ -161,7 +162,7 @@ jobs:
       - name: Configuring
         run: |
           mkdir build && cd build
-          cmake .. -G"MSYS Makefiles"
+          cmake .. -G"MSYS Makefiles" -DORIGIN_IMPORT=ON
 
       - name: Building
         run: |
