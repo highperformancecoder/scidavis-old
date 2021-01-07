@@ -470,23 +470,23 @@ Deseja sobrescrevê-lo?</translation>
     <name>Application</name>
     <message>
         <source>Error!</source>
-        <translation>Erro!</translation>
+        <translation type="vanished">Erro!</translation>
     </message>
     <message>
         <source>Error </source>
-        <translation>Erro </translation>
+        <translation type="vanished">Erro </translation>
     </message>
     <message>
         <source> sending event </source>
-        <translation> enviando evento </translation>
+        <translation type="vanished"> enviando evento </translation>
     </message>
     <message>
         <source> to object </source>
-        <translation> para objeto </translation>
+        <translation type="vanished"> para objeto </translation>
     </message>
     <message>
         <source>Error &lt;unknown&gt; sending event</source>
-        <translation>Erro &lt;unknown&gt; enviando evento</translation>
+        <translation type="vanished">Erro &lt;unknown&gt; enviando evento</translation>
     </message>
 </context>
 <context>
@@ -4228,6 +4228,12 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
         <source>&lt;b&gt;index.html&lt;/b&gt; file cannot be opened</source>
         <translation>&lt;b&gt;index.html&lt;/b&gt; não foi possível abrir o arquivo</translation>
     </message>
+    <message>
+        <source>Invalid WindowLabel line:
+&apos;%1&apos;
+in file %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AsciiTableImportFilter</name>
@@ -5375,6 +5381,14 @@ Os seguintes códigos podem ser usados:
     <message>
         <source>Default Row Height</source>
         <translation>Altura padrão da linha</translation>
+    </message>
+    <message>
+        <source>Consider &apos;,&apos; and &apos;.&apos; interchangeable on input in numerical columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert numerical columns to text columns when pasting non-numeric values</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8112,7 +8126,7 @@ The following special codes can be used:
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Marcando esta opção todos os espaços serão 
+        <translation type="vanished">Marcando esta opção todos os espaços serão 
 removidos do início e final das 
 linhas nos arquivos ASCII.</translation>
     </message>
@@ -8129,7 +8143,7 @@ ASCII não tiverem o mesmo número de linhas.</translation>
 define the column separator using TAB and 
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Para evitar este problema é necessário 
+        <translation type="vanished">Para evitar este problema é necessário 
 definir exatamente o separador de colunas 
 usando os caracteres TAB ou ESPAÇO.</translation>
     </message>
@@ -8144,7 +8158,7 @@ lines and each sequence of internal
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Marcando esta opção, todos os espaços em branco 
+        <translation type="vanished">Marcando esta opção, todos os espaços em branco 
 serão eliminados do início e do final das linhas 
 e cada sequência de espaços internos (incluindo o caracter TAB) 
 será substituída por um único espaço em branco.</translation>
@@ -8154,7 +8168,7 @@ será substituída por um único espaço em branco.</translation>
 overlaping if the columns in the ASCII file don&apos;t 
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation>Atenção: a marcação desta opção conduz à superposição 
+        <translation type="vanished">Atenção: a marcação desta opção conduz à superposição 
 de colunas se as colunas do arquivo ASCII não 
 tiverem o mesmo número de linhas.</translation>
     </message>
@@ -8236,7 +8250,7 @@ removed from the beginning and the end of
 the lines in the ASCII file.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="vanished">Ao selecionar esta opção todos os espaços serão 
+        <translation>Ao selecionar esta opção todos os espaços serão 
 removidos do início e final das 
 linhas nos arquivos ASCII.</translation>
     </message>
@@ -8246,7 +8260,7 @@ define the column separator using TAB and
 SPACE characters.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="vanished">Para evitar este problema é necessário 
+        <translation>Para evitar este problema é necessário 
 definir exatamente o separador de colunas 
 usando os caracteres TAB ou ESPAÇO.</translation>
     </message>
@@ -8258,7 +8272,7 @@ whitespaces (including the TAB character) will
 be replaced with a single space.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="vanished">Ao selecionar esta opção, todos os espaços em branco 
+        <translation>Ao selecionar esta opção, todos os espaços em branco 
 serão eliminados do início e do final das linhas 
 e cada sequência de espaços internos (incluindo o caracter TAB) 
 será substituída por um único espaço em branco.</translation>
@@ -8269,7 +8283,7 @@ overlaping if the columns in the ASCII file don&apos;t
 have the same number of rows.</source>
         <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
 &apos;s correctly</comment>
-        <translation type="vanished">Atenção: selecionar esta opção leva à sobreposição 
+        <translation>Atenção: selecionar esta opção leva à sobreposição 
 de colunas se as colunas no arquivo ASCII 
 não tem o mesmo número de linhas.</translation>
     </message>

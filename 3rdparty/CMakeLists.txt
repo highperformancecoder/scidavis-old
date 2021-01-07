@@ -19,8 +19,8 @@ option( BUILD_QWT "Build Qwt using own code" OFF )
 
 if( NOT BUILD_QWT )
   find_library ( QWT_LIBRARY
-    NAMES qwt5-qt5
-    HINTS ${QT_LIBRARY_DIR}
+    NAMES qwt5-qt5 qwt-qt5
+    HINTS ${QT_LIBRARY_DIR} /usr/lib64
   )
   if( NOT QWT_LIBRARY )
     set( BUILD_QWT ON CACHE BOOL "Build Qwt using own code" FORCE )
