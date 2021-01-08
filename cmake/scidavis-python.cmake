@@ -27,7 +27,7 @@
 
 if( ENABLE_Python3 )
 
-  find_program(SIP_EXECUTABLE sip)
+  find_program(SIP_EXECUTABLE sip REQUIRED)
   message(STATUS "SIP_EXECUTABLE = ${SIP_EXECUTABLE}")
   if(SIP_EXECUTABLE)
     execute_process(
@@ -58,12 +58,14 @@ if( ENABLE_Python3 )
       set(pyqt_module_name PyQt5)
       set(pyqt_NAMES Py2-Qt5)
       list(APPEND pyqt_NAMES ${pyqt_module_name})
+      list(APPEND pyqt_NAMES "PyQt5/bindings")
 
-      find_file(PYQT_SIP_DIR NAMES ${pyqt_NAMES} HINTS ${sip_dir_HINTS})
-	  if( ${PYQT_SIP_DIR} STREQUAL ${Python3_SITELIB}/PyQt5 )
-	    set( PYQT_SIP_DIR ${PYQT_SIP_DIR}/bindings )
-	  endif()
-
+      find_path( PYQT_SIP_DIR
+        NAMES "QtCore/QtCoremod.sip"
+        HINTS ${sip_dir_HINTS}
+        PATH_SUFFIXES ${pyqt_NAMES}
+        REQUIRED
+        )
       message(STATUS "PYQT_SIP_DIR = ${PYQT_SIP_DIR}")
 
       if(PYQT_SIP_DIR)
