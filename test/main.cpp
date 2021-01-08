@@ -25,8 +25,13 @@
 */
 #include <QApplication>
 #include <QMessageBox>
+#ifdef _WIN32
+#include <UnitTest++.h>
+#include <TestReporterStdout.h>
+#else
 #include <UnitTest++/UnitTest++.h>
 #include <UnitTest++/TestReporterStdout.h>
+#endif
 #include <boost/regex.hpp>
 #include <iostream>
 using namespace UnitTest;
@@ -98,6 +103,7 @@ int main(int argc, char** argv)
 typedef QMessageBox::StandardButton StandardButton;
 unsigned numInfos=0, numWarnings=0;
 
+#ifndef _WIN32
 // override the QmessageBox static methods to turn a failure messages into throws, and ignore warnings
 StandardButton QMessageBox::information
 (QWidget *, const QString&, const QString& text, StandardButtons,StandardButton) 
@@ -132,3 +138,4 @@ StandardButton QMessageBox::warning
 StandardButton QMessageBox::critical
 (QWidget *, const QString &, const QString& text, StandardButtons, StandardButton)
 {throw std::runtime_error(text.toStdString());}
+#endif

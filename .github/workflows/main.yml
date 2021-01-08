@@ -86,12 +86,15 @@ jobs:
           version: ${{ matrix.qt_ver }}
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
-      - name: Install VCPKG packages
-        uses: lukka/run-vcpkg@v6
+      - uses: lukka/run-vcpkg@v6
         with:
           vcpkgGitCommitId: 50ea8c0ab7aca3bb9245bba7fc877ad2f2a4464c
-          vcpkgTriplet: 'x64-windows'
-          vcpkgArguments: 'zlib gsl muparser opengl gl2ps'
+          setupOnly: true
+      - name: Install VCPKG packages
+        run: |
+          Add-Content ${{ env.VCPKG_ROOT }}\triplets\x64-windows.cmake "set(VCPKG_BUILD_TYPE release)" 
+          ${{ env.VCPKG_ROOT }}\vcpkg install zlib gsl muparser opengl gl2ps boost-regex unittest-cpp `
+            --triplet x64-windows
 
       - name: Download Qwt5 and QwtPlot3D
         run: |
@@ -116,7 +119,12 @@ jobs:
       - uses: microsoft/setup-msbuild@v1.0.2
       - name: Building
         run: |
-          MSBuild -maxCpuCount build\scidavis.sln
+          MSBuild -maxCpuCount -property:Configuration=Release build\scidavis.sln
+
+      - name: Testing
+        run: |
+          cd build
+          ctest -C Release --output-on-failure
 
   MinGW-w64:
 
@@ -141,6 +149,7 @@ jobs:
           install: >-
             wget
             patch
+            git
             make
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-gcc
@@ -148,6 +157,7 @@ jobs:
             mingw-w64-x86_64-muparser
             mingw-w64-x86_64-gsl
             mingw-w64-x86_64-gl2ps
+            mingw-w64-x86_64-boost
 
       - name: Download Qwt5 and QwtPlot3D
         run: |
@@ -159,6 +169,15 @@ jobs:
           tar -xzf qwtplot3d-qt5_0.2.7.orig.tar.gz && rm qwtplot3d-qt5_0.2.7.orig.tar.gz
           patch -p1 < qwtplot3d.diff
 
+      - name: Install UnitTest++
+        run: |
+          git clone --single-branch --branch master --depth 1 https://github.com/unittest-cpp/unittest-cpp
+          cd unittest-cpp
+          mkdir build && cd build
+          cmake .. -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=/mingw64
+          make -j$(nproc)
+          make install
+
       - name: Configuring
         run: |
           mkdir build && cd build
@@ -167,3 +186,8 @@ jobs:
       - name: Building
         run: |
           make -C build -j$(nproc)
+
+      - name: Testing
+        run: |
+          cd build
+          ctest --output-on-failure

@@ -5,7 +5,11 @@
 #include <iostream>
 using namespace std;
 
+#ifdef _WIN32
+#include <UnitTest++.h>
+#else
 #include <UnitTest++/UnitTest++.h>
+#endif
 #include "utils.h"
 
 SUITE(FFT)
