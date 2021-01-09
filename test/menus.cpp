@@ -5,7 +5,11 @@
 #include <fstream>
 using namespace std;
 
+#ifdef _WIN32
+#include <UnitTest++.h>
+#else
 #include <UnitTest++/UnitTest++.h>
+#endif
 #include "utils.h"
 
 struct MenuActions: map<QString,const QMenu*>

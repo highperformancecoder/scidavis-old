@@ -11,11 +11,15 @@ if( ENABLE_Testing )
     "applicationWindow.cpp"
     "readWriteProject.cpp"
     "fft.cpp"
-    "testPaintDevice.cpp"
-    "3dplot.cpp"
     "menus.cpp"
     "arrowMarker.cpp"
     )
+  if( NOT WIN32 )
+    list( APPEND SRCS
+      "testPaintDevice.cpp"
+      "3dplot.cpp"
+      )
+  endif()
 
   add_executable( unittest ${SRCS} )
 
@@ -41,7 +45,10 @@ if( ENABLE_Testing )
   # Find Boost-regex library
   find_package(Boost REQUIRED COMPONENTS regex)
 
-  target_link_libraries( unittest libscidavis Boost::regex pthread )
+  target_link_libraries( unittest libscidavis Boost::regex )
+  if( NOT WIN32 )
+    target_link_libraries( unittest pthread )
+  endif()
 
   if( MULTI_CONFIG )
     target_include_directories( unittest PRIVATE

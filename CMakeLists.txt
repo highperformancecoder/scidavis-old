@@ -65,12 +65,12 @@ endif()
 
 option( SCRIPTING_MUPARSER "Enable muParser Scripting" ON )
 
+option( ENABLE_Testing "Enable testing" ON )
+
 if( WIN32 )
   option( ENABLE_Python3 "Enable Python3 support" OFF )
-  option( ENABLE_Testing "Enable testing" OFF )
 else( WIN32 )
   option( ENABLE_Python3 "Enable Python3 support" ON )
-  option( ENABLE_Testing "Enable testing" ON )
 endif( WIN32 )
 
 if( ENABLE_Python3 )
