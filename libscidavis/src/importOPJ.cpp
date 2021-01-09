@@ -83,7 +83,7 @@ QString posixTimeToString(time_t pt)
 }
 
 ImportOPJ::ImportOPJ(ApplicationWindow *app, const QString& filename, const QString& codec) :
-		mw(app)
+		mw(app), d_codec(nullptr)
 {
 	setCodec(codec);
 	xoffset=0;
