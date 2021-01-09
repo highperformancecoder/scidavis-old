@@ -34,6 +34,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QCloseEvent>
+#include <QTextCodec>
 
 OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WindowFlags flags)
 	: ExtensibleFileDialog(parent, extended, flags)
@@ -57,16 +58,31 @@ OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WindowF
 		<< tr("All files") + " (*)";
 	setNameFilters(filters);
 
-	QWidget *advanced_options = new QWidget();
-	QHBoxLayout *advanced_layout = new QHBoxLayout();
-	advanced_options->setLayout(advanced_layout);
-	advanced_layout->addWidget(new QLabel(tr("Open As")));
+	d_advanced_options = new QWidget();
+	QVBoxLayout *advanced_layout = new QVBoxLayout();
+	d_advanced_options->setLayout(advanced_layout);
+
+    // Open As options
+    QHBoxLayout *openAs_layout = new QHBoxLayout();
+    openAs_layout->addWidget(new QLabel(tr("Open As")));
 	d_open_mode = new QComboBox();
 	// Important: Keep this is sync with enum OpenMode.
 	d_open_mode->addItem(tr("New Project Window"));
 	d_open_mode->addItem(tr("New Folder"));
-	advanced_layout->addWidget(d_open_mode);
-	setExtensionWidget(advanced_options);
+    openAs_layout->addWidget(d_open_mode);
+	advanced_layout->addLayout(openAs_layout);
+
+	// Origin codepage options
+    QHBoxLayout *codec_layout = new QHBoxLayout();
+    codec_layout->addWidget(new QLabel(tr("Codepage")));
+    d_open_codec = new QComboBox();
+    for(const int id : QTextCodec::availableMibs())
+        d_open_codec->addItem(QString::fromLocal8Bit(QTextCodec::codecForMib(id)->name()), id);
+    codec_layout->addWidget(d_open_codec);
+    codec_layout->setEnabled(false);
+    advanced_layout->addLayout(codec_layout);
+
+	setExtensionWidget(d_advanced_options);
 
 #if QT_VERSION >= 0x040300
 	connect(this, SIGNAL(filterSelected ( const QString & )),
@@ -82,12 +98,16 @@ OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WindowF
 
 void OpenProjectDialog::updateAdvancedOptions (const QString & filter)
 {
-	if (filter.contains("*.ogm") || filter.contains("*.ogw")) {
-		d_extension_toggle->setChecked(false);
-		d_extension_toggle->setEnabled(false);
-		return;
-	}
-	d_extension_toggle->setEnabled(true);
+    if (filter.contains("*.ogm") || filter.contains("*.ogw"))
+        d_open_mode->setEnabled(false);
+    else
+        d_open_mode->setEnabled(true);
+
+    if (filter.contains("*.ogm") || filter.contains("*.ogw") || filter.contains("*.opj") ||
+        filter.contains("*.ogg") || filter.contains("*.org"))
+        d_open_codec->setEnabled(true);
+    else
+        d_open_codec->setEnabled(false);
 }
 
 void OpenProjectDialog::closeEvent(QCloseEvent* e)
@@ -99,4 +119,27 @@ void OpenProjectDialog::closeEvent(QCloseEvent* e)
 	}
 
 	e->accept();
+}
+
+QString OpenProjectDialog::codec() const
+{
+    return QString::fromLocal8Bit(QTextCodec::codecForMib(d_open_codec->currentData().toInt())->name());
+}
+
+bool OpenProjectDialog::setCodec(const QString & codec)
+{
+    if ("" == codec)
+        return false;
+    for(const int id : QTextCodec::availableMibs())
+        if (codec == QString::fromLocal8Bit(QTextCodec::codecForMib(id)->name()))
+        {
+            // search data only if codec matches
+            int ind = d_open_codec->findData(id);
+            if (-1 != ind)
+            {
+                d_open_codec->setCurrentIndex(ind);
+                return true;
+            }
+        }
+    return false;
 }

@@ -125,7 +125,6 @@
 #include <QMdiSubWindow>
 #include <QTranslator>
 #include <QSplitter>
-#include <QSettings>
 #include <QApplication>
 #include <QMessageBox>
 #include <QPrinter>
@@ -3439,9 +3438,12 @@ void ApplicationWindow::open()
 {
 	OpenProjectDialog *open_dialog = new OpenProjectDialog(this, d_extended_open_dialog);
 	open_dialog->setDirectory(workingDir);
+	auto& settings = getSettings();
+	open_dialog->setCodec(settings.value("/General/Dialogs/LastUsedOriginLocale", "").toString());
 	if (open_dialog->exec() != QDialog::Accepted || open_dialog->selectedFiles().isEmpty())
 		return;
 	workingDir = open_dialog->directory().path();
+    	settings.setValue("/General/Dialogs/LastUsedOriginLocale", open_dialog->codec());
 
 	switch(open_dialog->openMode()) {
 		case OpenProjectDialog::NewProject:
@@ -4231,8 +4233,7 @@ void ApplicationWindow::openTemplate()
 
 void ApplicationWindow::readSettings()
 {
-  QSettings settings;
-
+    auto& settings = getSettings();
 	/* ---------------- group General --------------- */
 	settings.beginGroup("/General");
 #ifdef SEARCH_FOR_UPDATES
@@ -4508,13 +4509,7 @@ void ApplicationWindow::readSettings()
 
 void ApplicationWindow::saveSettings()
 {
-
-#ifdef Q_OS_MAC // Mac
-	QSettings settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-#else
-	QSettings settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-#endif
-
+    auto& settings = getSettings();
 	/* ---------------- group General --------------- */
 	settings.beginGroup("/General");
 #ifdef SEARCH_FOR_UPDATES
@@ -11791,6 +11786,7 @@ MultiLayer* ApplicationWindow::plotSpectrogram(Matrix *m, Graph::CurveType type)
 ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename [[maybe_unused]])
 {
 #ifdef ORIGIN_IMPORT
+    auto codec = getSettings().value("/General/Dialogs/LastUsedOriginLocale", "").toString();
     if (filename.endsWith(".opj", Qt::CaseInsensitive) || filename.endsWith(".ogg", Qt::CaseInsensitive) || filename.endsWith(".org", Qt::CaseInsensitive))
     {
         QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -11804,14 +11800,14 @@ ApplicationWindow* ApplicationWindow::importOPJ(const QString& filename [[maybe_
         app->recentProjects.push_front(filename);
         app->updateRecentProjectsList();
 
-        ImportOPJ(app, filename);
+        ImportOPJ(app, filename, codec);
 
         QApplication::restoreOverrideCursor();
         return app;
     }
     else if (filename.endsWith(".ogm", Qt::CaseInsensitive) || filename.endsWith(".ogw", Qt::CaseInsensitive))
     {
-		ImportOPJ(this, filename);
+		ImportOPJ(this, filename, codec);
         recentProjects.removeAll(filename);
         recentProjects.push_front(filename);
         updateRecentProjectsList();
@@ -12397,7 +12393,10 @@ void ApplicationWindow::appendProject(const QString& fn)
         fn.contains(".ogw", Qt::CaseInsensitive) || fn.contains(".ogg", Qt::CaseInsensitive) ||
         fn.contains(".org", Qt::CaseInsensitive))
 #ifdef ORIGIN_IMPORT
-		ImportOPJ(this, fn);
+        {
+            auto codec = getSettings().value("/General/Dialogs/LastUsedOriginLocale", "").toString();
+            ImportOPJ(this, fn, codec);
+        }
 #else
 		{
                 QMessageBox::critical(this, tr("File opening error"),  tr("SciDAVis currently does not support Origin import. If you are interested in reviving and maintaining an Origin import filter, contact the developers.").arg(fn));
@@ -14156,3 +14155,16 @@ QStringList ApplicationWindow::tableWindows()
 		result.append(aspect->name());
 	return result;
 }
+
+QSettings& ApplicationWindow::getSettings()
+{
+#ifdef Q_OS_MAC // Mac
+	static QSettings d_settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
+#else
+	static QSettings d_settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
+#endif
+	return d_settings;
+}
+
+// initialize singleton
+static auto& SciDavisSettingsSingleton = ApplicationWindow::getSettings();

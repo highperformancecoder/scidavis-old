@@ -34,7 +34,7 @@
 #include "lib/XmlStreamReader.h"
 #include <QXmlStreamWriter>
 #include <QtDebug>
-#include <QSettings>
+#include "ApplicationWindow.h"
 
 //! Locale-aware conversion filter QString -> double.
 class String2DoubleFilter : public AbstractSimpleFilter
@@ -99,12 +99,8 @@ class String2DoubleFilter : public AbstractSimpleFilter
 
 	 	bool isAnyDecimalSeparatorAllowed() const
 		{
-	#ifdef Q_OS_MAC // Mac
-		QSettings settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-	#else
-		QSettings settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-	#endif
-		return settings.value("/General/UseForeignSeparator").toBool();
+		    auto& settings = ApplicationWindow::getSettings();
+		    return settings.value("/General/UseForeignSeparator").toBool();
 		}
 
 		// convenience overload

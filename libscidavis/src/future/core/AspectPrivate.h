@@ -34,7 +34,7 @@
 #include <QString>
 #include <QDateTime>
 #include <QList>
-#include <QSettings>
+#include "ApplicationWindow.h"
 #include <QHash>
 
 //! Private data managed by AbstractAspect.
@@ -66,7 +66,6 @@ class AbstractAspect::Private
 
 		QString uniqueNameFor(const QString &current_name) const;
 
-		static QSettings * g_settings;
 		static QHash<QString, QVariant> g_defaults;
 	
 	private:
