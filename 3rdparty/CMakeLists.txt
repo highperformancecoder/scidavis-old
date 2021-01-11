@@ -72,6 +72,7 @@ else()
   file( GLOB HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "qwtplot3d/include/*.h" )
   file( GLOB SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "qwtplot3d/src/*.cpp" )
   add_library( qwtplot3d ${SRCS} ${HEADERS} )
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-c++11-narrowing")
 
   target_link_libraries( qwtplot3d Qt5::Core Qt5::Gui Qt5::OpenGL OpenGL::GLU )
   set_target_properties( qwtplot3d PROPERTIES AUTOMOC ON )
