@@ -85,7 +85,7 @@ public:
     //! For vector formats: returns a standard output page size (default: QPrinter::Custom).
 	QPrinter::PageSize pageSize() const;
 	void setPageSize(QPrinter::PageSize size);
-	QPrinter::Orientation pageOrientation() const;
+	QPageLayout::Orientation pageOrientation() const;
 	void setOrientation(QPrinter::Orientation orientation);
 	//! Return the quality (in percent) the user selected for export to raster formats.
 	int quality() const { return d_quality->value(); }
