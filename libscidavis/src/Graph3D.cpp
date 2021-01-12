@@ -1997,7 +1997,7 @@ void Graph3D::setBackGrid(bool b)
 void Graph3D::print()
 {
 	QPrinter printer;
-	printer.setOrientation(QPrinter::Landscape);
+	printer.setPageOrientation(QPageLayout::Landscape);
 	printer.setColorMode (QPrinter::Color);
 	printer.setFullPage(false);
 

@@ -242,7 +242,7 @@ public slots:
 		void exportSVG(const QString& fname);
 		void exportVector(const QString& fileName, int res = 0, bool color = true,
                         bool keepAspect = true, QPrinter::PageSize pageSize = QPrinter::Custom,
-						QPrinter::Orientation orientation = QPrinter::Portrait);
+						QPageLayout::Orientation orientation = QPageLayout::Portrait);
 		void exportImage(const QString& fileName, int quality = -1);
 		//@}
 

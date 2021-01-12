@@ -1390,7 +1390,7 @@ void Graph::exportImage(const QString& fileName, int quality)
 	image.save(fileName, 0, quality);
 }
 
-void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPrinter::Orientation orientation)
+void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPageLayout::Orientation orientation)
 {
 	if ( fileName.isEmpty() ){
 		QMessageBox::critical(this, tr("Error"), tr("Please provide a valid file name!"));
@@ -1423,7 +1423,7 @@ void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspe
        printer.setPaperSize(size(), QPrinter::Point);
     else
 	{
-		printer.setOrientation(orientation);
+		printer.setPageOrientation(orientation);
 		printer.setPaperSize(pageSize);
 	}
 
@@ -1439,9 +1439,9 @@ void Graph::print()
 	//printing should preserve plot aspect ratio, if possible
 	double aspect = double(d_plot->width())/double(d_plot->height());
 	if (aspect < 1)
-		printer.setOrientation(QPrinter::Portrait);
+		printer.setPageOrientation(QPageLayout::Portrait);
 	else
-		printer.setOrientation(QPrinter::Landscape);
+		printer.setPageOrientation(QPageLayout::Landscape);
 
 	QPrintDialog printDialog(&printer);
     if (printDialog.exec() == QDialog::Accepted)

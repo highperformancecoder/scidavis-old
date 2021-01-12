@@ -142,11 +142,11 @@ void ImageExportDialog::initAdvancedOptions()
 	d_standard_page->setChecked(app->d_export_vector_size != QPrinter::Custom);
 	d_box_page_size->setEnabled(app->d_export_vector_size != QPrinter::Custom);
 	vector_layout->addWidget(d_box_page_size, 4, 1, 1, 2);
-	
+
 	vector_layout->addWidget(new QLabel(tr("Orientation")), 5, 0);
 	d_box_page_orientation = new QComboBox();
-	d_box_page_orientation->addItem(tr("Portrait","page orientation"), QVariant(QPrinter::Portrait));
-	d_box_page_orientation->addItem(tr("Landscape","page orientation"), QVariant(QPrinter::Landscape));
+	d_box_page_orientation->addItem(tr("Portrait","page orientation"), QVariant(QPageLayout::Portrait));
+	d_box_page_orientation->addItem(tr("Landscape","page orientation"), QVariant(QPageLayout::Landscape));
 	d_box_page_orientation->setCurrentIndex(app->d_export_orientation);
 	d_box_page_orientation->setEnabled(app->d_export_vector_size != QPrinter::Custom);
 	vector_layout->addWidget(d_box_page_orientation, 5, 1, 1, 2);
@@ -215,22 +215,22 @@ QPrinter::PageSize ImageExportDialog::pageSize() const
 			size = QPrinter::A4;
 			break;
 		default:
-			size = (QPrinter::PageSize)d_box_page_size->itemData(d_box_page_size->currentIndex()).toInt(); 
+			size = (QPrinter::PageSize)d_box_page_size->itemData(d_box_page_size->currentIndex()).toInt();
 			break;
 	}
 	return size;
 }
 
-QPrinter::Orientation ImageExportDialog::pageOrientation() const
+QPageLayout::Orientation ImageExportDialog::pageOrientation() const
 {
-	QPrinter::Orientation orientation;
+	QPageLayout::Orientation orientation;
 	switch (d_box_page_orientation->currentIndex())
 	{
 		case -1:
-			orientation = QPrinter::Portrait;
+			orientation = QPageLayout::Portrait;
 			break;
 		default:
-			orientation = (QPrinter::Orientation)d_box_page_orientation->itemData(d_box_page_orientation->currentIndex()).toInt(); 
+			orientation = (QPageLayout::Orientation)d_box_page_orientation->itemData(d_box_page_orientation->currentIndex()).toInt();
 			break;
 	}
 	return orientation;

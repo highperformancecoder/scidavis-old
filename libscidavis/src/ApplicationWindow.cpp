@@ -6324,7 +6324,7 @@ void ApplicationWindow::printWindow()
 void ApplicationWindow::printAllPlots()
 {
 	QPrinter printer;
-	printer.setOrientation(QPrinter::Landscape);
+	printer.setPageOrientation(QPageLayout::Landscape);
 	printer.setColorMode (QPrinter::Color);
 	printer.setFullPage(true);
 
