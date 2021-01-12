@@ -1447,7 +1447,7 @@ void Graph::print()
     if (printDialog.exec() == QDialog::Accepted)
 	{
 		QRect plotRect = d_plot->rect();
-		QRect paperRect = printer.paperRect();
+		QRect paperRect = printer.pageLayout().fullRectPixels(printer.resolution());
 		if (d_scale_on_print)
 		{
 			int dpiy = printer.logicalDpiY();
