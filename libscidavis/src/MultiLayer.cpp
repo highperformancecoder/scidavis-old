@@ -806,16 +806,15 @@ void MultiLayer::printAllLayers(QPainter *painter)
 		return;
 
 	QPrinter *printer = (QPrinter *)painter->device();
-	QRect paperRect = ((QPrinter *)painter->device())->paperRect();
 	QRect canvasRect = canvas->rect();
-	QRect pageRect = printer->pageRect();
+	QRect pageRect = printer->pageLayout().fullRectPixels(printer->resolution());
 	QRect cr = canvasRect; // cropmarks rectangle
 
 	if (d_scale_on_print)
 	{
         int margin = (int)((1/2.54)*printer->logicalDpiY()); // 1 cm margins
-		double scaleFactorX=(double)(paperRect.width()-2*margin)/(double)canvasRect.width();
-		double scaleFactorY=(double)(paperRect.height()-2*margin)/(double)canvasRect.height();
+		double scaleFactorX=(double)(pageRect.width()-2*margin)/(double)canvasRect.width();
+		double scaleFactorY=(double)(pageRect.height()-2*margin)/(double)canvasRect.height();
 
         if (d_print_cropmarks)
         {
@@ -862,10 +861,10 @@ void MultiLayer::printAllLayers(QPainter *painter)
 		cr.adjust(-1, -1, 2, 2);
     	painter->save();
 		painter->setPen(QPen(QColor(Qt::black), 0.5, Qt::DashLine));
-		painter->drawLine(paperRect.left(), cr.top(), paperRect.right(), cr.top());
-		painter->drawLine(paperRect.left(), cr.bottom(), paperRect.right(), cr.bottom());
-		painter->drawLine(cr.left(), paperRect.top(), cr.left(), paperRect.bottom());
-		painter->drawLine(cr.right(), paperRect.top(), cr.right(), paperRect.bottom());
+		painter->drawLine(pageRect.left(), cr.top(), pageRect.right(), cr.top());
+		painter->drawLine(pageRect.left(), cr.bottom(), pageRect.right(), cr.bottom());
+		painter->drawLine(cr.left(), pageRect.top(), cr.left(), pageRect.bottom());
+		painter->drawLine(cr.right(), pageRect.top(), cr.right(), pageRect.bottom());
 		painter->restore();
 	}
 
