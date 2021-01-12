@@ -1042,7 +1042,7 @@ public:
   void print() /PyName=printDialog/;
   void exportImage(const QString& fileName, int quality = -1);
   void exportVector(const QString& fileName, int res = 0, bool color = true,
-                    bool keepAspect = true, QPrinter::PaperSize pageSize = QPrinter::Custom);
+                    bool keepAspect = true, QPageSize pageSize = QPageSize(QPageSize::Custom));
   void exportToFile(const QString& fileName) /PyName=export/;
 
   void enableAutoscaling(bool = true);
@@ -1129,7 +1129,7 @@ public:
   void exportToFile(const QString& fileName) /PyName=export/;
   void exportImage(const QString& fileName, int quality = -1);
   void exportVector(const QString& fileName, int res = 0, bool color = true,
-                    bool keepAspect = true, QPrinter::PaperSize pageSize = QPrinter::Custom);
+                    bool keepAspect = true, QPageSize pageSize = QPageSize(QPageSize::Custom));
 
   void print() /PyName=printDialog/;
 private:

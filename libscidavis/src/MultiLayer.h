@@ -165,7 +165,7 @@ public slots:
 	void exportSVG(const QString& fname);
     void exportPDF(const QString& fname);
 	void exportVector(const QString& fileName, int res = 0, bool color = true,
-                    bool keepAspect = true, QPrinter::PageSize pageSize = QPrinter::Custom,
+                    bool keepAspect = true, QPageSize pageSize = QPageSize(QPageSize::Custom),
 					QPageLayout::Orientation orientation = QPageLayout::Portrait);
     void exportPainter(QPaintDevice &paintDevice, bool keepAspect = false, QRect rect = QRect());
     void exportPainter(QPainter &painter, bool keepAspect = false, QRect rect = QRect(), QSize size = QSize());

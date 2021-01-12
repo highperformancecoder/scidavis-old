@@ -1390,7 +1390,7 @@ void Graph::exportImage(const QString& fileName, int quality)
 	image.save(fileName, 0, quality);
 }
 
-void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspect, QPrinter::PageSize pageSize, QPageLayout::Orientation orientation)
+void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspect, QPageSize pageSize, QPageLayout::Orientation orientation)
 {
 	if ( fileName.isEmpty() ){
 		QMessageBox::critical(this, tr("Error"), tr("Please provide a valid file name!"));
@@ -1419,12 +1419,12 @@ void Graph::exportVector(const QString& fileName, int, bool color, bool keepAspe
 	else
 		printer.setColorMode(QPrinter::GrayScale);
 
-    if (pageSize == QPrinter::Custom)
-       printer.setPaperSize(size(), QPrinter::Point);
+    if (pageSize == QPageSize(QPageSize::Custom))
+       printer.setPageSize(QPageSize(size(), QPageSize::Point));
     else
 	{
 		printer.setPageOrientation(orientation);
-		printer.setPaperSize(pageSize);
+		printer.setPageSize(pageSize);
 	}
 
 	exportPainter(printer, keepAspect);
