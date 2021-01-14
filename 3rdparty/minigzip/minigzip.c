@@ -1,13 +1,13 @@
 /* minigzip.c -- simulate gzip using the zlib compression library
- * Copyright (C) 1995-2005 Jean-loup Gailly.
+ * Copyright (C) 1995-2006, 2010, 2011, 2016 Jean-loup Gailly
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
 /* Copyright notice from zlib.h: 
   zlib.h -- interface of the 'zlib' general purpose compression library
-  version 1.2.3, July 18th, 2005
+  version 1.2.11, January 15th, 2017
 
-  Copyright (C) 1995-2005 Jean-loup Gailly and Mark Adler
+  Copyright (C) 1995-2017 Jean-loup Gailly and Mark Adler
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -30,8 +30,8 @@
 
 
   The data format used by the zlib library is described by RFCs (Request for
-  Comments) 1950 to 1952 in the files http://www.ietf.org/rfc/rfc1950.txt
-  (zlib format), rfc1951.txt (deflate format) and rfc1952.txt (gzip format).
+  Comments) 1950 to 1952 in the files http://tools.ietf.org/html/rfc1950
+  (zlib format), rfc1951 (deflate format) and rfc1952 (gzip format).
 */
 
 /*
@@ -46,8 +46,8 @@
 
 /* @(#) $Id$ */
 
-#include <stdio.h>
 #include "zlib.h"
+#include <stdio.h>
 
 #ifdef STDC
 #  include <string.h>
@@ -68,6 +68,10 @@
 #  define SET_BINARY_MODE(file)
 #endif
 
+#if defined(_MSC_VER) && _MSC_VER < 1900
+#  define snprintf _snprintf
+#endif
+
 #ifdef VMS
 #  define unlink delete
 #  define GZ_SUFFIX "-gz"
@@ -81,8 +85,10 @@
 #  include <unix.h> /* for fileno */
 #endif
 
+#if !defined(Z_HAVE_UNISTD_H) && !defined(_LARGEFILE64_SOURCE)
 #ifndef WIN32 /* unlink already in stdio.h for WIN32 */
   extern int unlink OF((const char *));
+#endif
 #endif
 
 #ifndef GZ_SUFFIX
@@ -100,7 +106,7 @@
 #  define local
 #endif
 
-char *prog;
+static char *prog;
 
 void error            OF((const char *msg));
 void gz_compress      OF((FILE   *in, gzFile out));
@@ -108,7 +114,7 @@ void gz_compress      OF((FILE   *in, gzFile out));
 int  gz_compress_mmap OF((FILE   *in, gzFile out));
 #endif
 void gz_uncompress    OF((gzFile in, FILE   *out));
-void file_compress    OF((const char  *file, const char *mode));
+void file_compress    OF((char  *file, char *mode));
 void file_uncompress  OF((char  *file));
 int  main             OF((int argc, char *argv[]));
 
@@ -222,15 +228,24 @@ void gz_uncompress(in, out)
  * original.
  */
 void file_compress(file, mode)
-    const char  *file;
-    const char  *mode;
+    char  *file;
+    char  *mode;
 {
     local char outfile[MAX_NAME_LEN];
     FILE  *in;
     gzFile out;
 
+    if (strlen(file) + strlen(GZ_SUFFIX) >= sizeof(outfile)) {
+        fprintf(stderr, "%s: filename too long\n", prog);
+        exit(1);
+    }
+
+#if !defined(NO_snprintf) && !defined(NO_vsnprintf)
+    snprintf(outfile, sizeof(outfile), "%s%s", file, GZ_SUFFIX);
+#else
     strcpy(outfile, file);
     strcat(outfile, GZ_SUFFIX);
+#endif
 
     in = fopen(file, "rb");
     if (in == NULL) {
@@ -258,9 +273,18 @@ void file_uncompress(file)
     char *infile, *outfile;
     FILE  *out;
     gzFile in;
-    uInt len = (uInt)strlen(file);
+    unsigned len = strlen(file);
 
+    if (len + strlen(GZ_SUFFIX) >= sizeof(buf)) {
+        fprintf(stderr, "%s: filename too long\n", prog);
+        exit(1);
+    }
+
+#if !defined(NO_snprintf) && !defined(NO_vsnprintf)
+    snprintf(buf, sizeof(buf), "%s", file);
+#else
     strcpy(buf, file);
+#endif
 
     if (len > SUFFIX_LEN && strcmp(file+len-SUFFIX_LEN, GZ_SUFFIX) == 0) {
         infile = file;
@@ -269,7 +293,11 @@ void file_uncompress(file)
     } else {
         outfile = file;
         infile = buf;
+#if !defined(NO_snprintf) && !defined(NO_vsnprintf)
+        snprintf(buf + len, sizeof(buf) - len, "%s", GZ_SUFFIX);
+#else
         strcat(infile, GZ_SUFFIX);
+#endif
     }
     in = gzopen(infile, "rb");
     if (in == NULL) {
