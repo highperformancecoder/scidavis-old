@@ -53,141 +53,142 @@ class Plot3DDialog : public QDialog
     Q_OBJECT
 
 public:
-    Plot3DDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    Plot3DDialog(QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
     ~Plot3DDialog();
 
 public slots:
-	void accept();
-	bool updatePlot();
+    void accept();
+    bool updatePlot();
 
-	QColor pickFromColor();
-	QColor pickToColor();
-	QColor pickMeshColor();
-	QColor pickAxesColor();
-	QColor pickTitleColor();
-	QColor pickNumberColor();
-	QColor pickBgColor();
-	QColor pickLabelColor();
-	QColor pickGridColor();
+    QColor pickFromColor();
+    QColor pickToColor();
+    QColor pickMeshColor();
+    QColor pickAxesColor();
+    QColor pickTitleColor();
+    QColor pickNumberColor();
+    QColor pickBgColor();
+    QColor pickLabelColor();
+    QColor pickGridColor();
 
-	void setColors(const QColor& title, const QColor& mesh,const QColor& axes,const QColor& num,
-							 const QColor& label,const QColor& bg,const QColor& grid);
-	void setDataColors(const QColor& minColor, const QColor& maxColor);
-	void setTransparency(double t);
-	void pickTitleFont();
-	void setTitle(const QString& title);
-	void setTitleFont(const QFont& font);
+    void setColors(const QColor &title, const QColor &mesh, const QColor &axes, const QColor &num,
+                   const QColor &label, const QColor &bg, const QColor &grid);
+    void setDataColors(const QColor &minColor, const QColor &maxColor);
+    void setTransparency(double t);
+    void pickTitleFont();
+    void setTitle(const QString &title);
+    void setTitleFont(const QFont &font);
 
-	void setResolution(int r);
-	void showLegend(bool show);
-	void setOrthogonal(bool on){boxOrthogonal->setChecked(on);};
+    void setResolution(int r);
+    void showLegend(bool show);
+    void setOrthogonal(bool on) { boxOrthogonal->setChecked(on); };
 
-	void setAxesLabels(const QStringList& list);
-	void viewAxisOptions(int axis);
+    void setAxesLabels(const QStringList &list);
+    void viewAxisOptions(int axis);
 
-	void setAxesFonts(const QFont& xf, const QFont& yf, const QFont& zf);
-	QFont axisFont(int axis);
-	void pickAxisLabelFont();
+    void setAxesFonts(const QFont &xf, const QFont &yf, const QFont &zf);
+    QFont axisFont(int axis);
+    void pickAxisLabelFont();
 
-	void pickNumbersFont();
-	void setNumbersFonts(const QFont& f){numbersFont=f;};
+    void pickNumbersFont();
+    void setNumbersFonts(const QFont &f) { numbersFont = f; };
 
-	QStringList scaleOptions(int axis, double start, double end,
-												const QString& majors, const QString& minors);
-	void setScales(const QStringList& list);
-	void viewScaleLimits(int axis);
+    QStringList scaleOptions(int axis, double start, double end, const QString &majors,
+                             const QString &minors);
+    void setScales(const QStringList &list);
+    void viewScaleLimits(int axis);
 
-	void setAxesTickLengths(const QStringList& list);
-	void setMeshLineWidth(double lw);
-	void setLabelsDistance(int dist);
+    void setAxesTickLengths(const QStringList &list);
+    void setMeshLineWidth(double lw);
+    void setLabelsDistance(int dist);
 
-	void disableAxesOptions();
-	void disableMeshOptions();
-	void disableLegend();
-	void disableGridOptions();
-	void showBarsTab(double rad);
-	void showPointsTab(double rad, bool smooth);
-	void showConesTab(double rad, int quality);
-	void showCrossHairTab(double rad, double linewidth, bool smooth, bool boxed);
+    void disableAxesOptions();
+    void disableMeshOptions();
+    void disableLegend();
+    void disableGridOptions();
+    void showBarsTab(double rad);
+    void showPointsTab(double rad, bool smooth);
+    void showConesTab(double rad, int quality);
+    void showCrossHairTab(double rad, double linewidth, bool smooth, bool boxed);
 
-	void customWorksheetBtn(const QString& text);
-	void worksheet();
-	void setZoom(double zoom);
-	void setScaling(double xVal, double yVal, double zVal);
-	void showTitleTab();
-	void showAxisTab();
+    void customWorksheetBtn(const QString &text);
+    void worksheet();
+    void setZoom(double zoom);
+    void setScaling(double xVal, double yVal, double zVal);
+    void showTitleTab();
+    void showAxisTab();
 
-	void initPointsOptionsStack();
-	void changeZoom(double);
-	void changeTransparency(int val);
+    void initPointsOptionsStack();
+    void changeZoom(double);
+    void changeTransparency(int val);
 
-	void showLowerGreek();
-	void showUpperGreek();
-	void addSymbol(const QString& letter);
-	void showGeneralTab();
+    void showLowerGreek();
+    void showUpperGreek();
+    void addSymbol(const QString &letter);
+    void showGeneralTab();
 
     void pickDataColorMap();
-    void setPlot(Graph3D *plot){d_plot = plot;};
+    void setPlot(Graph3D *plot) { d_plot = plot; };
 
 signals:
-	void showWorksheet();
-	void updatePoints(double, bool);
-	void updateBars(double);
-	void updateTransparency(double);
-	void updateDataColors(const QColor&,const QColor&);
-	void updateColors(const QColor&,const QColor&,const QColor&,const QColor&,const QColor&,const QColor&);
-	void updateTitle(const QString&,const QColor&,const QFont&);
-	void updateResolution(int);
-	void showColorLegend(bool);
-	void setOrtho(bool);
-	void updateLabel(int,const QString&, const QFont&);
-	void updateScale(int,const QStringList&);
-	void updateTickLength(int,double, double);
-	void adjustLabels (int);
-	void setNumbersFont(const QFont&);
-	void updateMeshLineWidth(int);
-	void updateZoom(double);
-	void updateScaling(double, double, double);
-	void updateCones(double, int);
-	void updateCross(double, double, bool, bool);
-	void setDataColorMap(const QString&);
+    void showWorksheet();
+    void updatePoints(double, bool);
+    void updateBars(double);
+    void updateTransparency(double);
+    void updateDataColors(const QColor &, const QColor &);
+    void updateColors(const QColor &, const QColor &, const QColor &, const QColor &,
+                      const QColor &, const QColor &);
+    void updateTitle(const QString &, const QColor &, const QFont &);
+    void updateResolution(int);
+    void showColorLegend(bool);
+    void setOrtho(bool);
+    void updateLabel(int, const QString &, const QFont &);
+    void updateScale(int, const QStringList &);
+    void updateTickLength(int, double, double);
+    void adjustLabels(int);
+    void setNumbersFont(const QFont &);
+    void updateMeshLineWidth(int);
+    void updateZoom(double);
+    void updateScaling(double, double, double);
+    void updateCones(double, int);
+    void updateCross(double, double, bool, bool);
+    void setDataColorMap(const QString &);
 
 private:
     void initScalesPage();
-	void initAxesPage();
-	void initTitlePage();
-	void initColorsPage();
-	void initGeneralPage();
+    void initAxesPage();
+    void initTitlePage();
+    void initColorsPage();
+    void initGeneralPage();
 
     Graph3D *d_plot;
-	QFont titleFont, xAxisFont,yAxisFont,zAxisFont, numbersFont;
-	QStringList labels, scales, tickLengths;
-	QColor titleColor,meshColor,bgColor, axesColor, numColor,labelColor, gridColor;
-	QColor fromColor, toColor; //custom data colors
+    QFont titleFont, xAxisFont, yAxisFont, zAxisFont, numbersFont;
+    QStringList labels, scales, tickLengths;
+    QColor titleColor, meshColor, bgColor, axesColor, numColor, labelColor, gridColor;
+    QColor fromColor, toColor; // custom data colors
 
     QSpinBox *boxMeshLineWidth;
-    QPushButton* buttonApply;
-    QPushButton* buttonOk;
-    QPushButton* buttonCancel, *buttonLowerGreek, *buttonUpperGreek;
-	QPushButton* btnTitleColor, *btnTitleFont, *btnLabelFont, *btnGrid;
-	QPushButton *btnBackground, *btnMesh, *btnAxes, *btnTitle, *btnLabels, *btnNumbers;
-	QPushButton *btnNumbersFont, *btnFromColor, *btnToColor, *btnTable, *btnColorMap;
-	QPushButton *buttonAxisLowerGreek, *buttonAxisUpperGreek;
-    QTabWidget* generalDialog;
-	QWidget *scale, *colors, *general, *axes, *title, *bars, *points;
-	QLineEdit *boxTitle, *boxFrom, *boxTo, *boxLabel;
-	QSpinBox *boxMajors, *boxMinors;
-	QGroupBox *TicksGroupBox, *AxesColorGroupBox;
-	QSpinBox *boxResolution, *boxDistance, *boxTransparency;
-	QCheckBox *boxLegend, *boxSmooth, *boxBoxed, *boxCrossSmooth, *boxOrthogonal;
-	QListWidget *axesList, *axesList2;
-	QComboBox *boxType, *boxPointStyle;
-	QLineEdit *boxMajorLength, *boxMinorLength, *boxConesRad;
-	QDoubleSpinBox *boxZoom, *boxXScale, *boxYScale, *boxZScale;
-	QSpinBox *boxQuality;
-	QLineEdit *boxSize, *boxBarsRad, *boxCrossRad, *boxCrossLinewidth;
-	QStackedWidget *optionStack;
-	QWidget *dotsPage, *conesPage, *crossPage;
+    QPushButton *buttonApply;
+    QPushButton *buttonOk;
+    QPushButton *buttonCancel, *buttonLowerGreek, *buttonUpperGreek;
+    QPushButton *btnTitleColor, *btnTitleFont, *btnLabelFont, *btnGrid;
+    QPushButton *btnBackground, *btnMesh, *btnAxes, *btnTitle, *btnLabels, *btnNumbers;
+    QPushButton *btnNumbersFont, *btnFromColor, *btnToColor, *btnTable, *btnColorMap;
+    QPushButton *buttonAxisLowerGreek, *buttonAxisUpperGreek;
+    QTabWidget *generalDialog;
+    QWidget *scale, *colors, *general, *axes, *title, *bars, *points;
+    QLineEdit *boxTitle, *boxFrom, *boxTo, *boxLabel;
+    QSpinBox *boxMajors, *boxMinors;
+    QGroupBox *TicksGroupBox, *AxesColorGroupBox;
+    QSpinBox *boxResolution, *boxDistance, *boxTransparency;
+    QCheckBox *boxLegend, *boxSmooth, *boxBoxed, *boxCrossSmooth, *boxOrthogonal;
+    QListWidget *axesList, *axesList2;
+    QComboBox *boxType, *boxPointStyle;
+    QLineEdit *boxMajorLength, *boxMinorLength, *boxConesRad;
+    QDoubleSpinBox *boxZoom, *boxXScale, *boxYScale, *boxZScale;
+    QSpinBox *boxQuality;
+    QLineEdit *boxSize, *boxBarsRad, *boxCrossRad, *boxCrossLinewidth;
+    QStackedWidget *optionStack;
+    QWidget *dotsPage, *conesPage, *crossPage;
 };
 
 #endif

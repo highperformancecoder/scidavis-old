@@ -43,22 +43,22 @@ class CurveRangeDialog : public QDialog
     Q_OBJECT
 
 public:
-    CurveRangeDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
-    ~CurveRangeDialog(){};
+    CurveRangeDialog(QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    ~CurveRangeDialog() {};
 
-	QPushButton* buttonOK;
-	QPushButton* buttonCancel;
-	QLabel* boxName;
-	QSpinBox* boxStart;
-	QSpinBox* boxEnd;
+    QPushButton *buttonOK;
+    QPushButton *buttonCancel;
+    QLabel *boxName;
+    QSpinBox *boxStart;
+    QSpinBox *boxEnd;
 
 public slots:
-	void setCurveToModify(Graph *g, int curve);
-	void accept();
+    void setCurveToModify(Graph *g, int curve);
+    void accept();
 
 private:
-	DataCurve *d_curve;
-	Graph *d_graph;
+    DataCurve *d_curve;
+    Graph *d_graph;
 };
 
 #endif

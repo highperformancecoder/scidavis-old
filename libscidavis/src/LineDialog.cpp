@@ -47,112 +47,111 @@
 #include <QComboBox>
 #include <QTabWidget>
 
-LineDialog::LineDialog( ArrowMarker *line, QWidget* parent, Qt::WindowFlags fl )
-    : QDialog( parent, fl )
+LineDialog::LineDialog(ArrowMarker *line, QWidget *parent, Qt::WindowFlags fl) : QDialog(parent, fl)
 {
-    setWindowTitle( tr( "Line options" ) );
+    setWindowTitle(tr("Line options"));
 
-	lm = line;
+    lm = line;
 
-	QGroupBox *gb1 = new QGroupBox();
-	QGridLayout *gl1 = new QGridLayout();
+    QGroupBox *gb1 = new QGroupBox();
+    QGridLayout *gl1 = new QGridLayout();
 
-	penWidget = new PenWidget(this,lm->linePen());
-	penWidget->setPen(lm->linePen());
-	gl1->addWidget(penWidget, 0, 0, 1, 2);
+    penWidget = new PenWidget(this, lm->linePen());
+    penWidget->setPen(lm->linePen());
+    gl1->addWidget(penWidget, 0, 0, 1, 2);
 
-	startBox = new QCheckBox();
-    startBox->setText( tr( "Arrow at &start" ) );
-	startBox->setChecked(lm->hasStartArrow());
-	gl1->addWidget(startBox, 1, 0, Qt::AlignTop);
+    startBox = new QCheckBox();
+    startBox->setText(tr("Arrow at &start"));
+    startBox->setChecked(lm->hasStartArrow());
+    gl1->addWidget(startBox, 1, 0, Qt::AlignTop);
 
-	endBox = new QCheckBox();
-    endBox->setText( tr( "Arrow at &end" ) );
-	endBox->setChecked(lm->hasEndArrow());
-	gl1->addWidget(endBox, 1, 1, Qt::AlignTop);
+    endBox = new QCheckBox();
+    endBox->setText(tr("Arrow at &end"));
+    endBox->setChecked(lm->hasEndArrow());
+    gl1->addWidget(endBox, 1, 1, Qt::AlignTop);
 
-	gb1->setLayout(gl1);
+    gb1->setLayout(gl1);
 
-	QHBoxLayout* hl1 = new QHBoxLayout();
+    QHBoxLayout *hl1 = new QHBoxLayout();
     hl1->addWidget(gb1);
 
-	options = new QWidget();
+    options = new QWidget();
     options->setLayout(hl1);
 
-	tw = new QTabWidget();
-	tw->addTab(options, tr( "Opti&ons" ) );
+    tw = new QTabWidget();
+    tw->addTab(options, tr("Opti&ons"));
 
     QGroupBox *gb2 = new QGroupBox();
     QGridLayout *gl2 = new QGridLayout();
 
     gl2->addWidget(new QLabel(tr("Length")), 0, 0);
-	boxHeadLength = new QSpinBox();
-	boxHeadLength->setValue(lm->headLength());
-	gl2->addWidget(boxHeadLength, 0, 1);
+    boxHeadLength = new QSpinBox();
+    boxHeadLength->setValue(lm->headLength());
+    gl2->addWidget(boxHeadLength, 0, 1);
 
-	gl2->addWidget(new QLabel(tr( "Angle" )), 1, 0 );
-	boxHeadAngle = new QSpinBox();
-	boxHeadAngle->setRange(0, 85);
-	boxHeadAngle->setSingleStep(5);
-	boxHeadAngle->setValue(lm->headAngle());
-	gl2->addWidget(boxHeadAngle, 1, 1);
+    gl2->addWidget(new QLabel(tr("Angle")), 1, 0);
+    boxHeadAngle = new QSpinBox();
+    boxHeadAngle->setRange(0, 85);
+    boxHeadAngle->setSingleStep(5);
+    boxHeadAngle->setValue(lm->headAngle());
+    gl2->addWidget(boxHeadAngle, 1, 1);
 
-	filledBox = new QCheckBox();
-    filledBox->setText( tr( "&Filled" ) );
-	filledBox->setChecked(lm->filledArrowHead());
-	gl2->addWidget(filledBox, 2, 1);
+    filledBox = new QCheckBox();
+    filledBox->setText(tr("&Filled"));
+    filledBox->setChecked(lm->filledArrowHead());
+    gl2->addWidget(filledBox, 2, 1);
 
-	gb2->setLayout(gl2);
+    gb2->setLayout(gl2);
 
-	QHBoxLayout* hl2 = new QHBoxLayout();
+    QHBoxLayout *hl2 = new QHBoxLayout();
     hl2->addWidget(gb2);
 
     head = new QWidget();
     head->setLayout(hl2);
-	tw->addTab(head, tr("Arrow &Head"));
+    tw->addTab(head, tr("Arrow &Head"));
 
-	initGeometryTab();
+    initGeometryTab();
 
-	buttonDefault = new QPushButton( tr( "Set &Default" ) );
-	btnApply = new QPushButton( tr( "&Apply" ) );
-	btnOk = new QPushButton(tr( "&Ok" ) );
+    buttonDefault = new QPushButton(tr("Set &Default"));
+    btnApply = new QPushButton(tr("&Apply"));
+    btnOk = new QPushButton(tr("&Ok"));
     btnOk->setDefault(true);
 
-    QBoxLayout *bl1 = new QBoxLayout (QBoxLayout::LeftToRight);
+    QBoxLayout *bl1 = new QBoxLayout(QBoxLayout::LeftToRight);
     bl1->addStretch();
-	bl1->addWidget(buttonDefault);
-	bl1->addWidget(btnApply);
-	bl1->addWidget(btnOk);
+    bl1->addWidget(buttonDefault);
+    bl1->addWidget(btnApply);
+    bl1->addWidget(btnOk);
 
-	QVBoxLayout* vl = new QVBoxLayout();
+    QVBoxLayout *vl = new QVBoxLayout();
     vl->addWidget(tw);
-	vl->addLayout(bl1);
-	setLayout(vl);
+    vl->addLayout(bl1);
+    setLayout(vl);
 
-	enableHeadTab();
+    enableHeadTab();
 
-	connect( btnOk, SIGNAL( clicked() ), this, SLOT(accept() ) );
-	connect( btnApply, SIGNAL( clicked() ), this, SLOT(apply() ) );
-	connect( tw, SIGNAL(currentChanged (int)), this, SLOT(enableButtonDefault(int)));
-	connect( buttonDefault, SIGNAL(clicked()), this, SLOT(setDefaultValues()));
+    connect(btnOk, SIGNAL(clicked()), this, SLOT(accept()));
+    connect(btnApply, SIGNAL(clicked()), this, SLOT(apply()));
+    connect(tw, SIGNAL(currentChanged(int)), this, SLOT(enableButtonDefault(int)));
+    connect(buttonDefault, SIGNAL(clicked()), this, SLOT(setDefaultValues()));
 }
 
 void LineDialog::initGeometryTab()
 {
-	unitBox = new QComboBox();
-	unitBox->addItem(tr("Scale Coordinates"));
-	unitBox->addItem(tr("Pixels"));
+    unitBox = new QComboBox();
+    unitBox->addItem(tr("Scale Coordinates"));
+    unitBox->addItem(tr("Pixels"));
 
-	QBoxLayout *bl1 = new QBoxLayout (QBoxLayout::LeftToRight);
-	bl1->addWidget(new QLabel(tr( "Unit" )));
-	bl1->addWidget(unitBox);
+    QBoxLayout *bl1 = new QBoxLayout(QBoxLayout::LeftToRight);
+    bl1->addWidget(new QLabel(tr("Unit")));
+    bl1->addWidget(unitBox);
 
     QGroupBox *gb1 = new QGroupBox(tr("Start Point"));
-	xStartBox = new QLineEdit();
-	yStartBox = new QLineEdit();
+    xStartBox = new QLineEdit();
+    yStartBox = new QLineEdit();
 
     QGridLayout *gl1 = new QGridLayout();
-    gl1->addWidget(new QLabel( tr("X")), 0, 0);
+    gl1->addWidget(new QLabel(tr("X")), 0, 0);
     gl1->addWidget(xStartBox, 0, 1);
     gl1->addWidget(new QLabel(tr("Y")), 1, 0);
     gl1->addWidget(yStartBox, 1, 1);
@@ -160,132 +159,121 @@ void LineDialog::initGeometryTab()
 
     QGroupBox *gb2 = new QGroupBox(tr("End Point"));
     xEndBox = new QLineEdit();
-	yEndBox = new QLineEdit();
+    yEndBox = new QLineEdit();
 
     QGridLayout *gl2 = new QGridLayout();
-    gl2->addWidget(new QLabel( tr("X")), 0, 0);
+    gl2->addWidget(new QLabel(tr("X")), 0, 0);
     gl2->addWidget(xEndBox, 0, 1);
     gl2->addWidget(new QLabel(tr("Y")), 1, 0);
     gl2->addWidget(yEndBox, 1, 1);
     gb2->setLayout(gl2);
 
-    QBoxLayout *bl2 = new QBoxLayout (QBoxLayout::LeftToRight);
-	bl2->addWidget(gb1);
-	bl2->addWidget(gb2);
+    QBoxLayout *bl2 = new QBoxLayout(QBoxLayout::LeftToRight);
+    bl2->addWidget(gb1);
+    bl2->addWidget(gb2);
 
-	QVBoxLayout* vl = new QVBoxLayout();
+    QVBoxLayout *vl = new QVBoxLayout();
     vl->addLayout(bl1);
     vl->addLayout(bl2);
 
     geometry = new QWidget();
     geometry->setLayout(vl);
-	tw->addTab(geometry, tr( "&Geometry" ) );
+    tw->addTab(geometry, tr("&Geometry"));
 
-	connect( unitBox, SIGNAL( activated(int) ), this, SLOT(displayCoordinates(int) ) );
-	displayCoordinates(0);
+    connect(unitBox, SIGNAL(activated(int)), this, SLOT(displayCoordinates(int)));
+    displayCoordinates(0);
 }
 
 void LineDialog::displayCoordinates(int unit)
 {
-if (unit == ScaleCoordinates)
-	{
-	QwtDoublePoint sp = lm->startPointCoord();
-	xStartBox->setText(QString::number(sp.x()));
-	yStartBox->setText(QString::number(sp.y()));
+    if (unit == ScaleCoordinates) {
+        QwtDoublePoint sp = lm->startPointCoord();
+        xStartBox->setText(QString::number(sp.x()));
+        yStartBox->setText(QString::number(sp.y()));
 
-	QwtDoublePoint ep = lm->endPointCoord();
-	xEndBox->setText(QString::number(ep.x()));
-	yEndBox->setText(QString::number(ep.y()));
-	}
-else
-	{
-	QPoint startPoint = lm->startPoint();
-	QPoint endPoint = lm->endPoint();
+        QwtDoublePoint ep = lm->endPointCoord();
+        xEndBox->setText(QString::number(ep.x()));
+        yEndBox->setText(QString::number(ep.y()));
+    } else {
+        QPoint startPoint = lm->startPoint();
+        QPoint endPoint = lm->endPoint();
 
-	xStartBox->setText(QString::number(startPoint.x()));
-	yStartBox->setText(QString::number(startPoint.y()));
+        xStartBox->setText(QString::number(startPoint.x()));
+        yStartBox->setText(QString::number(startPoint.y()));
 
-	xEndBox->setText(QString::number(endPoint.x()));
-	yEndBox->setText(QString::number(endPoint.y()));
-	}
+        xEndBox->setText(QString::number(endPoint.x()));
+        yEndBox->setText(QString::number(endPoint.y()));
+    }
 }
 
 void LineDialog::setCoordinates(int unit)
 {
-if (unit == ScaleCoordinates)
-	{
-	lm->setStartPoint(xStartBox->text().replace(",", ".").toDouble(),
-							yStartBox->text().replace(",", ".").toDouble());
-	lm->setEndPoint(xEndBox->text().replace(",", ".").toDouble(),
-						yEndBox->text().replace(",", ".").toDouble());
-	}
-else
-	{
-	lm->setStartPoint(QPoint(xStartBox->text().toInt(), yStartBox->text().toInt()));
-	lm->setEndPoint(QPoint(xEndBox->text().toInt(), yEndBox->text().toInt()));
-	}
+    if (unit == ScaleCoordinates) {
+        lm->setStartPoint(xStartBox->text().replace(",", ".").toDouble(),
+                          yStartBox->text().replace(",", ".").toDouble());
+        lm->setEndPoint(xEndBox->text().replace(",", ".").toDouble(),
+                        yEndBox->text().replace(",", ".").toDouble());
+    } else {
+        lm->setStartPoint(QPoint(xStartBox->text().toInt(), yStartBox->text().toInt()));
+        lm->setEndPoint(QPoint(xEndBox->text().toInt(), yEndBox->text().toInt()));
+    }
 }
 
 void LineDialog::apply()
 {
-if (tw->currentWidget()==(QWidget *)options)
-	{
-	lm->drawEndArrow(endBox->isChecked());
-	lm->drawStartArrow(startBox->isChecked());
-	lm->setLinePen(penWidget->pen());
-	}
-else if (tw->currentWidget()==(QWidget *)head)
-	{
-	if (lm->headLength() != boxHeadLength->value())
-		lm->setHeadLength( boxHeadLength->value() );
+    if (tw->currentWidget() == (QWidget *)options) {
+        lm->drawEndArrow(endBox->isChecked());
+        lm->drawStartArrow(startBox->isChecked());
+        lm->setLinePen(penWidget->pen());
+    } else if (tw->currentWidget() == (QWidget *)head) {
+        if (lm->headLength() != boxHeadLength->value())
+            lm->setHeadLength(boxHeadLength->value());
 
-	if (lm->headAngle() != boxHeadAngle->value())
-		lm->setHeadAngle( boxHeadAngle->value() );
+        if (lm->headAngle() != boxHeadAngle->value())
+            lm->setHeadAngle(boxHeadAngle->value());
 
-	if (lm->filledArrowHead() != filledBox->isChecked())
-		lm->fillArrowHead( filledBox->isChecked() );
-	}
-else if (tw->currentWidget()==(QWidget *)geometry)
-	setCoordinates(unitBox->currentIndex());
+        if (lm->filledArrowHead() != filledBox->isChecked())
+            lm->fillArrowHead(filledBox->isChecked());
+    } else if (tw->currentWidget() == (QWidget *)geometry)
+        setCoordinates(unitBox->currentIndex());
 
-QwtPlot *plot = lm->plot();
-Graph *g = (Graph *)plot->parent();
-plot->replot();
-g->notifyChanges();
+    QwtPlot *plot = lm->plot();
+    Graph *g = (Graph *)plot->parent();
+    plot->replot();
+    g->notifyChanges();
 
-enableHeadTab();
+    enableHeadTab();
 }
 
 void LineDialog::accept()
 {
-apply();
-close();
+    apply();
+    close();
 }
 
 void LineDialog::enableHeadTab()
 {
-if (startBox->isChecked() || endBox->isChecked())
-	tw->setTabEnabled (tw->indexOf(head), true);
-else
-	tw->setTabEnabled (tw->indexOf(head), false);
+    if (startBox->isChecked() || endBox->isChecked())
+        tw->setTabEnabled(tw->indexOf(head), true);
+    else
+        tw->setTabEnabled(tw->indexOf(head), false);
 }
 
 void LineDialog::setDefaultValues()
 {
-ApplicationWindow *app = (ApplicationWindow *)this->parent();
-if (!app)
-	return;
+    ApplicationWindow *app = (ApplicationWindow *)this->parent();
+    if (!app)
+        return;
 
-app->setArrowDefaultSettings(penWidget->pen(),
-							boxHeadLength->value(), boxHeadAngle->value(), filledBox->isChecked());
+    app->setArrowDefaultSettings(penWidget->pen(), boxHeadLength->value(), boxHeadAngle->value(),
+                                 filledBox->isChecked());
 }
 
 void LineDialog::enableButtonDefault(int page)
 {
-	QWidget* pageWidget = tw->widget(page);
-if (pageWidget == geometry)
-	buttonDefault->setEnabled(false);
-else
-	buttonDefault->setEnabled(true);
+    QWidget *pageWidget = tw->widget(page);
+    if (pageWidget == geometry)
+        buttonDefault->setEnabled(false);
+    else
+        buttonDefault->setEnabled(true);
 }
-

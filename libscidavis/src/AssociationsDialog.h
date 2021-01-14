@@ -46,11 +46,11 @@ class AssociationsDialog : public QDialog
     Q_OBJECT
 
 public:
-    AssociationsDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    AssociationsDialog(QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
     ~AssociationsDialog();
 
-    void initTablesList(QList<MyWidget*>* lst, int curve);
-	void setGraph(Graph *g);
+    void initTablesList(QList<MyWidget *> *lst, int curve);
+    void setGraph(Graph *g);
 
 private slots:
     void updateTable(int index);
@@ -58,24 +58,24 @@ private slots:
     void accept();
 
 private:
-    void changePlotAssociation(int curve, const QString& text);
-	void updateColumnTypes();
-	void uncheckCol(int col);
-	void updatePlotAssociation(int row, int col);
-	QString plotAssociation(const QString& text);
+    void changePlotAssociation(int curve, const QString &text);
+    void updateColumnTypes();
+    void uncheckCol(int col);
+    void updatePlotAssociation(int row, int col);
+    QString plotAssociation(const QString &text);
     Table *findTable(int index);
     bool eventFilter(QObject *object, QEvent *e);
 
-	QList<MyWidget*>* tables;
-	Table *active_table;
-	Graph *graph;
-	QStringList plotAssociationsList;
-	QList<int> dataCurvesList;
+    QList<MyWidget *> *tables;
+    Table *active_table;
+    Graph *graph;
+    QStringList plotAssociationsList;
+    QList<int> dataCurvesList;
 
-    QLabel* tableCaptionLabel;
-	QTableWidget *table;
-	QPushButton *btnOK, *btnCancel, *btnApply;
-    QListWidget* associations;
+    QLabel *tableCaptionLabel;
+    QTableWidget *table;
+    QPushButton *btnOK, *btnCancel, *btnApply;
+    QListWidget *associations;
 };
 
 #endif // ASSOCIATIONSDIALOG_H

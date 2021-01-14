@@ -1,10 +1,10 @@
 /***************************************************************************
-	File                 : PythonScript.h
-	Project              : SciDAVis
+        File                 : PythonScript.h
+        Project              : SciDAVis
 --------------------------------------------------------------------
-	Copyright            : (C) 2006 by Knut Franke
-	Email (use @ for *)  : knut.franke*gmx.de
-	Description          : Execute Python code from within SciDAVis
+        Copyright            : (C) 2006 by Knut Franke
+        Email (use @ for *)  : knut.franke*gmx.de
+        Description          : Execute Python code from within SciDAVis
 
  ***************************************************************************/
 
@@ -40,31 +40,31 @@ class ScriptingEnv;
 
 class PythonScript : public Script
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  PythonScript(PythonScripting *env, const QString &code, QObject *context=0, const QString &name="<input>");
-  ~PythonScript();
+    PythonScript(PythonScripting *env, const QString &code, QObject *context = 0,
+                 const QString &name = "<input>");
+    ~PythonScript();
 
-  void write(const QString &text) { emit print(text); }
+    void write(const QString &text) { emit print(text); }
 
 public slots:
-  bool compile(bool for_eval=true) override;
-  QVariant eval() override;
-  bool exec() override;
-  bool setQObject(QObject *val, const char *name) override;
-  bool setInt(int val, const char* name) override;
-  bool setDouble(double val, const char* name) override;
-  void setContext(QObject *context) override;
+    bool compile(bool for_eval = true) override;
+    QVariant eval() override;
+    bool exec() override;
+    bool setQObject(QObject *val, const char *name) override;
+    bool setInt(int val, const char *name) override;
+    bool setDouble(double val, const char *name) override;
+    void setContext(QObject *context) override;
 
 private:
-  PythonScripting *env() { return (PythonScripting*)Env; }
-  void beginStdoutRedirect();
-  void endStdoutRedirect();
+    PythonScripting *env() { return (PythonScripting *)Env; }
+    void beginStdoutRedirect();
+    void endStdoutRedirect();
 
-  PyObject *PyCode, *modLocalDict, *modGlobalDict, *stdoutSave, *stderrSave;
-  bool isFunction, hasOldGlobals;
+    PyObject *PyCode, *modLocalDict, *modGlobalDict, *stdoutSave, *stderrSave;
+    bool isFunction, hasOldGlobals;
 };
-
 
 #endif

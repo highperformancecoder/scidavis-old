@@ -46,58 +46,58 @@ class FunctionDialog : public QDialog
     Q_OBJECT
 
 public:
-    FunctionDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    FunctionDialog(QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
 
 protected:
-	QComboBox* boxXFunction;
-    QComboBox* boxYFunction;
-    QComboBox* boxPolarRadius;
-    QComboBox* boxPolarTheta;
-    QComboBox* boxType;
-    QLabel* textFunction;
-    QLineEdit* boxFrom;
-    QLineEdit* boxTo;
-	QLineEdit* boxParameter;
-    QLineEdit* boxParFrom;
-    QLineEdit* boxParTo;
-	QLineEdit* boxPolarParameter;
-    QLineEdit* boxPolarFrom;
-    QLineEdit* boxPolarTo;
-	 QPushButton *buttonApply;
-    QPushButton* buttonClear;
-    QPushButton* buttonCancel;
-    QPushButton* buttonOk;
-	QSpinBox* boxPoints;
-	QSpinBox* boxParPoints;
-	QSpinBox* boxPolarPoints;
-	QStackedWidget* optionStack;
-    QTextEdit* boxFunction;
-	QWidget* functionPage;
-	QWidget* polarPage;
-	QWidget* parametricPage;
+    QComboBox *boxXFunction;
+    QComboBox *boxYFunction;
+    QComboBox *boxPolarRadius;
+    QComboBox *boxPolarTheta;
+    QComboBox *boxType;
+    QLabel *textFunction;
+    QLineEdit *boxFrom;
+    QLineEdit *boxTo;
+    QLineEdit *boxParameter;
+    QLineEdit *boxParFrom;
+    QLineEdit *boxParTo;
+    QLineEdit *boxPolarParameter;
+    QLineEdit *boxPolarFrom;
+    QLineEdit *boxPolarTo;
+    QPushButton *buttonApply;
+    QPushButton *buttonClear;
+    QPushButton *buttonCancel;
+    QPushButton *buttonOk;
+    QSpinBox *boxPoints;
+    QSpinBox *boxParPoints;
+    QSpinBox *boxPolarPoints;
+    QStackedWidget *optionStack;
+    QTextEdit *boxFunction;
+    QWidget *functionPage;
+    QWidget *polarPage;
+    QWidget *parametricPage;
 
 protected slots:
-	void raiseWidget(int index);
+    void raiseWidget(int index);
 
 public slots:
-	bool apply();
-	void accept();
-	bool acceptFunction();
-	bool acceptParametric();
-	bool acceptPolar();
-	void setCurveToModify(Graph *g, int curve);
-	void insertParamFunctionsList(const QStringList& xList, const QStringList& yList);
-	void insertPolarFunctionsList(const QStringList& rList, const QStringList& thetaList);
-	void clearList();
-	void setGraph(Graph *g){graph = g;};
+    bool apply();
+    void accept();
+    bool acceptFunction();
+    bool acceptParametric();
+    bool acceptPolar();
+    void setCurveToModify(Graph *g, int curve);
+    void insertParamFunctionsList(const QStringList &xList, const QStringList &yList);
+    void insertPolarFunctionsList(const QStringList &rList, const QStringList &thetaList);
+    void clearList();
+    void setGraph(Graph *g) { graph = g; };
 
 signals:
-	void clearParamFunctionsList();
-	void clearPolarFunctionsList();
+    void clearParamFunctionsList();
+    void clearPolarFunctionsList();
 
 private:
-	Graph *graph;
-	int curveID;
+    Graph *graph;
+    int curveID;
 };
 
 #endif // FUNCTIONDIALOG_H

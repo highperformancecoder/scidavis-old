@@ -33,38 +33,40 @@
 
 class Integration : public Filter
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-	enum InterpolationMethod{Linear, Cubic, Akima};
+    enum InterpolationMethod { Linear, Cubic, Akima };
 
-	Integration(ApplicationWindow *parent, Graph *g);
-	Integration(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-	Integration(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+    Integration(ApplicationWindow *parent, Graph *g);
+    Integration(ApplicationWindow *parent, Graph *g, const QString &curveTitle);
+    Integration(ApplicationWindow *parent, Graph *g, const QString &curveTitle, double start,
+                double end);
 
-    InterpolationMethod method(){return d_method;};
-    void setMethod(InterpolationMethod method) {
-		 InterpolationMethod backup = d_method;
-		 d_method = method;
-		 if (!isDataAcceptable())
-			 d_method = backup;
-	 };
+    InterpolationMethod method() { return d_method; };
+    void setMethod(InterpolationMethod method)
+    {
+        InterpolationMethod backup = d_method;
+        d_method = method;
+        if (!isDataAcceptable())
+            d_method = backup;
+    };
 
-	 double result() { return d_result; }
+    double result() { return d_result; }
 
 protected:
-	virtual bool isDataAcceptable();
+    virtual bool isDataAcceptable();
 
 private:
     void init();
     double trapezoid();
     QString logInfo();
-    void output(){};
+    void output() {};
 
     //! The method for computing the interpolation used for integrating.
     InterpolationMethod d_method;
 
-	 double d_result;
+    double d_result;
 };
 
 #endif

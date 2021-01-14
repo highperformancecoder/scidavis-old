@@ -29,15 +29,11 @@
 
 #include "PlotEnrichement.h"
 
-PlotEnrichement::PlotEnrichement():
-	d_x_right(0),
-    d_y_bottom(0),
-    d_pos(QPoint()),
-    d_size(QSize())
+PlotEnrichement::PlotEnrichement() : d_x_right(0), d_y_bottom(0), d_pos(QPoint()), d_size(QSize())
 {
 }
 
-void PlotEnrichement::setOrigin(const QPoint& p)
+void PlotEnrichement::setOrigin(const QPoint &p)
 {
     d_pos = p;
 
@@ -80,7 +76,8 @@ void PlotEnrichement::updateBoundingRect()
 
 QwtDoubleRect PlotEnrichement::boundingRect() const
 {
-    return QwtDoubleRect(xValue(), yValue(), qAbs(d_x_right - xValue()), qAbs(d_y_bottom - yValue()));
+    return QwtDoubleRect(xValue(), yValue(), qAbs(d_x_right - xValue()),
+                         qAbs(d_y_bottom - yValue()));
 }
 
 void PlotEnrichement::setRect(int x, int y, int w, int h)

@@ -6,7 +6,7 @@
                            Knut Franke
     Email (use @ for *)  : thzs*gmx.net, knut.franke*gmx.de
     Description          : Conversion filter QDateTime -> double (using Julian day).
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -40,25 +40,27 @@
 //! Conversion filter QDateTime -> double (using Julian day).
 class DateTime2DoubleFilter : public AbstractSimpleFilter
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		virtual double valueAt(int row) const {
-			if (!d_inputs.value(0)) return 0;
-			QDateTime input_value = d_inputs.value(0)->dateTimeAt(row);
-			// 2440587.5 is julian date for unix epoch (1970-01-01T00:00:00)
-			return input_value.toMSecsSinceEpoch()/86400000.0 + 2440587.5;
-		}
+public:
+    virtual double valueAt(int row) const
+    {
+        if (!d_inputs.value(0))
+            return 0;
+        QDateTime input_value = d_inputs.value(0)->dateTimeAt(row);
+        // 2440587.5 is julian date for unix epoch (1970-01-01T00:00:00)
+        return input_value.toMSecsSinceEpoch() / 86400000.0 + 2440587.5;
+    }
 
-		//! Return the data type of the column
-		virtual SciDAVis::ColumnDataType dataType() const { return SciDAVis::TypeDouble; }
+    //! Return the data type of the column
+    virtual SciDAVis::ColumnDataType dataType() const { return SciDAVis::TypeDouble; }
 
-	protected:
-		//! Using typed ports: only DateTime inputs are accepted.
-		virtual bool inputAcceptable(int, const AbstractColumn *source) {
-			return source->dataType() == SciDAVis::TypeQDateTime;
-		}
+protected:
+    //! Using typed ports: only DateTime inputs are accepted.
+    virtual bool inputAcceptable(int, const AbstractColumn *source)
+    {
+        return source->dataType() == SciDAVis::TypeQDateTime;
+    }
 };
 
 #endif // ifndef DATE_TIME2DOUBLE_FILTER_H
-

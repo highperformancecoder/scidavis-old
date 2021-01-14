@@ -53,13 +53,13 @@ class ImageMarker;
  *
  * At every point in time, the list of managed targets must be non-empty,
  * so that the SelectionMoveResizer has a well-defined bounding rectangle.
- * When there are no more selected targets, it deletes itself, so references to a SelectionMoveResizer
- * should be maintained by QPointer and checked for validity before use.
+ * When there are no more selected targets, it deletes itself, so references to a
+ * SelectionMoveResizer should be maintained by QPointer and checked for validity before use.
  *
  * QWidget targets are automatically removed when they are deleted (possibly also deleting the
  * SelectionMoveResizer), using the QObject::destroyed() signal. With QwtPlotMarker, this is not
- * possible since it's not a QObject. Thus, care has to be taken to remove them before or shortly after deletion,
- * lest the wrath of Segmentation Fault shall come upon you.
+ * possible since it's not a QObject. Thus, care has to be taken to remove them before or shortly
+ * after deletion, lest the wrath of Segmentation Fault shall come upon you.
  *
  * \section design Design Ideas
  *   - Keep as much of the select/move/resize code as possible in one class to ease maintanance.
@@ -75,11 +75,11 @@ class ImageMarker;
  *   .
  *
  * \section future_plans Future Plans
- * See the documentation of ImageMarker for ideas about replacing QwtPlotMarker with a new QwtPlotItem subclass.
- * For SelectionMoveResizer this would mean supporting new enrichments without modifications and being able
- * to automatically remove them upon deletion (if the new class inherits QObject).
- * Not to mention that the implementation would be a lot cleaner if we would only have to handle two target classes
- * instead of four.
+ * See the documentation of ImageMarker for ideas about replacing QwtPlotMarker with a new
+ * QwtPlotItem subclass. For SelectionMoveResizer this would mean supporting new enrichments without
+ * modifications and being able to automatically remove them upon deletion (if the new class
+ * inherits QObject). Not to mention that the implementation would be a lot cleaner if we would only
+ * have to handle two target classes instead of four.
  *
  * Think about turning SelectionMoveResizer into an input method for general affine transformations.
  * Particularly, this would add rotation, flipping and shearing.
@@ -88,124 +88,135 @@ class ImageMarker;
  */
 class SelectionMoveResizer : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		//! Construct a new MoveResizer with the given marker as the only target.
-		SelectionMoveResizer(Legend *target);
-		//! Construct a new MoveResizer with the given marker as the only target.
-		SelectionMoveResizer(ArrowMarker *target);
-		//! Construct a new MoveResizer with the given marker as the only target.
-		SelectionMoveResizer(ImageMarker *target);
-		//! Construct a new MoveResizer with the given widget as the only target.
-		SelectionMoveResizer(QWidget *target);
-		//! Clean up after myself.
-		~SelectionMoveResizer();
-		/*!\brief React on geometry changes of parent and targets.
-		 */
-		virtual bool eventFilter(QObject *o, QEvent *e);
-		//! Returns true if w is one of targets, false else.
-		bool contains(QWidget *w) const { return d_widgets.contains(w); };
-		//! Returns true if m is one of targets, false else.
-		bool contains(Legend *m) const { return d_legend_markers.contains(m); };
-		//! Returns true if m is one of targets, false else.
-		bool contains(ArrowMarker *m) const { return d_line_markers.contains(m); };
-		//! Returns true if m is one of targets, false else.
-		bool contains(ImageMarker *m) const { return d_image_markers.contains(m); };
+public:
+    //! Construct a new MoveResizer with the given marker as the only target.
+    SelectionMoveResizer(Legend *target);
+    //! Construct a new MoveResizer with the given marker as the only target.
+    SelectionMoveResizer(ArrowMarker *target);
+    //! Construct a new MoveResizer with the given marker as the only target.
+    SelectionMoveResizer(ImageMarker *target);
+    //! Construct a new MoveResizer with the given widget as the only target.
+    SelectionMoveResizer(QWidget *target);
+    //! Clean up after myself.
+    ~SelectionMoveResizer();
+    /*!\brief React on geometry changes of parent and targets.
+     */
+    virtual bool eventFilter(QObject *o, QEvent *e);
+    //! Returns true if w is one of targets, false else.
+    bool contains(QWidget *w) const { return d_widgets.contains(w); };
+    //! Returns true if m is one of targets, false else.
+    bool contains(Legend *m) const { return d_legend_markers.contains(m); };
+    //! Returns true if m is one of targets, false else.
+    bool contains(ArrowMarker *m) const { return d_line_markers.contains(m); };
+    //! Returns true if m is one of targets, false else.
+    bool contains(ImageMarker *m) const { return d_image_markers.contains(m); };
 
-	public slots:
-		//! Add target to the list of items to be moved/resized together.
-		void add(Legend *target);
-		//! Add target to the list of items to be moved/resized together.
-		void add(ArrowMarker *target);
-		//! Add target to the list of items to be moved/resized together.
-		void add(ImageMarker *target);
-		//! Add target to the list of items to be moved/resized together.
-		void add(QWidget *target);
-		//! Remove target from the list of items to be moved/resized together and returns the number of occurences removed.
-		int removeAll(Legend *target);
-		//! Remove target from the list of items to be moved/resized together and returns the number of occurences removed.
-		int removeAll(ArrowMarker *target);
-		//! Remove target from the list of items to be moved/resized together and returns the number of occurences removed.
-		int removeAll(ImageMarker *target);
-		//! Remove target from the list of items to be moved/resized together and returns the number of occurences removed.
-		int removeAll(QWidget *target);
-		//! Calculate #d_bounding_rect based on the bounding rectangles of all targets.
-		void recalcBoundingRect();
+public slots:
+    //! Add target to the list of items to be moved/resized together.
+    void add(Legend *target);
+    //! Add target to the list of items to be moved/resized together.
+    void add(ArrowMarker *target);
+    //! Add target to the list of items to be moved/resized together.
+    void add(ImageMarker *target);
+    //! Add target to the list of items to be moved/resized together.
+    void add(QWidget *target);
+    //! Remove target from the list of items to be moved/resized together and returns the number of occurences removed.
+    int removeAll(Legend *target);
+    //! Remove target from the list of items to be moved/resized together and returns the number of occurences removed.
+    int removeAll(ArrowMarker *target);
+    //! Remove target from the list of items to be moved/resized together and returns the number of occurences removed.
+    int removeAll(ImageMarker *target);
+    //! Remove target from the list of items to be moved/resized together and returns the number of occurences removed.
+    int removeAll(QWidget *target);
+    //! Calculate #d_bounding_rect based on the bounding rectangles of all targets.
+    void recalcBoundingRect();
 
-	signals:
-		//! Emitted when the targets are modified (moved or resized).
-		void targetsChanged();
+signals:
+    //! Emitted when the targets are modified (moved or resized).
+    void targetsChanged();
 
-	protected:
-		//! Available modes of operation.
-		enum Operation { None=-2, Move, Resize_N, Resize_NE, Resize_E, Resize_SE, Resize_S, Resize_SW, Resize_W, Resize_NW };
+protected:
+    //! Available modes of operation.
+    enum Operation {
+        None = -2,
+        Move,
+        Resize_N,
+        Resize_NE,
+        Resize_E,
+        Resize_SE,
+        Resize_S,
+        Resize_SW,
+        Resize_W,
+        Resize_NW
+    };
 
-		/*!\brief Draw frame and resize handlers.
-		 *
-		 * Besides managing resize operations, this also provides a visual feedback
-		 * on the selection state.
-		 */
-		virtual void paintEvent(QPaintEvent *e);
-		/*!\brief Mouse button presses start move/resize operations.
-		 *
-		 * Clicks outside of #d_bounding_rect or with anything else than the left button
-		 * are propagated to the parent as usual.
-		 */
-		virtual void mousePressEvent(QMouseEvent *e);
-		/*!\brief Mouse movements need to be monitored for updating the frame during operation.
-		 *
-		 * When no operation is in progress, the mouse cursor is updated based on its position
-		 * before the event is passed on to the parent.
-		 */
-		virtual void mouseMoveEvent(QMouseEvent *e);
-		/*!\brief Mouse releases end the current operation and apply it to the targets.
-		 *
-		 * When there is no operation in progress, the event is passed on to the parent.
-		 */
-		virtual void mouseReleaseEvent(QMouseEvent *e);
-		/*!\brief Allow keyboard-based moving of the selection.
-		 *
-		 * Unused keys are passed on to the parent.
-		 */
-		virtual void keyPressEvent(QKeyEvent *e);
-		//! Ignore double-clicks so that they can be used by my parent.
-		virtual void mouseDoubleClickEvent(QMouseEvent *e);
+    /*!\brief Draw frame and resize handlers.
+     *
+     * Besides managing resize operations, this also provides a visual feedback
+     * on the selection state.
+     */
+    virtual void paintEvent(QPaintEvent *e);
+    /*!\brief Mouse button presses start move/resize operations.
+     *
+     * Clicks outside of #d_bounding_rect or with anything else than the left button
+     * are propagated to the parent as usual.
+     */
+    virtual void mousePressEvent(QMouseEvent *e);
+    /*!\brief Mouse movements need to be monitored for updating the frame during operation.
+     *
+     * When no operation is in progress, the mouse cursor is updated based on its position
+     * before the event is passed on to the parent.
+     */
+    virtual void mouseMoveEvent(QMouseEvent *e);
+    /*!\brief Mouse releases end the current operation and apply it to the targets.
+     *
+     * When there is no operation in progress, the event is passed on to the parent.
+     */
+    virtual void mouseReleaseEvent(QMouseEvent *e);
+    /*!\brief Allow keyboard-based moving of the selection.
+     *
+     * Unused keys are passed on to the parent.
+     */
+    virtual void keyPressEvent(QKeyEvent *e);
+    //! Ignore double-clicks so that they can be used by my parent.
+    virtual void mouseDoubleClickEvent(QMouseEvent *e);
 
-	private:
-		//! Size of resize handle in pixels.
-		static const int handler_size = 10;
-		//! Return one of the rectangles to be filled for starting resize operations.
-		static const QRect handlerRect(QRect rect, Operation op);
-		//! Apply operation specified by #d_op and #d_op_dp to in.
-		QRect operateOn(const QRect in);
-		//! Apply operation specified by #d_op and #d_op_dp to all targets.
-		void operateOnTargets();
-		//! The initialization part common to all constructors.
-		void init();
-		//! Get the bounding rectangle of a marker in paint coordinates.
-		QRect boundingRectOf(QwtPlotMarker *target) const;
+private:
+    //! Size of resize handle in pixels.
+    static const int handler_size = 10;
+    //! Return one of the rectangles to be filled for starting resize operations.
+    static const QRect handlerRect(QRect rect, Operation op);
+    //! Apply operation specified by #d_op and #d_op_dp to in.
+    QRect operateOn(const QRect in);
+    //! Apply operation specified by #d_op and #d_op_dp to all targets.
+    void operateOnTargets();
+    //! The initialization part common to all constructors.
+    void init();
+    //! Get the bounding rectangle of a marker in paint coordinates.
+    QRect boundingRectOf(QwtPlotMarker *target) const;
 
-		//! Target markers I'm handling.
-		QList <Legend *> d_legend_markers;
-		//! Target markers I'm handling.
-		QList <ArrowMarker *> d_line_markers;
-		//! Target markers I'm handling.
-		QList <ImageMarker *> d_image_markers;
-		//! Target widgets I'm handling.
-		QList <QWidget *> d_widgets;
-		//! Bounding rectangle of all targets taken together, in drawing coordinates.
-		QRect d_bounding_rect;
-		//! The type of operation currently in progress.
-		Operation d_op;
-		//! Mouse position where an operation started; (-1,-1) means started by keyboard.
-		QPoint d_op_start;
-		//! Difference between current and start position during operation.
-		QPoint d_op_dp;
+    //! Target markers I'm handling.
+    QList<Legend *> d_legend_markers;
+    //! Target markers I'm handling.
+    QList<ArrowMarker *> d_line_markers;
+    //! Target markers I'm handling.
+    QList<ImageMarker *> d_image_markers;
+    //! Target widgets I'm handling.
+    QList<QWidget *> d_widgets;
+    //! Bounding rectangle of all targets taken together, in drawing coordinates.
+    QRect d_bounding_rect;
+    //! The type of operation currently in progress.
+    Operation d_op;
+    //! Mouse position where an operation started; (-1,-1) means started by keyboard.
+    QPoint d_op_start;
+    //! Difference between current and start position during operation.
+    QPoint d_op_dp;
 
-	private slots:
-		//! A non-typesafe version of remvoveAll(QWidget*) needed for QObject::destroyed().
-		void removeWidget(QObject* w) { removeAll((QWidget*) w); }
+private slots:
+    //! A non-typesafe version of remvoveAll(QWidget*) needed for QObject::destroyed().
+    void removeWidget(QObject *w) { removeAll((QWidget *)w); }
 };
 
 #endif // ifndef SELECTION_MOVE_RESIZER_H

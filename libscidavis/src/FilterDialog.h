@@ -44,27 +44,24 @@ class FilterDialog : public QDialog
     Q_OBJECT
 
 public:
-    FilterDialog(int type, QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
-    ~FilterDialog(){};
+    FilterDialog(int type, QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    ~FilterDialog() {};
 
-	QPushButton* buttonFilter;
-	QPushButton* buttonCancel;
-	QComboBox* boxName;
-	QCheckBox* boxOffset;
-	QLineEdit* boxStart;
-	QLineEdit* boxEnd;
-	ColorButton* btnColor;
+    QPushButton *buttonFilter;
+    QPushButton *buttonCancel;
+    QComboBox *boxName;
+    QCheckBox *boxOffset;
+    QLineEdit *boxStart;
+    QLineEdit *boxEnd;
+    ColorButton *btnColor;
 
 public slots:
-	void setGraph(Graph *g);
-	void filter();
+    void setGraph(Graph *g);
+    void filter();
 
 private:
-	Graph *graph;
-	int filter_type;
+    Graph *graph;
+    int filter_type;
 };
 
 #endif
-
-
-

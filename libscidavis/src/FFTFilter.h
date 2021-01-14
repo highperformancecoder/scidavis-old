@@ -33,16 +33,17 @@
 
 class FFTFilter : public Filter
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-	FFTFilter(ApplicationWindow *parent, Graph *g, const QString& curveTitle, int m = 1);
-	FFTFilter(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end, int m = 1);
+    FFTFilter(ApplicationWindow *parent, Graph *g, const QString &curveTitle, int m = 1);
+    FFTFilter(ApplicationWindow *parent, Graph *g, const QString &curveTitle, double start,
+              double end, int m = 1);
 
-    enum FilterType{LowPass = 1, HighPass = 2, BandPass = 3, BandBlock = 4};
+    enum FilterType { LowPass = 1, HighPass = 2, BandPass = 3, BandBlock = 4 };
 
     void setFilterType(int type);
-    void setFilterType(FilterType type){setFilterType((int)type);};
+    void setFilterType(FilterType type) { setFilterType((int)type); };
 
     //! Sets the cutoff frequency. To be used only for Low Pass and High Pass filters.
     void setCutoff(double f);
@@ -51,13 +52,13 @@ public:
     void setBand(double lowFreq, double highFreq);
 
     //! Enables/Disables the DC offset when applying a Band Pass/Band block filter.
-    void enableOffset(bool offset = true){d_offset = offset;};
+    void enableOffset(bool offset = true) { d_offset = offset; };
 
 private:
     void init(int m);
     void calculateOutputData(double *x, double *y);
 
-    //! The filter type. 
+    //! The filter type.
     FilterType d_filter_type;
 
     //! Cutoff frequency for Low Pass and High Pass filters. Lower edge of the band for Band Pass and Band block filters.

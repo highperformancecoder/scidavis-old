@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : A button used for color selection
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -36,13 +36,34 @@ class QHBoxLayout;
 class QFrame;
 
 #if QT_VERSION >= 0x050000
-static inline QString COLORNAME( QColor c ) { return c.name(QColor::HexArgb); }
-static inline QString COLORVALUE( QString s ) { return s; }
+static inline QString COLORNAME(QColor c)
+{
+    return c.name(QColor::HexArgb);
+}
+static inline QString COLORVALUE(QString s)
+{
+    return s;
+}
 #else
-static inline QString COLORNAME( QColor c ) { return ('#'+QString::number(c.rgba(),16)); }
-static inline QString COLORVALUE( QString s ) { if ((s[0]=='#') && (s.size()==9)) return s.remove(1,2); else return s; }
+static inline QString COLORNAME(QColor c)
+{
+    return ('#' + QString::number(c.rgba(), 16));
+}
+static inline QString COLORVALUE(QString s)
+{
+    if ((s[0] == '#') && (s.size() == 9))
+        return s.remove(1, 2);
+    else
+        return s;
+}
 #endif
-static inline uint    COLORUINT( QString s ) { if (s[0]=='#') return s.remove(0,1).toUInt(nullptr,16); else return s.toUInt(); }
+static inline uint COLORUINT(QString s)
+{
+    if (s[0] == '#')
+        return s.remove(0, 1).toUInt(nullptr, 16);
+    else
+        return s.toUInt();
+}
 
 //! A button used for color selection
 /**
@@ -52,45 +73,45 @@ static inline uint    COLORUINT( QString s ) { if (s[0]=='#') return s.remove(0,
  */
 class ColorButton : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	//! Constructor
-	ColorButton(QWidget *parent = 0);
-	//! Set the color of the display part
-	void setColor(const QColor& c);
-	//! Get the color of the display part
-	QColor color() const;
-	//! Return the index for a given color
-	static unsigned int colorIndex(const QColor& c);
-	//! Return the color at index 'colorindex'
-	static QColor color(unsigned int colorIndex);
-	//! Returns TRUE if the color is included in the color box, otherwise returns FALSE.
-	static bool isValidColor(const QColor& color);
-	//! The number of predefined colors
-	static const unsigned int colors_count;
-	QSize sizeHint() const;
+    //! Constructor
+    ColorButton(QWidget *parent = 0);
+    //! Set the color of the display part
+    void setColor(const QColor &c);
+    //! Get the color of the display part
+    QColor color() const;
+    //! Return the index for a given color
+    static unsigned int colorIndex(const QColor &c);
+    //! Return the color at index 'colorindex'
+    static QColor color(unsigned int colorIndex);
+    //! Returns TRUE if the color is included in the color box, otherwise returns FALSE.
+    static bool isValidColor(const QColor &color);
+    //! The number of predefined colors
+    static const unsigned int colors_count;
+    QSize sizeHint() const;
 
 private:
-	QPushButton *selectButton;
-	QFrame *display;
+    QPushButton *selectButton;
+    QFrame *display;
 
 signals:
-	//! Signal clicked: This is emitted when the selection button is clicked
-	void clicked();
-	void changed(QColor);
+    //! Signal clicked: This is emitted when the selection button is clicked
+    void clicked();
+    void changed(QColor);
 
 protected:
-	//! Initialize the widget (called from constructor)
-	void init();
-	//! Array containing the 24 predefined colors
-	static const QColor colors[];
+    //! Initialize the widget (called from constructor)
+    void init();
+    //! Array containing the 24 predefined colors
+    static const QColor colors[];
 
 private slots:
-	void pickColor();
+    void pickColor();
 
 private:
-	int btn_size;
+    int btn_size;
 };
 
 #endif

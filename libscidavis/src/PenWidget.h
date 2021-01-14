@@ -41,17 +41,19 @@ class QPushButton;
 class QValidator;
 class ColorButton;
 
-static const QSize DefaultSampleSize(24, 24), DefaultLineStyleSampleSize(92,4);
+static const QSize DefaultSampleSize(24, 24), DefaultLineStyleSampleSize(92, 4);
 
-QPixmap penCapSample(const Qt::PenCapStyle capStyle, const QPen &pen, const QSize &size=DefaultSampleSize);
-QPixmap penJoinSample(const Qt::PenJoinStyle joinStyle, const QPen &pen, const QSize &size=DefaultSampleSize);
+QPixmap penCapSample(const Qt::PenCapStyle capStyle, const QPen &pen,
+                     const QSize &size = DefaultSampleSize);
+QPixmap penJoinSample(const Qt::PenJoinStyle joinStyle, const QPen &pen,
+                      const QSize &size = DefaultSampleSize);
 
 class PenWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit PenWidget(QWidget *parent=0, QPen pen=QPen());
+    explicit PenWidget(QWidget *parent = 0, QPen pen = QPen());
 
     QPen pen() const { return m_pen; }
 
@@ -71,10 +73,11 @@ private slots:
     void toggleDashPattern(int);
     void customDashCheck(const QString &);
     QVector<qreal> dashPattern();
-    void setDashPattern(QString s){d_custom_dash = s;};
-    void setDashPattern(QVector<qreal> dp) {d_custom_dash = dashPatternToString(dp);};
+    void setDashPattern(QString s) { d_custom_dash = s; };
+    void setDashPattern(QVector<qreal> dp) { d_custom_dash = dashPatternToString(dp); };
     QString dashPatternToString(QVector<qreal>);
-    QPixmap penStyleSample(const Qt::PenStyle, const QPen &, const QSize &size=DefaultLineStyleSampleSize);
+    QPixmap penStyleSample(const Qt::PenStyle, const QPen &,
+                           const QSize &size = DefaultLineStyleSampleSize);
     void updateCustomDash();
 
 private:
@@ -89,9 +92,9 @@ private:
     QComboBox *capStyleComboBox;
     QComboBox *joinStyleComboBox;
 
-    QLabel* dashLabel;
-    QLineEdit* dashLineEdit;
-    QValidator* dashValidator;
+    QLabel *dashLabel;
+    QLineEdit *dashLineEdit;
+    QValidator *dashValidator;
 
     QPen m_pen;
     QString d_custom_dash;

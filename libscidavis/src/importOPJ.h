@@ -39,25 +39,25 @@
 class ImportOPJ
 {
 public:
-	ImportOPJ(ApplicationWindow *app, const QString& filename, const QString& codec);
+    ImportOPJ(ApplicationWindow *app, const QString &filename, const QString &codec);
 
-	bool createProjectTree(const OriginFile& opj);
-	bool importTables (const OriginFile& opj);
-	bool importGraphs (const OriginFile& opj);
-	bool importNotes (const OriginFile& opj);
-	bool importSpreadsheet(const OriginFile& opj, const Origin::SpreadSheet& spread);
-	int error(){return parse_error;};
+    bool createProjectTree(const OriginFile &opj);
+    bool importTables(const OriginFile &opj);
+    bool importGraphs(const OriginFile &opj);
+    bool importNotes(const OriginFile &opj);
+    bool importSpreadsheet(const OriginFile &opj, const Origin::SpreadSheet &spread);
+    int error() { return parse_error; };
 
 private:
-	bool setCodec(const QString& codecName);
-	QString decodeMbcs(char const * const input) const;
-	int translateOrigin2ScidavisLineStyle(int linestyle);
-	QString parseOriginText(const QString &str);
-	QString parseOriginTags(const QString &str);
-	int parse_error;
-	int xoffset;
-	ApplicationWindow *mw;
-	QTextCodec* d_codec; // the codec object is owned by Qt, this is actually a weak pointer.
+    bool setCodec(const QString &codecName);
+    QString decodeMbcs(char const *const input) const;
+    int translateOrigin2ScidavisLineStyle(int linestyle);
+    QString parseOriginText(const QString &str);
+    QString parseOriginTags(const QString &str);
+    int parse_error;
+    int xoffset;
+    ApplicationWindow *mw;
+    QTextCodec *d_codec; // the codec object is owned by Qt, this is actually a weak pointer.
 };
 
-#endif //IMPORTOPJ_H
+#endif // IMPORTOPJ_H

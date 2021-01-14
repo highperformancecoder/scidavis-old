@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
     Description          : Implementations of generic scripting classes
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -40,9 +40,8 @@
 #include "PythonScripting.h"
 #endif
 
-namespace
-{
-  const char* langs[]={
+namespace {
+const char *langs[] = {
 #ifdef SCRIPTING_MUPARSER
     MuParserScripting::langName,
 #endif
@@ -50,75 +49,75 @@ namespace
     PythonScripting::langName,
 #endif
     nullptr
-  };
+};
 }
 
 ScriptingEnv *ScriptingLangManager::newEnv(ApplicationWindow *parent)
 {
-  if (!langs[0])
-    return nullptr;
-  else
-    return newEnv(langs[0],parent);
+    if (!langs[0])
+        return nullptr;
+    else
+        return newEnv(langs[0], parent);
 }
 
-ScriptingEnv *ScriptingLangManager::newEnv
-(const std::string& name, ApplicationWindow *parent, bool
+ScriptingEnv *ScriptingLangManager::newEnv(const std::string &name, ApplicationWindow *parent,
+                                           bool
 #ifdef SCRIPTING_PYTHON // avoids unused warning
- batch
+                                                   batch
 #endif
- )
+)
 {
 #ifdef SCRIPTING_MUPARSER
-  if (name==MuParserScripting::langName)
-    return new MuParserScripting(parent);
+    if (name == MuParserScripting::langName)
+        return new MuParserScripting(parent);
 #endif
 #ifdef SCRIPTING_PYTHON
-  if (name==PythonScripting::langName)
-    return new PythonScripting(parent, batch);
+    if (name == PythonScripting::langName)
+        return new PythonScripting(parent, batch);
 #endif
-  return nullptr;
+    return nullptr;
 }
 
 QStringList ScriptingLangManager::languages()
 {
-  QStringList l;
-  for (auto i = langs; *i; i++)
-    l << *i;
-  return l;
+    QStringList l;
+    for (auto i = langs; *i; i++)
+        l << *i;
+    return l;
 }
 
 bool Script::compile(bool)
 {
-	emit_error("Script::compile called!", 0);
-	return false;
+    emit_error("Script::compile called!", 0);
+    return false;
 }
 
 QVariant Script::eval()
 {
-	emit_error("Script::eval called!",0);
-	return QVariant();
+    emit_error("Script::eval called!", 0);
+    return QVariant();
 }
 
 bool Script::exec()
 {
-	emit_error("Script::exec called!",0);
-	return false;
+    emit_error("Script::exec called!", 0);
+    return false;
 }
 
 scripted::scripted(ScriptingEnv *env)
 {
-	env->incref();
-	scriptEnv = env;
+    env->incref();
+    scriptEnv = env;
 }
 
 scripted::~scripted()
 {
-	scriptEnv->decref();
+    scriptEnv->decref();
 }
 
 void scripted::scriptingChangeEvent(ScriptingChangeEvent *sce)
 {
-	scriptEnv->decref();
-	sce->scriptingEnv()->incref();
-	scriptEnv = sce->scriptingEnv();
+    scriptEnv->decref();
+    sce->scriptingEnv()->incref();
+    scriptEnv = sce->scriptingEnv();
 }

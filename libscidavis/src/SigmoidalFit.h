@@ -33,18 +33,18 @@
 
 class SigmoidalFit : public Fit
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  SigmoidalFit(ApplicationWindow *parent, Graph *g);
-  SigmoidalFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-  SigmoidalFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
-  void guessInitialValues() override;
+    SigmoidalFit(ApplicationWindow *parent, Graph *g);
+    SigmoidalFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle);
+    SigmoidalFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle, double start,
+                 double end);
+    void guessInitialValues() override;
 
 private:
-  void init();
-  void calculateFitCurveData(const std::vector<double>&, double *, double *) override;
+    void init();
+    void calculateFitCurveData(const std::vector<double> &, double *, double *) override;
 };
 
 #endif
-
