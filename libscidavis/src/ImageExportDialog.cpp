@@ -106,41 +106,41 @@ void ImageExportDialog::initAdvancedOptions()
 	vector_layout->addWidget(d_standard_page, 3, 0, 1, 2);
 
 	d_box_page_size = new QComboBox();
-	d_box_page_size->addItem(tr("A0 - 841 x 1189 mm"), QVariant(QPrinter::A0));
-	d_box_page_size->addItem(tr("A1 - 594 x 841 mm"), QVariant(QPrinter::A1));
-	d_box_page_size->addItem(tr("A2 - 420 x 594 mm"), QVariant(QPrinter::A2));
-	d_box_page_size->addItem(tr("A3 - 297 x 420 mm"), QVariant(QPrinter::A3));
-	d_box_page_size->addItem(tr("A4 - 210 x 297 mm"), QVariant(QPrinter::A4));
-	d_box_page_size->addItem(tr("A5 - 148 x 210 mm"), QVariant(QPrinter::A5));
-	d_box_page_size->addItem(tr("A6 - 105 x 148 mm"), QVariant(QPrinter::A6));
-	d_box_page_size->addItem(tr("A7 - 74 x 105 mm"), QVariant(QPrinter::A7));
-	d_box_page_size->addItem(tr("A8 - 52 x 74 mm"), QVariant(QPrinter::A8));
-	d_box_page_size->addItem(tr("A9 - 37 x 52 mm"), QVariant(QPrinter::A9));
-	d_box_page_size->addItem(tr("B0 - 1030 x 1456 mm"), QVariant(QPrinter::B0));
-	d_box_page_size->addItem(tr("B1 - 728 x 1030 mm"), QVariant(QPrinter::B1));
-	d_box_page_size->addItem(tr("B2 - 515 x 728 mm"), QVariant(QPrinter::B2));
-	d_box_page_size->addItem(tr("B3 - 364 x 515 mm"), QVariant(QPrinter::B3));
-	d_box_page_size->addItem(tr("B4 - 257 x 364 mm"), QVariant(QPrinter::B4));
-	d_box_page_size->addItem(tr("B5 - 182 x 257 mm"), QVariant(QPrinter::B5));
-	d_box_page_size->addItem(tr("B6 - 128 x 182 mm"), QVariant(QPrinter::B6));
-	d_box_page_size->addItem(tr("B7 - 91 x 128 mm"), QVariant(QPrinter::B7));
-	d_box_page_size->addItem(tr("B8 - 64 x 91 mm"), QVariant(QPrinter::B8));
-	d_box_page_size->addItem(tr("B9 - 45 x 64 mm"), QVariant(QPrinter::B9));
-	d_box_page_size->addItem(tr("B10 - 32 x 45 mm"), QVariant(QPrinter::B10));
-	d_box_page_size->addItem(tr("C5E - 163 x 226 mm"), QVariant(QPrinter::C5E));
-	d_box_page_size->addItem(tr("Comm10E - 105 x 241 mm"), QVariant(QPrinter::Comm10E));
-	d_box_page_size->addItem(tr("DLE - 110 x 220 mm"), QVariant(QPrinter::DLE));
-	d_box_page_size->addItem(tr("Executive - 191 x 254 mm"), QVariant(QPrinter::Executive));
-	d_box_page_size->addItem(tr("Folio 210 x 330 mm"), QVariant(QPrinter::Folio));
-	d_box_page_size->addItem(tr("Ledger 432 x 279 mm"), QVariant(QPrinter::Ledger));
-	d_box_page_size->addItem(tr("Legal 216 x 356 mm"), QVariant(QPrinter::Legal));
-	d_box_page_size->addItem(tr("Letter 216 x 279 mm"), QVariant(QPrinter::Letter));
-	d_box_page_size->addItem(tr("Tabloid 279 x 432 mm"), QVariant(QPrinter::Tabloid));
+	d_box_page_size->addItem(tr("A0 - 841 x 1189 mm"), QVariant(QPageSize::A0));
+	d_box_page_size->addItem(tr("A1 - 594 x 841 mm"), QVariant(QPageSize::A1));
+	d_box_page_size->addItem(tr("A2 - 420 x 594 mm"), QVariant(QPageSize::A2));
+	d_box_page_size->addItem(tr("A3 - 297 x 420 mm"), QVariant(QPageSize::A3));
+	d_box_page_size->addItem(tr("A4 - 210 x 297 mm"), QVariant(QPageSize::A4));
+	d_box_page_size->addItem(tr("A5 - 148 x 210 mm"), QVariant(QPageSize::A5));
+	d_box_page_size->addItem(tr("A6 - 105 x 148 mm"), QVariant(QPageSize::A6));
+	d_box_page_size->addItem(tr("A7 - 74 x 105 mm"), QVariant(QPageSize::A7));
+	d_box_page_size->addItem(tr("A8 - 52 x 74 mm"), QVariant(QPageSize::A8));
+	d_box_page_size->addItem(tr("A9 - 37 x 52 mm"), QVariant(QPageSize::A9));
+	d_box_page_size->addItem(tr("B0 - 1030 x 1456 mm"), QVariant(QPageSize::B0));
+	d_box_page_size->addItem(tr("B1 - 728 x 1030 mm"), QVariant(QPageSize::B1));
+	d_box_page_size->addItem(tr("B2 - 515 x 728 mm"), QVariant(QPageSize::B2));
+	d_box_page_size->addItem(tr("B3 - 364 x 515 mm"), QVariant(QPageSize::B3));
+	d_box_page_size->addItem(tr("B4 - 257 x 364 mm"), QVariant(QPageSize::B4));
+	d_box_page_size->addItem(tr("B5 - 182 x 257 mm"), QVariant(QPageSize::B5));
+	d_box_page_size->addItem(tr("B6 - 128 x 182 mm"), QVariant(QPageSize::B6));
+	d_box_page_size->addItem(tr("B7 - 91 x 128 mm"), QVariant(QPageSize::B7));
+	d_box_page_size->addItem(tr("B8 - 64 x 91 mm"), QVariant(QPageSize::B8));
+	d_box_page_size->addItem(tr("B9 - 45 x 64 mm"), QVariant(QPageSize::B9));
+	d_box_page_size->addItem(tr("B10 - 32 x 45 mm"), QVariant(QPageSize::B10));
+	d_box_page_size->addItem(tr("C5E - 163 x 226 mm"), QVariant(QPageSize::C5E));
+	d_box_page_size->addItem(tr("Comm10E - 105 x 241 mm"), QVariant(QPageSize::Comm10E));
+	d_box_page_size->addItem(tr("DLE - 110 x 220 mm"), QVariant(QPageSize::DLE));
+	d_box_page_size->addItem(tr("Executive - 191 x 254 mm"), QVariant(QPageSize::Executive));
+	d_box_page_size->addItem(tr("Folio 210 x 330 mm"), QVariant(QPageSize::Folio));
+	d_box_page_size->addItem(tr("Ledger 432 x 279 mm"), QVariant(QPageSize::Ledger));
+	d_box_page_size->addItem(tr("Legal 216 x 356 mm"), QVariant(QPageSize::Legal));
+	d_box_page_size->addItem(tr("Letter 216 x 279 mm"), QVariant(QPageSize::Letter));
+	d_box_page_size->addItem(tr("Tabloid 279 x 432 mm"), QVariant(QPageSize::Tabloid));
 
 	vector_layout->addWidget(new QLabel(tr("Page size")), 4, 0);
-	setPageSize((QPrinter::PageSize)app->d_export_vector_size);
-	d_standard_page->setChecked(app->d_export_vector_size != QPrinter::Custom);
-	d_box_page_size->setEnabled(app->d_export_vector_size != QPrinter::Custom);
+	setPageSize(QPageSize((QPageSize::PageSizeId)app->d_export_vector_size));
+	d_standard_page->setChecked(app->d_export_vector_size != QPageSize::Custom);
+	d_box_page_size->setEnabled(app->d_export_vector_size != QPageSize::Custom);
 	vector_layout->addWidget(d_box_page_size, 4, 1, 1, 2);
 
 	vector_layout->addWidget(new QLabel(tr("Orientation")), 5, 0);
@@ -195,7 +195,7 @@ void ImageExportDialog::closeEvent(QCloseEvent* e)
 
         app->d_export_resolution = d_resolution->value();
         app->d_export_color = d_color->isChecked();
-        app->d_export_vector_size = (int)pageSize();
+        app->d_export_vector_size = (int)pageSize().id();
         app->d_keep_plot_aspect = d_keep_aspect->isChecked();
 		  app->d_export_orientation = d_box_page_orientation->currentIndex();
 	}
@@ -203,19 +203,20 @@ void ImageExportDialog::closeEvent(QCloseEvent* e)
 	e->accept();
 }
 
-QPrinter::PageSize ImageExportDialog::pageSize() const
+QPageSize ImageExportDialog::pageSize() const
 {
 	if (!d_standard_page->isChecked())
-		return QPrinter::Custom;
+		return QPageSize(QPageSize::Custom);
 
-	QPrinter::PageSize size;
+	QPageSize size;
 	switch (d_box_page_size->currentIndex())
 	{
 		case -1:
-			size = QPrinter::A4;
+			size = QPageSize(QPageSize::A4);
 			break;
 		default:
-			size = (QPrinter::PageSize)d_box_page_size->itemData(d_box_page_size->currentIndex()).toInt();
+			size = QPageSize((QPageSize::PageSizeId)d_box_page_size
+								->itemData(d_box_page_size->currentIndex()).toInt());
 			break;
 	}
 	return size;
@@ -236,17 +237,17 @@ QPageLayout::Orientation ImageExportDialog::pageOrientation() const
 	return orientation;
 }
 
-void ImageExportDialog::setPageSize(QPrinter::PageSize size)
+void ImageExportDialog::setPageSize(QPageSize size)
 {
-	if (size == QPrinter::Custom)
+	if (size == QPageSize(QPageSize::Custom))
 		return;
 
-	int index = d_box_page_size->findData(QVariant(size));
+	int index = d_box_page_size->findData(QVariant(size.id()));
 	if (index != -1)
 		d_box_page_size->setCurrentIndex(index);
 	else
 	{
-		index = d_box_page_size->findData(QVariant(QPrinter::A4));
+		index = d_box_page_size->findData(QVariant(QPageSize::A4));
 		Q_ASSERT(index != -1);
 		d_box_page_size->setCurrentIndex(index);
 	}
