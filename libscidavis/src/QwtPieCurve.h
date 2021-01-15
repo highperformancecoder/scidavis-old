@@ -30,34 +30,38 @@
 #include "PlotCurve.h"
 
 //! Pie plot class
-class QwtPieCurve: public DataCurve
+class QwtPieCurve : public DataCurve
 {
 public:
-	QwtPieCurve(Table *t, const QString& name, int startRow, int endRow);
+    QwtPieCurve(Table *t, const QString &name, int startRow, int endRow);
 
 public slots:
-	QColor color(int i) const;
+    QColor color(int i) const;
 
-	int ray(){return d_pie_ray;};
-	void setRay(int size){d_pie_ray = size; updateBoundingRect();};
+    int ray() { return d_pie_ray; };
+    void setRay(int size)
+    {
+        d_pie_ray = size;
+        updateBoundingRect();
+    };
 
-	Qt::BrushStyle pattern(){return QwtPlotCurve::brush().style();};
-	void setBrushStyle(const Qt::BrushStyle& style);
+    Qt::BrushStyle pattern() { return QwtPlotCurve::brush().style(); };
+    void setBrushStyle(const Qt::BrushStyle &style);
 
-	void setFirstColor(int index){d_first_color = index;};
-	int firstColor(){return d_first_color;};
+    void setFirstColor(int index) { d_first_color = index; };
+    int firstColor() { return d_first_color; };
 
-	virtual bool loadData();
-	void updateBoundingRect();
+    virtual bool loadData();
+    void updateBoundingRect();
 
 private:
-	void draw(QPainter *painter,const QwtScaleMap &xMap,
-		const QwtScaleMap &yMap, int from, int to) const;
+    void draw(QPainter *painter, const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from,
+              int to) const;
 
-	void drawPie(QPainter *painter, const QwtScaleMap &xMap,
-		const QwtScaleMap &yMap, int from, int to) const;
+    void drawPie(QPainter *painter, const QwtScaleMap &xMap, const QwtScaleMap &yMap, int from,
+                 int to) const;
 
-	int d_pie_ray, d_first_color;
-	//! Keeps track of the left side position of the pie bounding rectangle in scale coordinates.
-	double d_left_coord;
+    int d_pie_ray, d_first_color;
+    //! Keeps track of the left side position of the pie bounding rectangle in scale coordinates.
+    double d_left_coord;
 };

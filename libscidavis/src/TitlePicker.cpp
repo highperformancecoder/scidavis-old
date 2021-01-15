@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Title picker
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,48 +34,42 @@
 #include <QMouseEvent>
 #include <QPen>
 
-TitlePicker::TitlePicker(QwtPlot *plot):
-	QObject(plot)
+TitlePicker::TitlePicker(QwtPlot *plot) : QObject(plot)
 {
     d_selected = false;
-	title = (QwtTextLabel *)plot->titleLabel();
-	title->setFocusPolicy(Qt::StrongFocus);
-	if (title)
-		title->installEventFilter(this);
+    title = (QwtTextLabel *)plot->titleLabel();
+    title->setFocusPolicy(Qt::StrongFocus);
+    if (title)
+        title->installEventFilter(this);
 }
 
 bool TitlePicker::eventFilter(QObject *object, QEvent *e)
 {
-	if (object != (QObject *)title)
-		return false;
-	
-    if ( object->inherits("QwtTextLabel") && e->type() == QEvent::MouseButtonDblClick)
-		{
+    if (object != (QObject *)title)
+        return false;
+
+    if (object->inherits("QwtTextLabel") && e->type() == QEvent::MouseButtonDblClick) {
         emit doubleClicked();
-		d_selected = true;
+        d_selected = true;
         return true;
-		}
-
-	 if ( object->inherits("QwtTextLabel") &&  e->type() == QEvent::MouseButtonPress )
-	 {
-		 const QMouseEvent *me = (const QMouseEvent *)e;	
-		 emit clicked();
-
-		 if (me->button()==Qt::RightButton)
-			 emit showTitleMenu();
-		 return !(me->modifiers() & Qt::ShiftModifier);
     }
 
-	if ( object->inherits("QwtTextLabel") && 
-        e->type() == QEvent::KeyPress)
-		{
-		switch (((const QKeyEvent *)e)->key()) 
-			{
-			case Qt::Key_Delete: 
-			emit removeTitle();	
+    if (object->inherits("QwtTextLabel") && e->type() == QEvent::MouseButtonPress) {
+        const QMouseEvent *me = (const QMouseEvent *)e;
+        emit clicked();
+
+        if (me->button() == Qt::RightButton)
+            emit showTitleMenu();
+        return !(me->modifiers() & Qt::ShiftModifier);
+    }
+
+    if (object->inherits("QwtTextLabel") && e->type() == QEvent::KeyPress) {
+        switch (((const QKeyEvent *)e)->key()) {
+        case Qt::Key_Delete:
+            emit removeTitle();
             return true;
-			}
-		}
+        }
+    }
 
     return QObject::eventFilter(object, e);
 }
@@ -95,4 +89,3 @@ void TitlePicker::setSelected(bool select)
 
     ((QwtPlot *)parent())->setTitle(text);
 }
-

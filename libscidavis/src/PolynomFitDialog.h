@@ -45,26 +45,25 @@ class PolynomFitDialog : public QDialog
     Q_OBJECT
 
 public:
-    PolynomFitDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    PolynomFitDialog(QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
 
 public slots:
-	void fit();
-	void setGraph(Graph *g);
-	void activateCurve(const QString& curveName);
-	void changeDataRange();
+    void fit();
+    void setGraph(Graph *g);
+    void activateCurve(const QString &curveName);
+    void changeDataRange();
 
 private:
-	Graph *graph;
+    Graph *graph;
 
-    QPushButton* buttonFit;
-	QPushButton* buttonCancel;
-    QCheckBox* boxShowFormula;
-	QComboBox* boxName;
-	QSpinBox* boxOrder;
-	QLineEdit* boxStart;
-	QLineEdit* boxEnd;
-	ColorButton* btnColor;
+    QPushButton *buttonFit;
+    QPushButton *buttonCancel;
+    QCheckBox *boxShowFormula;
+    QComboBox *boxName;
+    QSpinBox *boxOrder;
+    QLineEdit *boxStart;
+    QLineEdit *boxEnd;
+    ColorButton *btnColor;
 };
 
 #endif
-

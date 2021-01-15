@@ -42,8 +42,8 @@
  * Add a QwtPlotItem subclass (PlotEnrichment ?) and make PlotEnrichement, Legend and ArrowMarker
  * subclasses of that. These (usually) don't really mark a specific point in a plot and they don't
  * use the symbol/label functionality of QwtPlotMarker. Instead, it would make sense to provide a
- * unified move/resize (or even general affine transformations via QMatrix) interface and support for
- * positioning them either at fixed plot coordinates (like QwtPlotMarker) or at a fixed drawing
+ * unified move/resize (or even general affine transformations via QMatrix) interface and support
+ * for positioning them either at fixed plot coordinates (like QwtPlotMarker) or at a fixed drawing
  * position within a QwtPlot (like a QWidget child); leaving the choice of positioning policy to the
  * user.
  * If PlotEnrichment (ideas for a better name?) inherits from both QWidget and QwtPlotItem (which
@@ -59,47 +59,46 @@
  *
  * \sa Legend, ArrowMarker
  */
-class PlotEnrichement: public QwtPlotMarker
+class PlotEnrichement : public QwtPlotMarker
 {
 public:
-	PlotEnrichement();
+    PlotEnrichement();
 
-	//! Return bounding rectangle in paint coordinates.
-	virtual QRect rect() const {return QRect(d_pos, d_size);};
-	//! Set value (position) and #d_size, giving everything in paint coordinates.
-	virtual void setRect(int x, int y, int w, int h);
+    //! Return bounding rectangle in paint coordinates.
+    virtual QRect rect() const { return QRect(d_pos, d_size); };
+    //! Set value (position) and #d_size, giving everything in paint coordinates.
+    virtual void setRect(int x, int y, int w, int h);
 
-	//! Return bounding rectangle in plot coordinates.
-	virtual QwtDoubleRect boundingRect() const;
-	//! Set position (xValue() and yValue()), right and bottom values giving everything in plot coordinates.
-	virtual void setBoundingRect(double left, double top, double right, double bottom);
+    //! Return bounding rectangle in plot coordinates.
+    virtual QwtDoubleRect boundingRect() const;
+    //! Set position (xValue() and yValue()), right and bottom values giving everything in plot coordinates.
+    virtual void setBoundingRect(double left, double top, double right, double bottom);
 
-	double right(){return d_x_right;};
-	double bottom(){return d_y_bottom;};
+    double right() { return d_x_right; };
+    double bottom() { return d_y_bottom; };
 
-	//! Return position in paint coordinates.
-	QPoint origin() const { return d_pos; };
-	//! Set QwtPlotMarker::value() in paint coordinates.
-	void setOrigin(const QPoint &p);
+    //! Return position in paint coordinates.
+    QPoint origin() const { return d_pos; };
+    //! Set QwtPlotMarker::value() in paint coordinates.
+    void setOrigin(const QPoint &p);
 
     //! Return #d_size.
-	QSize size() {return d_size;};
-	//! Set #d_size.
-	void setSize(const QSize& size);
+    QSize size() { return d_size; };
+    //! Set #d_size.
+    void setSize(const QSize &size);
 
-	virtual void updateBoundingRect();
+    virtual void updateBoundingRect();
 
 private:
     QRect calculatePaintingRect();
-	//! The right side position in scale coordinates.
-	double d_x_right;
+    //! The right side position in scale coordinates.
+    double d_x_right;
     //! The bottom side position in scale coordinates.
     double d_y_bottom;
     //! The position in paint coordiantes.
-	QPoint d_pos;
-	//! The size (in paint coordinates).
-	QSize d_size;
+    QPoint d_pos;
+    //! The size (in paint coordinates).
+    QSize d_size;
 };
 
 #endif
-

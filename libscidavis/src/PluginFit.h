@@ -33,20 +33,20 @@
 
 class PluginFit : public Fit
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  PluginFit(ApplicationWindow *parent, Graph *g);
-  PluginFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-  PluginFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+    PluginFit(ApplicationWindow *parent, Graph *g);
+    PluginFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle);
+    PluginFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle, double start,
+              double end);
 
-  bool load(const QString& pluginName);
+    bool load(const QString &pluginName);
 
 private:
-  void init();
-  typedef double (*fitFunctionEval)(double, double *);
-  void calculateFitCurveData(const std::vector<double>&, double*, double*) override;
-  fitFunctionEval f_eval;
+    void init();
+    typedef double (*fitFunctionEval)(double, double *);
+    void calculateFitCurveData(const std::vector<double> &, double *, double *) override;
+    fitFunctionEval f_eval;
 };
 #endif
-

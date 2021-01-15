@@ -35,50 +35,42 @@
 #include <qwt_painter.h>
 #include <qwt_text.h>
 
-ScaleDraw::ScaleDraw(const QString& s):
-	formula_string (s),
-	d_fmt('g'),
-    d_prec(4),
-	d_minTicks(Out),
-	d_majTicks(Out)
-	{}
-
-ScaleDraw::ScaleDraw(const ScaleDraw &other, const QString &s) :
-	QwtScaleDraw(other),
-	formula_string(s),
-	d_minTicks(other.majorTicksStyle()),
-	d_majTicks(other.minorTicksStyle())
+ScaleDraw::ScaleDraw(const QString &s)
+    : formula_string(s), d_fmt('g'), d_prec(4), d_minTicks(Out), d_majTicks(Out)
 {
-	other.labelFormat(d_fmt, d_prec);
-	invalidateCache();
+}
+
+ScaleDraw::ScaleDraw(const ScaleDraw &other, const QString &s)
+    : QwtScaleDraw(other),
+      formula_string(s),
+      d_minTicks(other.majorTicksStyle()),
+      d_majTicks(other.minorTicksStyle())
+{
+    other.labelFormat(d_fmt, d_prec);
+    invalidateCache();
 }
 
 double ScaleDraw::transformValue(double value) const
-	{
-	if (!formula_string.isEmpty())
-		{
-		double lbl=0.0;
-		try
-			{
-			MyParser parser;
-			if (formula_string.contains("x"))
-                          parser.DefineVar(_T("x"), &value);
-			else if (formula_string.contains("y"))
-                          parser.DefineVar(_T("y"), &value);
+{
+    if (!formula_string.isEmpty()) {
+        double lbl = 0.0;
+        try {
+            MyParser parser;
+            if (formula_string.contains("x"))
+                parser.DefineVar(_T("x"), &value);
+            else if (formula_string.contains("y"))
+                parser.DefineVar(_T("y"), &value);
 
-			parser.SetExpr(formula_string.toUtf8().constData());
-			lbl=parser.Eval();
-			}
-		catch(mu::ParserError &)
-			{
-			return 0;
-			}
+            parser.SetExpr(formula_string.toUtf8().constData());
+            lbl = parser.Eval();
+        } catch (mu::ParserError &) {
+            return 0;
+        }
 
-		return lbl;
-		}
-	else
-		return value;
-	}
+        return lbl;
+    } else
+        return value;
+}
 
 /*!
   \brief Set the number format for the major scale labels
@@ -94,8 +86,8 @@ double ScaleDraw::transformValue(double value) const
 */
 void ScaleDraw::setLabelFormat(char f, int prec)
 {
-d_fmt = f;
-d_prec = prec;
+    d_fmt = f;
+    d_prec = prec;
 }
 
 /*!
@@ -118,20 +110,20 @@ void ScaleDraw::labelFormat(char &f, int &prec) const
 
 void ScaleDraw::drawTick(QPainter *p, double value, int len) const
 {
-QwtScaleDiv scDiv = scaleDiv();
-QwtValueList majTicks = scDiv.ticks(QwtScaleDiv::MajorTick);
-if (majTicks.contains(value) && (d_majTicks == In || d_majTicks == None))
-	return;
+    QwtScaleDiv scDiv = scaleDiv();
+    QwtValueList majTicks = scDiv.ticks(QwtScaleDiv::MajorTick);
+    if (majTicks.contains(value) && (d_majTicks == In || d_majTicks == None))
+        return;
 
-QwtValueList medTicks = scDiv.ticks(QwtScaleDiv::MediumTick);
-if (medTicks.contains(value) && (d_minTicks == In || d_minTicks == None))
-	return;
+    QwtValueList medTicks = scDiv.ticks(QwtScaleDiv::MediumTick);
+    if (medTicks.contains(value) && (d_minTicks == In || d_minTicks == None))
+        return;
 
-QwtValueList minTicks = scDiv.ticks(QwtScaleDiv::MinorTick);
-if (minTicks.contains(value) && (d_minTicks == In || d_minTicks == None))
-	return;
+    QwtValueList minTicks = scDiv.ticks(QwtScaleDiv::MinorTick);
+    if (minTicks.contains(value) && (d_minTicks == In || d_minTicks == None))
+        return;
 
-QwtScaleDraw::drawTick(p, value, len);
+    QwtScaleDraw::drawTick(p, value, len);
 }
 
 /*****************************************************************************
@@ -140,21 +132,19 @@ QwtScaleDraw::drawTick(p, value, len);
  *
  *****************************************************************************/
 
-QwtTextScaleDraw::QwtTextScaleDraw(const QMap<int, QString>& list):
-					  labels(list)
-{}
+QwtTextScaleDraw::QwtTextScaleDraw(const QMap<int, QString> &list) : labels(list) { }
 
 QwtText QwtTextScaleDraw::label(double value) const
 {
-	const QwtScaleDiv scDiv = scaleDiv();
-	if (!scDiv.contains (value))
-		return QwtText();
+    const QwtScaleDiv scDiv = scaleDiv();
+    if (!scDiv.contains(value))
+        return QwtText();
 
-	int int_value = (int)(value + value/1e6);
-	if (labels.contains(int_value))
-		return QwtText(labels[int_value]);
-	else
-		return QwtText();
+    int int_value = (int)(value + value / 1e6);
+    if (labels.contains(int_value))
+        return QwtText(labels[int_value]);
+    else
+        return QwtText();
 }
 
 /*****************************************************************************
@@ -163,21 +153,19 @@ QwtText QwtTextScaleDraw::label(double value) const
  *
  *****************************************************************************/
 
-TimeScaleDraw::TimeScaleDraw(const QTime& t, const QString& format):
-		t_origin (t),
-		t_format (format)
-		{}
+TimeScaleDraw::TimeScaleDraw(const QTime &t, const QString &format) : t_origin(t), t_format(format)
+{
+}
 
 QString TimeScaleDraw::origin()
 {
-return t_origin.toString ( "hh:mm:ss.zzz" );
+    return t_origin.toString("hh:mm:ss.zzz");
 }
-
 
 QwtText TimeScaleDraw::label(double value) const
 {
-QTime t = t_origin.addMSecs ( (int)value );
-return QwtText(t.toString ( t_format ));
+    QTime t = t_origin.addMSecs((int)value);
+    return QwtText(t.toString(t_format));
 }
 
 /*****************************************************************************
@@ -186,24 +174,23 @@ return QwtText(t.toString ( t_format ));
  *
  *****************************************************************************/
 
-DateScaleDraw::DateScaleDraw(const QDate& t, const QString& format):
-			  t_origin (t),
-			  t_format (format)
-{}
+DateScaleDraw::DateScaleDraw(const QDate &t, const QString &format) : t_origin(t), t_format(format)
+{
+}
 
 QString DateScaleDraw::origin()
 {
-return t_origin.toString ();
+    return t_origin.toString();
 }
 
 QwtText DateScaleDraw::label(double value) const
 {
-QDate t;
-if (t_origin.isValid())
-	t = t_origin.addDays((int) floor(value));
-else
-	t = QDate::fromJulianDay((int) floor(value));
-return QwtText(t.toString ( t_format ));
+    QDate t;
+    if (t_origin.isValid())
+        t = t_origin.addDays((int)floor(value));
+    else
+        t = QDate::fromJulianDay((int)floor(value));
+    return QwtText(t.toString(t_format));
 }
 
 /*****************************************************************************
@@ -212,20 +199,20 @@ return QwtText(t.toString ( t_format ));
  *
  *****************************************************************************/
 
-DateTimeScaleDraw::DateTimeScaleDraw(const QDateTime & origin, const QString& format):
-	d_origin (origin), d_format (format)
+DateTimeScaleDraw::DateTimeScaleDraw(const QDateTime &origin, const QString &format)
+    : d_origin(origin), d_format(format)
 {
 }
 
 QString DateTimeScaleDraw::origin()
 {
-	return d_origin.toString(d_format);
+    return d_origin.toString(d_format);
 }
 
 QwtText DateTimeScaleDraw::label(double value) const
 {
-	QDateTime dt = QDateTime::fromMSecsSinceEpoch(round((value-2440587.5)*86400000.));
-	return QwtText(dt.toString(d_format));
+    QDateTime dt = QDateTime::fromMSecsSinceEpoch(round((value - 2440587.5) * 86400000.));
+    return QwtText(dt.toString(d_format));
 }
 
 /*****************************************************************************
@@ -234,35 +221,32 @@ QwtText DateTimeScaleDraw::label(double value) const
  *
  *****************************************************************************/
 
-WeekDayScaleDraw:: WeekDayScaleDraw(NameFormat format):
-				d_format(format)
-{}
+WeekDayScaleDraw::WeekDayScaleDraw(NameFormat format) : d_format(format) { }
 
 QwtText WeekDayScaleDraw::label(double value) const
 {
-int val = int(transformValue(value))%7;
+    int val = int(transformValue(value)) % 7;
 
-if (val < 0)
-	val = 7 - abs(val);
-else if (val == 0)
-	val = 7;
+    if (val < 0)
+        val = 7 - abs(val);
+    else if (val == 0)
+        val = 7;
 
-QString day;
-switch(d_format)
-	{
-	case  ShortName:
-		day = QLocale().dayName(val, QLocale::ShortFormat);
-	break;
+    QString day;
+    switch (d_format) {
+    case ShortName:
+        day = QLocale().dayName(val, QLocale::ShortFormat);
+        break;
 
-	case  LongName:
-		day = QLocale().dayName(val, QLocale::LongFormat);
-	break;
+    case LongName:
+        day = QLocale().dayName(val, QLocale::LongFormat);
+        break;
 
-	case  Initial:
-		day = (QLocale().dayName(val, QLocale::ShortFormat)).left(1);
-	break;
-	}
-return QwtText(day);
+    case Initial:
+        day = (QLocale().dayName(val, QLocale::ShortFormat)).left(1);
+        break;
+    }
+    return QwtText(day);
 }
 
 /*****************************************************************************
@@ -271,35 +255,32 @@ return QwtText(day);
  *
  *****************************************************************************/
 
-MonthScaleDraw::MonthScaleDraw(NameFormat format):
-		d_format(format)
-{}
+MonthScaleDraw::MonthScaleDraw(NameFormat format) : d_format(format) { }
 
 QwtText MonthScaleDraw::label(double value) const
 {
-int val = int(transformValue(value))%12;
+    int val = int(transformValue(value)) % 12;
 
-if (val < 0)
-	val = 12 - abs(val);
-else if (val == 0)
-	val = 12;
+    if (val < 0)
+        val = 12 - abs(val);
+    else if (val == 0)
+        val = 12;
 
-QString month;
-switch(d_format)
-	{
-	case  ShortName:
-		month = QLocale().monthName(val, QLocale::ShortFormat);
-	break;
+    QString month;
+    switch (d_format) {
+    case ShortName:
+        month = QLocale().monthName(val, QLocale::ShortFormat);
+        break;
 
-	case  LongName:
-		month = QLocale().monthName(val, QLocale::LongFormat);
-	break;
+    case LongName:
+        month = QLocale().monthName(val, QLocale::LongFormat);
+        break;
 
-	case  Initial:
-		month = (QLocale().monthName(val, QLocale::ShortFormat)).left(1);
-	break;
-	}
-return QwtText(month);
+    case Initial:
+        month = (QLocale().monthName(val, QLocale::ShortFormat)).left(1);
+        break;
+    }
+    return QwtText(month);
 }
 
 /*****************************************************************************
@@ -308,43 +289,42 @@ return QwtText(month);
  *
  *****************************************************************************/
 
-QwtSupersciptsScaleDraw::QwtSupersciptsScaleDraw(const QString& s)
+QwtSupersciptsScaleDraw::QwtSupersciptsScaleDraw(const QString &s)
 {
-setFormulaString(s);
+    setFormulaString(s);
 }
 
 QwtText QwtSupersciptsScaleDraw::label(double value) const
 {
-char f;
-int prec;
-labelFormat(f, prec);
+    char f;
+    int prec;
+    labelFormat(f, prec);
 
-QString txt = QLocale().toString(transformValue(value), 'e', prec);
+    QString txt = QLocale().toString(transformValue(value), 'e', prec);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-QStringList list = txt.split( "e", Qt::SkipEmptyParts);
+    QStringList list = txt.split("e", Qt::SkipEmptyParts);
 #else
-QStringList list = txt.split( "e", QString::SkipEmptyParts);
+    QStringList list = txt.split("e", QString::SkipEmptyParts);
 #endif
-if (list[0].toDouble() == 0.0)
-	return QString("0");
+    if (list[0].toDouble() == 0.0)
+        return QString("0");
 
-QString s= list[1];
-int l = s.length();
-QChar sign = s[0];
+    QString s = list[1];
+    int l = s.length();
+    QChar sign = s[0];
 
-s.remove (sign);
+    s.remove(sign);
 
-while (l>1 && s.startsWith ("0", Qt::CaseInsensitive))
-	{
-	s.remove ( 0, 1 );
-	l = s.length();
-	}
+    while (l > 1 && s.startsWith("0", Qt::CaseInsensitive)) {
+        s.remove(0, 1);
+        l = s.length();
+    }
 
-if (sign == '-')
-	s.prepend(sign);
+    if (sign == '-')
+        s.prepend(sign);
 
-if (list[0] == "1")
-	return QwtText("10<sup>" + s + "</sup>");
-else
-	return QwtText(list[0] + "x10<sup>" + s + "</sup>");
+    if (list[0] == "1")
+        return QwtText("10<sup>" + s + "</sup>");
+    else
+        return QwtText(list[0] + "x10<sup>" + s + "</sup>");
 }

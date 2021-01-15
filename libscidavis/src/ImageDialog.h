@@ -40,31 +40,30 @@ class ImageDialog : public QDialog
     Q_OBJECT
 
 public:
-    ImageDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
-    ~ImageDialog(){};
+    ImageDialog(QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    ~ImageDialog() {};
 
-	void setOrigin(const QPoint& o);
-	void setSize(const QSize& size);
+    void setOrigin(const QPoint &o);
+    void setSize(const QSize &size);
 
 protected slots:
-	void accept();
-	void update();
-	void adjustHeight(int width);
-	void adjustWidth(int height);
+    void accept();
+    void update();
+    void adjustHeight(int width);
+    void adjustWidth(int height);
 
 signals:
-	void setGeometry(int, int, int, int);
+    void setGeometry(int, int, int, int);
 
 protected:
-	double aspect_ratio;
+    double aspect_ratio;
 
 private:
-    QPushButton* buttonOk;
-	QPushButton* buttonCancel;
-	QPushButton* buttonApply;
-    QSpinBox* boxX, *boxY, *boxWidth, *boxHeight;
-	QCheckBox *keepRatioBox;
+    QPushButton *buttonOk;
+    QPushButton *buttonCancel;
+    QPushButton *buttonApply;
+    QSpinBox *boxX, *boxY, *boxWidth, *boxHeight;
+    QCheckBox *keepRatioBox;
 };
-
 
 #endif // IMAGEDIALOG_H

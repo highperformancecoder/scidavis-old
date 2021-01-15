@@ -31,39 +31,37 @@
 #include <QPainter>
 #include <QImageReader>
 
-ImageMarker::ImageMarker(const QString& fn):
-	d_pos(QPoint(0,0)),
-	d_x_right(0),
-    d_y_bottom(0)
+ImageMarker::ImageMarker(const QString &fn) : d_pos(QPoint(0, 0)), d_x_right(0), d_y_bottom(0)
 {
-	QList<QByteArray> lst = QImageReader::supportedImageFormats();
-	for (int i=0; i<(int)lst.count(); i++){
-		if (fn.contains("." + lst[i])){
-			d_pic.load(fn, lst[i], Qt::AutoColor);
-			d_size = d_pic.size();
-			d_file_name = fn;
-			break;
-		}
-	}
+    QList<QByteArray> lst = QImageReader::supportedImageFormats();
+    for (int i = 0; i < (int)lst.count(); i++) {
+        if (fn.contains("." + lst[i])) {
+            d_pic.load(fn, lst[i], Qt::AutoColor);
+            d_size = d_pic.size();
+            d_file_name = fn;
+            break;
+        }
+    }
 }
 
-void ImageMarker::draw (QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap, const QRect &) const
+void ImageMarker::draw(QPainter *p, const QwtScaleMap &xMap, const QwtScaleMap &yMap,
+                       const QRect &) const
 {
     const int x0 = xMap.transform(xValue());
-	const int y0 = yMap.transform(yValue());
-	const int x1 = xMap.transform(d_x_right);
-	const int y1 = yMap.transform(d_y_bottom);
+    const int y0 = yMap.transform(yValue());
+    const int x1 = xMap.transform(d_x_right);
+    const int y1 = yMap.transform(d_y_bottom);
 
-	p->drawPixmap(QRect(x0, y0, abs(x1 - x0), abs(y1 - y0)), d_pic);
+    p->drawPixmap(QRect(x0, y0, abs(x1 - x0), abs(y1 - y0)), d_pic);
 }
 
-void ImageMarker::setSize(const QSize& size)
+void ImageMarker::setSize(const QSize &size)
 {
     d_size = size;
     updateBoundingRect();
 }
 
-void ImageMarker::setOrigin(const QPoint& p)
+void ImageMarker::setOrigin(const QPoint &p)
 {
     d_pos = p;
 
@@ -121,7 +119,8 @@ void ImageMarker::updateBoundingRect()
 
 QwtDoubleRect ImageMarker::boundingRect() const
 {
-    return QwtDoubleRect(xValue(), yValue(), qAbs(d_x_right - xValue()), qAbs(d_y_bottom - yValue()));
+    return QwtDoubleRect(xValue(), yValue(), qAbs(d_x_right - xValue()),
+                         qAbs(d_y_bottom - yValue()));
 }
 
 QRect ImageMarker::rect() const

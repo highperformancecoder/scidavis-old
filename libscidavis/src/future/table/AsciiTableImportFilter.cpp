@@ -43,140 +43,143 @@ using namespace std;
 
 QStringList AsciiTableImportFilter::fileExtensions() const
 {
-	return QStringList() << "txt" << "csv" << "dat";
+    return QStringList() << "txt"
+                         << "csv"
+                         << "dat";
 }
 
-namespace
+namespace {
+// redirect to QIODevice's readLine so that we can override it to handle '\r' line terminators
+struct SciDaVisTextStream
 {
-  // redirect to QIODevice's readLine so that we can override it to handle '\r' line terminators
-  struct SciDaVisTextStream
-  {
-    QIODevice& input;
+    QIODevice &input;
     bool good;
-    operator bool() const {return good;}
-    enum {none, simplify, trim} whiteSpaceTreatment;
+    operator bool() const { return good; }
+    enum { none, simplify, trim } whiteSpaceTreatment;
     QString separator;
-    SciDaVisTextStream(QIODevice& inp, const QString& sep): 
-      input(inp), good(true), whiteSpaceTreatment(none),
-      separator(sep) {}
+    SciDaVisTextStream(QIODevice &inp, const QString &sep)
+        : input(inp), good(true), whiteSpaceTreatment(none), separator(sep)
+    {
+    }
 
     QStringList readRow()
     {
-      char c;
-      QString r;
-   
-      while ((good=input.getChar(&c)))
-        switch (c)
-          {
-          case '\r':
-            if (input.getChar(&c) && c!='\n') // eat \n following \r
-              input.ungetChar(c);
-            goto breakLoop;
-          case '\n':
-            goto breakLoop;
-          default:
-            r+=c;
-          };
+        char c;
+        QString r;
+
+        while ((good = input.getChar(&c)))
+            switch (c) {
+            case '\r':
+                if (input.getChar(&c) && c != '\n') // eat \n following \r
+                    input.ungetChar(c);
+                goto breakLoop;
+            case '\n':
+                goto breakLoop;
+            default:
+                r += c;
+            };
     breakLoop:
-      switch (whiteSpaceTreatment)
-        {
+        switch (whiteSpaceTreatment) {
         case none:
-          return r.split(separator);
+            return r.split(separator);
         case simplify:
-          return r.simplified().split(separator);
+            return r.simplified().split(separator);
         case trim:
-          return r.trimmed().split(separator);
+            return r.trimmed().split(separator);
         default:
-          return QStringList();
+            return QStringList();
         }
     }
-  };
+};
 
-  template <class C> C conv(const QString& x);
-  template <> QString conv<QString>(const QString& x) {return x;}
-  template <> qreal conv<qreal>(const QString& x) {return (qreal)(QLocale().toDouble(x));}
+template<class C>
+C conv(const QString &x);
+template<>
+QString conv<QString>(const QString &x)
+{
+    return x;
+}
+template<>
+qreal conv<qreal>(const QString &x)
+{
+    return (qreal)(QLocale().toDouble(x));
+}
 
-  template <class T>
-  struct AP: public std::unique_ptr<T>
-  {
-    AP(): std::unique_ptr<T>(new T) {}
-    AP(const AP& x): std::unique_ptr<T>(new T(*x)) {}
-  };
+template<class T>
+struct AP : public std::unique_ptr<T>
+{
+    AP() : std::unique_ptr<T>(new T) { }
+    AP(const AP &x) : std::unique_ptr<T>(new T(*x)) { }
+};
 
-  template <class C>
-  void readCols(QList<Column*>& cols, SciDaVisTextStream& stream, 
-                bool readColNames)
-  {
+template<class C>
+void readCols(QList<Column *> &cols, SciDaVisTextStream &stream, bool readColNames)
+{
     QStringList row, column_names;
     int i;
 
     // read first row
     row = stream.readRow();
 
-    int dataSize=row.size();
-    vector<AP<C> > data(dataSize);
-    vector<IntervalAttribute<bool> > invalid_cells(row.size());
+    int dataSize = row.size();
+    vector<AP<C>> data(dataSize);
+    vector<IntervalAttribute<bool>> invalid_cells(row.size());
 
     if (readColNames)
-      column_names = row;
+        column_names = row;
     else
-      for (i=0; i<row.size(); ++i) 
-        {
-          column_names << QString::number(i+1);
-          *data[i] << conv<typename C::value_type>(row[i]);
+        for (i = 0; i < row.size(); ++i) {
+            column_names << QString::number(i + 1);
+            *data[i] << conv<typename C::value_type>(row[i]);
         }
 
     // read rest of data
-    while (stream)
-      {
+    while (stream) {
         row = stream.readRow();
         if (stream || (row != QStringList(""))) {
-            for (i=0; i<row.size() && i<dataSize; ++i)
-              *data[i] << conv<typename C::value_type>(row[i]);
+            for (i = 0; i < row.size() && i < dataSize; ++i)
+                *data[i] << conv<typename C::value_type>(row[i]);
             // some rows might have too few columns (re-use value of i from above loop)
-            for (; i<dataSize; ++i) {
-              invalid_cells[i].setValue(data[i]->size(), true);
-              *data[i] << conv<typename C::value_type>("");
+            for (; i < dataSize; ++i) {
+                invalid_cells[i].setValue(data[i]->size(), true);
+                *data[i] << conv<typename C::value_type>("");
             }
         }
-      }
+    }
 
-    for (i=0; i<dataSize; ++i)
-      {
+    for (i = 0; i < dataSize; ++i) {
         cols << new Column(std::move(column_names[i]), unique_ptr<C>(std::move(data[i])),
                            std::move(invalid_cells[i]));
-        if (i == 0) 
-          cols.back()->setPlotDesignation(SciDAVis::X);
+        if (i == 0)
+            cols.back()->setPlotDesignation(SciDAVis::X);
         else
-          cols.back()->setPlotDesignation(SciDAVis::Y);
-      }
-
-  }
+            cols.back()->setPlotDesignation(SciDAVis::Y);
+    }
+}
 
 }
 
-AbstractAspect * AsciiTableImportFilter::importAspect(QIODevice& input)
+AbstractAspect *AsciiTableImportFilter::importAspect(QIODevice &input)
 {
-  SciDaVisTextStream stream(input, d_separator);
-  if (d_simplify_whitespace)
-    stream.whiteSpaceTreatment=SciDaVisTextStream::simplify;
-  else if (d_trim_whitespace)
-      stream.whiteSpaceTreatment=SciDaVisTextStream::trim;
+    SciDaVisTextStream stream(input, d_separator);
+    if (d_simplify_whitespace)
+        stream.whiteSpaceTreatment = SciDaVisTextStream::simplify;
+    else if (d_trim_whitespace)
+        stream.whiteSpaceTreatment = SciDaVisTextStream::trim;
 
-  // skip ignored lines
-  for (int i=0; i<d_ignored_lines; i++)
-    stream.readRow();
+    // skip ignored lines
+    for (int i = 0; i < d_ignored_lines; i++)
+        stream.readRow();
 
-  // build a Table from the gathered data
-  QList<Column*> cols;
-  if (d_convert_to_numeric) 
-    readCols<QVector<qreal> >(cols, stream, d_first_row_names_columns);
-  else
-    readCols<QStringList>(cols, stream, d_first_row_names_columns);
+    // build a Table from the gathered data
+    QList<Column *> cols;
+    if (d_convert_to_numeric)
+        readCols<QVector<qreal>>(cols, stream, d_first_row_names_columns);
+    else
+        readCols<QStringList>(cols, stream, d_first_row_names_columns);
 
-  // renaming will be done by the kernel
-  future::Table * result = new future::Table(0, 0, tr("Table"));
-  result->appendColumns(cols);
-  return result;
+    // renaming will be done by the kernel
+    future::Table *result = new future::Table(0, 0, tr("Table"));
+    result->appendColumns(cols);
+    return result;
 }
-

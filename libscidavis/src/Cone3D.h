@@ -4,8 +4,9 @@
     --------------------------------------------------------------------
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
-    Description          : 3D cone class (code from Cone class  in QwtPlot3D library with modified destructor)
-                           
+    Description          : 3D cone class (code from Cone class  in QwtPlot3D library with modified
+ destructor)
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -35,21 +36,21 @@
 class Cone3D : public Qwt3D::VertexEnrichment
 {
 public:
-  Cone3D();
-  Cone3D(double rad, unsigned quality);
-  ~Cone3D();
+    Cone3D();
+    Cone3D(double rad, unsigned quality);
+    ~Cone3D();
 
-  Qwt3D::Enrichment* clone() const {return new Cone3D(*this);}
-  
-  void configure(double rad, unsigned quality);
-  void draw(Qwt3D::Triple const&);
+    Qwt3D::Enrichment *clone() const { return new Cone3D(*this); }
+
+    void configure(double rad, unsigned quality);
+    void draw(Qwt3D::Triple const &);
 
 private:
-  	GLUquadricObj *hat;
-	GLUquadricObj *disk;
-	unsigned quality_;
-	double radius_;
-	GLboolean oldstate_;
+    GLUquadricObj *hat;
+    GLUquadricObj *disk;
+    unsigned quality_;
+    double radius_;
+    GLboolean oldstate_;
 };
 
 #endif

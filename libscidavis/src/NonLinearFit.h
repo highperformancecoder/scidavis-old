@@ -33,19 +33,19 @@
 
 class NonLinearFit : public Fit
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  NonLinearFit(ApplicationWindow *parent, Graph *g);
-  NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-  NonLinearFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+    NonLinearFit(ApplicationWindow *parent, Graph *g);
+    NonLinearFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle);
+    NonLinearFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle, double start,
+                 double end);
 
-  void setParametersList(const QStringList& lst);
-  void setFormula(const QString& s);
+    void setParametersList(const QStringList &lst);
+    void setFormula(const QString &s);
 
 private:
-  void calculateFitCurveData(const std::vector<double>&, double*, double*) override;
-  void init();
+    void calculateFitCurveData(const std::vector<double> &, double *, double *) override;
+    void init();
 };
 #endif
-

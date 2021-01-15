@@ -39,19 +39,20 @@ class QwtPlotCurve;
 
 class DataPointPicker : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		DataPointPicker(Graph *g, ApplicationWindow *app);
-		~DataPointPicker();
-		QPointF pick();
-	protected slots:
-		void pointSelected(QwtPlotCurve *curve, int pointIndex);
-	private:
-		QEventLoop m_picking_loop;
-		Graph *m_graph;
-		ApplicationWindow *m_app;
-		QPointF m_result;
+public:
+    DataPointPicker(Graph *g, ApplicationWindow *app);
+    ~DataPointPicker();
+    QPointF pick();
+protected slots:
+    void pointSelected(QwtPlotCurve *curve, int pointIndex);
+
+private:
+    QEventLoop m_picking_loop;
+    Graph *m_graph;
+    ApplicationWindow *m_app;
+    QPointF m_result;
 };
 
 #endif // ifndef DATA_POINT_PICKER_H

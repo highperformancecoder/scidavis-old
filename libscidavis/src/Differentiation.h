@@ -33,12 +33,13 @@
 
 class Differentiation : public Filter
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-	Differentiation(ApplicationWindow *parent, Graph *g);
-	Differentiation(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-	Differentiation(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+    Differentiation(ApplicationWindow *parent, Graph *g);
+    Differentiation(ApplicationWindow *parent, Graph *g, const QString &curveTitle);
+    Differentiation(ApplicationWindow *parent, Graph *g, const QString &curveTitle, double start,
+                    double end);
 
 private:
     void init();

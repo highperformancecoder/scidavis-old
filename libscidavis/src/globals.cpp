@@ -109,91 +109,93 @@ GSL (http://www.gnu.org/software/gsl/)\n\
 
 int SciDAVis::version()
 {
-	return scidavis_versionNo;
+    return scidavis_versionNo;
 }
 
 QString SciDAVis::schemaVersion()
 {
-  return "SciDAVis " +
-    QString::number((version() & 0xFF0000) >> 16)+"."+
-    QString::number((version() & 0x00FF00) >> 8)+"."+
-    QString::number(version() & 0x0000FF);
+    return "SciDAVis " + QString::number((version() & 0xFF0000) >> 16) + "."
+            + QString::number((version() & 0x00FF00) >> 8) + "."
+            + QString::number(version() & 0x0000FF);
 }
 
 QString SciDAVis::versionString()
 {
-  return QString("SciDAVis ") + scidavis_version;
+    return QString("SciDAVis ") + scidavis_version;
 }
 
 QString SciDAVis::extraVersion()
 {
-	return	QString(extra_version);
+    return QString(extra_version);
 }
 
 void SciDAVis::about()
 {
-	QString text = SciDAVis::copyright_string;
-	text.replace(QRegExp("\\[1\\]"), "<sup>1</sup>");
-	text.replace("é","&eacute;");
-	text.replace("á","&aacute;");
-	text.replace("ö", "&ouml;");
-	text.replace("\n", "<br>");
-	text.replace("=== ", "<h1>");
-	text.replace(" ===","</h1>");
-	text.replace("--- ", "<h2>");
-	text.replace(" ---","</h2>");
-	text.replace(" ---","</h2>");
-	text.replace("</h1><br><br>", "</h1>");
-	text.replace("</h2><br><br>", "</h2>");
-	text.replace("<br><h1>", "<h1>");
-	text.replace("<br><h2>", "<h2>");
+    QString text = SciDAVis::copyright_string;
+    text.replace(QRegExp("\\[1\\]"), "<sup>1</sup>");
+    text.replace("é", "&eacute;");
+    text.replace("á", "&aacute;");
+    text.replace("ö", "&ouml;");
+    text.replace("\n", "<br>");
+    text.replace("=== ", "<h1>");
+    text.replace(" ===", "</h1>");
+    text.replace("--- ", "<h2>");
+    text.replace(" ---", "</h2>");
+    text.replace(" ---", "</h2>");
+    text.replace("</h1><br><br>", "</h1>");
+    text.replace("</h2><br><br>", "</h2>");
+    text.replace("<br><h1>", "<h1>");
+    text.replace("<br><h2>", "<h2>");
 
-	Qt::WindowFlags flags = Qt::WindowTitleHint | Qt::WindowSystemMenuHint;
+    Qt::WindowFlags flags = Qt::WindowTitleHint | Qt::WindowSystemMenuHint;
 #if QT_VERSION >= 0x040500
-	flags |= Qt::WindowCloseButtonHint;
+    flags |= Qt::WindowCloseButtonHint;
 #endif
-	QDialog *dialog = new QDialog(0, flags);
-	Ui::SciDAVisAbout ui;
-	ui.setupUi(dialog);
-	dialog->setAttribute(Qt::WA_DeleteOnClose);
-	dialog->setWindowTitle(QObject::tr("About SciDAVis"));
-	ui.version_label->setText(versionString() + extraVersion());
-	ui.release_date_label->setText(
-		QString("Qt: ")+QT_VERSION_STR+". Qwt: "+QWT_VERSION_STR
+    QDialog *dialog = new QDialog(0, flags);
+    Ui::SciDAVisAbout ui;
+    ui.setupUi(dialog);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->setWindowTitle(QObject::tr("About SciDAVis"));
+    ui.version_label->setText(versionString() + extraVersion());
+    ui.release_date_label->setText(QString("Qt: ") + QT_VERSION_STR + ". Qwt: "
+                                   + QWT_VERSION_STR
 #ifdef SCRIPTING_PYTHON
-		". Python: "+PY_VERSION
+                                   ". Python: "
+                                   + PY_VERSION
 #else
-		+". No python"
+                                   + ". No python"
 #endif
-	+QObject::tr("\nReleased") + ": " + QString(SciDAVis::release_date));
-	ui.credits_box->setHtml(text);
+                                   + QObject::tr("\nReleased") + ": "
+                                   + QString(SciDAVis::release_date));
+    ui.credits_box->setHtml(text);
 
-	dialog->exec();
+    dialog->exec();
 }
 
 QString SciDAVis::copyrightString()
 {
-	return copyright_string;
+    return copyright_string;
 }
 
 QString SciDAVis::releaseDateString()
 {
-	return release_date;
+    return release_date;
 }
 
-QString SciDAVis::enumValueToString(int key, const QString& enum_name)
+QString SciDAVis::enumValueToString(int key, const QString &enum_name)
 {
-	int index = staticMetaObject.indexOfEnumerator(enum_name.toUtf8());
-	if(index == -1) return QString("invalid");
-	QMetaEnum meta_enum = staticMetaObject.enumerator(index);
-	return QString(meta_enum.valueToKey(key));
+    int index = staticMetaObject.indexOfEnumerator(enum_name.toUtf8());
+    if (index == -1)
+        return QString("invalid");
+    QMetaEnum meta_enum = staticMetaObject.enumerator(index);
+    return QString(meta_enum.valueToKey(key));
 }
 
-int SciDAVis::enumStringToValue(const QString& string, const QString& enum_name)
+int SciDAVis::enumStringToValue(const QString &string, const QString &enum_name)
 {
-	int index = staticMetaObject.indexOfEnumerator(enum_name.toUtf8());
-	if(index == -1) return -1;
-	QMetaEnum meta_enum = staticMetaObject.enumerator(index);
-	return meta_enum.keyToValue(string.toUtf8());
+    int index = staticMetaObject.indexOfEnumerator(enum_name.toUtf8());
+    if (index == -1)
+        return -1;
+    QMetaEnum meta_enum = staticMetaObject.enumerator(index);
+    return meta_enum.keyToValue(string.toUtf8());
 }
-

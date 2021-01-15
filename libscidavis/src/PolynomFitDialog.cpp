@@ -42,118 +42,118 @@
 #include <QLineEdit>
 #include <QComboBox>
 
-PolynomFitDialog::PolynomFitDialog( QWidget* parent, Qt::WindowFlags fl )
-: QDialog( parent, fl )
+PolynomFitDialog::PolynomFitDialog(QWidget *parent, Qt::WindowFlags fl) : QDialog(parent, fl)
 {
-	setWindowTitle(tr("Polynomial Fit Options"));
-    setSizeGripEnabled( true );
+    setWindowTitle(tr("Polynomial Fit Options"));
+    setSizeGripEnabled(true);
 
     QGroupBox *gb1 = new QGroupBox();
-	QGridLayout *gl1 = new QGridLayout(gb1);
-	gl1->addWidget(new QLabel(tr("Polynomial Fit of")), 0, 0);
+    QGridLayout *gl1 = new QGridLayout(gb1);
+    gl1->addWidget(new QLabel(tr("Polynomial Fit of")), 0, 0);
 
-	boxName = new QComboBox();
+    boxName = new QComboBox();
     gl1->addWidget(boxName, 0, 1);
 
-    gl1->addWidget(new QLabel( tr("Order (1 - 9, 1 = linear)")), 1, 0);
-	boxOrder = new QSpinBox();
+    gl1->addWidget(new QLabel(tr("Order (1 - 9, 1 = linear)")), 1, 0);
+    boxOrder = new QSpinBox();
     boxOrder->setRange(1, 9);
-	boxOrder->setValue(2);
+    boxOrder->setValue(2);
     gl1->addWidget(boxOrder, 1, 1);
 
-    gl1->addWidget(new QLabel( tr("Fit curve Xmin")), 2, 0);
-	boxStart = new QLineEdit(tr("0"));
+    gl1->addWidget(new QLabel(tr("Fit curve Xmin")), 2, 0);
+    boxStart = new QLineEdit(tr("0"));
     gl1->addWidget(boxStart, 2, 1);
 
-    gl1->addWidget(	new QLabel( tr("Fit curve Xmax")), 3, 0);
-	boxEnd = new QLineEdit();
+    gl1->addWidget(new QLabel(tr("Fit curve Xmax")), 3, 0);
+    boxEnd = new QLineEdit();
     gl1->addWidget(boxEnd, 3, 1);
 
-    gl1->addWidget(new QLabel( tr("Color")), 4, 0);
-	btnColor = new ColorButton();
-	btnColor->setColor(QColor(Qt::red));
-	gl1->addWidget(btnColor, 4, 1);
+    gl1->addWidget(new QLabel(tr("Color")), 4, 0);
+    btnColor = new ColorButton();
+    btnColor->setColor(QColor(Qt::red));
+    gl1->addWidget(btnColor, 4, 1);
 
-	boxShowFormula = new QCheckBox(tr( "Show Formula on Graph?" ));
-	boxShowFormula->setChecked( false );
+    boxShowFormula = new QCheckBox(tr("Show Formula on Graph?"));
+    boxShowFormula->setChecked(false);
     gl1->addWidget(boxShowFormula, 5, 1);
     gl1->setRowStretch(6, 1);
 
-	buttonFit = new QPushButton(tr( "&Fit" ));
-	buttonFit->setDefault( true );
+    buttonFit = new QPushButton(tr("&Fit"));
+    buttonFit->setDefault(true);
 
-	buttonCancel = new QPushButton(tr( "&Close" ));
+    buttonCancel = new QPushButton(tr("&Close"));
 
-    QVBoxLayout* vl = new QVBoxLayout();
+    QVBoxLayout *vl = new QVBoxLayout();
     vl->addWidget(buttonFit);
     vl->addWidget(buttonCancel);
     vl->addStretch();
 
-	QHBoxLayout* hlayout = new QHBoxLayout(this);
-	hlayout->addWidget(gb1);
-	hlayout->addLayout(vl);
+    QHBoxLayout *hlayout = new QHBoxLayout(this);
+    hlayout->addWidget(gb1);
+    hlayout->addLayout(vl);
 
-	connect( buttonFit, SIGNAL( clicked() ), this, SLOT( fit() ) );
-	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-	connect( boxName, SIGNAL( activated(const QString&) ), this, SLOT(activateCurve(const QString&)));
+    connect(buttonFit, SIGNAL(clicked()), this, SLOT(fit()));
+    connect(buttonCancel, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(boxName, SIGNAL(activated(const QString &)), this,
+            SLOT(activateCurve(const QString &)));
 }
 
 void PolynomFitDialog::fit()
 {
-	QString curveName = boxName->currentText();
-	QStringList curvesList = graph->analysableCurvesList();
-	if (!curvesList.contains(curveName))
-	{
-		QMessageBox::critical(this, tr("Warning"),
-				tr("The curve <b> %1 </b> doesn't exist anymore! Operation aborted!").arg(curveName));
-		boxName->clear();
-		boxName->addItems(curvesList);
-		return;
-	}
+    QString curveName = boxName->currentText();
+    QStringList curvesList = graph->analysableCurvesList();
+    if (!curvesList.contains(curveName)) {
+        QMessageBox::critical(this, tr("Warning"),
+                              tr("The curve <b> %1 </b> doesn't exist anymore! Operation aborted!")
+                                      .arg(curveName));
+        boxName->clear();
+        boxName->addItems(curvesList);
+        return;
+    }
 
-	ApplicationWindow *app = (ApplicationWindow *)this->parent();
-    PolynomialFit *fitter = new PolynomialFit(app, graph, boxOrder->value(), boxShowFormula->isChecked());
-    if (fitter->setDataFromCurve(curveName, boxStart->text().toDouble(), boxEnd->text().toDouble()))
-    {
+    ApplicationWindow *app = (ApplicationWindow *)this->parent();
+    PolynomialFit *fitter =
+            new PolynomialFit(app, graph, boxOrder->value(), boxShowFormula->isChecked());
+    if (fitter->setDataFromCurve(curveName, boxStart->text().toDouble(),
+                                 boxEnd->text().toDouble())) {
         fitter->setColor(btnColor->color());
         fitter->scaleErrors(app->fit_scale_errors);
         fitter->setOutputPrecision(app->fit_output_precision);
-		fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);
+        fitter->generateFunction(app->generateUniformFitPoints, app->fitPoints);
         fitter->fit();
         delete fitter;
-	}
+    }
 }
 
 void PolynomFitDialog::setGraph(Graph *g)
 {
-	graph = g;
-	boxName->addItems (g->analysableCurvesList());
+    graph = g;
+    boxName->addItems(g->analysableCurvesList());
 
-	QString selectedCurve = g->selectedCurveTitle();
-	if (!selectedCurve.isEmpty())
-	{
-	    int index = boxName->findText (selectedCurve);
-		boxName->setCurrentIndex(index);
-	}
+    QString selectedCurve = g->selectedCurveTitle();
+    if (!selectedCurve.isEmpty()) {
+        int index = boxName->findText(selectedCurve);
+        boxName->setCurrentIndex(index);
+    }
     activateCurve(boxName->currentText());
 
-	connect (graph, SIGNAL(closedGraph()), this, SLOT(close()));
-	connect (graph, SIGNAL(dataRangeChanged()), this, SLOT(changeDataRange()));
+    connect(graph, SIGNAL(closedGraph()), this, SLOT(close()));
+    connect(graph, SIGNAL(dataRangeChanged()), this, SLOT(changeDataRange()));
 }
 
-void PolynomFitDialog::activateCurve(const QString& curveName)
+void PolynomFitDialog::activateCurve(const QString &curveName)
 {
-	double start, end;
-	graph->range(graph->curveIndex(curveName), &start, &end);
+    double start, end;
+    graph->range(graph->curveIndex(curveName), &start, &end);
 
-	boxStart->setText(QString::number(start, 'g', 15));
-	boxEnd->setText(QString::number(end, 'g', 15));
+    boxStart->setText(QString::number(start, 'g', 15));
+    boxEnd->setText(QString::number(end, 'g', 15));
 }
 
 void PolynomFitDialog::changeDataRange()
 {
-	double start = graph->selectedXStartValue();
-	double end = graph->selectedXEndValue();
-	boxStart->setText(QString::number(qMin(start, end), 'g', 15));
-	boxEnd->setText(QString::number(qMax(start, end), 'g', 15));
+    double start = graph->selectedXStartValue();
+    double end = graph->selectedXEndValue();
+    boxStart->setText(QString::number(qMin(start, end), 'g', 15));
+    boxEnd->setText(QString::number(qMax(start, end), 'g', 15));
 }

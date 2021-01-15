@@ -43,61 +43,60 @@ class CurvesDialog : public QDialog
     Q_OBJECT
 
 public:
-    CurvesDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    CurvesDialog(QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
 
-	void setGraph(Graph *graph);
+    void setGraph(Graph *graph);
 
 private slots:
-	void addCurves();
-	void removeCurves();
-	int curveStyle();
-	void showCurveRangeDialog();
-	void showPlotAssociations();
-	void showFunctionDialog();
+    void addCurves();
+    void removeCurves();
+    int curveStyle();
+    void showCurveRangeDialog();
+    void showPlotAssociations();
+    void showFunctionDialog();
 
-	/**
-  Enables ("yes")/disables ("no") the following buttons, which are on the right besides
-  the graph contents list, depending on the selected item in this list:
+    /**
+Enables ("yes")/disables ("no") the following buttons, which are on the right besides
+the graph contents list, depending on the selected item in this list:
 
-  <table>
-  <tr>  <td>Selected Item</td><td>btnEditFunction</td>  <td>btnAssociations</td>  <td>btnRange</td> </tr>
-  <tr>  <td>Spectrogram</td>  <td>no</td> <td>no</td> <td>no</td>   </tr>
-  <tr>  <td>Function</td>     <td>yes</td> <td>no</td> <td>no</td>   </tr>
-  <tr>  <td>ErrorBars</td>    <td>no</td> <td>yes</td> <td>no</td>   </tr>
-  <tr>  <td>all others</td>   <td>no</td> <td>yes</td> <td>yes</td>   </tr>
-  </table>
-	*/
-	void showCurveBtn(int);
+<table>
+<tr>  <td>Selected Item</td><td>btnEditFunction</td>  <td>btnAssociations</td>  <td>btnRange</td>
+</tr> <tr>  <td>Spectrogram</td>  <td>no</td> <td>no</td> <td>no</td>   </tr> <tr> <td>Function</td>
+<td>yes</td> <td>no</td> <td>no</td>   </tr> <tr>  <td>ErrorBars</td>    <td>no</td> <td>yes</td>
+<td>no</td>   </tr> <tr>  <td>all others</td>   <td>no</td> <td>yes</td> <td>yes</td>   </tr>
+</table>
+    */
+    void showCurveBtn(int);
     void enableAddBtn();
-	void enableRemoveBtn();
-	void showCurveRange(bool);
-	void updateCurveRange();
-	void showCurrentFolder(bool);
+    void enableRemoveBtn();
+    void showCurveRange(bool);
+    void updateCurveRange();
+    void showCurrentFolder(bool);
 
 private:
-	void closeEvent(QCloseEvent*);
+    void closeEvent(QCloseEvent *);
 
     void init();
-    bool addCurve(const QString& name);
+    bool addCurve(const QString &name);
     QSize sizeHint() const;
     void contextMenuEvent(QContextMenuEvent *);
 
-	int defaultCurveLineWidth, defaultSymbolSize;
-	Graph *d_graph;
+    int defaultCurveLineWidth, defaultSymbolSize;
+    Graph *d_graph;
 
-    QPushButton* btnAdd;
-    QPushButton* btnRemove;
-    QPushButton* btnOK;
-    QPushButton* btnCancel;
-	QPushButton* btnAssociations;
-	QPushButton* btnEditFunction;
-	QPushButton* btnRange;
-    QListWidget* available;
-    QListWidget* contents;
-	QComboBox* boxStyle;
-	QComboBox* boxMatrixStyle;
-	QCheckBox* boxShowRange;
-	QCheckBox* boxShowCurrentFolder;
+    QPushButton *btnAdd;
+    QPushButton *btnRemove;
+    QPushButton *btnOK;
+    QPushButton *btnCancel;
+    QPushButton *btnAssociations;
+    QPushButton *btnEditFunction;
+    QPushButton *btnRange;
+    QListWidget *available;
+    QListWidget *contents;
+    QComboBox *boxStyle;
+    QComboBox *boxMatrixStyle;
+    QCheckBox *boxShowRange;
+    QCheckBox *boxShowCurrentFolder;
 };
 
 #endif // CurvesDialog_H
