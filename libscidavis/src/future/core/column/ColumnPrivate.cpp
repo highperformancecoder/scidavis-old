@@ -87,6 +87,7 @@ Column::Private::Private(Column *owner, SciDAVis::ColumnMode mode) : d_owner(own
     case SciDAVis::DateTime: {
         d_input_filter = new String2DateTimeFilter();
         d_output_filter = new DateTime2StringFilter();
+        d_numeric_datetime_filter.reset(new NumericDateTimeBaseFilter());
         connect(static_cast<DateTime2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
                 d_owner, SLOT(notifyDisplayChange()));
         d_data_type = SciDAVis::TypeQDateTime;
@@ -154,6 +155,7 @@ Column::Private::Private(Column *owner, SciDAVis::ColumnDataType type, SciDAVis:
     case SciDAVis::DateTime: {
         d_input_filter = new String2DateTimeFilter();
         d_output_filter = new DateTime2StringFilter();
+        d_numeric_datetime_filter.reset(new NumericDateTimeBaseFilter());
         connect(static_cast<DateTime2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
                 d_owner, SLOT(notifyDisplayChange()));
         break;
@@ -201,162 +203,29 @@ Column::Private::~Private()
     } // switch(d_data_type)
 }
 
-void Column::Private::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *filter)
+void Column::Private::setColumnMode(SciDAVis::ColumnMode new_mode, AbstractFilter *converter)
 {
-    if (mode == d_column_mode)
+    const auto &old_mode = d_column_mode;
+    if (new_mode == old_mode)
         return;
-
     void *old_data = d_data;
     // remark: the deletion of the old data will be done in the dtor of a command
 
     AbstractSimpleFilter *new_in_filter, *new_out_filter;
-    bool filter_is_temporary {}; // it can also become outputFilter(), which we may not delete here
-    Column *temp_col = 0;
-    if (filter)
+    bool filter_is_temporary{true}; // it can also become outputFilter(), which we may not delete here
+    QScopedPointer<Column> temp_col;
+
+    if (nullptr != converter)
         filter_is_temporary = false;
 
     emit d_owner->modeAboutToChange(d_owner);
-
-    // determine the conversion filter and allocate the new data vector
-    switch (d_column_mode) {
-    case SciDAVis::Numeric:
-        disconnect(static_cast<Double2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
-                   d_owner, SLOT(notifyDisplayChange()));
-        switch (mode) {
-        case SciDAVis::Numeric:
-            break;
-        case SciDAVis::Text:
-            if (!filter) {
-                filter = outputFilter();
-                filter_is_temporary = false;
-            }
-            temp_col =
-                    new Column("temp_col", *(static_cast<QVector<qreal> *>(old_data)), d_validity);
-            d_data = new QStringList();
-            d_data_type = SciDAVis::TypeQString;
-            break;
-        case SciDAVis::DateTime:
-            if (!filter) {
-                filter = new Double2DateTimeFilter();
-                filter_is_temporary = true;
-            }
-            temp_col =
-                    new Column("temp_col", *(static_cast<QVector<qreal> *>(old_data)), d_validity);
-            d_data = new QList<QDateTime>();
-            d_data_type = SciDAVis::TypeQDateTime;
-            break;
-        case SciDAVis::Month:
-            if (!filter) {
-                filter = new Double2MonthFilter();
-                filter_is_temporary = true;
-            }
-            temp_col =
-                    new Column("temp_col", *(static_cast<QVector<qreal> *>(old_data)), d_validity);
-            d_data = new QList<QDateTime>();
-            d_data_type = SciDAVis::TypeQDateTime;
-            break;
-        case SciDAVis::Day:
-            if (!filter) {
-                filter = new Double2DayOfWeekFilter();
-                filter_is_temporary = true;
-            }
-            temp_col =
-                    new Column("temp_col", *(static_cast<QVector<qreal> *>(old_data)), d_validity);
-            d_data = new QList<QDateTime>();
-            d_data_type = SciDAVis::TypeQDateTime;
-            break;
-        } // switch(mode)
-        break;
-
-    case SciDAVis::Text:
-        switch (mode) {
-        case SciDAVis::Text:
-            break;
-        case SciDAVis::Numeric:
-            if (!filter) {
-                filter = new String2DoubleFilter();
-                filter_is_temporary = true;
-            }
-            temp_col = new Column("temp_col", *(static_cast<QStringList *>(old_data)), d_validity);
-            d_data = new QVector<double>();
-            d_data_type = SciDAVis::TypeDouble;
-            break;
-        case SciDAVis::DateTime:
-            if (!filter) {
-                filter = new String2DateTimeFilter();
-                filter_is_temporary = true;
-            }
-            temp_col = new Column("temp_col", *(static_cast<QStringList *>(old_data)), d_validity);
-            d_data = new QList<QDateTime>();
-            d_data_type = SciDAVis::TypeQDateTime;
-            break;
-        case SciDAVis::Month:
-            if (!filter) {
-                filter = new String2MonthFilter();
-                filter_is_temporary = true;
-            }
-            temp_col = new Column("temp_col", *(static_cast<QStringList *>(old_data)), d_validity);
-            d_data = new QList<QDateTime>();
-            d_data_type = SciDAVis::TypeQDateTime;
-            break;
-        case SciDAVis::Day:
-            if (!filter) {
-                filter = new String2DayOfWeekFilter();
-                filter_is_temporary = true;
-            }
-            temp_col = new Column("temp_col", *(static_cast<QStringList *>(old_data)), d_validity);
-            d_data = new QList<QDateTime>();
-            d_data_type = SciDAVis::TypeQDateTime;
-            break;
-        } // switch(mode)
-        break;
-
-    case SciDAVis::DateTime:
-    case SciDAVis::Month:
-    case SciDAVis::Day:
-        disconnect(static_cast<DateTime2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
-                   d_owner, SLOT(notifyDisplayChange()));
-        switch (mode) {
-        case SciDAVis::DateTime:
-            break;
-        case SciDAVis::Text:
-            if (!filter) {
-                filter = outputFilter();
-                filter_is_temporary = false;
-            }
-            temp_col = new Column("temp_col", *(static_cast<QList<QDateTime> *>(old_data)),
-                                  d_validity);
-            d_data = new QStringList();
-            d_data_type = SciDAVis::TypeQString;
-            break;
-        case SciDAVis::Numeric:
-            if (!filter) {
-                if (d_column_mode == SciDAVis::Month)
-                    filter = new Month2DoubleFilter();
-                else if (d_column_mode == SciDAVis::Day)
-                    filter = new DayOfWeek2DoubleFilter();
-                else
-                    filter = new DateTime2DoubleFilter();
-                filter_is_temporary = true;
-            }
-            temp_col = new Column("temp_col", *(static_cast<QList<QDateTime> *>(old_data)),
-                                  d_validity);
-            d_data = new QVector<double>();
-            d_data_type = SciDAVis::TypeDouble;
-            break;
-        case SciDAVis::Month:
-        case SciDAVis::Day:
-            break;
-        } // switch(mode)
-        break;
-    }
-
-    // determine the new input and output filters
-    switch (mode) {
+    // prepare new d_data, d_data_type and filters
+    switch (new_mode) {
     case SciDAVis::Numeric: {
+        d_data = new QVector<double>();
+        d_data_type = SciDAVis::TypeDouble;
         new_in_filter = new String2DoubleFilter();
         new_out_filter = new Double2StringFilter();
-
         auto &settings = ApplicationWindow::getSettings();
         settings.beginGroup("/General");
         static_cast<Double2StringFilter *>(new_out_filter)
@@ -364,45 +233,175 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *f
         static_cast<Double2StringFilter *>(new_out_filter)
                 ->setNumericFormat(
                         settings.value("/DefaultNumericFormat", 'f').toChar().toLatin1());
-
+        settings.endGroup();
         connect(static_cast<Double2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),
                 d_owner, SLOT(notifyDisplayChange()));
+        // if converter is not provided
+        if (nullptr == converter) {
+            switch (old_mode) {
+            case SciDAVis::Text:
+                converter = new String2DoubleFilter();
+                break;
+            case SciDAVis::Month:
+                converter = new Month2DoubleFilter();
+                break;
+            case SciDAVis::Day:
+                converter = new DayOfWeek2DoubleFilter();
+                break;
+            case SciDAVis::DateTime:
+                // use existing (or default) converter to get reciprocal converter
+                converter = new DateTime2DoubleFilter(*getNumericDateTimeFilter());
+                break;
+            case SciDAVis::Numeric:
+                throw logic_error("Unreachable line is reached in ColumnPrivate.cpp!");
+            }
+        }
         break;
     }
     case SciDAVis::Text: {
+        d_data = new QStringList();
+        d_data_type = SciDAVis::TypeQString;
         new_in_filter = new SimpleCopyThroughFilter();
         new_out_filter = new SimpleCopyThroughFilter();
+        if (nullptr == converter) {
+            converter = outputFilter();
+            filter_is_temporary = false;
+        }
         break;
     }
     case SciDAVis::DateTime: {
         new_in_filter = new String2DateTimeFilter();
         new_out_filter = new DateTime2StringFilter();
+        d_numeric_datetime_filter.reset(new NumericDateTimeBaseFilter());
+        if ((SciDAVis::DateTime != old_mode) && (SciDAVis::Month != old_mode)
+            && (SciDAVis::Day != old_mode)) {
+            d_data = new QList<QDateTime>();
+            d_data_type = SciDAVis::TypeQDateTime;
+        }
         connect(static_cast<DateTime2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),
                 d_owner, SLOT(notifyDisplayChange()));
+        if (nullptr == converter) {
+            switch (old_mode) {
+            case SciDAVis::Numeric:
+                // use existing (or default) converter to get reciprocal converter
+                converter = new Double2DateTimeFilter(*getNumericDateTimeFilter());
+                break;
+            case SciDAVis::Text:
+                converter = new String2DateTimeFilter();
+                break;
+            case SciDAVis::Month:
+                break;
+            case SciDAVis::Day:
+                break;
+            case SciDAVis::DateTime:
+                throw logic_error("Unreachable line is reached in ColumnPrivate.cpp!");
+            }
+        }
+        // converter is provided, need to store for possible double -> datetime conversion later
+        else if (old_mode == SciDAVis::Numeric) {
+            auto numeric_datetime_converter =
+                    reinterpret_cast<NumericDateTimeBaseFilter *>(converter);
+            if (nullptr != numeric_datetime_converter)
+                // the ownership of converter is not taken, copy is stored
+                setNumericDateTimeFilter(
+                        new NumericDateTimeBaseFilter(*numeric_datetime_converter));
+        }
         break;
     }
     case SciDAVis::Month: {
         new_in_filter = new String2MonthFilter();
         new_out_filter = new DateTime2StringFilter();
+        if ((SciDAVis::DateTime != old_mode) && (SciDAVis::Month != old_mode)
+            && (SciDAVis::Day != old_mode)) {
+            d_data = new QList<QDateTime>();
+            d_data_type = SciDAVis::TypeQDateTime;
+        }
         static_cast<DateTime2StringFilter *>(new_out_filter)->setFormat("MMMM");
         connect(static_cast<DateTime2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),
                 d_owner, SLOT(notifyDisplayChange()));
+        if (nullptr == converter) {
+            switch (old_mode) {
+            case SciDAVis::Numeric:
+                converter = new Double2MonthFilter();
+                break;
+            case SciDAVis::Text:
+                converter = new String2MonthFilter();
+                break;
+            case SciDAVis::Month:
+                throw logic_error("Unreachable line is reached in ColumnPrivate.cpp!");
+            case SciDAVis::DateTime:
+                break;
+            case SciDAVis::Day:
+                break;
+            }
+        }
         break;
     }
     case SciDAVis::Day: {
         new_in_filter = new String2DayOfWeekFilter();
         new_out_filter = new DateTime2StringFilter();
+        if ((SciDAVis::DateTime != old_mode) && (SciDAVis::Month != old_mode)
+            && (SciDAVis::Day != old_mode)) {
+            d_data = new QList<QDateTime>();
+            d_data_type = SciDAVis::TypeQDateTime;
+        }
         static_cast<DateTime2StringFilter *>(new_out_filter)->setFormat("dddd");
         connect(static_cast<DateTime2StringFilter *>(new_out_filter), SIGNAL(formatChanged()),
                 d_owner, SLOT(notifyDisplayChange()));
+        if (nullptr == converter) {
+            switch (old_mode) {
+            case SciDAVis::Numeric:
+                converter = new Double2DayOfWeekFilter();
+                break;
+            case SciDAVis::Text:
+                converter = new String2DayOfWeekFilter();
+                break;
+            case SciDAVis::Month:
+                break;
+            case SciDAVis::DateTime:
+                break;
+            case SciDAVis::Day:
+                throw logic_error("Unreachable line is reached in ColumnPrivate.cpp!");
+            }
+        }
         break;
     }
+#ifdef _DEBUG
     default:
-        throw runtime_error("invalid mode");
-    } // switch(mode)
+        // And this is very unlikely to happen, but
+        throw runtime_error("Switching column to an invalid mode!");
+#else
+    default:
+        return;
+#endif
+    }
 
-    d_column_mode = mode;
+    // prepare temporary data
+    switch (old_mode) {
+    case SciDAVis::Numeric: {
+        disconnect(static_cast<Double2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
+                   d_owner, SLOT(notifyDisplayChange()));
+        temp_col.reset(new Column("temp_col", *(static_cast<QVector<qreal> *>(old_data)), d_validity));
+        break;
+    }
+    case SciDAVis::Text: {
+        temp_col.reset(new Column("temp_col", *(static_cast<QStringList *>(old_data)), d_validity));
+        break;
+    }
+    case SciDAVis::DateTime: // fallthrough intended
+    case SciDAVis::Month:
+    case SciDAVis::Day: {
+        disconnect(static_cast<DateTime2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
+                   d_owner, SLOT(notifyDisplayChange()));
+        if ((SciDAVis::DateTime != new_mode) && (SciDAVis::Month != new_mode)
+            && (SciDAVis::Day != new_mode))
+            temp_col.reset(new Column("temp_col", *(static_cast<QList<QDateTime> *>(old_data)),
+                                  d_validity));
+        break;
+    }
+    }
 
+    d_column_mode = new_mode;
     new_in_filter->setName("InputFilter");
     new_out_filter->setName("OutputFilter");
     d_input_filter = new_in_filter;
@@ -413,15 +412,13 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *f
     if (temp_col) // if temp_col == 0, only the input/output filters need to be changed
     {
         // copy the filtered, i.e. converted, column
-        filter->input(0, temp_col);
-        copy(filter->output(0));
-        delete temp_col;
-
-        if (filter_is_temporary)
-            delete filter;
+        converter->input(0, temp_col.data());
+        copy(converter->output(0));
     }
 
     emit d_owner->modeChanged(d_owner);
+    if (filter_is_temporary)
+        delete converter;
 }
 
 void Column::Private::replaceModeData(SciDAVis::ColumnMode mode, SciDAVis::ColumnDataType type,
@@ -967,6 +964,16 @@ void Column::Private::replaceValues(int first, const QVector<qreal> &new_values)
         ptr[first + i] = new_values.at(i);
     d_validity.setValue(Interval<int>(first, first + num_rows - 1), false);
     emit d_owner->dataChanged(d_owner);
+}
+
+NumericDateTimeBaseFilter *Column::Private::getNumericDateTimeFilter()
+{
+    return d_numeric_datetime_filter.data();
+}
+
+void Column::Private::setNumericDateTimeFilter(NumericDateTimeBaseFilter *const newFilter)
+{
+    d_numeric_datetime_filter.reset(newFilter);
 }
 
 void Column::Private::replaceMasking(IntervalAttribute<bool> masking)

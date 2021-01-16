@@ -121,11 +121,21 @@ Table::Table() : AbstractPart("temp"), d_table_private(*this)
     createActions();
 }
 
-Table::~Table() { }
+Table::~Table() {}
 
 Column *Table::column(int index) const
 {
     return d_table_private.column(index);
+}
+
+Column *Table::currentColumn() const
+{
+    return d_table_private.currentColumn();
+}
+
+bool Table::setCurrentColumn(int index)
+{
+    return d_table_private.setCurrentColumn(index);
 }
 
 Column *Table::column(const QString &name, bool legacy_kludge) const
@@ -2486,6 +2496,23 @@ void Table::initActionManager()
 Column *Table::Private::column(int index) const
 {
     return d_columns.value(index);
+}
+
+Column *Table::Private::currentColumn() const
+{
+    if ((-1 < d_current_column) && (d_current_column < d_columns.size()))
+        return d_columns.value(d_current_column);
+    return nullptr;
+}
+
+bool future::Table::Private::setCurrentColumn(int index)
+{
+    if ((-1 < index) && (index < d_columns.size())) {
+        d_current_column = index;
+        return true;
+    }
+    d_current_column = -1;
+    return false;
 }
 
 void Table::Private::replaceColumns(int first, QList<Column *> new_cols)
