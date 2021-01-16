@@ -1,5 +1,8 @@
 cmake_minimum_required( VERSION 3.16 )
 
+# Target platform is Windows 10
+set(CMAKE_SYSTEM_VERSION 10.0)
+
 project( scidavis
   VERSION 2.3.0
   DESCRIPTION "SciDAVis is a free application for Scientific Data Analysis and Visualization."
@@ -17,6 +20,14 @@ set( CMAKE_C_EXTENSIONS OFF )
 get_property( MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG )
 
 set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH} )
+
+if( MSVC )
+  if (CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION VERSION_LESS 10)
+    message(SEND_ERROR "Windows 10 SDK is not found! Please, install one or set a CMAKE_WINDOWS_KITS_10_DIR environment variable to an absolute path to look for Windows 10 SDKs. The directory is expected to contain Include/10.0.* directories.")
+  else()
+	message(STATUS "Use Windows 10 SDK version ${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}")
+  endif()
+endif()
 
 find_package( Qt5
   COMPONENTS
@@ -40,8 +51,9 @@ if( MSVC )
   # /wd4251 Silent dll-related warnings
   # /wd4127 Silent conditional expression is constant (Qt headers)
   # /wd4310 Silent cast truncates constant value (muParser headers)
+  # /wd4996 strcpy is unsafe warnings, equiv to #define _SCL_SECURE_NO_WARNINGS
   set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /W4 /permissive- \
-       /wd4456 /wd4457 /wd4458 /wd4251 /wd4127 /wd4310" )
+	 /wd4456 /wd4457 /wd4458 /wd4251 /wd4127 /wd4310 /wd4996" )
   set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4 /permissive-" )
   if( CMAKE_CXX_COMPILER_ID STREQUAL "Clang" )
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-nonportable-include-path" )
@@ -144,4 +156,8 @@ if( WIN32 )
 else()
   install( FILES ${DOC_FILES} DESTINATION share/doc/scidavis )
   install( FILES manual/index.html DESTINATION share/doc/scidavis/manual )
+endif()
+
+if( MSVC )
+  set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "scidavis")
 endif()
