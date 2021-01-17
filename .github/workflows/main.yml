@@ -158,6 +158,10 @@ jobs:
             mingw-w64-x86_64-gsl
             mingw-w64-x86_64-gl2ps
             mingw-w64-x86_64-boost
+            mingw-w64-x86_64-unittest-cpp
+            mingw-w64-x86_64-sip
+            mingw-w64-x86_64-python-pyqt5
+            mingw-w64-x86_64-python-numpy
 
       - name: Download Qwt5 and QwtPlot3D
         run: |
@@ -168,15 +172,6 @@ jobs:
           wget http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_20.04/qwtplot3d-qt5_0.2.7.orig.tar.gz
           tar -xzf qwtplot3d-qt5_0.2.7.orig.tar.gz && rm qwtplot3d-qt5_0.2.7.orig.tar.gz
           patch -p1 < qwtplot3d.diff
-
-      - name: Install UnitTest++
-        run: |
-          git clone --single-branch --branch master --depth 1 https://github.com/unittest-cpp/unittest-cpp
-          cd unittest-cpp
-          mkdir build && cd build
-          cmake .. -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=/mingw64
-          make -j$(nproc)
-          make install
 
       - name: Configuring
         run: |
