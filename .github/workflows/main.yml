@@ -98,17 +98,7 @@ jobs:
 
       - name: Download Qwt5 and QwtPlot3D
         run: |
-          cd 3rdparty
-          Invoke-Webrequest `
-            http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_20.04/qwt5-qt5_0.2.7.orig.tar.gz `
-            -OutFile qwt5-qt5.tar.gz
-          tar -xzf qwt5-qt5.tar.gz; rm qwt5-qt5.tar.gz
-          Rename-Item qwt5-qt5-master qwt5-qt5
-          Invoke-Webrequest `
-            http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_20.04/qwtplot3d-qt5_0.2.7.orig.tar.gz `
-            -OutFile qwtplot3d.tar.gz
-          tar -xzf qwtplot3d.tar.gz; rm qwtplot3d.tar.gz
-          git apply --ignore-space-change --ignore-whitespace --whitespace=nowarn qwtplot3d.diff
+          git submodule update --init --recursive
 
       - name: Configuring
         run: |
@@ -165,13 +155,7 @@ jobs:
 
       - name: Download Qwt5 and QwtPlot3D
         run: |
-          cd 3rdparty
-          wget http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_20.04/qwt5-qt5_0.2.7.orig.tar.gz
-          tar -xzf qwt5-qt5_0.2.7.orig.tar.gz && rm qwt5-qt5_0.2.7.orig.tar.gz
-          mv qwt5-qt5* qwt5-qt5
-          wget http://download.opensuse.org/repositories/home:/hpcoder1/xUbuntu_20.04/qwtplot3d-qt5_0.2.7.orig.tar.gz
-          tar -xzf qwtplot3d-qt5_0.2.7.orig.tar.gz && rm qwtplot3d-qt5_0.2.7.orig.tar.gz
-          patch -p1 < qwtplot3d.diff
+          git submodule update --init --recursive
 
       - name: Configuring
         run: |
