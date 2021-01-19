@@ -48,35 +48,35 @@ class LineDialog : public QDialog
     Q_OBJECT
 
 public:
-    LineDialog(ArrowMarker *line, QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    LineDialog(ArrowMarker *line, QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
 
-    enum Unit{ScaleCoordinates, Pixels};
+    enum Unit { ScaleCoordinates, Pixels };
 
-	void initGeometryTab();
-	void enableHeadTab();
-	void setCoordinates(int unit);
+    void initGeometryTab();
+    void enableHeadTab();
+    void setCoordinates(int unit);
 
 public slots:
-	void enableButtonDefault(int);
-	void setDefaultValues();
-	void displayCoordinates(int unit);
-	void accept();
-	void apply();
+    void enableButtonDefault(int);
+    void setDefaultValues();
+    void displayCoordinates(int unit);
+    void accept();
+    void apply();
 
 private:
-	ArrowMarker *lm;
+    ArrowMarker *lm;
 
-    PenWidget* penWidget;
-	QComboBox* unitBox;
-    QPushButton* btnOk;
-    QPushButton* btnApply;
-	QPushButton* buttonDefault;
-    QCheckBox* endBox;
-    QCheckBox* startBox,  *filledBox;
-	QTabWidget* tw;
-	QWidget *options, *geometry, *head;
-	QLineEdit *xStartBox, *yStartBox, *xEndBox, *yEndBox;
-	QSpinBox *boxHeadAngle, *boxHeadLength;
+    PenWidget *penWidget;
+    QComboBox *unitBox;
+    QPushButton *btnOk;
+    QPushButton *btnApply;
+    QPushButton *buttonDefault;
+    QCheckBox *endBox;
+    QCheckBox *startBox, *filledBox;
+    QTabWidget *tw;
+    QWidget *options, *geometry, *head;
+    QLineEdit *xStartBox, *yStartBox, *xEndBox, *yEndBox;
+    QSpinBox *boxHeadAngle, *boxHeadLength;
 };
 
 #endif // LINEDIALOG_H

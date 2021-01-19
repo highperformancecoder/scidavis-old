@@ -43,26 +43,23 @@ class SmoothCurveDialog : public QDialog
     Q_OBJECT
 
 public:
-    SmoothCurveDialog(int method, QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
-    ~SmoothCurveDialog(){};
+    SmoothCurveDialog(int method, QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    ~SmoothCurveDialog() {};
 
-	QPushButton* btnSmooth;
-	QPushButton* buttonCancel;
-	QComboBox* boxName;
-	QSpinBox *boxPointsLeft, *boxPointsRight, *boxOrder;
-	ColorButton* btnColor;
+    QPushButton *btnSmooth;
+    QPushButton *buttonCancel;
+    QComboBox *boxName;
+    QSpinBox *boxPointsLeft, *boxPointsRight, *boxOrder;
+    ColorButton *btnColor;
 
 public slots:
-	void setGraph(Graph *g);
-	void smooth();
-	void activateCurve(const QString& curveName);
+    void setGraph(Graph *g);
+    void smooth();
+    void activateCurve(const QString &curveName);
 
 private:
-	Graph *graph;
-	int smooth_method;
+    Graph *graph;
+    int smooth_method;
 };
 
 #endif
-
-
-

@@ -33,16 +33,17 @@
 
 class FFT : public Filter
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    FFT(ApplicationWindow *parent, Table *t, const QString& realColName, const QString& imagColName = QString());
-	FFT(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
+    FFT(ApplicationWindow *parent, Table *t, const QString &realColName,
+        const QString &imagColName = QString());
+    FFT(ApplicationWindow *parent, Graph *g, const QString &curveTitle);
 
-    void setInverseFFT(bool inverse = true){d_inverse = inverse;};
-    void setSampling(double sampling){d_sampling = sampling;};
-    void normalizeAmplitudes(bool norm = true){d_normalize = norm;};
-    void shiftFrequencies(bool shift = true){d_shift_order = shift;};
+    void setInverseFFT(bool inverse = true) { d_inverse = inverse; };
+    void setSampling(double sampling) { d_sampling = sampling; };
+    void normalizeAmplitudes(bool norm = true) { d_normalize = norm; };
+    void shiftFrequencies(bool shift = true) { d_shift_order = shift; };
 
 private:
     void init();
@@ -51,7 +52,8 @@ private:
 
     QList<Column *> fftTable();
 
-    void setDataFromTable(Table *t, const QString& realColName, const QString& imagColName = QString());
+    void setDataFromTable(Table *t, const QString &realColName,
+                          const QString &imagColName = QString());
 
     double d_sampling;
     //! Flag telling if an inverse FFT must be performed.

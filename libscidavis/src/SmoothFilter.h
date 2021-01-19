@@ -34,17 +34,18 @@
 
 class SmoothFilter : public Filter
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-	SmoothFilter(ApplicationWindow *parent, Graph *g, const QString& curveTitle, int m = 3);
-	SmoothFilter(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end, int m = 3);
+    SmoothFilter(ApplicationWindow *parent, Graph *g, const QString &curveTitle, int m = 3);
+    SmoothFilter(ApplicationWindow *parent, Graph *g, const QString &curveTitle, double start,
+                 double end, int m = 3);
 
-    enum SmoothMethod{SavitzkyGolay = 1, FFT = 2, Average = 3};
+    enum SmoothMethod { SavitzkyGolay = 1, FFT = 2, Average = 3 };
 
-    int method(){return (int)d_method;};
+    int method() { return (int)d_method; };
     void setMethod(int m);
-	void setMethod(SmoothMethod m){setMethod((int)m);};
+    void setMethod(SmoothMethod m) { setMethod((int)m); };
 
     void setSmoothPoints(int points, int left_points = 0);
     //! Sets the polynomial order in the Savitky-Golay algorithm.
@@ -57,7 +58,7 @@ private:
     void smoothAverage(double *x, double *y);
     void smoothSavGol(double *x, double *y);
     void smoothModifiedSavGol(double *x, double *y);
-	 static int savitzkyGolayCoefficients(int points, int polynom_order, gsl_matrix *h);
+    static int savitzkyGolayCoefficients(int points, int polynom_order, gsl_matrix *h);
 
     //! The smooth method.
     SmoothMethod d_method;

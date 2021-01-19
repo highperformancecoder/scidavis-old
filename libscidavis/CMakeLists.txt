@@ -345,6 +345,8 @@ target_link_libraries( libscidavis
   Qt5::Svg
   )
 
+target_include_directories( libscidavis PUBLIC ${MUPARSER_INCLUDE_DIR} )
+
 if( NOT BUILD_QWT )
   target_include_directories( libscidavis PUBLIC ${QWT_INCLUDE_DIR} )
   target_link_libraries( libscidavis ${QWT_LIBRARY} )
@@ -425,6 +427,17 @@ if( ENABLE_Python3 )
     PYTHON_UTIL_PATH="${CMAKE_INSTALL_PREFIX}/share/scidavis"
     SCRIPTING_PYTHON
     )
+  if( MINGW )
+    get_filename_component( PYTHON_DIR ${Python3_EXECUTABLE} DIRECTORY )
+    file( REAL_PATH "${PYTHON_DIR}/.." PYTHON_ROOT_DIR )
+    set( PYTHONHOME "${PYTHON_ROOT_DIR}" CACHE PATH "Python Home" )
+    message( STATUS "PYTHONHOME = ${PYTHONHOME}" )
+    set_property( SOURCE "src/PythonScripting.cpp"
+      APPEND
+      PROPERTY COMPILE_DEFINITIONS
+      PYTHONHOME=${PYTHONHOME}
+      )
+  endif()
 endif( ENABLE_Python3 )
 
 if( SEARCH_FOR_UPDATE OR DOWNLOAD_LINKS )

@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Plot symbol combo box
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,157 +33,145 @@
 #include <qpainter.h>
 
 const QwtSymbol::Style SymbolBox::symbols[] = {
-  QwtSymbol::NoSymbol,
-  QwtSymbol::Ellipse,
-  QwtSymbol::Rect,
-  QwtSymbol::Diamond,
-  QwtSymbol::Triangle,
-  QwtSymbol::DTriangle,
-  QwtSymbol::UTriangle,
-  QwtSymbol::LTriangle,
-  QwtSymbol::RTriangle, 
-  QwtSymbol::Cross, 
-  QwtSymbol::XCross, 
-  QwtSymbol::HLine,
-  QwtSymbol::VLine,
-  QwtSymbol::Star1, 
-  QwtSymbol::Star2, 
-  QwtSymbol::Hexagon
+    QwtSymbol::NoSymbol,  QwtSymbol::Ellipse,   QwtSymbol::Rect,      QwtSymbol::Diamond,
+    QwtSymbol::Triangle,  QwtSymbol::DTriangle, QwtSymbol::UTriangle, QwtSymbol::LTriangle,
+    QwtSymbol::RTriangle, QwtSymbol::Cross,     QwtSymbol::XCross,    QwtSymbol::HLine,
+    QwtSymbol::VLine,     QwtSymbol::Star1,     QwtSymbol::Star2,     QwtSymbol::Hexagon
 };
 
-auto symbolsSize=sizeof(SymbolBox::symbols)/sizeof(SymbolBox::symbols[0]);
+auto symbolsSize = sizeof(SymbolBox::symbols) / sizeof(SymbolBox::symbols[0]);
 
 SymbolBox::SymbolBox(bool rw, QWidget *parent) : QComboBox(parent)
 {
-  setEditable(rw);
-  init();
+    setEditable(rw);
+    init();
 }
 
 SymbolBox::SymbolBox(QWidget *parent) : QComboBox(parent)
 {
-  init();
+    init();
 }
 
 void SymbolBox::init()
 {
-	QPixmap icon = QPixmap(14, 14);
-	icon.fill ( QColor (Qt::gray) );
-	const QRect r= QRect(0, 0, 14, 14);
-	QPainter p(&icon);
-	p.setBackground(QColor(Qt::gray));
-	QwtSymbol symb;
-	p.setBrush(QBrush(QColor(Qt::white)));
+    QPixmap icon = QPixmap(14, 14);
+    icon.fill(QColor(Qt::gray));
+    const QRect r = QRect(0, 0, 14, 14);
+    QPainter p(&icon);
+    p.setBackground(QColor(Qt::gray));
+    QwtSymbol symb;
+    p.setBrush(QBrush(QColor(Qt::white)));
 
-	this->addItem(tr("No Symbol" ));
+    this->addItem(tr("No Symbol"));
 
-	symb.setStyle (QwtSymbol::Ellipse);
-	symb.draw(&p, r);
-	this->addItem(icon, tr("Ellipse" ));
+    symb.setStyle(QwtSymbol::Ellipse);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Ellipse"));
 
-	symb.setStyle (QwtSymbol::Rect);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Rectangle"));
+    symb.setStyle(QwtSymbol::Rect);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Rectangle"));
 
-	symb.setStyle (QwtSymbol::Diamond);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Diamond"));
+    symb.setStyle(QwtSymbol::Diamond);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Diamond"));
 
-	symb.setStyle (QwtSymbol::Triangle);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Triangle"));
+    symb.setStyle(QwtSymbol::Triangle);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Triangle"));
 
-	symb.setStyle (QwtSymbol::DTriangle);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Down Triangle"));
+    symb.setStyle(QwtSymbol::DTriangle);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Down Triangle"));
 
-	symb.setStyle (QwtSymbol::UTriangle);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Up Triangle"));
+    symb.setStyle(QwtSymbol::UTriangle);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Up Triangle"));
 
-	symb.setStyle (QwtSymbol::LTriangle);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Left Triangle"));
+    symb.setStyle(QwtSymbol::LTriangle);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Left Triangle"));
 
-	symb.setStyle (QwtSymbol::RTriangle);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Right Triangle"));
+    symb.setStyle(QwtSymbol::RTriangle);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Right Triangle"));
 
-	symb.setStyle (QwtSymbol::Cross);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Cross"));
+    symb.setStyle(QwtSymbol::Cross);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Cross"));
 
-	symb.setStyle (QwtSymbol::XCross);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Diagonal Cross"));
+    symb.setStyle(QwtSymbol::XCross);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Diagonal Cross"));
 
-	symb.setStyle (QwtSymbol::HLine);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Horizontal Line"));
+    symb.setStyle(QwtSymbol::HLine);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Horizontal Line"));
 
-	symb.setStyle (QwtSymbol::VLine);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Vertical Line"));
+    symb.setStyle(QwtSymbol::VLine);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Vertical Line"));
 
-	symb.setStyle (QwtSymbol::Star1);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Star 1"));
+    symb.setStyle(QwtSymbol::Star1);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Star 1"));
 
-	symb.setStyle (QwtSymbol::Star2);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Star 2"));
+    symb.setStyle(QwtSymbol::Star2);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Star 2"));
 
-	symb.setStyle (QwtSymbol::Hexagon);
-	p.eraseRect ( r );
-	symb.draw(&p, r);
-    this->addItem(icon,tr("Hexagon"));
+    symb.setStyle(QwtSymbol::Hexagon);
+    p.eraseRect(r);
+    symb.draw(&p, r);
+    this->addItem(icon, tr("Hexagon"));
 
-	p.end();
+    p.end();
 }
 
-void SymbolBox::setStyle(const QwtSymbol::Style& style)
+void SymbolBox::setStyle(const QwtSymbol::Style &style)
 {
-    const QwtSymbol::Style*ite = std::find(symbols, symbols + symbolsSize, style);
+    const QwtSymbol::Style *ite = std::find(symbols, symbols + symbolsSize, style);
     if (ite == symbols + symbolsSize)
-    this->setCurrentIndex(0);
-  else 
-    this->setCurrentIndex(ite - symbols);
+        this->setCurrentIndex(0);
+    else
+        this->setCurrentIndex(ite - symbols);
 }
 
 QwtSymbol::Style SymbolBox::selectedSymbol() const
 {
-  size_t i = this->currentIndex();
-  if (i < sizeof(symbols))
-    return symbols[this->currentIndex()];
-  else
-    return QwtSymbol::NoSymbol;
+    size_t i = this->currentIndex();
+    if (i < sizeof(symbols))
+        return symbols[this->currentIndex()];
+    else
+        return QwtSymbol::NoSymbol;
 }
 
-int SymbolBox::symbolIndex(const QwtSymbol::Style& style)
+int SymbolBox::symbolIndex(const QwtSymbol::Style &style)
 {
-    const QwtSymbol::Style*ite = std::find(symbols, symbols + symbolsSize, style);
+    const QwtSymbol::Style *ite = std::find(symbols, symbols + symbolsSize, style);
     if (ite == symbols + symbolsSize)
-    return 0; 
-  else
-    return (ite - symbols);
+        return 0;
+    else
+        return (ite - symbols);
 }
 
 QwtSymbol::Style SymbolBox::style(int index)
 {
-  if (index < (int)sizeof(symbols))
-    return symbols[index];
-  else
-    return QwtSymbol::NoSymbol;
+    if (index < (int)sizeof(symbols))
+        return symbols[index];
+    else
+        return QwtSymbol::NoSymbol;
 }

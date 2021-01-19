@@ -41,90 +41,86 @@
 #include <QComboBox>
 #include <QLayout>
 
-SmoothCurveDialog::SmoothCurveDialog(int method, QWidget* parent, Qt::WindowFlags fl )
-    : QDialog( parent, fl )
+SmoothCurveDialog::SmoothCurveDialog(int method, QWidget *parent, Qt::WindowFlags fl)
+    : QDialog(parent, fl)
 {
-	smooth_method = method;
+    smooth_method = method;
 
-	setWindowTitle(tr("Smoothing Options"));
+    setWindowTitle(tr("Smoothing Options"));
 
     QGroupBox *gb1 = new QGroupBox();
     QGridLayout *gl1 = new QGridLayout(gb1);
-	gl1->addWidget(new QLabel(tr("Curve")), 0, 0);
+    gl1->addWidget(new QLabel(tr("Curve")), 0, 0);
 
     boxName = new QComboBox();
-	gl1->addWidget(boxName, 0, 1);
+    gl1->addWidget(boxName, 0, 1);
 
-	btnColor = new ColorButton();
-	btnColor->setColor(QColor(Qt::red));
+    btnColor = new ColorButton();
+    btnColor->setColor(QColor(Qt::red));
 
-	if (method == SmoothFilter::SavitzkyGolay)
-		{
+    if (method == SmoothFilter::SavitzkyGolay) {
         gl1->addWidget(new QLabel(tr("Polynomial Order")), 1, 0);
-		boxOrder = new QSpinBox();
-		boxOrder->setRange(0, 9);
-		boxOrder->setValue(2);
-		gl1->addWidget(boxOrder, 1, 1);
+        boxOrder = new QSpinBox();
+        boxOrder->setRange(0, 9);
+        boxOrder->setValue(2);
+        gl1->addWidget(boxOrder, 1, 1);
 
-		gl1->addWidget(new QLabel(tr("Points to the Left")), 2, 0);
-		boxPointsLeft = new QSpinBox();
-		boxPointsLeft->setRange(1, 25);
-		boxPointsLeft->setValue(2);
-		gl1->addWidget(boxPointsLeft, 2, 1);
+        gl1->addWidget(new QLabel(tr("Points to the Left")), 2, 0);
+        boxPointsLeft = new QSpinBox();
+        boxPointsLeft->setRange(1, 25);
+        boxPointsLeft->setValue(2);
+        gl1->addWidget(boxPointsLeft, 2, 1);
 
-		gl1->addWidget(new QLabel(tr("Points to the Right")), 3, 0);
-		boxPointsRight = new QSpinBox();
-		boxPointsRight->setRange(1, 25);
-		boxPointsRight->setValue(2);
-		gl1->addWidget(boxPointsRight, 3, 1);
+        gl1->addWidget(new QLabel(tr("Points to the Right")), 3, 0);
+        boxPointsRight = new QSpinBox();
+        boxPointsRight->setRange(1, 25);
+        boxPointsRight->setValue(2);
+        gl1->addWidget(boxPointsRight, 3, 1);
 
-		gl1->addWidget(new QLabel(tr("Color")), 4, 0);
-		gl1->addWidget(btnColor, 4, 1);
+        gl1->addWidget(new QLabel(tr("Color")), 4, 0);
+        gl1->addWidget(btnColor, 4, 1);
         gl1->setRowStretch(5, 1);
-		}
-	else
-		{
-		gl1->addWidget(new QLabel(tr("Points")), 1, 0);
-		boxPointsLeft = new QSpinBox();
-		boxPointsLeft->setRange(1, 1000000);
-		boxPointsLeft->setSingleStep(10);
-		boxPointsLeft->setValue(5);
-		gl1->addWidget(boxPointsLeft, 1, 1);
+    } else {
+        gl1->addWidget(new QLabel(tr("Points")), 1, 0);
+        boxPointsLeft = new QSpinBox();
+        boxPointsLeft->setRange(1, 1000000);
+        boxPointsLeft->setSingleStep(10);
+        boxPointsLeft->setValue(5);
+        gl1->addWidget(boxPointsLeft, 1, 1);
 
-		gl1->addWidget(new QLabel(tr("Color")), 2, 0);
-		gl1->addWidget(btnColor, 2, 1);
+        gl1->addWidget(new QLabel(tr("Color")), 2, 0);
+        gl1->addWidget(btnColor, 2, 1);
         gl1->setRowStretch(3, 1);
-		}
+    }
     gl1->setColumnStretch(2, 1);
 
-	btnSmooth = new QPushButton(tr( "&Smooth" ));
+    btnSmooth = new QPushButton(tr("&Smooth"));
     btnSmooth->setDefault(true);
-    buttonCancel = new QPushButton(tr( "&Close" ));
+    buttonCancel = new QPushButton(tr("&Close"));
 
-	QVBoxLayout *vl = new QVBoxLayout();
- 	vl->addWidget(btnSmooth);
-	vl->addWidget(buttonCancel);
+    QVBoxLayout *vl = new QVBoxLayout();
+    vl->addWidget(btnSmooth);
+    vl->addWidget(buttonCancel);
     vl->addStretch();
 
     QHBoxLayout *hb = new QHBoxLayout(this);
     hb->addWidget(gb1);
     hb->addLayout(vl);
 
-	connect( btnSmooth, SIGNAL(clicked()), this, SLOT( smooth()));
-    connect( buttonCancel, SIGNAL(clicked()), this, SLOT( reject()));
-	connect( boxName, SIGNAL(activated(const QString&)), this, SLOT(activateCurve(const QString&)));
+    connect(btnSmooth, SIGNAL(clicked()), this, SLOT(smooth()));
+    connect(buttonCancel, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(boxName, SIGNAL(activated(const QString &)), this,
+            SLOT(activateCurve(const QString &)));
 }
 
 void SmoothCurveDialog::smooth()
 {
     SmoothFilter *sf = new SmoothFilter((ApplicationWindow *)this->parent(), graph,
                                         boxName->currentText(), smooth_method);
-    if (smooth_method == SmoothFilter::SavitzkyGolay)
-    {
+    if (smooth_method == SmoothFilter::SavitzkyGolay) {
         sf->setSmoothPoints(boxPointsLeft->value(), boxPointsRight->value());
         sf->setPolynomOrder(boxOrder->value());
-    }
-    else
+    } else
         sf->setSmoothPoints(boxPointsLeft->value());
 
     sf->setColor(btnColor->color());
@@ -135,18 +131,17 @@ void SmoothCurveDialog::smooth()
 void SmoothCurveDialog::setGraph(Graph *g)
 {
     graph = g;
-    boxName->addItems (g->analysableCurvesList());
+    boxName->addItems(g->analysableCurvesList());
     activateCurve(boxName->currentText());
 }
 
-void SmoothCurveDialog::activateCurve(const QString& curveName)
+void SmoothCurveDialog::activateCurve(const QString &curveName)
 {
-    if (smooth_method == SmoothFilter::Average)
-	{
-	QwtPlotCurve *c = graph->curve(curveName);
-	if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
-		return;
+    if (smooth_method == SmoothFilter::Average) {
+        QwtPlotCurve *c = graph->curve(curveName);
+        if (!c || c->rtti() != QwtPlotItem::Rtti_PlotCurve)
+            return;
 
-	boxPointsLeft->setMaximum(c->dataSize()/2);
-	}
+        boxPointsLeft->setMaximum(c->dataSize() / 2);
+    }
 }

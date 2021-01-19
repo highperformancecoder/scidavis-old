@@ -45,7 +45,7 @@ jobs:
       - name: Configuring
         run: |
           mkdir build && cd build
-          cmake .. -DSEARCH_FOR_UPDATES=OFF -DDOWNLOAD_LINKS=OFF
+          cmake .. -DSEARCH_FOR_UPDATES=OFF -DDOWNLOAD_LINKS=OFF -DORIGIN_IMPORT=ON
 
       - name: Building
         run: |
@@ -86,12 +86,15 @@ jobs:
           version: ${{ matrix.qt_ver }}
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
-      - name: Install VCPKG packages
-        uses: lukka/run-vcpkg@v6
+      - uses: lukka/run-vcpkg@v6
         with:
           vcpkgGitCommitId: 50ea8c0ab7aca3bb9245bba7fc877ad2f2a4464c
-          vcpkgTriplet: 'x64-windows'
-          vcpkgArguments: 'zlib gsl muparser opengl gl2ps'
+          setupOnly: true
+      - name: Install VCPKG packages
+        run: |
+          Add-Content ${{ env.VCPKG_ROOT }}\triplets\x64-windows.cmake "set(VCPKG_BUILD_TYPE release)" 
+          ${{ env.VCPKG_ROOT }}\vcpkg install zlib gsl muparser opengl gl2ps boost-regex unittest-cpp `
+            --triplet x64-windows
 
       - name: Download Qwt5 and QwtPlot3D
         run: |
@@ -110,12 +113,18 @@ jobs:
       - name: Configuring
         run: |
           mkdir build; cd build
-          cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}\scripts\buildsystems\vcpkg.cmake
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}\scripts\buildsystems\vcpkg.cmake `
+            -DORIGIN_IMPORT=ON
 
       - uses: microsoft/setup-msbuild@v1.0.2
       - name: Building
         run: |
-          MSBuild -maxCpuCount build\scidavis.sln
+          MSBuild -maxCpuCount -property:Configuration=Release build\scidavis.sln
+
+      - name: Testing
+        run: |
+          cd build
+          ctest -C Release --output-on-failure
 
   MinGW-w64:
 
@@ -140,6 +149,7 @@ jobs:
           install: >-
             wget
             patch
+            git
             make
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-gcc
@@ -147,6 +157,11 @@ jobs:
             mingw-w64-x86_64-muparser
             mingw-w64-x86_64-gsl
             mingw-w64-x86_64-gl2ps
+            mingw-w64-x86_64-boost
+            mingw-w64-x86_64-unittest-cpp
+            mingw-w64-x86_64-sip
+            mingw-w64-x86_64-python-pyqt5
+            mingw-w64-x86_64-python-numpy
 
       - name: Download Qwt5 and QwtPlot3D
         run: |
@@ -161,8 +176,13 @@ jobs:
       - name: Configuring
         run: |
           mkdir build && cd build
-          cmake .. -G"MSYS Makefiles"
+          cmake .. -G"MSYS Makefiles" -DORIGIN_IMPORT=ON
 
       - name: Building
         run: |
           make -C build -j$(nproc)
+
+      - name: Testing
+        run: |
+          cd build
+          ctest --output-on-failure

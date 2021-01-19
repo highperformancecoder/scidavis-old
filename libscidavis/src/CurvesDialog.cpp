@@ -49,109 +49,108 @@
 
 #include <QMessageBox>
 
-CurvesDialog::CurvesDialog( QWidget* parent, Qt::WindowFlags fl )
-: QDialog( parent, fl )
+CurvesDialog::CurvesDialog(QWidget *parent, Qt::WindowFlags fl) : QDialog(parent, fl)
 {
-	setWindowTitle( tr( "Add/Remove curves" ) );
+    setWindowTitle(tr("Add/Remove curves"));
     setSizeGripEnabled(true);
-	setFocus();
+    setFocus();
 
     QHBoxLayout *hl = new QHBoxLayout();
 
-	hl->addWidget(new QLabel(tr("New curves style")));
-	boxStyle = new QComboBox();
-	boxStyle->addItem( QPixmap(":/lPlot.xpm"), tr( " Line" ) );
-	boxStyle->addItem( QPixmap(":/pPlot.xpm"), tr( " Scatter" ) );
-	boxStyle->addItem( QPixmap(":/lpPlot.xpm"), tr( " Line + Symbol" ) );
-	boxStyle->addItem( QPixmap(":/dropLines.xpm"), tr( " Vertical drop lines" ) );
-	boxStyle->addItem( QPixmap(":/spline.xpm"), tr( " Spline" ) );
-	boxStyle->addItem( QPixmap(":/vert_steps.xpm"), tr( " Vertical steps" ) );
-	boxStyle->addItem( QPixmap(":/hor_steps.xpm"), tr( " Horizontal steps" ) );
-	boxStyle->addItem( QPixmap(":/area.xpm"), tr( " Area" ) );
-	boxStyle->addItem( QPixmap(":/vertBars.xpm"), tr( " Vertical Bars" ) );
-	boxStyle->addItem( QPixmap(":/hBars.xpm"), tr( " Horizontal Bars" ) );
+    hl->addWidget(new QLabel(tr("New curves style")));
+    boxStyle = new QComboBox();
+    boxStyle->addItem(QPixmap(":/lPlot.xpm"), tr(" Line"));
+    boxStyle->addItem(QPixmap(":/pPlot.xpm"), tr(" Scatter"));
+    boxStyle->addItem(QPixmap(":/lpPlot.xpm"), tr(" Line + Symbol"));
+    boxStyle->addItem(QPixmap(":/dropLines.xpm"), tr(" Vertical drop lines"));
+    boxStyle->addItem(QPixmap(":/spline.xpm"), tr(" Spline"));
+    boxStyle->addItem(QPixmap(":/vert_steps.xpm"), tr(" Vertical steps"));
+    boxStyle->addItem(QPixmap(":/hor_steps.xpm"), tr(" Horizontal steps"));
+    boxStyle->addItem(QPixmap(":/area.xpm"), tr(" Area"));
+    boxStyle->addItem(QPixmap(":/vertBars.xpm"), tr(" Vertical Bars"));
+    boxStyle->addItem(QPixmap(":/hBars.xpm"), tr(" Horizontal Bars"));
     hl->addWidget(boxStyle);
 
     boxMatrixStyle = new QComboBox();
-	boxMatrixStyle->addItem( QPixmap(":/color_map.xpm"), tr("Contour - Color Fill"));
-	boxMatrixStyle->addItem( QPixmap(":/contour_map.xpm"), tr("Contour Lines"));
-	boxMatrixStyle->addItem( QPixmap(":/gray_map.xpm"), tr("Gray Scale Map"));
-	boxMatrixStyle->hide();
+    boxMatrixStyle->addItem(QPixmap(":/color_map.xpm"), tr("Contour - Color Fill"));
+    boxMatrixStyle->addItem(QPixmap(":/contour_map.xpm"), tr("Contour Lines"));
+    boxMatrixStyle->addItem(QPixmap(":/gray_map.xpm"), tr("Gray Scale Map"));
+    boxMatrixStyle->hide();
     hl->addWidget(boxMatrixStyle);
     hl->addStretch();
 
     QGridLayout *gl = new QGridLayout();
-    gl->addWidget(new QLabel( tr( "Available data" )), 0, 0);
-    gl->addWidget(new QLabel( tr( "Graph contents" )), 0, 2);
+    gl->addWidget(new QLabel(tr("Available data")), 0, 0);
+    gl->addWidget(new QLabel(tr("Graph contents")), 0, 2);
 
-	available = new QListWidget();
-	available->setSelectionMode (QAbstractItemView::ExtendedSelection);
+    available = new QListWidget();
+    available->setSelectionMode(QAbstractItemView::ExtendedSelection);
     gl->addWidget(available, 1, 0);
 
-    QVBoxLayout* vl1 = new QVBoxLayout();
-	btnAdd = new QPushButton();
-	btnAdd->setIcon( QIcon(QPixmap(":/next.xpm")) );
-	btnAdd->setFixedWidth (35);
-	btnAdd->setFixedHeight (30);
+    QVBoxLayout *vl1 = new QVBoxLayout();
+    btnAdd = new QPushButton();
+    btnAdd->setIcon(QIcon(QPixmap(":/next.xpm")));
+    btnAdd->setFixedWidth(35);
+    btnAdd->setFixedHeight(30);
     vl1->addWidget(btnAdd);
 
-	btnRemove = new QPushButton();
-	btnRemove->setIcon( QIcon(QPixmap(":/prev.xpm")) );
-	btnRemove->setFixedWidth (35);
-	btnRemove->setFixedHeight(30);
+    btnRemove = new QPushButton();
+    btnRemove->setIcon(QIcon(QPixmap(":/prev.xpm")));
+    btnRemove->setFixedWidth(35);
+    btnRemove->setFixedHeight(30);
     vl1->addWidget(btnRemove);
     vl1->addStretch();
 
     gl->addLayout(vl1, 1, 1);
-	contents = new QListWidget();
-	contents->setSelectionMode (QAbstractItemView::ExtendedSelection);
+    contents = new QListWidget();
+    contents->setSelectionMode(QAbstractItemView::ExtendedSelection);
     gl->addWidget(contents, 1, 2);
 
-    QVBoxLayout* vl2 = new QVBoxLayout();
-	btnAssociations = new QPushButton(tr( "&Plot Associations..." ));
-	btnAssociations->setEnabled(false);
+    QVBoxLayout *vl2 = new QVBoxLayout();
+    btnAssociations = new QPushButton(tr("&Plot Associations..."));
+    btnAssociations->setEnabled(false);
     vl2->addWidget(btnAssociations);
 
-	btnRange = new QPushButton(tr( "Edit &Range..." ));
-	btnRange->setEnabled(false);
+    btnRange = new QPushButton(tr("Edit &Range..."));
+    btnRange->setEnabled(false);
     vl2->addWidget(btnRange);
 
-	btnEditFunction = new QPushButton(tr( "&Edit Function..." ));
-	btnEditFunction->setEnabled(false);
+    btnEditFunction = new QPushButton(tr("&Edit Function..."));
+    btnEditFunction->setEnabled(false);
     vl2->addWidget(btnEditFunction);
 
-	btnOK = new QPushButton(tr( "OK" ));
-	btnOK->setDefault( true );
+    btnOK = new QPushButton(tr("OK"));
+    btnOK->setDefault(true);
     vl2->addWidget(btnOK);
 
-	btnCancel = new QPushButton(tr( "Close" ));
+    btnCancel = new QPushButton(tr("Close"));
     vl2->addWidget(btnCancel);
 
-    boxShowRange = new QCheckBox(tr( "&Show Range" ));
+    boxShowRange = new QCheckBox(tr("&Show Range"));
     vl2->addWidget(boxShowRange);
 
     vl2->addStretch();
     gl->addLayout(vl2, 1, 3);
 
-    QVBoxLayout* vl3 = new QVBoxLayout(this);
+    QVBoxLayout *vl3 = new QVBoxLayout(this);
     vl3->addLayout(hl);
     vl3->addLayout(gl);
 
-	boxShowCurrentFolder = new QCheckBox(tr("Show current &folder only" ));
-	vl3->addWidget(boxShowCurrentFolder);
+    boxShowCurrentFolder = new QCheckBox(tr("Show current &folder only"));
+    vl3->addWidget(boxShowCurrentFolder);
 
     init();
 
-	connect(boxShowCurrentFolder, SIGNAL(toggled(bool)), this, SLOT(showCurrentFolder(bool)));
+    connect(boxShowCurrentFolder, SIGNAL(toggled(bool)), this, SLOT(showCurrentFolder(bool)));
     connect(boxShowRange, SIGNAL(toggled(bool)), this, SLOT(showCurveRange(bool)));
-	connect(btnRange, SIGNAL(clicked()),this, SLOT(showCurveRangeDialog()));
-	connect(btnAssociations, SIGNAL(clicked()),this, SLOT(showPlotAssociations()));
-	connect(btnEditFunction, SIGNAL(clicked()),this, SLOT(showFunctionDialog()));
-	connect(btnAdd, SIGNAL(clicked()),this, SLOT(addCurves()));
-	connect(btnRemove, SIGNAL(clicked()),this, SLOT(removeCurves()));
-	connect(btnOK, SIGNAL(clicked()),this, SLOT(close()));
-	connect(btnCancel, SIGNAL(clicked()),this, SLOT(close()));
-	connect(contents, SIGNAL(currentRowChanged(int)), this, SLOT(showCurveBtn(int)));
+    connect(btnRange, SIGNAL(clicked()), this, SLOT(showCurveRangeDialog()));
+    connect(btnAssociations, SIGNAL(clicked()), this, SLOT(showPlotAssociations()));
+    connect(btnEditFunction, SIGNAL(clicked()), this, SLOT(showFunctionDialog()));
+    connect(btnAdd, SIGNAL(clicked()), this, SLOT(addCurves()));
+    connect(btnRemove, SIGNAL(clicked()), this, SLOT(removeCurves()));
+    connect(btnOK, SIGNAL(clicked()), this, SLOT(close()));
+    connect(btnCancel, SIGNAL(clicked()), this, SLOT(close()));
+    connect(contents, SIGNAL(currentRowChanged(int)), this, SLOT(showCurveBtn(int)));
     connect(contents, SIGNAL(itemSelectionChanged()), this, SLOT(enableRemoveBtn()));
     connect(available, SIGNAL(itemSelectionChanged()), this, SLOT(enableAddBtn()));
 
@@ -165,51 +164,48 @@ CurvesDialog::CurvesDialog( QWidget* parent, Qt::WindowFlags fl )
 
 void CurvesDialog::showCurveBtn(int)
 {
-	QwtPlotItem *it = d_graph->plotItem(contents->currentRow());
-	if (!it)
-		return;
+    QwtPlotItem *it = d_graph->plotItem(contents->currentRow());
+    if (!it)
+        return;
 
-	bool function = false;
-	bool associations = false;
-	bool range = false;
+    bool function = false;
+    bool associations = false;
+    bool range = false;
 
-	if (it->rtti() != QwtPlotItem::Rtti_PlotSpectrogram)
-	{
-		PlotCurve *c = (PlotCurve *)it;
-		if (c->type() == Graph::Function)
-			function = true;
-		else
-		{
-			associations = true;
-			if (c->type() != Graph::ErrorBars)
-				range = true;
-		}
-	}
+    if (it->rtti() != QwtPlotItem::Rtti_PlotSpectrogram) {
+        PlotCurve *c = (PlotCurve *)it;
+        if (c->type() == Graph::Function)
+            function = true;
+        else {
+            associations = true;
+            if (c->type() != Graph::ErrorBars)
+                range = true;
+        }
+    }
 
-	btnEditFunction->setEnabled(function);
-	btnAssociations->setEnabled(associations);
-	btnRange->setEnabled(range);
+    btnEditFunction->setEnabled(function);
+    btnAssociations->setEnabled(associations);
+    btnRange->setEnabled(range);
 }
 
 void CurvesDialog::showCurveRangeDialog()
 {
-  int curve = contents->currentRow();
-  if (curve < 0)
-    curve = 0;
+    int curve = contents->currentRow();
+    if (curve < 0)
+        curve = 0;
 
-  ApplicationWindow *app = dynamic_cast<ApplicationWindow*>(this->parent());
-  if (app)
-    {
-      app->showCurveRangeDialog(d_graph, curve);
-      updateCurveRange();
+    ApplicationWindow *app = dynamic_cast<ApplicationWindow *>(this->parent());
+    if (app) {
+        app->showCurveRangeDialog(d_graph, curve);
+        updateCurveRange();
     }
 }
 
 void CurvesDialog::showPlotAssociations()
 {
-	int curve = contents->currentRow();
-	if (curve < 0)
-		curve = 0;
+    int curve = contents->currentRow();
+    if (curve < 0)
+        curve = 0;
 
     ApplicationWindow *app = (ApplicationWindow *)this->parent();
 #if QT_VERSION >= 0x050000
@@ -235,35 +231,33 @@ void CurvesDialog::showFunctionDialog()
 
 QSize CurvesDialog::sizeHint() const
 {
-	return QSize(700, 400);
+    return QSize(700, 400);
 }
 
 void CurvesDialog::contextMenuEvent(QContextMenuEvent *e)
 {
-	QPoint pos = available->viewport()->mapFromGlobal(QCursor::pos());
-	QRect rect = available->visualItemRect(available->currentItem());
-	if (rect.contains(pos))
-	{
-	   QMenu contextMenu(this);
-       QList<QListWidgetItem *> lst = available->selectedItems();
-       if (lst.size() > 1)
-	       contextMenu.addAction(tr("&Plot Selection"), this, SLOT(addCurves()));
-       else if (lst.size() == 1)
-	       contextMenu.addAction(tr("&Plot"), this, SLOT(addCurves()));
-	   contextMenu.exec(QCursor::pos());
+    QPoint pos = available->viewport()->mapFromGlobal(QCursor::pos());
+    QRect rect = available->visualItemRect(available->currentItem());
+    if (rect.contains(pos)) {
+        QMenu contextMenu(this);
+        QList<QListWidgetItem *> lst = available->selectedItems();
+        if (lst.size() > 1)
+            contextMenu.addAction(tr("&Plot Selection"), this, SLOT(addCurves()));
+        else if (lst.size() == 1)
+            contextMenu.addAction(tr("&Plot"), this, SLOT(addCurves()));
+        contextMenu.exec(QCursor::pos());
     }
 
-	pos = contents->viewport()->mapFromGlobal(QCursor::pos());
-	rect = contents->visualItemRect(contents->currentItem());
-	if (rect.contains(pos))
-	{
-	   QMenu contextMenu(this);
-       QList<QListWidgetItem *> lst = contents->selectedItems();
-       if (lst.size() > 1)
-	       contextMenu.addAction(tr("&Delete Selection"), this, SLOT(removeCurves()));
-       else if (lst.size() == 1)
-	       contextMenu.addAction(tr("&Delete Curve"), this, SLOT(removeCurves()));
-	   contextMenu.exec(QCursor::pos());
+    pos = contents->viewport()->mapFromGlobal(QCursor::pos());
+    rect = contents->visualItemRect(contents->currentItem());
+    if (rect.contains(pos)) {
+        QMenu contextMenu(this);
+        QList<QListWidgetItem *> lst = contents->selectedItems();
+        if (lst.size() > 1)
+            contextMenu.addAction(tr("&Delete Selection"), this, SLOT(removeCurves()));
+        else if (lst.size() == 1)
+            contextMenu.addAction(tr("&Delete Curve"), this, SLOT(removeCurves()));
+        contextMenu.exec(QCursor::pos());
     }
 
     e->accept();
@@ -272,13 +266,13 @@ void CurvesDialog::contextMenuEvent(QContextMenuEvent *e)
 void CurvesDialog::init()
 {
     ApplicationWindow *app = (ApplicationWindow *)this->parent();
-    if (app){
-		bool currentFolderOnly = app->d_show_current_folder;
+    if (app) {
+        bool currentFolderOnly = app->d_show_current_folder;
         boxShowCurrentFolder->setChecked(currentFolderOnly);
-		showCurrentFolder(currentFolderOnly);
+        showCurrentFolder(currentFolderOnly);
 
         QStringList matrices = app->matrixNames();
-        if (!matrices.isEmpty ()){
+        if (!matrices.isEmpty()) {
             boxMatrixStyle->show();
             available->addItems(matrices);
         }
@@ -306,203 +300,190 @@ void CurvesDialog::init()
             boxStyle->setCurrentIndex(9);
     }
 
-	if (!available->count())
-		btnAdd->setDisabled(true);
+    if (!available->count())
+        btnAdd->setDisabled(true);
 }
 
 void CurvesDialog::setGraph(Graph *graph)
 {
-	d_graph = graph;
-	contents->addItems(d_graph->plotItemsList());
-	enableRemoveBtn();
+    d_graph = graph;
+    contents->addItems(d_graph->plotItemsList());
+    enableRemoveBtn();
     enableAddBtn();
 }
 
 void CurvesDialog::addCurves()
 {
-	QStringList emptyColumns;
+    QStringList emptyColumns;
     QList<QListWidgetItem *> lst = available->selectedItems();
-    for (int i = 0; i < lst.size(); ++i){
+    for (int i = 0; i < lst.size(); ++i) {
         QString text = lst.at(i)->text();
-        if (contents->findItems(text, Qt::MatchExactly ).isEmpty ()){
-			if (!addCurve(text))
-				emptyColumns << text;
-			}
+        if (contents->findItems(text, Qt::MatchExactly).isEmpty()) {
+            if (!addCurve(text))
+                emptyColumns << text;
+        }
     }
-	d_graph->updatePlot();
-	Graph::showPlotErrorMessage(this, emptyColumns);
+    d_graph->updatePlot();
+    Graph::showPlotErrorMessage(this, emptyColumns);
 
-	showCurveRange(boxShowRange->isChecked());
+    showCurveRange(boxShowRange->isChecked());
 }
 
-bool CurvesDialog::addCurve(const QString& name)
+bool CurvesDialog::addCurve(const QString &name)
 {
     ApplicationWindow *app = (ApplicationWindow *)this->parent();
     if (!app)
         return false;
 
     QStringList matrices = app->matrixNames();
-    if (matrices.contains(name))
-    {
+    if (matrices.contains(name)) {
         Matrix *m = app->matrix(name);
         if (!m)
             return false;
 
-        switch (boxMatrixStyle->currentIndex())
-        {
-            case 0:
-                d_graph->plotSpectrogram(m, Graph::ColorMap);
+        switch (boxMatrixStyle->currentIndex()) {
+        case 0:
+            d_graph->plotSpectrogram(m, Graph::ColorMap);
             break;
-            case 1:
-                d_graph->plotSpectrogram(m, Graph::ContourMap);
+        case 1:
+            d_graph->plotSpectrogram(m, Graph::ContourMap);
             break;
-            case 2:
-                d_graph->plotSpectrogram(m, Graph::GrayMap);
+        case 2:
+            d_graph->plotSpectrogram(m, Graph::GrayMap);
             break;
         }
 
         contents->addItem(name);
-		return true;
+        return true;
     }
 
-	int style = curveStyle();
-	Table* t = app->table(name);
-	if (t && d_graph->insertCurve(t, name, style))
-	{
-		CurveLayout cl = Graph::initCurveLayout();
-		int color, symbol;
-		d_graph->guessUniqueCurveLayout(color, symbol);
+    int style = curveStyle();
+    Table *t = app->table(name);
+    if (t && d_graph->insertCurve(t, name, style)) {
+        CurveLayout cl = Graph::initCurveLayout();
+        int color, symbol;
+        d_graph->guessUniqueCurveLayout(color, symbol);
 
-		cl.lCol = color;
-		cl.symCol = color;
-		cl.fillCol = color;
-		cl.lWidth = app->defaultCurveLineWidth;
-		cl.sSize = app->defaultSymbolSize;
-		cl.sType = symbol;
+        cl.lCol = color;
+        cl.symCol = color;
+        cl.fillCol = color;
+        cl.lWidth = app->defaultCurveLineWidth;
+        cl.sSize = app->defaultSymbolSize;
+        cl.sType = symbol;
 
-		if (style == Graph::Line)
-			cl.sType = 0;
-		else if (style==Graph::VerticalBars || style==Graph::HorizontalBars )
-		{
-			cl.filledArea=1;
-			cl.lCol=0;
-			cl.aCol=color;
-			cl.sType = 0;
-		}
-		else if (style==Graph::Area )
-		{
-			cl.filledArea=1;
-			cl.aCol=color;
-			cl.sType = 0;
-		}
-		else if (style == Graph::VerticalDropLines)
-			cl.connectType=2;
-		else if (style == Graph::VerticalSteps || style == Graph::HorizontalSteps)
-		{
-			cl.connectType=3;
-			cl.sType = 0;
-		}
-		else if (style == Graph::Spline)
-			cl.connectType=5;
+        if (style == Graph::Line)
+            cl.sType = 0;
+        else if (style == Graph::VerticalBars || style == Graph::HorizontalBars) {
+            cl.filledArea = 1;
+            cl.lCol = 0;
+            cl.aCol = color;
+            cl.sType = 0;
+        } else if (style == Graph::Area) {
+            cl.filledArea = 1;
+            cl.aCol = color;
+            cl.sType = 0;
+        } else if (style == Graph::VerticalDropLines)
+            cl.connectType = 2;
+        else if (style == Graph::VerticalSteps || style == Graph::HorizontalSteps) {
+            cl.connectType = 3;
+            cl.sType = 0;
+        } else if (style == Graph::Spline)
+            cl.connectType = 5;
 
-		d_graph->updateCurveLayout(d_graph->curves() - 1, &cl);
+        d_graph->updateCurveLayout(d_graph->curves() - 1, &cl);
 
-		contents->addItem(name);
-		return true;
-	}
-	return false;
+        contents->addItem(name);
+        return true;
+    }
+    return false;
 }
 
 void CurvesDialog::removeCurves()
 {
-	QList<QListWidgetItem *> lst = contents->selectedItems();
-	for (int i = 0; i < lst.size(); ++i){
+    QList<QListWidgetItem *> lst = contents->selectedItems();
+    for (int i = 0; i < lst.size(); ++i) {
         QListWidgetItem *it = lst.at(i);
         QString s = it->text();
-        if (boxShowRange->isChecked()){
+        if (boxShowRange->isChecked()) {
             QStringList lst = s.split("[");
             s = lst[0];
         }
         d_graph->removeCurve(s);
     }
 
-	showCurveRange(boxShowRange->isChecked());
-	d_graph->updatePlot();
+    showCurveRange(boxShowRange->isChecked());
+    d_graph->updatePlot();
 }
 
 void CurvesDialog::enableAddBtn()
 {
-    btnAdd->setEnabled (available->count()>0 && !available->selectedItems().isEmpty());
+    btnAdd->setEnabled(available->count() > 0 && !available->selectedItems().isEmpty());
 }
 
 void CurvesDialog::enableRemoveBtn()
 {
-    btnRemove->setEnabled (contents->count()>0 && !contents->selectedItems().isEmpty());
+    btnRemove->setEnabled(contents->count() > 0 && !contents->selectedItems().isEmpty());
 }
 
 int CurvesDialog::curveStyle()
 {
-	int style = 0;
-	switch (boxStyle->currentIndex())
-	{
-		case 0:
-			style = Graph::Line;
-			break;
-		case 1:
-			style = Graph::Scatter;
-			break;
-		case 2:
-			style = Graph::LineSymbols;
-			break;
-		case 3:
-			style = Graph::VerticalDropLines;
-			break;
-		case 4:
-			style = Graph::Spline;
-			break;
-		case 5:
-			style = Graph::VerticalSteps;
-			break;
-		case 6:
-			style = Graph::HorizontalSteps;
-			break;
-		case 7:
-			style = Graph::Area;
-			break;
-		case 8:
-			style = Graph::VerticalBars;
-			break;
-		case 9:
-			style = Graph::HorizontalBars;
-			break;
-	}
-	return style;
+    int style = 0;
+    switch (boxStyle->currentIndex()) {
+    case 0:
+        style = Graph::Line;
+        break;
+    case 1:
+        style = Graph::Scatter;
+        break;
+    case 2:
+        style = Graph::LineSymbols;
+        break;
+    case 3:
+        style = Graph::VerticalDropLines;
+        break;
+    case 4:
+        style = Graph::Spline;
+        break;
+    case 5:
+        style = Graph::VerticalSteps;
+        break;
+    case 6:
+        style = Graph::HorizontalSteps;
+        break;
+    case 7:
+        style = Graph::Area;
+        break;
+    case 8:
+        style = Graph::VerticalBars;
+        break;
+    case 9:
+        style = Graph::HorizontalBars;
+        break;
+    }
+    return style;
 }
 
-void CurvesDialog::showCurveRange(bool on )
+void CurvesDialog::showCurveRange(bool on)
 {
     int row = contents->currentRow();
     contents->clear();
-    if (on)
-    {
+    if (on) {
         QStringList lst = QStringList();
-        for (int i=0; i<d_graph->curves(); i++)
-        {
+        for (int i = 0; i < d_graph->curves(); i++) {
             QwtPlotItem *it = d_graph->plotItem(i);
             if (!it)
                 continue;
 
-            if (it->rtti() == QwtPlotItem::Rtti_PlotCurve && ((PlotCurve *)it)->type() != Graph::Function)
-            {
+            if (it->rtti() == QwtPlotItem::Rtti_PlotCurve
+                && ((PlotCurve *)it)->type() != Graph::Function) {
                 DataCurve *c = (DataCurve *)it;
-                lst << c->title().text() + "[" + QString::number(c->startRow()+1) + ":" + QString::number(c->endRow()+1) + "]";
-            }
-            else
+                lst << c->title().text() + "[" + QString::number(c->startRow() + 1) + ":"
+                                + QString::number(c->endRow() + 1) + "]";
+            } else
                 lst << it->title().text();
         }
         contents->addItems(lst);
-    }
-    else
+    } else
         contents->addItems(d_graph->plotItemsList());
 
     contents->setCurrentRow(row);
@@ -516,39 +497,38 @@ void CurvesDialog::updateCurveRange()
 
 void CurvesDialog::showCurrentFolder(bool currentFolder)
 {
-	ApplicationWindow *app = (ApplicationWindow *)this->parent();
-	if (!app)
-		return;
+    ApplicationWindow *app = (ApplicationWindow *)this->parent();
+    if (!app)
+        return;
 
-	app->d_show_current_folder = currentFolder;
-	available->clear();
+    app->d_show_current_folder = currentFolder;
+    available->clear();
 
-    if (currentFolder){
-    	Folder *f = app->currentFolder();
-		if (f){
-			QStringList columns;
-			foreach (QWidget *w, f->windowsList()){
-				if (!w->inherits("Table"))
-					continue;
+    if (currentFolder) {
+        Folder *f = app->currentFolder();
+        if (f) {
+            QStringList columns;
+            foreach (QWidget *w, f->windowsList()) {
+                if (!w->inherits("Table"))
+                    continue;
 
-				Table *t = (Table *)w;
-				for (int i=0; i < t->numCols(); i++){
-					if(t->colPlotDesignation(i) == SciDAVis::Y)
-						columns << QString(t->name()) + "_" + t->colLabel(i);
-				}
-			}
-			available->addItems(columns);
-		}
-    }
-	else
+                Table *t = (Table *)w;
+                for (int i = 0; i < t->numCols(); i++) {
+                    if (t->colPlotDesignation(i) == SciDAVis::Y)
+                        columns << QString(t->name()) + "_" + t->colLabel(i);
+                }
+            }
+            available->addItems(columns);
+        }
+    } else
         available->addItems(app->columnsList(SciDAVis::Y));
 }
 
-void CurvesDialog::closeEvent(QCloseEvent* e)
+void CurvesDialog::closeEvent(QCloseEvent *e)
 {
-	ApplicationWindow *app = (ApplicationWindow *)this->parent();
-	if (app)
-		app->d_add_curves_dialog_size = this->size();
+    ApplicationWindow *app = (ApplicationWindow *)this->parent();
+    if (app)
+        app->d_add_curves_dialog_size = this->size();
 
-	e->accept();
+    e->accept();
 }

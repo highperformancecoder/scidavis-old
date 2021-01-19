@@ -1,11 +1,11 @@
 /***************************************************************************
-	File                 : ScriptingLangDialog.h
-	Project              : SciDAVis
+        File                 : ScriptingLangDialog.h
+        Project              : SciDAVis
 --------------------------------------------------------------------
-	Copyright            : (C) 2006 by Knut Franke, Ion Vasilief
-	Email (use @ for *)  : knut.franke*gmx.de, ion_vasilief*yahoo.fr
-	Description          : Dialog for changing the current scripting
-	                       language
+        Copyright            : (C) 2006 by Knut Franke, Ion Vasilief
+        Email (use @ for *)  : knut.franke*gmx.de, ion_vasilief*yahoo.fr
+        Description          : Dialog for changing the current scripting
+                               language
 
  ***************************************************************************/
 
@@ -39,22 +39,21 @@ class ApplicationWindow;
 class QListWidget;
 class QPushButton;
 
-class ScriptingLangDialog: public QDialog, public scripted
+class ScriptingLangDialog : public QDialog, public scripted
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		ScriptingLangDialog(ScriptingEnv *env, ApplicationWindow *parent,
-                      Qt::WindowFlags fl = Qt::Widget);
+public:
+    ScriptingLangDialog(ScriptingEnv *env, ApplicationWindow *parent,
+                        Qt::WindowFlags fl = Qt::Widget);
 
-	public slots:
-		void updateLangList();
-		void accept();
+public slots:
+    void updateLangList();
+    void accept();
 
-	private:
-		QListWidget *langList;
-		QPushButton *btnOK, *btnCancel;
+private:
+    QListWidget *langList;
+    QPushButton *btnOK, *btnCancel;
 };
 
 #endif
-

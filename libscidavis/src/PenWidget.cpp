@@ -45,8 +45,7 @@
 
 #include <QDebug>
 
-PenWidget::PenWidget(QWidget *parent, QPen pen)
-    : QWidget(parent)
+PenWidget::PenWidget(QWidget *parent, QPen pen) : QWidget(parent)
 {
     m_pen = pen;
     d_custom_dash = dashPatternToString(m_pen.dashPattern());
@@ -63,27 +62,34 @@ void PenWidget::createWidgets()
     colorButton->setColor(m_pen.color());
     // linewidth
     widthComboBox = new QComboBox(this);
-    widthComboBox->addItem( tr( "1" ) );
-    widthComboBox->addItem( tr( "2" ) );
-    widthComboBox->addItem( tr( "3" ) );
-    widthComboBox->addItem( tr( "4" ) );
-    widthComboBox->addItem( tr( "5" ) );
+    widthComboBox->addItem(tr("1"));
+    widthComboBox->addItem(tr("2"));
+    widthComboBox->addItem(tr("3"));
+    widthComboBox->addItem(tr("4"));
+    widthComboBox->addItem(tr("5"));
     widthComboBox->setCurrentIndex(widthComboBox->findText(QString::number(m_pen.width())));
 
-    widthComboBox->setEditable (true);
+    widthComboBox->setEditable(true);
     widthComboBox->setEditText(QString::number(m_pen.width()));
     widthComboBox->setMinimumWidth(80);
     // line style
     lineStyleComboBox = new QComboBox(this);
-    lineStyleComboBox->setIconSize(QSize(100,4));
+    lineStyleComboBox->setIconSize(QSize(100, 4));
 
-    lineStyleComboBox->addItem(penStyleSample(Qt::SolidLine, m_pen), " Solid", static_cast<int>(Qt::SolidLine));
-    lineStyleComboBox->addItem(penStyleSample(Qt::DashLine, m_pen), " Dash", static_cast<int>(Qt::DashLine));
-    lineStyleComboBox->addItem(penStyleSample(Qt::DotLine, m_pen), " Dot", static_cast<int>(Qt::DotLine));
-    lineStyleComboBox->addItem(penStyleSample(Qt::DashDotLine, m_pen), " DashDot", static_cast<int>(Qt::DashDotLine));
-    lineStyleComboBox->addItem(penStyleSample(Qt::DashDotDotLine, m_pen), " DashDotDot", static_cast<int>(Qt::DashDotDotLine));
-    lineStyleComboBox->addItem(penStyleSample(Qt::CustomDashLine, m_pen), " Custom", static_cast<int>(Qt::CustomDashLine));
-    lineStyleComboBox->setCurrentIndex(lineStyleComboBox->findData(static_cast<int>(m_pen.style())));
+    lineStyleComboBox->addItem(penStyleSample(Qt::SolidLine, m_pen), " Solid",
+                               static_cast<int>(Qt::SolidLine));
+    lineStyleComboBox->addItem(penStyleSample(Qt::DashLine, m_pen), " Dash",
+                               static_cast<int>(Qt::DashLine));
+    lineStyleComboBox->addItem(penStyleSample(Qt::DotLine, m_pen), " Dot",
+                               static_cast<int>(Qt::DotLine));
+    lineStyleComboBox->addItem(penStyleSample(Qt::DashDotLine, m_pen), " DashDot",
+                               static_cast<int>(Qt::DashDotLine));
+    lineStyleComboBox->addItem(penStyleSample(Qt::DashDotDotLine, m_pen), " DashDotDot",
+                               static_cast<int>(Qt::DashDotDotLine));
+    lineStyleComboBox->addItem(penStyleSample(Qt::CustomDashLine, m_pen), " Custom",
+                               static_cast<int>(Qt::CustomDashLine));
+    lineStyleComboBox->setCurrentIndex(
+            lineStyleComboBox->findData(static_cast<int>(m_pen.style())));
 
     lineStyleComboBox->setMinimumWidth(80);
     // custom dash pattern
@@ -92,38 +98,40 @@ void PenWidget::createWidgets()
     dashLineEdit->setText(d_custom_dash);
     // # https://snorfalorpagus.net/blog/2014/08/09/validating-user-input-in-pyqt4-using-qvalidator/
     QRegExp rx("^(\\d+\\s+\\d+\\b\\s*)*$");
-    dashValidator = new QRegExpValidator(rx,this);
+    dashValidator = new QRegExpValidator(rx, this);
     // dashLineEdit->setValidator(validator);
 
     dashLineEdit->setMinimumWidth(80);
     // cap style
     capStyleComboBox = new QComboBox(this);
-    capStyleComboBox->addItem(penCapSample(Qt::FlatCap, m_pen),tr("Flat"), Qt::FlatCap);
-    capStyleComboBox->addItem(penCapSample(Qt::RoundCap, m_pen),tr("Round"), Qt::RoundCap);
-    capStyleComboBox->addItem(penCapSample(Qt::SquareCap, m_pen),tr("Square"), Qt::SquareCap);
-    capStyleComboBox->setCurrentIndex(capStyleComboBox->findData(static_cast<int>(m_pen.capStyle())));
+    capStyleComboBox->addItem(penCapSample(Qt::FlatCap, m_pen), tr("Flat"), Qt::FlatCap);
+    capStyleComboBox->addItem(penCapSample(Qt::RoundCap, m_pen), tr("Round"), Qt::RoundCap);
+    capStyleComboBox->addItem(penCapSample(Qt::SquareCap, m_pen), tr("Square"), Qt::SquareCap);
+    capStyleComboBox->setCurrentIndex(
+            capStyleComboBox->findData(static_cast<int>(m_pen.capStyle())));
     // join style
     joinStyleComboBox = new QComboBox(this);
-    joinStyleComboBox->addItem(penJoinSample(Qt::BevelJoin, m_pen),tr("Bevel"), Qt::BevelJoin);
-    joinStyleComboBox->addItem(penJoinSample(Qt::MiterJoin, m_pen),tr("Miter"), Qt::MiterJoin);
-    joinStyleComboBox->addItem(penJoinSample(Qt::RoundJoin, m_pen),tr("Round"), Qt::RoundJoin);
-    joinStyleComboBox->setCurrentIndex(joinStyleComboBox->findData(static_cast<int>(m_pen.joinStyle())));
+    joinStyleComboBox->addItem(penJoinSample(Qt::BevelJoin, m_pen), tr("Bevel"), Qt::BevelJoin);
+    joinStyleComboBox->addItem(penJoinSample(Qt::MiterJoin, m_pen), tr("Miter"), Qt::MiterJoin);
+    joinStyleComboBox->addItem(penJoinSample(Qt::RoundJoin, m_pen), tr("Round"), Qt::RoundJoin);
+    joinStyleComboBox->setCurrentIndex(
+            joinStyleComboBox->findData(static_cast<int>(m_pen.joinStyle())));
 }
 
 void PenWidget::createLayout()
 {
     QGridLayout *gl1 = new QGridLayout(this);
-    gl1->setColumnMinimumWidth(0,90);
+    gl1->setColumnMinimumWidth(0, 90);
     gl1->addWidget(new QLabel(tr("Color")), 0, 0);
     gl1->addWidget(colorButton, 0, 1, Qt::AlignLeft);
-    gl1->setColumnStretch(1,1);
+    gl1->setColumnStretch(1, 1);
 
     gl1->addWidget(new QLabel(tr("Line type")), 1, 0);
     gl1->addWidget(lineStyleComboBox, 1, 1);
 
     gl1->addWidget(dashLabel, 2, 0);
     gl1->addWidget(dashLineEdit, 2, 1);
-    lineStyleComboBox->setCurrentIndex(m_pen.style()-1);
+    lineStyleComboBox->setCurrentIndex(m_pen.style() - 1);
     toggleDashPattern(lineStyleComboBox->currentIndex());
 
     gl1->addWidget(new QLabel(tr("Line width")), 3, 0);
@@ -149,9 +157,10 @@ void PenWidget::createConnections()
     connect(capStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateCapStyle(int)));
     connect(joinStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateJoinStyle(int)));
 
-    connect(lineStyleComboBox, SIGNAL( activated(int) ), this, SLOT(toggleDashPattern(int)));
-    connect(dashLineEdit,SIGNAL(textEdited(const QString &)), this, SLOT(customDashCheck(const QString &)));
-    connect(dashLineEdit,SIGNAL(editingFinished()), this, SLOT(updateCustomDash()));
+    connect(lineStyleComboBox, SIGNAL(activated(int)), this, SLOT(toggleDashPattern(int)));
+    connect(dashLineEdit, SIGNAL(textEdited(const QString &)), this,
+            SLOT(customDashCheck(const QString &)));
+    connect(dashLineEdit, SIGNAL(editingFinished()), this, SLOT(updateCustomDash()));
 }
 
 void PenWidget::setPen(const QPen &pen)
@@ -160,16 +169,18 @@ void PenWidget::setPen(const QPen &pen)
         m_pen = pen;
         d_custom_dash = dashPatternToString(m_pen.dashPattern());
         colorButton->setColor(m_pen.color());
-        lineStyleComboBox->setCurrentIndex(lineStyleComboBox->findData(static_cast<int>(m_pen.style())));
+        lineStyleComboBox->setCurrentIndex(
+                lineStyleComboBox->findData(static_cast<int>(m_pen.style())));
         dashLineEdit->setText(d_custom_dash);
-        if (widthComboBox->findText(QString::number(m_pen.width()))>=0)
+        if (widthComboBox->findText(QString::number(m_pen.width())) >= 0)
             widthComboBox->setCurrentIndex(widthComboBox->findText(QString::number(m_pen.width())));
         widthComboBox->setEditText(QString::number(m_pen.width()));
-        capStyleComboBox->setCurrentIndex(capStyleComboBox->findData(static_cast<int>(m_pen.capStyle())));
-        joinStyleComboBox->setCurrentIndex(joinStyleComboBox->findData(static_cast<int>(m_pen.joinStyle())));
+        capStyleComboBox->setCurrentIndex(
+                capStyleComboBox->findData(static_cast<int>(m_pen.capStyle())));
+        joinStyleComboBox->setCurrentIndex(
+                joinStyleComboBox->findData(static_cast<int>(m_pen.joinStyle())));
     }
 }
-
 
 void PenWidget::updateColor(QColor color)
 {
@@ -206,16 +217,30 @@ void PenWidget::updateJoinStyle(int index)
 void PenWidget::updateSamples()
 {
     for (int i = 0; i < lineStyleComboBox->count(); ++i)
-        lineStyleComboBox->setItemIcon(i, penStyleSample(static_cast<Qt::PenStyle>(lineStyleComboBox->itemData(i).toInt()), m_pen));
+        lineStyleComboBox->setItemIcon(
+                i,
+                penStyleSample(static_cast<Qt::PenStyle>(lineStyleComboBox->itemData(i).toInt()),
+                               m_pen));
     for (int i = 0; i < capStyleComboBox->count(); ++i)
-        capStyleComboBox->setItemIcon(i, penCapSample(static_cast<Qt::PenCapStyle>(capStyleComboBox->itemData(i).toInt()), m_pen));
+        capStyleComboBox->setItemIcon(
+                i,
+                penCapSample(static_cast<Qt::PenCapStyle>(capStyleComboBox->itemData(i).toInt()),
+                             m_pen));
     for (int i = 0; i < joinStyleComboBox->count(); ++i)
-        joinStyleComboBox->setItemIcon(i, penJoinSample(static_cast<Qt::PenJoinStyle>(joinStyleComboBox->itemData(i).toInt()), m_pen));
+        joinStyleComboBox->setItemIcon(
+                i,
+                penJoinSample(static_cast<Qt::PenJoinStyle>(joinStyleComboBox->itemData(i).toInt()),
+                              m_pen));
 }
 
 QPixmap PenWidget::penStyleSample(const Qt::PenStyle style, const QPen &pen, const QSize &size)
 {
-    QString key = QString("PENSTYLESAMPLE:%1:%2:%3x%4:%5").arg(static_cast<int>(style)).arg(pen.color().name()).arg(size.width()).arg(size.height()).arg(d_custom_dash);
+    QString key = QString("PENSTYLESAMPLE:%1:%2:%3x%4:%5")
+                          .arg(static_cast<int>(style))
+                          .arg(pen.color().name())
+                          .arg(size.width())
+                          .arg(size.height())
+                          .arg(d_custom_dash);
     QPixmap pixmap(size);
     if (!QPixmapCache::find(key, &pixmap)) {
         pixmap.fill(Qt::transparent);
@@ -237,7 +262,11 @@ QPixmap PenWidget::penStyleSample(const Qt::PenStyle style, const QPen &pen, con
 
 QPixmap penCapSample(const Qt::PenCapStyle capStyle, const QPen &pen, const QSize &size)
 {
-    QString key = QString("PENCAPSTYLESAMPLE:%1:%2:%3x%4").arg(static_cast<int>(capStyle)).arg(pen.color().name()).arg(size.width()).arg(size.height());
+    QString key = QString("PENCAPSTYLESAMPLE:%1:%2:%3x%4")
+                          .arg(static_cast<int>(capStyle))
+                          .arg(pen.color().name())
+                          .arg(size.width())
+                          .arg(size.height());
     QPixmap pixmap(size);
     if (!QPixmapCache::find(key, &pixmap)) {
         pixmap.fill(Qt::transparent);
@@ -262,15 +291,17 @@ QPixmap penCapSample(const Qt::PenCapStyle capStyle, const QPen &pen, const QSiz
 
 QPixmap penJoinSample(const Qt::PenJoinStyle joinStyle, const QPen &pen, const QSize &size)
 {
-    QString key = QString("PENJOINSTYLESAMPLE:%1:%2:%3x%4").arg(static_cast<int>(joinStyle)).arg(pen.color().name()).arg(size.width()).arg(size.height());
+    QString key = QString("PENJOINSTYLESAMPLE:%1:%2:%3x%4")
+                          .arg(static_cast<int>(joinStyle))
+                          .arg(pen.color().name())
+                          .arg(size.width())
+                          .arg(size.height());
     QPixmap pixmap(size);
     if (!QPixmapCache::find(key, &pixmap)) {
         const double Indent = size.width() / 5.0;
         QPolygonF polygon;
-        polygon << QPointF(Indent, Indent)
-                << QPointF(Indent, size.height() - Indent)
-                << QPointF(size.width() - Indent,
-                           size.height() - Indent);
+        polygon << QPointF(Indent, Indent) << QPointF(Indent, size.height() - Indent)
+                << QPointF(size.width() - Indent, size.height() - Indent);
         pixmap.fill(Qt::transparent);
         QPainter painter(&pixmap);
         painter.setRenderHint(QPainter::Antialiasing);
@@ -288,8 +319,7 @@ QPixmap penJoinSample(const Qt::PenJoinStyle joinStyle, const QPen &pen, const Q
 
 void PenWidget::toggleDashPattern(int penstyle)
 {
-    if (penstyle == 5)
-    {
+    if (penstyle == 5) {
         dashLabel->show();
         dashLineEdit->show();
         dashLineEdit->setFocus();
@@ -302,13 +332,12 @@ void PenWidget::toggleDashPattern(int penstyle)
     }
 }
 
-void PenWidget::customDashCheck(const QString & s)
+void PenWidget::customDashCheck(const QString &s)
 {
     QString text = s;
-    int i=0;
-    QValidator::State status = dashValidator->validate(text,i);
-    switch (status)
-    {
+    int i = 0;
+    QValidator::State status = dashValidator->validate(text, i);
+    switch (status) {
     case QValidator::Invalid:
         dashLineEdit->setStyleSheet("QLineEdit { background-color: #f6989d }");
         break;
@@ -325,14 +354,13 @@ void PenWidget::customDashCheck(const QString & s)
 void PenWidget::updateCustomDash()
 {
     QString text = dashLineEdit->text();
-    int i=0;
-    QValidator::State status = dashValidator->validate(text,i);
-    if (status == QValidator::Acceptable)
-    {
+    int i = 0;
+    QValidator::State status = dashValidator->validate(text, i);
+    if (status == QValidator::Acceptable) {
         d_custom_dash = text;
         m_pen.setDashPattern(dashPattern());
         // update icon in combobox
-        lineStyleComboBox->setItemIcon(5,penStyleSample(Qt::CustomDashLine, m_pen));
+        lineStyleComboBox->setItemIcon(5, penStyleSample(Qt::CustomDashLine, m_pen));
     } else {
         dashLineEdit->setFocus();
     }
@@ -343,11 +371,11 @@ QVector<qreal> PenWidget::dashPattern()
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     QStringList custDash = d_custom_dash.split(' ', Qt::SkipEmptyParts);
     QVector<qreal> custDashF;
-    for (auto s: d_custom_dash.split(' ', Qt::SkipEmptyParts))
+    for (auto s : d_custom_dash.split(' ', Qt::SkipEmptyParts))
 #else
     QStringList custDash = d_custom_dash.split(' ', QString::SkipEmptyParts);
     QVector<qreal> custDashF;
-    for (auto s: d_custom_dash.split(' ', QString::SkipEmptyParts))
+    for (auto s : d_custom_dash.split(' ', QString::SkipEmptyParts))
 #endif
         custDashF << s.toDouble();
     return custDashF;
@@ -356,7 +384,7 @@ QVector<qreal> PenWidget::dashPattern()
 QString PenWidget::dashPatternToString(QVector<qreal> dashP)
 {
     QStringList dashPatternString;
-    for (auto v: dashP)
-        dashPatternString << QString::number(v,'f',0);
+    for (auto v : dashP)
+        dashPatternString << QString::number(v, 'f', 0);
     return dashPatternString.join(" ");
 }

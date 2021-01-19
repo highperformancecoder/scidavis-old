@@ -35,15 +35,16 @@
 //! Helper class for Project
 class ProjectConfigPage : public ConfigPageWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		ProjectConfigPage();
+public:
+    ProjectConfigPage();
 
-	public slots:
-		virtual void apply();
-	private:
-		Ui::ProjectConfigPage ui;
+public slots:
+    virtual void apply();
+
+private:
+    Ui::ProjectConfigPage ui;
 };
 
 #endif // ifndef PROJECT_CONFIG_PAGE_H

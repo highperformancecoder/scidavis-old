@@ -35,14 +35,13 @@
 //! Widget for configuration pages that has an apply slot
 class ConfigPageWidget : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		ConfigPageWidget(QWidget * parent = 0, Qt::WindowFlags f = Qt::Widget);
+public:
+    ConfigPageWidget(QWidget *parent = 0, Qt::WindowFlags f = Qt::Widget);
 
-	public slots:
-		virtual void apply() = 0;
+public slots:
+    virtual void apply() = 0;
 };
 
 #endif // ifndef CONFIG_PAGE_WIDGET
-

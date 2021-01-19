@@ -40,42 +40,41 @@ class ScriptingEnv;
  * \section future_plans Future Plans
  * - Search and replace
  */
-class Note: public MyWidget
+class Note : public MyWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
+    Note(ScriptingEnv *env, const QString &label, QWidget *parent = 0, const char *name = 0,
+         Qt::WindowFlags f = Qt::Widget);
+    ~Note() {};
 
-  Note(ScriptingEnv *env, const QString& label, QWidget* parent=0, const char* name=0,
-       Qt::WindowFlags f = Qt::Widget);
-  ~Note(){};
-
-
-  void init(ScriptingEnv *env);
+    void init(ScriptingEnv *env);
 
 public slots:
-  QString saveToString(const QString &info);
-  void restore(const QStringList&);
+    QString saveToString(const QString &info);
+    void restore(const QStringList &);
 
-  QTextEdit* textWidget(){return (QTextEdit*)te;};
-  bool autoexec() const { return autoExec; }
-  void setAutoexec(bool);
-  void modifiedNote();
+    QTextEdit *textWidget() { return (QTextEdit *)te; };
+    bool autoexec() const { return autoExec; }
+    void setAutoexec(bool);
+    void modifiedNote();
 
-  // ScriptEdit methods
-  QString text() { return te->toPlainText(); };
-  void setText(const QString &s) { te->setText(s); };
-  void print() { te->print(); };
-  void exportPDF(const QString& fileName){te->exportPDF(fileName);};
-  QString exportASCII(const QString &file={}) { return te->exportASCII(file); };
-  QString importASCII(const QString &file={}) { return te->importASCII(file); };
-  void execute() { te->execute(); };
-  bool executeAll() {return te->executeAll(); };
-  void evaluate() { te->evaluate(); };
-  void insert(const QString& s) {te->insertPlainText(s);}
+    // ScriptEdit methods
+    QString text() { return te->toPlainText(); };
+    void setText(const QString &s) { te->setText(s); };
+    void print() { te->print(); };
+    void exportPDF(const QString &fileName) { te->exportPDF(fileName); };
+    QString exportASCII(const QString &file = {}) { return te->exportASCII(file); };
+    QString importASCII(const QString &file = {}) { return te->importASCII(file); };
+    void execute() { te->execute(); };
+    bool executeAll() { return te->executeAll(); };
+    void evaluate() { te->evaluate(); };
+    void insert(const QString &s) { te->insertPlainText(s); }
+
 private:
-  ScriptEdit *te;
-  bool autoExec;
+    ScriptEdit *te;
+    bool autoExec;
 };
 
 #endif

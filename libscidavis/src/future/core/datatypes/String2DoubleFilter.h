@@ -5,7 +5,7 @@
     Copyright            : (C) 2007 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
     Description          : Locale-aware conversion filter QString -> double.
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,103 +34,110 @@
 #include "lib/XmlStreamReader.h"
 #include <QXmlStreamWriter>
 #include <QtDebug>
-#include <QSettings>
+#include "ApplicationWindow.h"
 
 //! Locale-aware conversion filter QString -> double.
 class String2DoubleFilter : public AbstractSimpleFilter
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		String2DoubleFilter() {}
-		virtual double valueAt(int row) const {
-			if (!d_inputs.value(0)) return 0;
-			double val=std::numeric_limits<double>::quiet_NaN();
-			convertToDouble(d_inputs.value(0)->textAt(row), val);
-			return val;
-		}
-		virtual bool isInvalid(int row) const { 
-			if (!d_inputs.value(0)) return false;
-			double val=std::numeric_limits<double>::quiet_NaN();
-			return !convertToDouble(d_inputs.value(0)->textAt(row), val);
-		}
-		virtual bool isInvalid(Interval<int> i) const {
-			if (!d_inputs.value(0)) return false;
-			double val=std::numeric_limits<double>::quiet_NaN();
-			QLocale locale = getLocale();
-			bool allowForeignSeparator = isAnyDecimalSeparatorAllowed();
-			for (int row = i.start(); row <= i.end(); row++) {
-				if (convertToDouble(d_inputs.value(0)->textAt(row), 
-						val, locale, allowForeignSeparator))
-					return false;
-			}
-			return true;
-		}
-		virtual QList< Interval<int> > invalidIntervals() const 
-		{
-			IntervalAttribute<bool> validity;
-			if (d_inputs.value(0)) {
-				int rows = d_inputs.value(0)->rowCount();
-				for (int i=0; i<rows; i++) 
-					validity.setValue(i, isInvalid(i));
-			}
-			return validity.intervals();
-		}
+public:
+    String2DoubleFilter() { }
+    virtual double valueAt(int row) const
+    {
+        if (!d_inputs.value(0))
+            return 0;
+        double val = std::numeric_limits<double>::quiet_NaN();
+        convertToDouble(d_inputs.value(0)->textAt(row), val);
+        return val;
+    }
+    virtual bool isInvalid(int row) const
+    {
+        if (!d_inputs.value(0))
+            return false;
+        double val = std::numeric_limits<double>::quiet_NaN();
+        return !convertToDouble(d_inputs.value(0)->textAt(row), val);
+    }
+    virtual bool isInvalid(Interval<int> i) const
+    {
+        if (!d_inputs.value(0))
+            return false;
+        double val = std::numeric_limits<double>::quiet_NaN();
+        QLocale locale = getLocale();
+        bool allowForeignSeparator = isAnyDecimalSeparatorAllowed();
+        for (int row = i.start(); row <= i.end(); row++) {
+            if (convertToDouble(d_inputs.value(0)->textAt(row), val, locale, allowForeignSeparator))
+                return false;
+        }
+        return true;
+    }
+    virtual QList<Interval<int>> invalidIntervals() const
+    {
+        IntervalAttribute<bool> validity;
+        if (d_inputs.value(0)) {
+            int rows = d_inputs.value(0)->rowCount();
+            for (int i = 0; i < rows; i++)
+                validity.setValue(i, isInvalid(i));
+        }
+        return validity.intervals();
+    }
 
-		//! Checks if it is possible to convert an input QString to number
-        bool isInvalid(const QString& str) const {
-			double val=std::numeric_limits<double>::quiet_NaN();
-			return !convertToDouble(str, val);
-		}
+    //! Checks if it is possible to convert an input QString to number
+    bool isInvalid(const QString &str) const
+    {
+        double val = std::numeric_limits<double>::quiet_NaN();
+        return !convertToDouble(str, val);
+    }
 
-		//! Return the data type of the column
-		virtual SciDAVis::ColumnDataType dataType() const { return SciDAVis::TypeDouble; }
+    //! Return the data type of the column
+    virtual SciDAVis::ColumnDataType dataType() const { return SciDAVis::TypeDouble; }
 
-	protected:
-		//! Using typed ports: only string inputs are accepted.
-		virtual bool inputAcceptable(int, const AbstractColumn *source) {
-			return source->dataType() == SciDAVis::TypeQString;
-		}
+protected:
+    //! Using typed ports: only string inputs are accepted.
+    virtual bool inputAcceptable(int, const AbstractColumn *source)
+    {
+        return source->dataType() == SciDAVis::TypeQString;
+    }
 
-	private:
-		QLocale getLocale() const {
-		        return QLocale(); // new QLocale instance in case it was changed between calls
-		}
+private:
+    QLocale getLocale() const
+    {
+        return QLocale(); // new QLocale instance in case it was changed between calls
+    }
 
-	 	bool isAnyDecimalSeparatorAllowed() const
-		{
-	#ifdef Q_OS_MAC // Mac
-		QSettings settings(QSettings::IniFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-	#else
-		QSettings settings(QSettings::NativeFormat,QSettings::UserScope, "SciDAVis", "SciDAVis");
-	#endif
-		return settings.value("/General/UseForeignSeparator").toBool();
-		}
+    bool isAnyDecimalSeparatorAllowed() const
+    {
+        auto &settings = ApplicationWindow::getSettings();
+        return settings.value("/General/UseForeignSeparator").toBool();
+    }
 
-		// convenience overload
-		bool convertToDouble(const QString& str, double& value) const {
-		    return convertToDouble(str, value, getLocale(), isAnyDecimalSeparatorAllowed());
-		}
+    // convenience overload
+    bool convertToDouble(const QString &str, double &value) const
+    {
+        return convertToDouble(str, value, getLocale(), isAnyDecimalSeparatorAllowed());
+    }
 
-		bool convertToDouble(const QString& str, double& value, const QLocale& locale,
-				             const bool accept_any_decimal_separator) const {
-		    bool ok;
-		    auto tstr = QString(str);
-		    if (accept_any_decimal_separator)
-		    {
-		        QChar decimalSeparator = locale.decimalPoint();    // get the decimal separator for this locale
-		        QChar foreignSeparator = decimalSeparator;         // safeguard initialization just in case there are other decimal separators.
-		        if ('.'==decimalSeparator)
-		            foreignSeparator = ',';
-		        if (','==decimalSeparator)
-		            foreignSeparator = '.';
+    bool convertToDouble(const QString &str, double &value, const QLocale &locale,
+                         const bool accept_any_decimal_separator) const
+    {
+        bool ok;
+        auto tstr = QString(str);
+        if (accept_any_decimal_separator) {
+            QChar decimalSeparator =
+                    locale.decimalPoint(); // get the decimal separator for this locale
+            QChar foreignSeparator = decimalSeparator; // safeguard initialization just in case
+                                                       // there are other decimal separators.
+            if ('.' == decimalSeparator)
+                foreignSeparator = ',';
+            if (',' == decimalSeparator)
+                foreignSeparator = '.';
 
-		        tstr.replace(foreignSeparator, decimalSeparator);
-		    }
-		    value = locale.toDouble(tstr, &ok);
+            tstr.replace(foreignSeparator, decimalSeparator);
+        }
+        value = locale.toDouble(tstr, &ok);
 
-		    return ok;
-		}
+        return ok;
+    }
 };
 
 #endif // ifndef STRING2DOUBLE_FILTER_H

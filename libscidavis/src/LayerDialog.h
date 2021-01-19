@@ -43,26 +43,26 @@ class LayerDialog : public QDialog
     Q_OBJECT
 
 public:
-    LayerDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
-	void setMultiLayer(MultiLayer *g);
+    LayerDialog(QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    void setMultiLayer(MultiLayer *g);
 
 protected slots:
-	void accept();
-	void update();
-	void enableLayoutOptions(bool ok);
+    void accept();
+    void update();
+    void enableLayoutOptions(bool ok);
 
 private:
-	MultiLayer *multi_layer;
+    MultiLayer *multi_layer;
 
-	QPushButton* buttonOk;
-	QPushButton* buttonCancel;
-	QPushButton* buttonApply;
+    QPushButton *buttonOk;
+    QPushButton *buttonCancel;
+    QPushButton *buttonApply;
     QGroupBox *GroupCanvasSize, *GroupGrid;
     QSpinBox *boxX, *boxY, *boxColsGap, *boxRowsGap;
-	QSpinBox *boxRightSpace, *boxLeftSpace, *boxTopSpace, *boxBottomSpace;
-	QSpinBox *boxCanvasWidth, *boxCanvasHeight, *layersBox;
-	QCheckBox *fitBox;
-	QComboBox *alignHorBox, *alignVertBox;
+    QSpinBox *boxRightSpace, *boxLeftSpace, *boxTopSpace, *boxBottomSpace;
+    QSpinBox *boxCanvasWidth, *boxCanvasHeight, *layersBox;
+    QCheckBox *fitBox;
+    QComboBox *alignHorBox, *alignVertBox;
 };
 
 #endif

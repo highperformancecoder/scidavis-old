@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Ion Vasilief, Tilman Benkert
     Email (use @ for *)  : ion_vasilief*yahoo.fr, thzs*gmx.net
     Description          : Exponential fit classes
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,49 +33,52 @@
 
 class ExponentialFit : public Fit
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  ExponentialFit(ApplicationWindow *parent, Graph *g,  bool expGrowth = false);
-  ExponentialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, bool expGrowth = false);
-  ExponentialFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, 
-                 double start, double end, bool expGrowth = false);
+    ExponentialFit(ApplicationWindow *parent, Graph *g, bool expGrowth = false);
+    ExponentialFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle,
+                   bool expGrowth = false);
+    ExponentialFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle, double start,
+                   double end, bool expGrowth = false);
 
 private:
-  void init();
-  void storeCustomFitResults(const std::vector<double>&) override;
-  void calculateFitCurveData(const std::vector<double>&, double *, double *) override;
+    void init();
+    void storeCustomFitResults(const std::vector<double> &) override;
+    void calculateFitCurveData(const std::vector<double> &, double *, double *) override;
 
-  bool is_exp_growth;
+    bool is_exp_growth;
 };
 
 class TwoExpFit : public Fit
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  TwoExpFit(ApplicationWindow *parent, Graph *g);
-  TwoExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-  TwoExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+    TwoExpFit(ApplicationWindow *parent, Graph *g);
+    TwoExpFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle);
+    TwoExpFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle, double start,
+              double end);
 
 private:
-  void init();
-  void storeCustomFitResults(const std::vector<double>&) override;
-  void calculateFitCurveData(const std::vector<double>&, double *, double *) override;
+    void init();
+    void storeCustomFitResults(const std::vector<double> &) override;
+    void calculateFitCurveData(const std::vector<double> &, double *, double *) override;
 };
 
 class ThreeExpFit : public Fit
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  ThreeExpFit(ApplicationWindow *parent, Graph *g);
-  ThreeExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle);
-  ThreeExpFit(ApplicationWindow *parent, Graph *g, const QString& curveTitle, double start, double end);
+    ThreeExpFit(ApplicationWindow *parent, Graph *g);
+    ThreeExpFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle);
+    ThreeExpFit(ApplicationWindow *parent, Graph *g, const QString &curveTitle, double start,
+                double end);
 
 private:
-  void init();
-  void storeCustomFitResults(const std::vector<double>& par) override;
-  void calculateFitCurveData(const std::vector<double>&, double *, double *) override;
+    void init();
+    void storeCustomFitResults(const std::vector<double> &par) override;
+    void calculateFitCurveData(const std::vector<double> &, double *, double *) override;
 };
 #endif

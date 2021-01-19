@@ -46,13 +46,14 @@
 
 //! Constructor.
 DataPointPicker::DataPointPicker(Graph *g, ApplicationWindow *app)
-	: m_graph(g), m_app(app), m_result(NAN,NAN)
+    : m_graph(g), m_app(app), m_result(NAN, NAN)
 {
 }
 
 //! Destructor (exits the event loop).
-DataPointPicker::~DataPointPicker() {
-	m_picking_loop.exit(1);
+DataPointPicker::~DataPointPicker()
+{
+    m_picking_loop.exit(1);
 }
 
 /**
@@ -61,20 +62,22 @@ DataPointPicker::~DataPointPicker() {
  * Starts a new event loop, which runs until either the user has selected a point or the
  * DataPointPicker is destructed.
  */
-QPointF DataPointPicker::pick() {
-	if (m_graph->isPiePlot() || !m_graph->validCurvesDataSize())
-		return m_result;
-	DataPickerTool *tool = new DataPickerTool(m_graph, m_app, DataPickerTool::Display);
-	connect(tool, SIGNAL(selected(QwtPlotCurve*,int)),
-                this, SLOT(pointSelected(QwtPlotCurve*,int)));
-	m_graph->setActiveTool(tool);
-	m_picking_loop.exec();
-	m_graph->setActiveTool(0);
-	return m_result;
+QPointF DataPointPicker::pick()
+{
+    if (m_graph->isPiePlot() || !m_graph->validCurvesDataSize())
+        return m_result;
+    DataPickerTool *tool = new DataPickerTool(m_graph, m_app, DataPickerTool::Display);
+    connect(tool, SIGNAL(selected(QwtPlotCurve *, int)), this,
+            SLOT(pointSelected(QwtPlotCurve *, int)));
+    m_graph->setActiveTool(tool);
+    m_picking_loop.exec();
+    m_graph->setActiveTool(0);
+    return m_result;
 }
 
 //! Handle selection of a point by the user.
-void DataPointPicker::pointSelected(QwtPlotCurve *curve, int pointIndex) {
-	m_result = QPointF(curve->x(pointIndex), curve->y(pointIndex));
-	m_picking_loop.exit(0);
+void DataPointPicker::pointSelected(QwtPlotCurve *curve, int pointIndex)
+{
+    m_result = QPointF(curve->x(pointIndex), curve->y(pointIndex));
+    m_picking_loop.exit(0);
 }

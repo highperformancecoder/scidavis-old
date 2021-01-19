@@ -5,7 +5,7 @@
     Copyright            : (C) 2006 by Knut Franke
     Email (use @ for *)  : knut.franke*gmx.de
     Description          : Implementations of generic scripting classes
-                           
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -40,32 +40,31 @@
 #include "PythonScripting.h"
 #endif
 
-	ScriptingEnv::ScriptingEnv(ApplicationWindow *parent, const char *langName)
-: QObject(0), d_parent(parent)
+ScriptingEnv::ScriptingEnv(ApplicationWindow *parent, const char *langName)
+    : QObject(0), d_parent(parent)
 {
-	setObjectName(langName);
-	d_initialized=false;
-	d_refcount=0;
+    setObjectName(langName);
+    d_initialized = false;
+    d_refcount = 0;
 }
 
 const QString ScriptingEnv::fileFilter() const
 {
-	QStringList extensions = fileExtensions();
-	if (extensions.isEmpty())
-		return "";
-	else
-		return tr("%1 Source (*.%2);;").arg(objectName()).arg(extensions.join(" *."));
+    QStringList extensions = fileExtensions();
+    if (extensions.isEmpty())
+        return "";
+    else
+        return tr("%1 Source (*.%2);;").arg(objectName()).arg(extensions.join(" *."));
 }
 
 void ScriptingEnv::incref()
 {
-	d_refcount++;
+    d_refcount++;
 }
 
 void ScriptingEnv::decref()
 {
-	d_refcount--;
-	if (d_refcount==0)
-		delete this;
+    d_refcount--;
+    if (d_refcount == 0)
+        delete this;
 }
-

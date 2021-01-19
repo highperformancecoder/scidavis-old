@@ -38,8 +38,8 @@ class QIODevice;
 
 // This works just like attr_reader in Ruby (except that you also have to declare the member
 // variable), i.e. it declares a get method for a (private) member variable.
-#define READER(type, name) \
-	type name() const { return d_ ## name; }
+#define READER(type, name)                                                                         \
+    type name() const { return d_##name; }
 
 // This works just like attr_accessor in Ruby (except that you also have to declare the member
 // variable), i.e. it declares get and set methods for a (private) member variable.
@@ -47,9 +47,9 @@ class QIODevice;
 // TODO: Due to technical limitations, this violates the method naming conventions in
 // doc/coding.dox. Maybe we should add a special rule for accessor methods. Unless someone knows how
 // to let the preprocessor do case conversion.
-#define ACCESSOR(type, name) \
-	type name() const { return d_ ## name; }; \
-	void set_ ## name(const type value) { d_ ## name = value; }
+#define ACCESSOR(type, name)                                                                       \
+    type name() const { return d_##name; };                                                        \
+    void set_##name(const type value) { d_##name = value; }
 
 //! Interface for import operations.
 /**
@@ -75,25 +75,21 @@ class QIODevice;
  */
 class AbstractImportFilter : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		virtual ~AbstractImportFilter() {}
-		//! Import an object from the specified device and convert it to an Aspect.
-		/**
-		 * May return 0 if import failed.
-		 */
-		virtual AbstractAspect * importAspect(QIODevice& input) = 0;
-		//! The file extension(s) typically associated with the handled format.
-		virtual QStringList fileExtensions() const = 0;
-		//! A (localized) name for the filter.
-		virtual QString name() const = 0;
-		//! Uses name() and fileExtensions() to produce a filter specification as used by QFileDialog.
-		QString nameAndPatterns() const {
-			return name() + " (*." + fileExtensions().join(" *.") + ")";
-		}
+public:
+    virtual ~AbstractImportFilter() { }
+    //! Import an object from the specified device and convert it to an Aspect.
+    /**
+     * May return 0 if import failed.
+     */
+    virtual AbstractAspect *importAspect(QIODevice &input) = 0;
+    //! The file extension(s) typically associated with the handled format.
+    virtual QStringList fileExtensions() const = 0;
+    //! A (localized) name for the filter.
+    virtual QString name() const = 0;
+    //! Uses name() and fileExtensions() to produce a filter specification as used by QFileDialog.
+    QString nameAndPatterns() const { return name() + " (*." + fileExtensions().join(" *.") + ")"; }
 };
 
 #endif // ifndef ABSTRACT_IMPORT_FILTER_H
-
-

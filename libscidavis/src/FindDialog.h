@@ -43,33 +43,33 @@ class FindDialog : public QDialog
     Q_OBJECT
 
 public:
-    FindDialog(QWidget* parent = 0, Qt::WindowFlags fl = Qt::Widget);
+    FindDialog(QWidget *parent = 0, Qt::WindowFlags fl = Qt::Widget);
     ~FindDialog();
 
 private:
-	QPushButton* buttonFind;
-	QPushButton* buttonCancel;
-	QPushButton* buttonReset;
+    QPushButton *buttonFind;
+    QPushButton *buttonCancel;
+    QPushButton *buttonReset;
 
-	QLabel *labelStart;
-	QComboBox* boxFind;
+    QLabel *labelStart;
+    QComboBox *boxFind;
 
-    QCheckBox* boxWindowNames;
-    QCheckBox* boxWindowLabels;
-	QCheckBox* boxFolderNames;
+    QCheckBox *boxWindowNames;
+    QCheckBox *boxWindowLabels;
+    QCheckBox *boxFolderNames;
 
-	QCheckBox* boxCaseSensitive;
-    QCheckBox* boxPartialMatch;
-	QCheckBox* boxSubfolders;
+    QCheckBox *boxCaseSensitive;
+    QCheckBox *boxPartialMatch;
+    QCheckBox *boxSubfolders;
 
 public slots:
 
-	//! Displays the project current folder path
-	void setStartPath();
+    //! Displays the project current folder path
+    void setStartPath();
 
 protected slots:
 
-	void accept();
+    void accept();
 };
 
 #endif // exportDialog_H

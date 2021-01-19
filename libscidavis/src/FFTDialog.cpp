@@ -48,75 +48,71 @@
 #include <memory>
 using namespace std;
 
-FFTDialog::FFTDialog(int type, QWidget* parent, Qt::WindowFlags fl )
-: QDialog( parent, fl )
+FFTDialog::FFTDialog(int type, QWidget *parent, Qt::WindowFlags fl) : QDialog(parent, fl)
 {
-	setWindowTitle(tr("FFT Options"));
+    setWindowTitle(tr("FFT Options"));
 
-	d_table = 0;
-	graph = 0;
-	d_type = type;
+    d_table = 0;
+    graph = 0;
+    d_type = type;
 
-	forwardBtn = new QRadioButton(tr("&Forward"));
-	forwardBtn->setChecked( true );
-	backwardBtn = new QRadioButton(tr("&Inverse"));
+    forwardBtn = new QRadioButton(tr("&Forward"));
+    forwardBtn->setChecked(true);
+    backwardBtn = new QRadioButton(tr("&Inverse"));
 
-	QHBoxLayout *hbox1 = new QHBoxLayout();
+    QHBoxLayout *hbox1 = new QHBoxLayout();
     hbox1->addWidget(forwardBtn);
     hbox1->addWidget(backwardBtn);
 
-	QGroupBox *gb1 = new QGroupBox();
+    QGroupBox *gb1 = new QGroupBox();
     gb1->setLayout(hbox1);
 
-	QGridLayout *gl1 = new QGridLayout();
-	if (d_type == onGraph)
-	    gl1->addWidget(new QLabel(tr("Curve")), 0, 0);
-	else
-		gl1->addWidget(new QLabel(tr("Sampling")), 0, 0);
+    QGridLayout *gl1 = new QGridLayout();
+    if (d_type == onGraph)
+        gl1->addWidget(new QLabel(tr("Curve")), 0, 0);
+    else
+        gl1->addWidget(new QLabel(tr("Sampling")), 0, 0);
 
-	boxName = new QComboBox();
-	gl1->addWidget(boxName, 0, 1);
+    boxName = new QComboBox();
+    gl1->addWidget(boxName, 0, 1);
 
     boxSampling = new QLineEdit();
-	if (d_type == onTable)
-       {
-		gl1->addWidget(new QLabel(tr("Real")), 1, 0);
-		boxReal = new QComboBox();
-		gl1->addWidget(boxReal, 1, 1);
+    if (d_type == onTable) {
+        gl1->addWidget(new QLabel(tr("Real")), 1, 0);
+        boxReal = new QComboBox();
+        gl1->addWidget(boxReal, 1, 1);
 
-		gl1->addWidget(new QLabel(tr("Imaginary")), 2, 0);
-		boxImaginary = new QComboBox();
-		gl1->addWidget(boxImaginary, 2, 1);
+        gl1->addWidget(new QLabel(tr("Imaginary")), 2, 0);
+        boxImaginary = new QComboBox();
+        gl1->addWidget(boxImaginary, 2, 1);
 
-		gl1->addWidget(new QLabel(tr("Sampling Interval")), 3, 0);
-		gl1->addWidget(boxSampling, 3, 1);
-	   }
-    else
-       {
+        gl1->addWidget(new QLabel(tr("Sampling Interval")), 3, 0);
+        gl1->addWidget(boxSampling, 3, 1);
+    } else {
         gl1->addWidget(new QLabel(tr("Sampling Interval")), 1, 0);
-		gl1->addWidget(boxSampling, 1, 1);
-       }
- 	QGroupBox *gb2 = new QGroupBox();
+        gl1->addWidget(boxSampling, 1, 1);
+    }
+    QGroupBox *gb2 = new QGroupBox();
     gb2->setLayout(gl1);
 
-	boxNormalize = new QCheckBox(tr( "&Normalize Amplitude" ));
-	boxNormalize->setChecked(true);
+    boxNormalize = new QCheckBox(tr("&Normalize Amplitude"));
+    boxNormalize->setChecked(true);
 
-    boxOrder = new QCheckBox(tr( "&Shift Results" ));
-	boxOrder->setChecked(true);
+    boxOrder = new QCheckBox(tr("&Shift Results"));
+    boxOrder->setChecked(true);
 
     QVBoxLayout *vbox1 = new QVBoxLayout();
     vbox1->addWidget(gb1);
     vbox1->addWidget(gb2);
     vbox1->addWidget(boxNormalize);
     vbox1->addWidget(boxOrder);
-	vbox1->addStretch();
+    vbox1->addStretch();
 
     buttonOK = new QPushButton(tr("&OK"));
-	buttonOK->setDefault( true );
-	buttonCancel = new QPushButton(tr("&Close"));
+    buttonOK->setDefault(true);
+    buttonCancel = new QPushButton(tr("&Close"));
 
-	QVBoxLayout *vbox2 = new QVBoxLayout();
+    QVBoxLayout *vbox2 = new QVBoxLayout();
     vbox2->addWidget(buttonOK);
     vbox2->addWidget(buttonCancel);
     vbox2->addStretch();
@@ -125,116 +121,101 @@ FFTDialog::FFTDialog(int type, QWidget* parent, Qt::WindowFlags fl )
     hbox2->addLayout(vbox1);
     hbox2->addLayout(vbox2);
 
-	setFocusProxy(boxName);
+    setFocusProxy(boxName);
 
-	// signals and slots connections
-	connect( boxName, SIGNAL( activated(const QString&) ), this, SLOT( activateCurve(const QString&) ) );
-	connect( buttonOK, SIGNAL( clicked() ), this, SLOT( accept() ) );
-	connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+    // signals and slots connections
+    connect(boxName, SIGNAL(activated(const QString &)), this,
+            SLOT(activateCurve(const QString &)));
+    connect(buttonOK, SIGNAL(clicked()), this, SLOT(accept()));
+    connect(buttonCancel, SIGNAL(clicked()), this, SLOT(reject()));
 }
 
 void FFTDialog::accept()
 {
-  double sampling;
-  try
-    {
-      MyParser parser;
-      parser.SetExpr(boxSampling->text());
-      sampling=parser.Eval();
-    }
-  catch(mu::ParserError &e)
-    {
-      QMessageBox::critical(this, tr("Sampling value error"), QStringFromString(e.GetMsg()));
-      boxSampling->setFocus();
-      return;
+    double sampling;
+    try {
+        MyParser parser;
+        parser.SetExpr(boxSampling->text());
+        sampling = parser.Eval();
+    } catch (mu::ParserError &e) {
+        QMessageBox::critical(this, tr("Sampling value error"), QStringFromString(e.GetMsg()));
+        boxSampling->setFocus();
+        return;
     }
 
-  ApplicationWindow *app = (ApplicationWindow *)parent();
-  unique_ptr<FFT> fft;
-  if (graph)
-    {
-      fft.reset(new FFT(app, graph, boxName->currentText()));
-    }
-  else if (d_table)
-    {
-      if (boxReal->currentText().isEmpty())
-        {
-          QMessageBox::critical(this, tr("Error"), tr("Please choose a column for the real part of the data!"));
-          boxReal->setFocus();
-          return;
+    ApplicationWindow *app = (ApplicationWindow *)parent();
+    unique_ptr<FFT> fft;
+    if (graph) {
+        fft.reset(new FFT(app, graph, boxName->currentText()));
+    } else if (d_table) {
+        if (boxReal->currentText().isEmpty()) {
+            QMessageBox::critical(this, tr("Error"),
+                                  tr("Please choose a column for the real part of the data!"));
+            boxReal->setFocus();
+            return;
         }
-      fft.reset(new FFT(app, d_table, boxReal->currentText(), boxImaginary->currentText()));
+        fft.reset(new FFT(app, d_table, boxReal->currentText(), boxImaginary->currentText()));
     }
-  if (fft)
-    {
-      fft->setInverseFFT(backwardBtn->isChecked());
-      fft->setSampling(sampling);
-      fft->normalizeAmplitudes(boxNormalize->isChecked());
-      fft->shiftFrequencies(boxOrder->isChecked());
-      fft->run();
+    if (fft) {
+        fft->setInverseFFT(backwardBtn->isChecked());
+        fft->setSampling(sampling);
+        fft->normalizeAmplitudes(boxNormalize->isChecked());
+        fft->shiftFrequencies(boxOrder->isChecked());
+        fft->run();
     }
-  close();
+    close();
 }
 
 void FFTDialog::setGraph(Graph *g)
 {
-	graph = g;
-	boxName->addItems (g->analysableCurvesList());
-	activateCurve(boxName->currentText());
+    graph = g;
+    boxName->addItems(g->analysableCurvesList());
+    activateCurve(boxName->currentText());
 }
 
-void FFTDialog::activateCurve(const QString& curveName)
+void FFTDialog::activateCurve(const QString &curveName)
 {
-	if (graph)
-	{
-		QwtPlotCurve *c = graph->curve(curveName);
-		if (!c)
-			return;
+    if (graph) {
+        QwtPlotCurve *c = graph->curve(curveName);
+        if (!c)
+            return;
 
-		boxSampling->setText(QString::number(c->x(1) - c->x(0)));
-	}
-	else if (d_table)
-	{
-	    int col = d_table->colIndex(curveName);
-		double x0 = d_table->text(0, col).toDouble();
-		double x1 = d_table->text(1, col).toDouble();
-		boxSampling->setText(QString::number(x1 - x0));
-	}
+        boxSampling->setText(QString::number(c->x(1) - c->x(0)));
+    } else if (d_table) {
+        int col = d_table->colIndex(curveName);
+        double x0 = d_table->text(0, col).toDouble();
+        double x1 = d_table->text(1, col).toDouble();
+        boxSampling->setText(QString::number(x1 - x0));
+    }
 }
 
 void FFTDialog::setTable(Table *t)
 {
-	d_table = t;
-	QStringList l = t->columnsList();
-	boxName->addItems (l);
-	boxReal->addItems (l);
-	boxImaginary->addItems (l);
+    d_table = t;
+    QStringList l = t->columnsList();
+    boxName->addItems(l);
+    boxReal->addItems(l);
+    boxImaginary->addItems(l);
 
-	int xcol = t->firstXCol();
-	if (xcol >= 0)
-	{
-		boxName->setCurrentIndex(xcol);
+    int xcol = t->firstXCol();
+    if (xcol >= 0) {
+        boxName->setCurrentIndex(xcol);
 
-		double x0 = t->text(0, xcol).toDouble();
-		double x1 = t->text(1, xcol).toDouble();
-		boxSampling->setText(QString::number(x1 - x0));
-	}
+        double x0 = t->text(0, xcol).toDouble();
+        double x1 = t->text(1, xcol).toDouble();
+        boxSampling->setText(QString::number(x1 - x0));
+    }
 
-	l = t->selectedColumns();
-	int selected = (int)l.size();
-	if (!selected)
-	{
-		boxReal->setItemText(boxReal->currentIndex(), QString());
-		boxImaginary->setItemText(boxImaginary->currentIndex(), QString());
-	}
-	else if (selected == 1)
-	{
-		boxReal->setCurrentIndex(t->colIndex(l[0]));
-		boxImaginary->setItemText(boxImaginary->currentIndex(), QString());
-	}
-	else
-	{
-		boxReal->setCurrentIndex(t->colIndex(l[0]));
-		boxImaginary->setCurrentIndex(t->colIndex(l[1]));
-	}
+    l = t->selectedColumns();
+    int selected = (int)l.size();
+    if (!selected) {
+        boxReal->setItemText(boxReal->currentIndex(), QString());
+        boxImaginary->setItemText(boxImaginary->currentIndex(), QString());
+    } else if (selected == 1) {
+        boxReal->setCurrentIndex(t->colIndex(l[0]));
+        boxImaginary->setItemText(boxImaginary->currentIndex(), QString());
+    } else {
+        boxReal->setCurrentIndex(t->colIndex(l[0]));
+        boxImaginary->setCurrentIndex(t->colIndex(l[1]));
+    }
 }
