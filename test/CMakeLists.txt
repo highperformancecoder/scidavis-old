@@ -24,23 +24,29 @@ if( ENABLE_Testing )
   add_executable( unittest ${SRCS} )
 
   # Find UnitTest++ library and its headers
-  find_package( PkgConfig )
-  if( PKG_CONFIG_FOUND )
-    pkg_search_module( UnitTest UnitTest++ IMPORTED_TARGET )
-    if( UnitTest_FOUND )
-      target_link_libraries( unittest PkgConfig::UnitTest )
+  find_package( UnitTest++ CONFIG )
+  if( UnitTest++_FOUND )
+    target_link_libraries( unittest UnitTest++ )
+    target_include_directories( unittest PRIVATE ${UTPP_INCLUDE_DIRS} )
+  else()
+    find_package( PkgConfig )
+    if( PKG_CONFIG_FOUND )
+      pkg_search_module( UnitTest UnitTest++ IMPORTED_TARGET )
+      if( UnitTest_FOUND )
+        target_link_libraries( unittest PkgConfig::UnitTest )
+      endif()
     endif()
-  endif()
     
-  if( NOT PKG_CONFIG_FOUND OR NOT UnitTest_FOUND )
-    find_library( UNITTEST_LIBRARY UnitTest++ REQUIRED )
-    find_path ( UNITTEST_INCLUDE_DIR
-      NAMES UnitTest++.h
-      PATH_SUFFIXES UnitTest++
-      REQUIRED
-      )
-    target_link_libraries( unittest ${UNITTEST_LIBRARY} )
-    target_include_directories( unittest PRIVATE ${UNITTEST_INCLUDE_DIR} )
+    if( NOT PKG_CONFIG_FOUND OR NOT UnitTest_FOUND )
+      find_library( UNITTEST_LIBRARY UnitTest++ REQUIRED )
+      find_path ( UNITTEST_INCLUDE_DIR
+        NAMES UnitTest++.h
+        PATH_SUFFIXES UnitTest++
+        REQUIRED
+        )
+      target_link_libraries( unittest ${UNITTEST_LIBRARY} )
+      target_include_directories( unittest PRIVATE ${UNITTEST_INCLUDE_DIR} )
+    endif()
   endif()
   # Find Boost-regex library
   find_package(Boost REQUIRED COMPONENTS regex)
