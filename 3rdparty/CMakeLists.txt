@@ -38,11 +38,7 @@ if( NOT BUILD_QWT )
 else()
   # Build Qwt5
   message( STATUS "Qwt5: using own code" )
-  file( GLOB HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "qwt5-qt5/src/*.h" )
-  file( GLOB SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "qwt5-qt5/src/*.cpp" )
-  add_library( qwt5-qt5 ${SRCS} ${HEADERS} )
-  target_link_libraries( qwt5-qt5 Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Svg )
-  set_target_properties( qwt5-qt5 PROPERTIES AUTOMOC ON )
+  add_subdirectory( qwt5-qt5 )
 endif()
 
 # QwtPlot3D
@@ -69,27 +65,7 @@ if( NOT BUILD_QWTPLOT3D )
 else()
   # Build QwtPlot3D
   message( STATUS "QwtPlot3D: using own code" )
-  file( GLOB HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "qwtplot3d/include/*.h" )
-  file( GLOB SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "qwtplot3d/src/*.cpp" )
-  add_library( qwtplot3d ${SRCS} ${HEADERS} )
-  if( NOT MSVC )
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-c++11-narrowing")
-  endif()
-
-  target_link_libraries( qwtplot3d Qt5::Core Qt5::Gui Qt5::OpenGL OpenGL::GLU )
-  set_target_properties( qwtplot3d PROPERTIES AUTOMOC ON )
-  target_include_directories( qwtplot3d PUBLIC "qwtplot3d/include" )
-
-  find_library( GL2PS_LIBRARY NAMES gl2ps )
-  if( NOT GL2PS_LIBRARY )
-    target_sources( qwtplot3d PRIVATE "qwtplot3d/3rdparty/gl2ps/gl2ps.c" "qwtplot3d/3rdparty/gl2ps/gl2ps.h" )
-  else()
-    find_path ( GL2PS_INCLUDE_DIR NAMES gl2ps.h REQUIRED )
-    message( STATUS "Found GL2PS: ${GL2PS_LIBRARY}, with include: ${GL2PS_INCLUDE_DIR}" )
-    target_link_libraries( qwtplot3d ${GL2PS_LIBRARY} )
-    target_include_directories( qwtplot3d PRIVATE ${GL2PS_INCLUDE_DIR} )
-  endif()
-
+  add_subdirectory( qwtplot3d )
 endif()
 
 # liborigin

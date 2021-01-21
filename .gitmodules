@@ -1,9 +1,9 @@
 [submodule "3rdparty/qwt5-qt5"]
 	path = 3rdparty/qwt5-qt5
-	url = https://github.com/gbm19/qwt5-qt5.git
+	url = https://github.com/SciDAVis/qwt5-qt5
 [submodule "3rdparty/qwtplot3d"]
 	path = 3rdparty/qwtplot3d
-	url = https://github.com/zohannn/qwtplot3d.git
+	url = https://github.com/SciDAVis/qwtplot3d
 [submodule "3rdparty/liborigin"]
 	path = 3rdparty/liborigin
 	url = https://github.com/SciDAVis/liborigin
