@@ -33,6 +33,8 @@
 #include <QObject>
 #include "lib/IntervalAttribute.h"
 #include "core/column/Column.h"
+#include "../future/core/datatypes/NumericDateTimeBaseFilter.h"
+#include <QScopedPointer>
 class AbstractSimpleFilter;
 class QString;
 
@@ -292,6 +294,10 @@ public:
      */
     void replaceValues(int first, const QVector<qreal> &new_values);
     //@}
+    //! Get current conversion filter from DateTime to double
+    NumericDateTimeBaseFilter *getNumericDateTimeFilter();
+    //! Set current conversion filter from DateTime to double with taking an ownership
+    void setNumericDateTimeFilter(NumericDateTimeBaseFilter *const);
 
 private:
     //! \name data members
@@ -317,6 +323,9 @@ private:
     AbstractSimpleFilter *d_input_filter;
     //! The output filter (for data type -> string conversion)
     AbstractSimpleFilter *d_output_filter;
+    //! The filter for numeric <-> datetime conversion
+    QScopedPointer<NumericDateTimeBaseFilter> d_numeric_datetime_filter;
+
     IntervalAttribute<bool> d_validity;
     IntervalAttribute<bool> d_masking;
     IntervalAttribute<QString> d_formulas;

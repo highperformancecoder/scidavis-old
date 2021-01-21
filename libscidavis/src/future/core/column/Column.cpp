@@ -81,23 +81,32 @@ Column::~Column()
 
 void Column::setColumnMode(SciDAVis::ColumnMode mode, AbstractFilter *conversion_filter)
 {
-    if (mode == columnMode())
-        return;
-    beginMacro(QObject::tr("%1: change column type").arg(name()));
-    AbstractSimpleFilter *old_input_filter = d_column_private->inputFilter();
-    AbstractSimpleFilter *old_output_filter = outputFilter();
-    exec(new ColumnSetModeCmd(d_column_private, mode, conversion_filter));
-    if (d_column_private->inputFilter() != old_input_filter) {
-        removeChild(old_input_filter);
-        addChild(d_column_private->inputFilter());
-        d_column_private->inputFilter()->input(0, d_string_io);
+    if (mode != columnMode()) // mode changed
+    {
+        beginMacro(QObject::tr("%1: change column type").arg(name()));
+        AbstractSimpleFilter *old_input_filter = inputFilter();
+        AbstractSimpleFilter *old_output_filter = outputFilter();
+        exec(new ColumnSetModeCmd(d_column_private, mode, conversion_filter));
+        if (d_column_private->inputFilter() != old_input_filter) {
+            removeChild(old_input_filter);
+            addChild(d_column_private->inputFilter());
+            d_column_private->inputFilter()->input(0, d_string_io);
+        }
+        if (outputFilter() != old_output_filter) {
+            removeChild(old_output_filter);
+            addChild(outputFilter());
+            outputFilter()->input(0, this);
+        }
+        endMacro();
     }
-    if (outputFilter() != old_output_filter) {
-        removeChild(old_output_filter);
-        addChild(outputFilter());
-        outputFilter()->input(0, this);
+    // mode is not changed, but DateTime numeric converter changed
+    else if ((mode == SciDAVis::ColumnMode::DateTime) && (nullptr != conversion_filter)) {
+        auto numeric_datetime_converter =
+                reinterpret_cast<NumericDateTimeBaseFilter *>(conversion_filter);
+        if (nullptr != numeric_datetime_converter)
+            // the ownership of converter is taken
+            d_column_private->setNumericDateTimeFilter(numeric_datetime_converter);
     }
-    endMacro();
 }
 
 bool Column::copy(const AbstractColumn *other)
@@ -327,7 +336,14 @@ void Column::save(QXmlStreamWriter *writer) const
         }
         break;
 
-    case SciDAVis::TypeQDateTime:
+    case SciDAVis::TypeQDateTime: {
+        { // this conversion is needed to store base class;
+            NumericDateTimeBaseFilter numericFilter(
+                    *(d_column_private->getNumericDateTimeFilter()));
+            writer->writeStartElement("numericDateTimeFilter");
+            numericFilter.save(writer);
+            writer->writeEndElement();
+        }
         for (i = 0; i < rowCount(); i++) {
             writer->writeStartElement("row");
             writer->writeAttribute("type",
@@ -349,6 +365,7 @@ void Column::save(QXmlStreamWriter *writer) const
             writer->writeEndElement();
         }
         break;
+    }
     }
     writer->writeEndElement(); // "column"
 }
@@ -417,6 +434,8 @@ bool Column::load(XmlStreamReader *reader)
                 bool ret_val = true;
                 if (reader->name() == "comment")
                     ret_val = readCommentElement(reader);
+                else if (reader->name() == "numericDateTimeFilter")
+                    ret_val = XmlReadNumericDateTimeFilter(reader);
                 else if (reader->name() == "input_filter")
                     ret_val = XmlReadInputFilter(reader);
                 else if (reader->name() == "output_filter")
@@ -441,6 +460,19 @@ bool Column::load(XmlStreamReader *reader)
         reader->raiseError(tr("no column element found"));
 
     return !reader->error();
+}
+
+bool Column::XmlReadNumericDateTimeFilter(XmlStreamReader *reader)
+{
+    Q_ASSERT(reader->isStartElement() && reader->name() == "numericDateTimeFilter");
+    if (!reader->skipToNextTag())
+        return false;
+    if (!d_column_private->getNumericDateTimeFilter()->load(reader))
+        return false;
+    if (!reader->skipToNextTag())
+        return false;
+    Q_ASSERT(reader->isEndElement() && reader->name() == "numericDateTimeFilter");
+    return true;
 }
 
 bool Column::XmlReadInputFilter(XmlStreamReader *reader)
@@ -582,6 +614,11 @@ AbstractSimpleFilter *Column::outputFilter() const
 AbstractSimpleFilter *Column::inputFilter() const
 {
     return d_column_private->inputFilter();
+}
+
+NumericDateTimeBaseFilter *Column::numericDateTimeBaseFilter() const
+{
+    return d_column_private->getNumericDateTimeFilter();
 }
 
 bool Column::isInvalid(int row) const

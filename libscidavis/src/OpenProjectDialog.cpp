@@ -62,13 +62,13 @@ OpenProjectDialog::OpenProjectDialog(QWidget *parent, bool extended, Qt::WindowF
 
     // Open As options
     QHBoxLayout *openAs_layout = new QHBoxLayout();
+    advanced_layout->addLayout(openAs_layout);
     openAs_layout->addWidget(new QLabel(tr("Open As")));
     d_open_mode = new QComboBox();
+    openAs_layout->addWidget(d_open_mode);
     // Important: Keep this is sync with enum OpenMode.
     d_open_mode->addItem(tr("New Project Window"));
     d_open_mode->addItem(tr("New Folder"));
-    openAs_layout->addWidget(d_open_mode);
-    advanced_layout->addLayout(openAs_layout);
 
     // Origin codepage options
     QHBoxLayout *codec_layout = new QHBoxLayout();

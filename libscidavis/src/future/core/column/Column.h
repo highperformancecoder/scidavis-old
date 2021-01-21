@@ -34,7 +34,7 @@
 #include "core/AbstractSimpleFilter.h"
 #include "lib/IntervalAttribute.h"
 #include "lib/XmlStreamReader.h"
-
+#include "core/datatypes/NumericDateTimeBaseFilter.h"
 #include <memory>
 
 class QString;
@@ -157,6 +157,8 @@ public:
     void clear() override;
     //! This must be called before the column is replaced by another
     void notifyReplacement(const AbstractColumn *replacement) override;
+    //! Return the converter filter (for double <-> datetime  conversion)
+    NumericDateTimeBaseFilter *numericDateTimeBaseFilter() const;
     //! Return the output filter (for data type -> string  conversion)
     /**
      * This method is mainly used to get a filter that can convert
@@ -309,6 +311,8 @@ public:
     bool load(XmlStreamReader *reader) override;
 
 private:
+    //! Read XML numerical <-> date time filter element
+    bool XmlReadNumericDateTimeFilter(XmlStreamReader *reader);
     //! Read XML input filter element
     bool XmlReadInputFilter(XmlStreamReader *reader);
     //! Read XML output filter element

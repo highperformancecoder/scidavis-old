@@ -82,10 +82,12 @@ TableView::~TableView()
 
 void TableView::setTable(future::Table *table)
 {
-    d_table = table;
-    d_model = new TableModel(table);
-    init();
-    d_table->setView(this);
+    if (nullptr != table) {
+        d_table = table;
+        d_model = new TableModel(table);
+        init();
+        d_table->setView(this);
+    }
 }
 
 void TableView::init()
@@ -258,23 +260,35 @@ void TableView::retranslateStrings()
     d_hide_button->setToolTip(tr("Show/hide control tabs"));
     ui.retranslateUi(d_control_tabs);
 
+    // prevent losing current selection on retranslate
+    auto index = ui.type_box->currentIndex();
+    if (-1 == index)
+        index = 0;
     ui.type_box->clear();
     ui.type_box->addItem(tr("Numeric"), QVariant(int(SciDAVis::Numeric)));
     ui.type_box->addItem(tr("Text"), QVariant(int(SciDAVis::Text)));
     ui.type_box->addItem(tr("Month names"), QVariant(int(SciDAVis::Month)));
     ui.type_box->addItem(tr("Day names"), QVariant(int(SciDAVis::Day)));
     ui.type_box->addItem(tr("Date and time"), QVariant(int(SciDAVis::DateTime)));
-    ui.type_box->setCurrentIndex(0);
+    ui.type_box->setCurrentIndex(index);
 
+    // prevent losing current selection on retranslate
+    index = ui.date_time_interval->currentIndex();
+    if (-1 == index)
+        index = 0;
     ui.date_time_interval->clear();
-    ui.date_time_interval->addItem(tr("years"), int(Double2DateTimeFilter::Year));
-    ui.date_time_interval->addItem(tr("months"), int(Double2DateTimeFilter::Month));
-    ui.date_time_interval->addItem(tr("days"), int(Double2DateTimeFilter::Day));
-    ui.date_time_interval->addItem(tr("hours"), int(Double2DateTimeFilter::Hour));
-    ui.date_time_interval->addItem(tr("minutes"), int(Double2DateTimeFilter::Minute));
-    ui.date_time_interval->addItem(tr("seconds"), int(Double2DateTimeFilter::Second));
-    ui.date_time_interval->addItem(tr("milliseconds"), int(Double2DateTimeFilter::Millisecond));
-    ui.date_time_interval->setCurrentIndex(0);
+    ui.date_time_interval->addItem(tr("years"), int(NumericDateTimeBaseFilter::UnitInterval::Year));
+    ui.date_time_interval->addItem(tr("months"),
+                                   int(NumericDateTimeBaseFilter::UnitInterval::Month));
+    ui.date_time_interval->addItem(tr("days"), int(NumericDateTimeBaseFilter::UnitInterval::Day));
+    ui.date_time_interval->addItem(tr("hours"), int(NumericDateTimeBaseFilter::UnitInterval::Hour));
+    ui.date_time_interval->addItem(tr("minutes"),
+                                   int(NumericDateTimeBaseFilter::UnitInterval::Minute));
+    ui.date_time_interval->addItem(tr("seconds"),
+                                   int(NumericDateTimeBaseFilter::UnitInterval::Second));
+    ui.date_time_interval->addItem(tr("milliseconds"),
+                                   int(NumericDateTimeBaseFilter::UnitInterval::Millisecond));
+    ui.date_time_interval->setCurrentIndex(index);
 
     // TODO: implement formula stuff
     // ui.formula_info->document()->setPlainText("not implemented yet");
@@ -360,6 +374,7 @@ void TableView::currentColumnChanged(const QModelIndex &current, const QModelInd
     if (col < 0 || (d_table && col >= d_table->columnCount()))
         return;
     setColumnForControlTabs(col);
+    d_table->setCurrentColumn(col);
 }
 
 void TableView::setColumnForControlTabs(int col)
@@ -394,6 +409,10 @@ void TableView::setColumnForControlTabs(int col)
                     static_cast<DateTime2StringFilter *>(col_ptr->outputFilter());
             ui.formatLineEdit->setText(filter->format());
             ui.format_box->setCurrentIndex(ui.format_box->findData(filter->format()));
+            auto num_filter = col_ptr->numericDateTimeBaseFilter();
+            ui.date_time_0->setDateTime(num_filter->getBaseDateTime());
+            auto unit = static_cast<int>(num_filter->getUnitInterval());
+            ui.date_time_interval->setCurrentIndex(ui.date_time_interval->findData(unit));
             break;
         }
         default:
@@ -656,8 +675,10 @@ void TableView::applyType()
 
     SciDAVis::ColumnMode new_mode = (SciDAVis::ColumnMode)ui.type_box->itemData(type_index).toInt();
     QList<Column *> list = selectedColumns();
+    if ((0 == list.size()) && (nullptr != d_table->currentColumn()))
+        list.append(d_table->currentColumn());
     switch (new_mode) {
-    case SciDAVis::Numeric:
+    case SciDAVis::Numeric: {
         foreach (Column *col, list) {
             col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
             col->setColumnMode(new_mode);
@@ -669,6 +690,7 @@ void TableView::applyType()
             col->endMacro();
         }
         break;
+    }
     case SciDAVis::Text:
         foreach (Column *col, list)
             col->setColumnMode(new_mode);
@@ -686,15 +708,15 @@ void TableView::applyType()
             SciDAVis::ColumnMode old_mode = col->columnMode();
             AbstractFilter *converter = 0;
             switch (old_mode) {
-            case SciDAVis::Numeric:
+            case SciDAVis::Numeric: // the mode is changed
+            case SciDAVis::DateTime: // the mode is not changed, but numeric converter parameters is
+                                     // (possibly) changed
                 if (ui.date_time_interval->isVisible()) {
                     Double2DateTimeFilter::UnitInterval unit =
                             (Double2DateTimeFilter::UnitInterval)ui.date_time_interval
                                     ->itemData(ui.date_time_interval->currentIndex())
                                     .toInt();
                     QDateTime date_time_0 = ui.date_time_0->dateTime();
-                    if (!date_time_0.date().isValid())
-                        date_time_0.setDate(QDate(-1, 12, 31));
                     converter = new Double2DateTimeFilter(unit, date_time_0);
                 }
                 break;

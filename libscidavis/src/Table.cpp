@@ -96,12 +96,11 @@ Table::Table(ScriptingEnv *env, int r, int c, const QString &label, QWidget *par
 
 void Table::init()
 {
-    TableView::setTable(d_future_table);
-
     if (d_future_table) {
-        d_future_table->setView(this);
+        TableView::setTable(d_future_table);
         birthdate = QLocale().toString(d_future_table->creationTime());
-    }
+    } else // the rest is meaningless
+        return;
 
     ui.gridLayout1->removeWidget(ui.formula_box);
     delete ui.formula_box;
