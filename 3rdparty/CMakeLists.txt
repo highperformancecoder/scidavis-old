@@ -98,12 +98,7 @@ if( ORIGIN_IMPORT )
   pkg_search_module( LIBORIGIN liborigin>=3.0.0 IMPORTED_TARGET GLOBAL )
   if( NOT LIBORIGIN_FOUND )
     message( STATUS "liborigin: using own code" )
-    set( SRCS
-      "liborigin/OriginFile.cpp"
-      "liborigin/OriginParser.cpp"
-      "liborigin/OriginAnyParser.cpp"
-      )
-    add_library( origin ${SRCS} )
+    add_subdirectory( liborigin )
   endif()
 else()
   message( STATUS "liborigin not enabled" )

@@ -4,3 +4,6 @@
 [submodule "3rdparty/qwtplot3d"]
 	path = 3rdparty/qwtplot3d
 	url = https://github.com/zohannn/qwtplot3d.git
+[submodule "3rdparty/liborigin"]
+	path = 3rdparty/liborigin
+	url = https://github.com/SciDAVis/liborigin

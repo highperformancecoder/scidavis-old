@@ -416,7 +416,7 @@ if( ORIGIN_IMPORT )
   if( LIBORIGIN_FOUND )
     target_link_libraries( libscidavis PkgConfig::LIBORIGIN )
   else()
-    target_link_libraries( libscidavis origin )
+    target_link_libraries( libscidavis origin_static )
     target_include_directories( libscidavis PUBLIC
       "${CMAKE_SOURCE_DIR}/3rdparty/liborigin" )
   endif()
