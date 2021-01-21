@@ -25,13 +25,8 @@
 */
 #include <QApplication>
 #include <QMessageBox>
-#ifdef _WIN32
-#include <UnitTest++.h>
-#include <TestReporterStdout.h>
-#else
 #include <UnitTest++/UnitTest++.h>
 #include <UnitTest++/TestReporterStdout.h>
-#endif
 #include <boost/regex.hpp>
 #include <iostream>
 using namespace UnitTest;
