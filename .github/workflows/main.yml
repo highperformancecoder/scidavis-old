@@ -170,3 +170,9 @@ jobs:
         run: |
           cd build
           ctest --output-on-failure
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+           name: mingw-build-${{github.ref}}
+           path: .
