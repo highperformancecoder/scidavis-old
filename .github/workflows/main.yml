@@ -174,5 +174,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-           name: mingw-build-${{github.ref}}
+           name: mingw-build-${{github.sha}}
            path: .
