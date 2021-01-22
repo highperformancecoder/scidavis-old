@@ -207,8 +207,8 @@ bool Filter::run()
     //	if (d_n < 0)
     //	{
     //		QMessageBox::critical((ApplicationWindow *)parent(), tr("SciDAVis") + " - " +
-    // tr("Error"), 				tr("You didn't specify a valid data set for this operation!"));
-    // return false;
+    // tr("Error"), 				tr("You didn't specify a valid data set for this
+    // operation!")); return false;
     //	}
 
     QApplication::setOverrideCursor(Qt::WaitCursor);

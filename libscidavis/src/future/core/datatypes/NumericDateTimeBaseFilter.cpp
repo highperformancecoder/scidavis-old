@@ -142,7 +142,7 @@ QDateTime NumericDateTimeBaseFilter::makeDateTime(double input_value) const
 {
     QDateTime dateTime = m_date_time_0;
     qint64 fullUnits(floor(input_value));
-    double residual{ 0.0 };
+    double residual { 0.0 };
     switch (m_unit_interval) {
     // add full number of units to dateTime
     case UnitInterval::Year: {

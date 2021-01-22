@@ -212,7 +212,9 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode new_mode, AbstractFilte
     // remark: the deletion of the old data will be done in the dtor of a command
 
     AbstractSimpleFilter *new_in_filter, *new_out_filter;
-    bool filter_is_temporary{true}; // it can also become outputFilter(), which we may not delete here
+    bool filter_is_temporary {
+        true
+    }; // it can also become outputFilter(), which we may not delete here
     QScopedPointer<Column> temp_col;
 
     if (nullptr != converter)
@@ -381,7 +383,8 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode new_mode, AbstractFilte
     case SciDAVis::Numeric: {
         disconnect(static_cast<Double2StringFilter *>(d_output_filter), SIGNAL(formatChanged()),
                    d_owner, SLOT(notifyDisplayChange()));
-        temp_col.reset(new Column("temp_col", *(static_cast<QVector<qreal> *>(old_data)), d_validity));
+        temp_col.reset(
+                new Column("temp_col", *(static_cast<QVector<qreal> *>(old_data)), d_validity));
         break;
     }
     case SciDAVis::Text: {
@@ -396,7 +399,7 @@ void Column::Private::setColumnMode(SciDAVis::ColumnMode new_mode, AbstractFilte
         if ((SciDAVis::DateTime != new_mode) && (SciDAVis::Month != new_mode)
             && (SciDAVis::Day != new_mode))
             temp_col.reset(new Column("temp_col", *(static_cast<QList<QDateTime> *>(old_data)),
-                                  d_validity));
+                                      d_validity));
         break;
     }
     }

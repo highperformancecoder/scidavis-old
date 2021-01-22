@@ -37,9 +37,9 @@ const char *String2DateTimeFilter::date_formats[] = {
     "yyyy/M/d",
     "d/M/yyyy", // European style day/month order (this order seems to be used in more countries
                 // than the US style M/d/yyyy)
-    "d/M/yy",   "d-M-yyyy", "d-M-yy",
+    "d/M/yy", "d-M-yyyy", "d-M-yy",
     "d.M.yyyy", // German style
-    "d.M.yy",   "M/yyyy",
+    "d.M.yy", "M/yyyy",
     "d.M.", // German form w/o year
     "yyyyMMdd", 0
 };

@@ -121,7 +121,7 @@ Table::Table() : AbstractPart("temp"), d_table_private(*this)
     createActions();
 }
 
-Table::~Table() {}
+Table::~Table() { }
 
 Column *Table::column(int index) const
 {
