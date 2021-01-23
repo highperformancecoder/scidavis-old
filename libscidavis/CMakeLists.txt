@@ -446,6 +446,9 @@ target_include_directories( libscidavis PUBLIC
 if( ENABLE_Python3 )
 
   set(scidavis_PyQt_HDR ${CMAKE_CURRENT_BINARY_DIR}/sipAPIscidavis.h)
+  if( SIP_VERSION VERSION_GREATER_EQUAL 5 )
+    set( scidavis_SIP_HDR ${CMAKE_CURRENT_BINARY_DIR}/sip.h )
+  endif()
 
   set_source_files_properties(
     ${scidavis_PyQt_HDR}
@@ -510,6 +513,13 @@ if( ENABLE_Python3 )
     GENERATED ON
     )
 
+  if( SIP_VERSION VERSION_GREATER_EQUAL 5 )
+    add_custom_command(
+      OUTPUT ${scidavis_SIP_HDR}
+      COMMAND sip-module --sip-h ${CMAKE_CURRENT_SOURCE_DIR}/src/scidavis.sip
+      )
+  endif()
+
   add_custom_command(
     OUTPUT ${scidavis_PyQt_HDR} ${scidavis_PyQt_SRC}
     COMMAND ${SIP_EXECUTABLE} -c . -I${PyQt_INCLUDE_DIRS} ${PyQt_FLAGS}
@@ -517,9 +527,15 @@ if( ENABLE_Python3 )
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scidavis.sip
     )
 
-  add_custom_target(generate_PyQt_source
-    DEPENDS ${scidavis_PyQt_HDR} ${scidavis_PyQt_SRC}
-    )
+  if( SIP_VERSION VERSION_GREATER_EQUAL 5 )
+    add_custom_target(generate_PyQt_source
+      DEPENDS ${scidavis_PyQt_HDR} ${scidavis_PyQt_SRC} ${scidavis_SIP_HDR}
+      )
+  else()
+    add_custom_target(generate_PyQt_source
+      DEPENDS ${scidavis_PyQt_HDR} ${scidavis_PyQt_SRC}
+      )
+  endif()
 
   target_sources( libscidavis PRIVATE
     "src/PythonScript.h"

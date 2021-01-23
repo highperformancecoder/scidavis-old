@@ -23,12 +23,12 @@
 
 if( SIP_DIR )
   find_program( SIP_EXECUTABLE
-    NAMES sip
+    NAMES sip sip5
     PATHS SIP_DIR
     )
 else()
   find_program( SIP_EXECUTABLE
-    NAMES sip
+    NAMES sip sip5
     )
   get_filename_component( SIP_DIR ${SIP_EXECUTABLE} DIRECTORY CACHE )
 endif()
