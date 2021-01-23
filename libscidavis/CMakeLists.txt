@@ -357,13 +357,13 @@ else()
   target_link_libraries( libscidavis qwtplot3d )
 endif()
 
-if( ENABLE_Python3 )
+if( SCRIPTING_PYTHON )
   target_include_directories( libscidavis PUBLIC ${Python3_INCLUDE_DIRS} )
   target_link_libraries( libscidavis  ${Python3_LIBRARIES} )
 
   # add sip generated files' directory to include path
   target_include_directories( libscidavis PUBLIC ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-endif( ENABLE_Python3)
+endif()
 
 target_compile_definitions( libscidavis PUBLIC
   LEGACY_CODE_0_2_x
@@ -415,7 +415,7 @@ if( ORIGIN_IMPORT )
   endif()
 endif()
 
-if( ENABLE_Python3 )
+if( SCRIPTING_PYTHON )
   target_compile_definitions( libscidavis PUBLIC
     PYTHON_CONFIG_PATH="${CMAKE_INSTALL_PREFIX}/etc"
     PYTHON_UTIL_PATH="${CMAKE_INSTALL_PREFIX}/share/scidavis"
@@ -432,7 +432,7 @@ if( ENABLE_Python3 )
       PYTHONHOME=${PYTHONHOME}
       )
   endif()
-endif( ENABLE_Python3 )
+endif()
 
 if( SEARCH_FOR_UPDATE OR DOWNLOAD_LINKS )
   target_link_libraries( libscidavis Qt5::Network )
@@ -443,7 +443,7 @@ target_include_directories( libscidavis PUBLIC
   "${CMAKE_CURRENT_SOURCE_DIR}/src/future"
   )
 
-if( ENABLE_Python3 )
+if( SCRIPTING_PYTHON )
 
   set(scidavis_PyQt_HDR ${CMAKE_CURRENT_BINARY_DIR}/sipAPIscidavis.h)
   if( SIP_VERSION VERSION_GREATER_EQUAL 5 )
