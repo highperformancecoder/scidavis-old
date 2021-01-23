@@ -316,11 +316,6 @@ if( ORIGIN_IMPORT )
   list( APPEND SRCS "src/importOPJ.cpp" )
 endif()
 
-if( ENABLE_Python3 )
-  list( APPEND HEADERS "src/PythonScript.h" "src/PythonScripting.h" )
-  list( APPEND SRCS "src/PythonScript.cpp" "src/PythonScripting.cpp" )
-endif( ENABLE_Python3 )
-
 add_library( libscidavis
   ${SRCS}
   ${HEADERS}
@@ -328,8 +323,6 @@ add_library( libscidavis
   )
 
 set_target_properties(libscidavis PROPERTIES OUTPUT_NAME scidavis)
-
-include(scidavis-python)
 
 target_link_libraries( libscidavis
   ZLIB::ZLIB
@@ -449,3 +442,94 @@ target_include_directories( libscidavis PUBLIC
   "${CMAKE_CURRENT_SOURCE_DIR}/src"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/future"
   )
+
+if( ENABLE_Python3 )
+
+  set(scidavis_PyQt_HDR ${CMAKE_CURRENT_BINARY_DIR}/sipAPIscidavis.h)
+
+  set_source_files_properties(
+    ${scidavis_PyQt_HDR}
+    PROPERTIES
+    GENERATED ON
+    )
+
+  set(scidavis_PyQt_SRC
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidaviscmodule.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisApplicationWindow.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisGraph.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisArrowMarker.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisImageMarker.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisLegend.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisMultiLayer.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisTable.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisMatrix.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisMyWidget.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisScriptEdit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisNote.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisPythonScript.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisPythonScripting.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisFolder.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisExponentialFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisTwoExpFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisThreeExpFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisSigmoidalFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisGaussAmpFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisLorentzFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisNonLinearFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisPluginFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisMultiPeakFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisPolynomialFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisLinearFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisGaussFit.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisFilter.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisDifferentiation.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisIntegration.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisInterpolation.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisSmoothFilter.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisFFTFilter.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisFFT.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisCorrelation.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisConvolution.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisDeconvolution.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisAbstractAspect.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisColumn.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisQwtSymbol.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisQwtPlotCurve.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisQwtPlot.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisGrid.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisQList0100QDateTime.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisQList0101Folder.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisQList0101MyWidget.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipscidavisQList0101QwtPlotCurve.cpp
+    )
+
+  set_source_files_properties(
+    ${scidavis_PyQt_SRC}
+    PROPERTIES
+    GENERATED ON
+    )
+
+  add_custom_command(
+    OUTPUT ${scidavis_PyQt_HDR} ${scidavis_PyQt_SRC}
+    COMMAND ${SIP_EXECUTABLE} -c . -I${PyQt_INCLUDE_DIRS} ${PyQt_FLAGS}
+      ${CMAKE_CURRENT_SOURCE_DIR}/src/scidavis.sip
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scidavis.sip
+    )
+
+  add_custom_target(generate_PyQt_source
+    DEPENDS ${scidavis_PyQt_HDR} ${scidavis_PyQt_SRC}
+    )
+
+  target_sources( libscidavis PRIVATE
+    "src/PythonScript.h"
+    "src/PythonScripting.h"
+    ${scidavis_PyQt_HDR}
+    "src/PythonScript.cpp"
+    "src/PythonScripting.cpp"
+    ${scidavis_PyQt_SRC}
+    )
+
+  add_dependencies(libscidavis generate_PyQt_source)
+
+endif()
