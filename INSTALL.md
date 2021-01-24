@@ -52,8 +52,9 @@ contains needed packages not in the official mxe fork
 
 2. Install necessary libraries:
    - cd mxe
-   - make boost gsl muparser qwt5_qt5 qwtplot3d<br>
-   Note: currently python support is unavailable with MXE.
+   - `make MXE_TARGETS=x86_64-w64-mingw32.static boost gsl muparser qt5`
+   - Note: currently python support is unavailable with MXE.
+   - Note 2: The mesa library uses scons, which uses python and the xml library. You may need to install the python-xml package to get this to work.
 
 3. Configure scidavis for MXE. If the location of your MXE dist is
 MXE_HOME, do
