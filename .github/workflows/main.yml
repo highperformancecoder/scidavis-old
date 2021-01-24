@@ -102,10 +102,9 @@ jobs:
           cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}\scripts\buildsystems\vcpkg.cmake `
             -DORIGIN_IMPORT=ON
 
-      - uses: microsoft/setup-msbuild@v1.0.2
       - name: Building
         run: |
-          MSBuild -maxCpuCount -property:Configuration=Release build\scidavis.sln
+          cmake --build build --config Release -- -maxCpuCount
 
       - name: Testing
         run: |
@@ -154,6 +153,49 @@ jobs:
       - name: Building
         run: |
           make -C build -j$(nproc)
+
+      - name: Testing
+        run: |
+          cd build
+          ctest --output-on-failure
+
+  macos:
+
+    runs-on: macos-latest
+
+    name: macos
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: ${{ runner.os }}-QtCache
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+
+      - name: Install prerequisties
+        run: |
+          brew install muparser gsl gl2ps boost unittest-cpp sip
+          pip install pyqt5 numpy
+
+      - name: Configuring
+        run: |
+          mkdir build && cd build
+          cmake .. -DPython3_ROOT_DIR=/Users/runner/hostedtoolcache/Python/3.9.1/x64
+
+      - name: Building
+        run: |
+          make -j$(sysctl -n hw.logicalcpu) -C build
 
       - name: Testing
         run: |
