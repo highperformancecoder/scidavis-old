@@ -44,6 +44,7 @@ class QTabWidget;
 class QWidget;
 class QStringList;
 class QStackedWidget;
+class QGroupBox;
 
 using namespace Qwt3D;
 

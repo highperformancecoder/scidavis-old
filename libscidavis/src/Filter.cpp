@@ -296,8 +296,8 @@ QwtPlotCurve *Filter::addResultCurve(double *x, double *y)
 {
     ApplicationWindow *app = (ApplicationWindow *)parent();
     const QString tableName = app->generateUniqueName(this->objectName());
-    Column *xCol = new Column(tr("1", "filter table x column name"), SciDAVis::Numeric);
-    Column *yCol = new Column(tr("2", "filter table y column name"), SciDAVis::Numeric);
+    Column *xCol = new Column(tr("1", "filter table x column name"), SciDAVis::ColumnMode::Numeric);
+    Column *yCol = new Column(tr("2", "filter table y column name"), SciDAVis::ColumnMode::Numeric);
     xCol->setPlotDesignation(SciDAVis::X);
     yCol->setPlotDesignation(SciDAVis::Y);
     for (int i = 0; i < d_points; i++) {

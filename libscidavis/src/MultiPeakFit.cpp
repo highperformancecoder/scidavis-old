@@ -286,10 +286,10 @@ void MultiPeakFit::generateFitCurve(const vector<double> &par)
         QString label = d_explanation + " " + tr("fit of") + " " + d_curve->title().text();
 
         QList<Column *> columns;
-        columns << new Column(tr("1", "multipeak fit table first column name"), SciDAVis::Numeric);
+        columns << new Column(tr("1", "multipeak fit table first column name"), SciDAVis::ColumnMode::Numeric);
         for (i = 0; i < peaks_aux; i++)
-            columns << new Column(tr("peak%1").arg(QString::number(i + 1)), SciDAVis::Numeric);
-        columns << new Column(tr("2", "multipeak fit table last column name"), SciDAVis::Numeric);
+            columns << new Column(tr("peak%1").arg(QString::number(i + 1)), SciDAVis::ColumnMode::Numeric);
+        columns << new Column(tr("2", "multipeak fit table last column name"), SciDAVis::ColumnMode::Numeric);
         Table *t = app->newHiddenTable(tableName, label, columns);
 
         for (i = 0; i < d_points; i++) {

@@ -161,7 +161,7 @@ public:
         // calling this function while d_input is empty is a sign of very bad code
         // nevertheless it will return some rather meaningless value to
         // avoid crashes
-        return d_inputs.value(0) ? d_inputs.at(0)->columnMode() : SciDAVis::Text;
+        return d_inputs.value(0) ? d_inputs.at(0)->columnMode() : SciDAVis::ColumnMode::Text;
     }
     //! Return the content of row 'row'.
     /**

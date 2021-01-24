@@ -42,7 +42,6 @@
 
 #include "Plot.h"
 #include "Table.h"
-#include "AxesDialog.h"
 #include "PlotToolInterface.h"
 #include "core/column/Column.h"
 
@@ -127,7 +126,7 @@ public:
     ~Graph();
 
     enum Axis { Left, Right, Bottom, Top };
-    enum AxisType {
+    enum class AxisType : int {
         Numeric = 0,
         Txt = 1,
         Day = 2,
@@ -471,7 +470,7 @@ public slots:
 
     //! \name Axes
     //@{
-    QList<int> axesType();
+    QList<AxisType> axesType();
 
     QStringList scalesTitles();
     void setXAxisTitle(const QString &text);
@@ -514,7 +513,7 @@ public slots:
     QStringList axesNumColors();
     void setAxesNumColors(const QStringList &colors);
 
-    void showAxis(int axis, int type, const QString &formatInfo, Table *table, bool axisOn,
+    void showAxis(int axis, AxisType type, const QString &formatInfo, Table *table, bool axisOn,
                   int majTicksType, int minTicksType, bool labelsOn, const QColor &c, int format,
                   int prec, int rotation, int baselineDist, const QString &formula,
                   const QColor &labelsColor);
@@ -560,7 +559,7 @@ public slots:
     void setLabelsNumericFormat(int axis, const QStringList &l);
     void setLabelsNumericFormat(int axis, int format, int prec = 6,
                                 const QString &formula = QString());
-    void setLabelsDateTimeFormat(int axis, int type, const QString &formatInfo);
+    void setLabelsDateTimeFormat(int axis, AxisType type, const QString &formatInfo);
     void setLabelsDayFormat(int axis, int format);
     void setLabelsMonthFormat(int axis, int format);
 
@@ -789,7 +788,7 @@ private:
     QStringList axesFormulas;
     //! Stores columns used for axes with text labels or time/date format info
     QStringList axesFormatInfo;
-    QList<int> axisType;
+    QList<AxisType> axisType;
     MarkerType selectedMarkerType;
     QwtPlotMarker::LineStyle mrklStyle;
 

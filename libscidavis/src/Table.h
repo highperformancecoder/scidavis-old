@@ -54,7 +54,7 @@ class Table : public TableView, public scripted
 public:
     QPointer<future::Table> d_future_table;
 
-    enum ColType {
+  /*  enum ColType {
         Numeric = 0,
         Text = 1,
         Date = 2,
@@ -62,7 +62,7 @@ public:
         Month = 4,
         Day = 5,
         DateTime = 6
-    }; // TODO: remove this in favor of SciDAVis::columnMode
+    }; // TODO: remove this in favor of SciDAVis::columnMode*/
 
     Table(ScriptingEnv *env, const QString &fname, const QString &sep, int ignoredLines,
           bool renameCols, bool stripSpaces, bool simplifySpaces, bool convertToNumeric,
@@ -244,10 +244,10 @@ public slots:
 
     int numSelectedRows();
 
-    int columnType(int col);
+    SciDAVis::ColumnMode columnType(int col);
 
-    QList<int> columnTypes();
-    void setColumnTypes(QList<int> ctl);
+    QList<SciDAVis::ColumnMode> columnTypes();
+    void setColumnTypes(QList<SciDAVis::ColumnMode> ctl);
     void setColumnTypes(const QStringList &ctl);
     void setColumnType(int col, SciDAVis::ColumnMode mode);
 

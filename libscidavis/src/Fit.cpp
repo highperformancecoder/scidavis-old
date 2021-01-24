@@ -399,9 +399,9 @@ Table *Fit::parametersTable(const QString &tableName)
     ApplicationWindow *app = (ApplicationWindow *)parent();
     Table *t = app->newTable(tableName, d_p, 3);
     t->setHeader(QStringList() << tr("Parameter") << tr("Value") << tr("Error"));
-    t->column(0)->setColumnMode(SciDAVis::Text);
-    t->column(1)->setColumnMode(SciDAVis::Numeric);
-    t->column(2)->setColumnMode(SciDAVis::Numeric);
+    t->column(0)->setColumnMode(SciDAVis::ColumnMode::Text);
+    t->column(1)->setColumnMode(SciDAVis::ColumnMode::Numeric);
+    t->column(2)->setColumnMode(SciDAVis::ColumnMode::Numeric);
     for (unsigned i = 0; i < d_p; i++) {
         t->column(0)->setTextAt(i, d_param_names[i]);
         t->column(1)->setValueAt(i, d_results[i]);

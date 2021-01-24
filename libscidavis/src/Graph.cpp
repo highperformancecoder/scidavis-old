@@ -130,7 +130,7 @@ Graph::Graph(QWidget *parent, QString name, Qt::WindowFlags f) : QWidget(parent,
 
     d_user_step = QVector<double>(QwtPlot::axisCnt);
     for (int i = 0; i < QwtPlot::axisCnt; i++) {
-        axisType << Numeric;
+        axisType << AxisType::Numeric;
         axesFormatInfo << QString();
         axesFormulas << QString();
         d_user_step[i] = 0.0;
@@ -369,14 +369,14 @@ void Graph::setAxesBaseline(QStringList &lst)
     }
 }
 
-QList<int> Graph::axesType()
+QList<Graph::AxisType> Graph::axesType()
 {
     return axisType;
 }
 
 void Graph::setLabelsNumericFormat(int axis, int format, int prec, const QString &formula)
 {
-    axisType[axis] = Numeric;
+    axisType[axis] = AxisType::Numeric;
     axesFormulas[axis] = formula;
 
     ScaleDraw *sd_old = (ScaleDraw *)d_plot->axisScaleDraw(axis);
@@ -409,7 +409,7 @@ void Graph::setLabelsNumericFormat(int axis, int format, int prec, const QString
 void Graph::setLabelsNumericFormat(int axis, const QStringList &l)
 {
     QwtScaleDraw *sd = d_plot->axisScaleDraw(axis);
-    if (!sd->hasComponent(QwtAbstractScaleDraw::Labels) || axisType[axis] != Numeric)
+    if (!sd->hasComponent(QwtAbstractScaleDraw::Labels) || axisType[axis] != AxisType::Numeric)
         return;
 
     int format = l[2 * axis].toInt();
@@ -427,10 +427,11 @@ QString Graph::saveAxesLabelsType()
 {
     QString s = "AxisType\t";
     for (int i = 0; i < 4; i++) {
-        int type = axisType[i];
-        s += QString::number(type);
-        if (type == Time || type == Date || type == DateTime || type == Txt || type == ColHeader
-            || type == Day || type == Month)
+        auto type = axisType[i];
+        s += QString::number(static_cast<int>(type));
+        if (type == AxisType::Time || type == AxisType::Date || type == AxisType::DateTime
+            || type == AxisType::Txt || type == AxisType::ColHeader || type == AxisType::Day
+            || type == AxisType::Month)
             s += ";" + axesFormatInfo[i];
         s += "\t";
     };
@@ -624,7 +625,7 @@ void Graph::changeTicksLength(int minLength, int majLength)
     emit modifiedGraph();
 }
 
-void Graph::showAxis(int axis, int type, const QString &formatInfo, Table *table, bool axisOn,
+void Graph::showAxis(int axis, AxisType type, const QString &formatInfo, Table *table, bool axisOn,
                      int majTicksType, int minTicksType, bool labelsOn, const QColor &c, int format,
                      int prec, int rotation, int baselineDist, const QString &formula,
                      const QColor &labelsColor)
@@ -661,24 +662,24 @@ void Graph::showAxis(int axis, int type, const QString &formatInfo, Table *table
         sclDraw->enableComponent(QwtAbstractScaleDraw::Labels, false);
     else {
         switch (type) {
-        case Numeric:
+        case AxisType::Numeric:
             setLabelsNumericFormat(axis, format, prec, formula);
             break;
-        case Day:
+        case AxisType::Day:
             setLabelsDayFormat(axis, format);
             break;
-        case Month:
+        case AxisType::Month:
             setLabelsMonthFormat(axis, format);
             break;
-        case Time:
-        case Date:
-        case DateTime:
+        case AxisType::Time:
+        case AxisType::Date:
+        case AxisType::DateTime:
             setLabelsDateTimeFormat(axis, type, formatInfo);
             break;
-        case Txt:
+        case AxisType::Txt:
             setLabelsTextFormat(axis, table, formatInfo);
             break;
-        case ColHeader:
+        case AxisType::ColHeader:
             setLabelsColHeaderFormat(axis, table);
             break;
         }
@@ -704,7 +705,7 @@ void Graph::showAxis(int axis, int type, const QString &formatInfo, Table *table
 
 void Graph::setLabelsDayFormat(int axis, int format)
 {
-    axisType[axis] = Day;
+    axisType[axis] = AxisType::Day;
     axesFormatInfo[axis] = QString::number(format);
 
     ScaleDraw *sd_old = (ScaleDraw *)d_plot->axisScaleDraw(axis);
@@ -720,7 +721,7 @@ void Graph::setLabelsDayFormat(int axis, int format)
 
 void Graph::setLabelsMonthFormat(int axis, int format)
 {
-    axisType[axis] = Month;
+    axisType[axis] = AxisType::Month;
     axesFormatInfo[axis] = QString::number(format);
 
     ScaleDraw *sd_old = (ScaleDraw *)d_plot->axisScaleDraw(axis);
@@ -750,7 +751,7 @@ void Graph::setLabelsTextFormat(int axis, const Column *column, int startRow, in
     if (axis < 0 || axis > 3)
         return;
 
-    axisType[axis] = Txt;
+    axisType[axis] = AxisType::Txt;
     axesFormatInfo[axis] = table->name() + "_" + column->name();
 
     QMap<int, QString> list;
@@ -788,7 +789,7 @@ void Graph::setLabelsColHeaderFormat(int axis, Table *table)
     if (!table)
         return;
 
-    axisType[axis] = ColHeader;
+    axisType[axis] = AxisType::ColHeader;
     axesFormatInfo[axis] = table->name();
 
     QMap<int, QString> list;
@@ -801,7 +802,7 @@ void Graph::setLabelsColHeaderFormat(int axis, Table *table)
     d_plot->setAxisScaleDraw(axis, sd);
 }
 
-void Graph::setLabelsDateTimeFormat(int axis, int type, const QString &formatInfo)
+void Graph::setLabelsDateTimeFormat(int axis, AxisType type, const QString &formatInfo)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     QStringList list = formatInfo.split(";", Qt::KeepEmptyParts);
@@ -815,7 +816,7 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString &formatInf
     }
 
     switch (type) {
-    case Time: {
+    case AxisType::Time : {
         TimeScaleDraw *sd = new TimeScaleDraw(
                 *static_cast<const ScaleDraw *>(d_plot->axisScaleDraw(axis)),
                 list[0].isEmpty() ? QTime(12, 0, 0, 0) : QTime::fromString(list[0].right(8)),
@@ -825,7 +826,7 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString &formatInf
         d_plot->setAxisScaleDraw(axis, sd);
         break;
     }
-    case Date: {
+    case AxisType::Date: {
         DateScaleDraw *sd =
                 new DateScaleDraw(*static_cast<const ScaleDraw *>(d_plot->axisScaleDraw(axis)),
                                   QDate::fromString(list[0].left(10), "yyyy-MM-dd"), list[1]);
@@ -834,7 +835,7 @@ void Graph::setLabelsDateTimeFormat(int axis, int type, const QString &formatInf
         d_plot->setAxisScaleDraw(axis, sd);
         break;
     }
-    case DateTime: {
+    case AxisType::DateTime: {
         DateTimeScaleDraw *sd = new DateTimeScaleDraw(
                 *static_cast<const ScaleDraw *>(d_plot->axisScaleDraw(axis)),
                 QDateTime::fromString(list[0], "yyyy-MM-ddThh:mm:ss"), list[1]);
@@ -1814,7 +1815,7 @@ void Graph::updateCurvesData(Table *w, const QString &colName)
             continue;
         DataCurve *c = static_cast<DataCurve *>(it);
         if (c->table() == w && (c->xColumnName() == colName || c->yColumnName() == colName)) {
-            int colType = w->column(colName)->columnMode();
+            auto colType = w->column(colName)->columnMode();
             AxisType atype;
             if (c->xColumnName() == colName) {
                 if (c->type() == HorizontalBars)
@@ -1828,10 +1829,10 @@ void Graph::updateCurvesData(Table *w, const QString &colName)
                     atype = (AxisType)axisType[QwtPlot::yLeft];
             }
             // compare setLabels*Format() calls in insertCurve()
-            if ((colType == Table::Text && atype != Txt)
-                || (colType == Table::Time && atype != Time)
-                || (colType == Table::Date && atype != Date)
-                || (colType == Table::DateTime && atype != DateTime))
+            if ((colType == SciDAVis::ColumnMode::Text && atype != AxisType::Txt)
+                || (colType == SciDAVis::ColumnMode::DateTime
+                    && ((atype != AxisType::Time) && (atype != AxisType::Date)
+                        && (atype != AxisType::DateTime))))
                 to_remove << c;
             else if (c->updateData(w, colName))
                 updated_curves++;
@@ -2160,7 +2161,7 @@ QString Graph::saveTitle()
 
 QString Graph::saveScaleTitles()
 {
-    int a {};
+    int a{};
     QString s = "";
     for (int i = 0; i < 4; i++) {
         switch (i) {
@@ -2391,7 +2392,7 @@ QString Graph::saveCurves()
                 if (c->type() == Function) {
                     s += "<formula>\n"
                             + static_cast<FunctionCurve *>(c)->formulas().join(
-                                    "\n</formula>\n<formula>\n")
+                                      "\n</formula>\n<formula>\n")
                             + "\n</formula>\n";
                 }
             } else if (c->type() == ErrorBars) {
@@ -3068,7 +3069,7 @@ void Graph::plotPie(Table *w, const QString &name, int startRow, int endRow)
     double sum = 0.0;
 
     Column *y_col_ptr = w->column(ycol);
-    int yColType = w->columnType(ycol);
+    auto yColType = w->columnType(ycol);
 
     if (endRow < 0)
         endRow = w->numRows() - 1;
@@ -3084,7 +3085,7 @@ void Graph::plotPie(Table *w, const QString &name, int startRow, int endRow)
     QVarLengthArray<double> Y(abs(endRow - startRow) + 1);
     for (int row = startRow; row <= endRow && row < y_col_ptr->rowCount(); row++) {
         if (!y_col_ptr->isInvalid(row)) {
-            if (yColType == Table::Text) {
+            if (yColType == SciDAVis::ColumnMode::Text) {
                 QString yval = y_col_ptr->textAt(row);
                 bool valid_data = true;
                 Y[size] = QLocale().toDouble(yval, &valid_data);
@@ -3165,7 +3166,7 @@ bool Graph::plotHistogram(Table *w, QStringList names, int startRow, int endRow)
     bool success = false;
     foreach (QString col, names) {
         Column *col_ptr = w->column(col);
-        if (!col_ptr || col_ptr->columnMode() != SciDAVis::Numeric)
+        if (!col_ptr || col_ptr->columnMode() != SciDAVis::ColumnMode::Numeric)
             continue;
 
         QwtHistogram *c = new QwtHistogram(w, col, startRow, endRow);
@@ -3939,8 +3940,8 @@ void Graph::createTable(const QwtPlotCurve *curve)
 
     int size = curve->dataSize();
 
-    Column *xCol = new Column(tr("1", "curve data table x column name"), SciDAVis::Numeric);
-    Column *yCol = new Column(tr("2", "curve data table y column name"), SciDAVis::Numeric);
+    Column *xCol = new Column(tr("1", "curve data table x column name"), SciDAVis::ColumnMode::Numeric);
+    Column *yCol = new Column(tr("2", "curve data table y column name"), SciDAVis::ColumnMode::Numeric);
     xCol->setPlotDesignation(SciDAVis::X);
     yCol->setPlotDesignation(SciDAVis::Y);
     for (int i = 0; i < size; i++) {
@@ -4574,15 +4575,15 @@ void Graph::copy(ApplicationWindow *parent, Graph *g)
 
         QwtScaleDraw *sd = g->plotWidget()->axisScaleDraw(i);
         if (sd->hasComponent(QwtAbstractScaleDraw::Labels)) {
-            if (axisType[i] == Graph::Numeric)
+            if (axisType[i] == AxisType::Numeric)
                 setLabelsNumericFormat(i, plot->axisLabelFormat(i), plot->axisLabelPrecision(i),
                                        axesFormulas[i]);
-            else if (axisType[i] == Graph::Day)
+            else if (axisType[i] == AxisType::Day)
                 setLabelsDayFormat(i, axesFormatInfo[i].toInt());
-            else if (axisType[i] == Graph::Month)
+            else if (axisType[i] == AxisType::Month)
                 setLabelsMonthFormat(i, axesFormatInfo[i].toInt());
-            else if (axisType[i] == Graph::Time || axisType[i] == Graph::Date
-                     || axisType[i] == Graph::DateTime)
+            else if (axisType[i] == AxisType::Time || axisType[i] == AxisType::Date
+                     || axisType[i] == AxisType::DateTime)
                 setLabelsDateTimeFormat(i, axisType[i], axesFormatInfo[i]);
             else {
                 QwtTextScaleDraw *sd = (QwtTextScaleDraw *)plot->axisScaleDraw(i);
@@ -4695,12 +4696,12 @@ void Graph::plotBoxDiagram(Table *w, const QStringList &names, int startRow, int
     if (mrk)
         mrk->setText(legendText());
 
-    axisType[QwtPlot::xBottom] = ColHeader;
+    axisType[QwtPlot::xBottom] = AxisType::ColHeader;
     d_plot->setAxisScaleDraw(QwtPlot::xBottom, new QwtTextScaleDraw(w->selectedYLabels()));
     d_plot->setAxisMaxMajor(QwtPlot::xBottom, names.count() + 1);
     d_plot->setAxisMaxMinor(QwtPlot::xBottom, 0);
 
-    axisType[QwtPlot::xTop] = ColHeader;
+    axisType[QwtPlot::xTop] = AxisType::ColHeader;
     d_plot->setAxisScaleDraw(QwtPlot::xTop, new QwtTextScaleDraw(w->selectedYLabels()));
     d_plot->setAxisMaxMajor(QwtPlot::xTop, names.count() + 1);
     d_plot->setAxisMaxMinor(QwtPlot::xTop, 0);

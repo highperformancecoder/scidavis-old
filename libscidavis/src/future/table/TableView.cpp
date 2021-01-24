@@ -265,11 +265,11 @@ void TableView::retranslateStrings()
     if (-1 == index)
         index = 0;
     ui.type_box->clear();
-    ui.type_box->addItem(tr("Numeric"), QVariant(int(SciDAVis::Numeric)));
-    ui.type_box->addItem(tr("Text"), QVariant(int(SciDAVis::Text)));
-    ui.type_box->addItem(tr("Month names"), QVariant(int(SciDAVis::Month)));
-    ui.type_box->addItem(tr("Day names"), QVariant(int(SciDAVis::Day)));
-    ui.type_box->addItem(tr("Date and time"), QVariant(int(SciDAVis::DateTime)));
+    ui.type_box->addItem(tr("Numeric"), QVariant(int(SciDAVis::ColumnMode::Numeric)));
+    ui.type_box->addItem(tr("Text"), QVariant(int(SciDAVis::ColumnMode::Text)));
+    ui.type_box->addItem(tr("Month names"), QVariant(int(SciDAVis::ColumnMode::Month)));
+    ui.type_box->addItem(tr("Day names"), QVariant(int(SciDAVis::ColumnMode::Day)));
+    ui.type_box->addItem(tr("Date and time"), QVariant(int(SciDAVis::ColumnMode::DateTime)));
     ui.type_box->setCurrentIndex(index);
 
     // prevent losing current selection on retranslate
@@ -391,7 +391,7 @@ void TableView::setColumnForControlTabs(int col)
         ui.comment_box->document()->setPlainText(col_ptr->comment());
         ui.type_box->setCurrentIndex(ui.type_box->findData((int)col_ptr->columnMode()));
         switch (col_ptr->columnMode()) {
-        case SciDAVis::Numeric: {
+        case SciDAVis::ColumnMode::Numeric: {
             Double2StringFilter *filter =
                     static_cast<Double2StringFilter *>(col_ptr->outputFilter());
             ui.format_box->setCurrentIndex(ui.format_box->findData(filter->numericFormat()));
@@ -402,9 +402,9 @@ void TableView::setColumnForControlTabs(int col)
             ui.date_time_0_label->setVisible(false);
             break;
         }
-        case SciDAVis::Month:
-        case SciDAVis::Day:
-        case SciDAVis::DateTime: {
+        case SciDAVis::ColumnMode::Month:
+        case SciDAVis::ColumnMode::Day:
+        case SciDAVis::ColumnMode::DateTime: {
             DateTime2StringFilter *filter =
                     static_cast<DateTime2StringFilter *>(col_ptr->outputFilter());
             ui.formatLineEdit->setText(filter->format());
@@ -471,8 +471,8 @@ void TableView::updateFormatBox()
     ui.formatLineEdit->setEnabled(false);
     ui.date_time_interval->setEnabled(false);
     ui.date_time_0->setEnabled(false);
-    switch (ui.type_box->itemData(type_index).toInt()) {
-    case SciDAVis::Numeric:
+    switch (static_cast<SciDAVis::ColumnMode>(ui.type_box->itemData(type_index).toInt())) {
+    case SciDAVis::ColumnMode::Numeric:
         ui.digits_box->setEnabled(true);
         ui.format_box->addItem(tr("Decimal"), QVariant('f'));
         ui.format_box->addItem(tr("Scientific (e)"), QVariant('e'));
@@ -480,22 +480,22 @@ void TableView::updateFormatBox()
         ui.format_box->addItem(tr("Automatic (e)"), QVariant('g'));
         ui.format_box->addItem(tr("Automatic (E)"), QVariant('G'));
         break;
-    case SciDAVis::Text:
+    case SciDAVis::ColumnMode::Text:
         ui.format_box->addItem(tr("Text"), QVariant());
         break;
-    case SciDAVis::Month:
+    case SciDAVis::ColumnMode::Month:
         ui.format_box->addItem(tr("Number without leading zero"), QVariant("M"));
         ui.format_box->addItem(tr("Number with leading zero"), QVariant("MM"));
         ui.format_box->addItem(tr("Abbreviated month name"), QVariant("MMM"));
         ui.format_box->addItem(tr("Full month name"), QVariant("MMMM"));
         break;
-    case SciDAVis::Day:
+    case SciDAVis::ColumnMode::Day:
         ui.format_box->addItem(tr("Number without leading zero"), QVariant("d"));
         ui.format_box->addItem(tr("Number with leading zero"), QVariant("dd"));
         ui.format_box->addItem(tr("Abbreviated day name"), QVariant("ddd"));
         ui.format_box->addItem(tr("Full day name"), QVariant("dddd"));
         break;
-    case SciDAVis::DateTime: {
+    case SciDAVis::ColumnMode::DateTime: {
         // TODO: allow adding of the combo box entries here
         const char *date_strings[] = {
             "yyyy-MM-dd", "yyyy/MM/dd", "dd/MM/yyyy", "dd/MM/yy", "dd.MM.yyyy",
@@ -546,45 +546,45 @@ void TableView::updateTypeInfo()
 
     QString str = tr("Selected column type:\n");
     if (format_index >= 0 && type_index >= 0) {
-        int type = ui.type_box->itemData(type_index).toInt();
+        SciDAVis::ColumnMode type = static_cast<SciDAVis::ColumnMode>(ui.type_box->itemData(type_index).toInt());
         switch (type) {
-        case SciDAVis::Numeric:
+        case SciDAVis::ColumnMode::Numeric:
             str += tr("Double precision\nfloating point values\n");
             ui.digits_box->setEnabled(true);
             break;
-        case SciDAVis::Text:
+        case SciDAVis::ColumnMode::Text:
             str += tr("Text\n");
             break;
-        case SciDAVis::Month:
+        case SciDAVis::ColumnMode::Month:
             str += tr("Month names\n");
             break;
-        case SciDAVis::Day:
+        case SciDAVis::ColumnMode::Day:
             str += tr("Days of the week\n");
             break;
-        case SciDAVis::DateTime:
+        case SciDAVis::ColumnMode::DateTime:
             str += tr("Dates and/or times\n");
             ui.formatLineEdit->setEnabled(true);
             break;
         }
         str += tr("Example: ");
         switch (type) {
-        case SciDAVis::Numeric:
+        case SciDAVis::ColumnMode::Numeric:
             str += QString::number(123.1234567890123456,
                                    ui.format_box->itemData(format_index).toChar().toLatin1(),
                                    ui.digits_box->value());
             break;
-        case SciDAVis::Text:
+        case SciDAVis::ColumnMode::Text:
             str += tr("Hello world!\n");
             break;
-        case SciDAVis::Month:
+        case SciDAVis::ColumnMode::Month:
             str += QLocale().toString(QDate(1900, 1, 1),
                                       ui.format_box->itemData(format_index).toString());
             break;
-        case SciDAVis::Day:
+        case SciDAVis::ColumnMode::Day:
             str += QLocale().toString(QDate(1900, 1, 1),
                                       ui.format_box->itemData(format_index).toString());
             break;
-        case SciDAVis::DateTime:
+        case SciDAVis::ColumnMode::DateTime:
             ui.formatLineEdit->setText(ui.format_box->itemData(format_index).toString());
             ui.date_time_0->setDisplayFormat(ui.format_box->itemData(format_index).toString());
             str += QDateTime(QDate(1900, 1, 1), QTime(23, 59, 59, 999))
@@ -592,7 +592,8 @@ void TableView::updateTypeInfo()
             break;
         }
     } else if (format_index == -1 && type_index >= 0
-               && ui.type_box->itemData(type_index).toInt() == SciDAVis::DateTime) {
+               && static_cast<SciDAVis::ColumnMode>(ui.type_box->itemData(type_index).toInt())
+                       == SciDAVis::ColumnMode::DateTime) {
         str += tr("Dates and/or times\n");
         ui.formatLineEdit->setEnabled(true);
         str += tr("Example: ");
@@ -616,8 +617,8 @@ void TableView::handleFormatLineEditChange()
     int type_index = ui.type_box->currentIndex();
 
     if (type_index >= 0) {
-        int type = ui.type_box->itemData(type_index).toInt();
-        if (type == SciDAVis::DateTime) {
+        SciDAVis::ColumnMode type = static_cast<SciDAVis::ColumnMode>(ui.type_box->itemData(type_index).toInt());
+        if (type == SciDAVis::ColumnMode::DateTime) {
             QString str = tr("Selected column type:\n");
             str += tr("Dates and/or times\n");
             str += tr("Example: ");
@@ -678,7 +679,7 @@ void TableView::applyType()
     if ((0 == list.size()) && (nullptr != d_table->currentColumn()))
         list.append(d_table->currentColumn());
     switch (new_mode) {
-    case SciDAVis::Numeric: {
+    case SciDAVis::ColumnMode::Numeric: {
         foreach (Column *col, list) {
             col->beginMacro(QObject::tr("%1: change column type").arg(col->name()));
             col->setColumnMode(new_mode);
@@ -691,13 +692,13 @@ void TableView::applyType()
         }
         break;
     }
-    case SciDAVis::Text:
+    case SciDAVis::ColumnMode::Text:
         foreach (Column *col, list)
             col->setColumnMode(new_mode);
         break;
-    case SciDAVis::Month:
-    case SciDAVis::Day:
-    case SciDAVis::DateTime:
+    case SciDAVis::ColumnMode::Month:
+    case SciDAVis::ColumnMode::Day:
+    case SciDAVis::ColumnMode::DateTime:
         QString format;
         if (ui.formatLineEdit->isEnabled())
             format = ui.formatLineEdit->text();
@@ -708,8 +709,8 @@ void TableView::applyType()
             SciDAVis::ColumnMode old_mode = col->columnMode();
             AbstractFilter *converter = 0;
             switch (old_mode) {
-            case SciDAVis::Numeric: // the mode is changed
-            case SciDAVis::DateTime: // the mode is not changed, but numeric converter parameters is
+            case SciDAVis::ColumnMode::Numeric: // the mode is changed
+            case SciDAVis::ColumnMode::DateTime: // the mode is not changed, but numeric converter parameters is
                                      // (possibly) changed
                 if (ui.date_time_interval->isVisible()) {
                     Double2DateTimeFilter::UnitInterval unit =
@@ -720,7 +721,7 @@ void TableView::applyType()
                     converter = new Double2DateTimeFilter(unit, date_time_0);
                 }
                 break;
-            case SciDAVis::Text:
+            case SciDAVis::ColumnMode::Text:
                 converter = new String2DateTimeFilter(format);
                 break;
             default:

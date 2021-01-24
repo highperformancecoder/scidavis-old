@@ -29,7 +29,6 @@
 #include "ApplicationWindow.h"
 #include "AxesDialog.h"
 #include "TextDialog.h"
-#include "Graph.h"
 #include "Grid.h"
 #include "Plot.h"
 #include "MyParser.h"
@@ -362,14 +361,14 @@ void AxesDialog::initAxesPage()
     axesPage = new QWidget();
 
     boxAxisType = new QComboBox();
-    boxAxisType->addItem(tr("Numeric"), (int)Graph::Numeric);
-    boxAxisType->addItem(tr("Text from table"), (int)Graph::Txt);
-    boxAxisType->addItem(tr("Day of the week"), (int)Graph::Day);
-    boxAxisType->addItem(tr("Month"), (int)Graph::Month);
-    boxAxisType->addItem(tr("Time"), (int)Graph::Time);
-    boxAxisType->addItem(tr("Date"), (int)Graph::Date);
-    boxAxisType->addItem(tr("Date & Time"), (int)Graph::DateTime);
-    boxAxisType->addItem(tr("Column Headings"), (int)Graph::ColHeader);
+    boxAxisType->addItem(tr("Numeric"), (int)Graph::AxisType::Numeric);
+    boxAxisType->addItem(tr("Text from table"), (int)Graph::AxisType::Txt);
+    boxAxisType->addItem(tr("Day of the week"), (int)Graph::AxisType::Day);
+    boxAxisType->addItem(tr("Month"), (int)Graph::AxisType::Month);
+    boxAxisType->addItem(tr("Time"), (int)Graph::AxisType::Time);
+    boxAxisType->addItem(tr("Date"), (int)Graph::AxisType::Date);
+    boxAxisType->addItem(tr("Date & Time"), (int)Graph::AxisType::DateTime);
+    boxAxisType->addItem(tr("Column Headings"), (int)Graph::AxisType::ColHeader);
 
     axesTitlesList = new QListWidget();
     axesTitlesList->addItem(new QListWidgetItem(image4, tr("Bottom")));
@@ -702,7 +701,7 @@ void AxesDialog::showAxisFormatOptions(int format)
     labelTable->hide();
 
     switch (static_cast<Graph::AxisType>(boxAxisType->itemData(format).toInt())) {
-    case Graph::Numeric:
+    case Graph::AxisType::Numeric:
         label2->show();
         boxFormat->show();
         boxFormat->addItem(tr("Automatic"));
@@ -718,12 +717,12 @@ void AxesDialog::showAxisFormatOptions(int format)
         showAxisFormula(mapToQwtAxisId());
         break;
 
-    case Graph::Txt:
+    case Graph::AxisType::Txt:
         label1->show();
         boxColName->show();
         break;
 
-    case Graph::Day: {
+    case Graph::AxisType::Day: {
         int day = (QDate::currentDate()).dayOfWeek();
         label2->show();
         boxFormat->show();
@@ -733,7 +732,7 @@ void AxesDialog::showAxisFormatOptions(int format)
         boxFormat->setCurrentIndex(formatInfo[axis].toInt());
     } break;
 
-    case Graph::Month: {
+    case Graph::AxisType::Month: {
         int month = (QDate::currentDate()).month();
         label2->show();
         boxFormat->show();
@@ -743,7 +742,7 @@ void AxesDialog::showAxisFormatOptions(int format)
         boxFormat->setCurrentIndex(formatInfo[axis].toInt());
     } break;
 
-    case Graph::Time: {
+    case Graph::AxisType::Time: {
         label2->show();
         boxFormat->show();
         boxFormat->setEditable(true);
@@ -773,7 +772,7 @@ void AxesDialog::showAxisFormatOptions(int format)
         boxFormat->addItem("hhmmss");
     } break;
 
-    case Graph::Date: {
+    case Graph::AxisType::Date: {
         label2->show();
         boxFormat->show();
         boxFormat->setEditable(true);
@@ -793,7 +792,7 @@ void AxesDialog::showAxisFormatOptions(int format)
         boxFormat->addItem("dd/MM/yyyy");
     } break;
 
-    case Graph::DateTime: {
+    case Graph::AxisType::DateTime: {
         label2->show();
         boxFormat->show();
         boxFormat->setEditable(true);
@@ -825,7 +824,7 @@ void AxesDialog::showAxisFormatOptions(int format)
                         QVariant(QString(date_strings[i]) + " " + QString(time_strings[j])));
     } break;
 
-    case Graph::ColHeader: {
+    case Graph::AxisType::ColHeader: {
         labelTable->show();
         if (tablesList.contains(formatInfo[axis]))
             boxTableName->setItemText(boxTableName->currentIndex(), formatInfo[axis]);
@@ -1178,9 +1177,9 @@ bool AxesDialog::updatePlot()
         QString step = boxStep->text().toLower();
         int a = Graph::mapToQwtAxis(axesList->currentRow());
         switch (axesType[a]) {
-        case Graph::Time:
-        case Graph::Date:
-        case Graph::DateTime: {
+        case Graph::AxisType::Time:
+        case Graph::AxisType::Date:
+        case Graph::AxisType::DateTime: {
             QDateTime qdt = QDateTime::fromString(from, "yyyy-MM-dd hh:mm:ss");
             from = QString::number(qdt.toMSecsSinceEpoch() / 86400000. + 2440587.5, 'f', 16);
             qdt = QDateTime::fromString(to, "yyyy-MM-dd hh:mm:ss");
@@ -1228,7 +1227,7 @@ bool AxesDialog::updatePlot()
                 return false;
             }
 
-            if (axesType[a] == Graph::Time) {
+            if (axesType[a] == Graph::AxisType::Time) {
                 switch (boxUnit->currentIndex()) {
                 case 0:
                     break;
@@ -1242,7 +1241,7 @@ bool AxesDialog::updatePlot()
                     stp *= 36e5;
                     break;
                 }
-            } else if (axesType[a] == Graph::Date) {
+            } else if (axesType[a] == Graph::AxisType::Date) {
                 switch (boxUnit->currentIndex()) {
                 case 0:
                     break;
@@ -1250,7 +1249,7 @@ bool AxesDialog::updatePlot()
                     stp *= 7;
                     break;
                 }
-            } else if (axesType[a] == Graph::DateTime) {
+            } else if (axesType[a] == Graph::AxisType::DateTime) {
                 switch (boxUnit->currentIndex()) {
                 case 0: // milliseconds
                     stp *= 1. / 86400000.;
@@ -1281,13 +1280,13 @@ bool AxesDialog::updatePlot()
         updateGrid();
     } else if (generalDialog.currentWidget() == (QWidget *)axesPage) {
         int axis = mapToQwtAxisId();
-        int format = currentSelectedAxisType();
+        auto format = currentSelectedAxisType();
         axesType[axis] = format;
 
         int baseline = boxBaseline->value();
         axesBaseline[axis] = baseline;
 
-        if (format == Graph::Numeric) {
+        if (format == Graph::AxisType::Numeric) {
             if (boxShowFormula->isChecked()) {
                 QString formula = boxFormula->toPlainText().toLower();
                 try {
@@ -1308,7 +1307,7 @@ bool AxesDialog::updatePlot()
                     return false;
                 }
             }
-        } else if (format == Graph::Time || format == Graph::Date || format == Graph::DateTime) {
+        } else if (format == Graph::AxisType::Time || format == Graph::AxisType::Date || format == Graph::AxisType::DateTime) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
             QStringList lst = formatInfo[axis].split(";", Qt::KeepEmptyParts);
 #else
@@ -1316,9 +1315,9 @@ bool AxesDialog::updatePlot()
 #endif
             if (lst.size() < 2 || lst[0].isEmpty()) {
                 lst = QStringList();
-                if (format == Graph::Time)
+                if (format == Graph::AxisType::Time)
                     lst << QTime(0, 0, 0).toString();
-                else if (format == Graph::Date)
+                else if (format == Graph::AxisType::Date)
                     lst << QDate(1900, 1, 1).toString("yyyy-MM-dd");
                 else
                     lst << QDateTime(QDate(1900, 1, 1), QTime(0, 0, 0))
@@ -1327,9 +1326,9 @@ bool AxesDialog::updatePlot()
             } else
                 lst[1] = boxFormat->currentText();
             formatInfo[axis] = lst.join(";");
-        } else if (format == Graph::Day || format == Graph::Month)
+        } else if (format == Graph::AxisType::Day || format == Graph::AxisType::Month)
             formatInfo[axis] = QString::number(boxFormat->currentIndex());
-        else if (format == Graph::ColHeader)
+        else if (format == Graph::AxisType::ColHeader)
             formatInfo[axis] = boxTableName->currentText();
         else
             formatInfo[axis] = boxColName->currentText();
@@ -1437,9 +1436,9 @@ void AxesDialog::updateScale()
     double astep = d_graph->axisStep(a);
 
     switch (axesType[a]) {
-    case Graph::Time:
-    case Graph::Date:
-    case Graph::DateTime: {
+    case Graph::AxisType::Time:
+    case Graph::AxisType::Date:
+    case Graph::AxisType::DateTime: {
         QDateTime qdt = QDateTime::fromMSecsSinceEpoch(round((astart - 2440587.5) * 86400000.));
         boxStart->setText(qdt.toString("yyyy-MM-dd hh:mm:ss"));
         qdt = QDateTime::fromMSecsSinceEpoch(round((aend - 2440587.5) * 86400000.));
@@ -1456,17 +1455,17 @@ void AxesDialog::updateScale()
     boxStep->setText(QString::number(d_graph->axisStep(a)));
     boxMajorValue->setValue(lst.count());
 
-    if (axesType[a] == Graph::Time) {
+    if (axesType[a] == Graph::AxisType::Time) {
         boxUnit->show();
         boxUnit->addItem(tr("millisec."));
         boxUnit->addItem(tr("sec."));
         boxUnit->addItem(tr("min."));
         boxUnit->addItem(tr("hours"));
-    } else if (axesType[a] == Graph::Date) {
+    } else if (axesType[a] == Graph::AxisType::Date) {
         boxUnit->show();
         boxUnit->addItem(tr("days"));
         boxUnit->addItem(tr("weeks"));
-    } else if (axesType[a] == Graph::DateTime) {
+    } else if (axesType[a] == Graph::AxisType::DateTime) {
         boxUnit->show();
         boxUnit->addItem(tr("millisec."));
         boxUnit->addItem(tr("sec."));
@@ -1481,7 +1480,7 @@ void AxesDialog::updateScale()
         btnStep->setChecked(true);
         boxStep->setEnabled(true);
         boxUnit->setEnabled(true);
-        if (axesType[a] == Graph::DateTime) {
+        if (axesType[a] == Graph::AxisType::DateTime) {
             if (abs(astep * 24. - round(astep * 24.)) < 1e-6 * astep) {
                 astep *= 24;
                 boxUnit->setCurrentIndex(3); // hours
@@ -1574,12 +1573,12 @@ void AxesDialog::pickAxisNumColor()
 void AxesDialog::setAxisType(int)
 {
     int a = mapToQwtAxisId();
-    int type = d_graph->axesType()[a];
+    auto type = d_graph->axesType()[a];
 
-    boxAxisType->setCurrentIndex(boxAxisType->findData(type));
-    showAxisFormatOptions(boxAxisType->findData(type));
+    boxAxisType->setCurrentIndex(boxAxisType->findData(static_cast<int>(type)));
+    showAxisFormatOptions(boxAxisType->findData(static_cast<int>(type)));
 
-    if (type == Graph::Txt)
+    if (type == Graph::AxisType::Txt)
         boxColName->setItemText(boxColName->currentIndex(), formatInfo[a]);
 }
 
@@ -1648,10 +1647,10 @@ void AxesDialog::updateTickLabelsList(bool on)
         return;
     tickLabelsOn[axis] = QString::number(on);
 
-    int type = currentSelectedAxisType();
-    if (type == Graph::Day || type == Graph::Month)
+    auto type = currentSelectedAxisType();
+    if (type == Graph::AxisType::Day || type == Graph::AxisType::Month)
         formatInfo[axis] = QString::number(boxFormat->currentIndex());
-    else if (type == Graph::Time || type == Graph::Date || type == Graph::DateTime) {
+    else if (type == Graph::AxisType::Time || type == Graph::AxisType::Date || type == Graph::AxisType::DateTime) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
         QStringList lst = formatInfo[axis].split(";", Qt::SkipEmptyParts);
 #else
@@ -1659,9 +1658,9 @@ void AxesDialog::updateTickLabelsList(bool on)
 #endif
         if (lst.size() < 2 || lst[0].isEmpty()) {
             lst = QStringList();
-            if (type == Graph::Time)
+            if (type == Graph::AxisType::Time)
                 lst << QTime(0, 0, 0).toString();
-            else if (type == Graph::Date)
+            else if (type == Graph::AxisType::Date)
                 lst << QDate(1900, 1, 1).toString("yyyy-MM-dd");
             else
                 lst << QDateTime(QDate(1900, 1, 1), QTime(0, 0, 0)).toString("yyyy-MM-ddThh:mm:ss");
@@ -1721,13 +1720,13 @@ void AxesDialog::showGridPage()
 void AxesDialog::setLabelsNumericFormat(int)
 {
     int axis = mapToQwtAxisId();
-    int type = currentSelectedAxisType();
+    auto type = currentSelectedAxisType();
     int prec = boxPrecision->value();
     int format = boxFormat->currentIndex();
 
     Plot *plot = d_graph->plotWidget();
 
-    if (type == Graph::Numeric) {
+    if (type == Graph::AxisType::Numeric) {
         if (plot->axisLabelFormat(axis) == format && plot->axisLabelPrecision(axis) == prec)
             return;
 
@@ -1735,9 +1734,9 @@ void AxesDialog::setLabelsNumericFormat(int)
             boxPrecision->setEnabled(false);
         else
             boxPrecision->setEnabled(true);
-    } else if (type == Graph::Day || type == Graph::Month)
+    } else if (type == Graph::AxisType::Day || type == Graph::AxisType::Month)
         formatInfo[axis] = QString::number(format);
-    else if (type == Graph::Time || type == Graph::Date || type == Graph::DateTime) {
+    else if (type == Graph::AxisType::Time || type == Graph::AxisType::Date || type == Graph::AxisType::DateTime) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
         QStringList lst = formatInfo[axis].split(";", Qt::KeepEmptyParts);
 #else
@@ -1745,9 +1744,9 @@ void AxesDialog::setLabelsNumericFormat(int)
 #endif
         if (lst.size() < 2 || lst[0].isEmpty()) {
             lst = QStringList();
-            if (type == Graph::Time)
+            if (type == Graph::AxisType::Time)
                 lst << QTime(0, 0, 0).toString();
-            else if (type == Graph::Date)
+            else if (type == Graph::AxisType::Date)
                 lst << QDate(1900, 1, 1).toString("yyyy-MM-dd");
             else
                 lst << QDateTime(QDate(1900, 1, 1), QTime(0, 0, 0)).toString("yyyy-MM-ddThh:mm:ss");
@@ -1787,7 +1786,7 @@ void AxesDialog::showAxisFormula(int axis)
 
 void AxesDialog::updateLabelsFormat(int)
 {
-    if (currentSelectedAxisType() != Graph::Numeric)
+    if (currentSelectedAxisType() != Graph::AxisType::Numeric)
         return;
 
     int a = mapToQwtAxisId();
@@ -1881,7 +1880,7 @@ void AxesDialog::updateMinorTicksList(int scaleType)
     boxMinorValue->setEditText(QString::number(d_graph->plotWidget()->axisMaxMinor(a)));
 }
 
-void AxesDialog::showAxis(int axis, int type, const QString &labelsColName, bool axisOn,
+void AxesDialog::showAxis(int axis, Graph::AxisType type, const QString &labelsColName, bool axisOn,
                           int majTicksType, int minTicksType, bool labelsOn, const QColor &c,
                           int format, int prec, int rotation, int baselineDist,
                           const QString &formula, const QColor &labelsColor)
@@ -1891,7 +1890,7 @@ void AxesDialog::showAxis(int axis, int type, const QString &labelsColName, bool
         return;
 
     Table *w = app->table(labelsColName);
-    if ((type == Graph::Txt || type == Graph::ColHeader) && !w)
+    if ((type == Graph::AxisType::Txt || type == Graph::AxisType::ColHeader) && !w)
         return;
 
     if (!d_graph)
@@ -1900,10 +1899,10 @@ void AxesDialog::showAxis(int axis, int type, const QString &labelsColName, bool
                       format, prec, rotation, baselineDist, formula, labelsColor);
 }
 
-int AxesDialog::currentSelectedAxisType()
+Graph::AxisType AxesDialog::currentSelectedAxisType()
 {
     int index = boxAxisType->currentIndex();
     if (index < 0)
-        return Graph::Numeric;
-    return boxAxisType->itemData(index).toInt();
+        return Graph::AxisType::Numeric;
+    return static_cast<Graph::AxisType>(boxAxisType->itemData(index).toInt());
 }

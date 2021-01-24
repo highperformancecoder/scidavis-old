@@ -321,7 +321,7 @@ void DataPickerTool::removePoint()
         return;
 
     int col = t->colIndex(d_selected_curve->title().text());
-    if (t->columnType(col) == Table::Numeric) {
+    if (t->columnType(col) == SciDAVis::ColumnMode::Numeric) {
         t->column(col)->setValueAt(((DataCurve *)d_selected_curve)->tableRow(d_selected_point),
                                    0.0);
         t->column(col)->setInvalid(((DataCurve *)d_selected_curve)->tableRow(d_selected_point),
@@ -390,7 +390,8 @@ bool DataPickerTool::end(bool ok)
         int row = ((DataCurve *)d_selected_curve)->tableRow(d_selected_point);
         int xcol = t->colIndex(((DataCurve *)d_selected_curve)->xColumnName());
         int ycol = t->colIndex(d_selected_curve->title().text());
-        if (t->columnType(xcol) == Table::Numeric && t->columnType(ycol) == Table::Numeric) {
+        if (t->columnType(xcol) == SciDAVis::ColumnMode::Numeric
+            && t->columnType(ycol) == SciDAVis::ColumnMode::Numeric) {
             t->column(xcol)->setValueAt(row, new_x_val);
             t->column(ycol)->setValueAt(row, new_y_val);
             d_app->updateCurves(t, d_selected_curve->title().text());

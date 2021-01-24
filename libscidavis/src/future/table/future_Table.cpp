@@ -99,7 +99,7 @@ Table::Table(int rows, int columns, const QString &name)
     // set initial number of rows and columns
     QList<Column *> cols;
     for (int i = 0; i < columns; i++) {
-        Column *new_col = new Column(QString::number(i + 1), SciDAVis::Numeric);
+        Column *new_col = new Column(QString::number(i + 1), SciDAVis::ColumnMode::Numeric);
         new_col->setPlotDesignation(i == 0 ? SciDAVis::X : SciDAVis::Y);
         cols << new_col;
     }
@@ -287,7 +287,7 @@ void Table::setColumnCount(int new_size)
     else {
         QList<Column *> cols;
         for (int i = 0; i < new_size - old_size; i++) {
-            Column *new_col = new Column(QString::number(i + 1), SciDAVis::Numeric);
+            Column *new_col = new Column(QString::number(i + 1), SciDAVis::ColumnMode::Numeric);
             new_col->setPlotDesignation(SciDAVis::Y);
             cols << new_col;
         }
@@ -475,7 +475,7 @@ void Table::pasteIntoSelection()
             if (last_col >= columnCount()) {
                 QList<Column *> cols;
                 for (int i = 0; i < last_col + 1 - columnCount(); i++) {
-                    Column *new_col = new Column(QString::number(i + 1), SciDAVis::Numeric);
+                    Column *new_col = new Column(QString::number(i + 1), SciDAVis::ColumnMode::Numeric);
                     new_col->setPlotDesignation(SciDAVis::Y);
                     cols << new_col;
                 }
@@ -521,12 +521,12 @@ void Table::pasteIntoSelection()
 
             for (int c = 0; c < cols && c < input_col_count; c++) {
                 Column *col_ptr = d_table_private.column(first_col + c);
-                if (convertToTextColumn && (col_ptr->columnMode() == SciDAVis::Numeric)) {
+                if (convertToTextColumn && (col_ptr->columnMode() == SciDAVis::ColumnMode::Numeric)) {
                     auto filter = reinterpret_cast<String2DoubleFilter *>(col_ptr->inputFilter());
                     if (nullptr != filter)
                         for (const auto &value : cols_texts.at(c))
                             if (filter->isInvalid(value)) {
-                                col_ptr->setColumnMode(SciDAVis::Text);
+                                col_ptr->setColumnMode(SciDAVis::ColumnMode::Text);
                                 break;
                             }
                 }
@@ -622,7 +622,7 @@ void Table::fillSelectedCellsWithRowNumbers()
     foreach (Column *col_ptr, d_view->selectedColumns()) {
         int col = columnIndex(col_ptr);
         switch (col_ptr->columnMode()) {
-        case SciDAVis::Numeric: {
+        case SciDAVis::ColumnMode::Numeric: {
             QVector<qreal> results(last - first + 1);
             for (int row = first; row <= last; row++)
                 if (d_view->isCellSelected(row, col))
@@ -632,7 +632,7 @@ void Table::fillSelectedCellsWithRowNumbers()
             col_ptr->replaceValues(first, results);
             break;
         }
-        case SciDAVis::Text: {
+        case SciDAVis::ColumnMode::Text: {
             QStringList results;
             for (int row = first; row <= last; row++)
                 if (d_view->isCellSelected(row, col))
@@ -671,7 +671,7 @@ void Table::fillSelectedCellsWithRandomNumbers()
     foreach (Column *col_ptr, d_view->selectedColumns()) {
         int col = columnIndex(col_ptr);
         switch (col_ptr->columnMode()) {
-        case SciDAVis::Numeric: {
+        case SciDAVis::ColumnMode::Numeric: {
             QVector<qreal> results(last - first + 1);
             for (int row = first; row <= last; row++)
                 if (d_view->isCellSelected(row, col))
@@ -686,7 +686,7 @@ void Table::fillSelectedCellsWithRandomNumbers()
             col_ptr->replaceValues(first, results);
             break;
         }
-        case SciDAVis::Text: {
+        case SciDAVis::ColumnMode::Text: {
             QStringList results;
             for (int row = first; row <= last; row++)
                 if (d_view->isCellSelected(row, col))
@@ -701,9 +701,9 @@ void Table::fillSelectedCellsWithRandomNumbers()
             col_ptr->replaceTexts(first, results);
             break;
         }
-        case SciDAVis::DateTime:
-        case SciDAVis::Month:
-        case SciDAVis::Day: {
+        case SciDAVis::ColumnMode::DateTime:
+        case SciDAVis::ColumnMode::Month:
+        case SciDAVis::ColumnMode::Day: {
             QList<QDateTime> results;
             QDate earliestDate(1, 1, 1);
             QDate latestDate(2999, 12, 31);
@@ -763,7 +763,7 @@ void Table::insertEmptyColumns()
             current++;
         count = current - first;
         for (int i = 0; i < count; i++) {
-            Column *new_col = new Column(QString::number(i + 1), SciDAVis::Numeric);
+            Column *new_col = new Column(QString::number(i + 1), SciDAVis::ColumnMode::Numeric);
             new_col->setPlotDesignation(SciDAVis::Y);
             cols << new_col;
         }
@@ -2392,7 +2392,7 @@ bool Table::load(XmlStreamReader *reader)
                     if (!readCommentElement(reader))
                         return false;
                 } else if (reader->name() == "column") {
-                    Column *column = new Column(tr("Column %1").arg(1), SciDAVis::Text);
+                    Column *column = new Column(tr("Column %1").arg(1), SciDAVis::ColumnMode::Text);
                     if (!column->load(reader)) {
                         setColumnCount(0);
                         return false;

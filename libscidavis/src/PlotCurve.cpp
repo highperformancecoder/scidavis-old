@@ -160,11 +160,11 @@ QList<QVector<double>> DataCurve::convertData(const QList<Column *> &cols,
         Column *col = cols[i];
 
         switch (col->columnMode()) {
-        case SciDAVis::DateTime: {
+        case SciDAVis::ColumnMode::DateTime: {
             QDateTime datetime;
             QString format;
 
-            if (g && g->axesType()[axes[i]] == Table::DateTime) {
+            if (g && g->axesType()[axes[i]] == Graph::AxisType::DateTime) {
                 QStringList lst = g->axisFormatInfo(axes[i]).split(";");
                 datetime = QDateTime::fromString(lst[0], "yyyy-MM-ddThh:mm:ss");
                 if (lst.size() >= 2)
@@ -185,11 +185,11 @@ QList<QVector<double>> DataCurve::convertData(const QList<Column *> &cols,
             reference_dates.push_back(QDate());
             reference_times.push_back(QTime());
             if (g)
-                g->setLabelsDateTimeFormat(axes[i], Graph::DateTime,
+                g->setLabelsDateTimeFormat(axes[i], Graph::AxisType::DateTime,
                                            datetime.toString("yyyy-MM-ddThh:mm:ss") + ";" + format);
             break;
         }
-        case SciDAVis::Text:
+        case SciDAVis::ColumnMode::Text:
             if (g)
                 g->setLabelsTextFormat(axes[i], col, d_start_row, end_row);
             reference_dates.push_back(QDate());
@@ -206,10 +206,10 @@ QList<QVector<double>> DataCurve::convertData(const QList<Column *> &cols,
     for (int i = 0; i < valid_rows.size(); i++)
         for (int j = 0; j < cols.size(); j++)
             switch (cols[j]->columnMode()) {
-            case SciDAVis::Text:
+            case SciDAVis::ColumnMode::Text:
                 result[j][i] = static_cast<double>(valid_rows[i] + 1);
                 break;
-            case SciDAVis::DateTime: {
+            case SciDAVis::ColumnMode::DateTime: {
                 QDateTime dt = cols[j]->dateTimeAt(valid_rows[i]);
                 result[j][i] = dt.toMSecsSinceEpoch() / 86400000. + 2440587.5;
                 break;
