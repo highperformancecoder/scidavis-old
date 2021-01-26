@@ -1445,8 +1445,8 @@ ApplicationWindow *sipscidavis_app()
   PyObject *mydict = PyModule_GetDict(me);
   PyObject *pyapp = PyDict_GetItemString(mydict,"app");
   Py_DECREF(me);
-  if (sipCanConvertToInstance(pyapp, sipClass_ApplicationWindow, SIP_NOT_NONE))
-    return (ApplicationWindow*) sipConvertToInstance(pyapp, sipClass_ApplicationWindow, NULL, SIP_NOT_NONE, NULL, &iserr);
+  if (sipCanConvertToType(pyapp, sipType_ApplicationWindow, SIP_NOT_NONE))
+    return (ApplicationWindow*) sipConvertToType(pyapp, sipType_ApplicationWindow, NULL, SIP_NOT_NONE, NULL, &iserr);
   else
     return NULL;
 }
