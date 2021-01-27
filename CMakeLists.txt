@@ -65,6 +65,10 @@ else()
   set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic" )
 endif()
 
+if( APPLE )
+  add_compile_definitions( GL_SILENCE_DEPRECATION )
+endif()
+
 # Searching for updates
 option( SEARCH_FOR_UPDATES "Enable Searching for updates" ON )
 
