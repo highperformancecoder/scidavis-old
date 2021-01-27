@@ -1,394 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
-<context>
-    <name>@default</name>
-    <message>
-        <source>Please select two columns for this operation!</source>
-        <translation type="obsolete">Por favor, selecione duas colunas para esta operação!</translation>
-    </message>
-    <message>
-        <source>Could not allocate memory, operation aborted!</source>
-        <translation type="obsolete">Memória insuficiente, operação cancelada!</translation>
-    </message>
-    <message>
-        <source>Error in GSL forward FFT operation!</source>
-        <translation type="obsolete">Erro na operação de FFT direta em GSL!</translation>
-    </message>
-    <message>
-        <source>Please select a e column to plot!</source>
-        <translation type="obsolete">Por favor, selecione uma coluna e para plotar!</translation>
-    </message>
-    <message>
-        <source>Please set a default X column for this table, first!</source>
-        <translation type="obsolete">Por favor, primeiro defina uma coluna X padrão nesta tabela!</translation>
-    </message>
-    <message>
-        <source>Please select a column to plot!</source>
-        <translation type="obsolete">Por favor, selecione uma coluna para plotar!</translation>
-    </message>
-    <message>
-        <source>Please select four columns for this operation!</source>
-        <translation type="obsolete">Por favor, selecione quatro colunas para esta operação!</translation>
-    </message>
-    <message>
-        <source>You need at least two columns for this operation!</source>
-        <translation type="obsolete">São necessárias pelo menos duas colunas para esta operação!</translation>
-    </message>
-    <message>
-        <source>Please select a Z column for this operation!</source>
-        <translation type="obsolete">Por favor, selecione uma coluna Z para esta operação!</translation>
-    </message>
-    <message>
-        <source>You need to define a X column first!</source>
-        <translation type="obsolete">É necessário definir uma coluna X primeiro!</translation>
-    </message>
-    <message>
-        <source>You need to define a e column first!</source>
-        <translation type="obsolete">É necessário definir uma coluna e primeiro!</translation>
-    </message>
-    <message>
-        <source>Columns will be deleted from the table!</source>
-        <translation type="obsolete">As colunas serão excluídas da tabela!</translation>
-    </message>
-    <message>
-        <source>Do you really want to continue?</source>
-        <translation type="obsolete">Deseja realmente continuar?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sim</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>Please select two columns for this operation:
- the first represents the signal and the second the response function!</source>
-        <translation type="obsolete">Por favor, selecione duas colunas para esta operação: 
-a primeira representando o sinal e a segunda a função resposta!</translation>
-    </message>
-    <message>
-        <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
-        <translation type="obsolete">Os dados da resposta &apos;%1&apos; devem ter tamanho menor que a metade dos de sinal &apos;%2&apos;!</translation>
-    </message>
-    <message>
-        <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
-        <translation type="obsolete">O conjunto resposta &apos;%1&apos; deve conter um número ímpar de pontos!</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">Frequência</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation type="obsolete">Tempo</translation>
-    </message>
-    <message>
-        <source>Real</source>
-        <translation type="obsolete">Real</translation>
-    </message>
-    <message>
-        <source>Imaginary</source>
-        <translation type="obsolete">Imaginário</translation>
-    </message>
-    <message>
-        <source>Amplitude</source>
-        <translation type="obsolete">Amplitude</translation>
-    </message>
-    <message>
-        <source>Angle</source>
-        <translation type="obsolete">Ângulo</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
-        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;: Opções regionais incorretas ou tradução indisponível!</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt; %1 &lt;/b&gt;: Unknown command line option or the file doesn&apos;t exist!</source>
-        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;: Opção de linha de comando desconhecida ou arquivo inexistente!</translation>
-    </message>
-    <message>
-        <source>QtiPlot project</source>
-        <translation type="obsolete">Projeto do QtiPlot</translation>
-    </message>
-    <message>
-        <source>Compressed QtiPlot project</source>
-        <translation type="obsolete">Projeto do QtiPlot compactado</translation>
-    </message>
-    <message>
-        <source>Origin project</source>
-        <translation type="obsolete">Projeto do Origin</translation>
-    </message>
-    <message>
-        <source>The file: &lt;b&gt;%1&lt;/b&gt; doesn&apos;t exist!</source>
-        <translation type="obsolete">O arquivo: &lt;b&gt; %1 &lt;/b&gt; não existe!</translation>
-    </message>
-    <message>
-        <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a QtiPlot or Origin project file!</source>
-        <translation type="obsolete">O arquivo: &lt;b&gt; %1 &lt;/b&gt; não é um projeto do Origin ou do QtiPlot!</translation>
-    </message>
-    <message>
-        <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you rum  the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation type="obsolete">Não é possível fazer uma cópia de segurança de &lt;b&gt;%1&lt;/b&gt; (para %2). &lt;br&gt;Se isto for ignorado corre-se o risco de &lt;b&gt;perder dados&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
-        <translation type="obsolete">O arquivo: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; está aberto no modo &quot;apenas leitura&quot;</translation>
-    </message>
-    <message>
-        <source>Save Project As</source>
-        <translation type="obsolete">Salvar projeto como</translation>
-    </message>
-    <message>
-        <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
-Do you want to overwrite it?</source>
-        <translation type="obsolete">Um arquivo chamado &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;já existe.
-Deseja sobrescrevê-lo?</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation type="obsolete">&amp;Sim</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation type="obsolete">&amp;Não</translation>
-    </message>
-    <message>
-        <source>&amp;Find...</source>
-        <translation type="obsolete">&amp;Procurar...</translation>
-    </message>
-    <message>
-        <source>App&amp;end Project...</source>
-        <translation type="obsolete">Anexar pro&amp;jeto...</translation>
-    </message>
-    <message>
-        <source>Save &amp;As Project...</source>
-        <translation type="obsolete">Salv&amp;ar como projeto...</translation>
-    </message>
-    <message>
-        <source>Save Project &amp;As...</source>
-        <translation type="obsolete">Salvar projeto &amp;como...</translation>
-    </message>
-    <message>
-        <source>&amp;Show All Windows</source>
-        <translation type="obsolete">Mo&amp;strar todas as janelas</translation>
-    </message>
-    <message>
-        <source>&amp;Hide All Windows</source>
-        <translation type="obsolete">&amp;Ocultar todas as janelas</translation>
-    </message>
-    <message>
-        <source>&amp;Delete Folder</source>
-        <translation type="obsolete">E&amp;xcluir pasta</translation>
-    </message>
-    <message>
-        <source>&amp;Rename</source>
-        <translation type="obsolete">&amp;Renomear</translation>
-    </message>
-    <message>
-        <source>New &amp;Window</source>
-        <translation type="obsolete">Nova &amp;janela</translation>
-    </message>
-    <message>
-        <source>New F&amp;older</source>
-        <translation type="obsolete">Nova &amp;pasta</translation>
-    </message>
-    <message>
-        <source>&amp;None</source>
-        <translation type="obsolete">&amp;Nenhum</translation>
-    </message>
-    <message>
-        <source>&amp;Windows in Active Folder</source>
-        <translation type="obsolete">&amp;Janelas na pasta ativa</translation>
-    </message>
-    <message>
-        <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
-        <translation type="obsolete">Janelas na pasta &amp;ativa e subpastas</translation>
-    </message>
-    <message>
-        <source>&amp;View Windows</source>
-        <translation type="obsolete">&amp;Ver janelas</translation>
-    </message>
-    <message>
-        <source>&amp;Properties...</source>
-        <translation type="obsolete">Propriedades...</translation>
-    </message>
-    <message>
-        <source>Hidden</source>
-        <translation type="obsolete">Oculto</translation>
-    </message>
-    <message>
-        <source>Please enter a valid name!</source>
-        <translation type="obsolete">Por favor, forneça um nome válido!</translation>
-    </message>
-    <message>
-        <source>Name already exists!</source>
-        <translation type="obsolete">Nome já existe!</translation>
-    </message>
-    <message>
-        <source>Please choose another name!</source>
-        <translation type="obsolete">Por favor, escolha outro nome!</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Tipo</translation>
-    </message>
-    <message>
-        <source>Project</source>
-        <translation type="obsolete">Projeto</translation>
-    </message>
-    <message>
-        <source>Path</source>
-        <translation type="obsolete">Caminho</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Tamanho</translation>
-    </message>
-    <message>
-        <source>bytes</source>
-        <translation type="obsolete">bytes</translation>
-    </message>
-    <message>
-        <source>Contents</source>
-        <translation type="obsolete">Conteúdos</translation>
-    </message>
-    <message>
-        <source>Windows</source>
-        <translation type="obsolete">Janelas</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation type="obsolete">Pastas</translation>
-    </message>
-    <message>
-        <source>Created</source>
-        <translation type="obsolete">Criado</translation>
-    </message>
-    <message>
-        <source>Modified</source>
-        <translation type="obsolete">Modificado</translation>
-    </message>
-    <message>
-        <source>Properties</source>
-        <translation type="obsolete">Propriedades</translation>
-    </message>
-    <message>
-        <source>Folder</source>
-        <translation type="obsolete">Pasta</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation type="obsolete">Nova pasta</translation>
-    </message>
-    <message>
-        <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
-        <translation type="obsolete">Excluir pasta &apos;%1&apos; e todas as janelas que ela contém?</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Não</translation>
-    </message>
-    <message>
-        <source>Matrix</source>
-        <translation type="obsolete">Matriz</translation>
-    </message>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">Tabela</translation>
-    </message>
-    <message>
-        <source>Note</source>
-        <translation type="obsolete">Nota</translation>
-    </message>
-    <message>
-        <source>Plot</source>
-        <translation type="obsolete">Gráfico</translation>
-    </message>
-    <message>
-        <source>Plot 3D</source>
-        <translation type="obsolete">Gráfico 3D</translation>
-    </message>
-    <message>
-        <source>Label</source>
-        <translation type="obsolete">Rótulo</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="obsolete">Status</translation>
-    </message>
-    <message>
-        <source>Sorry, no match found for string: &apos;%1&apos;</source>
-        <translation type="obsolete">Lamento, nenhuma coincidência encontrada para a cadeia de caracteres: &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Cannot move an object to itself!</source>
-        <translation type="obsolete">Não é possível mover um objeto para ele mesmo!</translation>
-    </message>
-    <message>
-        <source>Cannot move a parent folder into a child folder!</source>
-        <translation type="obsolete">Não se pode mover uma pasta pai para dentro de uma pasta filha!</translation>
-    </message>
-    <message>
-        <source>Skipped Moving Folder</source>
-        <translation type="obsolete">Omitido movimento de pasta</translation>
-    </message>
-    <message>
-        <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
-        <translation type="obsolete">A pasta de destino já contém uma pasta chamada &apos;%1&apos;! Pasta omitida!</translation>
-    </message>
-    <message>
-        <source>Rows will be deleted from the table!</source>
-        <translation type="obsolete">As linhas serão removidas da tabela!</translation>
-    </message>
-    <message>
-        <source>Graph</source>
-        <translation type="obsolete">Gráfico</translation>
-    </message>
-    <message>
-        <source>Graph 3D</source>
-        <translation type="obsolete">Gráfico 3D</translation>
-    </message>
-    <message>
-        <source>Cannot write file %1
-%2.</source>
-        <translation type="obsolete">Não é possível escrever arquivo %1
-%2.</translation>
-    </message>
-    <message>
-        <source>Error while fetching version file with HTTP: %1.</source>
-        <translation type="obsolete">Erro ao buscar versão de arquivo com HTTP: %1.</translation>
-    </message>
-    <message>
-        <source>No updates available. Your current version %1 is the last version available!</source>
-        <translation type="obsolete">Não existem atualizações disponíveis. Sua versão atual %1 é a mais recente!</translation>
-    </message>
-    <message>
-        <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
-        <translation type="obsolete">Isto apagará os conteúdos de todos os dados associados à tabela. Está certo disso?</translation>
-    </message>
-    <message>
-        <source>Row</source>
-        <translation type="obsolete">Linha</translation>
-    </message>
-</context>
+<TS language="pt_BR" version="2.1">
 <context>
     <name>AbstractAspect</name>
     <message>
         <source>XML read error: </source>
         <comment>prefix for XML error messages</comment>
         <translation>Erro na leitura XML:</translation>
-    </message>
-    <message>
-        <source> (loading failed)</source>
-        <comment>postfix for XML error messages</comment>
-        <translation type="obsolete">(o carregamento falhou)</translation>
-    </message>
-    <message>
-        <source>aspect name missing</source>
-        <translation type="obsolete">falta nome do aspecto</translation>
     </message>
     <message>
         <source> (non-critical)</source>
@@ -400,16 +16,16 @@ Deseja sobrescrevê-lo?</translation>
         <translation>nome do aspecto faltando ou vazio)</translation>
     </message>
     <message>
-        <source>Invalid creation time for &apos;%1&apos;. Using current time.</source>
-        <translation>Hora de criação inválida para &apos;%1&apos;. Usando hora atual.</translation>
+        <source>Invalid creation time for '%1'. Using current time.</source>
+        <translation>Hora de criação inválida para '%1'. Usando hora atual.</translation>
     </message>
     <message>
         <source>%1: add %2.</source>
         <translation>%1: adicionar %2.</translation>
     </message>
     <message>
-        <source>Renaming &quot;%1&quot; to &quot;%2&quot; in order to avoid name collision.</source>
-        <translation>Renomeando &quot;%1&quot; para &quot;%2&quot; para evitar conflito de nomes.</translation>
+        <source>Renaming "%1" to "%2" in order to avoid name collision.</source>
+        <translation>Renomeando "%1" para "%2" para evitar conflito de nomes.</translation>
     </message>
     <message>
         <source>%1: insert %2 at position %3.</source>
@@ -428,8 +44,8 @@ Deseja sobrescrevê-lo?</translation>
         <translation>Tabulação e quebras de linha em nomes de objetos não são suportados atualmente. Eles foram removidos.</translation>
     </message>
     <message>
-        <source>Intended name &quot;%1&quot; diverted to &quot;%2&quot; in order to avoid name collision.</source>
-        <translation>Nome pretendido &quot;%1&quot; alterado para &quot;%2&quot; para evitar conflito de nomes.</translation>
+        <source>Intended name "%1" diverted to "%2" in order to avoid name collision.</source>
+        <translation>Nome pretendido "%1" alterado para "%2" para evitar conflito de nomes.</translation>
     </message>
     <message>
         <source>%1: remove all children.</source>
@@ -458,8 +74,8 @@ Deseja sobrescrevê-lo?</translation>
         <translation>filtro incompatível</translation>
     </message>
     <message>
-        <source>unknown element &apos;%1&apos;</source>
-        <translation>elemento &apos;%1&apos; desconhecido</translation>
+        <source>unknown element '%1'</source>
+        <translation>elemento '%1' desconhecido</translation>
     </message>
     <message>
         <source>no simple filter element found</source>
@@ -467,97 +83,206 @@ Deseja sobrescrevê-lo?</translation>
     </message>
 </context>
 <context>
-    <name>Application</name>
-    <message>
-        <source>Error!</source>
-        <translation type="vanished">Erro!</translation>
-    </message>
-    <message>
-        <source>Error </source>
-        <translation type="vanished">Erro </translation>
-    </message>
-    <message>
-        <source> sending event </source>
-        <translation type="vanished"> enviando evento </translation>
-    </message>
-    <message>
-        <source> to object </source>
-        <translation type="vanished"> para objeto </translation>
-    </message>
-    <message>
-        <source>Error &lt;unknown&gt; sending event</source>
-        <translation type="vanished">Erro &lt;unknown&gt; enviando evento</translation>
-    </message>
-</context>
-<context>
     <name>ApplicationWindow</name>
+    <message>
+        <source />
+        <translation>Definir esquema</translation>
+    </message>
+    <message>
+        <source>UNTITLED</source>
+        <translation>Sem título</translation>
+    </message>
+    <message>
+        <source>&amp;Next</source>
+        <comment>next window</comment>
+        <translation>&amp;Próximo</translation>
+    </message>
+    <message>
+        <source>&amp;Previous</source>
+        <comment>previous window</comment>
+        <translation>&amp;Anterior</translation>
+    </message>
+    <message>
+        <source>SciDAVis - untitled</source>
+        <translation>SciDAVis - sem título</translation>
+    </message>
+    <message>
+        <source>Project Explorer</source>
+        <translation>Navegador de projeto</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation>Pasta</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nome</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tipo</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>Ver</translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation>Criado</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Rótulo</translation>
+    </message>
+    <message>
+        <source>Results Log</source>
+        <translation>Registro de resultados</translation>
+    </message>
+    <message>
+        <source>Scripting Console</source>
+        <translation>Terminal de programação</translation>
+    </message>
+    <message>
+        <source>F5</source>
+        <comment>next window shortcut</comment>
+        <translation>F5</translation>
+    </message>
+    <message>
+        <source>F6</source>
+        <comment>previous window shortcut</comment>
+        <translation>F6</translation>
+    </message>
     <message>
         <source>File</source>
         <translation>Arquivo</translation>
+    </message>
+    <message>
+        <source>New Aspect</source>
+        <translation>Novo aspecto</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Editar</translation>
+    </message>
+    <message>
+        <source>Graph</source>
+        <translation>Gráfico</translation>
+    </message>
+    <message>
+        <source>Disable &amp;Tools</source>
+        <translation>Desativar &amp;ferramentas</translation>
+    </message>
+    <message>
+        <source>Manage layers</source>
+        <translation>Remanejar camadas</translation>
+    </message>
+    <message>
+        <source>Add curves / error bars</source>
+        <translation>Adicionar curvas / barras de erro</translation>
+    </message>
+    <message>
+        <source>Enrichments</source>
+        <translation>Enriquecimentos</translation>
+    </message>
+    <message>
+        <source>Add &amp;Text</source>
+        <translation>Adicionar &amp;texto</translation>
+    </message>
+    <message>
+        <source>ALT+T</source>
+        <translation>ALT+T</translation>
+    </message>
+    <message>
+        <source>Draw &amp;Arrow</source>
+        <translation>&amp;Desenhar flecha</translation>
+    </message>
+    <message>
+        <source>CTRL+ALT+A</source>
+        <translation>CTRL+ALT+A</translation>
+    </message>
+    <message>
+        <source>Draw &amp;Line</source>
+        <translation>Desenhar li&amp;nha</translation>
+    </message>
+    <message>
+        <source>CTRL+ALT+L</source>
+        <translation>CTRL+ALT+L</translation>
+    </message>
+    <message>
+        <source>&amp;Zoom In</source>
+        <translation>A&amp;umentar zoom</translation>
+    </message>
+    <message>
+        <source>Ctrl++</source>
+        <translation>Ctrl++</translation>
+    </message>
+    <message>
+        <source>&amp;Zoom Out</source>
+        <translation>Diminuir &amp;zoom</translation>
+    </message>
+    <message>
+        <source>Ctrl+-</source>
+        <translation>Ctrl+-</translation>
+    </message>
+    <message>
+        <source>S&amp;creen Reader</source>
+        <translation>Leitor de &amp;tela</translation>
+    </message>
+    <message>
+        <source>&amp;Data Reader</source>
+        <translation>Leitor de &amp;dados</translation>
+    </message>
+    <message>
+        <source>CTRL+D</source>
+        <translation>CTRL+D</translation>
+    </message>
+    <message>
+        <source>&amp;Select Data Range</source>
+        <translation>&amp;Selecionar faixa de dados</translation>
+    </message>
+    <message>
+        <source>ALT+S</source>
+        <translation>ALT+S</translation>
+    </message>
+    <message>
+        <source>&amp;Move Data Points...</source>
+        <translation>&amp;Mover Pontos ...</translation>
+    </message>
+    <message>
+        <source>Ctrl+ALT+M</source>
+        <translation>Ctrl+ALT+M</translation>
+    </message>
+    <message>
+        <source>Remove &amp;Bad Data Points...</source>
+        <translation>R&amp;emover pontos ruins ...</translation>
+    </message>
+    <message>
+        <source>Alt+B</source>
+        <translation>Alt+B</translation>
     </message>
     <message>
         <source>Plot</source>
         <translation>Gráfico</translation>
     </message>
     <message>
-        <source>Pointer</source>
-        <translation>Ponteiro</translation>
-    </message>
-    <message>
-        <source>Zoom</source>
-        <translation type="obsolete">Zoom</translation>
-    </message>
-    <message>
-        <source>Show data display</source>
-        <translation type="obsolete">Exibir mostrador de dados</translation>
-    </message>
-    <message>
-        <source>Select data range</source>
-        <translation>Selecionar faixa de dados</translation>
-    </message>
-    <message>
-        <source>Show data cursor</source>
-        <translation type="obsolete">Exibir cursor de dados</translation>
-    </message>
-    <message>
-        <source>Move data points</source>
-        <translation>Mover pontos</translation>
-    </message>
-    <message>
-        <source>Remove data points</source>
-        <translation>Remover pontos</translation>
-    </message>
-    <message>
-        <source>Draw line</source>
-        <translation>Desenhar linha</translation>
+        <source>Lines and/or symbols</source>
+        <translation>Linhas e/ou símbolos</translation>
     </message>
     <message>
         <source>Table</source>
         <translation>Tabela</translation>
     </message>
     <message>
-        <source>Data Display</source>
-        <translation type="obsolete">Mostrador de dados</translation>
+        <source>Matrix Plot</source>
+        <translation>Gráfico de matriz</translation>
+    </message>
+    <message>
+        <source>3D Surface</source>
+        <translation>Superfície 3D</translation>
     </message>
     <message>
         <source>&amp;File</source>
         <translation>&amp;Arquivo</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation>&amp;Novo</translation>
-    </message>
-    <message>
-        <source>&amp;Recent projects</source>
-        <translation type="obsolete">P&amp;rojetos recentes</translation>
-    </message>
-    <message>
-        <source>&amp;Export Graph</source>
-        <translation>&amp;Exportar gráfico</translation>
-    </message>
-    <message>
-        <source>&amp;Import ASCII</source>
-        <translation type="obsolete">&amp;Importar ASCII</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -568,56 +293,40 @@ Deseja sobrescrevê-lo?</translation>
         <translation>&amp;Ver</translation>
     </message>
     <message>
+        <source>Scripting</source>
+        <translation>&amp;Programação</translation>
+    </message>
+    <message>
         <source>&amp;Graph</source>
         <translation>&amp;Gráfico</translation>
     </message>
     <message>
-        <source>&amp;Plot3D</source>
-        <translation type="obsolete">Gráfico 3D</translation>
+        <source>3D &amp;Plot</source>
+        <translation>&amp;Gráfico 3D</translation>
     </message>
     <message>
         <source>&amp;Matrix</source>
         <translation>&amp;Matriz</translation>
     </message>
     <message>
-        <source>Special Line/Symb&amp;ol</source>
-        <translation>Linha/Símb&amp;olo especial</translation>
+        <source>&amp;Table</source>
+        <translation>&amp;Tabela</translation>
     </message>
     <message>
-        <source>Statistical &amp;Graphs</source>
-        <translation>&amp;Gráficos estatísticos</translation>
-    </message>
-    <message>
-        <source>Pa&amp;nel</source>
-        <translation>Pai&amp;nel</translation>
-    </message>
-    <message>
-        <source>&amp;Plot 2D</source>
-        <translation type="obsolete">&amp;Gráfico 2D</translation>
-    </message>
-    <message>
-        <source>Plot &amp;3D</source>
-        <translation type="obsolete">Gráfico &amp;3D</translation>
-    </message>
-    <message>
-        <source>&amp;Data</source>
-        <translation type="obsolete">&amp;Dados</translation>
-    </message>
-    <message>
-        <source>Inter&amp;polate</source>
-        <translation type="obsolete">Inter&amp;polação</translation>
-    </message>
-    <message>
-        <source>&amp;FFT</source>
-        <translation type="obsolete">&amp;FFT</translation>
-    </message>
-    <message>
-        <source>Fit E&amp;xponential Decay</source>
-        <translation>Ajuste por decaimento exponencial</translation>
+        <source>&amp;Plot</source>
+        <translation>&amp;Gráfico</translation>
     </message>
     <message>
         <source>&amp;Analysis</source>
         <translation>A&amp;nálise</translation>
+    </message>
+    <message>
+        <source>&amp;Tools</source>
+        <translation>&amp;Ferramentas</translation>
+    </message>
+    <message>
+        <source>&amp;Quick Fit</source>
+        <translation>Aj&amp;uste rápido</translation>
     </message>
     <message>
         <source>For&amp;mat</source>
@@ -632,44 +341,356 @@ Deseja sobrescrevê-lo?</translation>
         <translation>A&amp;juda</translation>
     </message>
     <message>
+        <source>&amp;New</source>
+        <translation>&amp;Novo</translation>
+    </message>
+    <message>
+        <source>&amp;Recent Projects</source>
+        <translation>P&amp;rojetos recentes</translation>
+    </message>
+    <message>
+        <source>&amp;Export Graph</source>
+        <translation>&amp;Exportar gráfico</translation>
+    </message>
+    <message>
+        <source>Special Line/Symb&amp;ol</source>
+        <translation>Linha/Símb&amp;olo especial</translation>
+    </message>
+    <message>
+        <source>Statistical &amp;Graphs</source>
+        <translation>&amp;Gráficos estatísticos</translation>
+    </message>
+    <message>
+        <source>Pa&amp;nel</source>
+        <translation>Pai&amp;nel</translation>
+    </message>
+    <message>
+        <source>3&amp;D Plot</source>
+        <translation>Gráfico &amp;3D</translation>
+    </message>
+    <message>
+        <source>&amp;Translate</source>
+        <translation>T&amp;rasladar</translation>
+    </message>
+    <message>
+        <source>&amp;Smooth</source>
+        <translation>&amp;Suavizar</translation>
+    </message>
+    <message>
+        <source>&amp;FFT Filter</source>
+        <translation>Filtro FF&amp;T</translation>
+    </message>
+    <message>
+        <source>Fit E&amp;xponential Decay</source>
+        <translation>Ajuste por decaimento exponencial</translation>
+    </message>
+    <message>
+        <source>Fit &amp;Multi-Peak</source>
+        <translation>Ajuste de &amp;múltiplos picos</translation>
+    </message>
+    <message>
+        <source>Toolbars</source>
+        <translation>Barras de ferramentas</translation>
+    </message>
+    <message>
+        <source>Fit &amp;Multi-peak</source>
+        <translation>Ajustar &amp;múltiplos picos</translation>
+    </message>
+    <message>
+        <source>Plot error</source>
+        <translation>Erro ao criar gráfico</translation>
+    </message>
+    <message>
+        <source>You must select exactly one column for plotting!</source>
+        <translation>Você deve selecionar exatamente uma coluna para plotar!</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Erro</translation>
+    </message>
+    <message>
+        <source>Please set a default X column for this table, first!</source>
+        <translation>Por favor, primeiro defina uma coluna X padrão nesta tabela!</translation>
+    </message>
+    <message>
+        <source>Please select a column to plot!</source>
+        <translation>Por favor, selecione uma coluna para plotar!</translation>
+    </message>
+    <message>
+        <source>Please select four columns for this operation!</source>
+        <translation>Por favor, selecione quatro colunas para esta operação!</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Atenção</translation>
+    </message>
+    <message>
         <source>&lt;h4&gt;There are no tables available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a table and try again!&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Não há tabelas disponíveis neste projeto.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Por favor, crie uma tabela e tente novamente!&lt;/h4&gt;</translation>
     </message>
     <message>
-        <source>&lt;h4&gt;There are no matrixes available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
-        <translation type="obsolete">&lt;h4&gt;Não há matrizes disponíveis neste projeto.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Por favor, crie uma matriz e tente novamente!&lt;/h4&gt;</translation>
+        <source>There are no available columns with plot designation set to Z!</source>
+        <translation>Não existem colunas disponíveis definidas como Z!</translation>
     </message>
     <message>
-        <source>Data Plot 3D</source>
-        <translation type="obsolete">Gráfico 3D de dados</translation>
+        <source>Column</source>
+        <translation>Coluna</translation>
     </message>
     <message>
-        <source>Matrix Plot 3D</source>
-        <translation type="obsolete">Gráfico 3D de matriz</translation>
-    </message>
-    <message>
-        <source>Function Plot 3D</source>
-        <translation type="obsolete">Gráfico 3D de função</translation>
+        <source>Choose data set</source>
+        <translation>Escolher conjunto de dados</translation>
     </message>
     <message>
         <source>Matrix</source>
         <translation>Matriz</translation>
     </message>
     <message>
-        <source>Normal</source>
-        <translation>Normal</translation>
+        <source>Choose matrix to plot</source>
+        <translation>Escolher matriz para plotar</translation>
+    </message>
+    <message>
+        <source>&lt;h4&gt;There are no matrices available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
+        <translation>&lt;h4&gt;Não existem matrizes disponíveis neste projeto.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Por favor, crie uma matriz e tente novamente!&lt;/h4&gt;</translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation>imagens</translation>
+    </message>
+    <message>
+        <source>Import image from file</source>
+        <translation>Importar imagem do arquivo</translation>
+    </message>
+    <message>
+        <source>Load image from file</source>
+        <translation>Carregar imagem do arquivo</translation>
+    </message>
+    <message>
+        <source>Y Axis Title</source>
+        <translation>Título do eixo Y</translation>
+    </message>
+    <message>
+        <source>X Axis Title</source>
+        <translation>Título do eixo X</translation>
+    </message>
+    <message>
+        <source>pixels</source>
+        <translation>pixels</translation>
+    </message>
+    <message>
+        <source>pixel intensity (a.u.)</source>
+        <translation>intensidade dos pixels (u. a.)</translation>
+    </message>
+    <message>
+        <source>Renamed Window</source>
+        <translation>Renomear janela</translation>
+    </message>
+    <message>
+        <source>The table '%1' already exists. It has been renamed '%2'.</source>
+        <translation>A tabela '%1' já existe. Foi renomeada '%2'.</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation>Notas</translation>
+    </message>
+    <message>
+        <source>Determinant of </source>
+        <translation>Determinante de </translation>
     </message>
     <message>
         <source>&lt;h4&gt;There are no plot layers available in this window.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please add a layer and try again!&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Não há camadas de gráfico disponíveis nesta janela.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Por favor, adicione uma camada e tente novamente!&lt;/h4&gt;</translation>
     </message>
     <message>
+        <source>There are no curves available on this plot!</source>
+        <translation>Não existem curvas disponíveis neste gráfico!</translation>
+    </message>
+    <message>
+        <source>This functionality is not available for pie plots!</source>
+        <translation>Esta funcionalidade não está disponível para gráficos tipo pizza!</translation>
+    </message>
+    <message>
+        <source>Error bars error</source>
+        <translation>Erro das barras de erro</translation>
+    </message>
+    <message>
         <source>This feature is not available for user defined function curves!</source>
         <translation>Esta característica não está disponível para curvas de função definidas por usuários!</translation>
     </message>
     <message>
+        <source>The selected columns have different numbers of rows!</source>
+        <translation>As colunas selecionadas tem número de linhas diferentes!</translation>
+    </message>
+    <message>
+        <source>You can only define error bars for numeric columns.</source>
+        <translation>Barras de erro só podem ser definidas para colunas numéricas</translation>
+    </message>
+    <message>
+        <source>ASCII Import Failed</source>
+        <translation>Falha ao importar ASCII</translation>
+    </message>
+    <message>
+        <source>Numeric data cannot be imported into non-numeric column "%1".</source>
+        <translation>Dados numéricos não podem ser importados para uma coluna não numérica "%1".</translation>
+    </message>
+    <message>
+        <source>Non-numeric data cannot be imported into non-text column "%1".</source>
+        <translation>Dados não numéricos não podem ser importados para uma uma coluna não texto "%1".</translation>
+    </message>
+    <message>
+        <source>new_by_import</source>
+        <translation>Novo por importação</translation>
+    </message>
+    <message>
+        <source>File opening error</source>
+        <translation>Erro na abertura de arquivo</translation>
+    </message>
+    <message>
+        <source>The file: &lt;b&gt;%1&lt;/b&gt; is the current file!</source>
+        <translation>O arquivo &lt;b&gt; %1 &lt;/b&gt; é o arquivo atual!</translation>
+    </message>
+    <message>
+        <source>The file: &lt;b&gt;%1&lt;/b&gt; doesn't exist!</source>
+        <translation>O arquivo: &lt;b&gt; %1 &lt;/b&gt; não existe!</translation>
+    </message>
+    <message>
+        <source>The file &lt;b&gt;%1&lt;/b&gt; is not a valid project file.</source>
+        <translation>O arquivo &lt;b&gt;%1&lt;/b&gt; não é um arquivo de projeto válido. </translation>
+    </message>
+    <message>
+        <source>SciDAVis currently does not support Origin import. If you are interested in reviving and maintaining an Origin import filter, contact the developers.</source>
+        <translation>Atualmente o SciDAVis não oferece suporte à importação do Origin. Se você tem interesse em reavivar e manter um filtro de importação do Origin contate os desenvolvedores.</translation>
+    </message>
+    <message>
+        <source>File Open Error</source>
+        <translation>Erro de abertura de arquivo</translation>
+    </message>
+    <message>
+        <source>The file: &lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;does not exist anymore!&lt;p&gt;It will be removed from the list.</source>
+        <translation>O arquivo &lt;b&gt; %1 &lt;/b&gt; &lt;p&gt; já não existe!&lt;p&gt;Será removido da lista.</translation>
+    </message>
+    <message>
+        <source>The file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; is the current file!</source>
+        <translation>O arquivo &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; é o arquivo atual!</translation>
+    </message>
+    <message>
+        <source>zlib can't open %1.</source>
+        <translation>zlib não consegui abrir %1.</translation>
+    </message>
+    <message>
+        <source>Can't create temporary file for writing uncompressed copy of %1.</source>
+        <translation>Não foi possível criar um arquivo temporário para descompactar %1.</translation>
+    </message>
+    <message>
+        <source>Error writing to temporary file: %1</source>
+        <translation>Erro ao escrever o arquivo temporário: %1</translation>
+    </message>
+    <message>
+        <source>The file &lt;b&gt;%1&lt;/b&gt; is corrupted, but there exists a backup copy.&lt;br&gt;Do you want to open the backup instead?</source>
+        <translation>O arquivo &lt;b&gt;%1&lt;/b&gt; está corrompido, mas existe uma cópia de segurança.&lt;br&gt;Deseja abrir a cópia em seu lugar?</translation>
+    </message>
+    <message>
+        <source>Opening backup copy</source>
+        <translation>Abrindo cópia de segurança</translation>
+    </message>
+    <message>
+        <source>The original (corrupt) file is being left untouched, in case you want to try rescuing data manually. If you want to continue working with the automatically restored backup copy, you have to explicitly overwrite the original file.</source>
+        <translation>O arquivo original (corrompido) não será alterado, no caso você querer recuperar os dados manualmente. Se você quiser continuar trabalhando com a cópia de segurança, recuperada automaticamente, terá que sobrescrever manualmente o arquivo original.</translation>
+    </message>
+    <message>
+        <source>SciDAVis does not support QtiPlot project files from versions later than 0.9.0.</source>
+        <translation>SciDAVis não suporta arquivos de projeto do Qtiplot de versões posteriores à 0.9.0. </translation>
+    </message>
+    <message>
+        <source>SciDAVis</source>
+        <translation>SciDAVis</translation>
+    </message>
+    <message>
+        <source>The file "%1" was created using "%2" as scripting language.
+
+Initializing support for this language FAILED; I'm using "%3" instead.
+Various parts of this file may not be displayed as expected.</source>
+        <translation>O arquivo "%1" foi criado usando "%2" como linguagem de programação.
+
+A inicialização do  suporte para esta linguagem FALHOU; Estou usando "%3" em seu lugar.
+Varias partes deste arquivo podem não ser apresentadas como o esperado.</translation>
+    </message>
+    <message>
+        <source>Window</source>
+        <translation>Janela</translation>
+    </message>
+    <message>
+        <source>Opening file</source>
+        <translation>Abrindo arquivo</translation>
+    </message>
+    <message>
+        <source>Invalid WindowLabel line:
+'%1'
+in file %2.</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Script Error</source>
+        <translation>Erro de programação</translation>
+    </message>
+    <message>
+        <source>Scripting Error</source>
+        <translation>Erro no script</translation>
+    </message>
+    <message>
+        <source>Scripting language "%1" failed to initialize.</source>
+        <translation>Falha na inicialização da linguagem de programação "%1".</translation>
+    </message>
+    <message>
+        <source>Open Template File</source>
+        <translation>Abrir arquivo de modelo</translation>
+    </message>
+    <message>
+        <source>The file: &lt;b&gt; %1 &lt;/b&gt; was not created using SciDAVis!</source>
+        <translation>O arquivo &lt;b&gt; %1 &lt;/b&gt; não foi criado usando o SciDAVis!</translation>
+    </message>
+    <message>
+        <source>SciDAVis does not support QtiPlot template files from versions later than 0.9.0.</source>
+        <translation>SciDAVis não suporta modelos do Qtiplot de versões posteriores à 0.9.0.</translation>
+    </message>
+    <message>
+        <source>Table1</source>
+        <translation>Tabela1</translation>
+    </message>
+    <message>
+        <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a SciDAVis template file!</source>
+        <translation>O arquivo: &lt;b&gt;%1&lt;/b&gt; não é um arquivo de modelo do SciDAVis!</translation>
+    </message>
+    <message>
+        <source>Export Error</source>
+        <translation>Erro ao exportar</translation>
+    </message>
+    <message>
         <source>&lt;h4&gt;There are no plot layers available in this window!&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Não há camadas de gráfico disponíveis nesta janela!&lt;/h4&gt;</translation>
+    </message>
+    <message>
+        <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
+        <translation>Não foi possível escrever no arquivo: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Por favor, verifique se você tem permissão de escrita no local selecionado!</translation>
+    </message>
+    <message>
+        <source>Choose a directory to export the graphs to</source>
+        <translation>Escolha um diretório para exportar os gráficos</translation>
+    </message>
+    <message>
+        <source>Output format:</source>
+        <translation>Formato de saída:</translation>
+    </message>
+    <message>
+        <source>Directory:</source>
+        <translation>Diretório:</translation>
+    </message>
+    <message>
+        <source>There are no plot layers available in window &lt;b&gt;%1&lt;/b&gt;.&lt;br&gt;Graph window not exported!</source>
+        <translation>Não existem camadas disponíveis na janela &lt;b&gt;%1&lt;/b&gt;.&lt;br&gt; Janela de gráfico não exportada!</translation>
+    </message>
+    <message>
+        <source>Overwrite file?</source>
+        <translation>Sobrescrever arquivo?</translation>
     </message>
     <message>
         <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists. Do you want to overwrite it?</source>
@@ -688,34 +709,160 @@ Deseja sobrescrevê-lo?</translation>
         <translation>&amp;Cancelar</translation>
     </message>
     <message>
-        <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
-Do you want to overwrite it?</source>
-        <translation type="obsolete">Um arquivo chamado &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;já existe.
-Deseja sobrescrevê-lo?</translation>
+        <source>Could not write to file: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
+        <translation>Não foi possível escrever no arquivo: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Por favor, verifique se você tem permissão de escrita no local selecionado!</translation>
     </message>
     <message>
-        <source>&amp;No</source>
-        <translation>&amp;Não</translation>
+        <source>Minimized</source>
+        <translation>Minimizada</translation>
     </message>
     <message>
-        <source>Rename Window</source>
-        <translation type="obsolete">Renomear janela</translation>
+        <source>Maximized</source>
+        <translation>Maximizada</translation>
     </message>
     <message>
-        <source>Please choose a name</source>
-        <translation type="obsolete">Por favor, escolha um nome</translation>
+        <source>SciDAVis project</source>
+        <translation>Projeto do SciDAVis</translation>
+    </message>
+    <message>
+        <source>Compressed SciDAVis project</source>
+        <translation>Projeto do SciDAVis comprimido</translation>
+    </message>
+    <message>
+        <source>Save Project As</source>
+        <translation>Salvar projeto como</translation>
+    </message>
+    <message>
+        <source>SciDAVis/QtiPlot Matrix Template</source>
+        <translation>Modelo de matriz SciDAVis/QtiPlot</translation>
+    </message>
+    <message>
+        <source>SciDAVis/QtiPlot 2D Graph Template</source>
+        <translation>Modelo de gráfico 2D SciDAVis/QtiPlot</translation>
+    </message>
+    <message>
+        <source>SciDAVis/QtiPlot Table Template</source>
+        <translation>Modelo de tabela SciDAVis/QtiPlot</translation>
+    </message>
+    <message>
+        <source>SciDAVis/QtiPlot 3D Surface Template</source>
+        <translation>Modelo de superfície 3D SciDAVis/QtiPlot</translation>
+    </message>
+    <message>
+        <source>Save Window As Template</source>
+        <translation>Salvar janela como modelo</translation>
+    </message>
+    <message>
+        <source>Please enter a valid name!</source>
+        <translation>Por favor, forneça um nome válido!</translation>
+    </message>
+    <message>
+        <source>The name you chose is not valid: only letters and digits are allowed!</source>
+        <translation>O nome escolhido não é válido : somente dígitos e letras são permitidos!</translation>
+    </message>
+    <message>
+        <source>Please choose another name!</source>
+        <translation>Por favor, escolha outro nome!</translation>
+    </message>
+    <message>
+        <source>Name &lt;b&gt;%1&lt;/b&gt; already exists!</source>
+        <translation>O nome &lt;b&gt;%1&lt;/b&gt; já existe!</translation>
+    </message>
+    <message>
+        <source>Warning: for internal consistency reasons the underscore character is replaced with a minus sign.</source>
+        <translation>Aviso: por razões de consistência interna o caractere de contagem abaixo é substituído pelo sinal de menos.</translation>
+    </message>
+    <message>
+        <source>The table name must be different from the names of its columns!</source>
+        <translation>O nome da tabela deve ser diferente dos nomes das colunas!</translation>
+    </message>
+    <message>
+        <source>Right Axis Title</source>
+        <translation>Título do eixo direito</translation>
+    </message>
+    <message>
+        <source>Top Axis Title</source>
+        <translation>Título do eixo superior</translation>
+    </message>
+    <message>
+        <source>Choose a directory to export the tables to</source>
+        <translation>Escolha uma pasta para exportar as tabelas</translation>
+    </message>
+    <message>
+        <source>Choose a filename to save under</source>
+        <translation>Escolha o nome do arquivo para salvar</translation>
+    </message>
+    <message>
+        <source>Please select two columns for this operation!</source>
+        <translation>Por favor, selecione duas colunas para esta operação!</translation>
+    </message>
+    <message>
+        <source>Please select exactly one columns for this operation!</source>
+        <translation>Por favor, selecione exatamente uma coluna para esta operação!</translation>
+    </message>
+    <message>
+        <source>Please select two columns for this operation:
+ the first represents the signal and the second the response function!</source>
+        <translation>Por favor, selecione duas colunas para esta operação: 
+a primeira representando o sinal e a segunda a função resposta!</translation>
+    </message>
+    <message>
+        <source>Column selection error</source>
+        <translation>Erro na seleção de coluna</translation>
+    </message>
+    <message>
+        <source>Please select a column first!</source>
+        <translation>Por favor, selecione uma coluna primeiro!</translation>
+    </message>
+    <message>
+        <source>Row selection error</source>
+        <translation>Erro na seleção de linha</translation>
+    </message>
+    <message>
+        <source>Please select a row first!</source>
+        <translation>Por favor, selecione uma linha primeiro!</translation>
     </message>
     <message>
         <source>Not available for empty 3D surface plots!</source>
         <translation>Não disponível para superfícies 3D vazias!</translation>
     </message>
     <message>
+        <source>&amp;Worksheet</source>
+        <translation>&amp;Planilha de trabalho</translation>
+    </message>
+    <message>
         <source>&lt;h4&gt;There are no plot layers available in this window.&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Não existem camadas de gráfico disponíveis nesta janela.&lt;/h4&gt;</translation>
     </message>
     <message>
+        <source>This will modify the data in the worksheets!
+Are you sure you want to continue?</source>
+        <translation>Isto modificará os dados nas planilhas!
+Tem certeza que quer continuar?</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Continuar</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <source>Could not write to file: &lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location or that the file is not being used by another application!</source>
+        <translation>Não foi possível escrever no arquivo: &lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt; Por favor verifique se você tem permissão de escrita neste local ou que este arquivo não está sendo utilizado por outra aplicação!</translation>
+    </message>
+    <message>
         <source>Sorry, there are no results to display!</source>
         <translation>Lamento, não existem resultados para mostrar!</translation>
+    </message>
+    <message>
+        <source>There are no plot layers available in this window!</source>
+        <translation>Não existem camadas gráficas disponíveis nesta janela!</translation>
+    </message>
+    <message>
+        <source>Add new layer?</source>
+        <translation>Adicionar uma nova camada?</translation>
     </message>
     <message>
         <source>Do you want to add the text on a new layer or on the active layer?</source>
@@ -730,20 +877,60 @@ Deseja sobrescrevê-lo?</translation>
         <translation>Na camada &amp;ativa</translation>
     </message>
     <message>
-        <source></source>
-        <translation>Definir esquema</translation>
+        <source>Insert image from file</source>
+        <translation>Inserir imagem do arquivo</translation>
     </message>
     <message>
-        <source>Empty 3D surface plots can not be duplicated!</source>
-        <translation type="obsolete">Superfícies 3D vazias não podem ser duplicadas!</translation>
+        <source>There are no plot layers available in this window.</source>
+        <translation>Não existem camadas gráficas disponíveis nesta janela.</translation>
+    </message>
+    <message>
+        <source>Layer Geometry</source>
+        <translation>Geometria da camada</translation>
+    </message>
+    <message>
+        <source>Duplicate window error</source>
+        <translation>Erro em duplicação de janela</translation>
     </message>
     <message>
         <source>There are no windows available in this project!</source>
         <translation>Não há janelas disponíveis neste projeto!</translation>
     </message>
     <message>
-        <source>&amp;View pixel line profile</source>
-        <translation type="obsolete">&amp;Ver perfil de linha de pixel</translation>
+        <source>Duplicate error</source>
+        <translation>Erro de duplicação</translation>
+    </message>
+    <message>
+        <source>Empty 3D surface plots cannot be duplicated!</source>
+        <translation>Os gráficos de superfícies 3D vazias não podem ser duplicados!</translation>
+    </message>
+    <message>
+        <source>Window Geometry</source>
+        <translation>Geometria da janela</translation>
+    </message>
+    <message>
+        <source>&amp;Cascade</source>
+        <translation>&amp;Cascata</translation>
+    </message>
+    <message>
+        <source>&amp;Tile</source>
+        <translation>&amp;Mosaico</translation>
+    </message>
+    <message>
+        <source>&amp;Hide Window</source>
+        <translation>&amp;Ocultar janela</translation>
+    </message>
+    <message>
+        <source>Close &amp;Window</source>
+        <translation>&amp;Fechar janela</translation>
+    </message>
+    <message>
+        <source>More windows...</source>
+        <translation>Mais janelas...</translation>
+    </message>
+    <message>
+        <source>&amp;View Pixel Line profile</source>
+        <translation>&amp;Ver perfil de linha de pixel</translation>
     </message>
     <message>
         <source>&amp;Intensity Matrix</source>
@@ -762,164 +949,218 @@ Deseja sobrescrevê-lo?</translation>
         <translation>&amp;Remover</translation>
     </message>
     <message>
-        <source>&amp;Properties</source>
-        <translation>Propriedades</translation>
+        <source>&amp;Properties...</source>
+        <translation>Propriedades...</translation>
     </message>
     <message>
         <source>Please use the project explorer to select a window!</source>
         <translation>Por favor, use o navegador de projeto para selecionar uma janela!</translation>
     </message>
     <message>
+        <source>Normal</source>
+        <translation>Normal</translation>
+    </message>
+    <message>
+        <source>Save changes to project: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; ?</source>
+        <translation>Salvar alterações no projeto: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Sim</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Não</translation>
+    </message>
+    <message>
+        <source>&amp;Delete Selection</source>
+        <translation>Excluir seleção</translation>
+    </message>
+    <message>
+        <source>New &amp;Window</source>
+        <translation>Nova &amp;janela</translation>
+    </message>
+    <message>
+        <source>New F&amp;older</source>
+        <translation>Nova &amp;pasta</translation>
+    </message>
+    <message>
+        <source>Auto &amp;Column Width</source>
+        <translation>Largura automática de coluna</translation>
+    </message>
+    <message>
+        <source>Anal&amp;yze</source>
+        <translation>Anali&amp;zar</translation>
+    </message>
+    <message>
+        <source>Re&amp;move Pie Curve</source>
+        <translation>Remover curva tipo &amp;pizza</translation>
+    </message>
+    <message>
+        <source>&amp;Paste Layer</source>
+        <translation>Co&amp;lar camada</translation>
+    </message>
+    <message>
+        <source>&amp;Paste Text</source>
+        <translation>Co&amp;lar texto</translation>
+    </message>
+    <message>
+        <source>&amp;Paste Line/Arrow</source>
+        <translation>Co&amp;lar linha/flecha</translation>
+    </message>
+    <message>
+        <source>&amp;Paste Image</source>
+        <translation>Co&amp;lar imagem</translation>
+    </message>
+    <message>
+        <source>&amp;Layer</source>
+        <translation>&amp;Camada</translation>
+    </message>
+    <message>
+        <source>&amp;Window</source>
+        <translation>&amp;Janela</translation>
+    </message>
+    <message>
+        <source>E&amp;xport</source>
+        <translation>E&amp;xportar</translation>
+    </message>
+    <message>
+        <source>&amp;Print</source>
+        <translation>Im&amp;primir</translation>
+    </message>
+    <message>
+        <source>&amp;Geometry...</source>
+        <translation>&amp;Geometria...</translation>
+    </message>
+    <message>
+        <source>P&amp;roperties...</source>
+        <translation>Propriedades...</translation>
+    </message>
+    <message>
+        <source>&amp;Delete Layer</source>
+        <translation>Remover camada</translation>
+    </message>
+    <message>
+        <source>&amp;Copy Page</source>
+        <translation>C&amp;opiar página</translation>
+    </message>
+    <message>
+        <source>E&amp;xport Page</source>
+        <translation>E&amp;xportar página</translation>
+    </message>
+    <message>
+        <source>&amp;Matrix...</source>
+        <translation>&amp;Matriz...</translation>
+    </message>
+    <message>
+        <source>Choose &amp;Data Set...</source>
+        <translation>Selecionar conjunto de &amp;dados...</translation>
+    </message>
+    <message>
+        <source>Choose &amp;Matrix...</source>
+        <translation>Selecionar &amp;matriz...</translation>
+    </message>
+    <message>
+        <source>C&amp;lear</source>
+        <translation>Li&amp;mpar</translation>
+    </message>
+    <message>
+        <source>&amp;Copy Graph</source>
+        <translation>C&amp;opiar gráfico</translation>
+    </message>
+    <message>
+        <source>&amp;Export</source>
+        <translation>E&amp;xportar</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation>Cor&amp;tar</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>Co&amp;lar</translation>
+    </message>
+    <message>
+        <source>&amp;Insert Row</source>
+        <translation>&amp;Inserir linha</translation>
+    </message>
+    <message>
+        <source>&amp;Insert Column</source>
+        <translation>&amp;Inserir coluna</translation>
+    </message>
+    <message>
+        <source>&amp;Delete Rows</source>
+        <translation>&amp;Remover linhas</translation>
+    </message>
+    <message>
+        <source>&amp;Delete Columns</source>
+        <translation>Remover colunas</translation>
+    </message>
+    <message>
+        <source>Clea&amp;r</source>
+        <translation>Limpa&amp;r</translation>
+    </message>
+    <message>
+        <source>Choose the location of the SciDAVis help folder!</source>
+        <translation>Escolha a localização da pasta de ajuda do SciDAVis!</translation>
+    </message>
+    <message>
+        <source>index.html File Not Found!</source>
+        <translation>Não encontrado o arquivo index.html!</translation>
+    </message>
+    <message>
         <source>There is no file called &lt;b&gt;index.html&lt;/b&gt; in this folder.&lt;br&gt;Please choose another folder!</source>
         <translation>Não existe um arquivo chamado &lt;b&gt;index.html&lt;/b&gt; nesta pasta.&lt;br&gt;Por favor, escolha outra pasta!</translation>
     </message>
     <message>
-        <source>Print</source>
-        <translation type="obsolete">Imprimir</translation>
+        <source>Help Files Not Found!</source>
+        <translation>Arquivos de ajuda não encontrados!</translation>
     </message>
     <message>
-        <source>Backward</source>
-        <translation type="obsolete">Para tráz</translation>
+        <source>Please indicate the location of the help file!</source>
+        <translation>Por favor indique a localização do  arquivo de ajuda!</translation>
     </message>
     <message>
-        <source>Forward</source>
-        <translation type="obsolete">Para frente</translation>
+        <source>The manual can be downloaded from the following internet address:</source>
+        <translation>O manual pode ser baixado do seguinte endereço na internet:</translation>
     </message>
     <message>
-        <source>Home</source>
-        <translation type="obsolete">Início</translation>
+        <source>unable to open index.html!</source>
+        <translation>não foi possível abrir o arquivo index.html!</translation>
     </message>
     <message>
-        <source>Surface 3D</source>
-        <translation type="obsolete">Superfície 3D</translation>
+        <source>&lt;b&gt;index.html&lt;/b&gt; file cannot be opened</source>
+        <translation>&lt;b&gt;index.html&lt;/b&gt; não foi possível abrir o arquivo</translation>
     </message>
     <message>
-        <source>Coordinates</source>
-        <translation type="obsolete">Coordenadas</translation>
+        <source>Edit function</source>
+        <translation>Editar função</translation>
     </message>
     <message>
-        <source>&amp;Coord</source>
-        <translation type="obsolete">&amp;Coord</translation>
+        <source>Set the number of pixels to average</source>
+        <translation>Defina o número de pixels para realizar a média</translation>
     </message>
     <message>
-        <source>Box</source>
-        <translation>Caixa</translation>
+        <source>Number of averaged pixels</source>
+        <translation>Média do número de pixels selecionados</translation>
     </message>
     <message>
-        <source>Frame</source>
-        <translation>Quadro</translation>
+        <source>Error importing image</source>
+        <translation>Erro ao importar imagem</translation>
     </message>
     <message>
-        <source>&amp;Frame</source>
-        <translation>&amp;Quadro</translation>
+        <source>Import of image '%1' failed</source>
+        <translation>A importação da imagem '%1' falhou</translation>
     </message>
     <message>
-        <source>No Axes</source>
-        <translation>Sem eixos</translation>
+        <source>Guess best origin for the new layer?</source>
+        <translation>Encontrar a melhor origem para a nova camada?</translation>
     </message>
     <message>
-        <source>grid</source>
-        <translation type="obsolete">grade</translation>
-    </message>
-    <message>
-        <source>Action</source>
-        <translation type="obsolete">Ação</translation>
-    </message>
-    <message>
-        <source>Front Grid</source>
-        <translation type="obsolete">Grade frontal</translation>
-    </message>
-    <message>
-        <source>Action_2</source>
-        <translation type="obsolete">Ação_2</translation>
-    </message>
-    <message>
-        <source>Back Grid</source>
-        <translation type="obsolete">Grade posterior</translation>
-    </message>
-    <message>
-        <source>Action_3</source>
-        <translation type="obsolete">Ação_3</translation>
-    </message>
-    <message>
-        <source>Right Grid</source>
-        <translation type="obsolete">Grade direita</translation>
-    </message>
-    <message>
-        <source>Action_4</source>
-        <translation type="obsolete">Ação_4</translation>
-    </message>
-    <message>
-        <source>Left Grid</source>
-        <translation type="obsolete">Grade esquerda</translation>
-    </message>
-    <message>
-        <source>Action_5</source>
-        <translation type="obsolete">Ação_5</translation>
-    </message>
-    <message>
-        <source>Ceiling Grid</source>
-        <translation type="obsolete">Grade superior</translation>
-    </message>
-    <message>
-        <source>Action_6</source>
-        <translation type="obsolete">Ação_6</translation>
-    </message>
-    <message>
-        <source>Floor Grid</source>
-        <translation type="obsolete">Grade inferior</translation>
-    </message>
-    <message>
-        <source>Plot Style</source>
-        <translation type="obsolete">Estilo de gráfico</translation>
-    </message>
-    <message>
-        <source>Wireframe</source>
-        <translation>Rede</translation>
-    </message>
-    <message>
-        <source>Hidden Line</source>
-        <translation>Linha oculta</translation>
-    </message>
-    <message>
-        <source>Polygon only</source>
-        <translation>Somente polígono</translation>
-    </message>
-    <message>
-        <source>Mesh &amp; filled Polygons</source>
-        <translation>Mesclar polígonos preenchidos</translation>
-    </message>
-    <message>
-        <source>Dots</source>
-        <translation>Pontos</translation>
-    </message>
-    <message>
-        <source>Bars</source>
-        <translation>Barras</translation>
-    </message>
-    <message>
-        <source>Cones</source>
-        <translation>Cones</translation>
-    </message>
-    <message>
-        <source>Cross Hairs</source>
-        <translation type="obsolete">Cruzes</translation>
-    </message>
-    <message>
-        <source>Floor Style</source>
-        <translation type="obsolete">Estilo de chão</translation>
-    </message>
-    <message>
-        <source>Floor Data Projection</source>
-        <translation>Projeção de dados em chão</translation>
-    </message>
-    <message>
-        <source>Floor Isolines</source>
-        <translation>Isolinhas de chão</translation>
-    </message>
-    <message>
-        <source>Empty Floor</source>
-        <translation>Chão vazio</translation>
+        <source>Do you want SciDAVis to guess the best position for the new layer?
+ Warning: this will rearrange existing layers!</source>
+        <translation>Deseja que o SciDAVis encontre a melhor posição para a nova camada?
+Aviso: esta operação irá reorganizar as camadas existentes!</translation>
     </message>
     <message>
         <source>&amp;Guess</source>
@@ -930,12 +1171,50 @@ Deseja sobrescrevê-lo?</translation>
         <translation>Canto superior esquerdo</translation>
     </message>
     <message>
+        <source>Error reading matrix from project file</source>
+        <translation>Erro ao ler matriz a partir do arquivo do projeto</translation>
+    </message>
+    <message>
+        <source>The following problems occured when loading the project file:
+</source>
+        <translation>Ocorreram os seguintes problemas ao carregar o arquivo do projeto:
+</translation>
+    </message>
+    <message>
+        <source>Project loading partly failed</source>
+        <translation>Falha parcial no carregamento do projeto</translation>
+    </message>
+    <message>
+        <source>Error reading table from project file</source>
+        <translation>Erro ao ler tabela a partir do arquivo do projeto</translation>
+    </message>
+    <message>
+        <source>Curve</source>
+        <translation>Curva</translation>
+    </message>
+    <message>
         <source>New &amp;Project</source>
         <translation>Novo &amp;Projeto</translation>
     </message>
     <message>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
+    </message>
+    <message>
+        <source>New &amp;Graph</source>
+        <translation>Novo &amp;Gráfico</translation>
+    </message>
+    <message>
+        <source>Ctrl+G</source>
+        <translation>Ctrl+G</translation>
+    </message>
+    <message>
+        <source>New &amp;Note / Script</source>
+        <translation>Nova &amp;nota / script</translation>
+    </message>
+    <message>
+        <source>Ctrl+ALT+N</source>
+        <translation>Ctrl+ALT+N</translation>
     </message>
     <message>
         <source>New &amp;Table</source>
@@ -946,16 +1225,12 @@ Deseja sobrescrevê-lo?</translation>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <source>New spreadsheet</source>
-        <translation type="obsolete">Nova planilha</translation>
-    </message>
-    <message>
         <source>New &amp;Matrix</source>
         <translation>Nova &amp;Matriz</translation>
     </message>
     <message>
-        <source>New matrix</source>
-        <translation>Nova matriz</translation>
+        <source>Ctrl+M</source>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <source>New &amp;Function Plot</source>
@@ -966,12 +1241,12 @@ Deseja sobrescrevê-lo?</translation>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <source>New &amp;Surface 3D Plot</source>
-        <translation type="obsolete">Nova &amp;superfície 3D</translation>
+        <source>New 3D &amp;Surface Plot</source>
+        <translation>Nova &amp;superfície 3D</translation>
     </message>
     <message>
-        <source>Ctrl+Z</source>
-        <translation>Ctrl+Z</translation>
+        <source>Ctrl+ALT+Z</source>
+        <translation>Ctrl+ALT+Z</translation>
     </message>
     <message>
         <source>&amp;Open</source>
@@ -982,20 +1257,16 @@ Deseja sobrescrevê-lo?</translation>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <source>Open project</source>
-        <translation>Abrir projeto</translation>
-    </message>
-    <message>
-        <source>Open image &amp;file</source>
-        <translation type="obsolete">Abrir arquivo de imagem</translation>
+        <source>Open Image &amp;File</source>
+        <translation>&amp;Abrir arquivo de imagem</translation>
     </message>
     <message>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <source>Import &amp;image...</source>
-        <translation type="obsolete">Importar imagem...</translation>
+        <source>Import I&amp;mage...</source>
+        <translation>Importar ima&amp;gem...</translation>
     </message>
     <message>
         <source>&amp;Save Project</source>
@@ -1006,32 +1277,32 @@ Deseja sobrescrevê-lo?</translation>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <source>Save Project &amp;as...</source>
-        <translation type="obsolete">Salvar projeto &amp; como...</translation>
+        <source>Save Project &amp;As...</source>
+        <translation>Salvar projeto &amp;como...</translation>
     </message>
     <message>
-        <source>&amp;Single file...</source>
-        <translation type="obsolete">Arquivo único...</translation>
+        <source>Open Temp&amp;late...</source>
+        <translation>Abrir mode&amp;lo...</translation>
     </message>
     <message>
-        <source>Import data file</source>
-        <translation type="obsolete">Importar arquivo de dados</translation>
+        <source>Save As &amp;Template...</source>
+        <translation>Salvar como &amp;modelo...</translation>
     </message>
     <message>
-        <source>&amp;Multiple files...</source>
-        <translation type="obsolete">&amp;Múltipos arquivos...</translation>
+        <source>Save Note As...</source>
+        <translation>Salvar as notas como...</translation>
     </message>
     <message>
-        <source>Import multiple data files</source>
-        <translation type="obsolete">Importar múltiplos arquivos de dados</translation>
+        <source>&amp;Import ASCII...</source>
+        <translation>Importar arquivo ASCII...</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
         <translation>&amp;Desfazer</translation>
     </message>
     <message>
-        <source>Ctrl+U</source>
-        <translation type="obsolete">Ctrl+U</translation>
+        <source>Ctrl+Z</source>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
@@ -1046,108 +1317,97 @@ Deseja sobrescrevê-lo?</translation>
         <translation>&amp;Duplicar</translation>
     </message>
     <message>
-        <source>Duplicate window</source>
-        <translation>Duplicar janela</translation>
-    </message>
-    <message>
-        <source>Cu&amp;t selection</source>
-        <translation type="obsolete">Cor&amp;tar seleção</translation>
+        <source>Cu&amp;t Selection</source>
+        <translation>Cor&amp;tar seleção</translation>
     </message>
     <message>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <source>&amp;Copy selection</source>
-        <translation type="obsolete">C&amp;opiar seleção</translation>
+        <source>&amp;Copy Selection</source>
+        <translation>C&amp;opiar seleção</translation>
     </message>
     <message>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <source>&amp;Paste selection</source>
-        <translation type="obsolete">Co&amp;lar seleção</translation>
+        <source>&amp;Paste Selection</source>
+        <translation>Co&amp;lar seleção</translation>
     </message>
     <message>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <source>&amp;Delete selection</source>
-        <translation type="obsolete">E&amp;xcluir seleção</translation>
+        <source>Del</source>
+        <comment>delete key</comment>
+        <translation>Del</translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation type="obsolete">Excluir</translation>
-    </message>
-    <message>
-        <source>Project &amp;explorer</source>
-        <translation type="obsolete">&amp;Explorador de projeto</translation>
+        <source>&amp;Lock Toolbars</source>
+        <translation>Travar barras de ferramentas</translation>
     </message>
     <message>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <source>Show project explorer</source>
-        <translation>Mostrar navegador de projeto</translation>
-    </message>
-    <message>
-        <source>Results &amp;Log</source>
-        <translation>&amp;Registro de resultados</translation>
-    </message>
-    <message>
-        <source>Show calculus results</source>
-        <translation type="obsolete">Mostrar resultados de cálculos</translation>
+        <source>Undo/Redo &amp;History</source>
+        <translation>Desfazer/Refazer - Histórico</translation>
     </message>
     <message>
         <source>Add La&amp;yer</source>
         <translation>Adicionar camada</translation>
     </message>
     <message>
+        <source>ALT+L</source>
+        <translation>ALT+L</translation>
+    </message>
+    <message>
+        <source>Arran&amp;ge Layers</source>
+        <translation>Organizar camadas</translation>
+    </message>
+    <message>
+        <source>ALT+A</source>
+        <translation>ALT+A</translation>
+    </message>
+    <message>
+        <source>Automatic Layout</source>
+        <translation>Esquema automático</translation>
+    </message>
+    <message>
         <source>&amp;Current</source>
         <translation>&amp;Atual</translation>
     </message>
     <message>
-        <source>Ctrl+G</source>
-        <translation>Ctrl+G</translation>
-    </message>
-    <message>
-        <source>Export current graph</source>
-        <translation>Exportar gráfico atual</translation>
+        <source>Alt+G</source>
+        <translation>Alt+G</translation>
     </message>
     <message>
         <source>Alt+X</source>
         <translation>Alt+X</translation>
     </message>
     <message>
-        <source>Export all graphs</source>
-        <translation>Exportar todos os gráficos</translation>
+        <source>&amp;Export PDF</source>
+        <translation>&amp;Exportar como PDF</translation>
     </message>
     <message>
-        <source>&amp;Print</source>
-        <translation>Im&amp;primir</translation>
+        <source>Ctrl+Alt+P</source>
+        <translation>Ctrl+Alt+P</translation>
     </message>
     <message>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <source>Print graph</source>
-        <translation type="obsolete">Imprimir gráfico</translation>
-    </message>
-    <message>
-        <source>Print &amp;All Plots</source>
-        <translation type="obsolete">Imprimir tod&amp;os os gráficos</translation>
+        <source>Print All Plo&amp;ts</source>
+        <translation>Imprimir &amp;todos os gráficos</translation>
     </message>
     <message>
         <source>E&amp;xport ASCII</source>
         <translation>E&amp;xportar para ASCII</translation>
-    </message>
-    <message>
-        <source>Set import &amp;options</source>
-        <translation type="obsolete">Configurar &amp;opções de importação</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -1158,12 +1418,16 @@ Deseja sobrescrevê-lo?</translation>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <source>Clear &amp;log information</source>
-        <translation type="obsolete">&amp;Limpar registro de resultados</translation>
+        <source>Clear &amp;Log Information</source>
+        <translation>Apagar &amp;informações do registro</translation>
     </message>
     <message>
-        <source>Plot &amp;wizard</source>
-        <translation type="obsolete">Assistente de gráfico</translation>
+        <source>Delete &amp;Fit Tables</source>
+        <translation>Excluir ta&amp;belas de regressão</translation>
+    </message>
+    <message>
+        <source>Plot &amp;Wizard</source>
+        <translation>&amp;Assistente de gráfico</translation>
     </message>
     <message>
         <source>Ctrl+Alt+W</source>
@@ -1174,36 +1438,36 @@ Deseja sobrescrevê-lo?</translation>
         <translation>&amp;Preferências...</translation>
     </message>
     <message>
-        <source>&amp;Add/Remove curve</source>
-        <translation type="obsolete">&amp;Adicionar/Remover curva</translation>
+        <source>Add/Remove &amp;Curve...</source>
+        <translation>Adicionar/Remover c&amp;urva...</translation>
     </message>
     <message>
-        <source>Add curve to graph</source>
-        <translation>Adicionar curva ao gráfico</translation>
+        <source>ALT+C</source>
+        <translation>ALT+C</translation>
     </message>
     <message>
-        <source>Add &amp;Error Bars</source>
-        <translation type="obsolete">Adicionar barras de &amp;erro</translation>
+        <source>Add &amp;Error Bars...</source>
+        <translation>Adicionar barras de &amp;erro...</translation>
     </message>
     <message>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <source>Add &amp;function curve</source>
-        <translation type="obsolete">Adicionar &amp;curva de função</translation>
+        <source>Add &amp;Function...</source>
+        <translation>Adicionar &amp;função...</translation>
     </message>
     <message>
         <source>Ctrl+Alt+F</source>
         <translation>Ctrl+Alt+F</translation>
     </message>
     <message>
-        <source>&amp;Rescale to show all</source>
-        <translation type="obsolete">&amp;Reescalar para mostrar tudo</translation>
+        <source>&amp;Rescale to Show All</source>
+        <translation>&amp;Reescalar para mostrar tudo</translation>
     </message>
     <message>
-        <source>Best fit</source>
-        <translation>Melhor escala</translation>
+        <source>Ctrl+Shift+R</source>
+        <translation>Ctrl+Shift+R</translation>
     </message>
     <message>
         <source>New &amp;Legend</source>
@@ -1214,92 +1478,72 @@ Deseja sobrescrevê-lo?</translation>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <source>Add new legend</source>
-        <translation>Adicionar nova legenda</translation>
+        <source>Add Time Stamp</source>
+        <translation>Adicionar rótulo de hora</translation>
+    </message>
+    <message>
+        <source>Ctrl+ALT+T</source>
+        <translation>Ctrl+ALT+T</translation>
     </message>
     <message>
         <source>Add &amp;Image</source>
         <translation>Adicionar &amp;imagem</translation>
     </message>
     <message>
-        <source>Add &amp;Text</source>
-        <translation>Adicionar &amp;texto</translation>
-    </message>
-    <message>
-        <source>&amp;Draw arrow/line</source>
-        <translation type="obsolete">&amp;Desenhar flecha/linha</translation>
+        <source>ALT+I</source>
+        <translation>ALT+I</translation>
     </message>
     <message>
         <source>&amp;Line</source>
         <translation>&amp;Linha</translation>
     </message>
     <message>
-        <source>Plot with line</source>
-        <translation type="obsolete">Plotar com linha</translation>
-    </message>
-    <message>
         <source>&amp;Scatter</source>
         <translation>&amp;Dispersão</translation>
-    </message>
-    <message>
-        <source>Plot with symbols</source>
-        <translation type="obsolete">Plotar com símbolos</translation>
     </message>
     <message>
         <source>Line + S&amp;ymbol</source>
         <translation>Linha + &amp;Símbolo</translation>
     </message>
     <message>
-        <source>Plot with line + symbols</source>
-        <translation type="obsolete">Plotar com linha e símbolos</translation>
-    </message>
-    <message>
-        <source>Vertical &amp;drop lines</source>
-        <translation type="obsolete">Linhas verticais (gotículas)</translation>
+        <source>Vertical &amp;Drop Lines</source>
+        <translation>&amp;Linhas verticais gotejadas</translation>
     </message>
     <message>
         <source>&amp;Spline</source>
         <translation>&amp;Suavizado</translation>
     </message>
     <message>
+        <source>&amp;Horizontal Steps</source>
+        <translation>Escalas &amp;horizontais</translation>
+    </message>
+    <message>
         <source>&amp;Vertical Steps</source>
         <translation>Espaçamentos &amp;verticais</translation>
     </message>
     <message>
-        <source>&amp;Columns</source>
-        <translation type="obsolete">&amp;Colunas</translation>
+        <source>&amp;Vertical Bars</source>
+        <translation>Barras &amp;verticais</translation>
     </message>
     <message>
-        <source>Plot with vertical bars</source>
-        <translation>Plotar com barras verticais</translation>
-    </message>
-    <message>
-        <source>&amp;Rows</source>
-        <translation type="obsolete">&amp;Linhas</translation>
-    </message>
-    <message>
-        <source>Plot with horizontal bars</source>
-        <translation>Criar gráfico de barras horizontais</translation>
+        <source>&amp;Horizontal Bars</source>
+        <translation>Barras &amp;horizontais</translation>
     </message>
     <message>
         <source>&amp;Area</source>
         <translation>Á&amp;rea</translation>
     </message>
     <message>
-        <source>Plot area</source>
-        <translation>Criar gráfico tipo área</translation>
-    </message>
-    <message>
         <source>&amp;Pie</source>
         <translation>&amp;Pizza</translation>
     </message>
     <message>
-        <source>Plot pie</source>
-        <translation>Criar gráfico tipo pizza</translation>
+        <source>Vectors XY&amp;AM</source>
+        <translation>Vetores XY&amp;AM</translation>
     </message>
     <message>
-        <source>&amp;Vectors &amp;XYXY</source>
-        <translation type="obsolete">&amp;Vetores &amp;XYXY</translation>
+        <source>Vectors &amp;XYXY</source>
+        <translation>Vetores &amp;XYXY</translation>
     </message>
     <message>
         <source>&amp;Histogram</source>
@@ -1330,798 +1574,24 @@ Deseja sobrescrevê-lo?</translation>
         <translation>&amp;Fita</translation>
     </message>
     <message>
-        <source>Plot 3D Ribbon</source>
-        <translation type="obsolete">Gráfico de fita 3D</translation>
-    </message>
-    <message>
         <source>&amp;Bars</source>
         <translation>&amp;Barras</translation>
-    </message>
-    <message>
-        <source>Plot 3D Bars</source>
-        <translation type="obsolete">Gráfico de barras 3D</translation>
-    </message>
-    <message>
-        <source>Plot 3D Scatter</source>
-        <translation type="obsolete">Gráfico de dispersão 3D</translation>
     </message>
     <message>
         <source>&amp;Trajectory</source>
         <translation>&amp;Trajetória</translation>
     </message>
     <message>
-        <source>Plot 3D Trajectory</source>
-        <translation type="obsolete">Gráfico trajetória 3D</translation>
-    </message>
-    <message>
-        <source>Ctrl+M</source>
-        <translation>Ctrl+M</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation>Alt+R</translation>
-    </message>
-    <message>
         <source>Statistics on &amp;Columns</source>
         <translation>Estatísticas em &amp;coluna</translation>
-    </message>
-    <message>
-        <source>Selected columns statistics</source>
-        <translation>Estatísticas das colunas selecionadas</translation>
     </message>
     <message>
         <source>Statistics on &amp;Rows</source>
         <translation>Estatísticas em linha&amp;s</translation>
     </message>
     <message>
-        <source>Selected rows statistics</source>
-        <translation>Estatísticas das linhas selecionadas</translation>
-    </message>
-    <message>
         <source>&amp;Integrate ...</source>
         <translation>&amp;Integrar ...</translation>
-    </message>
-    <message>
-        <source>&amp;Differentiate</source>
-        <translation>&amp;Derivar</translation>
-    </message>
-    <message>
-        <source>Fit &amp;Linear</source>
-        <translation>Regressão &amp;linear</translation>
-    </message>
-    <message>
-        <source>Fit &amp;Polynomial ...</source>
-        <translation>Regressão &amp;polinomial ...</translation>
-    </message>
-    <message>
-        <source>&amp;First Order ...</source>
-        <translation>&amp;Primeira ordem ...</translation>
-    </message>
-    <message>
-        <source>&amp;Second Order ...</source>
-        <translation>&amp;Segunda ordem ...</translation>
-    </message>
-    <message>
-        <source>&amp;Third Order ...</source>
-        <translation>&amp;Terceira ordem ...</translation>
-    </message>
-    <message>
-        <source>Fit &amp;Gaussian</source>
-        <translation>Ajuste &amp;gaussiano</translation>
-    </message>
-    <message>
-        <source>Fit Lorent&amp;zian</source>
-        <translation>Ajuste loren&amp;ziano</translation>
-    </message>
-    <message>
-        <source>&amp;Non-linear Curve Fit ...</source>
-        <translation type="obsolete">Ajuste &amp;não linear...</translation>
-    </message>
-    <message>
-        <source>Ctrl+Y</source>
-        <translation>Ctrl+Y</translation>
-    </message>
-    <message>
-        <source>&amp;Plot ...</source>
-        <translation>&amp;Gráfico ...</translation>
-    </message>
-    <message>
-        <source>&amp;Title ...</source>
-        <translation>&amp;Título ...</translation>
-    </message>
-    <message>
-        <source>&amp;Columns...</source>
-        <translation type="obsolete">&amp;Colunas...</translation>
-    </message>
-    <message>
-        <source>&amp;Rows...</source>
-        <translation type="obsolete">&amp;Linhas...</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation type="obsolete">&amp;Sobre</translation>
-    </message>
-    <message>
-        <source>F1</source>
-        <translation>F1</translation>
-    </message>
-    <message>
-        <source>Ctrl+H</source>
-        <translation>Ctrl+H</translation>
-    </message>
-    <message>
-        <source>&amp;Choose help folder...</source>
-        <translation type="obsolete">Escolher &amp;pasta de ajuda ...</translation>
-    </message>
-    <message>
-        <source>&amp;Rename Window</source>
-        <translation>&amp;Renomear janela</translation>
-    </message>
-    <message>
-        <source>Close &amp;Window</source>
-        <translation>&amp;Fechar janela</translation>
-    </message>
-    <message>
-        <source>Ctrl+W</source>
-        <translation>Ctrl+W</translation>
-    </message>
-    <message>
-        <source>Add column</source>
-        <translation type="obsolete">Adicionar coluna</translation>
-    </message>
-    <message>
-        <source>Window &amp;Geometry...</source>
-        <translation>&amp;Geometria da janela...</translation>
-    </message>
-    <message>
-        <source>&amp;Hide Window</source>
-        <translation>&amp;Ocultar janela</translation>
-    </message>
-    <message>
-        <source>More windows...</source>
-        <translation>Mais janelas...</translation>
-    </message>
-    <message>
-        <source>&amp;Intensity table</source>
-        <translation type="obsolete">Tabela de &amp;intensidade</translation>
-    </message>
-    <message>
-        <source>&amp;Activate Window</source>
-        <translation>&amp;Ativar janela</translation>
-    </message>
-    <message>
-        <source>Mi&amp;nimize Window</source>
-        <translation>Mi&amp;nimizar janela</translation>
-    </message>
-    <message>
-        <source>Ma&amp;ximize Window</source>
-        <translation>Max&amp;imizar janela</translation>
-    </message>
-    <message>
-        <source>Re&amp;size Window...</source>
-        <translation>Redimen&amp;sionar janela ...</translation>
-    </message>
-    <message>
-        <source>&amp;Print Window</source>
-        <translation>Im&amp;primir janela</translation>
-    </message>
-    <message>
-        <source>&amp;Layer geometry</source>
-        <translation type="obsolete">&amp;Geometria da camada</translation>
-    </message>
-    <message>
-        <source>Set &amp;Properties...</source>
-        <translation type="obsolete">Definir &amp;propiedades...</translation>
-    </message>
-    <message>
-        <source>Set &amp;Dimensions...</source>
-        <translation type="obsolete">Definir &amp;dimensões...</translation>
-    </message>
-    <message>
-        <source>Set &amp;Values...</source>
-        <translation type="obsolete">Definir &amp;valores...</translation>
-    </message>
-    <message>
-        <source>&amp;Transpose</source>
-        <translation type="obsolete">&amp;Transpor</translation>
-    </message>
-    <message>
-        <source>&amp;Invert</source>
-        <translation>&amp;Inverter</translation>
-    </message>
-    <message>
-        <source>&amp;Determinant</source>
-        <translation>&amp;Determinante</translation>
-    </message>
-    <message>
-        <source>&amp;Convert to spreadsheet</source>
-        <translation type="obsolete">&amp;Converter para tabela</translation>
-    </message>
-    <message>
-        <source>3D &amp;Wire Frame</source>
-        <translation>Es&amp;queleto 3D</translation>
-    </message>
-    <message>
-        <source>3D &amp;Hidden Line</source>
-        <translation>Linha 3D &amp;oculta</translation>
-    </message>
-    <message>
-        <source>3D &amp;Polygons</source>
-        <translation>&amp;Polígonos 3D</translation>
-    </message>
-    <message>
-        <source>3D Wire &amp;Surface</source>
-        <translation>&amp;Superfície de fios 3D</translation>
-    </message>
-    <message>
-        <source>The file: &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist!</source>
-        <translation type="obsolete">O arquivo: &lt;b&gt; %1 &lt;/b&gt; não existe!</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Nome</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation>Tipo</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Ver</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>Tamanho</translation>
-    </message>
-    <message>
-        <source>Created</source>
-        <translation>Criado</translation>
-    </message>
-    <message>
-        <source>Label</source>
-        <translation>Rótulo</translation>
-    </message>
-    <message>
-        <source>Disable &amp;tools</source>
-        <translation>Desativar &amp;ferramentas</translation>
-    </message>
-    <message>
-        <source>&amp;Zoom</source>
-        <translation type="obsolete">&amp;Zoom</translation>
-    </message>
-    <message>
-        <source>ALT+Z</source>
-        <translation type="obsolete">ALT+Z</translation>
-    </message>
-    <message>
-        <source>&amp;Data reader</source>
-        <translation type="obsolete">Leitor de &amp;dados</translation>
-    </message>
-    <message>
-        <source>CTRL+D</source>
-        <translation>CTRL+D</translation>
-    </message>
-    <message>
-        <source>Data reader</source>
-        <translation>Leitor de dados</translation>
-    </message>
-    <message>
-        <source>&amp;Select data range</source>
-        <translation type="obsolete">&amp;Selecionar faixa de dados</translation>
-    </message>
-    <message>
-        <source>ALT+S</source>
-        <translation>ALT+S</translation>
-    </message>
-    <message>
-        <source>S&amp;creen reader</source>
-        <translation type="obsolete">Leitor de &amp;tela</translation>
-    </message>
-    <message>
-        <source>Screen reader</source>
-        <translation>Leitor de tela</translation>
-    </message>
-    <message>
-        <source>&amp;Move Data Points...</source>
-        <translation>&amp;Mover Pontos ...</translation>
-    </message>
-    <message>
-        <source>Remove &amp;Bad Data Points...</source>
-        <translation>R&amp;emover pontos ruins ...</translation>
-    </message>
-    <message>
-        <source>Alt+B</source>
-        <translation>Alt+B</translation>
-    </message>
-    <message>
-        <source>ALT+T</source>
-        <translation>ALT+T</translation>
-    </message>
-    <message>
-        <source>Draw &amp;Arrow/Line</source>
-        <translation type="obsolete">Desenhar flech&amp;a/linha</translation>
-    </message>
-    <message>
-        <source>CTRL+ALT+L</source>
-        <translation>CTRL+ALT+L</translation>
-    </message>
-    <message>
-        <source>&amp;Translate</source>
-        <translation>T&amp;rasladar</translation>
-    </message>
-    <message>
-        <source>&amp;Smooth</source>
-        <translation>&amp;Suavizar</translation>
-    </message>
-    <message>
-        <source>&amp;FFT filter</source>
-        <translation type="obsolete">Filtro FF&amp;T</translation>
-    </message>
-    <message>
-        <source>Set columns &amp;as</source>
-        <translation type="obsolete">Definir colun&amp;as como</translation>
-    </message>
-    <message>
-        <source>&amp;Fill columns with</source>
-        <translation type="obsolete">&amp;Preencher colunas com</translation>
-    </message>
-    <message>
-        <source>&amp;Table</source>
-        <translation>&amp;Tabela</translation>
-    </message>
-    <message>
-        <source>Plot 3&amp;D</source>
-        <translation type="obsolete">Gráfico &amp;3D</translation>
-    </message>
-    <message>
-        <source>&amp;Plot</source>
-        <translation>&amp;Gráfico</translation>
-    </message>
-    <message>
-        <source>&amp;Normalize</source>
-        <translation type="obsolete">Normali&amp;zar</translation>
-    </message>
-    <message>
-        <source>You must select exactly one column for plotting!</source>
-        <translation>Você deve selecionar exatamente uma coluna para plotar!</translation>
-    </message>
-    <message>
-        <source>This operation can not be performed on curves plotted from columns having a non-numerical format.</source>
-        <translation type="obsolete">Esta operação não pode ser realizada em curvas plotadas a partir de colunas com formato não numérico.</translation>
-    </message>
-    <message>
-        <source>Y Axis Title</source>
-        <translation>Título do eixo Y</translation>
-    </message>
-    <message>
-        <source>X Axis Title</source>
-        <translation>Título do eixo X</translation>
-    </message>
-    <message>
-        <source>Please select a e column to plot!</source>
-        <translation type="obsolete">Selecione uma coluna e para plotar!</translation>
-    </message>
-    <message>
-        <source>This functionality is not available for pie plots!</source>
-        <translation>Esta funcionalidade não está disponível para gráficos tipo pizza!</translation>
-    </message>
-    <message>
-        <source>The selected columns have different numbers of rows!</source>
-        <translation>As colunas selecionadas tem número de linhas diferentes!</translation>
-    </message>
-    <message>
-        <source>The selected error column is empty!</source>
-        <translation type="obsolete">A coluna de erro selecionada está vazia!</translation>
-    </message>
-    <message>
-        <source>The file: &lt;b&gt;%1&lt;/b&gt; is the current file!</source>
-        <translation>O arquivo &lt;b&gt; %1 &lt;/b&gt; é o arquivo atual!</translation>
-    </message>
-    <message>
-        <source>The file: &lt;b&gt;%1&lt;/b&gt; doesn&apos;t exist!</source>
-        <translation>O arquivo &lt;b&gt; %1 &lt;/b&gt; não existe!</translation>
-    </message>
-    <message>
-        <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a QtiPlot or Origin project file!</source>
-        <translation type="obsolete">O arquivo &lt;b&gt; %1 &lt;/b&gt; não é um projeto do Origin ou QtiPlot!</translation>
-    </message>
-    <message>
-        <source>The file: &lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;does not exist anymore!&lt;p&gt;It will be removed from the list.</source>
-        <translation>O arquivo &lt;b&gt; %1 &lt;/b&gt; &lt;p&gt; já não existe!&lt;p&gt;Será removido da lista.</translation>
-    </message>
-    <message>
-        <source>The file: &lt;b&gt; %1 &lt;/b&gt; is the current file!</source>
-        <translation type="obsolete">O arquivo &lt;b&gt; %1 &lt;/b&gt; é o arquivo atual!</translation>
-    </message>
-    <message>
-        <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation>Não foi possível escrever no arquivo: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Por favor, verifique se você tem permissão de escrita no local selecionado!</translation>
-    </message>
-    <message>
-        <source>Could not write to file: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation>Não foi possível escrever no arquivo: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Por favor, verifique se você tem permissão de escrita no local selecionado!</translation>
-    </message>
-    <message>
-        <source>Choose a directory to export the tables to</source>
-        <translation>Escolha uma pasta para exportar as tabelas</translation>
-    </message>
-    <message>
-        <source>Choose a filename to save under</source>
-        <translation>Escolha o nome do arquivo para salvar</translation>
-    </message>
-    <message>
-        <source>Rows</source>
-        <translation type="obsolete">Linhas</translation>
-    </message>
-    <message>
-        <source>Columns</source>
-        <translation type="obsolete">Colunas</translation>
-    </message>
-    <message>
-        <source>Please select a column first!</source>
-        <translation>Por favor, selecione uma coluna primeiro!</translation>
-    </message>
-    <message>
-        <source>Line + s&amp;ymbol</source>
-        <translation type="obsolete">Linha + &amp;Símbolo</translation>
-    </message>
-    <message>
-        <source>3D Ribbo&amp;n</source>
-        <translation type="obsolete">Fi&amp;ta 3D</translation>
-    </message>
-    <message>
-        <source>3D &amp;Bars</source>
-        <translation type="obsolete">&amp;Barras 3D</translation>
-    </message>
-    <message>
-        <source>3&amp;D Scatter</source>
-        <translation type="obsolete">Dispersão 3&amp;D</translation>
-    </message>
-    <message>
-        <source>3D &amp;Trajectory</source>
-        <translation type="obsolete">&amp;Trajetoria 3D</translation>
-    </message>
-    <message>
-        <source>&amp;Stacked Histograms</source>
-        <translation type="obsolete">Hi&amp;stogramas Empilhados</translation>
-    </message>
-    <message>
-        <source>Cu&amp;t</source>
-        <translation>Cor&amp;tar</translation>
-    </message>
-    <message>
-        <source>Past&amp;e</source>
-        <translation type="obsolete">Co&amp;lar</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Nenhum</translation>
-    </message>
-    <message>
-        <source>Set as</source>
-        <translation type="obsolete">Definir como</translation>
-    </message>
-    <message>
-        <source>Set column &amp;values...</source>
-        <translation type="obsolete">Definir &amp;valores das colunas...</translation>
-    </message>
-    <message>
-        <source>&amp;Fill column with</source>
-        <translation type="obsolete">Preenc&amp;her coluna com</translation>
-    </message>
-    <message>
-        <source>&amp;Column</source>
-        <translation type="obsolete">&amp;Coluna</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r</source>
-        <translation>Limpa&amp;r</translation>
-    </message>
-    <message>
-        <source>&amp;Insert</source>
-        <translation type="obsolete">&amp;Inserir</translation>
-    </message>
-    <message>
-        <source>&amp;Add column</source>
-        <translation type="obsolete">Adicio&amp;nar coluna</translation>
-    </message>
-    <message>
-        <source>&amp;Ascending</source>
-        <translation type="obsolete">&amp;Ascendente</translation>
-    </message>
-    <message>
-        <source>&amp;Descending</source>
-        <translation type="obsolete">&amp;Descendente</translation>
-    </message>
-    <message>
-        <source>Sort Colu&amp;mn</source>
-        <translation type="obsolete">Ordenar Col&amp;una</translation>
-    </message>
-    <message>
-        <source>Pr&amp;operties</source>
-        <translation type="obsolete">Pr&amp;opriedades</translation>
-    </message>
-    <message>
-        <source>Vectors &amp;XYXY</source>
-        <translation>Vetores &amp;XYXY</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation>Co&amp;lar</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r Row</source>
-        <translation type="obsolete">Lim&amp;par linha</translation>
-    </message>
-    <message>
-        <source>&amp;Delete Row</source>
-        <translation type="obsolete">Excluir linha</translation>
-    </message>
-    <message>
-        <source>&amp;Worksheet</source>
-        <translation>&amp;Planilha de trabalho</translation>
-    </message>
-    <message>
-        <source>There are actually  no curves on the active layer!</source>
-        <translation type="obsolete">Atualmente não existem curvas na camada ativa!</translation>
-    </message>
-    <message>
-        <source>This will modify the data in the worksheets!
-Are you sure you want to continue?</source>
-        <translation>Isto modificará os dados nas planilhas!
-Tem certeza que quer continuar?</translation>
-    </message>
-    <message>
-        <source>Continue</source>
-        <translation>Continuar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Cancelar</translation>
-    </message>
-    <message>
-        <source>There are no curves available on this plot!</source>
-        <translation>Não existem curvas disponíveis neste gráfico!</translation>
-    </message>
-    <message>
-        <source>Click on plot or move cursor to display coordinates!</source>
-        <translation type="obsolete">Clique no gráfico ou mova o cursor para mostrar as coordenadas!</translation>
-    </message>
-    <message>
-        <source>There are no plot layers available in this window!</source>
-        <translation>Não existem camadas gráficas disponíveis nesta janela!</translation>
-    </message>
-    <message>
-        <source>Click on plot to display information!</source>
-        <translation type="obsolete">Clique no gráfico para mostrar a informação!</translation>
-    </message>
-    <message>
-        <source>There are no plot layers available in this window.</source>
-        <translation>Não existem camadas gráficas disponíveis nesta janela.</translation>
-    </message>
-    <message>
-        <source>Hidden</source>
-        <translation>Oculto</translation>
-    </message>
-    <message>
-        <source>Maximized</source>
-        <translation>Maximizada</translation>
-    </message>
-    <message>
-        <source>Minimized</source>
-        <translation>Minimizada</translation>
-    </message>
-    <message>
-        <source>&amp;Cascade</source>
-        <translation>&amp;Cascata</translation>
-    </message>
-    <message>
-        <source>&amp;Tile</source>
-        <translation>&amp;Mosaico</translation>
-    </message>
-    <message>
-        <source>&amp;Next</source>
-        <translation type="obsolete">&amp;Próximo</translation>
-    </message>
-    <message>
-        <source>&amp;Previous</source>
-        <translation type="obsolete">&amp;Anterior</translation>
-    </message>
-    <message>
-        <source>&amp;Properties...</source>
-        <translation>Propriedades...</translation>
-    </message>
-    <message>
-        <source>Save changes to project: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; ?</source>
-        <translation>Salvar alterações no projeto: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Sim</translation>
-    </message>
-    <message>
-        <source>Não</source>
-        <translation type="obsolete">Não</translation>
-    </message>
-    <message>
-        <source>&amp;Delete Window</source>
-        <translation type="obsolete">Remover janela</translation>
-    </message>
-    <message>
-        <source>D&amp;epending Plots</source>
-        <translation type="obsolete">Gráficos D&amp;ependentes</translation>
-    </message>
-    <message>
-        <source>D&amp;epending 3D Plots</source>
-        <translation type="obsolete">Gráficos 3D D&amp;ependentes</translation>
-    </message>
-    <message>
-        <source>D&amp;epends on</source>
-        <translation>D&amp;epende de</translation>
-    </message>
-    <message>
-        <source>Function</source>
-        <translation type="obsolete">Função</translation>
-    </message>
-    <message>
-        <source>Re&amp;move pie curve</source>
-        <translation type="obsolete">Re&amp;mover curva tipo pizza</translation>
-    </message>
-    <message>
-        <source>Anal&amp;yse</source>
-        <translation type="obsolete">Anali&amp;zar</translation>
-    </message>
-    <message>
-        <source>&amp;Paste layer</source>
-        <translation type="obsolete">Co&amp;lar canada</translation>
-    </message>
-    <message>
-        <source>&amp;Paste text</source>
-        <translation type="obsolete">Co&amp;lar texto</translation>
-    </message>
-    <message>
-        <source>&amp;Paste line/arrow</source>
-        <translation type="obsolete">Co&amp;lar linha/flecha</translation>
-    </message>
-    <message>
-        <source>&amp;Paste image</source>
-        <translation type="obsolete">Co&amp;lar imagem</translation>
-    </message>
-    <message>
-        <source>&amp;Layer</source>
-        <translation>&amp;Camada</translation>
-    </message>
-    <message>
-        <source>&amp;Window</source>
-        <translation>&amp;Janela</translation>
-    </message>
-    <message>
-        <source>E&amp;xport</source>
-        <translation>E&amp;xportar</translation>
-    </message>
-    <message>
-        <source>&amp;Geometry...</source>
-        <translation>&amp;Geometria...</translation>
-    </message>
-    <message>
-        <source>P&amp;roperties...</source>
-        <translation>Propriedades...</translation>
-    </message>
-    <message>
-        <source>&amp;Delete Layer</source>
-        <translation>Remover camada</translation>
-    </message>
-    <message>
-        <source>&amp;Paste Layer</source>
-        <translation>Co&amp;lar camada</translation>
-    </message>
-    <message>
-        <source>&amp;Copy Page</source>
-        <translation>C&amp;opiar página</translation>
-    </message>
-    <message>
-        <source>E&amp;xport Page</source>
-        <translation>E&amp;xportar página</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r Rows</source>
-        <translation type="obsolete">Lim&amp;par linhas</translation>
-    </message>
-    <message>
-        <source>&amp;Delete Rows</source>
-        <translation>&amp;Remover linhas</translation>
-    </message>
-    <message>
-        <source>&amp;Plot 3D</source>
-        <translation type="obsolete">&amp;Gráfico 3D</translation>
-    </message>
-    <message>
-        <source>&amp;Matrix...</source>
-        <translation>&amp;Matriz...</translation>
-    </message>
-    <message>
-        <source>Choose &amp;Data Set...</source>
-        <translation>Selecionar conjunto de &amp;dados...</translation>
-    </message>
-    <message>
-        <source>Choose &amp;Matrix...</source>
-        <translation>Selecionar &amp;matriz...</translation>
-    </message>
-    <message>
-        <source>C&amp;lear</source>
-        <translation>Li&amp;mpar</translation>
-    </message>
-    <message>
-        <source>&amp;Copy Graph</source>
-        <translation>C&amp;opiar gráfico</translation>
-    </message>
-    <message>
-        <source>&amp;Export</source>
-        <translation>E&amp;xportar</translation>
-    </message>
-    <message>
-        <source>Please indicate the location of the help file!&lt;br&gt;&lt;br&gt;&lt;p&gt;The manual can be downloaded from the following internet address:&lt;/p&gt;&lt;p&gt;&lt;font color=blue&gt;&apos;http://soft.proindependent.com/manuals.html&apos;&lt;/font&gt;&lt;/p&gt;</source>
-        <translation type="obsolete">Por favor, indique a localização do arquivo de ajuda! &lt;br&gt;&lt;br&gt;&lt;p&gt;O manual pode ser obtido no seguinte endereço na internet: &lt;/p&gt;&lt;p&gt;&lt;font color=blue&gt;&apos;http://soft.proindependent.com/manuals.html&apos;&lt;/font&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Curve:</source>
-        <translation type="obsolete">Curva:</translation>
-    </message>
-    <message>
-        <source>Import i&amp;mage...</source>
-        <translation type="obsolete">Importar ima&amp;gem...</translation>
-    </message>
-    <message>
-        <source>ALT+L</source>
-        <translation>ALT+L</translation>
-    </message>
-    <message>
-        <source>Arran&amp;ge Layers</source>
-        <translation>Organizar camadas</translation>
-    </message>
-    <message>
-        <source>ALT+A</source>
-        <translation>ALT+A</translation>
-    </message>
-    <message>
-        <source>Print All Plo&amp;ts</source>
-        <translation>Imprimir &amp;todos os gráficos</translation>
-    </message>
-    <message>
-        <source>Delete &amp;fit tables</source>
-        <translation type="obsolete">Apagar tabelas de rea&amp;ressão</translation>
-    </message>
-    <message>
-        <source>Add/Remove &amp;Curve...</source>
-        <translation>Adicionar/Remover c&amp;urva...</translation>
-    </message>
-    <message>
-        <source>ALT+C</source>
-        <translation>ALT+C</translation>
-    </message>
-    <message>
-        <source>Add &amp;Error Bars...</source>
-        <translation>Adicionar barras de &amp;erro...</translation>
-    </message>
-    <message>
-        <source>Add &amp;Function...</source>
-        <translation>Adicionar &amp;função...</translation>
-    </message>
-    <message>
-        <source>Add time stamp</source>
-        <translation type="obsolete">Adicionar estampa de hora</translation>
-    </message>
-    <message>
-        <source>Ctrl+ALT+T</source>
-        <translation>Ctrl+ALT+T</translation>
-    </message>
-    <message>
-        <source>Date &amp; Time </source>
-        <translation type="obsolete">Data &amp;e hora</translation>
-    </message>
-    <message>
-        <source>ALT+I</source>
-        <translation>ALT+I</translation>
     </message>
     <message>
         <source>Inte&amp;rpolate ...</source>
@@ -2160,8 +1630,60 @@ Tem certeza que quer continuar?</translation>
         <translation>Movendo &amp;janela de média...</translation>
     </message>
     <message>
+        <source>&amp;Differentiate</source>
+        <translation>&amp;Derivar</translation>
+    </message>
+    <message>
+        <source>Fit &amp;Linear</source>
+        <translation>Regressão &amp;linear</translation>
+    </message>
+    <message>
+        <source>Fit &amp;Polynomial ...</source>
+        <translation>Regressão &amp;polinomial ...</translation>
+    </message>
+    <message>
+        <source>&amp;First Order ...</source>
+        <translation>&amp;Primeira ordem ...</translation>
+    </message>
+    <message>
+        <source>&amp;Second Order ...</source>
+        <translation>&amp;Segunda ordem ...</translation>
+    </message>
+    <message>
+        <source>&amp;Third Order ...</source>
+        <translation>&amp;Terceira ordem ...</translation>
+    </message>
+    <message>
         <source>Fit Exponential Gro&amp;wth ...</source>
         <translation>Ajuste por &amp;crescimento exponencial...</translation>
+    </message>
+    <message>
+        <source>Fit &amp;Boltzmann (Sigmoidal)</source>
+        <translation>Ajuste &amp;Boltzmann (Sigmoidal)</translation>
+    </message>
+    <message>
+        <source>Fit &amp;Gaussian</source>
+        <translation>Ajuste &amp;gaussiano</translation>
+    </message>
+    <message>
+        <source>Fit Lorent&amp;zian</source>
+        <translation>Ajuste loren&amp;ziano</translation>
+    </message>
+    <message>
+        <source>Fit &amp;Wizard...</source>
+        <translation>Assistente de a&amp;juste...</translation>
+    </message>
+    <message>
+        <source>Ctrl+Y</source>
+        <translation>Ctrl+Y</translation>
+    </message>
+    <message>
+        <source>&amp;Plot ...</source>
+        <translation>&amp;Gráfico ...</translation>
+    </message>
+    <message>
+        <source>&amp;Scales...</source>
+        <translation>E&amp;scalas...</translation>
     </message>
     <message>
         <source>&amp;Axes...</source>
@@ -2172,20 +1694,80 @@ Tem certeza que quer continuar?</translation>
         <translation>G&amp;rade ...</translation>
     </message>
     <message>
-        <source>Column &amp;Options ...</source>
-        <translation type="obsolete">Opções de coluna...</translation>
+        <source>&amp;Title ...</source>
+        <translation>&amp;Título ...</translation>
     </message>
     <message>
-        <source>Set Column &amp;Values ...</source>
-        <translation type="obsolete">Definir &amp;valores das colunas...</translation>
+        <source>&amp;About SciDAVis</source>
+        <translation>&amp;Sobre o SciDAVis</translation>
+    </message>
+    <message>
+        <source>F1</source>
+        <translation>F1</translation>
+    </message>
+    <message>
+        <source>Ctrl+H</source>
+        <translation>Ctrl+H</translation>
+    </message>
+    <message>
+        <source>&amp;Choose Help Folder...</source>
+        <translation>Escolher &amp;pasta de ajuda ...</translation>
+    </message>
+    <message>
+        <source>&amp;Rename Window</source>
+        <translation>&amp;Renomear janela</translation>
+    </message>
+    <message>
+        <source>Ctrl+W</source>
+        <translation>Ctrl+W</translation>
     </message>
     <message>
         <source>&amp;Remove Layer</source>
         <translation>Remove&amp;r camada</translation>
     </message>
     <message>
-        <source>Edit 3D &amp;Surface</source>
-        <translation type="obsolete">Editar &amp;superfície 3D</translation>
+        <source>Alt+R</source>
+        <translation>Alt+R</translation>
+    </message>
+    <message>
+        <source>Window &amp;Geometry...</source>
+        <translation>&amp;Geometria da janela...</translation>
+    </message>
+    <message>
+        <source>&amp;View Pixel Line Profile</source>
+        <translation>&amp;Ver perfil da linha de pixel</translation>
+    </message>
+    <message>
+        <source>&amp;Intensity Table</source>
+        <translation>Tabela de &amp;intensidade</translation>
+    </message>
+    <message>
+        <source>&amp;Properties</source>
+        <translation>Propriedades</translation>
+    </message>
+    <message>
+        <source>&amp;Activate Window</source>
+        <translation>&amp;Ativar janela</translation>
+    </message>
+    <message>
+        <source>Mi&amp;nimize Window</source>
+        <translation>Mi&amp;nimizar janela</translation>
+    </message>
+    <message>
+        <source>Ma&amp;ximize Window</source>
+        <translation>Max&amp;imizar janela</translation>
+    </message>
+    <message>
+        <source>Re&amp;size Window...</source>
+        <translation>Redimen&amp;sionar janela ...</translation>
+    </message>
+    <message>
+        <source>&amp;Print Window</source>
+        <translation>Im&amp;primir janela</translation>
+    </message>
+    <message>
+        <source>&amp;Layer Geometry</source>
+        <translation>&amp;Geometria da camada</translation>
     </message>
     <message>
         <source>&amp;Surface...</source>
@@ -2196,20 +1778,56 @@ Tem certeza que quer continuar?</translation>
         <translation>Conjunto de &amp;dados...</translation>
     </message>
     <message>
-        <source>Convert to &amp;matrix</source>
-        <translation type="obsolete">Converter em &amp;matriz</translation>
+        <source>&amp;Invert</source>
+        <translation>&amp;Inverter</translation>
     </message>
     <message>
-        <source>Sort Ta&amp;ble</source>
-        <translation type="obsolete">Ordenar ta&amp;bela</translation>
+        <source>&amp;Determinant</source>
+        <translation>&amp;Determinante</translation>
     </message>
     <message>
-        <source>Sort Columns</source>
-        <translation type="obsolete">Ordenar col&amp;unas</translation>
+        <source>&amp;Convert to Table</source>
+        <translation>Converter em tabela</translation>
+    </message>
+    <message>
+        <source>Convert to &amp;Matrix</source>
+        <translation>Converter em &amp;matriz</translation>
+    </message>
+    <message>
+        <source>3D &amp;Wire Frame</source>
+        <translation>Es&amp;queleto 3D</translation>
+    </message>
+    <message>
+        <source>3D &amp;Hidden Line</source>
+        <translation>Linha 3D &amp;oculta</translation>
+    </message>
+    <message>
+        <source>3D &amp;Polygons</source>
+        <translation>&amp;Polígonos 3D</translation>
+    </message>
+    <message>
+        <source>3D Wire &amp;Surface</source>
+        <translation>&amp;Superfície de fios 3D</translation>
+    </message>
+    <message>
+        <source>Contour - &amp;Color Fill</source>
+        <translation>Contorno - Preenchimento de &amp;cor</translation>
+    </message>
+    <message>
+        <source>Contour &amp;Lines</source>
+        <translation>&amp;Linhas de contorno</translation>
+    </message>
+    <message>
+        <source>&amp;Gray Scale Map</source>
+        <translation>Escala de &amp;cinza</translation>
     </message>
     <message>
         <source>Co&amp;rrelate</source>
         <translation>Co&amp;rrelacionar</translation>
+    </message>
+    <message>
+        <source>&amp;Autocorrelate</source>
+        <translation>&amp;Autocorrelacionar</translation>
     </message>
     <message>
         <source>&amp;Convolute</source>
@@ -2228,24 +1846,8 @@ Tem certeza que quer continuar?</translation>
         <translation>&amp;Vertical</translation>
     </message>
     <message>
-        <source>Ro&amp;w Numbers</source>
-        <translation type="obsolete">Número de &amp;linhas</translation>
-    </message>
-    <message>
-        <source>&amp;Random values</source>
-        <translation type="obsolete">Valores aleató&amp;rios</translation>
-    </message>
-    <message>
-        <source>&amp;None</source>
-        <translation>&amp;Nenhum</translation>
-    </message>
-    <message>
         <source>&amp;Box Plot</source>
         <translation>Gráfico de &amp;caixas</translation>
-    </message>
-    <message>
-        <source>Fit &amp;Multi-peak</source>
-        <translation>Ajustar &amp;múltiplos picos</translation>
     </message>
     <message>
         <source>&amp;Gaussian...</source>
@@ -2256,574 +1858,32 @@ Tem certeza que quer continuar?</translation>
         <translation>&amp;Lorentziana...</translation>
     </message>
     <message>
-        <source>Peaks</source>
-        <translation>Picos</translation>
-    </message>
-    <message>
-        <source>Move cursor and click to select a point and double-click/press &apos;Enter&apos; to set the position of a peak!</source>
-        <translation type="obsolete">Mova o cursor e clique para selecionar um ponto e dê um duplo clique ou tecle &apos;Enter&apos; para determinar a posição do pico!</translation>
-    </message>
-    <message>
-        <source>Too many command line options (maximum accepted is 2)!</source>
-        <translation type="obsolete">Muitas opções de linha de comando (o máximo aceito são 2)!</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt; %1 &lt;/b&gt;: Unknown command line option or the file doesn&apos;t exist!</source>
-        <translation type="obsolete">&lt;b&gt; %1 &lt;/b&gt;: Opção de linha de comando desconhecida ou arquivo inexistente!</translation>
-    </message>
-    <message>
-        <source>&amp;Search for Updates</source>
-        <translation type="obsolete">P&amp;rocurar atualizações</translation>
-    </message>
-    <message>
-        <source>Download &amp;manual</source>
-        <translation type="obsolete">Baixar &amp;manual</translation>
-    </message>
-    <message>
-        <source>&amp;Translations</source>
-        <translation type="obsolete">&amp;Traduções</translation>
-    </message>
-    <message>
-        <source>Make a &amp;donation</source>
-        <translation type="obsolete">Fazer uma &amp;doação</translation>
-    </message>
-    <message>
-        <source>Technical &amp;support</source>
-        <translation type="obsolete">Asis&amp;tência técnica</translation>
-    </message>
-    <message>
-        <source>Open a new project</source>
-        <translation>Abrir um novo projeto</translation>
-    </message>
-    <message>
-        <source>Create a new 2D function plot</source>
-        <translation>Criar um nova gráfico 2D de função</translation>
-    </message>
-    <message>
-        <source>Create a new 3D surface plot</source>
-        <translation>Criar um novo gráfico 3D</translation>
-    </message>
-    <message>
-        <source>Undo changes</source>
-        <translation>Desfazer mudanças</translation>
-    </message>
-    <message>
-        <source>Redo changes</source>
-        <translation>Refazer mudanças</translation>
-    </message>
-    <message>
-        <source>Cut selection</source>
-        <translation>Cortar seleção</translation>
-    </message>
-    <message>
-        <source>Copy selection</source>
-        <translation>Copiar seleção</translation>
-    </message>
-    <message>
-        <source>Paste selection</source>
-        <translation>Colar seleção</translation>
-    </message>
-    <message>
-        <source>Delete selection</source>
-        <translation>Excluir seleção</translation>
-    </message>
-    <message>
-        <source>English</source>
-        <translation type="obsolete">Português</translation>
-    </message>
-    <message>
-        <source>There are no available columns with plot designation set to Z!</source>
-        <translation>Não existem colunas disponíveis definidas como Z!</translation>
-    </message>
-    <message>
-        <source>Plot 3D</source>
-        <translation type="obsolete">Gráfico 3D</translation>
-    </message>
-    <message>
-        <source>Determinant of </source>
-        <translation>Determinante de </translation>
-    </message>
-    <message>
-        <source>graph1</source>
-        <translation type="obsolete">gráfico1</translation>
-    </message>
-    <message>
-        <source>table1</source>
-        <translation type="obsolete">tabela1</translation>
-    </message>
-    <message>
-        <source>Matrix1</source>
-        <translation type="obsolete">Matriz1</translation>
-    </message>
-    <message>
-        <source>Save Window As Template</source>
-        <translation>Salvar janela como modelo</translation>
-    </message>
-    <message>
-        <source>There are actually no curves on the active layer!</source>
-        <translation type="obsolete">Não existem curvas na camada ativa!</translation>
-    </message>
-    <message>
-        <source>&amp;Insert Row</source>
-        <translation>&amp;Inserir linha</translation>
-    </message>
-    <message>
-        <source>&amp;Insert Column</source>
-        <translation>&amp;Inserir coluna</translation>
-    </message>
-    <message>
-        <source>&amp;Delete Columns</source>
-        <translation>Remover colunas</translation>
-    </message>
-    <message>
-        <source>Open Temp&amp;late...</source>
-        <translation>Abrir mode&amp;lo...</translation>
-    </message>
-    <message>
-        <source>Save as &amp;Template...</source>
-        <translation type="obsolete">Salvar como mode&amp;lo...</translation>
-    </message>
-    <message>
-        <source>&amp;Curves ...</source>
-        <translation type="obsolete">&amp;Curvas...</translation>
-    </message>
-    <message>
-        <source>&amp;Scales...</source>
-        <translation>E&amp;scalas...</translation>
-    </message>
-    <message>
-        <source>New Table</source>
-        <translation type="obsolete">Nova tabela</translation>
-    </message>
-    <message>
-        <source>Save Project</source>
-        <translation type="obsolete">Salvar projeto</translation>
-    </message>
-    <message>
-        <source>Open Te&amp;mplate...</source>
-        <translation>Abrir mode&amp;lo...</translation>
-    </message>
-    <message>
-        <source>Open Template</source>
-        <translation type="obsolete">Abrir modelo</translation>
-    </message>
-    <message>
-        <source>Save Window as Template</source>
-        <translation type="obsolete">Salvar janela como modelo</translation>
-    </message>
-    <message>
-        <source>&amp;Vectors XYXY</source>
-        <translation type="obsolete">&amp;Vetores XYXY</translation>
-    </message>
-    <message>
-        <source>Vectors XYXY</source>
-        <translation>Vetores XYXY</translation>
-    </message>
-    <message>
-        <source>&amp;Curves...</source>
-        <translation type="obsolete">&amp;Curvas...</translation>
-    </message>
-    <message>
-        <source>Box and Whiskers Plot</source>
-        <translation type="obsolete">Gráfico de caixa e barbas</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
-        <translation>&lt;b&gt; %1 &lt;/b&gt;: Opções regionais inadequadas ou tradução indisponível!</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Editar</translation>
-    </message>
-    <message>
-        <source>Ctrl+ALT+M</source>
-        <translation>Ctrl+ALT+M</translation>
-    </message>
-    <message>
-        <source>Project Explorer</source>
-        <translation>Navegador de projeto</translation>
-    </message>
-    <message>
-        <source>Results Log</source>
-        <translation>Registro de resultados</translation>
-    </message>
-    <message>
-        <source>Note</source>
-        <translation>Nota</translation>
-    </message>
-    <message>
-        <source>The file &lt;b&gt;%1&lt;/b&gt; is corrupted, but there exists a backup copy.&lt;br&gt;Do you want to open the backup instead?</source>
-        <translation>O arquivo &lt;b&gt;%1&lt;/b&gt; está corrompido, mas existe uma cópia de segurança.&lt;br&gt;Deseja abrir a cópia em seu lugar?</translation>
-    </message>
-    <message>
-        <source>QtiPlot project</source>
-        <translation type="obsolete">Projeto do QtiPlot</translation>
-    </message>
-    <message>
-        <source>Compressed QtiPlot project</source>
-        <translation type="obsolete">Projeto do QtiPlot comprimido</translation>
-    </message>
-    <message>
-        <source>Origin project</source>
-        <translation type="obsolete">Projeto do Origin</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation type="obsolete">Todos os arquivos</translation>
-    </message>
-    <message>
-        <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you rum  the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation type="obsolete">Não foi possível fazer a cópia de segurança de &lt;b&gt;%1&lt;/b&gt; (a %2). &lt;br&gt;Se isto for ignorado os dados&lt;/b&gt; poderão ser &lt;b&gt;perdidos.</translation>
-    </message>
-    <message>
-        <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
-        <translation>O arquivo: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; está aberto no modo somente leitura</translation>
-    </message>
-    <message>
-        <source>Save Project As</source>
-        <translation>Salvar projeto como</translation>
-    </message>
-    <message>
-        <source>New &amp;Graph</source>
-        <translation>Novo &amp;Gráfico</translation>
-    </message>
-    <message>
-        <source>New &amp;Note / Script</source>
-        <translation>Nova &amp;nota / script</translation>
-    </message>
-    <message>
-        <source>Ctrl+ALT+Z</source>
-        <translation>Ctrl+ALT+Z</translation>
-    </message>
-    <message>
-        <source>Vectors XY&amp;AM</source>
-        <translation>Vetores XY&amp;AM</translation>
-    </message>
-    <message>
-        <source>Fit &amp;Boltzmann (Sigmoidal)</source>
-        <translation>Ajuste &amp;Boltzmann (Sigmoidal)</translation>
-    </message>
-    <message>
-        <source>Create an empty 2D plot</source>
-        <translation>Criar um gráfico 2D vazio</translation>
-    </message>
-    <message>
-        <source>Create an empty note window</source>
-        <translation type="obsolete">Criar uma janela de notas vazia</translation>
-    </message>
-    <message>
-        <source>Print window</source>
-        <translation>Imprimir janela</translation>
-    </message>
-    <message>
-        <source>Vectors XYAM</source>
-        <translation>Vetores XYAM</translation>
-    </message>
-    <message>
-        <source>Folder</source>
-        <translation>Pasta</translation>
-    </message>
-    <message>
-        <source>UNTITLED</source>
-        <translation>Sem título</translation>
-    </message>
-    <message>
-        <source>pixels</source>
-        <translation>pixels</translation>
-    </message>
-    <message>
-        <source>pixel intensity (a.u.)</source>
-        <translation>intensidade dos pixels (u. a.)</translation>
-    </message>
-    <message>
-        <source>The table &apos;%1&apos; already exists. It has been renamed &apos;%2&apos;.</source>
-        <translation>A tabela &apos;%1&apos; já existe. Foi renomeada &apos;%2&apos;.</translation>
-    </message>
-    <message>
-        <source>The matrix &apos;%1&apos; already exists. It has been renamed &apos;%2&apos;.</source>
-        <translation type="obsolete">A matriz &apos;%1&apos; já existe.Foi renomeada &apos;%2&apos;.</translation>
-    </message>
-    <message>
-        <source>Please enter a valid name!</source>
-        <translation>Por favor, forneça um nome válido!</translation>
-    </message>
-    <message>
-        <source>The name you chose is not valid: only letters and digits are allowed!</source>
-        <translation>O nome escolhido não é válido : somente dígitos e letras são permitidos!</translation>
-    </message>
-    <message>
-        <source>Please choose another name!</source>
-        <translation>Por favor, escolha outro nome!</translation>
-    </message>
-    <message>
-        <source>Name already exists!</source>
-        <translation>O nome já existe!</translation>
-    </message>
-    <message>
-        <source>The table name must be different from the names of its columns!</source>
-        <translation>O nome da tabela deve ser diferente dos nomes das colunas!</translation>
-    </message>
-    <message>
-        <source>&amp;Delete Selection</source>
-        <translation>Excluir seleção</translation>
-    </message>
-    <message>
-        <source>New &amp;Window</source>
-        <translation>Nova janela</translation>
-    </message>
-    <message>
-        <source>New F&amp;older</source>
-        <translation>Nova pasta</translation>
-    </message>
-    <message>
-        <source>Auto &amp;Column Width</source>
-        <translation>Largura automática de coluna</translation>
-    </message>
-    <message>
-        <source>Key_Delete</source>
-        <translation type="obsolete">Tecla_Apagar</translation>
-    </message>
-    <message>
-        <source>Double-click on plot to select a data point!</source>
-        <translation type="obsolete">Dê um duplo clique no gráfico para selecionar um ponto!</translation>
-    </message>
-    <message>
-        <source>Scripting Console</source>
-        <translation>Terminal de programação</translation>
-    </message>
-    <message>
-        <source>Graph</source>
-        <translation>Gráfico</translation>
-    </message>
-    <message>
-        <source>&amp;Zoom In</source>
-        <translation>A&amp;umentar zoom</translation>
-    </message>
-    <message>
-        <source>Ctrl++</source>
-        <translation>Ctrl++</translation>
-    </message>
-    <message>
-        <source>Zoom &amp;Out</source>
-        <translation>D&amp;iminuir zoom</translation>
-    </message>
-    <message>
-        <source>Ctrl+-</source>
-        <translation>Ctrl+-</translation>
-    </message>
-    <message>
-        <source>Draw &amp;Arrow</source>
-        <translation>&amp;Desenhar flecha</translation>
-    </message>
-    <message>
-        <source>CTRL+ALT+A</source>
-        <translation>CTRL+ALT+A</translation>
-    </message>
-    <message>
-        <source>Draw &amp;Line</source>
-        <translation>Desenhar li&amp;nha</translation>
-    </message>
-    <message>
-        <source>S&amp;cripting</source>
-        <translation type="obsolete">Programar</translation>
-    </message>
-    <message>
-        <source>This operation cannot be performed on curves plotted from columns having a non-numerical format.</source>
-        <translation type="obsolete">Esta operação não pode ser realizada em curvas plotadas a partir de colunas com  formato numérico.</translation>
-    </message>
-    <message>
-        <source>&lt;h4&gt;There are no matrizes available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
-        <translation type="obsolete">&lt;h4&gt;Não existen matrizes disponíveis neste projeto.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Por favor, crie uma matriz e tente novamente!&lt;/h4&gt;</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation>Notas</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="obsolete">Texto</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Dados</translation>
-    </message>
-    <message>
-        <source>Comma Separated Values</source>
-        <translation type="obsolete">Valores separados por vírgula</translation>
-    </message>
-    <message>
-        <source>The file &quot;%1&quot; was created using &quot;%2&quot; as scripting language.
-
-Initializing support for this language FAILED; I&apos;m using &quot;%3&quot; instead.
-Various parts of this file may not be displayed as expected.</source>
-        <translation>O arquivo &quot;%1&quot; foi criado usando &quot;%2&quot; como linguagem de programação.
-
-A inicialização do  suporte para esta linguagem FALHOU; Estou usando &quot;%3&quot; em seu lugar.
-Varias partes deste arquivo podem não ser apresentadas como o esperado.</translation>
-    </message>
-    <message>
-        <source>Window</source>
-        <translation>Janela</translation>
-    </message>
-    <message>
-        <source>Scripting language &quot;%1&quot; failed to initialize.</source>
-        <translation>Falha na inicialização da linguagem de programação &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <source>Get existing directory</source>
-        <translation type="obsolete">Obter diretório existente</translation>
-    </message>
-    <message>
-        <source>Choose a directory to export the graphs to</source>
-        <translation>Escolha um diretório para exportar os gráficos</translation>
-    </message>
-    <message>
-        <source>Python Source</source>
-        <translation type="obsolete">Fonte Python</translation>
-    </message>
-    <message>
-        <source>All Files</source>
-        <translation type="obsolete">Todos os arquivos</translation>
-    </message>
-    <message>
-        <source>Save Notes As...</source>
-        <translation type="obsolete">Salvar notas como...</translation>
-    </message>
-    <message>
-        <source>Please select a row first!</source>
-        <translation>Por favor, selecione uma linha primeiro!</translation>
-    </message>
-    <message>
-        <source>X</source>
-        <translation type="obsolete">X</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation type="obsolete">Y</translation>
-    </message>
-    <message>
-        <source>Z</source>
-        <translation type="obsolete">Z</translation>
-    </message>
-    <message>
-        <source>X Error</source>
-        <translation type="obsolete">Erro em X</translation>
-    </message>
-    <message>
-        <source>Y Error</source>
-        <translation type="obsolete">Erro em Y</translation>
-    </message>
-    <message>
-        <source>&amp;Edit Function...</source>
-        <translation>&amp;Editar função...</translation>
-    </message>
-    <message>
-        <source>&amp;Plot details...</source>
-        <translation>Detalhes do gráfico...</translation>
-    </message>
-    <message>
-        <source>Click on data point to display information!</source>
-        <translation type="obsolete">Clique no ponto para mostrar a informação!</translation>
-    </message>
-    <message>
-        <source>Images</source>
-        <translation>imagens</translation>
-    </message>
-    <message>
-        <source>Empty 3D surface plots cannot be duplicated!</source>
-        <translation>Os gráficos de superfícies 3D vazias não podem ser duplicados!</translation>
-    </message>
-    <message>
-        <source>D&amp;epending Graphs</source>
-        <translation>Gráficos d&amp;ependentes</translation>
-    </message>
-    <message>
-        <source>D&amp;epending 3D Graphs</source>
-        <translation>Gráficos 3D d&amp;ependentes</translation>
-    </message>
-    <message>
-        <source>&amp;Graph 3D</source>
-        <translation type="obsolete">&amp;Gráfico 3D</translation>
-    </message>
-    <message>
-        <source>Open File</source>
-        <translation type="obsolete">Abrir arquivo</translation>
-    </message>
-    <message>
-        <source>Number of averaged pixels</source>
-        <translation>Média do número de pixels selecionados</translation>
-    </message>
-    <message>
-        <source>Scripting &amp;Console</source>
-        <translation type="obsolete">&amp;Terminal de programação</translation>
-    </message>
-    <message>
-        <source>Alt+G</source>
-        <translation>Alt+G</translation>
-    </message>
-    <message>
-        <source>Alt+F4</source>
-        <translation type="obsolete">Alt+F4</translation>
-    </message>
-    <message>
-        <source>Ctrl+Shift+R</source>
-        <translation>Ctrl+Shift+R</translation>
-    </message>
-    <message>
-        <source>Ctrl+Alt+O</source>
-        <translation type="obsolete">Ctrl+Alt+O</translation>
-    </message>
-    <message>
-        <source>Recalculate</source>
-        <translation type="obsolete">Recalcular</translation>
-    </message>
-    <message>
-        <source>Ctrl+Return</source>
-        <translation>Ctrl+Return</translation>
-    </message>
-    <message>
-        <source>&amp;Go to Row...</source>
-        <translation type="obsolete">Ir para a linha...</translation>
-    </message>
-    <message>
-        <source>Ctrl+Alt+G</source>
-        <translation type="obsolete">Ctrl+Alt+G</translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="obsolete">Limp&amp;ar</translation>
-    </message>
-    <message>
-        <source>&amp;X</source>
-        <translation type="obsolete">&amp;X</translation>
-    </message>
-    <message>
-        <source>&amp;Y</source>
-        <translation type="obsolete">&amp;Y</translation>
-    </message>
-    <message>
-        <source>&amp;Z</source>
-        <translation type="obsolete">&amp;Z</translation>
-    </message>
-    <message>
-        <source>X E&amp;rror</source>
-        <translation type="obsolete">E&amp;rro em X</translation>
-    </message>
-    <message>
-        <source>Y &amp;Error</source>
-        <translation type="obsolete">&amp;Erro em Y</translation>
-    </message>
-    <message>
         <source>Search for &amp;Updates</source>
         <translation>Proc&amp;urar atualizações</translation>
     </message>
     <message>
-        <source>Scripting &amp;language</source>
-        <translation type="obsolete">&amp;Linguagem de programação</translation>
+        <source>&amp;SciDAVis Homepage</source>
+        <translation>S&amp;ite do SciDAVis</translation>
     </message>
     <message>
-        <source>&amp;Restart scripting</source>
-        <translation type="obsolete">&amp;Reiniciar programação</translation>
+        <source>SciDAVis &amp;Forums</source>
+        <translation>&amp;Fórum do SciDAVis</translation>
+    </message>
+    <message>
+        <source>Report a &amp;Bug</source>
+        <translation>&amp;Reportar um erro do programa</translation>
+    </message>
+    <message>
+        <source>Download &amp;Manual</source>
+        <translation>Baixar o &amp;manual</translation>
+    </message>
+    <message>
+        <source>Scripting &amp;Language</source>
+        <translation>&amp;Linguagem de programação (script)</translation>
+    </message>
+    <message>
+        <source>&amp;Restart Scripting</source>
+        <translation>&amp;Reiniciar programação (script)</translation>
     </message>
     <message>
         <source>E&amp;xecute</source>
@@ -2846,550 +1906,12 @@ Varias partes deste arquivo podem não ser apresentadas como o esperado.</transl
         <translation>&amp;Resolver expressão</translation>
     </message>
     <message>
-        <source>&amp;Python Script Window</source>
-        <translation type="obsolete">Janela de programação &amp;Python</translation>
+        <source>Ctrl+Return</source>
+        <translation>Ctrl+Return</translation>
     </message>
     <message>
-        <source>F3</source>
-        <translation type="obsolete">F3</translation>
-    </message>
-    <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Console</translation>
-    </message>
-    <message>
-        <source>Show Scripting console</source>
-        <translation>Mostrar terminal de programação</translation>
-    </message>
-    <message>
-        <source>Zoom In</source>
-        <translation>Aumentar zoom</translation>
-    </message>
-    <message>
-        <source>Zoom Out</source>
-        <translation>Diminuir zoom</translation>
-    </message>
-    <message>
-        <source>Draw arrow</source>
-        <translation>Desenhar flecha</translation>
-    </message>
-    <message>
-        <source>Fit</source>
-        <translation type="obsolete">Regredir</translation>
-    </message>
-    <message>
-        <source>&amp;Find...</source>
-        <translation>&amp;Procurar...</translation>
-    </message>
-    <message>
-        <source>App&amp;end Project...</source>
-        <translation>Adicionar proj&amp;eto...</translation>
-    </message>
-    <message>
-        <source>Save &amp;As Project...</source>
-        <translation>Salv&amp;ar como projeto...</translation>
-    </message>
-    <message>
-        <source>Save Project &amp;As...</source>
-        <translation>Sal&amp;var projeto como...</translation>
-    </message>
-    <message>
-        <source>&amp;Show All Windows</source>
-        <translation>Mo&amp;strar todas as janelas</translation>
-    </message>
-    <message>
-        <source>&amp;Hide All Windows</source>
-        <translation>&amp;Ocultar todas as janelas</translation>
-    </message>
-    <message>
-        <source>&amp;Delete Folder</source>
-        <translation>Excluir pasta</translation>
-    </message>
-    <message>
-        <source>&amp;Rename</source>
-        <translation>&amp;Renomear</translation>
-    </message>
-    <message>
-        <source>&amp;Windows in Active Folder</source>
-        <translation>&amp;Janelas na pasta ativa</translation>
-    </message>
-    <message>
-        <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
-        <translation>Janelas na pasta &amp;ativa e subpastas</translation>
-    </message>
-    <message>
-        <source>&amp;View Windows</source>
-        <translation>Ver janelas</translation>
-    </message>
-    <message>
-        <source>Project</source>
-        <translation>Projeto</translation>
-    </message>
-    <message>
-        <source>Path</source>
-        <translation>Caminho</translation>
-    </message>
-    <message>
-        <source>bytes</source>
-        <translation>bytes</translation>
-    </message>
-    <message>
-        <source>Contents</source>
-        <translation>Conteúdo</translation>
-    </message>
-    <message>
-        <source>Windows</source>
-        <translation type="obsolete">Janelas</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation type="obsolete">Pastas</translation>
-    </message>
-    <message>
-        <source>Modified</source>
-        <translation>Modificado</translation>
-    </message>
-    <message>
-        <source>Properties</source>
-        <translation>Propriedades</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation>Nova Pasta</translation>
-    </message>
-    <message>
-        <source>Delete folder &apos;%1&apos; and all the windows it contains?</source>
-        <translation>Excluir a pasta &apos;%1&apos; e todas as janelas que contém?</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>Status</translation>
-    </message>
-    <message>
-        <source>Sorry, no match found for string: &apos;%1&apos;</source>
-        <translation>Lamento, não foram encontradas coincidências para a cadeia de caracteres: &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Cannot move an object to itself!</source>
-        <translation>Não é possível mover um objeto para si mesmo!</translation>
-    </message>
-    <message>
-        <source>Cannot move a parent folder into a child folder!</source>
-        <translation>Não é possível mover uma pasta pai para dentro de uma pasta filha!</translation>
-    </message>
-    <message>
-        <source>Skipped Moving Folder</source>
-        <translation type="obsolete">Movimento de pasta cancelado</translation>
-    </message>
-    <message>
-        <source>The destination folder already contains a folder called &apos;%1&apos;! Folder skipped!</source>
-        <translation>A pasta de destino já contém uma pasta chamada &apos;%1&apos;! Pasta omitida!</translation>
-    </message>
-    <message>
-        <source>Graph 3D</source>
-        <translation type="obsolete">Gráfico 3D</translation>
-    </message>
-    <message>
-        <source>Cannot write file %1
-%2.</source>
-        <translation type="obsolete">Não foi possível escrever o arquivo %1
-%2.</translation>
-    </message>
-    <message>
-        <source>Error while fetching version file with HTTP: %1.</source>
-        <translation>Erro ao obter versão de arquivo com HTTP: %1.</translation>
-    </message>
-    <message>
-        <source>No updates available. Your current version %1 is the last version available!</source>
-        <translation type="obsolete">Não existem atualizações disponíveis. Sua versão actual %1 á a última versão disponível!</translation>
-    </message>
-    <message>
-        <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
-        <translation>Isto apagará os conteúdos de todos os dados associados com a tabela. Está certo disto?</translation>
-    </message>
-    <message>
-        <source>Row</source>
-        <translation type="obsolete">Linha</translation>
-    </message>
-    <message>
-        <source>Matrix Plot</source>
-        <translation>Gráfico de matriz</translation>
-    </message>
-    <message>
-        <source>The file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; is the current file!</source>
-        <translation>O arquivo &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; é o arquivo atual!</translation>
-    </message>
-    <message>
-        <source>Name &lt;b&gt;%1&lt;/b&gt; already exists!</source>
-        <translation>O nome &lt;b&gt;%1&lt;/b&gt; já existe!</translation>
-    </message>
-    <message>
-        <source>Warning: for internal consistency reasons the underscore character is replaced with a minus sign.</source>
-        <translation>Aviso: por razões de consistência interna o caractere de contagem abaixo é substituído pelo sinal de menos.</translation>
-    </message>
-    <message>
-        <source>&amp;Horizontal Steps</source>
-        <translation>Escalas &amp;horizontais</translation>
-    </message>
-    <message>
-        <source>Ctrl+K</source>
-        <translation>Ctrl+K</translation>
-    </message>
-    <message>
-        <source>Ctrl+Alt+K</source>
-        <translation type="obsolete">Ctrl+Alt+K</translation>
-    </message>
-    <message>
-        <source>Automatic Layout</source>
-        <translation>Esquema automático</translation>
-    </message>
-    <message>
-        <source>Alt+Q</source>
-        <translation type="obsolete">Alt+Q</translation>
-    </message>
-    <message>
-        <source>Contour - &amp;Color Fill</source>
-        <translation>Contorno - Preenchimento de &amp;cor</translation>
-    </message>
-    <message>
-        <source>Contour &amp;Lines</source>
-        <translation>&amp;Linhas de contorno</translation>
-    </message>
-    <message>
-        <source>&amp;Gray Scale Map</source>
-        <translation>Escala de &amp;cinza</translation>
-    </message>
-    <message>
-        <source>Script Window</source>
-        <translation type="obsolete">Janela de programação</translation>
-    </message>
-    <message>
-        <source>Add Layer</source>
-        <translation>Adicionar camada</translation>
-    </message>
-    <message>
-        <source>Arrange Layers</source>
-        <translation>Organizar camadas</translation>
-    </message>
-    <message>
-        <source>Add Error Bars...</source>
-        <translation>Adicionar barras de erro...</translation>
-    </message>
-    <message>
-        <source>Add Function...</source>
-        <translation>Adicionar função...</translation>
-    </message>
-    <message>
-        <source>Add Image</source>
-        <translation>Adicionar imagem</translation>
-    </message>
-    <message>
-        <source>Contour + &amp;Color Fill</source>
-        <translation>Contorno + preenchimento de &amp;cor</translation>
-    </message>
-    <message>
-        <source>Contour Lines + Color Fill</source>
-        <translation>Linhas de contorno + preenchimento de cor</translation>
-    </message>
-    <message>
-        <source>Contour Lines</source>
-        <translation>Linhas de contorno</translation>
-    </message>
-    <message>
-        <source>Gray Scale Map</source>
-        <translation>Mapa de escala de cinza</translation>
-    </message>
-    <message>
-        <source>Add Text</source>
-        <translation>Adicionar texto</translation>
-    </message>
-    <message>
-        <source>Animation</source>
-        <translation>Animação</translation>
-    </message>
-    <message>
-        <source>Enable perspective</source>
-        <translation>Habilitar perspectiva</translation>
-    </message>
-    <message>
-        <source>Reset rotation</source>
-        <translation>Reiniciar rotação</translation>
-    </message>
-    <message>
-        <source>Fit frame to window</source>
-        <translation>Ajustar quadro á janela</translation>
-    </message>
-    <message>
-        <source>&amp;Next</source>
-        <comment>Next window</comment>
-        <translation type="obsolete">&amp;Próxima</translation>
-    </message>
-    <message>
-        <source>F5</source>
-        <comment>Shortcut for next window</comment>
-        <translation type="obsolete">F5</translation>
-    </message>
-    <message>
-        <source>&amp;Previous</source>
-        <comment>Janela anterior</comment>
-        <translation type="obsolete">&amp;Anterior</translation>
-    </message>
-    <message>
-        <source>F6</source>
-        <comment>Atalho para a janela anterior</comment>
-        <translation type="obsolete">F6</translation>
-    </message>
-    <message>
-        <source>Disable &amp;Tools</source>
-        <translation>Desativar &amp;ferramentas</translation>
-    </message>
-    <message>
-        <source>&amp;Zoom Out</source>
-        <translation>Diminuir &amp;zoom</translation>
-    </message>
-    <message>
-        <source>&amp;Data Reader</source>
-        <translation>Leitor de &amp;dados</translation>
-    </message>
-    <message>
-        <source>&amp;Select Data Range</source>
-        <translation>&amp;Selecionar faixa de dados</translation>
-    </message>
-    <message>
-        <source>S&amp;creen Reader</source>
-        <translation>Leitor de &amp;tela</translation>
-    </message>
-    <message>
-        <source>3D Surface</source>
-        <translation>Superfície 3D</translation>
-    </message>
-    <message>
-        <source>&amp;Recent Projects</source>
-        <translation>P&amp;rojetos recentes</translation>
-    </message>
-    <message>
-        <source>3&amp;D Plot</source>
-        <translation>Gráfico &amp;3D</translation>
-    </message>
-    <message>
-        <source>Set Columns &amp;As</source>
-        <translation type="obsolete">&amp;Definir colunas como</translation>
-    </message>
-    <message>
-        <source>&amp;Fill Columns With</source>
-        <translation type="obsolete">&amp;Preencher colunas com</translation>
-    </message>
-    <message>
-        <source>&amp;FFT Filter</source>
-        <translation>Filtro FF&amp;T</translation>
-    </message>
-    <message>
-        <source>Fit &amp;Multi-Peak</source>
-        <translation>Ajuste de &amp;múltiplos picos</translation>
-    </message>
-    <message>
-        <source>Scripting</source>
-        <translation>&amp;Programação</translation>
-    </message>
-    <message>
-        <source>3D &amp;Plot</source>
-        <translation>&amp;Gráfico 3D</translation>
-    </message>
-    <message>
-        <source>Column</source>
-        <translation>Coluna</translation>
-    </message>
-    <message>
-        <source>Script Error</source>
-        <translation>Erro de programação</translation>
-    </message>
-    <message>
-        <source>Table1</source>
-        <translation>Tabela1</translation>
-    </message>
-    <message>
-        <source>Please select two columns for this operation!</source>
-        <translation>Por favor, selecione duas colunas para esta operação!</translation>
-    </message>
-    <message>
-        <source>Please select exactly one columns for this operation!</source>
-        <translation>Por favor, selecione exatamente uma coluna para esta operação!</translation>
-    </message>
-    <message>
-        <source>Please select two columns for this operation:
- the first represents the signal and the second the response function!</source>
-        <translation>Por favor, selecione duas colunas para esta operação: 
-a primeira representa o sinal e a segunda a função resposta!</translation>
-    </message>
-    <message>
-        <source>Vertical &amp;Drop Lines</source>
-        <translation>&amp;Linhas verticais gotejadas</translation>
-    </message>
-    <message>
-        <source>Set As</source>
-        <translation type="obsolete">Definir como</translation>
-    </message>
-    <message>
-        <source>&amp;Fill Column With</source>
-        <translation type="obsolete">Preencher coluna com</translation>
-    </message>
-    <message>
-        <source>&amp;Add Column</source>
-        <translation type="obsolete">Adicio&amp;nar coluna</translation>
-    </message>
-    <message>
-        <source>Could not write to file: &lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location or that the file is not being used by another application!</source>
-        <translation>Não foi possível escrever no arquivo: &lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt; Por favor verifique se você tem permissão de escrita neste local ou que este arquivo não está sendo utilizado por outra aplicação!</translation>
-    </message>
-    <message>
-        <source>Released</source>
-        <translation type="obsolete">Atualizado em</translation>
-    </message>
-    <message>
-        <source>Re&amp;move Pie Curve</source>
-        <translation>Remover curva tipo &amp;pizza</translation>
-    </message>
-    <message>
-        <source>Anal&amp;yze</source>
-        <translation>Anali&amp;zar</translation>
-    </message>
-    <message>
-        <source>&amp;Paste Text</source>
-        <translation>Co&amp;lar texto</translation>
-    </message>
-    <message>
-        <source>&amp;Paste Line/Arrow</source>
-        <translation>Co&amp;lar linha/flecha</translation>
-    </message>
-    <message>
-        <source>&amp;Paste Image</source>
-        <translation>Co&amp;lar imagem</translation>
-    </message>
-    <message>
-        <source>The manual can be downloaded from the following internet address:</source>
-        <translation>O manual pode ser baixado do seguinte endereço na internet:</translation>
-    </message>
-    <message>
-        <source>The assistant could not start because the file &lt;b&gt;%1&lt;/b&gt; was not found in the help file directory!</source>
-        <translation type="obsolete">O assistente não pode ser iniciado porque o arquivo &lt;b&gt;%1&lt;/b&gt; não foi encontrado na pasta de ajuda!</translation>
-    </message>
-    <message>
-        <source>Please indicate the location of the help file!</source>
-        <translation>Por favor indique a localização do  arquivo de ajuda!</translation>
-    </message>
-    <message>
-        <source>Curve</source>
-        <translation>Curva</translation>
-    </message>
-    <message>
-        <source>New 3D &amp;Surface Plot</source>
-        <translation>Nova &amp;superfície 3D</translation>
-    </message>
-    <message>
-        <source>Open Image &amp;File</source>
-        <translation>&amp;Abrir arquivo de imagem</translation>
-    </message>
-    <message>
-        <source>Import I&amp;mage...</source>
-        <translation>Importar ima&amp;gem...</translation>
-    </message>
-    <message>
-        <source>Save As &amp;Template...</source>
-        <translation>Salvar como &amp;modelo...</translation>
-    </message>
-    <message>
-        <source>Save Note As...</source>
-        <translation>Salvar as notas como...</translation>
-    </message>
-    <message>
-        <source>Cu&amp;t Selection</source>
-        <translation>Cor&amp;tar seleção</translation>
-    </message>
-    <message>
-        <source>&amp;Copy Selection</source>
-        <translation>C&amp;opiar seleção</translation>
-    </message>
-    <message>
-        <source>&amp;Paste Selection</source>
-        <translation>Co&amp;lar seleção</translation>
-    </message>
-    <message>
-        <source>Del</source>
-        <comment>delete key</comment>
-        <translatorcomment>Tecla delete</translatorcomment>
-        <translation>Del</translation>
-    </message>
-    <message>
-        <source>&amp;Export PDF</source>
-        <translation>&amp;Exportar como PDF</translation>
-    </message>
-    <message>
-        <source>Ctrl+Alt+P</source>
-        <translation>Ctrl+Alt+P</translation>
-    </message>
-    <message>
-        <source>Clear &amp;Log Information</source>
-        <translation>Apagar &amp;informações do registro</translation>
-    </message>
-    <message>
-        <source>Delete &amp;Fit Tables</source>
-        <translation>Excluir ta&amp;belas de regressão</translation>
-    </message>
-    <message>
-        <source>Plot &amp;Wizard</source>
-        <translation>&amp;Assistente de gráfico</translation>
-    </message>
-    <message>
-        <source>&amp;Rescale to Show All</source>
-        <translation>&amp;Reescalar para mostrar tudo</translation>
-    </message>
-    <message>
-        <source>Add Time Stamp</source>
-        <translation>Adicionar rótulo de hora</translation>
-    </message>
-    <message>
-        <source>&amp;Choose Help Folder...</source>
-        <translation>Escolher &amp;pasta de ajuda ...</translation>
-    </message>
-    <message>
-        <source>Add Column</source>
-        <translation type="obsolete">Adicionar coluna</translation>
-    </message>
-    <message>
-        <source>&amp;View Pixel Line Profile</source>
-        <translation>&amp;Ver perfil da linha de pixel</translation>
-    </message>
-    <message>
-        <source>&amp;Intensity Table</source>
-        <translation>Tabela de &amp;intensidade</translation>
-    </message>
-    <message>
-        <source>&amp;Layer Geometry</source>
-        <translation>&amp;Geometria da camada</translation>
-    </message>
-    <message>
-        <source>&amp;Convert to Spreadsheet</source>
-        <translation type="obsolete">&amp;Converter em planilha</translation>
-    </message>
-    <message>
-        <source>Convert to &amp;Matrix</source>
-        <translation>Converter em &amp;matriz</translation>
-    </message>
-    <message>
-        <source>&amp;Autocorrelate</source>
-        <translation>&amp;Autocorrelacionar</translation>
-    </message>
-    <message>
-        <source>&amp;Random Values</source>
-        <translation type="obsolete">Valores aleató&amp;rios</translation>
-    </message>
-    <message>
-        <source>Report a &amp;Bug</source>
-        <translation>&amp;Reportar um erro do programa</translation>
-    </message>
-    <message>
-        <source>Download &amp;Manual</source>
-        <translation>Baixar o &amp;manual</translation>
+        <source>&amp;Plot details...</source>
+        <translation>Detalhes do gráfico...</translation>
     </message>
     <message>
         <source>&amp;Reset to Full Range</source>
@@ -3412,12 +1934,52 @@ a primeira representa o sinal e a segunda a função resposta!</translation>
         <translation>Mostrar todas as &amp;curvas</translation>
     </message>
     <message>
+        <source>&amp;Edit Function...</source>
+        <translation>&amp;Editar função...</translation>
+    </message>
+    <message>
+        <source>&amp;Copy status bar text</source>
+        <translation>&amp;Copiar o status da barra de texto</translation>
+    </message>
+    <message>
+        <source>Open a new project</source>
+        <translation>Abrir um novo projeto</translation>
+    </message>
+    <message>
+        <source>Create an empty 2D plot</source>
+        <translation>Criar um gráfico 2D vazio</translation>
+    </message>
+    <message>
+        <source>Create an empty note / script window</source>
+        <translation>Criar uma janela de notas / script vazia</translation>
+    </message>
+    <message>
         <source>New table</source>
         <translation>Nova tabela</translation>
     </message>
     <message>
+        <source>New matrix</source>
+        <translation>Nova matriz</translation>
+    </message>
+    <message>
+        <source>Create a new 2D function plot</source>
+        <translation>Criar um nova gráfico 2D de função</translation>
+    </message>
+    <message>
+        <source>Create a new 3D surface plot</source>
+        <translation>Criar um novo gráfico 3D</translation>
+    </message>
+    <message>
+        <source>Open project</source>
+        <translation>Abrir projeto</translation>
+    </message>
+    <message>
         <source>Save project</source>
         <translation>Salvar projeto</translation>
+    </message>
+    <message>
+        <source>Open Te&amp;mplate...</source>
+        <translation>Abrir mode&amp;lo...</translation>
     </message>
     <message>
         <source>Open template</source>
@@ -3428,20 +1990,116 @@ a primeira representa o sinal e a segunda a função resposta!</translation>
         <translation>Salvar janela como modelo</translation>
     </message>
     <message>
+        <source>Import data file(s)</source>
+        <translation>Importar arquivo(s) de dados</translation>
+    </message>
+    <message>
+        <source>Ctrl+K</source>
+        <translation>Ctrl+K</translation>
+    </message>
+    <message>
+        <source>Undo changes</source>
+        <translation>Desfazer mudanças</translation>
+    </message>
+    <message>
+        <source>Redo changes</source>
+        <translation>Refazer mudanças</translation>
+    </message>
+    <message>
+        <source>Duplicate window</source>
+        <translation>Duplicar janela</translation>
+    </message>
+    <message>
+        <source>Cut selection</source>
+        <translation>Cortar seleção</translation>
+    </message>
+    <message>
+        <source>Copy selection</source>
+        <translation>Copiar seleção</translation>
+    </message>
+    <message>
+        <source>Paste selection</source>
+        <translation>Colar seleção</translation>
+    </message>
+    <message>
+        <source>Delete selection</source>
+        <translation>Excluir seleção</translation>
+    </message>
+    <message>
         <source>Project &amp;Explorer</source>
         <translation>&amp;Navegador de projeto</translation>
+    </message>
+    <message>
+        <source>Show project explorer</source>
+        <translation>Mostrar navegador de projeto</translation>
+    </message>
+    <message>
+        <source>Results &amp;Log</source>
+        <translation>&amp;Registro de resultados</translation>
     </message>
     <message>
         <source>Show analysis results</source>
         <translation>Mostrar resultados das análises</translation>
     </message>
     <message>
+        <source>&amp;Console</source>
+        <translation>&amp;Console</translation>
+    </message>
+    <message>
+        <source>Show Scripting console</source>
+        <translation>Mostrar terminal de programação</translation>
+    </message>
+    <message>
+        <source>Add Layer</source>
+        <translation>Adicionar camada</translation>
+    </message>
+    <message>
+        <source>Arrange Layers</source>
+        <translation>Organizar camadas</translation>
+    </message>
+    <message>
+        <source>Export current graph</source>
+        <translation>Exportar gráfico atual</translation>
+    </message>
+    <message>
+        <source>Export all graphs</source>
+        <translation>Exportar todos os gráficos</translation>
+    </message>
+    <message>
         <source>Export to PDF</source>
         <translation>Exportar para PDF</translation>
     </message>
     <message>
+        <source>Print window</source>
+        <translation>Imprimir janela</translation>
+    </message>
+    <message>
+        <source>Add curve to graph</source>
+        <translation>Adicionar curva ao gráfico</translation>
+    </message>
+    <message>
+        <source>Add Error Bars...</source>
+        <translation>Adicionar barras de erro...</translation>
+    </message>
+    <message>
+        <source>Add Function...</source>
+        <translation>Adicionar função...</translation>
+    </message>
+    <message>
+        <source>Best fit</source>
+        <translation>Melhor escala</translation>
+    </message>
+    <message>
+        <source>Add new legend</source>
+        <translation>Adicionar nova legenda</translation>
+    </message>
+    <message>
         <source>Date &amp; time </source>
         <translation>Data &amp; hora</translation>
+    </message>
+    <message>
+        <source>Add Image</source>
+        <translation>Adicionar imagem</translation>
     </message>
     <message>
         <source>Plot as line</source>
@@ -3454,6 +2112,30 @@ a primeira representa o sinal e a segunda a função resposta!</translation>
     <message>
         <source>Plot as line + symbols</source>
         <translation>plotar como linha+símbolos</translation>
+    </message>
+    <message>
+        <source>Plot with vertical bars</source>
+        <translation>Plotar com barras verticais</translation>
+    </message>
+    <message>
+        <source>Plot with horizontal bars</source>
+        <translation>Criar gráfico de barras horizontais</translation>
+    </message>
+    <message>
+        <source>Plot area</source>
+        <translation>Criar gráfico tipo área</translation>
+    </message>
+    <message>
+        <source>Plot pie</source>
+        <translation>Criar gráfico tipo pizza</translation>
+    </message>
+    <message>
+        <source>Vectors XYXY</source>
+        <translation>Vetores XYXY</translation>
+    </message>
+    <message>
+        <source>Vectors XYAM</source>
+        <translation>Vetores XYAM</translation>
     </message>
     <message>
         <source>Plot 3D ribbon</source>
@@ -3472,12 +2154,108 @@ a primeira representa o sinal e a segunda a função resposta!</translation>
         <translation>Gráfico trajetória 3D</translation>
     </message>
     <message>
+        <source>Contour + &amp;Color Fill</source>
+        <translation>Contorno + preenchimento de &amp;cor</translation>
+    </message>
+    <message>
+        <source>Contour Lines + Color Fill</source>
+        <translation>Linhas de contorno + preenchimento de cor</translation>
+    </message>
+    <message>
+        <source>Contour Lines</source>
+        <translation>Linhas de contorno</translation>
+    </message>
+    <message>
+        <source>Gray Scale Map</source>
+        <translation>Mapa de escala de cinza</translation>
+    </message>
+    <message>
+        <source>Selected columns statistics</source>
+        <translation>Estatísticas das colunas selecionadas</translation>
+    </message>
+    <message>
+        <source>Selected rows statistics</source>
+        <translation>Estatísticas das linhas selecionadas</translation>
+    </message>
+    <message>
         <source>More Windows...</source>
         <translation>Mais janelas ...</translation>
     </message>
     <message>
         <source>Box and whiskers plot</source>
         <translation>Gráfico de caixas e barbas</translation>
+    </message>
+    <message>
+        <source>Visit SciDAVis &amp;Forums</source>
+        <translation>Visite os &amp;fóruns do SciDAVis</translation>
+    </message>
+    <message>
+        <source>Disable &amp;tools</source>
+        <translation>Desativar &amp;ferramentas</translation>
+    </message>
+    <message>
+        <source>Pointer</source>
+        <translation>Ponteiro</translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation>Aumentar zoom</translation>
+    </message>
+    <message>
+        <source>Zoom &amp;Out</source>
+        <translation>D&amp;iminuir zoom</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation>Diminuir zoom</translation>
+    </message>
+    <message>
+        <source>Data reader</source>
+        <translation>Leitor de dados</translation>
+    </message>
+    <message>
+        <source>Select data range</source>
+        <translation>Selecionar faixa de dados</translation>
+    </message>
+    <message>
+        <source>Screen reader</source>
+        <translation>Leitor de tela</translation>
+    </message>
+    <message>
+        <source>Move data points</source>
+        <translation>Mover pontos</translation>
+    </message>
+    <message>
+        <source>Remove data points</source>
+        <translation>Remover pontos</translation>
+    </message>
+    <message>
+        <source>Add Text</source>
+        <translation>Adicionar texto</translation>
+    </message>
+    <message>
+        <source>Draw arrow</source>
+        <translation>Desenhar flecha</translation>
+    </message>
+    <message>
+        <source>Draw line</source>
+        <translation>Desenhar linha</translation>
+    </message>
+    <message>
+        <source>Box</source>
+        <translation>Caixa</translation>
+    </message>
+    <message>
+        <source>Frame</source>
+        <translation>Quadro</translation>
+    </message>
+    <message>
+        <source>&amp;Frame</source>
+        <translation>&amp;Quadro</translation>
+    </message>
+    <message>
+        <source>No Axes</source>
+        <translation>Sem eixos</translation>
     </message>
     <message>
         <source>No axes</source>
@@ -3508,6 +2286,14 @@ a primeira representa o sinal e a segunda a função resposta!</translation>
         <translation>Grade inferior</translation>
     </message>
     <message>
+        <source>Wireframe</source>
+        <translation>Rede</translation>
+    </message>
+    <message>
+        <source>Hidden Line</source>
+        <translation>Linha oculta</translation>
+    </message>
+    <message>
         <source>Hidden line</source>
         <translation>Linha oculta</translation>
     </message>
@@ -3516,220 +2302,80 @@ a primeira representa o sinal e a segunda a função resposta!</translation>
         <translation>Somente polígonos</translation>
     </message>
     <message>
+        <source>Polygon only</source>
+        <translation>Somente polígono</translation>
+    </message>
+    <message>
         <source>Mesh &amp; Filled Polygons</source>
         <translation>Polígonos &amp;preenchidos e mesclados</translation>
+    </message>
+    <message>
+        <source>Mesh &amp; filled Polygons</source>
+        <translation>Mesclar polígonos preenchidos</translation>
+    </message>
+    <message>
+        <source>Dots</source>
+        <translation>Pontos</translation>
+    </message>
+    <message>
+        <source>Bars</source>
+        <translation>Barras</translation>
+    </message>
+    <message>
+        <source>Cones</source>
+        <translation>Cones</translation>
     </message>
     <message>
         <source>Crosshairs</source>
         <translation>Cruzes</translation>
     </message>
     <message>
+        <source>Floor Data Projection</source>
+        <translation>Projeção de dados em chão</translation>
+    </message>
+    <message>
         <source>Floor data projection</source>
         <translation>Projeção de dados no chão</translation>
+    </message>
+    <message>
+        <source>Floor Isolines</source>
+        <translation>Isolinhas de chão</translation>
     </message>
     <message>
         <source>Floor isolines</source>
         <translation>Isolinhas de chão</translation>
     </message>
     <message>
+        <source>Empty Floor</source>
+        <translation>Chão vazio</translation>
+    </message>
+    <message>
         <source>Empty floor</source>
         <translation>Chão vazio</translation>
     </message>
     <message>
-        <source>SciDAVis - untitled</source>
-        <translation>SciDAVis - sem título</translation>
+        <source>Animation</source>
+        <translation>Animação</translation>
     </message>
     <message>
-        <source>Toolbars</source>
-        <translation>Barras de ferramentas</translation>
+        <source>Enable perspective</source>
+        <translation>Habilitar perspectiva</translation>
     </message>
     <message>
-        <source>&amp;Quick Fit</source>
-        <translation>Aj&amp;uste rápido</translation>
+        <source>Reset rotation</source>
+        <translation>Reiniciar rotação</translation>
     </message>
     <message>
-        <source>&amp;Tools</source>
-        <translation>&amp;Ferramentas</translation>
+        <source>Fit frame to window</source>
+        <translation>Ajustar quadro á janela</translation>
     </message>
     <message>
-        <source>Please set a default X column for this table, first!</source>
-        <translation>Por favor, primeiro determine uma coluna X para esta tabela!</translation>
+        <source>Enter the number of peaks</source>
+        <translation>Introduza o número de picos</translation>
     </message>
     <message>
-        <source>Please select a column to plot!</source>
-        <translation>Por favor, selecione uma coluna para o gráfico!</translation>
-    </message>
-    <message>
-        <source>Please select four columns for this operation!</source>
-        <translation>Por favor, selecione quatro colunas para esta operação!</translation>
-    </message>
-    <message>
-        <source>ASCII Import Failed</source>
-        <translation>Falha ao importar ASCII</translation>
-    </message>
-    <message>
-        <source>Numeric data cannot be imported into non-numeric column &quot;%1&quot;.</source>
-        <translation>Dados numéricos não podem ser importados para uma coluna não numérica &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <source>Non-numeric data cannot be imported into non-text column &quot;%1&quot;.</source>
-        <translation>Dados não numéricos não podem ser importados para uma uma coluna não texto &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <source>The file &lt;b&gt;%1&lt;/b&gt; is not a valid project file.</source>
-        <translation>O arquivo &lt;b&gt;%1&lt;/b&gt; não é um arquivo de projeto válido. </translation>
-    </message>
-    <message>
-        <source>SciDAVis does not support QtiPlot project files from versions later than 0.9.0.</source>
-        <translation>SciDAVis não suporta arquivos de projeto do Qtiplot de versões posteriores à 0.9.0. </translation>
-    </message>
-    <message>
-        <source>SciDAVis</source>
-        <translation>SciDAVis</translation>
-    </message>
-    <message>
-        <source>The file: &lt;b&gt; %1 &lt;/b&gt; was not created using SciDAVis!</source>
-        <translation>O arquivo &lt;b&gt; %1 &lt;/b&gt; não foi criado usando o SciDAVis!</translation>
-    </message>
-    <message>
-        <source>SciDAVis does not support QtiPlot template files from versions later than 0.9.0.</source>
-        <translation>SciDAVis não suporta modelos do Qtiplot de versões posteriores à 0.9.0.</translation>
-    </message>
-    <message>
-        <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a SciDAVis template file!</source>
-        <translation>O arquivo: &lt;b&gt;%1&lt;/b&gt; não é um arquivo de modelo do SciDAVis!</translation>
-    </message>
-    <message>
-        <source>Output format:</source>
-        <translation>Formato de saída:</translation>
-    </message>
-    <message>
-        <source>Directory:</source>
-        <translation>Diretório:</translation>
-    </message>
-    <message>
-        <source>There are no plot layers available in window &lt;b&gt;%1&lt;/b&gt;.&lt;br&gt;Graph window not exported!</source>
-        <translation>Não existem camadas disponíveis na janela &lt;b&gt;%1&lt;/b&gt;.&lt;br&gt; Janela de gráfico não exportada!</translation>
-    </message>
-    <message>
-        <source>SciDAVis project</source>
-        <translation>Projeto do SciDAVis</translation>
-    </message>
-    <message>
-        <source>Compressed SciDAVis project</source>
-        <translation>Projeto do SciDAVis comprimido</translation>
-    </message>
-    <message>
-        <source>SciDAVis/QtiPlot Matrix Template</source>
-        <translation>Modelo de matriz SciDAVis/QtiPlot</translation>
-    </message>
-    <message>
-        <source>SciDAVis/QtiPlot 2D Graph Template</source>
-        <translation>Modelo de gráfico 2D SciDAVis/QtiPlot</translation>
-    </message>
-    <message>
-        <source>SciDAVis/QtiPlot Table Template</source>
-        <translation>Modelo de tabela SciDAVis/QtiPlot</translation>
-    </message>
-    <message>
-        <source>SciDAVis/QtiPlot 3D Surface Template</source>
-        <translation>Modelo de superfície 3D SciDAVis/QtiPlot</translation>
-    </message>
-    <message>
-        <source>Error reading matrix from project file</source>
-        <translation>Erro ao ler matriz a partir do arquivo do projeto</translation>
-    </message>
-    <message>
-        <source>The following problems occured when loading the project file:
-</source>
-        <translation>Ocorreram os seguintes problemas ao carregar o arquivo do projeto:
-</translation>
-    </message>
-    <message>
-        <source>Project loading partly failed</source>
-        <translation>Falha parcial no carregamento do projeto</translation>
-    </message>
-    <message>
-        <source>Error reading table from project file</source>
-        <translation>Erro ao ler tabela a partir do arquivo do projeto</translation>
-    </message>
-    <message>
-        <source>&amp;Vertical Bars</source>
-        <translation>Barras &amp;verticais</translation>
-    </message>
-    <message>
-        <source>&amp;Horizontal Bars</source>
-        <translation>Barras &amp;horizontais</translation>
-    </message>
-    <message>
-        <source>About SciDAVis</source>
-        <translation type="obsolete">Sobre o SciDAVis</translation>
-    </message>
-    <message>
-        <source>&amp;View Pixel Line profile</source>
-        <translation>&amp;Ver perfil de linha de pixel</translation>
-    </message>
-    <message>
-        <source>Choose the location of the SciDAVis help folder!</source>
-        <translation>Escolha a localização da pasta de ajuda do SciDAVis!</translation>
-    </message>
-    <message>
-        <source>This file is provided with the SciDAVis manual which can be downloaded from the following internet address:</source>
-        <translation type="obsolete">Este arquivo vem junto com omanual do SciDAVis, o qual pode ser baixado da seguinte localização na internet:</translation>
-    </message>
-    <message>
-        <source>Import image...</source>
-        <translation type="obsolete">Importar imagem...</translation>
-    </message>
-    <message>
-        <source>Do you want SciDAVis to guess the best position for the new layer?
- Warning: this will rearrange existing layers!</source>
-        <translation>Deseja que o SciDAVis encontre a melhor posição para a nova camada?
-Aviso: esta operação irá reorganizar as camadas existentes!</translation>
-    </message>
-    <message>
-        <source>&amp;Import ASCII...</source>
-        <translation>Importar arquivo ASCII...</translation>
-    </message>
-    <message>
-        <source>Fit &amp;Wizard...</source>
-        <translation>Assistente de a&amp;juste...</translation>
-    </message>
-    <message>
-        <source>&amp;About SciDAVis</source>
-        <translation>&amp;Sobre o SciDAVis</translation>
-    </message>
-    <message>
-        <source>&amp;Go to Cell...</source>
-        <translation type="obsolete">&amp;Ir para a célula...</translation>
-    </message>
-    <message>
-        <source>&amp;SciDAVis Homepage</source>
-        <translation>S&amp;ite do SciDAVis</translation>
-    </message>
-    <message>
-        <source>SciDAVis &amp;Forums</source>
-        <translation>&amp;Fórum do SciDAVis</translation>
-    </message>
-    <message>
-        <source>Scripting &amp;Language</source>
-        <translation>&amp;Linguagem de programação (script)</translation>
-    </message>
-    <message>
-        <source>&amp;Restart Scripting</source>
-        <translation>&amp;Reiniciar programação (script)</translation>
-    </message>
-    <message>
-        <source>&amp;Copy status bar text</source>
-        <translation>&amp;Copiar o status da barra de texto</translation>
-    </message>
-    <message>
-        <source>Import data file(s)</source>
-        <translation>Importar arquivo(s) de dados</translation>
-    </message>
-    <message>
-        <source>Visit SciDAVis &amp;Forums</source>
-        <translation>Visite os &amp;fóruns do SciDAVis</translation>
+        <source>Peaks</source>
+        <translation>Picos</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt;: This command line option must be used without other arguments!</source>
@@ -3788,12 +2434,20 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
         <translation>Execute o arquivo de script dado como argumento</translation>
     </message>
     <message>
-        <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py or ASCII file</source>
-        <translation type="obsolete">pode ser qualquer arquivo .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .py ou ASCII</translation>
+        <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .org, .py or ASCII file</source>
+        <translation>pode ser qualquer arquivo .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .org, .py ou ASCII</translation>
+    </message>
+    <message>
+        <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .py or ASCII file</source>
+        <translation>pode ser qualquer arquivo .sciprj, .sciprj.gz, .qti, qti.gz, .py ou ASCII</translation>
     </message>
     <message>
         <source>SciDAVis - Help</source>
         <translation>SciDAVis - Ajuda</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt; %1 &lt;/b&gt;: Wrong locale option or no translation available!</source>
+        <translation>&lt;b&gt; %1 &lt;/b&gt;: Opções regionais incorretas ou tradução indisponível!</translation>
     </message>
     <message>
         <source>&lt;b&gt; %1 &lt;/b&gt; unknown command line option!</source>
@@ -3808,12 +2462,20 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
         <translation>&lt;b&gt;%1&lt;/b&gt; é um diretório, por favor especifique um nome de arquivo!</translation>
     </message>
     <message>
-        <source>You don&apos;t have the permission to open this file: &lt;b&gt;%1&lt;/b&gt;</source>
+        <source>You don't have the permission to open this file: &lt;b&gt;%1&lt;/b&gt;</source>
         <translation>Você não tem permissão para abrir este arquivo: &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
         <source>The file: &lt;b&gt;%1&lt;/b&gt; is not a SciDAVis or Origin project file!</source>
         <translation>O arquivo &lt;b&gt; %1 &lt;/b&gt; não é um projeto do SciDAVis ou Origin!</translation>
+    </message>
+    <message>
+        <source>File save error</source>
+        <translation>Erro ao salvar o arquivo</translation>
+    </message>
+    <message>
+        <source>The file: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; is opened in read-only mode</source>
+        <translation>O arquivo: &lt;br&gt;&lt;b&gt;%1&lt;/b&gt; está aberto no modo "apenas leitura"</translation>
     </message>
     <message>
         <source>Error writing data to disk</source>
@@ -3828,12 +2490,84 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
         <translation>Erro ao renomear arquivos de cópia de segurança</translation>
     </message>
     <message>
-        <source>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Data was written to &lt;em&gt;%2&lt;/em&gt;, but saving the original file as &lt;em&gt;%3&lt;/em&gt;					and moving the new file to &lt;em&gt;%4&lt;/em&gt; failed. In case you wonder why the original file hasn&apos;t					been simply replaced, see here:					&lt;a href=&quot;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&quot;&gt;					http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</source>
-        <translation>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Os dados foram gravados em &lt;em&gt;%2&lt;/em&gt;, mas ao salvar os arquivos originais em &lt;em&gt;%3&lt;/em&gt;	e movê-los para &lt;em&gt;%4&lt;/em&gt; ocorreu uma falha. Caso você saiba porque o arquivo original não 	foi simplesmente substituído veja:	&lt;a href=&quot;http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&quot;&gt;￼￼￼￼￼http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</translation>
+        <source>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Data was written to &lt;em&gt;%2&lt;/em&gt;, but saving the original file as &lt;em&gt;%3&lt;/em&gt;					and moving the new file to &lt;em&gt;%4&lt;/em&gt; failed. In case you wonder why the original file hasn't					been simply replaced, see here:					&lt;a href="http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54"&gt;					http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</source>
+        <translation>&lt;html&gt;%1&lt;br&gt;&lt;br&gt;Os dados foram gravados em &lt;em&gt;%2&lt;/em&gt;, mas ao salvar os arquivos originais em &lt;em&gt;%3&lt;/em&gt;	e movê-los para &lt;em&gt;%4&lt;/em&gt; ocorreu uma falha. Caso você saiba porque o arquivo original não 	foi simplesmente substituído veja:	&lt;a href="http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54"&gt;￼￼￼￼￼http://bugs.launchpad.net/ubuntu/+source/linux/+bug/317781/comments/54&lt;/a&gt;.&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Save project as</source>
         <translation>Salvar projeto como</translation>
+    </message>
+    <message>
+        <source>&amp;Find...</source>
+        <translation>&amp;Procurar...</translation>
+    </message>
+    <message>
+        <source>App&amp;end Project...</source>
+        <translation>Anexar pro&amp;jeto...</translation>
+    </message>
+    <message>
+        <source>Save &amp;As Project...</source>
+        <translation>Salv&amp;ar como projeto...</translation>
+    </message>
+    <message>
+        <source>&amp;Show All Windows</source>
+        <translation>Mo&amp;strar todas as janelas</translation>
+    </message>
+    <message>
+        <source>&amp;Hide All Windows</source>
+        <translation>&amp;Ocultar todas as janelas</translation>
+    </message>
+    <message>
+        <source>&amp;Delete Folder</source>
+        <translation>E&amp;xcluir pasta</translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation>&amp;Renomear</translation>
+    </message>
+    <message>
+        <source>&amp;View Windows</source>
+        <translation>&amp;Ver janelas</translation>
+    </message>
+    <message>
+        <source>&amp;None</source>
+        <translation>&amp;Nenhum</translation>
+    </message>
+    <message>
+        <source>&amp;Windows in Active Folder</source>
+        <translation>&amp;Janelas na pasta ativa</translation>
+    </message>
+    <message>
+        <source>Windows in &amp;Active Folder &amp;&amp; Subfolders</source>
+        <translation>Janelas na pasta &amp;ativa e subpastas</translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation>Oculto</translation>
+    </message>
+    <message>
+        <source>Name already exists!</source>
+        <translation>Nome já existe!</translation>
+    </message>
+    <message>
+        <source>Project</source>
+        <translation>Projeto</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation>Caminho</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Tamanho</translation>
+    </message>
+    <message>
+        <source>bytes</source>
+        <translation>bytes</translation>
+    </message>
+    <message>
+        <source>Contents</source>
+        <translation>Conteúdos</translation>
     </message>
     <message>
         <source>windows</source>
@@ -3844,28 +2578,116 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
         <translation>pastas</translation>
     </message>
     <message>
+        <source>Modified</source>
+        <translation>Modificado</translation>
+    </message>
+    <message>
+        <source>Properties</source>
+        <translation>Propriedades</translation>
+    </message>
+    <message>
+        <source>New Folder</source>
+        <translation>Nova pasta</translation>
+    </message>
+    <message>
+        <source>Delete folder?</source>
+        <translation>Excluir a pasta?</translation>
+    </message>
+    <message>
+        <source>Delete folder '%1' and all the windows it contains?</source>
+        <translation>Excluir pasta '%1' e todas as janelas que ela contém?</translation>
+    </message>
+    <message>
+        <source>Note</source>
+        <translation>Nota</translation>
+    </message>
+    <message>
         <source>3D Graph</source>
         <translation>Gráfico 3D</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>Status</translation>
+    </message>
+    <message>
+        <source>No match found</source>
+        <translation>Não foi encontrada nenhuma coincidência</translation>
+    </message>
+    <message>
+        <source>Sorry, no match found for string: '%1'</source>
+        <translation>Lamento, nenhuma coincidência encontrada para a cadeia de caracteres: '%1'</translation>
+    </message>
+    <message>
+        <source>Cannot move an object to itself!</source>
+        <translation>Não é possível mover um objeto para ele mesmo!</translation>
+    </message>
+    <message>
+        <source>Cannot move a parent folder into a child folder!</source>
+        <translation>Não se pode mover uma pasta pai para dentro de uma pasta filha!</translation>
     </message>
     <message>
         <source>Skipped moving folder</source>
         <translation>Omitido o movimento da pasta</translation>
     </message>
     <message>
+        <source>The destination folder already contains a folder called '%1'! Folder skipped!</source>
+        <translation>A pasta de destino já contém uma pasta chamada '%1'! Pasta omitida!</translation>
+    </message>
+    <message>
+        <source>SciDAVis will now try to determine whether a new version of SciDAVis is available. Please modify your firewall settings in order to allow SciDAVis to connect to the internet.</source>
+        <translation>O SciDAVis tentará agora ver se há uma nova versão do SciDAVis disponível. Por favor modifique a configuração de seu firewall para que o SciDAVis possa conectar-se à internet.</translation>
+    </message>
+    <message>
         <source>Do you wish to continue?</source>
         <translation>Deseja realmente continuar?</translation>
     </message>
     <message>
-        <source>Go to Cell</source>
-        <translation type="obsolete">Ir para a célula</translation>
+        <source>HTTP get version file</source>
+        <translation>Obter versão de arquivo via HTTP</translation>
     </message>
     <message>
-        <source>Enter row</source>
-        <translation type="obsolete">Inserir linha</translation>
+        <source>Error while fetching version file with HTTP: %1.</source>
+        <translation>Erro ao buscar versão de arquivo com HTTP: %1.</translation>
     </message>
     <message>
-        <source>Enter column</source>
-        <translation type="obsolete">Inserir coluna</translation>
+        <source>Updates Available</source>
+        <translation>Atualizações disponíveis</translation>
+    </message>
+    <message>
+        <source>There is a newer version of SciDAVis (%1) available for download. Would you like to download it now?</source>
+        <translation>Existe uma nova versão do SciDAVis (%1) disponível para baixar. Deseja baixá-la agora?</translation>
+    </message>
+    <message>
+        <source>No updates available. You are already running the latest version.</source>
+        <translation>Não há atualizações disponíveis. Você já está usando a última versão.</translation>
+    </message>
+    <message>
+        <source>Invalid version file</source>
+        <translation>Versão de arquivo inválida</translation>
+    </message>
+    <message>
+        <source>The version file (contents: "%1") could not be decoded into a valid version number.</source>
+        <translation>O arquivo de versão (contido en: "%1") não pode ser decodificado em um número de versão válido.</translation>
+    </message>
+    <message>
+        <source>This will clear the contents of all the data associated with the table. Are you sure?</source>
+        <translation>Isto apagará os conteúdos de todos os dados associados à tabela. Está certo disso?</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;Não</translation>
+    </message>
+    <message>
+        <source>D&amp;epending Graphs</source>
+        <translation>Gráficos d&amp;ependentes</translation>
+    </message>
+    <message>
+        <source>D&amp;epending 3D Graphs</source>
+        <translation>Gráficos 3D d&amp;ependentes</translation>
+    </message>
+    <message>
+        <source>D&amp;epends on</source>
+        <translation>D&amp;epende de</translation>
     </message>
     <message>
         <source>You need at least two columns for this operation!</source>
@@ -3880,359 +2702,21 @@ Aviso: esta operação irá reorganizar as camadas existentes!</translation>
         <translation>É necessário definir uma coluna X primeiro!</translation>
     </message>
     <message>
-        <source>You need to define a e column first!</source>
-        <translation type="obsolete">É necessário definir uma coluna e primeiro!</translation>
-    </message>
-    <message>
-        <source>New Aspect</source>
-        <translation>Novo aspecto</translation>
-    </message>
-    <message>
-        <source>Manage layers</source>
-        <translation>Remanejar camadas</translation>
-    </message>
-    <message>
-        <source>Add curves / error bars</source>
-        <translation>Adicionar curvas / barras de erro</translation>
-    </message>
-    <message>
-        <source>Enrichments</source>
-        <translation>Enriquecimentos</translation>
-    </message>
-    <message>
-        <source>Lines and/or symbols</source>
-        <translation>Linhas e/ou símbolos</translation>
-    </message>
-    <message>
-        <source>Plot error</source>
-        <translation>Erro ao criar gráfico</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Erro</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Atenção</translation>
-    </message>
-    <message>
-        <source>Choose data set</source>
-        <translation>Escolher conjunto de dados</translation>
-    </message>
-    <message>
-        <source>Choose matrix to plot</source>
-        <translation>Escolher matriz para plotar</translation>
-    </message>
-    <message>
-        <source>Import image from file</source>
-        <translation>Importar imagem do arquivo</translation>
-    </message>
-    <message>
-        <source>Load image from file</source>
-        <translation>Carregar imagem do arquivo</translation>
-    </message>
-    <message>
-        <source>Renamed Window</source>
-        <translation>Renomear janela</translation>
-    </message>
-    <message>
-        <source>Error bars error</source>
-        <translation>Erro das barras de erro</translation>
-    </message>
-    <message>
-        <source>File opening error</source>
-        <translation>Erro na abertura de arquivo</translation>
-    </message>
-    <message>
-        <source>File Open Error</source>
-        <translation>Erro de abertura de arquivo</translation>
-    </message>
-    <message>
-        <source>Opening file</source>
-        <translation>Abrindo arquivo</translation>
-    </message>
-    <message>
-        <source>Scripting Error</source>
-        <translation>Erro no script</translation>
-    </message>
-    <message>
-        <source>Open Template File</source>
-        <translation>Abrir arquivo de modelo</translation>
-    </message>
-    <message>
-        <source>Export Error</source>
-        <translation>Erro ao exportar</translation>
-    </message>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>Sobrescrever arquivo?</translation>
-    </message>
-    <message>
-        <source>Right Axis Title</source>
-        <translation>Título do eixo direito</translation>
-    </message>
-    <message>
-        <source>Top Axis Title</source>
-        <translation>Título do eixo superior</translation>
-    </message>
-    <message>
-        <source>Enter rows number</source>
-        <translation type="obsolete">Introduza o número de linhas</translation>
-    </message>
-    <message>
-        <source>Enter columns number</source>
-        <translation type="obsolete">Introduza o número de colunas</translation>
-    </message>
-    <message>
-        <source>Column selection error</source>
-        <translation>Erro na seleção de coluna</translation>
-    </message>
-    <message>
-        <source>Row selection error</source>
-        <translation>Erro na seleção de linha</translation>
-    </message>
-    <message>
-        <source>Add new layer?</source>
-        <translation>Adicionar uma nova camada?</translation>
-    </message>
-    <message>
-        <source>Insert image from file</source>
-        <translation>Inserir imagem do arquivo</translation>
-    </message>
-    <message>
-        <source>Layer Geometry</source>
-        <translation>Geometria da camada</translation>
-    </message>
-    <message>
-        <source>Duplicate window error</source>
-        <translation>Erro em duplicação de janela</translation>
-    </message>
-    <message>
-        <source>Duplicate error</source>
-        <translation>Erro de duplicação</translation>
-    </message>
-    <message>
-        <source>Window Geometry</source>
-        <translation>Geometria da janela</translation>
-    </message>
-    <message>
-        <source>index.html File Not Found!</source>
-        <translation>Não encontrado o arquivo index.html!</translation>
-    </message>
-    <message>
-        <source>Help Files Not Found!</source>
-        <translation>Arquivos de ajuda não encontrados!</translation>
-    </message>
-    <message>
-        <source>Help Profile Not Found!</source>
-        <translation type="obsolete">Não foi encontrado o perfil de ajuda!</translation>
-    </message>
-    <message>
-        <source>Edit function</source>
-        <translation>Editar função</translation>
-    </message>
-    <message>
-        <source>Set the number of pixels to average</source>
-        <translation>Defina o número de pixels para realizar a média</translation>
-    </message>
-    <message>
-        <source>Guess best origin for the new layer?</source>
-        <translation>Encontrar a melhor origem para a nova camada?</translation>
-    </message>
-    <message>
-        <source>Enter the number of peaks</source>
-        <translation>Introduza o número de picos</translation>
-    </message>
-    <message>
-        <source>File backup error</source>
-        <translation type="obsolete">Erro na cópia de segurança</translation>
-    </message>
-    <message>
-        <source>File save error</source>
-        <translation>Erro ao salvar o arquivo</translation>
-    </message>
-    <message>
-        <source>Delete folder?</source>
-        <translation>Excluir a pasta?</translation>
-    </message>
-    <message>
-        <source>No match found</source>
-        <translation>Não foi encontrada nenhuma coincidência</translation>
-    </message>
-    <message>
-        <source>HTTP get version file</source>
-        <translation>Obter versão de arquivo via HTTP</translation>
-    </message>
-    <message>
-        <source>Updates Available</source>
-        <translation>Atualizações disponíveis</translation>
-    </message>
-    <message>
-        <source>English</source>
-        <comment>translate this to the language of the translation file, NOT to the meaning of English!</comment>
-        <translation>Português Brasileiro</translation>
-    </message>
-    <message>
-        <source>Create an empty note / script window</source>
-        <translation>Criar uma janela de notas / script vazia</translation>
-    </message>
-    <message>
-        <source>SciDAVis will now try to determine whether a new version of SciDAVis is available. Please modify your firewall settings in order to allow SciDAVis to connect to the internet.</source>
-        <translation>O SciDAVis tentará agora ver se há uma nova versão do SciDAVis disponível. Por favor modifique a configuração de seu firewall para que o SciDAVis possa conectar-se à internet.</translation>
-    </message>
-    <message>
-        <source>There is a newer version of SciDAVis (%1) available for download. Would you like to download it now?</source>
-        <translation>Existe uma nova versão do SciDAVis (%1) disponível para baixar. Deseja baixá-la agora?</translation>
-    </message>
-    <message>
-        <source>No updates available. Your are already running the latest version.</source>
-        <translation type="obsolete">Não existem atualizações disponíveis. Sua versão atual é a última versão disponível.</translation>
-    </message>
-    <message>
-        <source>Invalid version file</source>
-        <translation>Versão de arquivo inválida</translation>
-    </message>
-    <message>
-        <source>The version file (contents: &quot;%1&quot;) could not be decoded into a valid version number.</source>
-        <translation>O arquivo de versão (contido en: &quot;%1&quot;) não pode ser decodificado em um número de versão válido.</translation>
-    </message>
-    <message>
-        <source>&amp;Next</source>
-        <comment>next window</comment>
-        <translatorcomment>próxima janela</translatorcomment>
-        <translation>&amp;Próxima</translation>
-    </message>
-    <message>
-        <source>F5</source>
-        <comment>next window shortcut</comment>
-        <translatorcomment>atalho para próxima janela</translatorcomment>
-        <translation>F5</translation>
-    </message>
-    <message>
-        <source>&amp;Previous</source>
-        <comment>previous window</comment>
-        <translatorcomment>janela anterior</translatorcomment>
-        <translation>&amp;Anterior</translation>
-    </message>
-    <message>
-        <source>F6</source>
-        <comment>previous window shortcut</comment>
-        <translatorcomment>atalho para janela anterior</translatorcomment>
-        <translation>F6</translation>
-    </message>
-    <message>
-        <source>&lt;h4&gt;There are no matrices available in this project.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Please create a matrix and try again!&lt;/h4&gt;</source>
-        <translation>&lt;h4&gt;Não existem matrizes disponíveis neste projeto.&lt;/h4&gt;&lt;p&gt;&lt;h4&gt;Por favor, crie uma matriz e tente novamente!&lt;/h4&gt;</translation>
+        <source>You need to define a Y column first!</source>
+        <translation>É necessário definir uma coluna Y primeiro!</translation>
     </message>
     <message>
         <source>Please select a Y column to plot!</source>
         <translation>Por favor, selecione uma coluna Y para plotar</translation>
     </message>
     <message>
-        <source>You can only define error bars for numeric columns.</source>
-        <translation>Barras de erro só podem ser definidas para colunas numéricas</translation>
-    </message>
-    <message>
-        <source>new_by_import</source>
-        <translation>Novo por importação</translation>
-    </message>
-    <message>
-        <source>SciDAVis currently does not support Origin import. If you are interested in reviving an maintaining an Origin import filter, contact the developers.</source>
-        <translation type="obsolete">Atualmente o SciDAVis não oferece suporte à importação do Origin. Se você tem interesse em reavivar e manter um filtro de importação do Origin contate os desenvolvedores.</translation>
-    </message>
-    <message>
-        <source>zlib can&apos;t open %1.</source>
-        <translation>zlib não consegui abrir %1.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create temporary file for writing uncompressed copy of %1.</source>
-        <translation>Não foi possível criar um arquivo temporário para descompactar %1.</translation>
-    </message>
-    <message>
-        <source>Error writing to temporary file: %1</source>
-        <translation>Erro ao escrever o arquivo temporário: %1</translation>
-    </message>
-    <message>
-        <source>Opening backup copy</source>
-        <translation>Abrindo cópia de segurança</translation>
-    </message>
-    <message>
-        <source>The original (corrupt) file is being left untouched, in case you want to try rescuing data manually. If you want to continue working with the automatically restored backup copy, you have to explicitly overwrite the original file.</source>
-        <translation>O arquivo original (corrompido) não será alterado, no caso você querer recuperar os dados manualmente. Se você quiser continuar trabalhando com a cópia de segurança, recuperada automaticamente, terá que sobrescrever manualmente o arquivo original.</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>Não</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="obsolete">F</translation>
-    </message>
-    <message>
-        <source>Error importing image</source>
-        <translation>Erro ao importar imagem</translation>
-    </message>
-    <message>
-        <source>Import of image &apos;%1&apos; failed</source>
-        <translation>A importação da imagem &apos;%1&apos; falhou</translation>
-    </message>
-    <message>
-        <source>Undo/Redo &amp;History</source>
-        <translation>Desfazer/Refazer - Histórico</translation>
-    </message>
-    <message>
-        <source>&amp;Convert to Table</source>
-        <translation>Converter em tabela</translation>
-    </message>
-    <message>
-        <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .py or ASCII file</source>
-        <translation>pode ser qualquer arquivo .sciprj, .sciprj.gz, .qti, qti.gz, .py ou ASCII</translation>
-    </message>
-    <message>
-        <source>Cannot make a backup copy of &lt;b&gt;%1&lt;/b&gt; (to %2).&lt;br&gt;If you ignore this, you run the risk of &lt;b&gt;data loss&lt;/b&gt;.</source>
-        <translation type="obsolete">Não foi possível fazer uma cópia de segurança de &lt;b&gt;%1&lt;/b&gt; (para %2).&lt;br&gt;Se vocè ignorar isto, correrá o risco de &lt;b&gt;perder os dados&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>You need to define a Y column first!</source>
-        <translation>É necessário definir uma coluna Y primeiro!</translation>
-    </message>
-    <message>
         <source>Undo/Redo History</source>
         <translation>Desfazer/Refazer - Histórico</translation>
     </message>
     <message>
-        <source>SciDAVis currently does not support Origin import. If you are interested in reviving and maintaining an Origin import filter, contact the developers.</source>
-        <translation>Atualmente o SciDAVis não oferece suporte à importação do Origin. Se você tem interesse em reavivar e manter um filtro de importação do Origin contate os desenvolvedores.</translation>
-    </message>
-    <message>
-        <source>unable to open index.html!</source>
-        <translation>não foi possível abrir o arquivo index.html!</translation>
-    </message>
-    <message>
-        <source>Ctrl+ALT+N</source>
-        <translation>Ctrl+ALT+N</translation>
-    </message>
-    <message>
-        <source>&amp;Lock Toolbars</source>
-        <translation>Travar barras de ferramentas</translation>
-    </message>
-    <message>
-        <source>No updates available. You are already running the latest version.</source>
-        <translation>Não há atualizações disponíveis. Você já está usando a última versão.</translation>
-    </message>
-    <message>
-        <source>can be any .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .org, .py or ASCII file</source>
-        <translation>pode ser qualquer arquivo .sciprj, .sciprj.gz, .qti, qti.gz, .opj, .ogm, .ogw, .ogg, .org, .py ou ASCII</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;index.html&lt;/b&gt; file cannot be opened</source>
-        <translation>&lt;b&gt;index.html&lt;/b&gt; não foi possível abrir o arquivo</translation>
-    </message>
-    <message>
-        <source>Invalid WindowLabel line:
-&apos;%1&apos;
-in file %2.</source>
-        <translation type="unfinished"></translation>
+        <source>English</source>
+        <comment>translate this to the language of the translation file, NOT to the meaning of English!</comment>
+        <translation>Português</translation>
     </message>
 </context>
 <context>
@@ -4244,6 +2728,10 @@ in file %2.</source>
 </context>
 <context>
     <name>AssociationsDialog</name>
+    <message>
+        <source>Plot Associations</source>
+        <translation>Gráficos associados</translation>
+    </message>
     <message>
         <source>Spreadsheet: </source>
         <translation>Planilha: </translation>
@@ -4295,16 +2783,15 @@ in file %2.</source>
     <message>
         <source>Magn.</source>
         <comment>Magnitude, vector length</comment>
-        <translatorcomment>Magnitude, comprimento do vector</translatorcomment>
         <translation>Magn.</translation>
-    </message>
-    <message>
-        <source>Plot Associations</source>
-        <translation>Gráficos associados</translation>
     </message>
 </context>
 <context>
     <name>AxesDialog</name>
+    <message>
+        <source>General Plot Options</source>
+        <translation>Opções gerais do Gráfico</translation>
+    </message>
     <message>
         <source>&amp;Apply</source>
         <translation>&amp;Aplicar</translation>
@@ -4422,18 +2909,6 @@ in file %2.</source>
         <translation>Grades</translation>
     </message>
     <message>
-        <source>Show</source>
-        <translation>Mostrar</translation>
-    </message>
-    <message>
-        <source>Title</source>
-        <translation>Título</translation>
-    </message>
-    <message>
-        <source>&amp;Font</source>
-        <translation>&amp;Fonte</translation>
-    </message>
-    <message>
         <source>Numeric</source>
         <translation>Numérico</translation>
     </message>
@@ -4451,15 +2926,31 @@ in file %2.</source>
     </message>
     <message>
         <source>Time</source>
-        <translation>Hora</translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <source>Date</source>
         <translation>Data</translation>
     </message>
     <message>
+        <source>Date &amp; Time</source>
+        <translation>Data e Hora</translation>
+    </message>
+    <message>
         <source>Column Headings</source>
         <translation>Cabeçalhos da coluna</translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation>Mostrar</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation>Título</translation>
+    </message>
+    <message>
+        <source>&amp;Font</source>
+        <translation>&amp;Fonte</translation>
     </message>
     <message>
         <source>Font</source>
@@ -4534,26 +3025,6 @@ in file %2.</source>
         <translation>Largura</translation>
     </message>
     <message>
-        <source>Background</source>
-        <translation type="obsolete">Fundo</translation>
-    </message>
-    <message>
-        <source>Opacity</source>
-        <translation type="obsolete">Opacidade</translation>
-    </message>
-    <message>
-        <source>Canvas Color</source>
-        <translation type="obsolete">Cor de fundo</translation>
-    </message>
-    <message>
-        <source>Border Width</source>
-        <translation type="obsolete">Largura da borda</translation>
-    </message>
-    <message>
-        <source>Border Color</source>
-        <translation type="obsolete">Cor da borda</translation>
-    </message>
-    <message>
         <source>Draw backbones</source>
         <translation>Desenhar guias</translation>
     </message>
@@ -4568,10 +3039,6 @@ in file %2.</source>
     <message>
         <source>Minor ticks length</source>
         <translation>Tamanho das marcas secundárias</translation>
-    </message>
-    <message>
-        <source>Apply to all layers</source>
-        <translation type="obsolete">Aplicar a todas as camadas</translation>
     </message>
     <message>
         <source>General</source>
@@ -4594,12 +3061,28 @@ in file %2.</source>
         <translation>Científico: 10^2</translation>
     </message>
     <message>
+        <source>Start limit error</source>
+        <translation>Erro no limite inicial</translation>
+    </message>
+    <message>
+        <source>End limit error</source>
+        <translation>Erro no limite final</translation>
+    </message>
+    <message>
+        <source>Step input error</source>
+        <translation>Erro ao inserir passo</translation>
+    </message>
+    <message>
         <source>Please enter a positive step value!</source>
         <translation>Por favor, forneça um valor de passo positivo!</translation>
     </message>
     <message>
-        <source>Valid variables are &apos;x&apos; for Top/Bottom axes and &apos;y&apos; for Left/Right axes!</source>
-        <translation>As variáveis válidas são &apos;x&apos; para os eixos superior/inferior e &apos;y&apos; para os eixos esquerdo/direito!</translation>
+        <source>Formula input error</source>
+        <translation>Error na fórmula introduzida</translation>
+    </message>
+    <message>
+        <source>Valid variables are 'x' for Top/Bottom axes and 'y' for Left/Right axes!</source>
+        <translation>As variáveis válidas são 'x' para os eixos superior/inferior e 'y' para os eixos esquerdo/direito!</translation>
     </message>
     <message>
         <source>millisec.</source>
@@ -4625,139 +3108,12 @@ in file %2.</source>
         <source>weeks</source>
         <translation>semanas</translation>
     </message>
-    <message>
-        <source>General Plot Options</source>
-        <translation>Opções gerais do Gráfico</translation>
-    </message>
-    <message>
-        <source>Start limit error</source>
-        <translation>Erro no limite inicial</translation>
-    </message>
-    <message>
-        <source>End limit error</source>
-        <translation>Erro no limite final</translation>
-    </message>
-    <message>
-        <source>Step input error</source>
-        <translation>Erro ao inserir passo</translation>
-    </message>
-    <message>
-        <source>Formula input error</source>
-        <translation>Error na fórmula introduzida</translation>
-    </message>
-    <message>
-        <source>Date &amp; Time</source>
-        <translation>Data e Hora</translation>
-    </message>
 </context>
 <context>
     <name>CanvasPicker</name>
     <message>
         <source>enter your text here</source>
         <translation>introduza seu texto aqui</translation>
-    </message>
-</context>
-<context>
-    <name>ColorBox</name>
-    <message>
-        <source>black</source>
-        <translation>preto</translation>
-    </message>
-    <message>
-        <source>red</source>
-        <translation>vermelho</translation>
-    </message>
-    <message>
-        <source>verde</source>
-        <translation type="obsolete">verde</translation>
-    </message>
-    <message>
-        <source>blue</source>
-        <translation>azul</translation>
-    </message>
-    <message>
-        <source>cyan</source>
-        <translation>ciano</translation>
-    </message>
-    <message>
-        <source>magenta</source>
-        <translation>magenta</translation>
-    </message>
-    <message>
-        <source>yellow</source>
-        <translation>amarelo</translation>
-    </message>
-    <message>
-        <source>dark yellow</source>
-        <translation>amarelo escuro</translation>
-    </message>
-    <message>
-        <source>navy</source>
-        <translation>azul marinho</translation>
-    </message>
-    <message>
-        <source>purple</source>
-        <translation>púrpura</translation>
-    </message>
-    <message>
-        <source>wine</source>
-        <translation>vinho</translation>
-    </message>
-    <message>
-        <source>olive</source>
-        <translation>oliva</translation>
-    </message>
-    <message>
-        <source>dark cyan</source>
-        <translation>ciano escuro</translation>
-    </message>
-    <message>
-        <source>white</source>
-        <translation>branco</translation>
-    </message>
-    <message>
-        <source>light gray</source>
-        <translation>cinza claro</translation>
-    </message>
-    <message>
-        <source>dark gray</source>
-        <translation>cinza escuro</translation>
-    </message>
-    <message>
-        <source>royal</source>
-        <translation>azul real</translation>
-    </message>
-    <message>
-        <source>orange</source>
-        <translation>laranja</translation>
-    </message>
-    <message>
-        <source>violet</source>
-        <translation>violeta</translation>
-    </message>
-    <message>
-        <source>pink</source>
-        <translation>rosa</translation>
-    </message>
-    <message>
-        <source>gray</source>
-        <translation>cinza</translation>
-    </message>
-    <message>
-        <source>light yellow</source>
-        <translation>amarelo suave</translation>
-    </message>
-    <message>
-        <source>light cyan</source>
-        <translation>ciano claro</translation>
-    </message>
-    <message>
-        <source>light magenta</source>
-        <translation>magenta claro</translation>
-    </message>
-    <message>
-        <source>green</source>
-        <translation>verde</translation>
     </message>
 </context>
 <context>
@@ -4776,11 +3132,15 @@ in file %2.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>Excluir</translation>
+        <translation>&amp;Remover</translation>
     </message>
     <message>
         <source>&amp;Scale Colors</source>
         <translation>E&amp;scalar Cores</translation>
+    </message>
+    <message>
+        <source>Input Error</source>
+        <translation>Erro de entrada</translation>
     </message>
     <message>
         <source>Sorry, you cannot edit this value!</source>
@@ -4789,10 +3149,6 @@ in file %2.</source>
     <message>
         <source>Please enter a valid color level value!</source>
         <translation>Por favor, forneça um valor válido do nível de cor!</translation>
-    </message>
-    <message>
-        <source>Input Error</source>
-        <translation>Erro de entrada</translation>
     </message>
 </context>
 <context>
@@ -4822,8 +3178,8 @@ in file %2.</source>
         <translation>coluna inválida para o gráfico designado</translation>
     </message>
     <message>
-        <source>unknown element &apos;%1&apos;</source>
-        <translation>elemento &apos;%1&apos; desconhecido</translation>
+        <source>unknown element '%1'</source>
+        <translation>elemento '%1' desconhecido</translation>
     </message>
     <message>
         <source>no column element found</source>
@@ -4854,13 +3210,6 @@ in file %2.</source>
     </message>
 </context>
 <context>
-    <name>ColumnStringIO</name>
-    <message>
-        <source>as string</source>
-        <translation type="vanished">como cadeia de caracteres</translation>
-    </message>
-</context>
-<context>
     <name>ConfigDialog</name>
     <message>
         <source>The column separator can be customized. 
@@ -4877,6 +3226,14 @@ Os seguintes códigos podem ser usados:
 0-9eE.+-</source>
         <translation>O separador não pode conter os seguintes caracteres: 
 0-9eE.+-</translation>
+    </message>
+    <message>
+        <source>Default Row Height</source>
+        <translation>Altura padrão da linha</translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation>Preferências</translation>
     </message>
     <message>
         <source>General</source>
@@ -4923,16 +3280,12 @@ Os seguintes códigos podem ser usados:
         <translation>Comprimento</translation>
     </message>
     <message>
-        <source>Scale Errors with sqrt(Chi^2/doF)</source>
-        <translation>Escalar erros com raiz(Chi^2/doF)</translation>
-    </message>
-    <message>
         <source>Axes linewidth</source>
         <translation>Largura da linha dos eixos</translation>
     </message>
     <message>
         <source>Major Ticks</source>
-        <translation>Marcas principais</translation>
+        <translation>Marcas maiores</translation>
     </message>
     <message>
         <source>Minor Ticks</source>
@@ -4976,19 +3329,31 @@ Os seguintes códigos podem ser usados:
     </message>
     <message>
         <source>None</source>
-        <translation>Nenhuma</translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <source>Out</source>
-        <translation>Externo</translation>
+        <translation>Fora</translation>
     </message>
     <message>
         <source>In &amp; Out</source>
-        <translation>Interno e externo</translation>
+        <translation>Dentro e fora</translation>
     </message>
     <message>
         <source>In</source>
-        <translation>Interno</translation>
+        <translation>Dentro</translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation>Imprimir</translation>
+    </message>
+    <message>
+        <source>Print Crop &amp;Marks</source>
+        <translation>Imprimir &amp;marcas de bastões</translation>
+    </message>
+    <message>
+        <source>&amp;Scale layers to paper size</source>
+        <translation>&amp;Ajustar as camadas ao tamanho do papel</translation>
     </message>
     <message>
         <source>Prompt on closing</source>
@@ -5055,6 +3420,10 @@ Os seguintes códigos podem ser usados:
         <translation>Cores</translation>
     </message>
     <message>
+        <source>Numeric Format</source>
+        <translation>Formato numérico</translation>
+    </message>
+    <message>
         <source>Language</source>
         <translation>Idioma</translation>
     </message>
@@ -5083,6 +3452,10 @@ Os seguintes códigos podem ser usados:
         <translation>Painéis</translation>
     </message>
     <message>
+        <source>Undo/Redo History limit</source>
+        <translation>Desfazer/Refazer - limite de histórico</translation>
+    </message>
+    <message>
         <source>Save every</source>
         <translation>Salvar a cada</translation>
     </message>
@@ -5097,6 +3470,64 @@ Os seguintes códigos podem ser usados:
     <message>
         <source>Default scripting language</source>
         <translation>Linguagem de script padrão</translation>
+    </message>
+    <message>
+        <source>Default numeric format</source>
+        <translation>Formato numérico padrão</translation>
+    </message>
+    <message>
+        <source>Consider ',' and '.' interchangeable on input in numerical columns</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Convert numerical columns to text columns when pasting non-numeric values</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>Decimal</source>
+        <translation>Decimal</translation>
+    </message>
+    <message>
+        <source>Scientific (e)</source>
+        <translation>Científico (e)</translation>
+    </message>
+    <message>
+        <source>Scientific (E)</source>
+        <translation>Científico (E)</translation>
+    </message>
+    <message>
+        <source>Automatic (e)</source>
+        <translation>Automático (e)</translation>
+    </message>
+    <message>
+        <source>Automatic (E)</source>
+        <translation>Automático (E)</translation>
+    </message>
+    <message>
+        <source>Use group separator</source>
+        <comment>option: use separator every 3 digits</comment>
+        <translation>Usar separador de grupos</translation>
+    </message>
+    <message>
+        <source>Default Number of Decimal Digits</source>
+        <translation>Número padrão de dígitos decimais</translation>
+    </message>
+    <message>
+        <source>Decimal Separators</source>
+        <translation>Separadores decimais</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation>padrão</translation>
+    </message>
+    <message>
+        <source>Preview:</source>
+        <comment>preview of the decimal separator</comment>
+        <translation>Pré-visualizar:</translation>
+    </message>
+    <message>
+        <source>&amp;Display Comments in Header</source>
+        <translation>&amp;Mostrar comentários no cabeçalho</translation>
     </message>
     <message>
         <source>Default Column Separator</source>
@@ -5259,6 +3690,10 @@ Os seguintes códigos podem ser usados:
         <translation>Mesmos X que os dados ajustados</translation>
     </message>
     <message>
+        <source>2 points for linear fits</source>
+        <translation>2 pontos para ajustes lineares</translation>
+    </message>
+    <message>
         <source>Display Peak Curves for Multi-peak Fits</source>
         <translation>Mostrar curvas de pico para ajustes multipico</translation>
     </message>
@@ -5279,116 +3714,20 @@ Os seguintes códigos podem ser usados:
         <translation>Colar parâmetros no gráfico</translation>
     </message>
     <message>
+        <source>Scale Errors with sqrt(Chi^2/doF)</source>
+        <translation>Escalar erros com raiz(Chi^2/doF)</translation>
+    </message>
+    <message>
         <source>Peaks Color</source>
         <translation>Cor dos picos</translation>
-    </message>
-    <message>
-        <source>The separator must not contain the following characters: 0-9eE.+-</source>
-        <translation>O separador não pode conter os seguintes caracteres: 0-9eE.+-</translation>
-    </message>
-    <message>
-        <source>Decimal Separators</source>
-        <translation>Separadores decimais</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Imprimir</translation>
-    </message>
-    <message>
-        <source>&amp;Scale layers to paper size</source>
-        <translation>&amp;Ajustar as camadas ao tamanho do papel</translation>
-    </message>
-    <message>
-        <source>Numeric Format</source>
-        <translation>Formato numérico</translation>
-    </message>
-    <message>
-        <source>Update separators in Tables/Matrices</source>
-        <translation type="obsolete">Atualizar os separadores nas tabelas/matrizes</translation>
-    </message>
-    <message>
-        <source>Use group separator</source>
-        <comment>option: use separator every 3 digits</comment>
-        <translatorcomment>opção: use separator a cada 3 dígitos</translatorcomment>
-        <translation>Usar separador de grupos</translation>
-    </message>
-    <message>
-        <source>Number of Decimal Digits</source>
-        <translation type="obsolete">Número de digitos decimais</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>padrão</translation>
-    </message>
-    <message>
-        <source>Preview:</source>
-        <comment>preview of the decimal separator</comment>
-        <translatorcomment>pré visualizar o separador decimal</translatorcomment>
-        <translation>Pré-visualizar:</translation>
-    </message>
-    <message>
-        <source>&amp;Display Comments in Header</source>
-        <translation>&amp;Mostrar comentários no cabeçalho</translation>
-    </message>
-    <message>
-        <source>2 points for linear fits</source>
-        <translation>2 pontos para ajustes lineares</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation>Preferências</translation>
     </message>
     <message>
         <source>Import options error</source>
         <translation>Erro nas opções de importação</translation>
     </message>
     <message>
-        <source>Print Crop &amp;Marks</source>
-        <translation>Imprimir &amp;marcas de bastões</translation>
-    </message>
-    <message>
-        <source>Default numeric format</source>
-        <translation>Formato numérico padrão</translation>
-    </message>
-    <message>
-        <source>Decimal</source>
-        <translation>Decimal</translation>
-    </message>
-    <message>
-        <source>Scientific (e)</source>
-        <translation>Científico (e)</translation>
-    </message>
-    <message>
-        <source>Scientific (E)</source>
-        <translation>Científico (E)</translation>
-    </message>
-    <message>
-        <source>Default Number of Decimal Digits</source>
-        <translation>Número padrão de dígitos decimais</translation>
-    </message>
-    <message>
-        <source>Automatic (e)</source>
-        <translation>Automático (e)</translation>
-    </message>
-    <message>
-        <source>Automatic (E)</source>
-        <translation>Automático (E)</translation>
-    </message>
-    <message>
-        <source>Undo/Redo History limit</source>
-        <translation>Desfazer/Refazer - limite de histórico</translation>
-    </message>
-    <message>
-        <source>Default Row Height</source>
-        <translation>Altura padrão da linha</translation>
-    </message>
-    <message>
-        <source>Consider &apos;,&apos; and &apos;.&apos; interchangeable on input in numerical columns</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Convert numerical columns to text columns when pasting non-numeric values</source>
-        <translation type="unfinished"></translation>
+        <source>The separator must not contain the following characters: 0-9eE.+-</source>
+        <translation>O separador não pode conter os seguintes caracteres: 0-9eE.+-</translation>
     </message>
 </context>
 <context>
@@ -5430,56 +3769,56 @@ Os seguintes códigos podem ser usados:
         <translation>Tipo</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar novo tipo e formato para todas as colunas selecionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Aplicar novo tipo e formato para todas as colunas selecionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Type:</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select the column type&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Select the column type&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Selecione o tipo de coluna&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Selecione o tipo de coluna&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Format:</source>
         <translation>Formato:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Escolha o formato a ser mostrado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Escolha o formato a ser mostrado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Decimal Digits:</source>
         <translation>Casas decimais</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insira o número de casas decimais que devem ser mostradas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Insira o número de casas decimais que devem ser mostradas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Numbers are</source>
@@ -5490,14 +3829,14 @@ p, li { white-space: pre-wrap; }
         <translation>desde</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informações sobre tipo e formato selecionado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Informações sobre tipo e formato selecionado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -5508,60 +3847,60 @@ p, li { white-space: pre-wrap; }
         <translation>Fórmula</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar fórmula em todas as células selecionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Aplicar fórmula em todas as células selecionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Selecione uma coluna de referência para inserir na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Selecione uma coluna de referência para inserir na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insira a coluna de referência na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Insira a coluna de referência na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Add</source>
         <translation>Adicionar</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Selecione uma função para inserir na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Selecione uma função para inserir na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Insert the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Bitstream Vera Sans'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif';"&gt;Insert the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Bitstream Vera Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;Insira a função na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Bitstream Vera Sans'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif';"&gt;Insira a função na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -5569,6 +3908,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Convolution</source>
         <translation>Convolução</translation>
+    </message>
+    <message>
+        <source>SciDAVis</source>
+        <translation>SciDAVis</translation>
     </message>
     <message>
         <source>Error</source>
@@ -5583,16 +3926,16 @@ p, li { white-space: pre-wrap; }
         <translation>A resposta do conjunto de dados %1 não existe!</translation>
     </message>
     <message>
-        <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
-        <translation>O conjunto de dados resposta &apos;%1&apos; deve ser menor que a metade do tamanho do conjunto de dados sinal &apos;%2&apos;!</translation>
+        <source>The response dataset '%1' must be less then half the size of the signal dataset '%2'!</source>
+        <translation>Os dados da resposta '%1' devem ter tamanho menor que a metade dos de sinal '%2'!</translation>
     </message>
     <message>
-        <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
-        <translation>O conjunto resposta &apos;%1&apos; deve conter um número ímpar de pontos!</translation>
+        <source>The response dataset '%1' must contain an odd number of points!</source>
+        <translation>O conjunto resposta '%1' deve conter um número ímpar de pontos!</translation>
     </message>
     <message>
         <source>Could not allocate memory, operation aborted!</source>
-        <translation>Não foi possível alocar memória, operação abortada!</translation>
+        <translation>Memória insuficiente, operação cancelada!</translation>
     </message>
     <message>
         <source>Index</source>
@@ -5602,16 +3945,16 @@ p, li { white-space: pre-wrap; }
         <source>Plot</source>
         <translation>Gráfico</translation>
     </message>
-    <message>
-        <source>SciDAVis</source>
-        <translation>SciDAVis</translation>
-    </message>
 </context>
 <context>
     <name>Correlation</name>
     <message>
         <source>Correlation</source>
         <translation>Correlação</translation>
+    </message>
+    <message>
+        <source>SciDAVis</source>
+        <translation>SciDAVis</translation>
     </message>
     <message>
         <source>Error</source>
@@ -5623,11 +3966,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Could not allocate memory, operation aborted!</source>
-        <translation>Não foi possível alocar memória, operação abortada!</translation>
+        <translation>Memória insuficiente, operação cancelada!</translation>
     </message>
     <message>
         <source>Error in GSL forward FFT operation!</source>
-        <translation>Erro na operação de FFT direta na GSL!</translation>
+        <translation>Erro na operação de FFT direta em GSL!</translation>
     </message>
     <message>
         <source>Lag</source>
@@ -5637,13 +3980,13 @@ p, li { white-space: pre-wrap; }
         <source>Plot</source>
         <translation>Gráfico</translation>
     </message>
-    <message>
-        <source>SciDAVis</source>
-        <translation>SciDAVis</translation>
-    </message>
 </context>
 <context>
     <name>CurveRangeDialog</name>
+    <message>
+        <source>Plot range</source>
+        <translation>Região do gráfico</translation>
+    </message>
     <message>
         <source>Data set: </source>
         <translation>Conjunto de dados: </translation>
@@ -5664,13 +4007,13 @@ p, li { white-space: pre-wrap; }
         <source>&amp;Close</source>
         <translation>&amp;Fechar</translation>
     </message>
-    <message>
-        <source>Plot range</source>
-        <translation>Região do gráfico</translation>
-    </message>
 </context>
 <context>
     <name>CurvesDialog</name>
+    <message>
+        <source>Add/Remove curves</source>
+        <translation>Adicionar/Remover curvas</translation>
+    </message>
     <message>
         <source>New curves style</source>
         <translation>Novo estilo de curvas</translation>
@@ -5689,7 +4032,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> Vertical drop lines</source>
-        <translation> Linhas verticais</translation>
+        <translation> Linhas verticais com gotas</translation>
     </message>
     <message>
         <source> Spline</source>
@@ -5697,11 +4040,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> Vertical steps</source>
-        <translation> Escalas verticais</translation>
+        <translation> Passos verticais</translation>
     </message>
     <message>
         <source> Horizontal steps</source>
-        <translation> Escalas horizontais</translation>
+        <translation> Passos horizontais</translation>
     </message>
     <message>
         <source> Area</source>
@@ -5725,7 +4068,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Gray Scale Map</source>
-        <translation>Escala de cinzas</translation>
+        <translation>Mapa de escala de cinza</translation>
     </message>
     <message>
         <source>Available data</source>
@@ -5741,7 +4084,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit &amp;Range...</source>
-        <translation>Editar &amp;região...</translation>
+        <translation>R&amp;estringir faixa de dados...</translation>
     </message>
     <message>
         <source>&amp;Edit Function...</source>
@@ -5760,6 +4103,10 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Mostrar região</translation>
     </message>
     <message>
+        <source>Show current &amp;folder only</source>
+        <translation>Mostrar somente a &amp;pasta atual</translation>
+    </message>
+    <message>
         <source>&amp;Plot Selection</source>
         <translation>Seleção de g&amp;ráfico </translation>
     </message>
@@ -5774,14 +4121,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>&amp;Delete Curve</source>
         <translation>Remover curva</translation>
-    </message>
-    <message>
-        <source>Show current &amp;folder only</source>
-        <translation>Mostrar somente a &amp;pasta atual</translation>
-    </message>
-    <message>
-        <source>Add/Remove curves</source>
-        <translation>Adicionar/Remover curvas</translation>
     </message>
 </context>
 <context>
@@ -5799,32 +4138,36 @@ p, li { white-space: pre-wrap; }
         <translation>Selecione um ponto e dê um duplo clique para removê-lo!</translation>
     </message>
     <message>
-        <source>Sorry, but removing points of a function is not possible.</source>
-        <translation>Desculpe, mas não é possível remover pontos de uma função.</translation>
-    </message>
-    <message>
-        <source>Sorry, but moving points of a function is not possible.</source>
-        <translation>Desculpe, mas não é possível mover pontos de uma função. </translation>
-    </message>
-    <message>
-        <source>This operation cannot be performed on curves plotted from columns having a non-numerical format.</source>
-        <translation>Esta operação não pode ser realizada em curvas desenhadas a partir de colunas com um formato não numérico.</translation>
-    </message>
-    <message>
         <source>Remove point error</source>
         <translation>Erro ao remover ponto</translation>
+    </message>
+    <message>
+        <source>Sorry, but removing points of a function is not possible.</source>
+        <translation>Desculpe, mas não é possível remover pontos de uma função.</translation>
     </message>
     <message>
         <source>Warning</source>
         <translation>Atenção</translation>
     </message>
     <message>
+        <source>This operation cannot be performed on curves plotted from columns having a non-numerical format.</source>
+        <translation>Esta operação não pode ser realizada em curvas plotadas a partir de colunas com  formato numérico.</translation>
+    </message>
+    <message>
         <source>Move point error</source>
         <translation>Erro ao mover ponto</translation>
+    </message>
+    <message>
+        <source>Sorry, but moving points of a function is not possible.</source>
+        <translation>Desculpe, mas não é possível mover pontos de uma função. </translation>
     </message>
 </context>
 <context>
     <name>DataSetDialog</name>
+    <message>
+        <source>Select data set</source>
+        <translation>Selecionar dados</translation>
+    </message>
     <message>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
@@ -5832,10 +4175,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Select data set</source>
-        <translation>Selecionar dados</translation>
     </message>
 </context>
 <context>
@@ -5852,16 +4191,6 @@ p, li { white-space: pre-wrap; }
         <translation>Derivada</translation>
     </message>
     <message>
-        <source>of</source>
-        <comment>Derivative of</comment>
-        <translatorcomment>derivada de</translatorcomment>
-        <translation>de </translation>
-    </message>
-    <message>
-        <source>Plot</source>
-        <translation>Gráfico</translation>
-    </message>
-    <message>
         <source>1</source>
         <comment>differention table x column name</comment>
         <translation>1</translation>
@@ -5870,6 +4199,15 @@ p, li { white-space: pre-wrap; }
         <source>2</source>
         <comment>differention table y column name</comment>
         <translation>2</translation>
+    </message>
+    <message>
+        <source>of</source>
+        <comment>Derivative of</comment>
+        <translation>de </translation>
+    </message>
+    <message>
+        <source>Plot</source>
+        <translation>Gráfico</translation>
     </message>
 </context>
 <context>
@@ -5895,41 +4233,14 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>EpsExportDialog</name>
-    <message>
-        <source>Orientation</source>
-        <translation type="obsolete">Orientação</translation>
-    </message>
-    <message>
-        <source>Page Size</source>
-        <translation type="obsolete">Tamanho da página</translation>
-    </message>
-    <message>
-        <source>&amp;Print in color if available</source>
-        <translation type="obsolete">Im&amp;primir colorido se possível</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Landscape</source>
-        <translation type="obsolete">Paisagen</translation>
-    </message>
-    <message>
-        <source>Portrait</source>
-        <translation type="obsolete">Retrato</translation>
-    </message>
-</context>
-<context>
     <name>ErrDialog</name>
     <message>
         <source>Source of errors</source>
         <translation>Fonte de erros</translation>
+    </message>
+    <message>
+        <source>Error Bars</source>
+        <translation>Barras de erro</translation>
     </message>
     <message>
         <source>&amp;X Error Bars</source>
@@ -5963,13 +4274,13 @@ p, li { white-space: pre-wrap; }
         <source>&amp;Close</source>
         <translation>&amp;Fechar</translation>
     </message>
-    <message>
-        <source>Error Bars</source>
-        <translation>Barras de erro</translation>
-    </message>
 </context>
 <context>
     <name>ExpDecayDialog</name>
+    <message>
+        <source>Verify initial guesses</source>
+        <translation>Verificar estimativas iniciais</translation>
+    </message>
     <message>
         <source>Exponential Fit of</source>
         <translation>Ajuste exponencial de</translation>
@@ -6027,16 +4338,12 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation>A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Verify initial guesses</source>
-        <translation>Verificar estimativas iniciais</translation>
-    </message>
-    <message>
         <source>Warning</source>
         <translation>Atenção</translation>
+    </message>
+    <message>
+        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn't exist anymore! Operation aborted!</source>
+        <translation>A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
     </message>
 </context>
 <context>
@@ -6069,12 +4376,16 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ExportDialog</name>
     <message>
+        <source>Export ASCII</source>
+        <translation>Exportar para ASCII</translation>
+    </message>
+    <message>
         <source>Table</source>
         <translation>Tabela</translation>
     </message>
     <message>
         <source>&amp;All</source>
-        <translation>&amp;Tudo</translation>
+        <translation>&amp;Todos</translation>
     </message>
     <message>
         <source>Separator</source>
@@ -6121,10 +4432,6 @@ p, li { white-space: pre-wrap; }
         <translation>A&amp;juda</translation>
     </message>
     <message>
-        <source>Export ASCII</source>
-        <translation>Exportar para ASCII</translation>
-    </message>
-    <message>
         <source>Help</source>
         <translation>Ajuda</translation>
     </message>
@@ -6147,28 +4454,20 @@ p, li { white-space: pre-wrap; }
         <translation>FFT</translation>
     </message>
     <message>
+        <source>SciDAVis</source>
+        <translation>SciDAVis</translation>
+    </message>
+    <message>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
         <source>Could not allocate memory, operation aborted!</source>
-        <translation>Não foi possível alocar memória, operação abortada!</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation type="obsolete">Para frente</translation>
-    </message>
-    <message>
-        <source>of</source>
-        <translation type="obsolete">de</translation>
+        <translation>Memória insuficiente, operação cancelada!</translation>
     </message>
     <message>
         <source>Frequency</source>
         <translation>Frequência</translation>
-    </message>
-    <message>
-        <source>Inverse</source>
-        <translation type="obsolete">Inversa</translation>
     </message>
     <message>
         <source>Time</source>
@@ -6198,13 +4497,21 @@ p, li { white-space: pre-wrap; }
         <source>s</source>
         <translation>s</translation>
     </message>
-    <message>
-        <source>SciDAVis</source>
-        <translation>SciDAVis</translation>
-    </message>
 </context>
 <context>
     <name>FFTDialog</name>
+    <message>
+        <source>FFT Options</source>
+        <translation>Opções de FFT</translation>
+    </message>
+    <message>
+        <source>&amp;Forward</source>
+        <translation>&amp;Direta</translation>
+    </message>
+    <message>
+        <source>&amp;Inverse</source>
+        <translation>&amp;Inversa</translation>
+    </message>
     <message>
         <source>Curve</source>
         <translation>Curva</translation>
@@ -6234,14 +4541,6 @@ p, li { white-space: pre-wrap; }
         <translation>Deslocar Resultado&amp;s</translation>
     </message>
     <message>
-        <source>&amp;Inverse</source>
-        <translation>&amp;Inversa</translation>
-    </message>
-    <message>
-        <source>&amp;Forward</source>
-        <translation>&amp;Direta</translation>
-    </message>
-    <message>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
@@ -6250,32 +4549,16 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <source>Please choose a column for the real part of the data!</source>
-        <translation>Por favor, escolha uma coluna para a parte real dos dados!</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">Frequência</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation type="obsolete">Tempo</translation>
-    </message>
-    <message>
-        <source>Amplitude</source>
-        <translation type="obsolete">Amplitude</translation>
-    </message>
-    <message>
-        <source>FFT Options</source>
-        <translation>Opções de FFT</translation>
-    </message>
-    <message>
         <source>Sampling value error</source>
         <translation>Erro no valor da amostra</translation>
     </message>
     <message>
         <source>Error</source>
         <translation>Erro</translation>
+    </message>
+    <message>
+        <source>Please choose a column for the real part of the data!</source>
+        <translation>Por favor, escolha uma coluna para a parte real dos dados!</translation>
     </message>
 </context>
 <context>
@@ -6289,8 +4572,12 @@ p, li { white-space: pre-wrap; }
         <translation>Filtrado</translation>
     </message>
     <message>
+        <source>SciDAVis</source>
+        <translation>SciDAVis</translation>
+    </message>
+    <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Unknown filter type. Valid values are: 1 - Low pass, 2 - High Pass, 3 - Band Pass, 4 - Band block.</source>
@@ -6324,13 +4611,13 @@ p, li { white-space: pre-wrap; }
         <source>Band Block FFT Filter</source>
         <translation>Filtro FFT recusa banda</translation>
     </message>
+</context>
+<context>
+    <name>Filter</name>
     <message>
         <source>SciDAVis</source>
         <translation>SciDAVis</translation>
     </message>
-</context>
-<context>
-    <name>Filter</name>
     <message>
         <source>Error</source>
         <translation>Erro</translation>
@@ -6340,40 +4627,24 @@ p, li { white-space: pre-wrap; }
         <translation>Por favor, selecione uma coluna primeiro!</translation>
     </message>
     <message>
-        <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
-        <translation type="obsolete">Vários pontos tem o mesmo valor de x causando divisões por zero, integração abortada!</translation>
-    </message>
-    <message>
         <source>You need at least %1 points in order to perform this operation!</source>
         <translation>São necessários pelo menos %1 pontos para realizar esta operação!</translation>
-    </message>
-    <message>
-        <source>Please enter a valid curve name!</source>
-        <translation>Por favor, forneça um nome de curva válido!</translation>
-    </message>
-    <message>
-        <source>The color name &apos;%1&apos; is not valid, a default color (red) will be used instead!</source>
-        <translation>O nome da cor &apos;%1&apos; não é válido , a cor padrão (vermelho) será usada!</translation>
-    </message>
-    <message>
-        <source>You didn&apos;t specify a valid data set for this operation!</source>
-        <translation type="obsolete">Não foi especificado um conjunto de dados válido para esta operação!</translation>
-    </message>
-    <message>
-        <source>of</source>
-        <translation>de</translation>
-    </message>
-    <message>
-        <source>SciDAVis</source>
-        <translation>SciDAVis</translation>
     </message>
     <message>
         <source>Filter Error</source>
         <translation>Erro de filtro</translation>
     </message>
     <message>
+        <source>Please enter a valid curve name!</source>
+        <translation>Por favor, forneça um nome de curva válido!</translation>
+    </message>
+    <message>
         <source>Color Name Error</source>
         <translation>Erro no nome da cor</translation>
+    </message>
+    <message>
+        <source>The color name '%1' is not valid, a default color (red) will be used instead!</source>
+        <translation>O nome da cor '%1' não é válido , a cor padrão (vermelho) será usada!</translation>
     </message>
     <message>
         <source>1</source>
@@ -6385,9 +4656,17 @@ p, li { white-space: pre-wrap; }
         <comment>filter table y column name</comment>
         <translation>2</translation>
     </message>
+    <message>
+        <source>of</source>
+        <translation>de </translation>
+    </message>
 </context>
 <context>
     <name>FilterDialog</name>
+    <message>
+        <source>Filter options</source>
+        <translation>Opções do filtro</translation>
+    </message>
     <message>
         <source>Filter curve: </source>
         <translation>Filtrar curva: </translation>
@@ -6429,28 +4708,28 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <source>Please enter positive frequency values!</source>
-        <translation>Por favor, forneça valores positivos de frequências!</translation>
-    </message>
-    <message>
-        <source>Please enter frequency limits that satisfy: Low &lt; High !</source>
-        <translation>Por favor, forneça limites para a frequência tais que: Baixo &lt; Alto!</translation>
-    </message>
-    <message>
-        <source>Filter options</source>
-        <translation>Opções do filtro</translation>
-    </message>
-    <message>
         <source>Frequency input error</source>
         <translation>Erro na frequência fornecida</translation>
+    </message>
+    <message>
+        <source>Please enter positive frequency values!</source>
+        <translation>Por favor, forneça valores positivos de frequências!</translation>
     </message>
     <message>
         <source>High Frequency input error</source>
         <translation>Erro na frequência alta fornecida</translation>
     </message>
+    <message>
+        <source>Please enter frequency limits that satisfy: Low &lt; High !</source>
+        <translation>Por favor, forneça limites para a frequência tais que: Baixo &lt; Alto!</translation>
+    </message>
 </context>
 <context>
     <name>FindDialog</name>
+    <message>
+        <source>SciDAVis</source>
+        <translation>SciDAVis</translation>
+    </message>
     <message>
         <source>Find</source>
         <translation>Procurar</translation>
@@ -6499,29 +4778,15 @@ p, li { white-space: pre-wrap; }
         <source>&amp;Close</source>
         <translation>&amp;Fechar</translation>
     </message>
-    <message>
-        <source>SciDAVis</source>
-        <translation>SciDAVis</translation>
-    </message>
 </context>
 <context>
     <name>Fit</name>
-    <message>
-        <source>No curve assigned to the fitter! Please assign a curve first!</source>
-        <translation type="obsolete">Não foi indicada uma curva para ajustar! Por favor, indique uma curva primeiro!</translation>
-    </message>
-    <message>
-        <source>Please enter a valid curve name!</source>
-        <translation type="obsolete">Por favor, forneça um nome de curva válido!</translation>
-    </message>
     <message>
         <source>Plot</source>
         <translation>Gráfico</translation>
     </message>
     <message>
         <source>fit of dataset</source>
-        <translatorcomment>The &quot;; &quot; is a temporary workarround to make the fit description to be good looking (the current way is a little uggly).
-O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do ajuste ter uma aparência melhor (a aparência atual é um pouco feia).</translatorcomment>
         <translation>; ajuste do conjunto de dados</translation>
     </message>
     <message>
@@ -6529,24 +4794,20 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>utilizando a função</translation>
     </message>
     <message>
-        <source>Weighting Method</source>
-        <translation type="obsolete">Método de ponderação</translation>
+        <source>Y standard errors</source>
+        <translation>Erros padrão em Y</translation>
     </message>
     <message>
-        <source>No weighting</source>
-        <translation type="obsolete">Sem ponderação</translation>
+        <source>Unknown</source>
+        <translation>Desconhecido</translation>
     </message>
     <message>
-        <source>Instrumental</source>
-        <translation type="obsolete">Instrumental</translation>
+        <source>Associated dataset (%1)</source>
+        <translation>Conjunto de dados associado (%1)</translation>
     </message>
     <message>
-        <source>using error bars dataset</source>
-        <translation type="obsolete">usando barras de erro</translation>
-    </message>
-    <message>
-        <source>Statistical</source>
-        <translation type="obsolete">Estatístico</translation>
+        <source>Statistical (assuming Poisson distribution)</source>
+        <translation>Estatísticas (assumindo a distribuição de Poisson)</translation>
     </message>
     <message>
         <source>Arbitrary Dataset</source>
@@ -6601,8 +4862,12 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>Erro</translation>
     </message>
     <message>
-        <source>The curve %1 has no associated e error bars. You cannot use instrumental weighting method.</source>
-        <translation type="obsolete">A curva %1 não possui barras de erro e associadas. Não é possível utilizar o método de ponderação instrumental.</translation>
+        <source>The curve %1 has no associated Y error bars.</source>
+        <translation>A curva %1 não está associada a barras de erro em Y.</translation>
+    </message>
+    <message>
+        <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
+        <translation>A coluna %1 tem menos pontos que o conjunto de dados ajustado. Por favor, escolha outra coluna!</translation>
     </message>
     <message>
         <source>Parameter</source>
@@ -6613,76 +4878,40 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>Valor</translation>
     </message>
     <message>
-        <source>You didn&apos;t specify a data set for this fit operation. Operation aborted!</source>
-        <translation type="obsolete">Não foi especificado um conjunto de dados para esta operação. Operação abortada!</translation>
+        <source>Fit Error</source>
+        <translation>Erro ao ajustar</translation>
+    </message>
+    <message>
+        <source>You didn't specify a valid data set for this fit operation. Operation aborted!</source>
+        <translation>Não foi especificado um conjunto de dados válido para esta operação de ajuste. Operação abortada!</translation>
     </message>
     <message>
         <source>There are no parameters specified for this fit operation. Operation aborted!</source>
         <translation>Não foram especificados parâmetros para esta operação de ajuste. Operação abortada!</translation>
     </message>
     <message>
-        <source>You must specify a valid fit function first. Operation aborted!</source>
-        <translation>É necessário especificar uma função válida primeiro. Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Fit</source>
-        <translation>Ajuste</translation>
-    </message>
-    <message>
-        <source> of </source>
-        <translation type="obsolete"> de </translation>
-    </message>
-    <message>
-        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
-        <translation type="obsolete">São necessários pelo menos %1 pontos para realizar esta operação! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>The column %1 has less points than the fitted data set. Please choose another column!.</source>
-        <translation type="obsolete">A coluna %1 possui menos pontos que o conjunto de dados ajustado. Por favor, escolha outra coluna!.</translation>
-    </message>
-    <message>
-        <source>You didn&apos;t specify a valid data set for this fit operation. Operation aborted!</source>
-        <translation>Não foi especificado um conjunto de dados válido para esta operação de ajuste. Operação abortada!</translation>
-    </message>
-    <message>
         <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
         <translation>São necessários pelo menos %1 pontos para este ajuste. Operação abortada!</translation>
     </message>
     <message>
-        <source>Fit Error</source>
-        <translation>Erro ao ajustar</translation>
-    </message>
-    <message>
-        <source>Y standard errors</source>
-        <translation>Erros padrão em Y</translation>
-    </message>
-    <message>
-        <source>Unknown</source>
-        <translation>Desconhecido</translation>
-    </message>
-    <message>
-        <source>Associated dataset (%1)</source>
-        <translation>Conjunto de dados associado (%1)</translation>
-    </message>
-    <message>
-        <source>Statistical (assuming Poisson distribution)</source>
-        <translation>Estatísticas (assumindo a distribuição de Poisson)</translation>
-    </message>
-    <message>
-        <source>The curve %1 has no associated Y error bars.</source>
-        <translation>A curva %1 não está associada a barras de erro em Y.</translation>
+        <source>You must specify a valid fit function first. Operation aborted!</source>
+        <translation>É necessário especificar uma função válida primeiro. Operação abortada!</translation>
     </message>
     <message>
         <source>Input function error</source>
         <translation>Erro na função fornecida</translation>
     </message>
     <message>
-        <source>The column %1 has less points than the fitted data set. Please choose another column!</source>
-        <translation>A coluna %1 tem menos pontos que o conjunto de dados ajustado. Por favor, escolha outra coluna!</translation>
+        <source>Fit</source>
+        <translation>Regredir</translation>
     </message>
 </context>
 <context>
     <name>FitDialog</name>
+    <message>
+        <source>Fit Wizard</source>
+        <translation>Assistente de ajuste</translation>
+    </message>
     <message>
         <source>Curve</source>
         <translation>Curva</translation>
@@ -6744,20 +4973,20 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>Tolerância</translation>
     </message>
     <message>
-        <source>Weighting Method</source>
-        <translation type="obsolete">Método de ponderação</translation>
+        <source>Y Error Source</source>
+        <translation>Fonte de erros em Y</translation>
     </message>
     <message>
-        <source>No weighting</source>
-        <translation type="obsolete">Sem ponderação</translation>
+        <source>Errors Unknown</source>
+        <translation>Erros desconhecidos</translation>
     </message>
     <message>
-        <source>Instrumental</source>
-        <translation type="obsolete">Instrumental</translation>
+        <source>Associated</source>
+        <translation>Associados</translation>
     </message>
     <message>
-        <source>Statistical</source>
-        <translation type="obsolete">Estatístico</translation>
+        <source>Statistical (Poisson)</source>
+        <translation>Estatísticos (Poisson)</translation>
     </message>
     <message>
         <source>Arbitrary Dataset</source>
@@ -6920,6 +5149,10 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>&amp;Aplicar</translation>
     </message>
     <message>
+        <source>Error</source>
+        <translation>Erro</translation>
+    </message>
+    <message>
         <source>Please enter a valid name for the parameters table.</source>
         <translation>Por favor, forneça um nome válido para a tabela de parâmetros.</translation>
     </message>
@@ -6930,6 +5163,10 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
     <message>
         <source>Please enter a valid name for the covariance matrix.</source>
         <translation>Por favor, forneça um nome válido para a matriz de covariância.</translation>
+    </message>
+    <message>
+        <source>Input function error</source>
+        <translation>Erro na função fornecida</translation>
     </message>
     <message>
         <source>Please enter a valid function!</source>
@@ -6944,11 +5181,15 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>Por favor, forneça pelo menos um nome para o parâmetro!</translation>
     </message>
     <message>
+        <source>Error: function name</source>
+        <translation>Erro: o nome da função</translation>
+    </message>
+    <message>
         <source> is a built-in function name&lt;p&gt;You must choose another name for your function!</source>
         <translation> é o nome de uma função incorporada&lt;p&gt;. É necessário escolher outro nome! </translation>
     </message>
     <message>
-        <source>You can&apos;t define functions recursevely!</source>
+        <source>You can't define functions recursevely!</source>
         <translation>Não é possível definir funções recursivamente!</translation>
     </message>
     <message>
@@ -6968,72 +5209,16 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>Escolher a pasta de plugins</translation>
     </message>
     <message>
-        <source>Gauss</source>
-        <translation type="obsolete">Gauss</translation>
-    </message>
-    <message>
         <source>Peaks</source>
         <translation>Picos</translation>
     </message>
     <message>
-        <source>Lorentz</source>
-        <translation type="obsolete">Lorentz</translation>
-    </message>
-    <message>
-        <source>Polynomial</source>
-        <translation type="obsolete">Polinomial</translation>
-    </message>
-    <message>
-        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation>A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Please enter x limits that satisfy: from &lt; end!</source>
-        <translation>Por favor, forneça limites em x tais que: início &lt; fim!</translation>
-    </message>
-    <message>
-        <source>The tolerance value must be positive and less than 1!</source>
-        <translation>O valor da tolerância deve ser positivo e menor que 1!</translation>
-    </message>
-    <message>
-        <source>Please verify that you have initialized all the parameters!</source>
-        <translation type="obsolete">Por favor, certifique-se de que todos os parâmetros tenham sido inicializados!</translation>
-    </message>
-    <message>
-        <source>MultiPeak</source>
-        <translation>Múltiplos Picos</translation>
-    </message>
-    <message>
-        <source>Please enter initial guesses for your parameters!</source>
-        <translation>Por favor, forneça as estimativas iniciais para seus parâmetros!</translation>
-    </message>
-    <message>
-        <source>No data tables</source>
-        <translation>Sem tabela de dados</translation>
-    </message>
-    <message>
-        <source>You have to use a dot as decimal separator in formulas.</source>
-        <translation type="obsolete">Deve usar um ponto como separador decimal nas fórmulas.</translation>
-    </message>
-    <message>
-        <source>Fit Wizard</source>
-        <translation>Assistente de ajuste</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Erro</translation>
-    </message>
-    <message>
-        <source>Input function error</source>
-        <translation>Erro na função fornecida</translation>
-    </message>
-    <message>
-        <source>Error: function name</source>
-        <translation>Erro: o nome da função</translation>
-    </message>
-    <message>
         <source>Warning</source>
         <translation>Atenção</translation>
+    </message>
+    <message>
+        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn't exist anymore! Operation aborted!</source>
+        <translation>A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
     </message>
     <message>
         <source>Start limit error</source>
@@ -7048,55 +5233,28 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>Erro de entrada</translation>
     </message>
     <message>
+        <source>Please enter x limits that satisfy: from &lt; end!</source>
+        <translation>Por favor, forneça limites em x tais que: início &lt; fim!</translation>
+    </message>
+    <message>
         <source>Tolerance input error</source>
         <translation>Erro na tolerância</translation>
     </message>
     <message>
-        <source>Y Error Source</source>
-        <translation>Fonte de erros em Y</translation>
+        <source>The tolerance value must be positive and less than 1!</source>
+        <translation>O valor da tolerância deve ser positivo e menor que 1!</translation>
     </message>
     <message>
-        <source>Errors Unknown</source>
-        <translation>Erros desconhecidos</translation>
+        <source>MultiPeak</source>
+        <translation>Múltiplos Picos</translation>
     </message>
     <message>
-        <source>Associated</source>
-        <translation>Associados</translation>
+        <source>Please enter initial guesses for your parameters!</source>
+        <translation>Por favor, forneça as estimativas iniciais para seus parâmetros!</translation>
     </message>
     <message>
-        <source>Statistical (Poisson)</source>
-        <translation>Estatísticos (Poisson)</translation>
-    </message>
-</context>
-<context>
-    <name>Folder</name>
-    <message>
-        <source>kB</source>
-        <translation type="obsolete">kB</translation>
-    </message>
-    <message>
-        <source>bytes</source>
-        <translation type="obsolete">bytes</translation>
-    </message>
-    <message>
-        <source>no folder element found</source>
-        <translation type="obsolete">sem elemento de pasta</translation>
-    </message>
-    <message>
-        <source>Folder %1</source>
-        <translation type="obsolete">Pasta %1</translation>
-    </message>
-    <message>
-        <source>Column %1</source>
-        <translation type="obsolete">Coluna %1</translation>
-    </message>
-    <message>
-        <source>creation of aspect from element &apos;%1&apos; failed</source>
-        <translation type="obsolete">A criação de aspecto a partir do elemento &apos;%1&apos; falhou</translation>
-    </message>
-    <message>
-        <source>no plugin to load element &apos;%1&apos; found</source>
-        <translation type="obsolete">Nenhum plugin para carregar o elemento &apos;%1&apos; foi encontrado</translation>
+        <source>No data tables</source>
+        <translation>Sem tabela de dados</translation>
     </message>
 </context>
 <context>
@@ -7109,16 +5267,24 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
 <context>
     <name>FunctionDialog</name>
     <message>
-        <source>Clear list</source>
-        <translation type="obsolete">Limpar lista</translation>
-    </message>
-    <message>
-        <source>Clear Function</source>
-        <translation>Remover função</translation>
+        <source>Add function curve</source>
+        <translation>Adicionar curva de função</translation>
     </message>
     <message>
         <source>Curve type </source>
         <translation>Tipo de curva </translation>
+    </message>
+    <message>
+        <source>Function</source>
+        <translation>Função</translation>
+    </message>
+    <message>
+        <source>Parametric plot</source>
+        <translation>Gráfico paramétrico</translation>
+    </message>
+    <message>
+        <source>Polar plot</source>
+        <translation>Gráfico polar</translation>
     </message>
     <message>
         <source>f(x)= </source>
@@ -7141,20 +5307,20 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>Parâmetro</translation>
     </message>
     <message>
-        <source>To</source>
-        <translation>Até</translation>
+        <source>From</source>
+        <translation>De</translation>
     </message>
     <message>
-        <source>y = </source>
-        <translation>y = </translation>
+        <source>To</source>
+        <translation>Até</translation>
     </message>
     <message>
         <source>x = </source>
         <translation>x = </translation>
     </message>
     <message>
-        <source>From</source>
-        <translation>A partir</translation>
+        <source>y = </source>
+        <translation>y = </translation>
     </message>
     <message>
         <source>R =</source>
@@ -7165,40 +5331,24 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>Teta =</translation>
     </message>
     <message>
-        <source>Function</source>
-        <translation>Função</translation>
-    </message>
-    <message>
-        <source>Parametric plot</source>
-        <translation>Gráfico paramétrico</translation>
-    </message>
-    <message>
-        <source>Polar plot</source>
-        <translation>Gráfico polar</translation>
-    </message>
-    <message>
         <source>&amp;Apply</source>
         <translation>&amp;Aplicar</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation>Fechar</translation>
+        <source>Clear Function</source>
+        <translation>Remover função</translation>
     </message>
     <message>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <source>Please enter x limits that satisfy: from &lt; end!</source>
-        <translation>Por favor, forneça limites em x tais que: início &lt; fim!</translation>
+        <source>Close</source>
+        <translation>Fechar</translation>
     </message>
     <message>
-        <source>Please enter parameter limits that satisfy: from &lt; end!</source>
-        <translation>Por favor, forneça limites para o parâmetro tais que: início &lt; fim!</translation>
-    </message>
-    <message>
-        <source>Add function curve</source>
-        <translation>Adicionar curva de função</translation>
+        <source>Clear List</source>
+        <translation>Limpar lista</translation>
     </message>
     <message>
         <source>Start limit error</source>
@@ -7213,8 +5363,12 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>Erro de entrada</translation>
     </message>
     <message>
-        <source>Clear List</source>
-        <translation>Limpar lista</translation>
+        <source>Please enter x limits that satisfy: from &lt; end!</source>
+        <translation>Por favor, forneça limites em x tais que: início &lt; fim!</translation>
+    </message>
+    <message>
+        <source>Please enter parameter limits that satisfy: from &lt; end!</source>
+        <translation>Por favor, forneça limites para o parâmetro tais que: início &lt; fim!</translation>
     </message>
 </context>
 <context>
@@ -7236,10 +5390,6 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>(largura)</translation>
     </message>
     <message>
-        <source>GaussAmp</source>
-        <translation type="obsolete">GaussAmp</translation>
-    </message>
-    <message>
         <source>GaussAmp Fit</source>
         <translation>Ajuste Gaussiano - Amplitude</translation>
     </message>
@@ -7256,7 +5406,7 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
     </message>
     <message>
         <source>(center)</source>
-        <translation>(centro)</translation>
+        <translation>(central)</translation>
     </message>
     <message>
         <source>(width)</source>
@@ -7270,306 +5420,66 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
 <context>
     <name>Graph</name>
     <message>
-        <source>Curve selected! Move cursor and click to choose a point and double-click/press &apos;Enter&apos; to finish!</source>
-        <translation type="obsolete">Curva selecionada! Mova o cursor e clique para escolher um ponto e dê um duplo clique/&apos;enter&apos; para finalisar</translation>
+        <source>Internal Error</source>
+        <translation>Erro interno</translation>
     </message>
     <message>
-        <source>&amp;Cut</source>
-        <translation>&amp;Cortar</translation>
+        <source>&lt;html&gt;Failed to set axis labels on Graph %1. Maybe you're trying to open a corrupted project file; or there's some problem within SciDAVis. Please report this as a bug (together with detailed instructions how to reproduce this message or the corrupted file).&lt;p&gt;&lt;a href="https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;"&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;Falha ao definir rótulos do eixo no Gráfico %1. Pode ser que você esteja tentando abrir  um projeto corrompido ou existe algum problema com o SciDAVis. Por favor, reporte isto como um bug (juntamente com instruções detalhadas de como reproduzir esta mensagem ou com o arquivo corrompido).&lt;p&gt;&lt;a href="https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214"&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&amp;Copy</source>
-        <translation>C&amp;opiar</translation>
+        <source>Error</source>
+        <translation>Erro</translation>
     </message>
     <message>
-        <source>&amp;Delete</source>
-        <translation>&amp;Excluir</translation>
+        <source>Couldn't change the axis type to the requested format!</source>
+        <translation>Não foi possível alterar o tipo de eixo para o formato solicitado!</translation>
     </message>
     <message>
-        <source>&amp;Properties...</source>
-        <translation>Propriedades...</translation>
+        <source>Please provide a valid file name!</source>
+        <translation>Por favor, forneça um nome de arquivo válido!</translation>
     </message>
     <message>
-        <source>&amp;Rescale to show all</source>
-        <translation>&amp;Reescalar para mostrar tudo</translation>
+        <source>File format not handled, operation aborted!</source>
+        <translation>Formato de arquivo não suportado. Operação abortada!</translation>
     </message>
     <message>
-        <source>Ctrl+R</source>
-        <translation type="obsolete">Ctrl+R</translation>
+        <source>Warning</source>
+        <translation>Atenção</translation>
     </message>
     <message>
-        <source>&amp;Hide axis</source>
-        <translation>&amp;Ocultar eixo</translation>
+        <source>Output in postscript format is not available for Qt5, using PDF</source>
+        <translation>Saída no formato postscript não está disponível para Qt5, utilizando PDF</translation>
     </message>
     <message>
-        <source>&amp;Show grids</source>
-        <translation>Mo&amp;strar grades</translation>
+        <source>Title</source>
+        <translation>Título</translation>
     </message>
     <message>
-        <source>&amp;Scale...</source>
-        <translation>Escala...</translation>
+        <source>File open error</source>
+        <translation>Erro na abertura de arquivo</translation>
     </message>
     <message>
-        <source>Your data is not valid. You need at least two different points for a histogram!</source>
-        <translation type="obsolete">Seus dados não são válidos. São necessários pelo menos dois pontos diferentes para um  histograma!</translation>
+        <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
+        <translation>O arquivo de imagem: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; não existe mais!</translation>
     </message>
     <message>
-        <source>Histogram and Probabilities for</source>
-        <translation type="obsolete">Histograma e Probabilidades para</translation>
+        <source>1</source>
+        <comment>curve data table x column name</comment>
+        <translation>1</translation>
     </message>
     <message>
-        <source>Mean</source>
-        <translation type="obsolete">Média</translation>
+        <source>2</source>
+        <comment>curve data table y column name</comment>
+        <translation>2</translation>
     </message>
     <message>
-        <source>Standard Deviation</source>
-        <translation type="obsolete">Desvio padrão</translation>
+        <source>Data set generated from curve</source>
+        <translation>Conjunto de dados gerados a partir da curva </translation>
     </message>
     <message>
-        <source>Minimum</source>
-        <translation type="obsolete">Mínimo</translation>
-    </message>
-    <message>
-        <source>Maximum</source>
-        <translation type="obsolete">Máximo</translation>
-    </message>
-    <message>
-        <source>Bins</source>
-        <translation type="obsolete">Bins</translation>
-    </message>
-    <message>
-        <source>Could not allocate memory, operation aborted!</source>
-        <translation type="obsolete">Não foi possível reservar memória, operação abortada!</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">Frequência</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation type="obsolete">Tempo</translation>
-    </message>
-    <message>
-        <source>Real</source>
-        <translation type="obsolete">Real</translation>
-    </message>
-    <message>
-        <source>Imaginary</source>
-        <translation type="obsolete">Imaginário</translation>
-    </message>
-    <message>
-        <source>Amplitude</source>
-        <translation type="obsolete">Amplitude</translation>
-    </message>
-    <message>
-        <source>Angle</source>
-        <translation type="obsolete">Ângulo</translation>
-    </message>
-    <message>
-        <source>You need at least 2 points to integrate! Integration aborted!</source>
-        <translation type="obsolete">São necessários pelo menos 2 pontos para integrar! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Several points have the same x value causing divisions by zero, integration aborted!</source>
-        <translation type="obsolete">Vários pontos tem o mesmo valor de x causando divisão por zero, integração abortada!</translation>
-    </message>
-    <message>
-        <source>Linear regresion of </source>
-        <translation type="obsolete">Regressão linear de </translation>
-    </message>
-    <message>
-        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
-        <translation type="obsolete">São necessários pelo menos %1 pontos para realizar esta operação! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Order</source>
-        <translation type="obsolete">Ordem</translation>
-    </message>
-    <message>
-        <source>Polynomial fit of </source>
-        <translation type="obsolete">Ajuste polinomial de </translation>
-    </message>
-    <message>
-        <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
-        <translation type="obsolete">Plugin: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;não encontrado. Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Error when loading plugin!
-</source>
-        <translation type="obsolete">Erro ao carregar plugin!
-</translation>
-    </message>
-    <message>
-        <source>You need at least %1 points to perform the fit! Operation aborted!</source>
-        <translation type="obsolete">São necessários pelo menos %1 pontos para fazer o ajuste! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Error when loading plugin!</source>
-        <translation type="obsolete">Erro ao carregar plugin!</translation>
-    </message>
-    <message>
-        <source>Low Pass FFT Filter of </source>
-        <translation type="obsolete">Filtro FFT passa baixa de </translation>
-    </message>
-    <message>
-        <source>High Pass FFT Filter of </source>
-        <translation type="obsolete">Filtro FFT passa alta de </translation>
-    </message>
-    <message>
-        <source>Band Pass FFT Filter of </source>
-        <translation type="obsolete">Filtro FFT passa banda de </translation>
-    </message>
-    <message>
-        <source>Band Block FFT Filter of </source>
-        <translation type="obsolete">Filtro FFT bloqueia banda de </translation>
-    </message>
-    <message>
-        <source>There are no curves available on this plot!</source>
-        <translation>Não existem curvas disponíveis neste gráfico!</translation>
-    </message>
-    <message>
-        <source>There are no curves with more than two points on this plot. Operation aborted!</source>
-        <translation>Não existem curvas com mais de dois pontos neste gráfico. Operação abortada!</translation>
-    </message>
-    <message>
-        <source>All the curves on this plot are empty!</source>
-        <translation type="obsolete">Todas as curvas neste gráfico estão vazias!</translation>
-    </message>
-    <message>
-        <source>Peak %1 selected! Click to select a point and double-click/press &apos;Enter&apos; to set the position of the next peak!</source>
-        <translation type="obsolete">Pico %1 selecionado! Clique para selecionar um ponto e dê um duplo clique/&apos;enter&apos; para fixar a posição do pico seguinte!</translation>
-    </message>
-    <message>
-        <source>y0 (offset)</source>
-        <translation type="obsolete">y0 (offset)</translation>
-    </message>
-    <message>
-        <source>Lorentz</source>
-        <translation type="obsolete">Lorentz</translation>
-    </message>
-    <message>
-        <source>Gauss</source>
-        <translation type="obsolete">Gauss</translation>
-    </message>
-    <message>
-        <source>multi-peak</source>
-        <translation type="obsolete">multiplos picos</translation>
-    </message>
-    <message>
-        <source>Non-linear fit of </source>
-        <translation type="obsolete">Ajuste não linear de </translation>
-    </message>
-    <message>
-        <source>Non-linear</source>
-        <translation type="obsolete">Não linear</translation>
-    </message>
-    <message>
-        <source>Peak</source>
-        <translation type="obsolete">Pico</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="obsolete">Altura</translation>
-    </message>
-    <message>
-        <source>Area</source>
-        <translation type="obsolete">área</translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation type="obsolete">Centro</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Largura</translation>
-    </message>
-    <message>
-        <source>fit of</source>
-        <translation type="obsolete">ajuste de</translation>
-    </message>
-    <message>
-        <source>Exponential decay fit of </source>
-        <translation type="obsolete">Ajuste por decaimento exponencial de </translation>
-    </message>
-    <message>
-        <source>ExpDecay2 fit of </source>
-        <translation type="obsolete">Ajuste ExpDecaim2 de </translation>
-    </message>
-    <message>
-        <source>ExpDecay3 fit of </source>
-        <translation type="obsolete">Ajuste ExpDecaim3 de </translation>
-    </message>
-    <message>
-        <source>Exponential growth fit of </source>
-        <translation type="obsolete">Ajuste por crescimento exponencial de </translation>
-    </message>
-    <message>
-        <source>Gauss fit of </source>
-        <translation type="obsolete">Ajuste gaussiano de </translation>
-    </message>
-    <message>
-        <source>Lorentz fit of </source>
-        <translation type="obsolete">Ajuste lorentziano de </translation>
-    </message>
-    <message>
-        <source>using function</source>
-        <translation type="obsolete">usando função </translation>
-    </message>
-    <message>
-        <source>Unscaled Levenberg-Marquardt</source>
-        <translation type="obsolete">Levenberg-Marquardt não escalado</translation>
-    </message>
-    <message>
-        <source>Scaled Levenberg-Marquardt</source>
-        <translation type="obsolete">Levenberg-Marquardt escalado</translation>
-    </message>
-    <message>
-        <source> algorithm with tolerance = </source>
-        <translation type="obsolete"> algoritmo com tolerância = </translation>
-    </message>
-    <message>
-        <source>From x=</source>
-        <translation type="obsolete">A partir de x=</translation>
-    </message>
-    <message>
-        <source> to x=</source>
-        <translation type="obsolete"> até x = </translation>
-    </message>
-    <message>
-        <source>Iterations = </source>
-        <translation type="obsolete">Interações = </translation>
-    </message>
-    <message>
-        <source>Nelder-Mead Simplex</source>
-        <translation type="obsolete">Nelder-Mead Simplex</translation>
-    </message>
-    <message>
-        <source>Savitzky-Golay smoothing of </source>
-        <translation type="obsolete">Suavização de Savitzky-Golay de </translation>
-    </message>
-    <message>
-        <source>A1 (init value)</source>
-        <translation type="obsolete">A1 (valor inicial)</translation>
-    </message>
-    <message>
-        <source>A2 (final value)</source>
-        <translation type="obsolete">A2 (valor final)</translation>
-    </message>
-    <message>
-        <source>x0 (center)</source>
-        <translation type="obsolete">x0 (centro)</translation>
-    </message>
-    <message>
-        <source>dx (time constant)</source>
-        <translation type="obsolete">dx (constante de Tempo)</translation>
-    </message>
-    <message>
-        <source>Boltzmann (Sigmoidal)</source>
-        <translation type="obsolete">Boltzmann (Sigmoidal)</translation>
-    </message>
-    <message>
-        <source>Boltzmann (Sigmoidal) fit of </source>
-        <translation type="obsolete">Boltzmann (Sigmoidal) ajuste de </translation>
+        <source>Curve data %1</source>
+        <translation>Dados da curva %1</translation>
     </message>
     <message>
         <source>The columns</source>
@@ -7588,182 +5498,56 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>está vazia e não será adicionada ao gráfico!</translation>
     </message>
     <message>
-        <source>Derivative of</source>
-        <translation type="obsolete">Derivada de</translation>
+        <source>&amp;Cut</source>
+        <translation>&amp;Cortar</translation>
     </message>
     <message>
-        <source>Left</source>
-        <translation type="obsolete">Esquerda</translation>
+        <source>&amp;Copy</source>
+        <translation>C&amp;opiar</translation>
     </message>
     <message>
-        <source>Right</source>
-        <translation type="obsolete">Direita</translation>
+        <source>&amp;Delete</source>
+        <translation>&amp;Remover</translation>
     </message>
     <message>
-        <source>Title</source>
-        <translation>Título</translation>
+        <source>&amp;Properties...</source>
+        <translation>Propriedades...</translation>
     </message>
     <message>
-        <source>This function is not available for function curves!</source>
-        <translation type="obsolete">Esta função não está disponível para curvas de função!</translation>
-    </message>
-    <message>
-        <source>There is no curve called &apos;%1&apos; on this layer.</source>
-        <translation type="obsolete">Não existe nenhuma curva chamada &apos;%1&apos; nesta camada.</translation>
-    </message>
-    <message>
-        <source>There is no curve with index %1 on this layer.</source>
-        <translation type="obsolete">Não existe nenhuma curva com índice %1 nesta camada.</translation>
-    </message>
-    <message>
-        <source>Valid indexes must have values between 0 and %1</source>
-        <translation type="obsolete">Os índices válidos devem ter valores entre 0 e %1</translation>
-    </message>
-    <message>
-        <source>Image file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt;does not exist anymore!</source>
-        <translation>O arquivo de imagem: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt;&lt;p&gt; não existe mais!</translation>
+        <source>&amp;Rescale to show all</source>
+        <translation>&amp;Reescalar para mostrar tudo</translation>
     </message>
     <message>
         <source>Ctrl+Shift+R</source>
         <translation>Ctrl+Shift+R</translation>
     </message>
     <message>
-        <source>Fit</source>
-        <translation type="obsolete">Ajustar</translation>
+        <source>&amp;Hide axis</source>
+        <translation>&amp;Ocultar eixo</translation>
     </message>
     <message>
-        <source>Quantity</source>
-        <translation type="obsolete">Quantidade</translation>
+        <source>&amp;Show grids</source>
+        <translation>Mo&amp;strar grades</translation>
     </message>
     <message>
-        <source>Sum</source>
-        <translation type="obsolete">Soma</translation>
+        <source>&amp;Scale...</source>
+        <translation>Escala...</translation>
     </message>
     <message>
-        <source>Percent</source>
-        <translation type="obsolete">Porcentagem</translation>
+        <source>There are no curves available on this plot!</source>
+        <translation>Não existem curvas disponíveis neste gráfico!</translation>
     </message>
     <message>
-        <source>Linear interpolation of </source>
-        <translation type="obsolete">Interpolação linear de </translation>
-    </message>
-    <message>
-        <source>Cubic interpolation of </source>
-        <translation type="obsolete">Interpolação cúbica de </translation>
-    </message>
-    <message>
-        <source>Akima interpolation of </source>
-        <translation type="obsolete">Interpolação de Akima de </translation>
-    </message>
-    <message>
-        <source>The curve %1 doesn&apos;t exist! Operation aborted!</source>
-        <translation type="obsolete">A curva %1 não existe! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Please select the start line point inside the image rectangle!</source>
-        <translation type="obsolete">Por favor, selecione o ponto de início de linha na imagem do retângulo!</translation>
-    </message>
-    <message>
-        <source>Please select the end line point inside the image rectangle!</source>
-        <translation type="obsolete">Por favor, selecione o ponto de fim de linha na imagem do retângulo!</translation>
-    </message>
-    <message>
-        <source>Smoothed</source>
-        <translation type="obsolete">Suavizado</translation>
-    </message>
-    <message>
-        <source>points</source>
-        <translation type="obsolete">pontos</translation>
-    </message>
-    <message>
-        <source>FFT Smoothing of</source>
-        <translation type="obsolete">Suavizar FFT de</translation>
-    </message>
-    <message>
-        <source>average mmoothing of</source>
-        <translation type="obsolete">suavizar média de</translation>
-    </message>
-    <message>
-        <source>Please provide a valid file name!</source>
-        <translation>Por favor, forneça um nome de arquivo válido!</translation>
-    </message>
-    <message>
-        <source>File format not handled, operation aborted!</source>
-        <translation>Formato de arquivo não suportado. Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Data set generated from curve</source>
-        <translation>Conjunto de dados gerados a partir da curva </translation>
-    </message>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">Tabela</translation>
+        <source>There are no curves with more than two points on this plot. Operation aborted!</source>
+        <translation>Não existem curvas com mais de dois pontos neste gráfico. Operação abortada!</translation>
     </message>
     <message>
         <source>F</source>
         <translation>F</translation>
     </message>
-    <message>
-        <source>Error</source>
-        <translation>Erro</translation>
-    </message>
-    <message>
-        <source>File open error</source>
-        <translation>Erro na abertura de arquivo</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Atenção</translation>
-    </message>
-    <message>
-        <source>1</source>
-        <comment>curve data table x column name</comment>
-        <translation>1</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <comment>curve data table y column name</comment>
-        <translation>2</translation>
-    </message>
-    <message>
-        <source>Curve data %1</source>
-        <translation>Dados da curva %1</translation>
-    </message>
-    <message>
-        <source>Internal Error</source>
-        <translation>Erro interno</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;Failed to set axis labels on Graph %1. Maybe you&apos;re trying to open a corrupted project file; or there&apos;s some problem within SciDAVis. Please report this as a bug (together with detailed instructions how to reproduce this message or the corrupted file).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&gt;&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;Falha ao definir rótulos do eixo no Gráfico %1. Pode ser que você esteja tentando abrir  um projeto corrompido ou existe algum problema com o SciDAVis. Por favor, reporte isto como um bug (juntamente com instruções detalhadas de como reproduzir esta mensagem ou com o arquivo corrompido).&lt;p&gt;&lt;a href=&quot;https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&quot;&gt;bug tracker: https://sourceforge.net/tracker/?group_id=199120&amp;atid=968214&lt;/a&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t change the axis type to the requested format!</source>
-        <translation>Não foi possível alterar o tipo de eixo para o formato solicitado!</translation>
-    </message>
-    <message>
-        <source>Output in postscript format is not available for Qt5, using PDF</source>
-        <translation>Saída no formato postscript não está disponível para Qt5, utilizando PDF</translation>
-    </message>
 </context>
 <context>
     <name>Graph3D</name>
-    <message>
-        <source>Choose a filename to save under</source>
-        <translation type="obsolete">Escolha um nome de arquivo para salvar</translation>
-    </message>
-    <message>
-        <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists. Do you want to overwrite it?</source>
-        <translation type="obsolete">Um arquivo chamado &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt; já existe. Deseja sobrescrevê-lo?</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation type="obsolete">&amp;Sim</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation type="obsolete">&amp;Não</translation>
-    </message>
     <message>
         <source>X axis</source>
         <translation>Eixo X</translation>
@@ -7777,20 +5561,20 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <translation>Eixo Z</translation>
     </message>
     <message>
-        <source>Could not print: &lt;h4&gt;</source>
-        <translation>Não foi possível imprimir: &lt;h4&gt;</translation>
-    </message>
-    <message>
-        <source>Please provide a valid file name!</source>
-        <translation>Por favor, forneça um nome de arquivo válido!</translation>
-    </message>
-    <message>
         <source>IO Error</source>
         <translation>Erro E/S</translation>
     </message>
     <message>
+        <source>Could not print: &lt;h4&gt;</source>
+        <translation>Não foi possível imprimir: &lt;h4&gt;</translation>
+    </message>
+    <message>
         <source>Error</source>
         <translation>Erro</translation>
+    </message>
+    <message>
+        <source>Please provide a valid file name!</source>
+        <translation>Por favor, forneça um nome de arquivo válido!</translation>
     </message>
     <message>
         <source> not supported</source>
@@ -7799,6 +5583,10 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
 </context>
 <context>
     <name>ImageDialog</name>
+    <message>
+        <source>Image Geometry</source>
+        <translation>Geometria da imagem</translation>
+    </message>
     <message>
         <source>Origin</source>
         <translation>Origem</translation>
@@ -7843,44 +5631,24 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
         <source>&amp;Cancel</source>
         <translation>&amp;Cancelar</translation>
     </message>
-    <message>
-        <source>Image Geometry</source>
-        <translation>Geometria da imagem</translation>
-    </message>
 </context>
 <context>
     <name>ImageExportDialog</name>
     <message>
-        <source>Show export &amp;options</source>
-        <translation type="obsolete">Mostrar &amp;opções de exportação</translation>
+        <source>Choose a filename to save under</source>
+        <translation>Escolha o nome do arquivo para salvar</translation>
     </message>
     <message>
         <source>Resolution (DPI)</source>
         <translation>Resolução (DPI)</translation>
     </message>
     <message>
-        <source>Export to &amp;standard page size</source>
-        <translation>Exportar para tamanho de página &amp;padrão</translation>
-    </message>
-    <message>
-        <source>&amp;Keep aspect ratio</source>
-        <translation>Manter a relação de aspecto</translation>
-    </message>
-    <message>
-        <source>Image quality</source>
-        <translation>Qualidade da imagem</translation>
-    </message>
-    <message>
-        <source>Save transparency</source>
-        <translation type="obsolete">Salvar transparência</translation>
-    </message>
-    <message>
-        <source>Choose a filename to save under</source>
-        <translation>Escolha o nome do arquivo para salvar</translation>
-    </message>
-    <message>
         <source>Export in &amp;color</source>
         <translation>Exportar em &amp;cores</translation>
+    </message>
+    <message>
+        <source>Export to &amp;standard page size</source>
+        <translation>Exportar para tamanho de página &amp;padrão</translation>
     </message>
     <message>
         <source>A0 - 841 x 1189 mm</source>
@@ -8018,30 +5786,23 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
     <message>
         <source>Landscape</source>
         <comment>page orientation</comment>
-        <translation>Paisagem</translation>
+        <translation>Paisagen</translation>
     </message>
-</context>
-<context>
-    <name>ImageExportOptionsDialog</name>
     <message>
-        <source>Image format</source>
-        <translation type="obsolete">Formato da imagem</translation>
+        <source>&amp;Keep aspect ratio</source>
+        <translation>Manter a relação de aspecto</translation>
     </message>
     <message>
         <source>Image quality</source>
-        <translation type="obsolete">Qualidade da imagem</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
+        <translation>Qualidade da imagem</translation>
     </message>
 </context>
 <context>
     <name>ImportASCIIDialog</name>
+    <message>
+        <source>Import ASCII File(s)</source>
+        <translation>Importar arquivo(s) ASCII</translation>
+    </message>
     <message>
         <source>All files</source>
         <translation>Todos os arquivos</translation>
@@ -8095,7 +5856,8 @@ O uso de &quot;; &quot; é uma solução temporária para fazer a descrição do
 The following special codes can be used:
 \t for a TAB character 
 \s for a SPACE</source>
-        <translation>O separador de coluna pode ser personalizado. Os seguintes códigos podem ser usados:
+        <translation>O separador de coluna pode ser personalizado. 
+Os seguintes códigos podem ser usados:
 \t para um caractere TAB
 \s para um caractere ESPAÇO</translation>
     </message>
@@ -8125,14 +5887,15 @@ The following special codes can be used:
         <source>By checking this option all white spaces will be 
 removed from the beginning and the end of 
 the lines in the ASCII file.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Marcando esta opção todos os espaços serão 
+        <comment>when translating this check the what's this functions and tool tips to place the '
+'s correctly</comment>
+        <translation>Marcando esta opção todos os espaços serão 
 removidos do início e final das 
 linhas nos arquivos ASCII.</translation>
     </message>
     <message>
         <source>Warning: checking this option leads to column 
-overlaping if the columns in the ASCII file don&apos;t 
+overlaping if the columns in the ASCII file don't 
 have the same number of rows.</source>
         <translation>Aviso: a marcação desta opção conduz à 
 superposição de colunas se as colunas do arquivo 
@@ -8142,8 +5905,9 @@ ASCII não tiverem o mesmo número de linhas.</translation>
         <source>To avoid this problem you should precisely 
 define the column separator using TAB and 
 SPACE characters.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Para evitar este problema é necessário 
+        <comment>when translating this check the what's this functions and tool tips to place the '
+'s correctly</comment>
+        <translation>Para evitar este problema é necessário 
 definir exatamente o separador de colunas 
 usando os caracteres TAB ou ESPAÇO.</translation>
     </message>
@@ -8157,20 +5921,26 @@ removed from the beginning and the end of the
 lines and each sequence of internal 
 whitespaces (including the TAB character) will 
 be replaced with a single space.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Marcando esta opção, todos os espaços em branco 
+        <comment>when translating this check the what's this functions and tool tips to place the '
+'s correctly</comment>
+        <translation>Marcando esta opção, todos os espaços em branco 
 serão eliminados do início e do final das linhas 
 e cada sequência de espaços internos (incluindo o caracter TAB) 
 será substituída por um único espaço em branco.</translation>
     </message>
     <message>
         <source>Warning: checking this option leads to column 
-overlaping if the columns in the ASCII file don&apos;t 
+overlaping if the columns in the ASCII file don't 
 have the same number of rows.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;\n&apos;s correctly</comment>
-        <translation type="vanished">Atenção: a marcação desta opção conduz à superposição 
-de colunas se as colunas do arquivo ASCII não 
-tiverem o mesmo número de linhas.</translation>
+        <comment>when translating this check the what's this functions and tool tips to place the '
+'s correctly</comment>
+        <translation>Aviso: a marcação desta opção conduz à 
+superposição de colunas se as colunas do arquivo 
+ASCII não tiverem o mesmo número de linhas.</translation>
+    </message>
+    <message>
+        <source>&amp;Numeric data</source>
+        <translation>Dados numéricos</translation>
     </message>
     <message>
         <source>Decimal Separators</source>
@@ -8179,10 +5949,6 @@ tiverem o mesmo número de linhas.</translation>
     <message>
         <source>default</source>
         <translation>padrão</translation>
-    </message>
-    <message>
-        <source>Use custom &amp;decimal separator</source>
-        <translation type="obsolete">Usar separador &amp;decimal personalizado</translation>
     </message>
     <message>
         <source>Re&amp;member the above options</source>
@@ -8196,8 +5962,8 @@ tiverem o mesmo número de linhas.</translation>
         <source>The column separator can be customized. The following special codes can be used:
 \t for a TAB character 
 \s for a SPACE</source>
-        <translation>O separador de colunas pode ser personalizado. Os seguintes códigos podem ser usados:
-\t para um caractere TAB
+        <translation>O separador de colunas pode ser personalizado. Os seguintes códigos podem ser utilizados:
+\t para um caractere TAB 
 \s para um caractere ESPAÇO</translation>
     </message>
     <message>
@@ -8225,7 +5991,7 @@ tiverem o mesmo número de linhas.</translation>
         <translation>Marcando esta opção todos os espaços em branco serão removidos do início e do final das linhas e cada sequência de espaços internos (incluindo o caractere TAB) serão substituídos por um único espaço em branco.</translation>
     </message>
     <message>
-        <source>Warning: using these two last options leads to column overlaping if the columns in the ASCII file don&apos;t have the same number of rows.</source>
+        <source>Warning: using these two last options leads to column overlaping if the columns in the ASCII file don't have the same number of rows.</source>
         <translation>Atenção: o uso destas duas últimas opções conduz à superposição de colunas se as colunas do arquivo ASCII não tiverem o mesmo número de linhas.</translation>
     </message>
     <message>
@@ -8233,204 +5999,19 @@ tiverem o mesmo número de linhas.</translation>
         <translation>Para evitar este problema é necessário definir exatamente o separador de colunas usando os caracteres TAB ou ESPAÇO.</translation>
     </message>
     <message>
-        <source>Import ASCII File(s)</source>
-        <translation>Importar arquivo(s) ASCII</translation>
-    </message>
-    <message>
         <source>Help</source>
         <translation>Ajuda</translation>
-    </message>
-    <message>
-        <source>&amp;Numeric data</source>
-        <translation>Dados numéricos</translation>
-    </message>
-    <message>
-        <source>By checking this option all white spaces will be 
-removed from the beginning and the end of 
-the lines in the ASCII file.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
-&apos;s correctly</comment>
-        <translation>Ao selecionar esta opção todos os espaços serão 
-removidos do início e final das 
-linhas nos arquivos ASCII.</translation>
-    </message>
-    <message>
-        <source>To avoid this problem you should precisely 
-define the column separator using TAB and 
-SPACE characters.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
-&apos;s correctly</comment>
-        <translation>Para evitar este problema é necessário 
-definir exatamente o separador de colunas 
-usando os caracteres TAB ou ESPAÇO.</translation>
-    </message>
-    <message>
-        <source>By checking this option all white spaces will be 
-removed from the beginning and the end of the 
-lines and each sequence of internal 
-whitespaces (including the TAB character) will 
-be replaced with a single space.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
-&apos;s correctly</comment>
-        <translation>Ao selecionar esta opção, todos os espaços em branco 
-serão eliminados do início e do final das linhas 
-e cada sequência de espaços internos (incluindo o caracter TAB) 
-será substituída por um único espaço em branco.</translation>
-    </message>
-    <message>
-        <source>Warning: checking this option leads to column 
-overlaping if the columns in the ASCII file don&apos;t 
-have the same number of rows.</source>
-        <comment>when translating this check the what&apos;s this functions and tool tips to place the &apos;
-&apos;s correctly</comment>
-        <translation>Atenção: selecionar esta opção leva à sobreposição 
-de colunas se as colunas no arquivo ASCII 
-não tem o mesmo número de linhas.</translation>
-    </message>
-</context>
-<context>
-    <name>ImportDialog</name>
-    <message>
-        <source>Separator</source>
-        <translation type="obsolete">Separador</translation>
-    </message>
-    <message>
-        <source>TAB</source>
-        <translation type="obsolete">TAB</translation>
-    </message>
-    <message>
-        <source>SPACE</source>
-        <translation type="obsolete">ESPAÇO</translation>
-    </message>
-    <message>
-        <source>Ignore first</source>
-        <translation type="obsolete">Ignorar primeiras</translation>
-    </message>
-    <message>
-        <source>lines</source>
-        <translation type="obsolete">linhas</translation>
-    </message>
-    <message>
-        <source>Use first row to &amp;name columns</source>
-        <translation type="obsolete">Usar primeira linha para &amp;nomear colunas</translation>
-    </message>
-    <message>
-        <source>&amp;Remove white spaces from line ends</source>
-        <translation type="obsolete">Remove&amp;r espaços em branco dos finais de linha</translation>
-    </message>
-    <message>
-        <source>&amp;Simplify white spaces</source>
-        <translation type="obsolete">&amp;Simplificar espaços em branco</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-    <message>
-        <source>The separator must not contain the following characters: 0-9eE.+-</source>
-        <translation type="obsolete">O separador não pode conter os seguintes caracteres: 0-9eE.+-</translation>
-    </message>
-    <message>
-        <source>Remove white spaces from line ends</source>
-        <translation type="obsolete">Remover espaços em branco dos finais de linha</translation>
-    </message>
-    <message>
-        <source>By checking this option all white spaces will be removed from the beginning and the end of the lines in the ASCII file.</source>
-        <translation type="obsolete">Marcando esta opção todos os espaços em branco serão removidos do principio e do final das linhas no arquivo ASCII.</translation>
-    </message>
-    <message>
-        <source>Simplify white spaces</source>
-        <translation type="obsolete">Simplificar espaços em branco</translation>
-    </message>
-    <message>
-        <source>By checking this option each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.</source>
-        <translation type="obsolete">Marcando esta opção cada sequência de espaços em branco internos (incluindo o caractere TAB) será substituída por um  único espaço.</translation>
-    </message>
-    <message>
-        <source>By checking this option all white spaces will be removed from the beginning and the end of the lines and each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.</source>
-        <translation type="obsolete">Marcando esta opção todos os espaços em branco serão removidos do início e do final das linhas e cada sequência de espaços internos (incluindo o caractere TAB) será substituída por um único espaço em branco.</translation>
-    </message>
-    <message>
-        <source>Warning: using these two last options leads to column overlaping if the columns in the ASCII file don&apos;t have the same number of rows.</source>
-        <translation type="obsolete">Aviso: o uso destas duas últimas opções conduz à superposição de colunas se as colunas do arquivo ASCII não tiverem o mesmo número de linhas.</translation>
-    </message>
-    <message>
-        <source>To avoid this problem you should precisely define the column separator using TAB and SPACE characters.</source>
-        <translation type="obsolete">Para evitar este problema é necessário definir exatamente o separador de colunas usando os caracteres TAB ou ESPAÇO.</translation>
-    </message>
-    <message>
-        <source>Do you want to save the modifications to the ASCII import options before closing?</source>
-        <translation type="obsolete">Gostaria de salvar as modificações nas opções de importação ASCII antes de fechar?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sim</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Não</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-</context>
-<context>
-    <name>ImportFilesDialog</name>
-    <message>
-        <source>New Table</source>
-        <translation type="obsolete">Nova tabela</translation>
-    </message>
-    <message>
-        <source>New Columns</source>
-        <translation type="obsolete">Novas colunas</translation>
-    </message>
-    <message>
-        <source>New Rows</source>
-        <translation type="obsolete">Novas linhas</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation type="obsolete">Todos os arquivos</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="obsolete">Texto</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Dados</translation>
-    </message>
-    <message>
-        <source>Comma Separated Values</source>
-        <translation type="obsolete">Valores separados por vírgula</translation>
-    </message>
-    <message>
-        <source>Import each file as</source>
-        <translation type="obsolete">Importar cada arquivo como</translation>
     </message>
 </context>
 <context>
     <name>IntDialog</name>
     <message>
+        <source>Integration Options</source>
+        <translation>Opções de integração</translation>
+    </message>
+    <message>
         <source>Integration of</source>
         <translation>Integração de</translation>
-    </message>
-    <message>
-        <source>Order (1 - 5, 1 = Trapezoid Rule)</source>
-        <translation type="obsolete">Ordem (1 - 5, 1 = Regra do trapézio)</translation>
-    </message>
-    <message>
-        <source>Number of iterations (Max=40)</source>
-        <translation type="obsolete">Número de interações (Max=40)</translation>
-    </message>
-    <message>
-        <source>Tolerance</source>
-        <translation type="obsolete">Tolerância</translation>
     </message>
     <message>
         <source>Interpolation</source>
@@ -8469,12 +6050,20 @@ não tem o mesmo número de linhas.</translation>
         <translation>&amp;Fechar</translation>
     </message>
     <message>
+        <source>SciDAVis</source>
+        <translation>SciDAVis</translation>
+    </message>
+    <message>
         <source>Warning</source>
         <translation>Atenção</translation>
     </message>
     <message>
-        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
+        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn't exist anymore! Operation aborted!</source>
         <translation>A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
+    </message>
+    <message>
+        <source>Input error</source>
+        <translation>Erro de entrada</translation>
     </message>
     <message>
         <source>Please give a number larger or equal to the minimum value of X, for the lower limit.
@@ -8489,10 +6078,22 @@ Se você não conhece este valor, escreva min na caixa.</translation>
 Se você não conhece este valor, escreva max na caixa.</translation>
     </message>
     <message>
+        <source>Start limit error</source>
+        <translation>Erro no limite inicial</translation>
+    </message>
+    <message>
         <source>Please give a number larger or equal to the minimum value of X, for the upper limit.
  If you do not know that value, type min in the box.</source>
         <translation>Por favor, forneça um número maior o igual ao valor mínimo de X para o limite superior.
 Se não conhece este valor, escreva min na caixa.</translation>
+    </message>
+    <message>
+        <source>End limit error</source>
+        <translation>Erro no limite final</translation>
+    </message>
+    <message>
+        <source>Help for Integration</source>
+        <translation>Ajuda para a integração</translation>
     </message>
     <message>
         <source>The integration of a curve consists of the following five steps:
@@ -8516,34 +6117,6 @@ The limits must be within the range of x; If you do not know the maximum (minimu
 IMPORTANTE
 Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo (mínimo) de x, escreva max (min) nas caixas.</translation>
     </message>
-    <message>
-        <source>SciDAVis</source>
-        <translation>SciDAVis</translation>
-    </message>
-    <message>
-        <source>Integration Options</source>
-        <translation>Opções de integração</translation>
-    </message>
-    <message>
-        <source>Tolerance value error</source>
-        <translation type="obsolete">Erro no valor da tolerância</translation>
-    </message>
-    <message>
-        <source>Input error</source>
-        <translation>Erro de entrada</translation>
-    </message>
-    <message>
-        <source>Start limit error</source>
-        <translation>Erro no limite inicial</translation>
-    </message>
-    <message>
-        <source>End limit error</source>
-        <translation>Erro no limite final</translation>
-    </message>
-    <message>
-        <source>Help for Integration</source>
-        <translation>Ajuda para a integração</translation>
-    </message>
 </context>
 <context>
     <name>Integration</name>
@@ -8556,8 +6129,16 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>SciDAVis</translation>
     </message>
     <message>
+        <source>Error</source>
+        <translation>Erro</translation>
+    </message>
+    <message>
+        <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
+        <translation>Método de interpolação desconhecido. Os valores válidos são: 0 - Linear, 1 - Cúbico, 2 - Akima.</translation>
+    </message>
+    <message>
         <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
-        <translation>Vários pontos tem o mesmo valor de x, causando divisão por zero. Operação abortada!</translation>
+        <translation>Vários pontos tem o mesmo valor de x causando divisões por zero, integração abortada!</translation>
     </message>
     <message>
         <source>Linear</source>
@@ -8592,22 +6173,6 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>Interpolação</translation>
     </message>
     <message>
-        <source>using a %1 order method</source>
-        <translation type="obsolete">usando um método de %1 orden</translation>
-    </message>
-    <message>
-        <source>Iterations</source>
-        <translation type="obsolete">Interações</translation>
-    </message>
-    <message>
-        <source>Tolerance</source>
-        <translation type="obsolete">Tolerância</translation>
-    </message>
-    <message>
-        <source>max</source>
-        <translation type="obsolete">max</translation>
-    </message>
-    <message>
         <source>Points</source>
         <translation>Pontos</translation>
     </message>
@@ -8617,7 +6182,7 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
     </message>
     <message>
         <source>to</source>
-        <translation>até</translation>
+        <translation>para</translation>
     </message>
     <message>
         <source>Peak at</source>
@@ -8627,21 +6192,13 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <source>Area</source>
         <translation>área</translation>
     </message>
-    <message>
-        <source>Unknown integration method. Valid values must be in the range: 1 (Trapezoidal Method) to 5.</source>
-        <translation type="obsolete">Método de integração desconhecido. Os valores válidos devem estar no intervalo: 1 (Método do Trapézio) a 5.</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Erro</translation>
-    </message>
-    <message>
-        <source>Unknown interpolation method. Valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
-        <translation>Método de interpolação desconhecido. Os valores válidos são: 0 - Linear, 1 - Cúbico, 2 - Akima.</translation>
-    </message>
 </context>
 <context>
     <name>Interpolation</name>
+    <message>
+        <source>SciDAVis</source>
+        <translation>SciDAVis</translation>
+    </message>
     <message>
         <source>Error</source>
         <translation>Erro</translation>
@@ -8671,10 +6228,6 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>Akima</translation>
     </message>
     <message>
-        <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
-        <translation>Vários pontos tem o mesmo valor de x causando divisões por zero, operação abortada!</translation>
-    </message>
-    <message>
         <source>Unknown interpolation method, valid values are: 0 - Linear, 1 - Cubic, 2 - Akima.</source>
         <translation>Método de Interpolação desconhecido. Os valores válidos são: 0 - Linear, 1 - Cúbico, 2 - Akima.</translation>
     </message>
@@ -8683,12 +6236,16 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>São necessários pelo menos %1 pontos para realizar esta operação!</translation>
     </message>
     <message>
-        <source>SciDAVis</source>
-        <translation>SciDAVis</translation>
+        <source>Several data points have the same x value causing divisions by zero, operation aborted!</source>
+        <translation>Vários pontos tem o mesmo valor de x causando divisões por zero, integração abortada!</translation>
     </message>
 </context>
 <context>
     <name>InterpolationDialog</name>
+    <message>
+        <source>Interpolation Options</source>
+        <translation>Opções de interpolação</translation>
+    </message>
     <message>
         <source>Make curve from</source>
         <translation>Traçar curva a partir de</translation>
@@ -8707,7 +6264,7 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
     </message>
     <message>
         <source>Non-rounded Akima</source>
-        <translation>Akima (sem condições de contorno)</translation>
+        <translation>Akima - sem condições de contorno</translation>
     </message>
     <message>
         <source>Points</source>
@@ -8738,20 +6295,12 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation>A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Please enter x limits that satisfy: from &lt; to!</source>
-        <translation>Por favor, forneça limites em x tais que: inicio &lt; fim!</translation>
-    </message>
-    <message>
-        <source>Interpolation Options</source>
-        <translation>Opções de interpolação</translation>
-    </message>
-    <message>
         <source>Warning</source>
         <translation>Atenção</translation>
+    </message>
+    <message>
+        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn't exist anymore! Operation aborted!</source>
+        <translation>A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
     </message>
     <message>
         <source>Start limit error</source>
@@ -8765,16 +6314,32 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <source>Input error</source>
         <translation>Erro de entrada</translation>
     </message>
+    <message>
+        <source>Please enter x limits that satisfy: from &lt; to!</source>
+        <translation>Por favor, forneça limites em x tais que: inicio &lt; fim!</translation>
+    </message>
 </context>
 <context>
     <name>LayerDialog</name>
     <message>
-        <source>Number of Layers</source>
-        <translation type="obsolete">Número de camadas</translation>
+        <source>Arrange Layers</source>
+        <translation>Organizar camadas</translation>
+    </message>
+    <message>
+        <source>Layers</source>
+        <translation>Camadas</translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation>Número</translation>
     </message>
     <message>
         <source>Automatic &amp;layout</source>
         <translation>Organização &amp;automática</translation>
+    </message>
+    <message>
+        <source>Alignement</source>
+        <translation>Alinhamento</translation>
     </message>
     <message>
         <source>Horizontal</source>
@@ -8786,11 +6351,11 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
     </message>
     <message>
         <source>Left</source>
-        <translation>Esquerda</translation>
+        <translation>Esquerdo</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Direita</translation>
+        <translation>Direito</translation>
     </message>
     <message>
         <source>Vertical</source>
@@ -8805,8 +6370,8 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>Inferior</translation>
     </message>
     <message>
-        <source>Alignement</source>
-        <translation>Alinhamento</translation>
+        <source>Grid</source>
+        <translation>Grades</translation>
     </message>
     <message>
         <source>Columns</source>
@@ -8815,10 +6380,6 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
     <message>
         <source>Rows</source>
         <translation>Linhas</translation>
-    </message>
-    <message>
-        <source>Grid</source>
-        <translation>Grades</translation>
     </message>
     <message>
         <source>&amp;Layer Canvas Size</source>
@@ -8835,6 +6396,10 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
     <message>
         <source>Height</source>
         <translation>Altura</translation>
+    </message>
+    <message>
+        <source>Spacing</source>
+        <translation>Espaçamento</translation>
     </message>
     <message>
         <source>Columns gap</source>
@@ -8861,26 +6426,6 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>Margem inferior</translation>
     </message>
     <message>
-        <source>Spacing</source>
-        <translation>Espaçamento</translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation type="obsolete">Disposição</translation>
-    </message>
-    <message>
-        <source>Titles</source>
-        <translation type="obsolete">Títulos</translation>
-    </message>
-    <message>
-        <source>Legends</source>
-        <translation type="obsolete">Legendas</translation>
-    </message>
-    <message>
-        <source>Fonts</source>
-        <translation type="obsolete">Fontes</translation>
-    </message>
-    <message>
         <source>&amp;Apply</source>
         <translation>&amp;Aplicar</translation>
     </message>
@@ -8891,6 +6436,10 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancelar</translation>
+    </message>
+    <message>
+        <source>Delete Layers?</source>
+        <translation>Remover as camadas?</translation>
     </message>
     <message>
         <source>You are about to delete %1 existing layers.</source>
@@ -8905,71 +6454,27 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>&amp;Continuar</translation>
     </message>
     <message>
-        <source>The number of columns you&apos;ve entered is greater than the number of graphs (%1)!</source>
-        <translation>O número de colunas fornecido é maior que o número de gráficos (%1)!</translation>
-    </message>
-    <message>
-        <source>The number of rows you&apos;ve entered is greater than the number of graphs (%1)!</source>
-        <translation>O número de linhas fornecido é maior que o número de gráficos (%1)!</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation>Camadas</translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>Número</translation>
-    </message>
-    <message>
-        <source>Arrange Layers</source>
-        <translation>Organizar camadas</translation>
-    </message>
-    <message>
-        <source>Delete Layers?</source>
-        <translation>Remover as camadas?</translation>
-    </message>
-    <message>
         <source>Columns input error</source>
         <translation>Erro nas colunas introduzidas</translation>
+    </message>
+    <message>
+        <source>The number of columns you've entered is greater than the number of graphs (%1)!</source>
+        <translation>O número de colunas fornecido é maior que o número de gráficos (%1)!</translation>
     </message>
     <message>
         <source>Rows input error</source>
         <translation>Erro nas linhas introduzidas</translation>
     </message>
+    <message>
+        <source>The number of rows you've entered is greater than the number of graphs (%1)!</source>
+        <translation>O número de linhas fornecido é maior que o número de gráficos (%1)!</translation>
+    </message>
 </context>
 <context>
     <name>LineDialog</name>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>Line type</source>
-        <translation type="obsolete">Tipo de linha</translation>
-    </message>
-    <message>
-        <source>Line width</source>
-        <translation type="obsolete">Espessura da linha</translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="obsolete">1</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="obsolete">2</translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation type="obsolete">3</translation>
-    </message>
-    <message>
-        <source>4</source>
-        <translation type="obsolete">4</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
+        <source>Line options</source>
+        <translation>Opções de linha</translation>
     </message>
     <message>
         <source>Arrow at &amp;start</source>
@@ -9036,10 +6541,6 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>Y</translation>
     </message>
     <message>
-        <source>To</source>
-        <translation type="obsolete">A</translation>
-    </message>
-    <message>
         <source>End Point</source>
         <translation>Ponto final</translation>
     </message>
@@ -9047,28 +6548,16 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <source>&amp;Geometry</source>
         <translation>&amp;Geometria</translation>
     </message>
-    <message>
-        <source>Line options</source>
-        <translation>Opções de linha</translation>
-    </message>
 </context>
 <context>
     <name>LineProfileTool</name>
     <message>
-        <source>pixel</source>
-        <translation>pixel</translation>
-    </message>
-    <message>
-        <source>intensity</source>
-        <translation>Intensidade</translation>
-    </message>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">Tabela</translation>
-    </message>
-    <message>
         <source>Pixel selection warning</source>
         <translation>Aviso de seleção de pixel</translation>
+    </message>
+    <message>
+        <source>pixel</source>
+        <translation>pixel</translation>
     </message>
     <message>
         <source>x</source>
@@ -9077,6 +6566,10 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
     <message>
         <source>y</source>
         <translation>y</translation>
+    </message>
+    <message>
+        <source>intensity</source>
+        <translation>Intensidade</translation>
     </message>
     <message>
         <source>Line profile %1</source>
@@ -9102,12 +6595,12 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>Linear</translation>
     </message>
     <message>
-        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
-        <translation>São necessários pelo menos %1 pontos para esta operação de ajuste. Operação abortada!</translation>
+        <source>Fit Error</source>
+        <translation>Erro ao ajustar</translation>
     </message>
     <message>
-        <source>Fit Error</source>
-        <translation>Erro de ajuste</translation>
+        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
+        <translation>São necessários pelo menos %1 pontos para este ajuste. Operação abortada!</translation>
     </message>
 </context>
 <context>
@@ -9122,7 +6615,7 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
     </message>
     <message>
         <source>(center)</source>
-        <translation>(centro)</translation>
+        <translation>(central)</translation>
     </message>
     <message>
         <source>(width)</source>
@@ -9136,12 +6629,8 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
 <context>
     <name>Matrix</name>
     <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sim</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <source>Error</source>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Calculation failed, the matrix is not square!</source>
@@ -9152,37 +6641,8 @@ Os limites devem estar dentro do intervalo de x; se não conhece o valor máximo
         <translation>A inversão falhou, a matriz não é quadrada!</translation>
     </message>
     <message>
-        <source>No</source>
-        <translation type="obsolete">No</translation>
-    </message>
-    <message>
-        <source>The text in the clipboard is larger than your current selection!	        
-Do you want to insert cells?</source>
-        <translation type="obsolete">O texto na área de transferência é maior que a seleção!	        
-Gostaria de inserir células?</translation>
-    </message>
-    <message>
-        <source>Ctrl+A</source>
-        <comment>Matriz: selecionar tudo</comment>
-        <translation type="obsolete">Ctrl+A</translation>
-    </message>
-    <message>
-        <source>Deleting rows/columns from the matrix!</source>
-        <comment>set matrix dimensions</comment>
-        <translation type="obsolete">Apagando linhas/colunas desta matriz!</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Do you really want to continue?</source>
-        <comment>set matrix dimensions</comment>
-        <translation type="obsolete">&lt;p&gt;Deseja realmente continuar?</translation>
-    </message>
-    <message>
         <source>SciDAVis</source>
         <translation>SciDAVis</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Erro</translation>
     </message>
     <message>
         <source>Do you want to hide or delete</source>
@@ -9197,227 +6657,16 @@ Gostaria de inserir células?</translation>
         <translation>Ocultar</translation>
     </message>
     <message>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
         <source>Matrix %1</source>
         <translation>Matriz %1</translation>
     </message>
     <message>
         <source>%1: apply formula to selection</source>
         <translation>%1: aplicar fórmula à seleção</translation>
-    </message>
-    <message>
-        <source>%1: cut selected cell(s)</source>
-        <translation type="obsolete">%1: cortar célula(s) selecionada(s)</translation>
-    </message>
-    <message>
-        <source>%1: paste from clipboard</source>
-        <translation type="obsolete">%1: colar da área de trabalho</translation>
-    </message>
-    <message>
-        <source>%1: clear selected cell(s)</source>
-        <translation type="obsolete">%1: limpar célula(s) selecionada(s)</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">C&amp;opiar</translation>
-    </message>
-    <message>
-        <source>Past&amp;e</source>
-        <translation type="obsolete">Co&amp;lar</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r</source>
-        <comment>clear selection</comment>
-        <translation type="obsolete">Limpa&amp;r</translation>
-    </message>
-    <message>
-        <source>Alt+Q</source>
-        <translation type="obsolete">Alt+Q</translation>
-    </message>
-    <message>
-        <source>Recalculate</source>
-        <translation type="obsolete">Recalcular</translation>
-    </message>
-    <message>
-        <source>F12</source>
-        <translation type="obsolete">F12</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">Selecionar tudo</translation>
-    </message>
-    <message>
-        <source>Clear Matrix</source>
-        <translation type="obsolete">Limpar matriz</translation>
-    </message>
-    <message>
-        <source>&amp;Go to Cell</source>
-        <translation type="obsolete">Ir para célula</translation>
-    </message>
-    <message>
-        <source>Ctrl+Alt+G</source>
-        <translation type="obsolete">Ctrl+Alt+G</translation>
-    </message>
-    <message>
-        <source>&amp;Transpose</source>
-        <translation type="obsolete">&amp;Transpor</translation>
-    </message>
-    <message>
-        <source>Mirror &amp;Horizontally</source>
-        <translation type="obsolete">Espelhar horizontalmente</translation>
-    </message>
-    <message>
-        <source>Mirror &amp;Vertically</source>
-        <translation type="obsolete">Espelhar verticalmente</translation>
-    </message>
-    <message>
-        <source>&amp;Import Image</source>
-        <comment>import image as matrix</comment>
-        <translation type="obsolete">Importar imagem</translation>
-    </message>
-    <message>
-        <source>&amp;Duplicate</source>
-        <comment>duplicate matrix</comment>
-        <translation type="obsolete">&amp;Duplicar</translation>
-    </message>
-    <message>
-        <source>Set &amp;Coordinates</source>
-        <translation type="obsolete">Coordenadas</translation>
-    </message>
-    <message>
-        <source>Set Display &amp;Format</source>
-        <translation type="obsolete">Definir formato do mostrador</translation>
-    </message>
-    <message>
-        <source>&amp;Insert Empty Columns</source>
-        <translation type="obsolete">Inserir coluna vazia</translation>
-    </message>
-    <message>
-        <source>Remo&amp;ve Columns</source>
-        <translation type="obsolete">Remover colunas</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r Columns</source>
-        <translation type="obsolete">Limpar colunas</translation>
-    </message>
-    <message>
-        <source>&amp;Add Columns</source>
-        <translation type="obsolete">Adicionar colunas</translation>
-    </message>
-    <message>
-        <source>&amp;Insert Empty Rows</source>
-        <translation type="obsolete">Inserir linhas vazias</translation>
-    </message>
-    <message>
-        <source>Remo&amp;ve Rows</source>
-        <translation type="obsolete">Remover linhas</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r Rows</source>
-        <translation type="obsolete">Lim&amp;par linhas</translation>
-    </message>
-    <message>
-        <source>&amp;Add Rows</source>
-        <translation type="obsolete">Adicionar linhas</translation>
-    </message>
-    <message>
-        <source>&amp;Matrix</source>
-        <translation type="obsolete">&amp;Matriz</translation>
-    </message>
-    <message>
-        <source>Go to Cell</source>
-        <translation type="obsolete">Ir para a célula</translation>
-    </message>
-    <message>
-        <source>Enter column</source>
-        <translation type="obsolete">Inserir coluna</translation>
-    </message>
-    <message>
-        <source>Enter row</source>
-        <translation type="obsolete">Inserir linha</translation>
-    </message>
-    <message>
-        <source>Set Matrix Dimensions</source>
-        <translation type="obsolete">Definir dimensões da matriz</translation>
-    </message>
-    <message>
-        <source>Enter number of columns</source>
-        <translation type="obsolete">Número de colunas</translation>
-    </message>
-    <message>
-        <source>Enter number of rows</source>
-        <translation type="obsolete">Número de linhas</translation>
-    </message>
-    <message>
-        <source>Error importing image</source>
-        <translation type="obsolete">Erro ao importar imagem</translation>
-    </message>
-    <message>
-        <source>Import of image &apos;%1&apos; failed</source>
-        <translation type="obsolete">A importação da imagem &apos;%1&apos; falhou</translation>
-    </message>
-    <message>
-        <source>invalid row or column count</source>
-        <translation type="obsolete">Contagem de linhas ou colunas inválidas</translation>
-    </message>
-    <message>
-        <source>no matrix element found</source>
-        <translation type="obsolete">Nenhum elemento de matriz encontrado</translation>
-    </message>
-    <message>
-        <source>invalid or missing numeric format</source>
-        <translation type="obsolete">Formato numérico inválido ou ausente</translation>
-    </message>
-    <message>
-        <source>invalid or missing number of displayed digits</source>
-        <translation type="obsolete">O número de dígitos mostrados não é válido</translation>
-    </message>
-    <message>
-        <source>invalid x start value</source>
-        <translation type="obsolete">O valor inicial de x não é válido</translation>
-    </message>
-    <message>
-        <source>invalid x end value</source>
-        <translation type="obsolete">O valor final de x não é válido</translation>
-    </message>
-    <message>
-        <source>invalid y start value</source>
-        <translation type="obsolete">valor inicial de y inválido</translation>
-    </message>
-    <message>
-        <source>invalid y end value</source>
-        <translation type="obsolete">valor final de y inválido</translation>
-    </message>
-    <message>
-        <source>invalid row height</source>
-        <translation type="obsolete">altura de linha inválida</translation>
-    </message>
-    <message>
-        <source>invalid or missing column index</source>
-        <translation type="obsolete">índice de colunas inválido ou inexistente</translation>
-    </message>
-    <message>
-        <source>invalid column width</source>
-        <translation type="obsolete">largura de coluna inválida</translation>
-    </message>
-    <message>
-        <source>invalid cell value</source>
-        <translation type="obsolete">valor da célula inválido</translation>
-    </message>
-    <message>
-        <source>Hide Controls</source>
-        <translation type="obsolete">Ocultar controles</translation>
-    </message>
-    <message>
-        <source>Show Controls</source>
-        <translation type="obsolete">Mostrar controles</translation>
-    </message>
-    <message>
-        <source>Matrix</source>
-        <translation type="obsolete">Matriz</translation>
-    </message>
-    <message>
-        <source>Import image...</source>
-        <translation type="obsolete">Importar imagem...</translation>
     </message>
 </context>
 <context>
@@ -9432,7 +6681,7 @@ Gostaria de inserir células?</translation>
     </message>
     <message>
         <source>Appl&amp;y</source>
-        <translation>&amp;Aplicar</translation>
+        <translation>Apl&amp;icar</translation>
     </message>
     <message>
         <source>First column X =</source>
@@ -9447,56 +6696,60 @@ Gostaria de inserir células?</translation>
         <translation>Primeira linha Y =</translation>
     </message>
     <message>
+        <source>Last row Y =</source>
+        <translation>Última linha Y =</translation>
+    </message>
+    <message>
         <source>Format</source>
         <translation>Formato</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Apply new type and format to all selected columns&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar novo tipo e formato em todas as colunas selecionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Aplicar novo tipo e formato para todas as colunas selecionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Format:</source>
         <translation>Formato:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Choose the display format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Escolha o formato a ser mostrado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Escolha o formato a ser mostrado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Decimal Digits:</source>
         <translation>Casas decimais</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Enter the number of displayed decimal digits&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insira o número de casas decimais a serem mostradas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Insira o número de casas decimais que devem ser mostradas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Information about the selected type and format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Informação sobre o tipo e formato selecionado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Informações sobre tipo e formato selecionado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -9504,210 +6757,61 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Formula:</source>
-        <translation>Fórmula:</translation>
+        <translation>Fórmula</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Apply the formula to all selected cells&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplicar fórmula em todas as células selecionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Aplicar fórmula em todas as células selecionadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Select a column reference to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Selecione uma coluna de referência para inserir na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Selecione uma coluna de referência para inserir na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Insert the column reference into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insira a coluna de referência na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Insira a coluna de referência na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Add</source>
         <translation>Adicionar</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Select a function to insert into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Selecione uma função para inserir na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Selecione uma função para inserir na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Inset the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Inset the function into the formula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insira a função na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Last row Y =</source>
-        <translation>Última linha Y =</translation>
-    </message>
-</context>
-<context>
-    <name>MatrixDialog</name>
-    <message>
-        <source>Cell Width</source>
-        <translation type="obsolete">Largura de célula</translation>
-    </message>
-    <message>
-        <source>Data Format</source>
-        <translation type="obsolete">Formato dos dados</translation>
-    </message>
-    <message>
-        <source>Numeric Display</source>
-        <translation type="obsolete">Mostrador numérico</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>Decimal: 1000</source>
-        <translation type="obsolete">Decimal: 1000</translation>
-    </message>
-    <message>
-        <source>Scientific: 1E3</source>
-        <translation type="obsolete">Científico: 1E3</translation>
-    </message>
-    <message>
-        <source>Default Decimal Digits</source>
-        <translation type="obsolete">Casas decimais padrão</translation>
-    </message>
-    <message>
-        <source>Significant Digits=</source>
-        <translation type="obsolete">Algarismos significativos=</translation>
-    </message>
-    <message>
-        <source>Matrix Properties</source>
-        <translation type="obsolete">Propriedades da matriz</translation>
-    </message>
-    <message>
-        <source>Decimal digits</source>
-        <translation type="obsolete">Digitos decimais</translation>
-    </message>
-</context>
-<context>
-    <name>MatrixSizeDialog</name>
-    <message>
-        <source>Dimensions</source>
-        <translation type="obsolete">Dimensões</translation>
-    </message>
-    <message>
-        <source>Coordinates</source>
-        <translation type="obsolete">Coordenadas</translation>
-    </message>
-    <message>
-        <source>Rows</source>
-        <translation type="obsolete">Linhas</translation>
-    </message>
-    <message>
-        <source>Columns</source>
-        <translation type="obsolete">Colunas</translation>
-    </message>
-    <message>
-        <source>X (Columns)</source>
-        <translation type="obsolete">X (Colunas)</translation>
-    </message>
-    <message>
-        <source>Y (Rows)</source>
-        <translation type="obsolete">Y (Linhas)</translation>
-    </message>
-    <message>
-        <source>First</source>
-        <translation type="obsolete">Primeiro</translation>
-    </message>
-    <message>
-        <source>Last</source>
-        <translation type="obsolete">�ltimo</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Matrix Dimensions</source>
-        <translation type="obsolete">Dimensões da matriz</translation>
-    </message>
-    <message>
-        <source>Input error</source>
-        <translation type="obsolete">Erro de entrada</translation>
-    </message>
-</context>
-<context>
-    <name>MatrixValuesDialog</name>
-    <message>
-        <source>For row (i)</source>
-        <translation type="obsolete">Para a linha (i)</translation>
-    </message>
-    <message>
-        <source>to</source>
-        <translation type="obsolete">a</translation>
-    </message>
-    <message>
-        <source>For col (j)</source>
-        <translation type="obsolete">Para col (j)</translation>
-    </message>
-    <message>
-        <source>Add function</source>
-        <translation type="obsolete">Adicionar função</translation>
-    </message>
-    <message>
-        <source>Add Cell</source>
-        <translation type="obsolete">Adicionar célula</translation>
-    </message>
-    <message>
-        <source>Cell(i,j)=</source>
-        <translation type="obsolete">Célula(i,j)=</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="obsolete">Aplicar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>Set Matrix Values</source>
-        <translation type="obsolete">Definir valores da matriz</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Insira a função na fórmula&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -9734,16 +6838,16 @@ p, li { white-space: pre-wrap; }
         <translation>Científico (E)</translation>
     </message>
     <message>
-        <source>Example: %1</source>
-        <translation>Exemplo: %1</translation>
-    </message>
-    <message>
         <source>Automatic (e)</source>
         <translation>Automático (e)</translation>
     </message>
     <message>
         <source>Automatic (E)</source>
         <translation>Automático (E)</translation>
+    </message>
+    <message>
+        <source>Example: %1</source>
+        <translation>Exemplo: %1</translation>
     </message>
 </context>
 <context>
@@ -9753,7 +6857,7 @@ p, li { white-space: pre-wrap; }
         <translation>col() funciona somente em tabelas!</translation>
     </message>
     <message>
-        <source>There&apos;s no column %1 in table %2!</source>
+        <source>There's no column %1 in table %2!</source>
         <translation>Não existe a coluna %1 na tabela %2!</translation>
     </message>
     <message>
@@ -9761,19 +6865,19 @@ p, li { white-space: pre-wrap; }
         <translation>tablecol() funciona somente em tabelas!</translation>
     </message>
     <message>
-        <source>Couldn&apos;t find a table named %1.</source>
+        <source>Couldn't find a table named %1.</source>
         <translation>Não foi possível encontrar a tabela chamada %1.</translation>
     </message>
     <message>
         <source>cell() works only on tables and matrices!</source>
-        <translation>o uso de &quot;cell()&quot; só funciona com tabelas e matrizes!</translation>
+        <translation>o uso de "cell()" só funciona com tabelas e matrizes!</translation>
     </message>
     <message>
-        <source>There&apos;s no row %1 in matrix %2!</source>
+        <source>There's no row %1 in matrix %2!</source>
         <translation>Não existe a linha %1 na matriz %2!</translation>
     </message>
     <message>
-        <source>There&apos;s no column %1 in matrix %2!</source>
+        <source>There's no column %1 in matrix %2!</source>
         <translation>Não existe a coluna %1 na matriz %2!</translation>
     </message>
     <message>
@@ -9781,7 +6885,7 @@ p, li { white-space: pre-wrap; }
         <translation>O acesso a valores de tabelas (ainda) não é suportado neste contexto.</translation>
     </message>
     <message>
-        <source>There&apos;s no column named %1 in table %2!</source>
+        <source>There's no column named %1 in table %2!</source>
         <translation>Não existe uma coluna chamada %1 na tabela %2!</translation>
     </message>
     <message>
@@ -9968,10 +7072,9 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
  Computa a função de hazard para a distribuição normal h(x) = erfz(x)/erfq(x).</translation>
     </message>
     <message>
-        <source>if(e1, e2, e3):
+        <source>(e1)?(e2):(e3):
  if e1 then e2 else e3.</source>
-        <translation type="vanished">if(e1, e2, e3):￼
- Se e1 então e2, senão e3.</translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <source>ln(x):
@@ -10073,7 +7176,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>w0(x):
- Compute the principal branch of Lambert&apos;s W function, W_0(x).
+ Compute the principal branch of Lambert's W function, W_0(x).
  W is defined as a solution to the equation W(x)*exp(W(x))=x.
  For x&lt;0, there are two real-valued branches; this function computes the one where W&gt;-1 for x&lt;0 (also see wm1(x)).</source>
         <translation>w0(x):￼
@@ -10083,7 +7186,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>wm1(x):
- Compute the secondary branch of Lambert&apos;s W function, W_{-1}(x).
+ Compute the secondary branch of Lambert's W function, W_{-1}(x).
  W is defined as a solution to the equation W(x)*exp(W(x))=x.
  For x&lt;0, there are two real-valued branches; this function computes the one where W&lt;-1 for x&lt;0. (also see w0(x)).</source>
         <translation>wm1(x):￼
@@ -10091,14 +7194,17 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
  W é definido como uma solução da equação W(x)*exp(W(x))=x.
  Para x&lt;0, existem dois ramos reais avaliados; esta função calcula um deles onde W&lt;-1 para x&lt;0 (veja também w0(x)).</translation>
     </message>
-    <message>
-        <source>(e1)?(e2):(e3):
- if e1 then e2 else e3.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MultiLayer</name>
+    <message>
+        <source>Guess best layout?</source>
+        <translation> Buscar a melhor organização?</translation>
+    </message>
+    <message>
+        <source>Do you want SciDAVis to rearrange the remaining layers?</source>
+        <translation>Você quer que SciDAVis reorganize as camadas restantes?</translation>
+    </message>
     <message>
         <source>&amp;Yes</source>
         <translation>&amp;Sim</translation>
@@ -10112,12 +7218,8 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>&amp;Cancelar</translation>
     </message>
     <message>
-        <source>There is not enaugh space available in this window.&lt;p&gt;You could try to maximize it first and to rearrange the layers using the automatic option!&lt;/p&gt;</source>
-        <translation type="obsolete">Não há espaço suficiente disponível nesta janela.&lt;p&gt;Você pode tentar primeiro reorganizar as camadas usando a opção automática!&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>enter your text here</source>
-        <translation>digite seu texto aqui</translation>
+        <source>Error</source>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Please provide a valid file name!</source>
@@ -10125,19 +7227,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>File format not handled, operation aborted!</source>
-        <translation>Formato de arquivo não suportado, operação abortada!</translation>
-    </message>
-    <message>
-        <source>Do you want SciDAVis to rearrange the remaining layers?</source>
-        <translation>Você quer que SciDAVis reorganize as camadas restantes?</translation>
-    </message>
-    <message>
-        <source>Guess best layout?</source>
-        <translation> Buscar a melhor organização?</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Erro</translation>
+        <translation>Formato de arquivo não suportado. Operação abortada!</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -10147,60 +7237,16 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <source>Output in postscript format is not available for Qt5, using PDF</source>
         <translation>Saída no formato postscript não está disponível para Qt5, utilizando PDF</translation>
     </message>
+    <message>
+        <source>enter your text here</source>
+        <translation>introduza seu texto aqui</translation>
+    </message>
 </context>
 <context>
     <name>MultiPeakFit</name>
     <message>
         <source>MultiPeak</source>
         <translation>Múltiplos Picos</translation>
-    </message>
-    <message>
-        <source>Gauss</source>
-        <translation type="obsolete">Gauss</translation>
-    </message>
-    <message>
-        <source>Lorentz</source>
-        <translation type="obsolete">Lorentz</translation>
-    </message>
-    <message>
-        <source>multi-peak</source>
-        <translation>múltiplos picos</translation>
-    </message>
-    <message>
-        <source>Peak</source>
-        <translation>Pico</translation>
-    </message>
-    <message>
-        <source>Could not allocate enough memory for the fit curves!</source>
-        <translation>Não foi possível reservar memória suficiente para o ajuste das curvas!</translation>
-    </message>
-    <message>
-        <source>Fit</source>
-        <translation>Ajuste</translation>
-    </message>
-    <message>
-        <source>fit of</source>
-        <translation>ajuste de</translation>
-    </message>
-    <message>
-        <source>peak</source>
-        <translation>pico</translation>
-    </message>
-    <message>
-        <source>Area</source>
-        <translation>Área</translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation>Centro</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation>Largura</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation>Altura</translation>
     </message>
     <message>
         <source>Gauss Fit</source>
@@ -10211,12 +7257,16 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>Ajuste Lorentziano</translation>
     </message>
     <message>
+        <source>multi-peak</source>
+        <translation>multiplos picos</translation>
+    </message>
+    <message>
         <source>(amplitude)</source>
-        <translation>(área)</translation>
+        <translation>(amplitude)</translation>
     </message>
     <message>
         <source>(center)</source>
-        <translation>(centro)</translation>
+        <translation>(central)</translation>
     </message>
     <message>
         <source>(width)</source>
@@ -10239,8 +7289,24 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>(largura %1)</translation>
     </message>
     <message>
+        <source>Peak</source>
+        <translation>Pico</translation>
+    </message>
+    <message>
         <source>Fit Error</source>
         <translation>Erro ao ajustar</translation>
+    </message>
+    <message>
+        <source>Could not allocate enough memory for the fit curves!</source>
+        <translation>Não foi possível reservar memória suficiente para o ajuste das curvas!</translation>
+    </message>
+    <message>
+        <source>Fit</source>
+        <translation>Regredir</translation>
+    </message>
+    <message>
+        <source>fit of</source>
+        <translation>ajuste de</translation>
     </message>
     <message>
         <source>1</source>
@@ -10256,23 +7322,47 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <comment>multipeak fit table last column name</comment>
         <translation>2</translation>
     </message>
+    <message>
+        <source>peak</source>
+        <translation>pico</translation>
+    </message>
+    <message>
+        <source>Area</source>
+        <translation>área</translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation>Centro</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Largura</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>Altura</translation>
+    </message>
 </context>
 <context>
     <name>MultiPeakFitTool</name>
     <message>
-        <source>Move cursor and click to select a point and double-click/press &apos;Enter&apos; to set the position of a peak!</source>
-        <translation>Mova o cursor e clique para selecionar um  ponto e dê um duplo clique o &apos;Enter&apos; para fixar a posição de um pico!</translation>
+        <source>Move cursor and click to select a point and double-click/press 'Enter' to set the position of a peak!</source>
+        <translation>Mova o cursor e clique para selecionar um ponto e dê um duplo clique ou tecle 'Enter' para determinar a posição do pico!</translation>
     </message>
     <message>
-        <source>Peak %1 selected! Click to select a point and double-click/press &apos;Enter&apos; to set the position of the next peak!</source>
-        <translation>Pico %1 selecionado! Clique para selecionar um  ponto e dê um duplo clique/&apos;Enter&apos; para fixar a posição do pico seguinte!</translation>
+        <source>Peak %1 selected! Click to select a point and double-click/press 'Enter' to set the position of the next peak!</source>
+        <translation>Pico %1 selecionado! Clique para selecionar um ponto e dê um duplo clique/'enter' para fixar a posição do pico seguinte!</translation>
     </message>
 </context>
 <context>
     <name>MyWidget</name>
     <message>
+        <source>SciDAVis</source>
+        <translation>SciDAVis</translation>
+    </message>
+    <message>
         <source>Do you want to hide or delete</source>
-        <translation>Você quer ocultar ou excluir</translation>
+        <translation>Você quer excluir ou ocultar</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -10302,14 +7392,6 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <source>Maximized</source>
         <translation>Maximizada</translation>
     </message>
-    <message>
-        <source>kB</source>
-        <translation type="obsolete">kB</translation>
-    </message>
-    <message>
-        <source>SciDAVis</source>
-        <translation>SciDAVis</translation>
-    </message>
 </context>
 <context>
     <name>NonLinearFit</name>
@@ -10322,54 +7404,34 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>Não linear</translation>
     </message>
     <message>
-        <source>Please enter a valid non-empty expression! Operation aborted!</source>
-        <translation type="obsolete">Por favor, forneça uma expressão válida não vazia! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>There are no parameters specified for this fit operation. Please define a list of parameters first!</source>
-        <translation type="obsolete">Não foram especificados os parâmetros para esta operação de ajuste. Por favor, defina uma lista de parâmetros primeiro!</translation>
-    </message>
-    <message>
-        <source>You must provide a list containing at least 2 parameters for this type of fit. Operation aborted!</source>
-        <translation type="obsolete">Você deve fornecer uma lista contendo pelo menos 2 parâmetros para este tipo de ajuste. Operação abortada!</translation>
+        <source>Fit Error</source>
+        <translation>Erro ao ajustar</translation>
     </message>
     <message>
         <source>You must provide a list containing at least one parameter for this type of fit. Operation aborted!</source>
         <translation>Você deve fornecer uma lista contendo pelo menos um parâmetro para este tipo de ajuste. Operação abortada!</translation>
     </message>
-    <message>
-        <source>Input function error</source>
-        <translation type="obsolete">Erro na função fornecida</translation>
-    </message>
-    <message>
-        <source>Fit Error</source>
-        <translation>Erro ao ajustar</translation>
-    </message>
 </context>
 <context>
-    <name>Note</name>
+    <name>NumericDateTimeBaseFilter</name>
     <message>
-        <source>Delete</source>
-        <translation type="obsolete">Apagar</translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation type="obsolete">Ocultar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
+        <source>missing or invalid format attribute(s)</source>
+        <translation>falta(m) atributo(s) ou estão em formato inválido</translation>
     </message>
 </context>
 <context>
     <name>OpenProjectDialog</name>
+    <message>
+        <source>Open Project</source>
+        <translation>Abrir projeto</translation>
+    </message>
     <message>
         <source>SciDAVis project</source>
         <translation>Projeto do SciDAVis</translation>
     </message>
     <message>
         <source>Compressed SciDAVis project</source>
-        <translation>Projeto do SciDAVis compactado</translation>
+        <translation>Projeto do SciDAVis comprimido</translation>
     </message>
     <message>
         <source>QtiPlot project</source>
@@ -10396,6 +7458,10 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>Gráfico do Origin</translation>
     </message>
     <message>
+        <source>Origin 3.5 project</source>
+        <translation>Projeto do Origin 3.5</translation>
+    </message>
+    <message>
         <source>Backup files</source>
         <translation>Cópias de segurança</translation>
     </message>
@@ -10416,12 +7482,8 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>Nova pasta</translation>
     </message>
     <message>
-        <source>Open Project</source>
-        <translation>Abrir projeto</translation>
-    </message>
-    <message>
-        <source>Origin 3.5 project</source>
-        <translation>Projeto do Origin 3.5</translation>
+        <source>Codepage</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -10527,7 +7589,6 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>Miter</source>
-        <translatorcomment>Talvez haja uma tradução mais apropriada</translatorcomment>
         <translation>Esquadria</translation>
     </message>
     <message>
@@ -10552,89 +7613,6 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
 </context>
 <context>
-    <name>PieDialog</name>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Estilo</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Largura</translation>
-    </message>
-    <message>
-        <source>Border</source>
-        <translation type="obsolete">Borda</translation>
-    </message>
-    <message>
-        <source>First color</source>
-        <translation type="obsolete">Primeira cor</translation>
-    </message>
-    <message>
-        <source>Pattern</source>
-        <translation type="obsolete">Modelo</translation>
-    </message>
-    <message>
-        <source>Pie radius</source>
-        <translation type="obsolete">Raio da pizza</translation>
-    </message>
-    <message>
-        <source>Fill</source>
-        <translation type="obsolete">Preenchimento</translation>
-    </message>
-    <message>
-        <source>Pie</source>
-        <translation type="obsolete">Pizza</translation>
-    </message>
-    <message>
-        <source>Opacity</source>
-        <translation type="obsolete">Opacidade</translation>
-    </message>
-    <message>
-        <source>Canvas Color</source>
-        <translation type="obsolete">Cor de fundo</translation>
-    </message>
-    <message>
-        <source>Border Width</source>
-        <translation type="obsolete">Largura da borda</translation>
-    </message>
-    <message>
-        <source>Border Color</source>
-        <translation type="obsolete">Cor da borda</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="obsolete">Fundo</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opções</translation>
-    </message>
-    <message>
-        <source>Apply to all layers</source>
-        <translation type="obsolete">Aplicar a todas as camadas</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="obsolete">Geral</translation>
-    </message>
-</context>
-<context>
     <name>Plot</name>
     <message>
         <source>Y Axis Title</source>
@@ -10647,6 +7625,10 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
 </context>
 <context>
     <name>Plot3DDialog</name>
+    <message>
+        <source>Surface Plot Options</source>
+        <translation>Opções de gráfico de superfície</translation>
+    </message>
     <message>
         <source>&amp;Apply</source>
         <translation>&amp;Aplicar</translation>
@@ -10673,7 +7655,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>From</source>
-        <translation>A partir de</translation>
+        <translation>De</translation>
     </message>
     <message>
         <source>To</source>
@@ -10693,7 +7675,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>Major Ticks</source>
-        <translation>Marcas principais</translation>
+        <translation>Marcas maiores</translation>
     </message>
     <message>
         <source>Minor Ticks</source>
@@ -10773,7 +7755,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>Lab&amp;els</source>
-        <translation>Rótu&amp;los</translation>
+        <translation>Rót&amp;ulos</translation>
     </message>
     <message>
         <source>&amp;Numbers</source>
@@ -10781,7 +7763,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>&amp;Grid</source>
-        <translation>&amp;Grade</translation>
+        <translation>Grades</translation>
     </message>
     <message>
         <source>Coordinate System</source>
@@ -10805,7 +7787,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>Line Width</source>
-        <translation>Espessura da Linha</translation>
+        <translation>Espessura da linha</translation>
     </message>
     <message>
         <source>Resolution</source>
@@ -10896,14 +7878,6 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>Arquivos de mapa de cores</translation>
     </message>
     <message>
-        <source>Please enter scale limits that satisfy: from &lt; to!</source>
-        <translation>Por favor, forneça limites de escala que satisfaçam: inicio &lt; fim!</translation>
-    </message>
-    <message>
-        <source>Surface Plot Options</source>
-        <translation>Opções de gráfico de superfície</translation>
-    </message>
-    <message>
         <source>Start limit error</source>
         <translation>Erro no limite inicial</translation>
     </message>
@@ -10915,16 +7889,16 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <source>Input error</source>
         <translation>Erro de entrada</translation>
     </message>
+    <message>
+        <source>Please enter scale limits that satisfy: from &lt; to!</source>
+        <translation>Por favor, forneça limites de escala que satisfaçam: inicio &lt; fim!</translation>
+    </message>
 </context>
 <context>
     <name>PlotDialog</name>
     <message>
-        <source>&amp;Plot Associations...</source>
-        <translation>Associações de &amp;gráficos...</translation>
-    </message>
-    <message>
-        <source>&amp;Edit Function...</source>
-        <translation type="obsolete">&amp;Editar função...</translation>
+        <source>Plot details</source>
+        <translation>Detalhes do gráfico</translation>
     </message>
     <message>
         <source>Plot type</source>
@@ -10932,11 +7906,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>&amp;Worksheet</source>
-        <translation>&amp;Tabela</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation>&amp;Aplicar</translation>
+        <translation>&amp;Planilha de trabalho</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -10945,6 +7915,118 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancelar</translation>
+    </message>
+    <message>
+        <source>&amp;Apply</source>
+        <translation>&amp;Aplicar</translation>
+    </message>
+    <message>
+        <source>&amp;Plot Associations...</source>
+        <translation>Associações do &amp;gráfico...</translation>
+    </message>
+    <message>
+        <source>Titles</source>
+        <translation>Títulos</translation>
+    </message>
+    <message>
+        <source>Axes Labels</source>
+        <translation>Títulos dos eixos</translation>
+    </message>
+    <message>
+        <source>Axes Numbers</source>
+        <translation>Números de eixos</translation>
+    </message>
+    <message>
+        <source>Legends</source>
+        <translation>Legendas</translation>
+    </message>
+    <message>
+        <source>Fonts</source>
+        <translation>Fontes</translation>
+    </message>
+    <message>
+        <source>Background Color</source>
+        <translation>Cor de fundo</translation>
+    </message>
+    <message>
+        <source>Opacity</source>
+        <translation>Opacidade</translation>
+    </message>
+    <message>
+        <source>Transparent</source>
+        <translation>Transparente</translation>
+    </message>
+    <message>
+        <source>Canvas Color</source>
+        <translation>Cor de fundo</translation>
+    </message>
+    <message>
+        <source>Border Color</source>
+        <translation>Cor da borda</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Largura</translation>
+    </message>
+    <message>
+        <source>Margin</source>
+        <translation>Margem</translation>
+    </message>
+    <message>
+        <source>Antialiasing</source>
+        <translation>Antialiasing</translation>
+    </message>
+    <message>
+        <source>Apply to all layers</source>
+        <translation>Aplicar a todas as camadas</translation>
+    </message>
+    <message>
+        <source>Layer</source>
+        <translation>Capa</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Cor</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Estilo</translation>
+    </message>
+    <message>
+        <source>Border</source>
+        <translation>Borda</translation>
+    </message>
+    <message>
+        <source>First color</source>
+        <translation>Primeira cor</translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation>Modelo</translation>
+    </message>
+    <message>
+        <source>Pie radius</source>
+        <translation>Raio da pizza</translation>
+    </message>
+    <message>
+        <source>Fill</source>
+        <translation>Preenchimento</translation>
+    </message>
+    <message>
+        <source>Pie</source>
+        <translation>Pizza</translation>
+    </message>
+    <message>
+        <source>&amp;Scale layers to paper size</source>
+        <translation>&amp;Ajustar as camadas ao tamanho do papel</translation>
+    </message>
+    <message>
+        <source>Print Crop &amp;Marks</source>
+        <translation>Imprimir &amp;marcas de bastões</translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation>Imprimir</translation>
     </message>
     <message>
         <source>Attach curve to: </source>
@@ -10968,11 +8050,11 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>Left</source>
-        <translation>Esquerda</translation>
+        <translation>Esquerdo</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Direita</translation>
+        <translation>Direito</translation>
     </message>
     <message>
         <source>Axes</source>
@@ -11004,23 +8086,11 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>Spline</source>
-        <translation>Spline</translation>
+        <translation>Interpolação</translation>
     </message>
     <message>
         <source>Vertical Steps</source>
         <translation>Escalas verticais</translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation>Estilo</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation>Largura</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation>Cor</translation>
     </message>
     <message>
         <source>Fill area under curve</source>
@@ -11029,10 +8099,6 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     <message>
         <source>Fill color</source>
         <translation>Cor de preenchimento</translation>
-    </message>
-    <message>
-        <source>Pattern</source>
-        <translation>Modelo</translation>
     </message>
     <message>
         <source>Line</source>
@@ -11228,7 +8294,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>Axis</source>
-        <translation>Eixo</translation>
+        <translation>Eixos</translation>
     </message>
     <message>
         <source>Contour</source>
@@ -11340,7 +8406,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>Spacing</source>
-        <translation>Espaçado</translation>
+        <translation>Espaçamento</translation>
     </message>
     <message>
         <source>Arrowheads</source>
@@ -11348,7 +8414,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>Length</source>
-        <translation>Tamanho</translation>
+        <translation>Comprimento</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -11356,7 +8422,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>&amp;Filled</source>
-        <translation>Preenc&amp;hido</translation>
+        <translation>Preench&amp;ido</translation>
     </message>
     <message>
         <source>End Point</source>
@@ -11396,7 +8462,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>Histogram and Probabilities for</source>
-        <translation>Histograma e probabilidades para</translation>
+        <translation>Histograma e Probabilidades para</translation>
     </message>
     <message>
         <source>Quantity</source>
@@ -11420,7 +8486,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>E&amp;xcluir</translation>
+        <translation>&amp;Remover</translation>
     </message>
     <message>
         <source>&amp;Edit...</source>
@@ -11459,6 +8525,10 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>Linha + Símbolo</translation>
     </message>
     <message>
+        <source>Input error</source>
+        <translation>Erro de entrada</translation>
+    </message>
+    <message>
         <source>Please enter a valid start limit!</source>
         <translation>Por favor, forneça um limite inicial válido!</translation>
     </message>
@@ -11471,8 +8541,20 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>Por favor, forneça um  valor de bin válido!</translation>
     </message>
     <message>
+        <source>Start limit error</source>
+        <translation>Erro no limite inicial</translation>
+    </message>
+    <message>
+        <source>End limit error</source>
+        <translation>Erro no limite final</translation>
+    </message>
+    <message>
         <source>Please enter limits that satisfy: begin &lt; end!</source>
         <translation>Por favor, forneça limites que satisfaçam: início &lt; fim!</translation>
+    </message>
+    <message>
+        <source>Bin size input error</source>
+        <translation>Erro no tamanho do intervalo</translation>
     </message>
     <message>
         <source>Please enter a positive bin size value!</source>
@@ -11486,117 +8568,13 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <source>Magnitude</source>
         <translation>Magnitude</translation>
     </message>
-    <message>
-        <source>Titles</source>
-        <translation>Títulos</translation>
-    </message>
-    <message>
-        <source>Axes Labels</source>
-        <translation>Títulos dos eixos</translation>
-    </message>
-    <message>
-        <source>Axes Numbers</source>
-        <translation>Números de eixos</translation>
-    </message>
-    <message>
-        <source>Legends</source>
-        <translation>Legendas</translation>
-    </message>
-    <message>
-        <source>Fonts</source>
-        <translation>Fontes</translation>
-    </message>
-    <message>
-        <source>Background Color</source>
-        <translation>Cor de fundo</translation>
-    </message>
-    <message>
-        <source>Opacity</source>
-        <translation>Opacidade</translation>
-    </message>
-    <message>
-        <source>Transparent</source>
-        <translation>Transparente</translation>
-    </message>
-    <message>
-        <source>Canvas Color</source>
-        <translation>Cor do fundo</translation>
-    </message>
-    <message>
-        <source>Border Color</source>
-        <translation>Cor da borda</translation>
-    </message>
-    <message>
-        <source>Margin</source>
-        <translation>Margem</translation>
-    </message>
-    <message>
-        <source>Antialiasing</source>
-        <translation>Antialiasing</translation>
-    </message>
-    <message>
-        <source>Apply to all layers</source>
-        <translation>Aplicar a todas as camadas</translation>
-    </message>
-    <message>
-        <source>Layer</source>
-        <translation>Capa</translation>
-    </message>
-    <message>
-        <source>Border</source>
-        <translation>Borda</translation>
-    </message>
-    <message>
-        <source>First color</source>
-        <translation>Primeira cor</translation>
-    </message>
-    <message>
-        <source>Pie radius</source>
-        <translation>Raio da pizza</translation>
-    </message>
-    <message>
-        <source>Fill</source>
-        <translation>Preenchimento</translation>
-    </message>
-    <message>
-        <source>Pie</source>
-        <translation>Pizza</translation>
-    </message>
-    <message>
-        <source>&amp;Scale layers to paper size</source>
-        <translation>&amp;Ajustar as camadas ao tamanho do  papel</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Imprimir</translation>
-    </message>
-    <message>
-        <source>Plot details</source>
-        <translation>Detalhes do gráfico</translation>
-    </message>
-    <message>
-        <source>Input error</source>
-        <translation>Erro de entrada</translation>
-    </message>
-    <message>
-        <source>Start limit error</source>
-        <translation>Erro no limite inicial</translation>
-    </message>
-    <message>
-        <source>End limit error</source>
-        <translation>Erro no limite final</translation>
-    </message>
-    <message>
-        <source>Bin size input error</source>
-        <translation>Erro no tamanho do intervalo</translation>
-    </message>
-    <message>
-        <source>Print Crop &amp;Marks</source>
-        <translation>Imprimir &amp;marcas e bastões</translation>
-    </message>
 </context>
 <context>
     <name>PlotWizard</name>
+    <message>
+        <source>Select Columns to Plot</source>
+        <translation>Selecione colunas para o Gráfico</translation>
+    </message>
     <message>
         <source>&amp;X</source>
         <translation>&amp;X</translation>
@@ -11638,8 +8616,12 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <source>Please define a e column for the following curve</source>
-        <translation type="obsolete">Por favor defina uma e coluna para a seguinte curva</translation>
+        <source>Error</source>
+        <translation>Erro</translation>
+    </message>
+    <message>
+        <source>Please define a Y column for the following curve</source>
+        <translation>Por favor, defina uma coluna Y para a seguinte curva</translation>
     </message>
     <message>
         <source>You have already defined a X column!</source>
@@ -11650,16 +8632,20 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>É necessário definir uma coluna X primeiro!</translation>
     </message>
     <message>
-        <source>You have already defined a e column!</source>
-        <translation type="obsolete">Já foi definida uma coluna Y!</translation>
+        <source>You have already defined a Y column!</source>
+        <translation>Você já definiu uma coluna Y!</translation>
+    </message>
+    <message>
+        <source>This kind of curve is not handled by SciDAVis!</source>
+        <translation>Este tipo de curva não é suportada pelo SciDAVis!</translation>
     </message>
     <message>
         <source>You have already defined a Z column!</source>
         <translation>Já foi definida uma coluna Z!</translation>
     </message>
     <message>
-        <source>You must define a e column first!</source>
-        <translation type="obsolete">É necessário definir uma coluna e primeiro!</translation>
+        <source>You must define a Y column first!</source>
+        <translation>É necessário definir uma coluna Y primeiro!</translation>
     </message>
     <message>
         <source>You have already defined an error-bars column!</source>
@@ -11669,49 +8655,9 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <source>You must add a new curve first!</source>
         <translation>É necessário adicionar uma nova curva primeiro!</translation>
     </message>
-    <message>
-        <source>This kind of curve is not handled by SciDAVis!</source>
-        <translation>Este tipo de curva não é suportada pelo SciDAVis!</translation>
-    </message>
-    <message>
-        <source>Select Columns to Plot</source>
-        <translation>Selecione colunas para o Gráfico</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Erro</translation>
-    </message>
-    <message>
-        <source>Please define a Y column for the following curve</source>
-        <translation>Por favor, defina uma coluna Y para a seguinte curva</translation>
-    </message>
-    <message>
-        <source>You have already defined a Y column!</source>
-        <translation>Você já definiu uma coluna Y!</translation>
-    </message>
-    <message>
-        <source>You must define a Y column first!</source>
-        <translation>É necessário definir uma coluna Y primeiro!</translation>
-    </message>
 </context>
 <context>
     <name>PluginFit</name>
-    <message>
-        <source>Plugin</source>
-        <translation type="obsolete">Plugin</translation>
-    </message>
-    <message>
-        <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
-        <translation>Arquivo de plugin: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;não encontrado. Operação abortada!</translation>
-    </message>
-    <message>
-        <source>The plugin does not implement a %1 method necessary for simplex fitting.</source>
-        <translation>O plugin não implementa um método %1 necessário para o ajuste simplex.</translation>
-    </message>
-    <message>
-        <source>The plugin does not implement a %1 method necessary for Levenberg-Marquardt fitting.</source>
-        <translation>O plugin não implementa um método %1 necessário para o ajuste Levenberg-Marquardt.</translation>
-    </message>
     <message>
         <source>Plugin Fit</source>
         <translation>Ajuste com plugin</translation>
@@ -11721,12 +8667,28 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>Arquivo não encontrado</translation>
     </message>
     <message>
+        <source>Plugin file: &lt;p&gt;&lt;b&gt; %1 &lt;/b&gt; &lt;p&gt;not found. Operation aborted!</source>
+        <translation>Plugin: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;não encontrado. Operação abortada!</translation>
+    </message>
+    <message>
         <source>Plugin Error</source>
         <translation>Erro de plugin</translation>
+    </message>
+    <message>
+        <source>The plugin does not implement a %1 method necessary for simplex fitting.</source>
+        <translation>O plugin não implementa um método %1 necessário para o ajuste simplex.</translation>
+    </message>
+    <message>
+        <source>The plugin does not implement a %1 method necessary for Levenberg-Marquardt fitting.</source>
+        <translation>O plugin não implementa um método %1 necessário para o ajuste Levenberg-Marquardt.</translation>
     </message>
 </context>
 <context>
     <name>PolynomFitDialog</name>
+    <message>
+        <source>Polynomial Fit Options</source>
+        <translation>Opções de ajuste polinomial</translation>
+    </message>
     <message>
         <source>Polynomial Fit of</source>
         <translation>Ajuste polinomial de </translation>
@@ -11734,14 +8696,6 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     <message>
         <source>Order (1 - 9, 1 = linear)</source>
         <translation>Ordem (1 - 9, 1 = linear)</translation>
-    </message>
-    <message>
-        <source>Fit curve # pts</source>
-        <translation type="obsolete"># pts da curva</translation>
-    </message>
-    <message>
-        <source>Not enough points</source>
-        <translation type="obsolete">Não existem pontos suficientes</translation>
     </message>
     <message>
         <source>Fit curve Xmin</source>
@@ -11772,16 +8726,12 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation>A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Polynomial Fit Options</source>
-        <translation>Opções de ajuste polinomial</translation>
-    </message>
-    <message>
         <source>Warning</source>
         <translation>Atenção</translation>
+    </message>
+    <message>
+        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn't exist anymore! Operation aborted!</source>
+        <translation>A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
     </message>
 </context>
 <context>
@@ -11795,12 +8745,12 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>Polinomial</translation>
     </message>
     <message>
-        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
-        <translation>São necessários pelo menos %1 pontos para este ajuste. Operação abortada!</translation>
-    </message>
-    <message>
         <source>Fit Error</source>
         <translation>Erro ao ajustar</translation>
+    </message>
+    <message>
+        <source>You need at least %1 data points for this fit operation. Operation aborted!</source>
+        <translation>São necessários pelo menos %1 pontos para este ajuste. Operação abortada!</translation>
     </message>
 </context>
 <context>
@@ -11814,8 +8764,8 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>versão do projeto inválida ou faltando</translation>
     </message>
     <message>
-        <source>unknown element &apos;%1&apos;</source>
-        <translation>o elemento &apos;%1&apos; é desconhecido</translation>
+        <source>unknown element '%1'</source>
+        <translation>elemento '%1' desconhecido</translation>
     </message>
     <message>
         <source>no scidavis_project element found</source>
@@ -11856,7 +8806,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>Falha ao exportar a API do SciDAVis</translation>
     </message>
     <message>
-        <source>Accessing SciDAVis functions or objects from Python code won&apos;t work.Probably your version of SIP differs from the one SciDAVis was compiled against;try updating SIP or recompiling SciDAVis.</source>
+        <source>Accessing SciDAVis functions or objects from Python code won't work.Probably your version of SIP differs from the one SciDAVis was compiled against;try updating SIP or recompiling SciDAVis.</source>
         <translation>O acesso aos objetos e funções do SciDAVis via código em Python não funcionará. Provavelmente sua versão do SIP é diferente da versão com a qual o SciDAVis foi compilado; tente atualizar o SIP ou recompilar o SciDAVis.</translation>
     </message>
 </context>
@@ -11868,7 +8818,7 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation>&amp;Remover</translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <source>In%1</source>
@@ -11991,12 +8941,12 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>definir formato de data e hora para %1</translation>
     </message>
     <message>
-        <source>%1: set numeric format to &apos;%2&apos;</source>
-        <translation>%1: definir formato numérico para &apos;%2&apos;</translation>
+        <source>%1: set numeric format to '%2'</source>
+        <translation>%1: definir formato numérico para '%2'</translation>
     </message>
     <message>
-        <source>set numeric format to &apos;%1&apos;</source>
-        <translation>definir formato numérico para &apos;%1&apos;</translation>
+        <source>set numeric format to '%1'</source>
+        <translation>definir formato numérico para '%1'</translation>
     </message>
     <message>
         <source>%1: set decimal digits to %2</source>
@@ -12142,16 +9092,16 @@ s-ésimo zero positivo x_s da função regular cilíndrica de Bessel de ordem n,
         <translation>%1: normalizar seleção</translation>
     </message>
     <message>
+        <source>%1: clear selected cell(s)</source>
+        <translation>%1: limpar célula(s) selecionada(s)</translation>
+    </message>
+    <message>
         <source>%1: move column %2 from position %3 to %4</source>
         <translation>%1: mover coluna %2 da posição %3 para a %4</translation>
     </message>
     <message>
         <source>About SciDAVis</source>
         <translation>Sobre o SciDAVis</translation>
-    </message>
-    <message>
-        <source>%1: clear selected cell(s)</source>
-        <translation>%1: limpar célula(s) selecionada(s)</translation>
     </message>
     <message>
         <source>
@@ -12163,6 +9113,10 @@ Atualizado</translation>
 <context>
     <name>RangeSelectorTool</name>
     <message>
+        <source>Warning</source>
+        <translation>Atenção</translation>
+    </message>
+    <message>
         <source>All the curves on this plot are empty!</source>
         <translation>Todas as curvas neste gráfico estão vazias!</translation>
     </message>
@@ -12172,19 +9126,19 @@ Atualizado</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Direita</translation>
+        <translation>Direito</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>Esquerda</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Atenção</translation>
+        <translation>Esquerdo</translation>
     </message>
 </context>
 <context>
     <name>RenameWindowDialog</name>
+    <message>
+        <source>Rename Window</source>
+        <translation>Renomear janela</translation>
+    </message>
     <message>
         <source>Window Title</source>
         <translation>Título da janela</translation>
@@ -12210,16 +9164,12 @@ Atualizado</translation>
         <translation>&amp;Cancelar</translation>
     </message>
     <message>
-        <source>For internal consistency reasons the underscore character is replaced with a minus sign.</source>
-        <translation>Por razões de consistência interna o caracter de sub-linha é substituído pelo sinal de menos.</translation>
-    </message>
-    <message>
-        <source>Rename Window</source>
-        <translation>Renomear janela</translation>
-    </message>
-    <message>
         <source>Warning</source>
         <translation>Atenção</translation>
+    </message>
+    <message>
+        <source>For internal consistency reasons the underscore character is replaced with a minus sign.</source>
+        <translation>Por razões de consistência interna o caracter de sub-linha é substituído pelo sinal de menos.</translation>
     </message>
 </context>
 <context>
@@ -12251,54 +9201,8 @@ Atualizado</translation>
 <context>
     <name>ScriptEdit</name>
     <message>
-        <source>Auto&amp;exec</source>
-        <translation>Autoexecutar</translation>
-    </message>
-    <message>
-        <source>&amp;Functions</source>
-        <translation>&amp;Funções</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Texto</translation>
-    </message>
-    <message>
-        <source>Python Source</source>
-        <translation type="obsolete">Código Python</translation>
-    </message>
-    <message>
-        <source>All Files</source>
-        <translation>Todos os arquivos</translation>
-    </message>
-    <message>
-        <source>Could not open file &quot;%1&quot; for reading.</source>
-        <translation>Não foi possível abrir o arquivo &quot;%1&quot; para leitura.</translation>
-    </message>
-    <message>
-        <source>Save Text to File</source>
-        <translation>Salvar texto no arquivo</translation>
-    </message>
-    <message>
-        <source>A file called: &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;already exists.
-Do you want to overwrite it?</source>
-        <translation type="obsolete">Um arquivo chamado &lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;p&gt;já existe.
-Deseja sobreescrevê-lo?</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation type="obsolete">&amp;Sim</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation type="obsolete">&amp;Não</translation>
-    </message>
-    <message>
-        <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation>Não foi possível escrever no arquivo &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Por favor, certifique-se que você possui permissão de escrita no destino escolhido!</translation>
-    </message>
-    <message>
         <source>E&amp;xecute</source>
-        <translation>E&amp;xecutar</translation>
+        <translation>Executar</translation>
     </message>
     <message>
         <source>Ctrl+J</source>
@@ -12330,7 +9234,23 @@ Deseja sobreescrevê-lo?</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation>&amp;Exportar</translation>
+        <translation>E&amp;xportar</translation>
+    </message>
+    <message>
+        <source>Auto&amp;exec</source>
+        <translation>Autoexecutar</translation>
+    </message>
+    <message>
+        <source>&amp;Functions</source>
+        <translation>&amp;Funções</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Texto</translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation>Todos os arquivos</translation>
     </message>
     <message>
         <source>Import Text From File</source>
@@ -12341,135 +9261,20 @@ Deseja sobreescrevê-lo?</translation>
         <translation>Erro ao abrir arquivo</translation>
     </message>
     <message>
+        <source>Could not open file "%1" for reading.</source>
+        <translation>Não foi possível abrir o arquivo "%1" para leitura.</translation>
+    </message>
+    <message>
+        <source>Save Text to File</source>
+        <translation>Salvar texto no arquivo</translation>
+    </message>
+    <message>
         <source>File Save Error</source>
         <translation>Erro ao salvar arquivo</translation>
     </message>
-</context>
-<context>
-    <name>ScriptWindow</name>
-    <message>
-        <source>&amp;File</source>
-        <translation type="obsolete">&amp;Arquivo</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Editar</translation>
-    </message>
-    <message>
-        <source>E&amp;xecute</source>
-        <translation type="obsolete">Executar</translation>
-    </message>
-    <message>
-        <source>&amp;Hide</source>
-        <translation type="obsolete">Ocultar</translation>
-    </message>
-    <message>
-        <source>Ctrl+N</source>
-        <translation type="obsolete">Ctrl+N</translation>
-    </message>
-    <message>
-        <source>Ctrl+O</source>
-        <translation type="obsolete">Ctrl+O</translation>
-    </message>
-    <message>
-        <source>Ctrl+S</source>
-        <translation type="obsolete">Ctrl+S</translation>
-    </message>
-    <message>
-        <source>Ctrl+P</source>
-        <translation type="obsolete">Ctrl+P</translation>
-    </message>
-    <message>
-        <source>Ctrl+Z</source>
-        <translation type="obsolete">Ctrl+Z</translation>
-    </message>
-    <message>
-        <source>Ctrl+Y</source>
-        <translation type="obsolete">Ctrl+Y</translation>
-    </message>
-    <message>
-        <source>Ctrl+x</source>
-        <translation type="obsolete">Ctrl+x</translation>
-    </message>
-    <message>
-        <source>Ctrl+C</source>
-        <translation type="obsolete">Ctrl+C</translation>
-    </message>
-    <message>
-        <source>Ctrl+V</source>
-        <translation type="obsolete">Ctrl+V</translation>
-    </message>
-    <message>
-        <source>Del</source>
-        <translation type="obsolete">Del</translation>
-    </message>
-    <message>
-        <source>CTRL+J</source>
-        <translation type="obsolete">CTRL+J</translation>
-    </message>
-    <message>
-        <source>CTRL+SHIFT+J</source>
-        <translation type="obsolete">CTRL+SHIFT+J</translation>
-    </message>
-    <message>
-        <source>CTRL+Return</source>
-        <translation type="obsolete">CTRL+Return</translation>
-    </message>
     <message>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation type="obsolete">Não foi possível escrever no arquivo &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Por favor, verifique se você possui permissão de escrita no local selecionado!</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation type="obsolete">&amp;Novo</translation>
-    </message>
-    <message>
-        <source>&amp;Open...</source>
-        <translation type="obsolete">&amp;Abrir...</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="obsolete">&amp;Salvar</translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation type="obsolete">Salvar &amp;como...</translation>
-    </message>
-    <message>
-        <source>&amp;Print</source>
-        <translation type="obsolete">Im&amp;primir</translation>
-    </message>
-    <message>
-        <source>&amp;Undo</source>
-        <translation type="obsolete">&amp;Desfazer</translation>
-    </message>
-    <message>
-        <source>&amp;Redo</source>
-        <translation type="obsolete">&amp;Refazer</translation>
-    </message>
-    <message>
-        <source>&amp;Cut</source>
-        <translation type="obsolete">&amp;Cortar</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">C&amp;opiar</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">Co&amp;lar</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">&amp;Apagar</translation>
-    </message>
-    <message>
-        <source>Execute &amp;All</source>
-        <translation type="obsolete">Execut&amp;ar tudo</translation>
-    </message>
-    <message>
-        <source>&amp;Evaluate Expression</source>
-        <translation type="obsolete">&amp;Resolver expressão</translation>
+        <translation>Não foi possível escrever no arquivo: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Por favor, verifique se você tem permissão de escrita no local selecionado!</translation>
     </message>
 </context>
 <context>
@@ -12482,6 +9287,10 @@ Deseja sobreescrevê-lo?</translation>
 <context>
     <name>ScriptingLangDialog</name>
     <message>
+        <source>Select scripting language</source>
+        <translation>Selecionar linguagem de script</translation>
+    </message>
+    <message>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -12490,69 +9299,12 @@ Deseja sobreescrevê-lo?</translation>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <source>Scripting language &quot;%1&quot; failed to initialize.</source>
-        <translation>Falha na inicialização da linguagem de script &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <source>Select scripting language</source>
-        <translation>Selecionar linguagem de script</translation>
-    </message>
-    <message>
         <source>Scripting Error</source>
         <translation>Erro no script</translation>
     </message>
-</context>
-<context>
-    <name>SetColValuesDialog</name>
     <message>
-        <source>For row (i)</source>
-        <translation type="obsolete">Da linha (i)</translation>
-    </message>
-    <message>
-        <source>to</source>
-        <translation type="obsolete">à</translation>
-    </message>
-    <message>
-        <source>Add function</source>
-        <translation type="obsolete">Adicionar função</translation>
-    </message>
-    <message>
-        <source>Add column</source>
-        <translation type="obsolete">Adicionar coluna</translation>
-    </message>
-    <message>
-        <source>Add cell</source>
-        <translation type="obsolete">Adicionar célula</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>&amp;&lt;&lt; Prev.</source>
-        <comment>previous column</comment>
-        <translation type="obsolete">&amp;&lt;&lt; Prev.</translation>
-    </message>
-    <message>
-        <source>Next &amp;&gt;&gt;</source>
-        <comment>next column</comment>
-        <translation type="obsolete"> Próxima &amp;&gt;&gt;</translation>
-    </message>
-    <message>
-        <source>Set column values</source>
-        <translation type="obsolete">Definir valores da coluna</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
+        <source>Scripting language "%1" failed to initialize.</source>
+        <translation>Falha na inicialização da linguagem de programação "%1".</translation>
     </message>
 </context>
 <context>
@@ -12567,15 +9319,11 @@ Deseja sobreescrevê-lo?</translation>
     </message>
     <message>
         <source>(center)</source>
-        <translation>(centro)</translation>
+        <translation>(central)</translation>
     </message>
     <message>
         <source>(time constant)</source>
         <translation>(constante de tempo)</translation>
-    </message>
-    <message>
-        <source>Boltzmann (Sigmoidal)</source>
-        <translation type="obsolete">Boltzmann (Sigmoidal)</translation>
     </message>
     <message>
         <source>Boltzmann (Sigmoidal) Fit</source>
@@ -12584,6 +9332,10 @@ Deseja sobreescrevê-lo?</translation>
 </context>
 <context>
     <name>SmoothCurveDialog</name>
+    <message>
+        <source>Smoothing Options</source>
+        <translation>Opções de suavização</translation>
+    </message>
     <message>
         <source>Curve</source>
         <translation>Curva</translation>
@@ -12602,7 +9354,7 @@ Deseja sobreescrevê-lo?</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Color</translation>
+        <translation>Cor</translation>
     </message>
     <message>
         <source>Points</source>
@@ -12616,16 +9368,16 @@ Deseja sobreescrevê-lo?</translation>
         <source>&amp;Close</source>
         <translation>&amp;Fechar</translation>
     </message>
-    <message>
-        <source>Smoothing Options</source>
-        <translation>Opções de suavização</translation>
-    </message>
 </context>
 <context>
     <name>SmoothFilter</name>
     <message>
         <source>Smoothed</source>
         <translation>Suavizado</translation>
+    </message>
+    <message>
+        <source>SciDAVis</source>
+        <translation>SciDAVis</translation>
     </message>
     <message>
         <source>Error</source>
@@ -12650,6 +9402,10 @@ Deseja sobreescrevê-lo?</translation>
     <message>
         <source>average smoothing</source>
         <translation>suavização por média</translation>
+    </message>
+    <message>
+        <source>The polynomial order must be lower than the number of left points plus the number of right points!</source>
+        <translation>A ordem do polinômio deve ser menor que o número de pontos à esquerda mais o número de pontos à direita!</translation>
     </message>
     <message>
         <source>Tried to smooth over more points (left+right+1=%1) than given as input (%2).</source>
@@ -12677,63 +9433,16 @@ Deseja sobreescrevê-lo?</translation>
         <translation>O número de pontos deve ser positivo!</translation>
     </message>
     <message>
-        <source>The polynomial order must be lower than the number of left points plus the number of right points!</source>
-        <translation>A ordem do polinômio deve ser menor que o número de pontos à esquerda mais o número de pontos à direita!</translation>
-    </message>
-    <message>
         <source>Setting polynomial order is only available for Savitzky-Golay smooth filters! Ignored option!</source>
         <translation>A seleção da ordem do polinômio só é possível para suavização com filtros de Savitzky-Golay! Opção ignorada!</translation>
-    </message>
-    <message>
-        <source>SciDAVis</source>
-        <translation>SciDAVis</translation>
-    </message>
-</context>
-<context>
-    <name>SortDialog</name>
-    <message>
-        <source>Sort columns</source>
-        <translation type="obsolete">Ordenar colunas</translation>
-    </message>
-    <message>
-        <source>Order</source>
-        <translation type="obsolete">Ordem</translation>
-    </message>
-    <message>
-        <source>Leading column</source>
-        <translation type="obsolete">Coluna principal</translation>
-    </message>
-    <message>
-        <source>&amp;Sort</source>
-        <translation type="obsolete">&amp;Ordenar</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-    <message>
-        <source>Separately</source>
-        <translation type="obsolete">Separadamente</translation>
-    </message>
-    <message>
-        <source>Together</source>
-        <translation type="obsolete">Juntas</translation>
-    </message>
-    <message>
-        <source>Ascending</source>
-        <translation type="obsolete">Ascendente</translation>
-    </message>
-    <message>
-        <source>Descending</source>
-        <translation type="obsolete">Descendente</translation>
-    </message>
-    <message>
-        <source>Sorting Options</source>
-        <translation type="obsolete">Opções de ordenamento</translation>
     </message>
 </context>
 <context>
     <name>SurfaceDialog</name>
+    <message>
+        <source>Define surface plot</source>
+        <translation>Definir gráfico de superfície</translation>
+    </message>
     <message>
         <source>f(x,y)=</source>
         <translation>f(x,y)=</translation>
@@ -12752,7 +9461,7 @@ Deseja sobreescrevê-lo?</translation>
     </message>
     <message>
         <source>From</source>
-        <translation>A partir de</translation>
+        <translation>De</translation>
     </message>
     <message>
         <source>To</source>
@@ -12777,14 +9486,6 @@ Deseja sobreescrevê-lo?</translation>
     <message>
         <source>&amp;Close</source>
         <translation>&amp;Fechar</translation>
-    </message>
-    <message>
-        <source>Please enter limits that satisfy: from &lt; end!</source>
-        <translation>Por favor, forneça limites tais que: início &lt; fim!</translation>
-    </message>
-    <message>
-        <source>Define surface plot</source>
-        <translation>Definir gráfico de superfície</translation>
     </message>
     <message>
         <source>X Start limit error</source>
@@ -12815,12 +9516,20 @@ Deseja sobreescrevê-lo?</translation>
         <translation>Erro de entrada</translation>
     </message>
     <message>
+        <source>Please enter limits that satisfy: from &lt; end!</source>
+        <translation>Por favor, forneça limites tais que: início &lt; fim!</translation>
+    </message>
+    <message>
         <source>Input function error</source>
         <translation>Erro na função fornecida</translation>
     </message>
 </context>
 <context>
     <name>SymbolBox</name>
+    <message>
+        <source>No Symbol</source>
+        <translation>Sem símbolo</translation>
+    </message>
     <message>
         <source>Ellipse</source>
         <translation>Elipse</translation>
@@ -12834,12 +9543,16 @@ Deseja sobreescrevê-lo?</translation>
         <translation>Diamante</translation>
     </message>
     <message>
-        <source>Up Triangle</source>
-        <translation>Triângulo para cima</translation>
+        <source>Triangle</source>
+        <translation>Triângulo</translation>
     </message>
     <message>
         <source>Down Triangle</source>
         <translation>Triângulo para baixo</translation>
+    </message>
+    <message>
+        <source>Up Triangle</source>
+        <translation>Triângulo para cima</translation>
     </message>
     <message>
         <source>Left Triangle</source>
@@ -12851,19 +9564,11 @@ Deseja sobreescrevê-lo?</translation>
     </message>
     <message>
         <source>Cross</source>
-        <translation>Cruz</translation>
+        <translation>Cruzado</translation>
     </message>
     <message>
         <source>Diagonal Cross</source>
         <translation>Cruz diagonal</translation>
-    </message>
-    <message>
-        <source>No Symbol</source>
-        <translation>Sem símbolo</translation>
-    </message>
-    <message>
-        <source>Triangle</source>
-        <translation>Triângulo</translation>
     </message>
     <message>
         <source>Horizontal Line</source>
@@ -12900,152 +9605,24 @@ Deseja sobreescrevê-lo?</translation>
 <context>
     <name>Table</name>
     <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sim</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Não</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Cancelar</translation>
-    </message>
-    <message>
-        <source>Please select two columns for this operation!</source>
-        <translation type="obsolete">Por favor, selecione duas colunas para esta operação!</translation>
-    </message>
-    <message>
-        <source>Could not allocate memory, operation aborted!</source>
-        <translation type="obsolete">Não foi possível alocar memória, operação abortada!</translation>
-    </message>
-    <message>
-        <source>Error in GSL forward FFT operation!</source>
-        <translation type="obsolete">Erro na operação de FFT direta com GSL!</translation>
-    </message>
-    <message>
-        <source>Please set a default X column for this table, first!</source>
-        <translation type="obsolete">Por favor, defina primeiro uma coluna X para esta tabela!</translation>
-    </message>
-    <message>
-        <source>Please select a column to plot!</source>
-        <translation type="obsolete">Por favor, selecione uma coluna para o gráfico!</translation>
-    </message>
-    <message>
-        <source>Please select four columns for this operation!</source>
-        <translation type="obsolete">Por favor, selecione quatro colunas para esta operação!</translation>
-    </message>
-    <message>
-        <source>You need at least two columns for this operation!</source>
-        <translation type="obsolete">É necessário pelo menos duas colunas para esta operação!</translation>
-    </message>
-    <message>
-        <source>Please select a Z column for this operation!</source>
-        <translation type="obsolete">Por favor, selecione uma coluna Z para esta operação!</translation>
-    </message>
-    <message>
-        <source>You need to define a X column first!</source>
-        <translation type="obsolete">É necessário definir uma coluna X primeiro!</translation>
-    </message>
-    <message>
-        <source>You need to define a e column first!</source>
-        <translation type="obsolete">É necessário definir uma coluna X primeiro!</translation>
-    </message>
-    <message>
-        <source>Columns will be deleted from the table!</source>
-        <translation type="obsolete">As colunas serão excluídas da tabela!</translation>
-    </message>
-    <message>
-        <source>Do you really want to continue?</source>
-        <translation type="obsolete">Deseja realmente continuar?</translation>
-    </message>
-    <message>
-        <source>Please select two columns for this operation:
- the first represents the signal and the second the response function!</source>
-        <translation type="obsolete">Por favor, selecione duas colunas para esta operação: 
-A primeira representa o sinal e a segunda a função resposta!</translation>
-    </message>
-    <message>
-        <source>The response dataset &apos;%1&apos; must be less then half the size of the signal dataset &apos;%2&apos;!</source>
-        <translation type="obsolete">O conjunto resposta &apos;%1&apos; deve ser menor que a metade do Tamanho do conjunto sinal &apos;%2&apos;!</translation>
-    </message>
-    <message>
-        <source>The response dataset &apos;%1&apos; must contain an odd number of points!</source>
-        <translation type="obsolete">O conjunto resposta &apos;%1&apos; deve conter um número ímpar de pontos!</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">Frequência</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation type="obsolete">Tempo</translation>
-    </message>
-    <message>
-        <source>Real</source>
-        <translation type="obsolete">Real</translation>
-    </message>
-    <message>
-        <source>Imaginary</source>
-        <translation type="obsolete">Imaginário</translation>
-    </message>
-    <message>
-        <source>Amplitude</source>
-        <translation type="obsolete">Amplitude</translation>
-    </message>
-    <message>
-        <source>Angle</source>
-        <translation type="obsolete">Ângulo</translation>
-    </message>
-    <message>
-        <source>The text in the clipboard is larger than your current selection!	        
-Do you want to insert cells?</source>
-        <translation type="obsolete">O texto na área de transferência é maior que a seleção!	        
-Gostaria de inserir células?</translation>
-    </message>
-    <message>
-        <source>Rows will be deleted from the table!</source>
-        <translation type="obsolete">As linhas serão excluídas da tabela!</translation>
-    </message>
-    <message>
-        <source>The column name must be different from the table name : &lt;b&gt;</source>
-        <translation type="obsolete">O nome da coluna deve ser diferente do nome da tabela: &lt;b&gt;</translation>
-    </message>
-    <message>
-        <source>There is already a column called : &lt;b&gt;</source>
-        <translation type="obsolete">Já existe uma coluna chamada: &lt;b&gt;</translation>
-    </message>
-    <message>
-        <source>Please indicate the name of the leading column!</source>
-        <translation type="obsolete">Por favor, indique o nome da colunma principal!</translation>
-    </message>
-    <message>
-        <source>The leading column has the type set to &apos;Text&apos;! Operation aborted!</source>
-        <translation type="obsolete">A coluna principal é do tipo &apos;Texto&apos;! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>The leading column is empty! Operation aborted!</source>
-        <translation type="obsolete">A coluna principal esta vazia! Operação abortada!</translation>
+        <source>ASCII Export Error</source>
+        <translation>Erro na exportação para ASCII</translation>
     </message>
     <message>
         <source>Could not write to file: &lt;br&gt;&lt;h4&gt;</source>
         <translation>Não foi possível escrever no arquivo: &lt;br&gt;&lt;h4&gt;</translation>
     </message>
     <message>
+        <source>&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
+        <translation>&lt;/h4&gt;&lt;p&gt;Por favor, verifique se você tem permissão de escrita nestelocal!</translation>
+    </message>
+    <message>
         <source>SciDAVis</source>
         <translation>SciDAVis</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="obsolete">Erro</translation>
-    </message>
-    <message>
-        <source>ASCII Export Error</source>
-        <translation>Erro na exportação para ASCII</translation>
-    </message>
-    <message>
         <source>Do you want to hide or delete</source>
-        <translation>Você quer ocultar ou excluir</translation>
+        <translation>Você quer excluir ou ocultar</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -13056,540 +9633,12 @@ Gostaria de inserir células?</translation>
         <translation>Ocultar</translation>
     </message>
     <message>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
         <source>%1: apply formula to column</source>
         <translation>%1: aplicar fórmula à coluna</translation>
-    </message>
-    <message>
-        <source>%1: cut selected cell(s)</source>
-        <translation type="obsolete">%1: cortar célula(s) selecionada(s)</translation>
-    </message>
-    <message>
-        <source>%1: paste from clipboard</source>
-        <translation type="obsolete">%1: colar da área de trabalho</translation>
-    </message>
-    <message>
-        <source>%1: mask selected cell(s)</source>
-        <translation type="obsolete">%1: mascarar células(s) selecionada(s)</translation>
-    </message>
-    <message>
-        <source>%1: unmask selected cell(s)</source>
-        <translation type="obsolete">%1: remover máscara(s) de célula(s) selecionada(s)</translation>
-    </message>
-    <message>
-        <source>%1: apply formula to selection</source>
-        <translation type="obsolete">%1: aplicar fórmula à seleção</translation>
-    </message>
-    <message>
-        <source>%1: fill cells with row numbers</source>
-        <translation type="obsolete">%1: preencher células com números das linhas</translation>
-    </message>
-    <message>
-        <source>%1: fill cells with random values</source>
-        <translation type="obsolete">%1: preencher células com valores aleatórios</translation>
-    </message>
-    <message>
-        <source>&amp;Table</source>
-        <translation type="obsolete">&amp;Tabela</translation>
-    </message>
-    <message>
-        <source>S&amp;et Column(s) As</source>
-        <translation type="obsolete">Definir coluna(s) como</translation>
-    </message>
-    <message>
-        <source>Fi&amp;ll Selection with</source>
-        <translation type="obsolete">&amp;Preencher seleção com</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">C&amp;opiar</translation>
-    </message>
-    <message>
-        <source>Past&amp;e</source>
-        <translation type="obsolete">Co&amp;lar</translation>
-    </message>
-    <message>
-        <source>&amp;Mask</source>
-        <comment>mask selection</comment>
-        <translation type="obsolete">Mascarar</translation>
-    </message>
-    <message>
-        <source>&amp;Unmask</source>
-        <comment>unmask selection</comment>
-        <translation type="obsolete">Desmascarar</translation>
-    </message>
-    <message>
-        <source>Alt+Q</source>
-        <translation type="obsolete">Alt+Q</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r</source>
-        <comment>clear selection</comment>
-        <translation type="obsolete">Limpa&amp;r</translation>
-    </message>
-    <message>
-        <source>Recalculate</source>
-        <translation type="obsolete">Recalcular</translation>
-    </message>
-    <message>
-        <source>Row Numbers</source>
-        <translation type="obsolete">Números das linhas</translation>
-    </message>
-    <message>
-        <source>Random Values</source>
-        <translation type="obsolete">Valores aleatórios</translation>
-    </message>
-    <message>
-        <source>F12</source>
-        <translation type="obsolete">F12</translation>
-    </message>
-    <message>
-        <source>Formula Edit Mode</source>
-        <translation type="obsolete">Modo de edição de fórmula</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">Selecionar tudo</translation>
-    </message>
-    <message>
-        <source>&amp;Add Column</source>
-        <translation type="obsolete">Adicio&amp;nar coluna</translation>
-    </message>
-    <message>
-        <source>append a new column to the table</source>
-        <translation type="obsolete">adicionar nova coluna à tabela</translation>
-    </message>
-    <message>
-        <source>Clear Table</source>
-        <translation type="obsolete">Limpar tabela</translation>
-    </message>
-    <message>
-        <source>Export to TeX...</source>
-        <translation type="obsolete">Exportar para Tex...</translation>
-    </message>
-    <message>
-        <source>Clear Masks</source>
-        <translation type="obsolete">Limpar máscaras</translation>
-    </message>
-    <message>
-        <source>&amp;Sort Table</source>
-        <translation type="obsolete">Ordenar tabela</translation>
-    </message>
-    <message>
-        <source>&amp;Go to Cell</source>
-        <translation type="obsolete">Ir para célula</translation>
-    </message>
-    <message>
-        <source>Ctrl+Alt+G</source>
-        <translation type="obsolete">Ctrl+Alt+G</translation>
-    </message>
-    <message>
-        <source>change the table size</source>
-        <translation type="obsolete">Modificar dimensões da tabela</translation>
-    </message>
-    <message>
-        <source>&amp;Insert Empty Columns</source>
-        <translation type="obsolete">Inserir coluna vazia</translation>
-    </message>
-    <message>
-        <source>Remo&amp;ve Columns</source>
-        <translation type="obsolete">Remover colunas</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r Columns</source>
-        <translation type="obsolete">Limpar colunas</translation>
-    </message>
-    <message>
-        <source>&amp;Add Columns</source>
-        <translation type="obsolete">Adicionar colunas</translation>
-    </message>
-    <message>
-        <source>X</source>
-        <comment>plot designation</comment>
-        <translation type="obsolete">X</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <comment>plot designation</comment>
-        <translation type="obsolete">Y</translation>
-    </message>
-    <message>
-        <source>Z</source>
-        <comment>plot designation</comment>
-        <translation type="obsolete">Z</translation>
-    </message>
-    <message>
-        <source>X Error</source>
-        <comment>plot designation</comment>
-        <translation type="obsolete">Erro em X</translation>
-    </message>
-    <message>
-        <source>Y Error</source>
-        <comment>plot designation</comment>
-        <translation type="obsolete">Erro em Y</translation>
-    </message>
-    <message>
-        <source>&amp;Normalize Columns</source>
-        <translation type="obsolete">Normalizar colunas</translation>
-    </message>
-    <message>
-        <source>&amp;Normalize Selection</source>
-        <translation type="obsolete">Normalizar seleção</translation>
-    </message>
-    <message>
-        <source>&amp;Sort Columns</source>
-        <translation type="obsolete">Ordenar colunas</translation>
-    </message>
-    <message>
-        <source>Column Statisti&amp;cs</source>
-        <translation type="obsolete">Estatísticas das colunas</translation>
-    </message>
-    <message>
-        <source>statistics on columns</source>
-        <translation type="obsolete">Estatísticas em colunas</translation>
-    </message>
-    <message>
-        <source>Change &amp;Type &amp;&amp; Format</source>
-        <translation type="obsolete">Modificar tipo e formato</translation>
-    </message>
-    <message>
-        <source>Ctrl+Alt+O</source>
-        <translation type="obsolete">Ctrl+Alt+O</translation>
-    </message>
-    <message>
-        <source>Edit Column &amp;Description</source>
-        <translation type="obsolete">Editar descrição da coluna</translation>
-    </message>
-    <message>
-        <source>&amp;Insert Empty Rows</source>
-        <translation type="obsolete">Inserir linhas vazias</translation>
-    </message>
-    <message>
-        <source>Remo&amp;ve Rows</source>
-        <translation type="obsolete">Remover linhas</translation>
-    </message>
-    <message>
-        <source>Clea&amp;r Rows</source>
-        <translation type="obsolete">Lim&amp;par linhas</translation>
-    </message>
-    <message>
-        <source>&amp;Add Rows</source>
-        <translation type="obsolete">Adicionar linhas</translation>
-    </message>
-    <message>
-        <source>Row Statisti&amp;cs</source>
-        <translation type="obsolete">Estatísticas das linhas</translation>
-    </message>
-    <message>
-        <source>statistics on rows</source>
-        <translation type="obsolete">Estatísticas em linhas</translation>
-    </message>
-    <message>
-        <source>TeX Export Error</source>
-        <translation type="obsolete">Erro ao exportar para Tex</translation>
-    </message>
-    <message>
-        <source>Could not write to file: &lt;br&gt;&lt;h4&gt;%1&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation type="obsolete">Não foi possível escrever no arquivo: &lt;br&gt;&lt;h4&gt; %1 &lt;/h4&gt;&lt;p&gt;Por favor, verifique se você tem permissão de escrita no local selecionado!</translation>
-    </message>
-    <message>
-        <source>Go to Cell</source>
-        <translation type="obsolete">Ir para a célula</translation>
-    </message>
-    <message>
-        <source>Enter column</source>
-        <translation type="obsolete">Inserir coluna</translation>
-    </message>
-    <message>
-        <source>Enter row</source>
-        <translation type="obsolete">Inserir linha</translation>
-    </message>
-    <message>
-        <source>Set Table Dimensions</source>
-        <translation type="obsolete">Definir dimensões da tabela</translation>
-    </message>
-    <message>
-        <source>%1: move column %2 from position %3 to %4.</source>
-        <translation type="obsolete">%1: mover coluna %2 da posição %3 para %4.</translation>
-    </message>
-    <message>
-        <source>%1: sort column(s)</source>
-        <translation type="obsolete">%1: ordenar coluna(s)</translation>
-    </message>
-    <message>
-        <source>invalid row or column count</source>
-        <translation type="obsolete">Contagem de linhas ou colunas inválidas</translation>
-    </message>
-    <message>
-        <source>Column %1</source>
-        <translation type="obsolete">Coluna %1</translation>
-    </message>
-    <message>
-        <source>columns attribute and number of read columns do not match</source>
-        <translation type="obsolete">os atributos das colunas e o número de colunas lidas não coincidem</translation>
-    </message>
-    <message>
-        <source>no table element found</source>
-        <translation type="obsolete">nenhum elemento de tabela encontrado</translation>
-    </message>
-    <message>
-        <source>Hide Comments</source>
-        <translation type="obsolete">Ocultar comentários</translation>
-    </message>
-    <message>
-        <source>Show Comments</source>
-        <translation type="obsolete">Mostrar comentários</translation>
-    </message>
-    <message>
-        <source>Hide Controls</source>
-        <translation type="obsolete">Ocultar controles</translation>
-    </message>
-    <message>
-        <source>Show Controls</source>
-        <translation type="obsolete">Mostrar controles</translation>
-    </message>
-    <message>
-        <source>invalid or missing column index</source>
-        <translation type="obsolete">índice de colunas inválido ou inexistente</translation>
-    </message>
-    <message>
-        <source>invalid column width</source>
-        <translation type="obsolete">largura de coluna inválida</translation>
-    </message>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">Tabela</translation>
-    </message>
-    <message>
-        <source>&lt;/h4&gt;&lt;p&gt;Please verify that you have the right to write to this location!</source>
-        <translation>&lt;/h4&gt;&lt;p&gt;Por favor, verifique se você tem permissão de escrita nestelocal!</translation>
-    </message>
-</context>
-<context>
-    <name>TableConfigPage</name>
-    <message>
-        <source>Form</source>
-        <translation>A partir de</translation>
-    </message>
-    <message>
-        <source>TODO</source>
-        <translation>A ser feito</translation>
-    </message>
-</context>
-<context>
-    <name>TableDialog</name>
-    <message>
-        <source>Column Name:</source>
-        <translation type="obsolete">Nome da Coluna:</translation>
-    </message>
-    <message>
-        <source>Enumerate all to the right</source>
-        <translation type="obsolete">Enumerar todas à direita</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Plot Designation:</source>
-        <translation type="obsolete">Designação do gráfico:</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Nenhum</translation>
-    </message>
-    <message>
-        <source>X (abscissae)</source>
-        <translation type="obsolete">X (abscisas)</translation>
-    </message>
-    <message>
-        <source>Y (ordinates)</source>
-        <translation type="obsolete">Y (ordenadas)</translation>
-    </message>
-    <message>
-        <source>Z (height)</source>
-        <translation type="obsolete">Z (altura)</translation>
-    </message>
-    <message>
-        <source>X Error</source>
-        <translation type="obsolete">Erro em X</translation>
-    </message>
-    <message>
-        <source>Y Error</source>
-        <translation type="obsolete">Erro em Y</translation>
-    </message>
-    <message>
-        <source>Display</source>
-        <translation type="obsolete">Mostrador</translation>
-    </message>
-    <message>
-        <source>Numeric</source>
-        <translation type="obsolete">Numérico</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="obsolete">Texto</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Data</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation type="obsolete">Hora</translation>
-    </message>
-    <message>
-        <source>Month</source>
-        <translation type="obsolete">Mês</translation>
-    </message>
-    <message>
-        <source>Day of Week</source>
-        <translation type="obsolete">Dia da semana</translation>
-    </message>
-    <message>
-        <source>Format:</source>
-        <translation type="obsolete">Formato:</translation>
-    </message>
-    <message>
-        <source>Precision:</source>
-        <translation type="obsolete">Precisão:</translation>
-    </message>
-    <message>
-        <source>Apply to all columns to the right</source>
-        <translation type="obsolete">Aplicar a todas as colunas à direita</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opções</translation>
-    </message>
-    <message>
-        <source>Column Width:</source>
-        <translation type="obsolete">Largura da coluna:</translation>
-    </message>
-    <message>
-        <source>Apply to all</source>
-        <translation type="obsolete">Aplicar a todos</translation>
-    </message>
-    <message>
-        <source>Comment:</source>
-        <translation type="obsolete">Comentário:</translation>
-    </message>
-    <message>
-        <source>For internal consistency reasons the underscore character is replaced with a minus sign.</source>
-        <translation type="obsolete">Por razões de consistência interna o caracter de sublinha é substituído pelo sinal menos.</translation>
-    </message>
-    <message>
-        <source>The column names must only contain letters and digits!</source>
-        <translation type="obsolete">Os nomes das colunas podem conter apenas dígitos e letras!</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="obsolete">Padrão</translation>
-    </message>
-    <message>
-        <source>Decimal: 1000</source>
-        <translation type="obsolete">Decimal: 1000</translation>
-    </message>
-    <message>
-        <source>Scientific: 1E3</source>
-        <translation type="obsolete">Científico: 1E3</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="obsolete">aaaa-MM-dd</translation>
-    </message>
-    <message>
-        <source>h</source>
-        <translation type="obsolete">h</translation>
-    </message>
-    <message>
-        <source>h ap</source>
-        <translation type="obsolete">h ap</translation>
-    </message>
-    <message>
-        <source>h AP</source>
-        <translation type="obsolete">h AP</translation>
-    </message>
-    <message>
-        <source>h:mm</source>
-        <translation type="obsolete">h:mm</translation>
-    </message>
-    <message>
-        <source>h:mm ap</source>
-        <translation type="obsolete">h:mm ap</translation>
-    </message>
-    <message>
-        <source>hh:mm</source>
-        <translation type="obsolete">hh:mm</translation>
-    </message>
-    <message>
-        <source>h:mm:ss</source>
-        <translation type="obsolete">h:mm:ss</translation>
-    </message>
-    <message>
-        <source>h:mm:ss.zzz</source>
-        <translation type="obsolete">h:mm:ss.zzz</translation>
-    </message>
-    <message>
-        <source>mm:ss</source>
-        <translation type="obsolete">mm:ss</translation>
-    </message>
-    <message>
-        <source>mm:ss.zzz</source>
-        <translation type="obsolete">mm:ss.zzz</translation>
-    </message>
-    <message>
-        <source>hmm</source>
-        <translation type="obsolete">hmm</translation>
-    </message>
-    <message>
-        <source>hmmss</source>
-        <translation type="obsolete">hmmss</translation>
-    </message>
-    <message>
-        <source>hhmmss</source>
-        <translation type="obsolete">hhmmss</translation>
-    </message>
-    <message>
-        <source>&amp;&lt;&lt; Prev.</source>
-        <comment>previous column</comment>
-        <translation type="obsolete">&amp;&lt;&lt; Ant.</translation>
-    </message>
-    <message>
-        <source>Next &amp;&gt;&gt;</source>
-        <comment>next column</comment>
-        <translation type="obsolete">Próx. &amp;&gt;&gt;</translation>
-    </message>
-    <message>
-        <source>&amp;Display Comments in Header</source>
-        <translation type="obsolete">&amp;Mostrar comentários no cabeçalho</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t guess the source data format, please specify it using the &apos;Format&apos; box!</source>
-        <translation type="obsolete">Não foi possível determminar o formato dos dados, por favor especifique-o usando o quadro &apos;Formato&apos;!</translation>
-    </message>
-    <message>
-        <source>For more information about the supported date/time formats please read the Qt documentation for the QDateTime class!</source>
-        <translation type="obsolete">Para mais informações sobre os formatos de data/hora suportados, leia a documentação do Qt para a clase QDateTime!</translation>
-    </message>
-    <message>
-        <source>Column options</source>
-        <translation type="obsolete">Opções de coluna</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Atenção</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Erro</translation>
     </message>
 </context>
 <context>
@@ -13606,12 +9655,15 @@ Gostaria de inserir células?</translation>
     <message>
         <source>-</source>
         <comment>string for invalid rows</comment>
-        <translatorcomment>símbolo para cadeia de caracteres inválida para linhas</translatorcomment>
         <translation>-</translation>
     </message>
 </context>
 <context>
     <name>TableStatistics</name>
+    <message>
+        <source>RowStats</source>
+        <translation>EstatísticaLinhas</translation>
+    </message>
     <message>
         <source>Row Statistics of %1</source>
         <translation>Estatística em linhas de %1</translation>
@@ -13629,6 +9681,10 @@ Gostaria de inserir células?</translation>
         <translation>Média</translation>
     </message>
     <message>
+        <source>StandardDev</source>
+        <translation>DesvioPadrão</translation>
+    </message>
+    <message>
         <source>Variance</source>
         <translation>Variância</translation>
     </message>
@@ -13638,11 +9694,15 @@ Gostaria de inserir células?</translation>
     </message>
     <message>
         <source>Max</source>
-        <translation>Max</translation>
+        <translation>Máx</translation>
     </message>
     <message>
         <source>Min</source>
-        <translation>Min</translation>
+        <translation>Mín</translation>
+    </message>
+    <message>
+        <source>ColStats</source>
+        <translation>EstatísticaColunas</translation>
     </message>
     <message>
         <source>Column Statistics of %1</source>
@@ -13665,18 +9725,6 @@ Gostaria de inserir células?</translation>
         <translation>iMin</translation>
     </message>
     <message>
-        <source>RowStats</source>
-        <translation>EstatísticaLinhas</translation>
-    </message>
-    <message>
-        <source>StandardDev</source>
-        <translation>DesvioPadrão</translation>
-    </message>
-    <message>
-        <source>ColStats</source>
-        <translation>EstatísticaColunas</translation>
-    </message>
-    <message>
         <source>S&amp;et Column(s) As</source>
         <translation>Definir coluna(s) como</translation>
     </message>
@@ -13690,7 +9738,7 @@ Gostaria de inserir células?</translation>
     </message>
     <message>
         <source>Show/hide control tabs</source>
-        <translation>Mostrar/ocultar abas de controle</translation>
+        <translation>Mostrar/esconder abas de controle</translation>
     </message>
     <message>
         <source>Numeric</source>
@@ -13759,6 +9807,14 @@ Posição: %2</translation>
     <message>
         <source>Scientific (E)</source>
         <translation>Científico (E)</translation>
+    </message>
+    <message>
+        <source>Automatic (e)</source>
+        <translation>Automático (e)</translation>
+    </message>
+    <message>
+        <source>Automatic (E)</source>
+        <translation>Automático (E)</translation>
     </message>
     <message>
         <source>Number without leading zero</source>
@@ -13836,14 +9892,6 @@ valores de ponto flutuante (float)
 </source>
         <translation>Olá mundo!</translation>
     </message>
-    <message>
-        <source>Automatic (e)</source>
-        <translation>Automático (e)</translation>
-    </message>
-    <message>
-        <source>Automatic (E)</source>
-        <translation>Automático (E)</translation>
-    </message>
 </context>
 <context>
     <name>TeXTableExportDialog</name>
@@ -13868,7 +9916,7 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>Left</source>
-        <translation>Esquerda</translation>
+        <translation>Esquerdo</translation>
     </message>
     <message>
         <source>Center</source>
@@ -13876,18 +9924,18 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>Right</source>
-        <translation>Direita</translation>
+        <translation>Direito</translation>
     </message>
 </context>
 <context>
     <name>TextDialog</name>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
+        <source>Text options</source>
+        <translation>Opções de texto</translation>
     </message>
     <message>
-        <source>Co&amp;lor</source>
-        <translation type="obsolete">Co&amp;r</translation>
+        <source>Text Color</source>
+        <translation>Cor do texto</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -13906,8 +9954,8 @@ valores de ponto flutuante (float)
         <translation>&amp;Aplicar</translation>
     </message>
     <message>
-        <source>Alignement</source>
-        <translation type="obsolete">Alinhamento</translation>
+        <source>Alignment</source>
+        <translation>Alinhamento</translation>
     </message>
     <message>
         <source>Center</source>
@@ -13915,15 +9963,15 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>Left</source>
-        <translation>Esquerda</translation>
+        <translation>Esquerdo</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Direita</translation>
+        <translation>Direito</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation>Estrutura</translation>
+        <translation>Quadro</translation>
     </message>
     <message>
         <source>None</source>
@@ -13942,74 +9990,6 @@ valores de ponto flutuante (float)
         <translation>&amp;Cancelar</translation>
     </message>
     <message>
-        <source>Background</source>
-        <translation type="obsolete">Fundo</translation>
-    </message>
-    <message>
-        <source>&amp;Background</source>
-        <translation type="obsolete">Fun&amp;do</translation>
-    </message>
-    <message>
-        <source>Rotate (deg.)</source>
-        <translation type="obsolete">Rotacionar (graus)</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="obsolete">0</translation>
-    </message>
-    <message>
-        <source>45</source>
-        <translation type="obsolete">45</translation>
-    </message>
-    <message>
-        <source>90</source>
-        <translation type="obsolete">90</translation>
-    </message>
-    <message>
-        <source>135</source>
-        <translation type="obsolete">135</translation>
-    </message>
-    <message>
-        <source>180</source>
-        <translation type="obsolete">180</translation>
-    </message>
-    <message>
-        <source>225</source>
-        <translation type="obsolete">225</translation>
-    </message>
-    <message>
-        <source>270</source>
-        <translation type="obsolete">270</translation>
-    </message>
-    <message>
-        <source>315</source>
-        <translation type="obsolete">315</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">B</translation>
-    </message>
-    <message>
-        <source>It</source>
-        <translation type="obsolete">It</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="obsolete">U</translation>
-    </message>
-    <message>
-        <source>Set &amp;Default</source>
-        <translation type="obsolete">Definir como &amp;padrão</translation>
-    </message>
-    <message>
-        <source>Text Color</source>
-        <translation>Cor do texto</translation>
-    </message>
-    <message>
-        <source>Alignment</source>
-        <translation>Alinhamento</translation>
-    </message>
-    <message>
         <source>Opacity</source>
         <translation>Opacidade</translation>
     </message>
@@ -14024,10 +10004,6 @@ valores de ponto flutuante (float)
     <message>
         <source>Set As &amp;Default</source>
         <translation>Definir como &amp;padrão</translation>
-    </message>
-    <message>
-        <source>Text options</source>
-        <translation>Opções de texto</translation>
     </message>
 </context>
 <context>
@@ -14050,6 +10026,10 @@ valores de ponto flutuante (float)
 </context>
 <context>
     <name>ThreeExpFit</name>
+    <message>
+        <source>Exponential decay</source>
+        <translation>Decaimento exponencial</translation>
+    </message>
     <message>
         <source>(first amplitude)</source>
         <translation>(primeira amplitude)</translation>
@@ -14078,16 +10058,16 @@ valores de ponto flutuante (float)
         <source>(offset)</source>
         <translation>(afastamento)</translation>
     </message>
-    <message>
-        <source>Exponential decay</source>
-        <translation>Decaimento exponencial</translation>
-    </message>
 </context>
 <context>
     <name>TranslateCurveTool</name>
     <message>
-        <source>Curve selected! Move cursor and click to choose a point and double-click/press &apos;Enter&apos; to finish!</source>
-        <translation>Curva selecionada! Mova o cursor, clique para selecionar um ponto e duplo clique/ou  &apos;Enter&apos; para finalisar!</translation>
+        <source>Curve selected! Move cursor and click to choose a point and double-click/press 'Enter' to finish!</source>
+        <translation>Curva selecionada! Mova o cursor e clique para escolher um ponto e dê um duplo clique/'enter' para finalisar</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Atenção</translation>
     </message>
     <message>
         <source>This operation cannot be performed on function curves.</source>
@@ -14095,15 +10075,15 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>This operation cannot be performed on curves plotted from columns having a non-numerical format.</source>
-        <translation>Esta operação não pode ser realizada em curvas obtidas a partir de colunas com um formato não numérico.</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Atenção</translation>
+        <translation>Esta operação não pode ser realizada em curvas plotadas a partir de colunas com  formato numérico.</translation>
     </message>
 </context>
 <context>
     <name>TwoExpFit</name>
+    <message>
+        <source>Exponential decay</source>
+        <translation>Decaimento exponencial</translation>
+    </message>
     <message>
         <source>(first amplitude)</source>
         <translation>(primeira amplitude)</translation>
@@ -14124,1694 +10104,12 @@ valores de ponto flutuante (float)
         <source>(offset)</source>
         <translation>(afastamento)</translation>
     </message>
-    <message>
-        <source>Exponential decay</source>
-        <translation>Decaimento exponencial</translation>
-    </message>
-</context>
-<context>
-    <name>analysisDialog</name>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-</context>
-<context>
-    <name>associationsDialog</name>
-    <message>
-        <source>Spreadsheet: </source>
-        <translation type="obsolete">Planilha: </translation>
-    </message>
-    <message>
-        <source>Column</source>
-        <translation type="obsolete">Coluna</translation>
-    </message>
-    <message>
-        <source>X</source>
-        <translation type="obsolete">X</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation type="obsolete">Y</translation>
-    </message>
-    <message>
-        <source>xErr</source>
-        <translation type="obsolete">xErr</translation>
-    </message>
-    <message>
-        <source>yErr</source>
-        <translation type="obsolete">yErr</translation>
-    </message>
-    <message>
-        <source>&amp;Update curve</source>
-        <translation type="obsolete">At&amp;ualizar curva</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>xEnd</source>
-        <translation type="obsolete">xFinal</translation>
-    </message>
-    <message>
-        <source>yEnd</source>
-        <translation type="obsolete">yFinal</translation>
-    </message>
-</context>
-<context>
-    <name>axesDialog</name>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>From</source>
-        <translation type="obsolete">A partir de</translation>
-    </message>
-    <message>
-        <source>To</source>
-        <translation type="obsolete">Até</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Tipo</translation>
-    </message>
-    <message>
-        <source>linear</source>
-        <translation type="obsolete">linear</translation>
-    </message>
-    <message>
-        <source>logarithmic</source>
-        <translation type="obsolete">logaritimico</translation>
-    </message>
-    <message>
-        <source>Inverted</source>
-        <translation type="obsolete">Invertido</translation>
-    </message>
-    <message>
-        <source>Step</source>
-        <translation type="obsolete">Passo</translation>
-    </message>
-    <message>
-        <source>Major Ticks</source>
-        <translation type="obsolete">Marcas maiores</translation>
-    </message>
-    <message>
-        <source>Minor Ticks</source>
-        <translation type="obsolete">Marcas menores</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation type="obsolete">Horizontal</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation type="obsolete">Vertical</translation>
-    </message>
-    <message>
-        <source>Scale</source>
-        <translation type="obsolete">Escala</translation>
-    </message>
-    <message>
-        <source>Major Grids</source>
-        <translation type="obsolete">Grades primárias</translation>
-    </message>
-    <message>
-        <source>Minor Grids</source>
-        <translation type="obsolete">Grades secundárias</translation>
-    </message>
-    <message>
-        <source>Line Color</source>
-        <translation type="obsolete">Cor da inha</translation>
-    </message>
-    <message>
-        <source>Line Type</source>
-        <translation type="obsolete">Tipo de linha</translation>
-    </message>
-    <message>
-        <source>Thickness</source>
-        <translation type="obsolete">Espessura</translation>
-    </message>
-    <message>
-        <source>Additional lines</source>
-        <translation type="obsolete">Linhas adicionais</translation>
-    </message>
-    <message>
-        <source>X=0</source>
-        <translation type="obsolete">X=0</translation>
-    </message>
-    <message>
-        <source>Y=0</source>
-        <translation type="obsolete">Y=0</translation>
-    </message>
-    <message>
-        <source>Grid</source>
-        <translation type="obsolete">Grade</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation type="obsolete">Mostrar</translation>
-    </message>
-    <message>
-        <source>Title</source>
-        <translation type="obsolete">Título</translation>
-    </message>
-    <message>
-        <source>Numeric</source>
-        <translation type="obsolete">Numérico</translation>
-    </message>
-    <message>
-        <source>Text from table</source>
-        <translation type="obsolete">Texto da tabela</translation>
-    </message>
-    <message>
-        <source>Day of the week</source>
-        <translation type="obsolete">Dia da semana</translation>
-    </message>
-    <message>
-        <source>Month</source>
-        <translation type="obsolete">Mês</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation type="obsolete">Tempo</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Data</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Fonte</translation>
-    </message>
-    <message>
-        <source>Axis &amp;Font</source>
-        <translation type="obsolete">&amp;Fonte do eixo</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>Co&amp;lor</source>
-        <translation type="obsolete">Co&amp;r</translation>
-    </message>
-    <message>
-        <source>Ticks</source>
-        <translation type="obsolete">Marcas</translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation type="obsolete">Dentro</translation>
-    </message>
-    <message>
-        <source>Out</source>
-        <translation type="obsolete">Fora</translation>
-    </message>
-    <message>
-        <source>Both</source>
-        <translation type="obsolete">Ambos</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Nenhum</translation>
-    </message>
-    <message>
-        <source>Stand-off</source>
-        <translation type="obsolete">Separados</translation>
-    </message>
-    <message>
-        <source>Show Labels</source>
-        <translation type="obsolete">Mostrar rótulos</translation>
-    </message>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">Tabela</translation>
-    </message>
-    <message>
-        <source>Format</source>
-        <translation type="obsolete">Formato</translation>
-    </message>
-    <message>
-        <source>Precision</source>
-        <translation type="obsolete">Precisão</translation>
-    </message>
-    <message>
-        <source>Angle</source>
-        <translation type="obsolete">Ângulo</translation>
-    </message>
-    <message>
-        <source>For&amp;mula</source>
-        <translation type="obsolete">Fór&amp;mula</translation>
-    </message>
-    <message>
-        <source>Axis</source>
-        <translation type="obsolete">Eixo</translation>
-    </message>
-    <message>
-        <source>Canvas frame</source>
-        <translation type="obsolete">Estrutura do fundo</translation>
-    </message>
-    <message>
-        <source>C&amp;olor</source>
-        <translation type="obsolete">C&amp;or</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Largura</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="obsolete">Fundo</translation>
-    </message>
-    <message>
-        <source>Border Width</source>
-        <translation type="obsolete">Largura da borda</translation>
-    </message>
-    <message>
-        <source>Border Color</source>
-        <translation type="obsolete">Cor da borda</translation>
-    </message>
-    <message>
-        <source>Colo&amp;r</source>
-        <translation type="obsolete">Co&amp;r</translation>
-    </message>
-    <message>
-        <source>Axes</source>
-        <translation type="obsolete">Eixos</translation>
-    </message>
-    <message>
-        <source>Draw backbones</source>
-        <translation type="obsolete">Desenhar guias</translation>
-    </message>
-    <message>
-        <source>Line Width</source>
-        <translation type="obsolete">Espessura da linha</translation>
-    </message>
-    <message>
-        <source>Major ticks length</source>
-        <translation type="obsolete">Comprimento das marcas maiores</translation>
-    </message>
-    <message>
-        <source>Minor ticks length</source>
-        <translation type="obsolete">Comprimento das marcas menores</translation>
-    </message>
-    <message>
-        <source>Margin</source>
-        <translation type="obsolete">Margem</translation>
-    </message>
-    <message>
-        <source>Apply to all layers</source>
-        <translation type="obsolete">Aplicar a todas as camadas</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="obsolete">Geral</translation>
-    </message>
-    <message>
-        <source>Automatic</source>
-        <translation type="obsolete">Automático</translation>
-    </message>
-    <message>
-        <source>Decimal: 100.0</source>
-        <translation type="obsolete">Decimal: 100.0</translation>
-    </message>
-    <message>
-        <source>Scientific: 1e2</source>
-        <translation type="obsolete">Científico: 1e2</translation>
-    </message>
-    <message>
-        <source>Scientific: 10^2</source>
-        <translation type="obsolete">Científico: 10^2</translation>
-    </message>
-    <message>
-        <source>Please enter a positive step value!</source>
-        <translation type="obsolete">Por favor, forneça um valor positivo para o passo!</translation>
-    </message>
-    <message>
-        <source>Valid variables are &apos;x&apos; for Top/Bottom axes and &apos;y&apos; for Left/Right axes!</source>
-        <translation type="obsolete">As variáveis válidas são &apos;x&apos; para os eixos Superior/Inferior e &apos;y&apos; para os eixos esquerdo/direito!</translation>
-    </message>
-    <message>
-        <source>milisec.</source>
-        <translation type="obsolete">miliseg.</translation>
-    </message>
-    <message>
-        <source>sec.</source>
-        <translation type="obsolete">seg.</translation>
-    </message>
-    <message>
-        <source>min.</source>
-        <translation type="obsolete">min.</translation>
-    </message>
-    <message>
-        <source>hours</source>
-        <translation type="obsolete">horas</translation>
-    </message>
-    <message>
-        <source>days</source>
-        <translation type="obsolete">dias</translation>
-    </message>
-    <message>
-        <source>weeks</source>
-        <translation type="obsolete">semanas</translation>
-    </message>
-    <message>
-        <source>Column Headings</source>
-        <translation type="obsolete">Cabeçalhos de coluna</translation>
-    </message>
-    <message>
-        <source>&amp;Font</source>
-        <translation type="obsolete">&amp;Fonte</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">B</translation>
-    </message>
-    <message>
-        <source>It</source>
-        <translation type="obsolete">It</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="obsolete">U</translation>
-    </message>
-    <message>
-        <source>In &amp; Out</source>
-        <translation type="obsolete">Dentro e Fora</translation>
-    </message>
-    <message>
-        <source>Canvas Color</source>
-        <translation type="obsolete">Cor do fundo</translation>
-    </message>
-    <message>
-        <source>millisec.</source>
-        <translation type="obsolete">miliseg.</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation type="obsolete">Inferior</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="obsolete">Esquerdo</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation type="obsolete">Superior</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="obsolete">Direito</translation>
-    </message>
-</context>
-<context>
-    <name>configDialog</name>
-    <message>
-        <source>Application</source>
-        <translation type="obsolete">Aplicação</translation>
-    </message>
-    <message>
-        <source>Confirmations</source>
-        <translation type="obsolete">Confirmações</translation>
-    </message>
-    <message>
-        <source>Tables</source>
-        <translation type="obsolete">Tabelas</translation>
-    </message>
-    <message>
-        <source>3D Plots</source>
-        <translation type="obsolete">Gráficos 3D</translation>
-    </message>
-    <message>
-        <source>2D Plots</source>
-        <translation type="obsolete">Gráficos 2D</translation>
-    </message>
-    <message>
-        <source>2D Curves</source>
-        <translation type="obsolete">Curvas 2D</translation>
-    </message>
-    <message>
-        <source>Colors</source>
-        <translation type="obsolete">Cores</translation>
-    </message>
-    <message>
-        <source>Fonts</source>
-        <translation type="obsolete">Fontes</translation>
-    </message>
-    <message>
-        <source>Prompt on closing</source>
-        <translation type="obsolete">Avisar ao fechar</translation>
-    </message>
-    <message>
-        <source>Matrixes</source>
-        <translation type="obsolete">Matrizes</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opções</translation>
-    </message>
-    <message>
-        <source>Frame width</source>
-        <translation type="obsolete">Largura do quadro</translation>
-    </message>
-    <message>
-        <source>Legend frame</source>
-        <translation type="obsolete">Quadro da legenda</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Nenhum</translation>
-    </message>
-    <message>
-        <source>Rectangle</source>
-        <translation type="obsolete">Retângulo</translation>
-    </message>
-    <message>
-        <source>Shadow</source>
-        <translation type="obsolete">Sombra</translation>
-    </message>
-    <message>
-        <source>White out</source>
-        <translation type="obsolete">Branco fora</translation>
-    </message>
-    <message>
-        <source>Black out</source>
-        <translation type="obsolete">Preto fora</translation>
-    </message>
-    <message>
-        <source>Ticks</source>
-        <translation type="obsolete">Marcas</translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation type="obsolete">Dentro</translation>
-    </message>
-    <message>
-        <source>Out</source>
-        <translation type="obsolete">Fora</translation>
-    </message>
-    <message>
-        <source>Both</source>
-        <translation type="obsolete">Ambos</translation>
-    </message>
-    <message>
-        <source>Major ticks length</source>
-        <translation type="obsolete">Comprimento das marcas maiores</translation>
-    </message>
-    <message>
-        <source>Axes linewidth</source>
-        <translation type="obsolete">Largura de linha dos eixos</translation>
-    </message>
-    <message>
-        <source>Minor ticks length</source>
-        <translation type="obsolete">comprimento das marcas menores</translation>
-    </message>
-    <message>
-        <source>&amp;Show Legend</source>
-        <translation type="obsolete">Mo&amp;strar legenda</translation>
-    </message>
-    <message>
-        <source>Resolution</source>
-        <translation type="obsolete">Resolução</translation>
-    </message>
-    <message>
-        <source>Lab&amp;els</source>
-        <translation type="obsolete">Rótulos</translation>
-    </message>
-    <message>
-        <source>Mesh &amp;Line</source>
-        <translation type="obsolete">&amp;Linha de grade</translation>
-    </message>
-    <message>
-        <source>&amp;Grid</source>
-        <translation type="obsolete">&amp;Grade</translation>
-    </message>
-    <message>
-        <source>Data &amp;Min</source>
-        <translation type="obsolete">&amp;Min dados</translation>
-    </message>
-    <message>
-        <source>&amp;Numbers</source>
-        <translation type="obsolete">&amp;Números</translation>
-    </message>
-    <message>
-        <source>&amp;Background</source>
-        <translation type="obsolete">Fun&amp;do</translation>
-    </message>
-    <message>
-        <source>&amp;Title</source>
-        <translation type="obsolete">&amp;Título</translation>
-    </message>
-    <message>
-        <source>&amp;Axes Labels</source>
-        <translation type="obsolete">Rótulo dos eixos</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="obsolete">Geral</translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Estilo</translation>
-    </message>
-    <message>
-        <source>Choose &amp;font</source>
-        <translation type="obsolete">Escolher &amp;fonte</translation>
-    </message>
-    <message>
-        <source>Save every</source>
-        <translation type="obsolete">Salvar a cada</translation>
-    </message>
-    <message>
-        <source>Default curve style</source>
-        <translation type="obsolete">Estilo de curva padrão</translation>
-    </message>
-    <message>
-        <source> Line</source>
-        <translation type="obsolete">Linha</translation>
-    </message>
-    <message>
-        <source> Scatter</source>
-        <translation type="obsolete"> Dispersão</translation>
-    </message>
-    <message>
-        <source> Line + Symbol</source>
-        <translation type="obsolete"> Linha + símbolo</translation>
-    </message>
-    <message>
-        <source> Vertical drop lines</source>
-        <translation type="obsolete"> Linhas verticais</translation>
-    </message>
-    <message>
-        <source> Spline</source>
-        <translation type="obsolete"> Spline</translation>
-    </message>
-    <message>
-        <source> Vertical steps</source>
-        <translation type="obsolete"> Passos verticais</translation>
-    </message>
-    <message>
-        <source> Area</source>
-        <translation type="obsolete">área</translation>
-    </message>
-    <message>
-        <source> Vertical Bars</source>
-        <translation type="obsolete"> Barras verticais</translation>
-    </message>
-    <message>
-        <source> Horizontal Bars</source>
-        <translation type="obsolete">Barras horizontais</translation>
-    </message>
-    <message>
-        <source>Line width</source>
-        <translation type="obsolete">Largura da linha</translation>
-    </message>
-    <message>
-        <source>Symbol size</source>
-        <translation type="obsolete">Tamanho do símbolo</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;Text Font</source>
-        <translation type="obsolete">Fonte do &amp;texto</translation>
-    </message>
-    <message>
-        <source>&amp;Labels Font</source>
-        <translation type="obsolete">Fonte dos rótulos</translation>
-    </message>
-    <message>
-        <source>A&amp;xes Legend</source>
-        <translation type="obsolete">Legenda dos eixos</translation>
-    </message>
-    <message>
-        <source>Axes &amp;Numbers</source>
-        <translation type="obsolete">&amp;Números dos eixos</translation>
-    </message>
-    <message>
-        <source>&amp;Legend</source>
-        <translation type="obsolete">&amp;Legenda</translation>
-    </message>
-    <message>
-        <source>T&amp;itle</source>
-        <translation type="obsolete">T&amp;ítulo</translation>
-    </message>
-    <message>
-        <source>&amp;Workspace</source>
-        <translation type="obsolete">área de trabalho</translation>
-    </message>
-    <message>
-        <source>Pa&amp;nels</source>
-        <translation type="obsolete">Pai&amp;néis</translation>
-    </message>
-    <message>
-        <source>Panels Te&amp;xt</source>
-        <translation type="obsolete">Te&amp;xto dos painéis</translation>
-    </message>
-    <message>
-        <source>Default Column Separator</source>
-        <translation type="obsolete">Separador de coluna padrão</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="obsolete">Fundo</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="obsolete">Texto</translation>
-    </message>
-    <message>
-        <source>Labels</source>
-        <translation type="obsolete">Rótulos</translation>
-    </message>
-    <message>
-        <source>Auto&amp;scaling</source>
-        <translation type="obsolete">Autoe&amp;scalar</translation>
-    </message>
-    <message>
-        <source>Scale &amp;Fonts</source>
-        <translation type="obsolete">Escalar &amp;fontes</translation>
-    </message>
-    <message>
-        <source>Show &amp;Title</source>
-        <translation type="obsolete">Mostrar &amp;título</translation>
-    </message>
-    <message>
-        <source>Sho&amp;w all axes</source>
-        <translation type="obsolete">Mostrar todos os eixos</translation>
-    </message>
-    <message>
-        <source>Canvas Fra&amp;me</source>
-        <translation type="obsolete">Quadro de fundo</translation>
-    </message>
-    <message>
-        <source>Axes &amp;backbones</source>
-        <translation type="obsolete">Guías dos eixos</translation>
-    </message>
-    <message>
-        <source>Margin</source>
-        <translation type="obsolete">Margem</translation>
-    </message>
-    <message>
-        <source>Do not &amp;resize layers when window size changes</source>
-        <translation type="obsolete">Não redimensionar a camada quando o tamanho da janela for alterado</translation>
-    </message>
-    <message>
-        <source>(all data shown)</source>
-        <translation type="obsolete">(todos os dados mostrados)</translation>
-    </message>
-    <message>
-        <source>Show &amp;Projection</source>
-        <translation type="obsolete">Mostrar &amp;projeção</translation>
-    </message>
-    <message>
-        <source>Smooth Mes&amp;h</source>
-        <translation type="obsolete">Suavizar grade</translation>
-    </message>
-    <message>
-        <source>&amp;Data Max</source>
-        <translation type="obsolete">Max &amp;dados</translation>
-    </message>
-    <message>
-        <source>A&amp;xes</source>
-        <translation type="obsolete">Eixos</translation>
-    </message>
-    <message>
-        <source>Workspace</source>
-        <translation type="obsolete">área de trabalho</translation>
-    </message>
-    <message>
-        <source>Panels</source>
-        <translation type="obsolete">Painéis</translation>
-    </message>
-    <message>
-        <source>Panels text</source>
-        <translation type="obsolete">Texto dos painéis</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-    <message>
-        <source>Te&amp;xt</source>
-        <translation type="obsolete">Te&amp;xto</translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation type="obsolete">Linguagem</translation>
-    </message>
-    <message>
-        <source> minutes</source>
-        <translation type="obsolete"> minutos</translation>
-    </message>
-    <message>
-        <source>Smoot&amp;h Line</source>
-        <translation type="obsolete">Linha suave</translation>
-    </message>
-    <message>
-        <source>&amp;Notes</source>
-        <translation type="obsolete">&amp;Notas</translation>
-    </message>
-    <message>
-        <source>TAB</source>
-        <translation type="obsolete">TAB</translation>
-    </message>
-    <message>
-        <source>SPACE</source>
-        <translation type="obsolete">ESPAÇO</translation>
-    </message>
-    <message>
-        <source>The separator must not contain the following characters: 0-9eE.+-</source>
-        <translation type="obsolete">O separador não pode conter os seguintes caracteres: 0-9eE.+-</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation type="obsolete">Pastas</translation>
-    </message>
-    <message>
-        <source>Generated Fit Curve</source>
-        <translation type="obsolete">Curva de ajuste gerada</translation>
-    </message>
-    <message>
-        <source>Uniform X Function</source>
-        <translation type="obsolete">Distribução uniforme em X</translation>
-    </message>
-    <message>
-        <source>Points</source>
-        <translation type="obsolete">Pontos</translation>
-    </message>
-    <message>
-        <source>Same X as Fitting Data</source>
-        <translation type="obsolete">Mesmos X que dados da regressão</translation>
-    </message>
-    <message>
-        <source>Display Peak Curves for Multi-peak Fits</source>
-        <translation type="obsolete">Mostrar curvas de pico para ajustes multi-pico</translation>
-    </message>
-    <message>
-        <source>Peaks Color</source>
-        <translation type="obsolete">Cor dos picos</translation>
-    </message>
-    <message>
-        <source>Parameters Output</source>
-        <translation type="obsolete">Saída de parâmetros</translation>
-    </message>
-    <message>
-        <source>Significant Digits</source>
-        <translation type="obsolete">Dígitos significativos</translation>
-    </message>
-    <message>
-        <source>Write Parameters to Result Log</source>
-        <translation type="obsolete">Escrever parâmetros no registro de resultados</translation>
-    </message>
-    <message>
-        <source>Paste Parameters to Plot</source>
-        <translation type="obsolete">Colar parâmetros no gráfico</translation>
-    </message>
-    <message>
-        <source>Fitting</source>
-        <translation type="obsolete">Ajustes</translation>
-    </message>
-    <message>
-        <source>Curves</source>
-        <translation type="obsolete">Curvas</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="obsolete">Comprimento</translation>
-    </message>
-    <message>
-        <source>Major Ticks</source>
-        <translation type="obsolete">Marcas maiores</translation>
-    </message>
-    <message>
-        <source>Minor Ticks</source>
-        <translation type="obsolete">Marcas menores</translation>
-    </message>
-    <message>
-        <source>Draw axes &amp;backbone</source>
-        <translation type="obsolete">Desenhar colunas dos eixos</translation>
-    </message>
-    <message>
-        <source>Scale &amp;fonts on resize</source>
-        <translation type="obsolete">Escalar &amp;fontes ao redimensionar</translation>
-    </message>
-    <message>
-        <source>Auto&amp;scale axes</source>
-        <translation type="obsolete">Autoe&amp;scalar eixos</translation>
-    </message>
-    <message>
-        <source>In &amp; Out</source>
-        <translation type="obsolete">Dentro e fora</translation>
-    </message>
-    <message>
-        <source>Check for new versions at startup</source>
-        <translation type="obsolete">Buscar versões novas ao iniciar</translation>
-    </message>
-    <message>
-        <source>Default scripting language</source>
-        <translation type="obsolete">Linguagem de script padrão</translation>
-    </message>
-    <message>
-        <source>Scale Errors with sqrt(Chi^2/doF)</source>
-        <translation type="obsolete">Escalar erros com sqrt(Chi^2/doF)</translation>
-    </message>
-    <message>
-        <source> Horizontal steps</source>
-        <translation type="obsolete"> Escalas horizontais</translation>
-    </message>
-    <message>
-        <source>O&amp;rthogonal</source>
-        <translation type="obsolete">O&amp;rtogonal</translation>
-    </message>
-</context>
-<context>
-    <name>curvesDialog</name>
-    <message>
-        <source> Line</source>
-        <translation type="obsolete"> Linha</translation>
-    </message>
-    <message>
-        <source> Scatter</source>
-        <translation type="obsolete"> Dispersão</translation>
-    </message>
-    <message>
-        <source> Line + Symbol</source>
-        <translation type="obsolete"> Linha + símbolo</translation>
-    </message>
-    <message>
-        <source> Vertical drop lines</source>
-        <translation type="obsolete"> Linhas verticais</translation>
-    </message>
-    <message>
-        <source> Spline</source>
-        <translation type="obsolete"> Spline</translation>
-    </message>
-    <message>
-        <source> Vertical steps</source>
-        <translation type="obsolete"> Passos verticais</translation>
-    </message>
-    <message>
-        <source> Area</source>
-        <translation type="obsolete"> área</translation>
-    </message>
-    <message>
-        <source> Vertical Bars</source>
-        <translation type="obsolete"> Barras verticais</translation>
-    </message>
-    <message>
-        <source> Horizontal Bars</source>
-        <translation type="obsolete"> Barras horizontais</translation>
-    </message>
-    <message>
-        <source>Available data</source>
-        <translation type="obsolete">Dados disponíveis</translation>
-    </message>
-    <message>
-        <source>Graph contents</source>
-        <translation type="obsolete">Conteúdo do gráfico</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <source>&amp;Plot Associations...</source>
-        <translation type="obsolete">Associações entre gráficos...</translation>
-    </message>
-    <message>
-        <source>&amp;Edit Function...</source>
-        <translation type="obsolete">&amp;Editar função...</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Fechar</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">&amp;Excluir</translation>
-    </message>
-    <message>
-        <source>&amp;Plot</source>
-        <translation type="obsolete">&amp;Gráfico</translation>
-    </message>
-    <message>
-        <source> Horizontal steps</source>
-        <translation type="obsolete"> Escalas horizontais</translation>
-    </message>
-</context>
-<context>
-    <name>epsExportDialog</name>
-    <message>
-        <source>Orientation</source>
-        <translation type="obsolete">Orientação</translation>
-    </message>
-    <message>
-        <source>Page Size</source>
-        <translation type="obsolete">Tamanho da página</translation>
-    </message>
-    <message>
-        <source>Resolution</source>
-        <translation type="obsolete">Resolução</translation>
-    </message>
-    <message>
-        <source>&amp;Print in color if available</source>
-        <translation type="obsolete">Im&amp;primir em cores se for possível</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Landscape</source>
-        <translation type="obsolete">Paisagem</translation>
-    </message>
-    <message>
-        <source>Portrait</source>
-        <translation type="obsolete">Retrato</translation>
-    </message>
-    <message>
-        <source>Warning: Windows users need a default post-script printer enabled!</source>
-        <translation type="obsolete">Aviso: os usuários de Windows precosam de uma impresora post-script habilitada!</translation>
-    </message>
-</context>
-<context>
-    <name>errDialog</name>
-    <message>
-        <source>&amp;X Error Bars</source>
-        <translation type="obsolete">Barras de erro &amp;X</translation>
-    </message>
-    <message>
-        <source>Add Error Bars to</source>
-        <translation type="obsolete">Adicionar barras de erro a</translation>
-    </message>
-    <message>
-        <source>Source of errors</source>
-        <translation type="obsolete">Fonte dos erros</translation>
-    </message>
-    <message>
-        <source>Percent of data (%)</source>
-        <translation type="obsolete">Porcentagem de dados (%)</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
-        <source>Standard Deviation of Data</source>
-        <translation type="obsolete">Desvio padrão dos dados</translation>
-    </message>
-    <message>
-        <source>&amp;Y Error Bars</source>
-        <translation type="obsolete">Barras de erro &amp;Y</translation>
-    </message>
-    <message>
-        <source>&amp;Add</source>
-        <translation type="obsolete">&amp;Adicionar</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-</context>
-<context>
-    <name>expDecayDialog</name>
-    <message>
-        <source>Damping</source>
-        <translation type="obsolete">Amortecimento</translation>
-    </message>
-    <message>
-        <source>First decay time (t1)</source>
-        <translation type="obsolete">Primeiro tempo de decaimento (t1)</translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="obsolete">1</translation>
-    </message>
-    <message>
-        <source>Second decay time (t2)</source>
-        <translation type="obsolete">Segundo tempo de decaimento (t2)</translation>
-    </message>
-    <message>
-        <source>Third decay time (t3)</source>
-        <translation type="obsolete">Terceiro tempo de decaimento (t3)</translation>
-    </message>
-    <message>
-        <source>Amplitude</source>
-        <translation type="obsolete">Amplitude</translation>
-    </message>
-    <message>
-        <source>Initial time</source>
-        <translation type="obsolete">Tempo inicial</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="obsolete">0</translation>
-    </message>
-    <message>
-        <source>Y Offset</source>
-        <translation type="obsolete">Deslocamento Y</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Exponential Fit of</source>
-        <translation type="obsolete">Ajuste exponencial de</translation>
-    </message>
-    <message>
-        <source>Growth time</source>
-        <translation type="obsolete">Tempo de crescimento</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>&amp;Fit</source>
-        <translation type="obsolete">Ajuste</translation>
-    </message>
-    <message>
-        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation type="obsolete">A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-</context>
-<context>
-    <name>exportDialog</name>
-    <message>
-        <source>Separator</source>
-        <translation type="obsolete">Separador</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">Tabela</translation>
-    </message>
-    <message>
-        <source>Include Column &amp;Names</source>
-        <translation type="obsolete">Incluir &amp;nomes das colunas</translation>
-    </message>
-    <message>
-        <source>Export &amp;Selection</source>
-        <translation type="obsolete">Exportar &amp;seleção</translation>
-    </message>
-    <message>
-        <source>&amp;All</source>
-        <translation type="obsolete">&amp;Tudo</translation>
-    </message>
-    <message>
-        <source>The separator must not contain the following characters: 0-9eE.+-</source>
-        <translation type="obsolete">O separador não pode conter os seguints caracteres: 0-9eE.+-</translation>
-    </message>
-    <message>
-        <source>The column separator can be customized. The following special codes can be used:
-\t for a TAB character 
-\s for a SPACE</source>
-        <translation type="obsolete">O separador de coluna pode ser personalizado. Os seguintes códigos podem ser usados:
-\t para um  caractere TAB
-\s para um  ESPAÇO</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="obsolete">A&amp;juda</translation>
-    </message>
-    <message>
-        <source>TAB</source>
-        <translation type="obsolete">TAB</translation>
-    </message>
-    <message>
-        <source>SPACE</source>
-        <translation type="obsolete">ESPAÇO</translation>
-    </message>
-</context>
-<context>
-    <name>fDialog</name>
-    <message>
-        <source>Please enter x limits that satisfy: from &lt; end!</source>
-        <translation type="obsolete">Por favor, forneça limites em x tais que: inicio &lt; fim!</translation>
-    </message>
-    <message>
-        <source>Please enter parameter limits that satisfy: from &lt; end!</source>
-        <translation type="obsolete">Por favor, forneça limites para o parâmetro tais que: inicio &lt; fim!</translation>
-    </message>
-</context>
-<context>
-    <name>filterDialog</name>
-    <message>
-        <source>Filter curve: </source>
-        <translation type="obsolete">Curva filtro: </translation>
-    </message>
-    <message>
-        <source>Frequency cutoff (Hz)</source>
-        <translation type="obsolete">Corte de frequências (Hz)</translation>
-    </message>
-    <message>
-        <source>Low Frequency (Hz)</source>
-        <translation type="obsolete">Frequência baixa (Hz)</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="obsolete">0</translation>
-    </message>
-    <message>
-        <source>High Frequency (Hz)</source>
-        <translation type="obsolete">Frequência alta (Hz)</translation>
-    </message>
-    <message>
-        <source>Add DC Offset</source>
-        <translation type="obsolete">Adicionar deslocamento DC</translation>
-    </message>
-    <message>
-        <source>Substract DC Offset</source>
-        <translation type="obsolete">Subtrair deslocamento DC</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>&amp;Filter</source>
-        <translation type="obsolete">&amp;Filtro</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-    <message>
-        <source>Please enter positive frequency values!</source>
-        <translation type="obsolete">Por favor, forneça frequências positivas!</translation>
-    </message>
-    <message>
-        <source>Please enter frequency limits that satisfy: Low &lt; High !</source>
-        <translation type="obsolete">Por favor, forneça limites para a frequência tais que: Baixo &lt; Alto!</translation>
-    </message>
-</context>
-<context>
-    <name>findDialog</name>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Procurar</translation>
-    </message>
-    <message>
-        <source>Start From</source>
-        <translation type="obsolete">Iniciar a partir de</translation>
-    </message>
-    <message>
-        <source>Search In</source>
-        <translation type="obsolete">Procurar em</translation>
-    </message>
-    <message>
-        <source>&amp;Window Names</source>
-        <translation type="obsolete">Nomes das janelas</translation>
-    </message>
-    <message>
-        <source>Window &amp;Labels</source>
-        <translation type="obsolete">Rótulos das janelas</translation>
-    </message>
-    <message>
-        <source>Folder &amp;Names</source>
-        <translation type="obsolete">&amp;Nomes das pastas</translation>
-    </message>
-    <message>
-        <source>Case &amp;Sensitive</source>
-        <translation type="obsolete">Sensível à caixa</translation>
-    </message>
-    <message>
-        <source>&amp;Partial Match Allowed</source>
-        <translation type="obsolete">Coincidência &amp;parcial permitida</translation>
-    </message>
-    <message>
-        <source>&amp;Include Subfolders</source>
-        <translation type="obsolete">&amp;Incluir subpastas</translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">Procurar</translation>
-    </message>
-    <message>
-        <source>&amp;Reset Start From</source>
-        <translation type="obsolete">&amp;Reiniciar começo a partir de</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-</context>
-<context>
-    <name>fitDialog</name>
-    <message>
-        <source>Curve</source>
-        <translation type="obsolete">Curva</translation>
-    </message>
-    <message>
-        <source>Function</source>
-        <translation type="obsolete">Função</translation>
-    </message>
-    <message>
-        <source>Initial guesses</source>
-        <translation type="obsolete">Estimativas iniciais</translation>
-    </message>
-    <message>
-        <source>From x=</source>
-        <translation type="obsolete">A partir de x=</translation>
-    </message>
-    <message>
-        <source>To x=</source>
-        <translation type="obsolete">Até x=</translation>
-    </message>
-    <message>
-        <source>Iterations</source>
-        <translation type="obsolete">Interações</translation>
-    </message>
-    <message>
-        <source>Tolerance</source>
-        <translation type="obsolete">Tolerância</translation>
-    </message>
-    <message>
-        <source>Algorithm</source>
-        <translation type="obsolete">Algorítmo</translation>
-    </message>
-    <message>
-        <source>&amp;Fit</source>
-        <translation type="obsolete">&amp;Ajustar</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Scaled Levenberg-Marquardt</source>
-        <translation type="obsolete">Levenberg-Marquardt escalado</translation>
-    </message>
-    <message>
-        <source>Unscaled Levenberg-Marquardt</source>
-        <translation type="obsolete">Levenberg-Marquardt não escalado</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>&lt;&lt; &amp;Edit function</source>
-        <translation type="obsolete">&lt;&lt; &amp;Editar função</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Categoria</translation>
-    </message>
-    <message>
-        <source>User defined</source>
-        <translation type="obsolete">Definida pelo usuário</translation>
-    </message>
-    <message>
-        <source>Built-in</source>
-        <translation type="obsolete">Incorporada</translation>
-    </message>
-    <message>
-        <source>Basic</source>
-        <translation type="obsolete">Básicas</translation>
-    </message>
-    <message>
-        <source>Plugins</source>
-        <translation type="obsolete">Plugins</translation>
-    </message>
-    <message>
-        <source>Expresion</source>
-        <translation type="obsolete">Expressão</translation>
-    </message>
-    <message>
-        <source>Fit with &amp;built-in function</source>
-        <translation type="obsolete">Ajustar com função incorporada</translation>
-    </message>
-    <message>
-        <source>&amp;Choose plugins folder...</source>
-        <translation type="obsolete">&amp;Escolher pasta de plugins...</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Nome</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="obsolete">Salvar</translation>
-    </message>
-    <message>
-        <source>Parameters</source>
-        <translation type="obsolete">Parâmetros</translation>
-    </message>
-    <message>
-        <source>&amp;Remove</source>
-        <translation type="obsolete">Remove&amp;r</translation>
-    </message>
-    <message>
-        <source>Add &amp;expresion</source>
-        <translation type="obsolete">Adicionar &amp;expressão</translation>
-    </message>
-    <message>
-        <source>Add &amp;name</source>
-        <translation type="obsolete">Adicionar &amp;nome</translation>
-    </message>
-    <message>
-        <source>Clear user &amp;list</source>
-        <translation type="obsolete">Limpar &amp;lista definida por usuário</translation>
-    </message>
-    <message>
-        <source>&amp;Fit &gt;&gt;</source>
-        <translation type="obsolete">&amp;Ajuste &gt;&gt;</translation>
-    </message>
-    <message>
-        <source>Please enter a valid function!</source>
-        <translation type="obsolete">Por favor, forneça uma função válida!</translation>
-    </message>
-    <message>
-        <source>Please enter a function name!</source>
-        <translation type="obsolete">Por favor, forneça um nome de função!</translation>
-    </message>
-    <message>
-        <source>Please enter at least one parameter name!</source>
-        <translation type="obsolete">Por favor, forneça pelo menos um nome para o parâmetro!</translation>
-    </message>
-    <message>
-        <source> is a built-in function name&lt;p&gt;You must choose another name for your function!</source>
-        <translation type="obsolete"> é o nome de uma função incorporada&lt;p&gt;Você dee escolher outro nome! </translation>
-    </message>
-    <message>
-        <source>You can&apos;t define functions recursevely!</source>
-        <translation type="obsolete">Não é possível definir funções recursivamente!</translation>
-    </message>
-    <message>
-        <source>Fit with selected &amp;user function</source>
-        <translation type="obsolete">Ajustar com função definida por &amp;usuários</translation>
-    </message>
-    <message>
-        <source>Fit using &amp;built-in function</source>
-        <translation type="obsolete">Ajustar usando função incorporada</translation>
-    </message>
-    <message>
-        <source>Fit using &amp;plugin function</source>
-        <translation type="obsolete">Ajustar usando função de &amp;plugin</translation>
-    </message>
-    <message>
-        <source>Choose the plugins folder</source>
-        <translation type="obsolete">Escolher pasta de plugins</translation>
-    </message>
-    <message>
-        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation type="obsolete">A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>Please enter initial guesses for your parameters!</source>
-        <translation type="obsolete">Por favor, forneça estimativas iniciais para seus parâmetros!</translation>
-    </message>
-    <message>
-        <source>Please enter x limits that satisfy: from &lt; end!</source>
-        <translation type="obsolete">Por favor, fornrça limites em x tais que: inicio &lt; fim!</translation>
-    </message>
-    <message>
-        <source>The tolerance value must be positive and less than 1!</source>
-        <translation type="obsolete">O valor da tolerância deve ser positivo e menor que 1!</translation>
-    </message>
-    <message>
-        <source>Please verify that you have initialized all the parameters!</source>
-        <translation type="obsolete">Por favor, verifique se todos os parâmetros foram inicializados!</translation>
-    </message>
-    <message>
-        <source>Parameter</source>
-        <translation type="obsolete">Parâmetro</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="obsolete">Valor</translation>
-    </message>
-    <message>
-        <source>&amp;Delete Fit Curves</source>
-        <translation type="obsolete">&amp;Excluir curvas de ajuste</translation>
-    </message>
-    <message>
-        <source>Constant</source>
-        <translation type="obsolete">Constante</translation>
-    </message>
-    <message>
-        <source>Nelder-Mead Simplex</source>
-        <translation type="obsolete">Nelder-Mead Simplex</translation>
-    </message>
-    <message>
-        <source>Weighting Method</source>
-        <translation type="obsolete">Método de ponderação</translation>
-    </message>
-    <message>
-        <source>No weighting</source>
-        <translation type="obsolete">Sie ponderação</translation>
-    </message>
-    <message>
-        <source>Instrumental</source>
-        <translation type="obsolete">Instrumental</translation>
-    </message>
-    <message>
-        <source>Statistical</source>
-        <translation type="obsolete">Estatístico</translation>
-    </message>
-    <message>
-        <source>Arbitrary Dataset</source>
-        <translation type="obsolete">Conjunto de dados arbitrário</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-    <message>
-        <source>Custom &amp;Output &gt;&gt;</source>
-        <translation type="obsolete">Saída pers&amp;onalizada &gt;&gt;</translation>
-    </message>
-    <message>
-        <source>Expression</source>
-        <translation type="obsolete">Expressão</translation>
-    </message>
-    <message>
-        <source>Polynomial Order</source>
-        <translation type="obsolete">Ordem do polinômio</translation>
-    </message>
-    <message>
-        <source>Add &amp;expression</source>
-        <translation type="obsolete">Adicionar &amp;expressão</translation>
-    </message>
-    <message>
-        <source>Generated Fit Curve</source>
-        <translation type="obsolete">Curva de ajuste gerada</translation>
-    </message>
-    <message>
-        <source>Uniform X Function</source>
-        <translation type="obsolete">Função X uniforme</translation>
-    </message>
-    <message>
-        <source>Points</source>
-        <translation type="obsolete">Pontos</translation>
-    </message>
-    <message>
-        <source>Same X as Fitting Data</source>
-        <translation type="obsolete">Mesmos X que os dados de ajuste</translation>
-    </message>
-    <message>
-        <source>Parameters Output</source>
-        <translation type="obsolete">Saída de parâmetros</translation>
-    </message>
-    <message>
-        <source>Significant Digits</source>
-        <translation type="obsolete">Algarismos significativos</translation>
-    </message>
-    <message>
-        <source>Parameters Table</source>
-        <translation type="obsolete">Tabela de parâmetros</translation>
-    </message>
-    <message>
-        <source>Name: </source>
-        <translation type="obsolete">Nome: </translation>
-    </message>
-    <message>
-        <source>Covariance Matrix</source>
-        <translation type="obsolete">Matriz de covariância</translation>
-    </message>
-    <message>
-        <source>CovMatrix</source>
-        <translation type="obsolete">CovMatriz</translation>
-    </message>
-    <message>
-        <source>Write Parameters to Result Log</source>
-        <translation type="obsolete">Escrever parâmetros resumo de resultados</translation>
-    </message>
-    <message>
-        <source>Paste Parameters to Plot</source>
-        <translation type="obsolete">Colar parâmetros no gráfico</translation>
-    </message>
-    <message>
-        <source>&lt;&lt; &amp;Fit</source>
-        <translation type="obsolete">&lt;&lt; Ajuste</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>Please enter a valid name for the parameters table.</source>
-        <translation type="obsolete">Por favor, forneça um nome válido  para a tabela de parâmetros.</translation>
-    </message>
-    <message>
-        <source>Please perform a fit first and try again.</source>
-        <translation type="obsolete">Por favor, realize um ajuste primeiro e tente novamente.</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Erro</translation>
-    </message>
-    <message>
-        <source>Please enter a valid name for the covariance matrix.</source>
-        <translation type="obsolete">Por favor, forneça um  nome válido  para a matriz de covariância.</translation>
-    </message>
-    <message>
-        <source>Gauss</source>
-        <translation type="obsolete">Gauss</translation>
-    </message>
-    <message>
-        <source>Peaks</source>
-        <translation type="obsolete">Picos</translation>
-    </message>
-    <message>
-        <source>Lorentz</source>
-        <translation type="obsolete">Lorentz</translation>
-    </message>
-    <message>
-        <source>Polynomial</source>
-        <translation type="obsolete">Polinomial</translation>
-    </message>
-    <message>
-        <source>MultiPeak</source>
-        <translation type="obsolete">MultiPicos</translation>
-    </message>
-    <message>
-        <source>Scale Errors with sqrt(Chi^2/doF)</source>
-        <translation type="obsolete">Escalar erros com sqrt(Chi^2/doF)</translation>
-    </message>
-</context>
-<context>
-    <name>functionDialogui</name>
-    <message>
-        <source>Curve type </source>
-        <translation type="obsolete">Tipo de curva </translation>
-    </message>
-    <message>
-        <source>f(x)= </source>
-        <translation type="obsolete">f(x)= </translation>
-    </message>
-    <message>
-        <source>From x= </source>
-        <translation type="obsolete">Desde x= </translation>
-    </message>
-    <message>
-        <source>To x= </source>
-        <translation type="obsolete">A x= </translation>
-    </message>
-    <message>
-        <source>Points</source>
-        <translation type="obsolete">Pontos</translation>
-    </message>
-    <message>
-        <source>Clear list</source>
-        <translation type="obsolete">Apagar lista</translation>
-    </message>
-    <message>
-        <source>Parameter</source>
-        <translation type="obsolete">Parâmetro</translation>
-    </message>
-    <message>
-        <source>To</source>
-        <translation type="obsolete">A</translation>
-    </message>
-    <message>
-        <source>y = </source>
-        <translation type="obsolete">y = </translation>
-    </message>
-    <message>
-        <source>x = </source>
-        <translation type="obsolete">x = </translation>
-    </message>
-    <message>
-        <source>From</source>
-        <translation type="obsolete">Desde</translation>
-    </message>
-    <message>
-        <source>R =</source>
-        <translation type="obsolete">R =</translation>
-    </message>
-    <message>
-        <source>Theta =</source>
-        <translation type="obsolete">Theta =</translation>
-    </message>
-    <message>
-        <source>Function</source>
-        <translation type="obsolete">Função</translation>
-    </message>
-    <message>
-        <source>Parametric plot</source>
-        <translation type="obsolete">Gráfico paramétrica</translation>
-    </message>
-    <message>
-        <source>Polar plot</source>
-        <translation type="obsolete">Gráfico polar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="obsolete">Ok</translation>
-    </message>
 </context>
 <context>
     <name>future::Folder</name>
     <message>
-        <source>unknown element &apos;%1&apos;</source>
-        <translation>elemento &apos;%1&apos; desconhecido</translation>
+        <source>unknown element '%1'</source>
+        <translation>elemento '%1' desconhecido</translation>
     </message>
     <message>
         <source>no folder element found</source>
@@ -15826,12 +10124,12 @@ valores de ponto flutuante (float)
         <translation>Coluna %1</translation>
     </message>
     <message>
-        <source>creation of aspect from element &apos;%1&apos; failed</source>
-        <translation>A criação de aspecto a partir do elemento &apos;%1&apos; falhou</translation>
+        <source>creation of aspect from element '%1' failed</source>
+        <translation>A criação de aspecto a partir do elemento '%1' falhou</translation>
     </message>
     <message>
-        <source>no plugin to load element &apos;%1&apos; found</source>
-        <translation>Nenhum plugin para carregar o elemento &apos;%1&apos; foi encontrado</translation>
+        <source>no plugin to load element '%1' found</source>
+        <translation>Nenhum plugin para carregar o elemento '%1' foi encontrado</translation>
     </message>
 </context>
 <context>
@@ -15850,7 +10148,7 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation>&amp;Cortar</translation>
+        <translation>Cor&amp;tar</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -15879,7 +10177,7 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>Ctrl+Return</source>
-        <translation>Ctrl+Enter</translation>
+        <translation>Ctrl+Return</translation>
     </message>
     <message>
         <source>F12</source>
@@ -15998,27 +10296,27 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>Images</source>
-        <translation>Imagems</translation>
+        <translation>imagens</translation>
     </message>
     <message>
         <source>Import image from file</source>
-        <translation>Importar imagem de arquivo</translation>
+        <translation>Importar imagem do arquivo</translation>
     </message>
     <message>
         <source>Error importing image</source>
         <translation>Erro ao importar imagem</translation>
     </message>
     <message>
-        <source>Import of image &apos;%1&apos; failed</source>
-        <translation>A importação da imagem &apos;%1&apos; falhou</translation>
+        <source>Import of image '%1' failed</source>
+        <translation>A importação da imagem '%1' falhou</translation>
     </message>
     <message>
         <source>invalid row or column count</source>
         <translation>Contagem de linhas ou colunas inválidas</translation>
     </message>
     <message>
-        <source>unknown element &apos;%1&apos;</source>
-        <translation>Elemento &apos;%1&apos; desconhecido</translation>
+        <source>unknown element '%1'</source>
+        <translation>elemento '%1' desconhecido</translation>
     </message>
     <message>
         <source>no matrix element found</source>
@@ -16050,7 +10348,7 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>invalid or missing row index</source>
-        <translation>índice de linhas inválido ou inexistente</translation>
+        <translation>índice de linha inválido ou faltando</translation>
     </message>
     <message>
         <source>invalid row height</source>
@@ -16101,7 +10399,7 @@ valores de ponto flutuante (float)
     <name>future::SortDialog</name>
     <message>
         <source>Sorting Options</source>
-        <translation>Opções de ordenação</translation>
+        <translation>Opções de ordenamento</translation>
     </message>
     <message>
         <source>Sort columns</source>
@@ -16171,10 +10469,6 @@ valores de ponto flutuante (float)
         <translation>%1: preencher células com valores aleatórios</translation>
     </message>
     <message>
-        <source>%1: clear selected cell(s)</source>
-        <translation type="obsolete">%1: limpar célula(s) selecionada(s)</translation>
-    </message>
-    <message>
         <source>&amp;Table</source>
         <translation>&amp;Tabela</translation>
     </message>
@@ -16185,6 +10479,10 @@ valores de ponto flutuante (float)
     <message>
         <source>Fi&amp;ll Selection with</source>
         <translation>&amp;Preencher seleção com</translation>
+    </message>
+    <message>
+        <source>Edit Column &amp;Description</source>
+        <translation>Editar descrição da coluna</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
@@ -16210,7 +10508,7 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>Assign &amp;Formula</source>
-        <translation>Atribuir fórmula</translation>
+        <translation>&amp;Fórmula</translation>
     </message>
     <message>
         <source>Alt+Q</source>
@@ -16227,7 +10525,7 @@ valores de ponto flutuante (float)
     </message>
     <message>
         <source>Ctrl+Return</source>
-        <translation>Ctrl+Enter</translation>
+        <translation>Ctrl+Return</translation>
     </message>
     <message>
         <source>Row Numbers</source>
@@ -16284,7 +10582,7 @@ valores de ponto flutuante (float)
     <message>
         <source>&amp;Dimensions</source>
         <comment>table size</comment>
-        <translation>Dimensões</translation>
+        <translation>Dimensões da matriz</translation>
     </message>
     <message>
         <source>change the table size</source>
@@ -16365,10 +10663,6 @@ valores de ponto flutuante (float)
         <translation>Ctrl+Alt+O</translation>
     </message>
     <message>
-        <source>Edit Column &amp;Description</source>
-        <translation>Editar descrição da coluna</translation>
-    </message>
-    <message>
         <source>&amp;Insert Empty Rows</source>
         <translation>Inserir linhas vazias</translation>
     </message>
@@ -16433,8 +10727,8 @@ valores de ponto flutuante (float)
         <translation>Coluna %1</translation>
     </message>
     <message>
-        <source>unknown element &apos;%1&apos;</source>
-        <translation>elemento &apos;%1&apos; desconhecido</translation>
+        <source>unknown element '%1'</source>
+        <translation>elemento '%1' desconhecido</translation>
     </message>
     <message>
         <source>columns attribute and number of read columns do not match</source>
@@ -16471,2432 +10765,6 @@ valores de ponto flutuante (float)
     <message>
         <source>Table</source>
         <translation>Tabela</translation>
-    </message>
-</context>
-<context>
-    <name>imageDialog</name>
-    <message>
-        <source>Origin</source>
-        <translation type="obsolete">Origen</translation>
-    </message>
-    <message>
-        <source>X= </source>
-        <translation type="obsolete">X= </translation>
-    </message>
-    <message>
-        <source>Y= </source>
-        <translation type="obsolete">Y= </translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Tamanho</translation>
-    </message>
-    <message>
-        <source>width= </source>
-        <translation type="obsolete">largura= </translation>
-    </message>
-    <message>
-        <source>height= </source>
-        <translation type="obsolete">altura= </translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source> pixels</source>
-        <translation type="obsolete"> pixels</translation>
-    </message>
-</context>
-<context>
-    <name>imageExportDialog</name>
-    <message>
-        <source>Image format</source>
-        <translation type="obsolete">Formato de imagem</translation>
-    </message>
-    <message>
-        <source>Image quality</source>
-        <translation type="obsolete">Qualidade de imagem</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-</context>
-<context>
-    <name>importDialog</name>
-    <message>
-        <source>Separator</source>
-        <translation type="obsolete">Separador</translation>
-    </message>
-    <message>
-        <source>Ignore first</source>
-        <translation type="obsolete">Ignorar primeiras</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Use first row to &amp;name columns</source>
-        <translation type="obsolete">Usar primeira linha para &amp;nomear colunas</translation>
-    </message>
-    <message>
-        <source>The column separator can be customized. The following special codes can be used:
-\t for a TAB character 
-\s for a SPACE</source>
-        <translation type="obsolete">O separador de colunas pode ser personalizado. Os códigos seguintes podem ser usados:
-\t para um  caractere TAB
-\s para um  ESPAÇO</translation>
-    </message>
-    <message>
-        <source>The separator must not contain the following characters: 0-9eE.+-</source>
-        <translation type="obsolete">O separador no pode conter os caracteres seguintes: 0-9eE.+-</translation>
-    </message>
-    <message>
-        <source>lines</source>
-        <translation type="obsolete">linhas</translation>
-    </message>
-    <message>
-        <source>By checking this option all white spaces will be removed from the beginning and the end of the lines in the ASCII file.</source>
-        <translation type="obsolete">Marcando esta opção todos os espaços em branco serão eliminados do  principio e o final das linhas no arquivo ASCII.</translation>
-    </message>
-    <message>
-        <source>Warning: checking this option leads to column overlaping if the columns in the ASCII file don&apos;t have the same number of rows.</source>
-        <translation type="obsolete">Aviso: marcar esta opção conduceà superposição de colunas si as colunas do  arquivo ASCII no tienno mesmo número de linhas.</translation>
-    </message>
-    <message>
-        <source>To avoid this problem you should precisely define the column separator using TAB and SPACE characters.</source>
-        <translation type="obsolete">Para evitar este problema debería definir com precisión o separador de colunas usando os caracteres TAB o ESPAÇO.</translation>
-    </message>
-    <message>
-        <source>By checking this option all white spaces will be removed from the beginning and the end of the lines and each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.</source>
-        <translation type="obsolete">Marcando esta opção todos os espaços em branco serão eliminados do  principio e o final das linhas e cada sequência de espaços internos (incluindo o caractere TAB) serão substituídos por um  único ESPAÇO em branco.</translation>
-    </message>
-    <message>
-        <source>Remove white spaces from line ends</source>
-        <translation type="obsolete">Remover espaços em branco dos  finais de linha</translation>
-    </message>
-    <message>
-        <source>Simplify white spaces</source>
-        <translation type="obsolete">Simplificar espaços em branco</translation>
-    </message>
-    <message>
-        <source>By checking this option each sequence of internal whitespaces (including the TAB character) will be replaced with a single space.</source>
-        <translation type="obsolete">Marcando esta opção cada sequência de espaços em branco internos (incluindo o caractere TAB) será substituída por um  único ESPAÇO.</translation>
-    </message>
-    <message>
-        <source>Warning: using these two last options leads to column overlaping if the columns in the ASCII file don&apos;t have the same number of rows.</source>
-        <translation type="obsolete">Aviso: usando estas dos últimas opções conduceà superposição de colunas si as colunas do  arquivo ASCII no tienno mesmo número de linhas.</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="obsolete">Ajuda</translation>
-    </message>
-    <message>
-        <source>TAB</source>
-        <translation type="obsolete">TAB</translation>
-    </message>
-    <message>
-        <source>SPACE</source>
-        <translation type="obsolete">ESPAÇO</translation>
-    </message>
-    <message>
-        <source>&amp;Remove white spaces from line ends</source>
-        <translation type="obsolete">Quita&amp;r espaços em branco dos  finais de linha</translation>
-    </message>
-    <message>
-        <source>&amp;Simplify white spaces</source>
-        <translation type="obsolete">&amp;Simplificar espaços em branco</translation>
-    </message>
-    <message>
-        <source>Do you want to save the modifications to the ASCII import options before closing?</source>
-        <translation type="obsolete">Gostaria de guardar as modificações das opções de importação ASCII antes de Fechar?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sim</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">No</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-</context>
-<context>
-    <name>intDialog</name>
-    <message>
-        <source>Integration of</source>
-        <translation type="obsolete">integração de</translation>
-    </message>
-    <message>
-        <source>Order (1 - 5, 1 = Trapezoid Rule)</source>
-        <translation type="obsolete">Ordem (1 - 5, 1 = Regla do  Trapecio)</translation>
-    </message>
-    <message>
-        <source>Number of iterations (Max=40)</source>
-        <translation type="obsolete">Número de Interações (Max=40)</translation>
-    </message>
-    <message>
-        <source>Tolerance</source>
-        <translation type="obsolete">tolerância</translation>
-    </message>
-    <message>
-        <source>Lower limit</source>
-        <translation type="obsolete">limite inferior</translation>
-    </message>
-    <message>
-        <source>Upper limit</source>
-        <translation type="obsolete">limite superior</translation>
-    </message>
-    <message>
-        <source>&amp;Integrate</source>
-        <translation type="obsolete">&amp;Integrar</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="obsolete">A&amp;yuda</translation>
-    </message>
-    <message>
-        <source>You can not fit index:</source>
-        <translation type="obsolete">No pode ajustar índice:</translation>
-    </message>
-    <message>
-        <source>because it has less than 2 points!</source>
-        <translation type="obsolete">porque possui menos de 2 Pontos!</translation>
-    </message>
-    <message>
-        <source>Please give a number larger or equal to the minimum value of X, for the lower limit.
- If you do not know that value, type min in the box.</source>
-        <translation type="obsolete">Por favor, dé um  número maior o igual que o valor mínimo de X para o limite inferior.
-Si no conhece ese valor, escreva min no cuadro.</translation>
-    </message>
-    <message>
-        <source>Please give a number smaller or equal to the maximum value of X, for the lower limit.
- If you do not know that value, type max in the box.</source>
-        <translation type="obsolete">Por favor, dé um  número menor o igual que o valor máximo de X para o limite inferior.
-Si no conhece ese valor, escreva max no cuadro.</translation>
-    </message>
-    <message>
-        <source>Please give a number smaller or equal to the maximum value of X, for the upper limit.
- If you do not know that value, type max in the box.</source>
-        <translation type="obsolete">Por favor, dé um  número menor o igual que o valor máximo de X para o limite superior.
-Si no conhece ese valor, escreva max no cuadro.</translation>
-    </message>
-    <message>
-        <source>Please give a number larger or equal to the minimum value of X, for the upper limit.
- If you do not know that value, type min in the box.</source>
-        <translation type="obsolete">Por favor, dé um  número maior o igual que o valor mínimo de X para o limite superior.
-Si no conhece ese valor, escreva min no cuadro.</translation>
-    </message>
-    <message>
-        <source>The integration of a curve consists of the following five steps:
- 1) Choose which curve you want to integrate
- 2) Set the order of the integration. The higher it is the more accurate the calculation is
- 3) Choose the number of iterations 
- 4) Choose the tollerance 
- 5) Choose the lower and the upper limit.
- The code integrates the curve with an iterative algorithm. The tolerance determines the termination criteria for the solver.
- Because, sometimes we ask for too much accuracy, the number of iterations makes sure that the solver will not work for ever.
- IMPORTANT 
-The limits must be within the range of x; If you do not know the maximum (minimum) value of x, type max (min) in the boxes.</source>
-        <translation type="obsolete">La integração de uma curva consta dos  seguintes cinco passos:
-1) Escolher que curva integrar
-2) Escolher o Ordem de integração. Cuanto maior sea más preciso será o cálculo
-3) Escolher o número de Interações
-4) Escolher a tolerância
-5) Escolher o limite superior e o inferior
-El código integra a curva mediante um  algoritmo iterativo. a tolerância determina o valor para a finalización de algoritmo.
-Debido a que a veces pedimos mucha precisión, o número de Interações asegura que o algoritmo no funciona para siempre.
-IMPORTANTE
-Os limites devem estar dentro do  rango de x; si no conhece o valor máximo (mínimo) de x, escreva max (min) en os cuadros.</translation>
-    </message>
-    <message>
-        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation type="obsolete">A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>You cannot fit index:</source>
-        <translation type="obsolete">No pode ajustar o índice:</translation>
-    </message>
-    <message>
-        <source>The integration of a curve consists of the following five steps:
- 1) Choose which curve you want to integrate
- 2) Set the order of the integration. The higher it is the more accurate the calculation is
- 3) Choose the number of iterations 
- 4) Choose the tolerance 
- 5) Choose the lower and the upper limit.
- The code integrates the curve with an iterative algorithm. The tolerance determines the termination criteria for the solver.
- Because, sometimes we ask for too much accuracy, the number of iterations makes sure that the solver will not work for ever.
- IMPORTANT 
-The limits must be within the range of x; If you do not know the maximum (minimum) value of x, type max (min) in the boxes.</source>
-        <translation type="obsolete">La integração de uma curva consiste en os cinco passos seguintes:
-1) Escolha qué curva deseja integrar
-2) defina o Ordem de integração. Cuanto más alto sea más preciso será o cálculo
-3) Escolha o número de Interações
-4) Escolha a tolerância
-5) Escolha o limite inferior e superior
-El código integra a curva mediante um  algoritmo iterativo. a tolerância determina o critério de finalización.
-IMPORTANTE
-Os limites devem estar dentro do  rango de x; si no conhece o máximo (mínimo) valor de x, escreva max (min) nas cajas.</translation>
-    </message>
-</context>
-<context>
-    <name>interpolationDialog</name>
-    <message>
-        <source>Make curve from</source>
-        <translation type="obsolete">Hacer curva de</translation>
-    </message>
-    <message>
-        <source>Spline</source>
-        <translation type="obsolete">Spline</translation>
-    </message>
-    <message>
-        <source>Points</source>
-        <translation type="obsolete">Pontos</translation>
-    </message>
-    <message>
-        <source>From Xmin</source>
-        <translation type="obsolete">Desde Xmin</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="obsolete">0</translation>
-    </message>
-    <message>
-        <source>To Xmax</source>
-        <translation type="obsolete">A Xmax</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Color</translation>
-    </message>
-    <message>
-        <source>&amp;Make</source>
-        <translation type="obsolete">Hacer</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-    <message>
-        <source>Linear</source>
-        <translation type="obsolete">linear</translation>
-    </message>
-    <message>
-        <source>Cubic</source>
-        <translation type="obsolete">Cúbica</translation>
-    </message>
-    <message>
-        <source>Non-rounded Akima</source>
-        <translation type="obsolete">Akima no redondeado</translation>
-    </message>
-    <message>
-        <source>Please enter x limits that satisfy: from &lt; to!</source>
-        <translation type="obsolete">Por favor, forneça limites em x tais que: inicio &lt; fim!</translation>
-    </message>
-    <message>
-        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation type="obsolete">A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>You need at least %1 points to perform this operation! Operation aborted!</source>
-        <translation type="obsolete">São necessários pelo menos %1 pontos para realizar esta operação! Operação abortada!</translation>
-    </message>
-</context>
-<context>
-    <name>layerDialog</name>
-    <message>
-        <source>Grid</source>
-        <translation type="obsolete">Grade</translation>
-    </message>
-    <message>
-        <source>Columns</source>
-        <translation type="obsolete">Colunas</translation>
-    </message>
-    <message>
-        <source>Rows</source>
-        <translation type="obsolete">Linhas</translation>
-    </message>
-    <message>
-        <source>Spacing</source>
-        <translation type="obsolete">Espaçamento</translation>
-    </message>
-    <message>
-        <source>Columns gap</source>
-        <translation type="obsolete">Espaço entre colunas</translation>
-    </message>
-    <message>
-        <source>Rows gap</source>
-        <translation type="obsolete">Espaço entre linhas</translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation type="obsolete">Esquema</translation>
-    </message>
-    <message>
-        <source>Fonts</source>
-        <translation type="obsolete">Fontes</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Automatic &amp;layout</source>
-        <translation type="obsolete">Esquema automático</translation>
-    </message>
-    <message>
-        <source>Number of Layers</source>
-        <translation type="obsolete">Número de camadas</translation>
-    </message>
-    <message>
-        <source>Alignement</source>
-        <translation type="obsolete">Alinhamento</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation type="obsolete">Horizontal</translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation type="obsolete">Centro</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="obsolete">Esquerda</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="obsolete">Direita</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation type="obsolete">Vertical</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation type="obsolete">Superior</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation type="obsolete">Inferior</translation>
-    </message>
-    <message>
-        <source>&amp;Layer Canvas Size</source>
-        <translation type="obsolete">Tamanho do fundo da camada</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Largura</translation>
-    </message>
-    <message>
-        <source> pixels</source>
-        <translation type="obsolete"> pixels</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="obsolete">Altura</translation>
-    </message>
-    <message>
-        <source>Left margin</source>
-        <translation type="obsolete">Margem esquerda</translation>
-    </message>
-    <message>
-        <source>Right margin</source>
-        <translation type="obsolete">Margem direita</translation>
-    </message>
-    <message>
-        <source>Top margin</source>
-        <translation type="obsolete">Margem superior</translation>
-    </message>
-    <message>
-        <source>Bottom margin</source>
-        <translation type="obsolete">Margem inferior</translation>
-    </message>
-    <message>
-        <source>Titles</source>
-        <translation type="obsolete">Títulos</translation>
-    </message>
-    <message>
-        <source>Axis Legends</source>
-        <translation type="obsolete">Legendas dos eixos</translation>
-    </message>
-    <message>
-        <source>Axis Numbers</source>
-        <translation type="obsolete">Números dos eixos</translation>
-    </message>
-    <message>
-        <source>Legends</source>
-        <translation type="obsolete">Legendas</translation>
-    </message>
-    <message>
-        <source>You are about to delete %1 existing layers.</source>
-        <translation type="obsolete">Você está preste aremover %1 camadas existentes.</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to continue this operation?</source>
-        <translation type="obsolete">Está certo de que quer continuar com esta operação?</translation>
-    </message>
-    <message>
-        <source>&amp;Continue</source>
-        <translation type="obsolete">&amp;Continuar</translation>
-    </message>
-    <message>
-        <source>The number of columns you&apos;ve entered is greater than the number of graphs (%1)!</source>
-        <translation type="obsolete">O número de colunas fornecido é maior que o número de gráficos (%1)!</translation>
-    </message>
-    <message>
-        <source>The number of rows you&apos;ve entered is greater than the number of graphs (%1)!</source>
-        <translation type="obsolete">O número de linhas fornecido é maior que o número de gráficos (%1)!</translation>
-    </message>
-</context>
-<context>
-    <name>lineDialog</name>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>Line type</source>
-        <translation type="obsolete">Tipo de Linha</translation>
-    </message>
-    <message>
-        <source>Line width</source>
-        <translation type="obsolete">Espessura de Linha</translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="obsolete">1</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="obsolete">2</translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation type="obsolete">3</translation>
-    </message>
-    <message>
-        <source>4</source>
-        <translation type="obsolete">4</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
-        <source>Arrow at &amp;start</source>
-        <translation type="obsolete">Seta no início</translation>
-    </message>
-    <message>
-        <source>Arrow at &amp;end</source>
-        <translation type="obsolete">Seta no final</translation>
-    </message>
-    <message>
-        <source>Opti&amp;ons</source>
-        <translation type="obsolete">&amp;Opciões</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="obsolete">Comprimento</translation>
-    </message>
-    <message>
-        <source>Angle</source>
-        <translation type="obsolete">Ângulo</translation>
-    </message>
-    <message>
-        <source>&amp;Filled</source>
-        <translation type="obsolete">Preenc&amp;hido</translation>
-    </message>
-    <message>
-        <source>Arrow &amp;Head</source>
-        <translation type="obsolete">Cabeça da se&amp;ta</translation>
-    </message>
-    <message>
-        <source>Start Point</source>
-        <translation type="obsolete">Ponto inicial</translation>
-    </message>
-    <message>
-        <source>X</source>
-        <translation type="obsolete">X</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation type="obsolete">Y</translation>
-    </message>
-    <message>
-        <source>End Point</source>
-        <translation type="obsolete">Ponto final</translation>
-    </message>
-    <message>
-        <source>&amp;Geometry</source>
-        <translation type="obsolete">&amp;Geometria</translation>
-    </message>
-    <message>
-        <source>&amp;Ok</source>
-        <translation type="obsolete">&amp;Ok</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Co&amp;lor</source>
-        <translation type="obsolete">C&amp;or</translation>
-    </message>
-    <message>
-        <source>Set &amp;Default</source>
-        <translation type="obsolete">Definir como &amp;padrão</translation>
-    </message>
-    <message>
-        <source>Unit</source>
-        <translation type="obsolete">Unidade</translation>
-    </message>
-    <message>
-        <source>Pixels</source>
-        <translation type="obsolete">Pixels</translation>
-    </message>
-    <message>
-        <source>Scale Coordinates</source>
-        <translation type="obsolete">Coordenadas da escala</translation>
-    </message>
-</context>
-<context>
-    <name>matrixDialog</name>
-    <message>
-        <source>Cell Width</source>
-        <translation type="obsolete">Largura da célula</translation>
-    </message>
-    <message>
-        <source>Data Format</source>
-        <translation type="obsolete">Formato dos dados</translation>
-    </message>
-    <message>
-        <source>Numeric Display</source>
-        <translation type="obsolete">Mostrador numérico</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>Decimal: 1000</source>
-        <translation type="obsolete">Decimal: 1000</translation>
-    </message>
-    <message>
-        <source>Scientific: 1E3</source>
-        <translation type="obsolete">Científico: 1E3</translation>
-    </message>
-    <message>
-        <source>Default Decimal Digits</source>
-        <translation type="obsolete">Dígitos decimais padrão</translation>
-    </message>
-    <message>
-        <source>Significant Digits=</source>
-        <translation type="obsolete">Algarismos significativos=</translation>
-    </message>
-</context>
-<context>
-    <name>matrixSizeDialog</name>
-    <message>
-        <source>Rows</source>
-        <translation type="obsolete">Linhas</translation>
-    </message>
-    <message>
-        <source>Columns</source>
-        <translation type="obsolete">Colunas</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Dimensions</source>
-        <translation type="obsolete">Dimensões</translation>
-    </message>
-    <message>
-        <source>Coordinates</source>
-        <translation type="obsolete">Coordenadas</translation>
-    </message>
-    <message>
-        <source>X (Columns)</source>
-        <translation type="obsolete">X (Colunas)</translation>
-    </message>
-    <message>
-        <source>Y (Rows)</source>
-        <translation type="obsolete">Y (linhas)</translation>
-    </message>
-    <message>
-        <source>First</source>
-        <translation type="obsolete">Primeiro</translation>
-    </message>
-    <message>
-        <source>Last</source>
-        <translation type="obsolete">�ltimo</translation>
-    </message>
-</context>
-<context>
-    <name>matrixValuesDialog</name>
-    <message>
-        <source>For row (i)</source>
-        <translation type="obsolete">Da linha (i)</translation>
-    </message>
-    <message>
-        <source>to</source>
-        <translation type="obsolete">até</translation>
-    </message>
-    <message>
-        <source>For col (j)</source>
-        <translation type="obsolete">Da col (j)</translation>
-    </message>
-    <message>
-        <source>Add function</source>
-        <translation type="obsolete">Adicionar função</translation>
-    </message>
-    <message>
-        <source>Add Cell</source>
-        <translation type="obsolete">Adicionar célula</translation>
-    </message>
-    <message>
-        <source>Cell(i,j)=</source>
-        <translation type="obsolete">Célula(i,j)=</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="obsolete">Aplicar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>You can not use cells recursevely!</source>
-        <translation type="obsolete">Não é possível usar as células recursivamente!</translation>
-    </message>
-    <message>
-        <source>Column and row indexes must be greater than zero!</source>
-        <translation type="obsolete">Os índices de coluna e linha devem ser maiores que zero!</translation>
-    </message>
-</context>
-<context>
-    <name>muParserScript</name>
-    <message>
-        <source>Out of memory</source>
-        <translation type="obsolete">Memória esgotada</translation>
-    </message>
-    <message>
-        <source>You cannot use imbricated columns!</source>
-        <translation type="obsolete">Não é possível usar colunas mescladas!</translation>
-    </message>
-    <message>
-        <source>You cannot use cells recursively!</source>
-        <translation type="obsolete">Não é possível usar as células recursivamente!</translation>
-    </message>
-    <message>
-        <source>Too many &apos;=&apos; in one line.</source>
-        <translation type="obsolete">Excessivos &apos;=&apos; em uma única linha.</translation>
-    </message>
-    <message>
-        <source>Syntax error: &apos;=&apos; without variable name.</source>
-        <translation type="obsolete">Erro de sintaxe: &apos;=&apos; sem nome de variável.</translation>
-    </message>
-    <message>
-        <source>col() works only on tables!</source>
-        <translation type="obsolete">col() funciona somente em tabelas!</translation>
-    </message>
-    <message>
-        <source>There&apos;s no column named %1 in table %2!</source>
-        <translation type="obsolete">Não existe uma coluna chamada %1 na tabela %2!</translation>
-    </message>
-    <message>
-        <source>There&apos;s no row %1 in table %2!</source>
-        <translation type="obsolete">Não existe a linha %1 na tabela %2!</translation>
-    </message>
-    <message>
-        <source>There&apos;s no column %1 in table %2!</source>
-        <translation type="obsolete">Não existe a coluna %1 na tabela %2!</translation>
-    </message>
-    <message>
-        <source>cell() works only on matrizes!</source>
-        <translation type="obsolete">cell() funciona somente com matrizes!</translation>
-    </message>
-    <message>
-        <source>There&apos;s no row %1 in matrix %2!</source>
-        <translation type="obsolete">Não existe a linha %1 na matriz %2!</translation>
-    </message>
-    <message>
-        <source>There&apos;s no column %1 in matrix %2!</source>
-        <translation type="obsolete">Não existe a coluna %1 na matriz %2!</translation>
-    </message>
-    <message>
-        <source>tablecol() works only on tables!</source>
-        <translation type="obsolete">tablecol() funciona somente em tabelas!</translation>
-    </message>
-    <message>
-        <source>tablecol: wrong number of arguments (need 2, got %1)</source>
-        <translation type="obsolete">tablecol: número incorreto de argumentos (necessários 2, obtener %1) </translation>
-    </message>
-    <message>
-        <source>tablecol: first argument must be a string (table name)</source>
-        <translation type="obsolete">tablecol: o primeiro argumento deve ser uma string (nome da tabela)</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t find a table named %1.</source>
-        <translation type="obsolete">Não foi possível encontrar a tabela chamada %1.</translation>
-    </message>
-    <message>
-        <source>cell() works only on tables and matrizes!</source>
-        <translation type="obsolete">cell() funciona somente em tabelas e matrizes!</translation>
-    </message>
-    <message>
-        <source>cell() works only on tables and matrices!</source>
-        <translation type="obsolete">o uso de &quot;cell()&quot; só funciona com tabelas e matrizes!</translation>
-    </message>
-</context>
-<context>
-    <name>myWidget</name>
-    <message>
-        <source>Do you want to hide or delete</source>
-        <translation type="obsolete">Deseja ocultar ou excluir</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Excluir</translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation type="obsolete">Ocultar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="obsolete">Normal</translation>
-    </message>
-    <message>
-        <source>Hidden</source>
-        <translation type="obsolete">Oculto</translation>
-    </message>
-    <message>
-        <source>Minimized</source>
-        <translation type="obsolete">Minimizada</translation>
-    </message>
-    <message>
-        <source>Maximized</source>
-        <translation type="obsolete">Maximizada</translation>
-    </message>
-    <message>
-        <source>kB</source>
-        <translation type="obsolete">kB</translation>
-    </message>
-</context>
-<context>
-    <name>pieDialog</name>
-    <message>
-        <source>Border</source>
-        <translation type="obsolete">Borda</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Estilo</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Largura</translation>
-    </message>
-    <message>
-        <source>Fill</source>
-        <translation type="obsolete">Preenchimento</translation>
-    </message>
-    <message>
-        <source>First color</source>
-        <translation type="obsolete">Primeira cor</translation>
-    </message>
-    <message>
-        <source>Pattern</source>
-        <translation type="obsolete">Modelo</translation>
-    </message>
-    <message>
-        <source>Pie ray</source>
-        <translation type="obsolete">Pizza raiada</translation>
-    </message>
-    <message>
-        <source>Pie</source>
-        <translation type="obsolete">Pizza</translation>
-    </message>
-    <message>
-        <source>&amp;Worksheet</source>
-        <translation type="obsolete">&amp;Planilha</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="obsolete">Fundo</translation>
-    </message>
-    <message>
-        <source>Co&amp;lor</source>
-        <translation type="obsolete">C&amp;or</translation>
-    </message>
-    <message>
-        <source>Border Width</source>
-        <translation type="obsolete">Largura da borda</translation>
-    </message>
-    <message>
-        <source>Border Color</source>
-        <translation type="obsolete">Cor de borda</translation>
-    </message>
-    <message>
-        <source>Colo&amp;r</source>
-        <translation type="obsolete">Co&amp;r</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opções</translation>
-    </message>
-    <message>
-        <source>Margin</source>
-        <translation type="obsolete">Margem</translation>
-    </message>
-    <message>
-        <source>Apply to all layers</source>
-        <translation type="obsolete">Aplicar a todas as camadas</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="obsolete">Geral</translation>
-    </message>
-    <message>
-        <source>Pie radius</source>
-        <translation type="obsolete">Raio da pizza</translation>
-    </message>
-    <message>
-        <source>Canvas Color</source>
-        <translation type="obsolete">Cor da camada</translation>
-    </message>
-</context>
-<context>
-    <name>plot3DDialog</name>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>X</source>
-        <translation type="obsolete">X</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation type="obsolete">Y</translation>
-    </message>
-    <message>
-        <source>Z</source>
-        <translation type="obsolete">Z</translation>
-    </message>
-    <message>
-        <source>From</source>
-        <translation type="obsolete">A partir de</translation>
-    </message>
-    <message>
-        <source>To</source>
-        <translation type="obsolete">Até</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Tipo</translation>
-    </message>
-    <message>
-        <source>linear</source>
-        <translation type="obsolete">linear</translation>
-    </message>
-    <message>
-        <source>logarithmic</source>
-        <translation type="obsolete">logarítmico</translation>
-    </message>
-    <message>
-        <source>Major Ticks</source>
-        <translation type="obsolete">Marcas maiores</translation>
-    </message>
-    <message>
-        <source>MinorTicks</source>
-        <translation type="obsolete">Marcas menores</translation>
-    </message>
-    <message>
-        <source>&amp;Scale</source>
-        <translation type="obsolete">E&amp;scala</translation>
-    </message>
-    <message>
-        <source>Title</source>
-        <translation type="obsolete">Título</translation>
-    </message>
-    <message>
-        <source>Axis Font</source>
-        <translation type="obsolete">Fonte do eixo</translation>
-    </message>
-    <message>
-        <source>&amp;Choose font</source>
-        <translation type="obsolete">Escolher fonte</translation>
-    </message>
-    <message>
-        <source>Major Ticks Length</source>
-        <translation type="obsolete">Comprimrnto das marcas maiores</translation>
-    </message>
-    <message>
-        <source>Minor Ticks Length</source>
-        <translation type="obsolete">Comprimento das marcas menores</translation>
-    </message>
-    <message>
-        <source>&amp;Axis</source>
-        <translation type="obsolete">Eixos</translation>
-    </message>
-    <message>
-        <source>&amp;Color</source>
-        <translation type="obsolete">&amp;Cor</translation>
-    </message>
-    <message>
-        <source>&amp;Font</source>
-        <translation type="obsolete">&amp;Fonte</translation>
-    </message>
-    <message>
-        <source>&amp;Title</source>
-        <translation type="obsolete">&amp;Título</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Dados</translation>
-    </message>
-    <message>
-        <source>Ma&amp;x</source>
-        <translation type="obsolete">Ma&amp;x</translation>
-    </message>
-    <message>
-        <source>&amp;Min</source>
-        <translation type="obsolete">&amp;Min</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="obsolete">Geral</translation>
-    </message>
-    <message>
-        <source>&amp;Line</source>
-        <translation type="obsolete">&amp;Linha</translation>
-    </message>
-    <message>
-        <source>&amp;Background</source>
-        <translation type="obsolete">Fun&amp;do</translation>
-    </message>
-    <message>
-        <source>Coordinate System</source>
-        <translation type="obsolete">Sistema de coordenadas</translation>
-    </message>
-    <message>
-        <source>&amp;Axes</source>
-        <translation type="obsolete">Eixos</translation>
-    </message>
-    <message>
-        <source>Lab&amp;els</source>
-        <translation type="obsolete">Rótulos</translation>
-    </message>
-    <message>
-        <source>&amp;Numbers</source>
-        <translation type="obsolete">&amp;Números</translation>
-    </message>
-    <message>
-        <source>&amp;Grid</source>
-        <translation type="obsolete">Grade</translation>
-    </message>
-    <message>
-        <source>Opacity</source>
-        <translation type="obsolete">Opacidade</translation>
-    </message>
-    <message>
-        <source>&amp;Colors</source>
-        <translation type="obsolete">&amp;Cores</translation>
-    </message>
-    <message>
-        <source>Line Width</source>
-        <translation type="obsolete">Espessura da linha</translation>
-    </message>
-    <message>
-        <source>Resolution</source>
-        <translation type="obsolete">Resolução</translation>
-    </message>
-    <message>
-        <source>Numbers Font</source>
-        <translation type="obsolete">Fonte dos números</translation>
-    </message>
-    <message>
-        <source>&amp;Choose Font</source>
-        <translation type="obsolete">Escolher fonte</translation>
-    </message>
-    <message>
-        <source>Distance labels - axis</source>
-        <translation type="obsolete">Distância rótulos - eixo</translation>
-    </message>
-    <message>
-        <source>Zoom (%)</source>
-        <translation type="obsolete">Zoom (%)</translation>
-    </message>
-    <message>
-        <source>X Zoom (%)</source>
-        <translation type="obsolete">X Zoom (%)</translation>
-    </message>
-    <message>
-        <source>Y Zoom (%)</source>
-        <translation type="obsolete">Y Zoom (%)</translation>
-    </message>
-    <message>
-        <source>Z Zoom (%)</source>
-        <translation type="obsolete">Z Zoom (%)</translation>
-    </message>
-    <message>
-        <source>&amp;General</source>
-        <translation type="obsolete">&amp;Geral</translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Estilo</translation>
-    </message>
-    <message>
-        <source>Dot</source>
-        <translation type="obsolete">Ponto</translation>
-    </message>
-    <message>
-        <source>Cross Hair</source>
-        <translation type="obsolete">Cruzes</translation>
-    </message>
-    <message>
-        <source>Cone</source>
-        <translation type="obsolete">Cone</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Largura</translation>
-    </message>
-    <message>
-        <source>Smooth angles</source>
-        <translation type="obsolete">Ângulos suaves</translation>
-    </message>
-    <message>
-        <source>Radius</source>
-        <translation type="obsolete">Raio</translation>
-    </message>
-    <message>
-        <source>Smooth line</source>
-        <translation type="obsolete">Linha suave</translation>
-    </message>
-    <message>
-        <source>Boxed</source>
-        <translation type="obsolete">Quadrado</translation>
-    </message>
-    <message>
-        <source>Quality</source>
-        <translation type="obsolete">Qualidade</translation>
-    </message>
-    <message>
-        <source>Points</source>
-        <translation type="obsolete">Pontos</translation>
-    </message>
-    <message>
-        <source>Bars</source>
-        <translation type="obsolete">Barras</translation>
-    </message>
-    <message>
-        <source>Please enter scale limits that satisfy: from &lt; to!</source>
-        <translation type="obsolete">Por favor, forneça limites de escala tais que: início &lt; fim!</translation>
-    </message>
-    <message>
-        <source>Color Ma&amp;p</source>
-        <translation type="obsolete">Ma&amp;pa de Cor</translation>
-    </message>
-    <message>
-        <source>Colormap files</source>
-        <translation type="obsolete">Arquivos de mapas de cor</translation>
-    </message>
-</context>
-<context>
-    <name>plotDialog</name>
-    <message>
-        <source>Plot type</source>
-        <translation type="obsolete">Tipo de gráfico</translation>
-    </message>
-    <message>
-        <source>&amp;Plot Associations...</source>
-        <translation type="obsolete">Associações do gráfico...</translation>
-    </message>
-    <message>
-        <source>&amp;Edit Function...</source>
-        <translation type="obsolete">&amp;Editar função...</translation>
-    </message>
-    <message>
-        <source>&amp;Worksheet</source>
-        <translation type="obsolete">&amp;Planilha de trabalho</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Connect</source>
-        <translation type="obsolete">Conectar</translation>
-    </message>
-    <message>
-        <source>No line</source>
-        <translation type="obsolete">Sem linha</translation>
-    </message>
-    <message>
-        <source>Lines</source>
-        <translation type="obsolete">Linhas</translation>
-    </message>
-    <message>
-        <source>Sticks</source>
-        <translation type="obsolete">Traços</translation>
-    </message>
-    <message>
-        <source>Steps</source>
-        <translation type="obsolete">Passos</translation>
-    </message>
-    <message>
-        <source>Dots</source>
-        <translation type="obsolete">Pontos</translation>
-    </message>
-    <message>
-        <source>Spline</source>
-        <translation type="obsolete">Spline</translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Estilo</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Largura</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>Fill area under curve</source>
-        <translation type="obsolete">Preencher área sob a curva</translation>
-    </message>
-    <message>
-        <source>Fill color</source>
-        <translation type="obsolete">Cor de preenchimento</translation>
-    </message>
-    <message>
-        <source>Pattern</source>
-        <translation type="obsolete">Modelo</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation type="obsolete">Linha</translation>
-    </message>
-    <message>
-        <source>Rectangle</source>
-        <translation type="obsolete">Retângulo</translation>
-    </message>
-    <message>
-        <source>Diamond</source>
-        <translation type="obsolete">Diamante</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Tamanho</translation>
-    </message>
-    <message>
-        <source>Fill Color</source>
-        <translation type="obsolete">Cor de preenchimento</translation>
-    </message>
-    <message>
-        <source>Symbol</source>
-        <translation type="obsolete">Símbolo</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation type="obsolete">Caixa</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Tipo</translation>
-    </message>
-    <message>
-        <source>Notch</source>
-        <translation type="obsolete">Entalhe</translation>
-    </message>
-    <message>
-        <source>Range</source>
-        <translation type="obsolete">Faixa</translation>
-    </message>
-    <message>
-        <source>Coef</source>
-        <translation type="obsolete">Coef</translation>
-    </message>
-    <message>
-        <source>Box Width</source>
-        <translation type="obsolete">Largura da Caixa</translation>
-    </message>
-    <message>
-        <source>No Whiskers</source>
-        <translation type="obsolete">Sem barbas</translation>
-    </message>
-    <message>
-        <source>Constant</source>
-        <translation type="obsolete">Constante</translation>
-    </message>
-    <message>
-        <source>Box/Whiskers</source>
-        <translation type="obsolete">Caixa/Barbas</translation>
-    </message>
-    <message>
-        <source>Max</source>
-        <translation type="obsolete">Max</translation>
-    </message>
-    <message>
-        <source>99%</source>
-        <translation type="obsolete">99%</translation>
-    </message>
-    <message>
-        <source>Mean</source>
-        <translation type="obsolete">Média</translation>
-    </message>
-    <message>
-        <source>1%</source>
-        <translation type="obsolete">1%</translation>
-    </message>
-    <message>
-        <source>Min</source>
-        <translation type="obsolete">Min</translation>
-    </message>
-    <message>
-        <source>Edge Color</source>
-        <translation type="obsolete">Cor da borda</translation>
-    </message>
-    <message>
-        <source>Edge Width</source>
-        <translation type="obsolete">Espessura do borda</translation>
-    </message>
-    <message>
-        <source>Percentile</source>
-        <translation type="obsolete">Porcentagem</translation>
-    </message>
-    <message>
-        <source>Direction</source>
-        <translation type="obsolete">Direção</translation>
-    </message>
-    <message>
-        <source>Plus</source>
-        <translation type="obsolete">Mais</translation>
-    </message>
-    <message>
-        <source>Minus</source>
-        <translation type="obsolete">Menos</translation>
-    </message>
-    <message>
-        <source>&amp;X Error Bar</source>
-        <translation type="obsolete">Barra de erro &amp;X</translation>
-    </message>
-    <message>
-        <source>Co&amp;lor</source>
-        <translation type="obsolete">C&amp;or</translation>
-    </message>
-    <message>
-        <source>Line Width</source>
-        <translation type="obsolete">Espessura da linha</translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="obsolete">1</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="obsolete">2</translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation type="obsolete">3</translation>
-    </message>
-    <message>
-        <source>4</source>
-        <translation type="obsolete">4</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
-        <source>Cap Width</source>
-        <translation type="obsolete">Largura das maiusculas</translation>
-    </message>
-    <message>
-        <source>8</source>
-        <translation type="obsolete">8</translation>
-    </message>
-    <message>
-        <source>10</source>
-        <translation type="obsolete">10</translation>
-    </message>
-    <message>
-        <source>12</source>
-        <translation type="obsolete">12</translation>
-    </message>
-    <message>
-        <source>16</source>
-        <translation type="obsolete">16</translation>
-    </message>
-    <message>
-        <source>20</source>
-        <translation type="obsolete">20</translation>
-    </message>
-    <message>
-        <source>Through Symbol</source>
-        <translation type="obsolete">Atravéz de símbolo</translation>
-    </message>
-    <message>
-        <source>Error Bars</source>
-        <translation type="obsolete">Barras de erro</translation>
-    </message>
-    <message>
-        <source>Automatic Binning</source>
-        <translation type="obsolete">Binning automático</translation>
-    </message>
-    <message>
-        <source>&amp;Show statistics</source>
-        <translation type="obsolete">&amp;Mostrar estatísticas</translation>
-    </message>
-    <message>
-        <source>Bin Size</source>
-        <translation type="obsolete">Tamanho do bin</translation>
-    </message>
-    <message>
-        <source>Begin</source>
-        <translation type="obsolete">Iniciar</translation>
-    </message>
-    <message>
-        <source>End</source>
-        <translation type="obsolete">Terminar</translation>
-    </message>
-    <message>
-        <source>Histogram Data</source>
-        <translation type="obsolete">Dados do histograma</translation>
-    </message>
-    <message>
-        <source>Gap Between Bars (in %)</source>
-        <translation type="obsolete">Espaço entre barras (em %)</translation>
-    </message>
-    <message>
-        <source>Offset (in %)</source>
-        <translation type="obsolete">Deslocamento (em %)</translation>
-    </message>
-    <message>
-        <source>Spacing</source>
-        <translation type="obsolete">Espaçando</translation>
-    </message>
-    <message>
-        <source>Arrowheads</source>
-        <translation type="obsolete">Pontas de flecha</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="obsolete">Longitude</translation>
-    </message>
-    <message>
-        <source>Angle</source>
-        <translation type="obsolete">Ângulo</translation>
-    </message>
-    <message>
-        <source>&amp;Filled</source>
-        <translation type="obsolete">Preenchimento</translation>
-    </message>
-    <message>
-        <source>End Point</source>
-        <translation type="obsolete">Ponto final</translation>
-    </message>
-    <message>
-        <source>X End</source>
-        <translation type="obsolete">X final</translation>
-    </message>
-    <message>
-        <source>Y End</source>
-        <translation type="obsolete">Y final</translation>
-    </message>
-    <message>
-        <source>Vector</source>
-        <translation type="obsolete">Vetor</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">E&amp;xcluir</translation>
-    </message>
-    <message>
-        <source>&amp;Edit...</source>
-        <translation type="obsolete">&amp;Editar...</translation>
-    </message>
-    <message>
-        <source>Vertical Bars</source>
-        <translation type="obsolete">Barras verticais</translation>
-    </message>
-    <message>
-        <source>Horizontal Bars</source>
-        <translation type="obsolete">Barras horizontais</translation>
-    </message>
-    <message>
-        <source>Histogram</source>
-        <translation type="obsolete">Histograma</translation>
-    </message>
-    <message>
-        <source>Vector XYXY</source>
-        <translation type="obsolete">Vetor XYXY</translation>
-    </message>
-    <message>
-        <source>Scatter</source>
-        <translation type="obsolete">Dispersão</translation>
-    </message>
-    <message>
-        <source>Line + Symbol</source>
-        <translation type="obsolete"> Linha + símbolo</translation>
-    </message>
-    <message>
-        <source>Please enter a valid start limit!</source>
-        <translation type="obsolete">Por favor, forneça um limite inicial válido !</translation>
-    </message>
-    <message>
-        <source>Please enter a valid end limit!</source>
-        <translation type="obsolete">Por favor, forneça um limite final válido !</translation>
-    </message>
-    <message>
-        <source>Please enter a valid bin size value!</source>
-        <translation type="obsolete">Por favor, forneça um tamanho de bin válido !</translation>
-    </message>
-    <message>
-        <source>Please enter limits that satisfy: begin &lt; end!</source>
-        <translation type="obsolete">Por favor, forneça limites que satisfaçam: inicio &lt; fim!</translation>
-    </message>
-    <message>
-        <source>Please enter a positive bin size value!</source>
-        <translation type="obsolete">Por favor, forneça um valor positivo de bin!</translation>
-    </message>
-    <message>
-        <source>No Box</source>
-        <translation type="obsolete">Sem caixa</translation>
-    </message>
-    <message>
-        <source>Perc 10, 25, 75, 90</source>
-        <translation type="obsolete">Perc 10, 25, 75, 90</translation>
-    </message>
-    <message>
-        <source>Standard Deviation</source>
-        <translation type="obsolete">Desvio padrão</translation>
-    </message>
-    <message>
-        <source>Standard Error</source>
-        <translation type="obsolete">Erro padrão</translation>
-    </message>
-    <message>
-        <source>Perc 25, 75</source>
-        <translation type="obsolete">Perc 25, 75</translation>
-    </message>
-    <message>
-        <source>Perc 10, 90</source>
-        <translation type="obsolete">Perc 10, 90</translation>
-    </message>
-    <message>
-        <source>Perc 5, 95</source>
-        <translation type="obsolete">Perc 5, 95</translation>
-    </message>
-    <message>
-        <source>Perc 1, 99</source>
-        <translation type="obsolete">Perc 1, 99</translation>
-    </message>
-    <message>
-        <source>Max-Min</source>
-        <translation type="obsolete">Max-Min</translation>
-    </message>
-    <message>
-        <source>Percentile (%)</source>
-        <translation type="obsolete">Porcentagem (%)</translation>
-    </message>
-    <message>
-        <source>Whiskers</source>
-        <translation type="obsolete">Barbas</translation>
-    </message>
-    <message>
-        <source>75-25</source>
-        <translation type="obsolete">75-25</translation>
-    </message>
-    <message>
-        <source>90-10</source>
-        <translation type="obsolete">90-10</translation>
-    </message>
-    <message>
-        <source>95-5</source>
-        <translation type="obsolete">95-5</translation>
-    </message>
-    <message>
-        <source>99-1</source>
-        <translation type="obsolete">99-1</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="obsolete">Posição</translation>
-    </message>
-    <message>
-        <source>Tail</source>
-        <translation type="obsolete">Cauda</translation>
-    </message>
-    <message>
-        <source>Middle</source>
-        <translation type="obsolete">Meio</translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <translation type="obsolete">Cabeça</translation>
-    </message>
-    <message>
-        <source>Vector XYAM</source>
-        <translation type="obsolete">Vetor XYAM</translation>
-    </message>
-    <message>
-        <source>Vector Data</source>
-        <translation type="obsolete">Dados vetoriais</translation>
-    </message>
-    <message>
-        <source>Magnitude</source>
-        <translation type="obsolete">Magnitude</translation>
-    </message>
-    <message>
-        <source>Attach curve to: </source>
-        <translation type="obsolete">Anexar curva a: </translation>
-    </message>
-    <message>
-        <source>x Axis</source>
-        <translation type="obsolete">Eixo x</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation type="obsolete">Inferior</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation type="obsolete">Superior</translation>
-    </message>
-    <message>
-        <source>y Axis</source>
-        <translation type="obsolete">Eixo y</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="obsolete">Esquerda</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="obsolete">Direita</translation>
-    </message>
-    <message>
-        <source>Axes</source>
-        <translation type="obsolete">Eixos</translation>
-    </message>
-    <message>
-        <source>Horizontal Steps</source>
-        <translation type="obsolete">Escalas horizontais</translation>
-    </message>
-    <message>
-        <source>Vertical Steps</source>
-        <translation type="obsolete">Escalas verticais</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation type="obsolete">Imagem</translation>
-    </message>
-    <message>
-        <source>&amp;Gray Scale</source>
-        <translation type="obsolete">Escala de &amp;cinza</translation>
-    </message>
-    <message>
-        <source>&amp;Default Colors</source>
-        <translation type="obsolete">Cores &amp;padrão</translation>
-    </message>
-    <message>
-        <source>Custom Co&amp;lors</source>
-        <translation type="obsolete">Co&amp;res personalizadas</translation>
-    </message>
-    <message>
-        <source>Contour Lines</source>
-        <translation type="obsolete">Linhas de contorno</translation>
-    </message>
-    <message>
-        <source>Levels</source>
-        <translation type="obsolete">Níveis</translation>
-    </message>
-    <message>
-        <source>Use &amp;Color Map</source>
-        <translation type="obsolete">Usar mapa de &amp;cores</translation>
-    </message>
-    <message>
-        <source>Use Default &amp;Pen</source>
-        <translation type="obsolete">Usar caneta padrão</translation>
-    </message>
-    <message>
-        <source>Color Bar Scale</source>
-        <translation type="obsolete">Escala da barra de cores</translation>
-    </message>
-    <message>
-        <source>Axis</source>
-        <translation type="obsolete">Eixos</translation>
-    </message>
-    <message>
-        <source>Contour</source>
-        <translation type="obsolete">Contorno</translation>
-    </message>
-    <message>
-        <source>Colors</source>
-        <translation type="obsolete">Cores</translation>
-    </message>
-</context>
-<context>
-    <name>plotWizard</name>
-    <message>
-        <source>Worksheet</source>
-        <translation type="obsolete">Planilha de trabalho</translation>
-    </message>
-    <message>
-        <source>&amp;New curve</source>
-        <translation type="obsolete">&amp;Nova curva</translation>
-    </message>
-    <message>
-        <source>&amp;Delete curve</source>
-        <translation type="obsolete">Remover curva</translation>
-    </message>
-    <message>
-        <source>&amp;Plot</source>
-        <translation type="obsolete">&amp;Gráfico</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Redefinitions of the same curve are ignored!</source>
-        <translation type="obsolete">As redefinições da mesma curva são ignoradas!</translation>
-    </message>
-    <message>
-        <source>You have allready defined a X column!</source>
-        <translation type="obsolete">Já foi definida uma coluna X!</translation>
-    </message>
-    <message>
-        <source>You must define a X column first!</source>
-        <translation type="obsolete">É necessário definir uma coluna X primeiro!</translation>
-    </message>
-    <message>
-        <source>You have allready defined a e column!</source>
-        <translation type="obsolete">Já foi definida uma coluna Y!</translation>
-    </message>
-    <message>
-        <source>You have allready defined a Z column!</source>
-        <translation type="obsolete">Já foi definida uma coluna Z!</translation>
-    </message>
-    <message>
-        <source>You must define a e column first!</source>
-        <translation type="obsolete">É necessário definir uma coluna e primeiro!</translation>
-    </message>
-    <message>
-        <source>You have allready defined an error-bars column!</source>
-        <translation type="obsolete">Já foi definida uma coluna de barras de erro!</translation>
-    </message>
-    <message>
-        <source>You must add a new curve first!</source>
-        <translation type="obsolete">É necessário adicionar uma nova curva primeiro!</translation>
-    </message>
-</context>
-<context>
-    <name>polynomFitDialog</name>
-    <message>
-        <source>Polynomial Fit of</source>
-        <translation type="obsolete">Ajuste polinomial de </translation>
-    </message>
-    <message>
-        <source>Order (1 - 9, 1 = linear)</source>
-        <translation type="obsolete">Ordem (1 - 9, 1 = linear)</translation>
-    </message>
-    <message>
-        <source>Fit curve # pts</source>
-        <translation type="obsolete">Ajustar # pts da curva</translation>
-    </message>
-    <message>
-        <source>Fit curve Xmin</source>
-        <translation type="obsolete">Ajustar Xmin da curva</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="obsolete">0</translation>
-    </message>
-    <message>
-        <source>Fit curve Xmax</source>
-        <translation type="obsolete">Ajustar Xmax da curva</translation>
-    </message>
-    <message>
-        <source>Show Formula on Graph?</source>
-        <translation type="obsolete">Mostrar fórmula no gráfico?</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>&amp;Fit</source>
-        <translation type="obsolete">Ajuste</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-    <message>
-        <source>Not enough points</source>
-        <translation type="obsolete">Não existem pontos suficientes</translation>
-    </message>
-    <message>
-        <source>You can not fit curve:</source>
-        <translation type="obsolete">Não é possível ajustar a curva:</translation>
-    </message>
-    <message>
-        <source>because it has less than 2 points!</source>
-        <translation type="obsolete">porque possui menos de 2 Pontos!</translation>
-    </message>
-    <message>
-        <source>The curve &lt;b&gt; %1 &lt;/b&gt; doesn&apos;t exist anymore! Operation aborted!</source>
-        <translation type="obsolete">A curva &lt;b&gt;%1&lt;/b&gt; não existe mais! Operação abortada!</translation>
-    </message>
-    <message>
-        <source>You cannot fit curve:</source>
-        <translation type="obsolete">Não é possível ajustar a curva:</translation>
-    </message>
-</context>
-<context>
-    <name>renameWindowDialog</name>
-    <message>
-        <source>Window Title</source>
-        <translation type="obsolete">Título da janela</translation>
-    </message>
-    <message>
-        <source>&amp;Name (single word)</source>
-        <translation type="obsolete">&amp;Nome (uma palavra)</translation>
-    </message>
-    <message>
-        <source>&amp;Label</source>
-        <translation type="obsolete">Rótulo</translation>
-    </message>
-    <message>
-        <source>&amp;Both Name and Label</source>
-        <translation type="obsolete">No&amp;me e rótulo</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Please enter a valid name!</source>
-        <translation type="obsolete">Por favor, forneça um  nome válido!</translation>
-    </message>
-    <message>
-        <source>The name you chose is not valid: only letters and digits are allowed!</source>
-        <translation type="obsolete">O nome escolhido não é válido: somente dígitos e letras são permitidos!</translation>
-    </message>
-    <message>
-        <source>Please choose another name!</source>
-        <translation type="obsolete">Por favor, escolha outro nome!</translation>
-    </message>
-    <message>
-        <source>Name already exists!</source>
-        <translation type="obsolete">O nome não existe mais!</translation>
-    </message>
-    <message>
-        <source>The table name must be different from the names of its columns!</source>
-        <translation type="obsolete">O nome da tabela deve ser diferente dos nomes das colunas!</translation>
-    </message>
-    <message>
-        <source>For internal consistency reasons the underscore character is replaced with a minus sign.</source>
-        <translation type="obsolete">Por razones de consistência interna o caractere sublinha é substituído pelo sinal de menos.</translation>
-    </message>
-</context>
-<context>
-    <name>sDialog</name>
-    <message>
-        <source>f(x,y)=</source>
-        <translation type="obsolete">f(x,y)=</translation>
-    </message>
-    <message>
-        <source>X - axis</source>
-        <translation type="obsolete">Eixo - X</translation>
-    </message>
-    <message>
-        <source>From</source>
-        <translation type="obsolete">A partir de</translation>
-    </message>
-    <message>
-        <source>-1</source>
-        <translation type="obsolete">-1</translation>
-    </message>
-    <message>
-        <source>To</source>
-        <translation type="obsolete">Até</translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="obsolete">1</translation>
-    </message>
-    <message>
-        <source>Y - axis</source>
-        <translation type="obsolete">Eixo - Y</translation>
-    </message>
-    <message>
-        <source>Z - axis</source>
-        <translation type="obsolete">Eixo - Z</translation>
-    </message>
-    <message>
-        <source>Clear &amp;list</source>
-        <translation type="obsolete">Limpar &amp;lista</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Please enter limits that satisfy: from &lt; end!</source>
-        <translation type="obsolete">Por favor, forneça limites que satisfaçam: inicio &lt; fim!</translation>
-    </message>
-</context>
-<context>
-    <name>setColValuesDialog</name>
-    <message>
-        <source>For row (i)</source>
-        <translation type="obsolete">Para linha (i)</translation>
-    </message>
-    <message>
-        <source>to</source>
-        <translation type="obsolete">até</translation>
-    </message>
-    <message>
-        <source>Add function</source>
-        <translation type="obsolete">Adicionar função</translation>
-    </message>
-    <message>
-        <source>Add column</source>
-        <translation type="obsolete">Adicionar coluna</translation>
-    </message>
-    <message>
-        <source>Add cell</source>
-        <translation type="obsolete">Adicionar célula</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="obsolete">Aplicar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>You can not use imbricated columns!</source>
-        <translation type="obsolete">Não é possível usar colunas entrelaçadas!</translation>
-    </message>
-</context>
-<context>
-    <name>smoothCurveDialog</name>
-    <message>
-        <source>Curve</source>
-        <translation type="obsolete">Curva</translation>
-    </message>
-    <message>
-        <source>Polynomial Order</source>
-        <translation type="obsolete">Ordem do polinômio</translation>
-    </message>
-    <message>
-        <source>Points to the Left</source>
-        <translation type="obsolete">Pontos à esquerda</translation>
-    </message>
-    <message>
-        <source>Points to the Right</source>
-        <translation type="obsolete">Pontos à direita</translation>
-    </message>
-    <message>
-        <source>Points</source>
-        <translation type="obsolete">Pontos</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>&amp;Smooth</source>
-        <translation type="obsolete">&amp;Suavizar</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Fechar</translation>
-    </message>
-</context>
-<context>
-    <name>sortDialog</name>
-    <message>
-        <source>Sort columns</source>
-        <translation type="obsolete">Ordenar col&amp;unas</translation>
-    </message>
-    <message>
-        <source>Order</source>
-        <translation type="obsolete">Ordem</translation>
-    </message>
-    <message>
-        <source>Leading column</source>
-        <translation type="obsolete">Coluna principal</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Separately</source>
-        <translation type="obsolete">Separadamente</translation>
-    </message>
-    <message>
-        <source>Together</source>
-        <translation type="obsolete">Juntas</translation>
-    </message>
-    <message>
-        <source>Ascending</source>
-        <translation type="obsolete">Ascendente</translation>
-    </message>
-    <message>
-        <source>Descending</source>
-        <translation type="obsolete">Descendente</translation>
-    </message>
-</context>
-<context>
-    <name>tableDialog</name>
-    <message>
-        <source>Enumerate all to the right</source>
-        <translation type="obsolete">Enumerar todas à direita</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opções</translation>
-    </message>
-    <message>
-        <source>Display</source>
-        <translation type="obsolete">Mostrador</translation>
-    </message>
-    <message>
-        <source>X (abscissae)</source>
-        <translation type="obsolete">X (abscissas)</translation>
-    </message>
-    <message>
-        <source>Y (ordinates)</source>
-        <translation type="obsolete">Y (ordenadas)</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Nenhum</translation>
-    </message>
-    <message>
-        <source>Numeric</source>
-        <translation type="obsolete">Numérico</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="obsolete">Texto</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Data</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation type="obsolete">Tempo</translation>
-    </message>
-    <message>
-        <source>Month</source>
-        <translation type="obsolete">Mês</translation>
-    </message>
-    <message>
-        <source>Day of Week</source>
-        <translation type="obsolete">Dia da semana</translation>
-    </message>
-    <message>
-        <source>Apply to all columns to the right</source>
-        <translation type="obsolete">Aplicar a todas as colunas à direita</translation>
-    </message>
-    <message>
-        <source>Decimal: 1000</source>
-        <translation type="obsolete">Decimal: 1000</translation>
-    </message>
-    <message>
-        <source>Scientific: 1E3</source>
-        <translation type="obsolete">Científico: 1E3</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="obsolete">aaaa-MM-dd</translation>
-    </message>
-    <message>
-        <source>h</source>
-        <translation type="obsolete">h</translation>
-    </message>
-    <message>
-        <source>h ap</source>
-        <translation type="obsolete">h ap</translation>
-    </message>
-    <message>
-        <source>h AP</source>
-        <translation type="obsolete">h AP</translation>
-    </message>
-    <message>
-        <source>h:mm</source>
-        <translation type="obsolete">h:mm</translation>
-    </message>
-    <message>
-        <source>h:mm ap</source>
-        <translation type="obsolete">h:mm ap</translation>
-    </message>
-    <message>
-        <source>hh:mm</source>
-        <translation type="obsolete">hh:mm</translation>
-    </message>
-    <message>
-        <source>h:mm:ss</source>
-        <translation type="obsolete">h:mm:ss</translation>
-    </message>
-    <message>
-        <source>h:mm:ss.zzz</source>
-        <translation type="obsolete">h:mm:ss.zzz</translation>
-    </message>
-    <message>
-        <source>mm:ss</source>
-        <translation type="obsolete">mm:ss</translation>
-    </message>
-    <message>
-        <source>mm:ss.zzz</source>
-        <translation type="obsolete">mm:ss.zzz</translation>
-    </message>
-    <message>
-        <source>hmm</source>
-        <translation type="obsolete">hmm</translation>
-    </message>
-    <message>
-        <source>hmmss</source>
-        <translation type="obsolete">hmmss</translation>
-    </message>
-    <message>
-        <source>hhmmss</source>
-        <translation type="obsolete">hhmmss</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="obsolete">Padrão</translation>
-    </message>
-    <message>
-        <source>Apply to all</source>
-        <translation type="obsolete">Aplicar a todos</translation>
-    </message>
-    <message>
-        <source>Column Name:</source>
-        <translation type="obsolete">Nome da coluna:</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>Plot Designation:</source>
-        <translation type="obsolete">Designação do gráfico:</translation>
-    </message>
-    <message>
-        <source>Format:</source>
-        <translation type="obsolete">Formato:</translation>
-    </message>
-    <message>
-        <source>Precision:</source>
-        <translation type="obsolete">Precisão:</translation>
-    </message>
-    <message>
-        <source>Z (height)</source>
-        <translation type="obsolete">Z (altura)</translation>
-    </message>
-    <message>
-        <source>Column Width:</source>
-        <translation type="obsolete">Largura da coluna:</translation>
-    </message>
-    <message>
-        <source>Comment:</source>
-        <translation type="obsolete">Comentário:</translation>
-    </message>
-    <message>
-        <source>The column names must only contain letters and digits!</source>
-        <translation type="obsolete">Os nome das colunas podem conter somente dígitos e letras!</translation>
-    </message>
-    <message>
-        <source>X Error</source>
-        <translation type="obsolete">Erro em X</translation>
-    </message>
-    <message>
-        <source>Y Error</source>
-        <translation type="obsolete">Erro em Y</translation>
-    </message>
-    <message>
-        <source>For internal consistency reasons the underscore character is replaced with a minus sign.</source>
-        <translation type="obsolete">Por razões de consistência interna o caractere sublinha é substituído pelo sinal de menos.</translation>
-    </message>
-</context>
-<context>
-    <name>textDialog</name>
-    <message>
-        <source>Title Color</source>
-        <translation type="obsolete">Cor do título</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>Title Font</source>
-        <translation type="obsolete">Fonte do título</translation>
-    </message>
-    <message>
-        <source>&amp;Font</source>
-        <translation type="obsolete">&amp;Fonte</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>Alignement</source>
-        <translation type="obsolete">Alinhamento</translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation type="obsolete">Centro</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="obsolete">Esquerda</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="obsolete">Direita</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Co&amp;lor</source>
-        <translation type="obsolete">C&amp;or</translation>
-    </message>
-</context>
-<context>
-    <name>textDlg</name>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Cor</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="obsolete">Fundo</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Nenhum</translation>
-    </message>
-    <message>
-        <source>Rectangle</source>
-        <translation type="obsolete">Retângulo</translation>
-    </message>
-    <message>
-        <source>Shadow</source>
-        <translation type="obsolete">Sombra</translation>
-    </message>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">&amp;Aplicar</translation>
-    </message>
-    <message>
-        <source>&amp;Font</source>
-        <translation type="obsolete">&amp;Fonte</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Rotate (deg.)</source>
-        <translation type="obsolete">Rotcionar (graus)</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="obsolete">0</translation>
-    </message>
-    <message>
-        <source>45</source>
-        <translation type="obsolete">45</translation>
-    </message>
-    <message>
-        <source>90</source>
-        <translation type="obsolete">90</translation>
-    </message>
-    <message>
-        <source>135</source>
-        <translation type="obsolete">135</translation>
-    </message>
-    <message>
-        <source>180</source>
-        <translation type="obsolete">180</translation>
-    </message>
-    <message>
-        <source>225</source>
-        <translation type="obsolete">225</translation>
-    </message>
-    <message>
-        <source>270</source>
-        <translation type="obsolete">270</translation>
-    </message>
-    <message>
-        <source>315</source>
-        <translation type="obsolete">315</translation>
-    </message>
-    <message>
-        <source>Co&amp;lor</source>
-        <translation type="obsolete">C&amp;or</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation type="obsolete">Estrutura</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Fonte</translation>
-    </message>
-    <message>
-        <source>&amp;Background</source>
-        <translation type="obsolete">Fun&amp;do</translation>
     </message>
 </context>
 </TS>
