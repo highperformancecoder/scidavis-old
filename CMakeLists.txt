@@ -139,21 +139,16 @@ add_subdirectory( test )
 
 # Documentation
 set( DOC_FILES
-  scidavis-logo.png
-  scidavis.css
   ChangeLog.md
   README.md
-  INSTALL.md
   gpl.txt
   license.rtf
   )
 
 if( WIN32 )
   install( FILES ${DOC_FILES} DESTINATION . )
-  install( FILES manual/index.html DESTINATION ./manual )
 else()
   install( FILES ${DOC_FILES} DESTINATION share/doc/scidavis )
-  install( FILES manual/index.html DESTINATION share/doc/scidavis/manual )
 endif()
 
 if( MSVC )
