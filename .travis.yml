@@ -31,6 +31,8 @@ script:
   # required to avoid picking up a bodgy python interpreter
   - export PATH=/usr/bin:$PATH
   - export PYTHON=python3
+  - cp 3rdparty/liborigin.pro 3rdparty/liborigin/
+  - cp 3rdparty/config.h 3rdparty/liborigin/
   - qmake CONFIG+=aegis
   - make
 #  - Xvfb :0 &

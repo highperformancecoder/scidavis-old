@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Install prerequisties
         run: |
@@ -131,9 +133,6 @@ jobs:
         with:
           update: true
           install: >-
-            wget
-            patch
-            git
             make
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-gcc

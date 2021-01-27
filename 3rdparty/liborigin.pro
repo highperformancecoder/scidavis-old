@@ -11,9 +11,6 @@ QMAKE_CLEAN+=${TARGET}
 LIBORIGIN_VERSION_MAJOR = 3
 LIBORIGIN_VERSION_MINOR = 0
 LIBORIGIN_VERSION_BUGFIX = 0
-versionconfig.input = config.h.in
-versionconfig.output = config.h
-QMAKE_SUBSTITUTES += versionconfig
 
 # logging of parse process is disabled by default
 # to enable it uncomment following line
