@@ -93,7 +93,7 @@ if( ENABLE_Testing )
 
   endif()
 
-  if( ENABLE_Python3 )
+  if( SCRIPTING_PYTHON )
 
     file( COPY pythonTests/ DESTINATION ./tmp )
     file( COPY ../scidavis-logo.png DESTINATION ./tmp )

@@ -45,7 +45,7 @@ jobs:
       - name: Configuring
         run: |
           mkdir build && cd build
-          cmake .. -DSEARCH_FOR_UPDATES=OFF -DDOWNLOAD_LINKS=OFF -DORIGIN_IMPORT=ON
+          cmake .. -DSEARCH_FOR_UPDATES=OFF -DDOWNLOAD_LINKS=OFF -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=ON
 
       - name: Building
         run: |
@@ -63,7 +63,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        qt_ver: [5.12.10, 5.15.2]
+        include:
+          - qt_ver: 5.12.10
+            python: OFF
+          - qt_ver: 5.15.2
+            python: ON
 
     name: MSVC_Qt_${{ matrix.qt_ver }}
 
@@ -96,16 +100,19 @@ jobs:
           ${{ env.VCPKG_ROOT }}\vcpkg install zlib gsl muparser opengl gl2ps boost-regex unittest-cpp `
             --triplet x64-windows
 
+      - name: Install Python packages
+        if: ${{ matrix.qt_ver == '5.15.2' }}
+        run: pip install sip==5.5.0 pyqt5 numpy
+
       - name: Configuring
         run: |
           mkdir build; cd build
           cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}\scripts\buildsystems\vcpkg.cmake `
-            -DORIGIN_IMPORT=ON
+            -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=${{ matrix.python }}
 
-      - uses: microsoft/setup-msbuild@v1.0.2
       - name: Building
         run: |
-          MSBuild -maxCpuCount -property:Configuration=Release build\scidavis.sln
+          cmake --build build --config Release -- -maxCpuCount
 
       - name: Testing
         run: |
@@ -149,7 +156,7 @@ jobs:
       - name: Configuring
         run: |
           mkdir build && cd build
-          cmake .. -G"MSYS Makefiles" -DORIGIN_IMPORT=ON
+          cmake .. -G"MSYS Makefiles" -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=ON
 
       - name: Building
         run: |

@@ -44,16 +44,31 @@ else()
     )
 endif()
 
-if( ENABLE_Python3 )
-  file( COPY scidavisrc.py DESTINATION . )
-  add_custom_command( OUTPUT scidavisrc.pyc
-    COMMAND ${Python3_EXECUTABLE} -m compileall -b ./*.py
-    COMMENT "Compiling python files"
-    )
-  add_custom_target( generate_pyc_files
-    DEPENDS scidavisrc.pyc
-    )
+if( SCRIPTING_PYTHON )
+
+  if( MULTI_CONFIG )
+    file( GENERATE OUTPUT $<CONFIG>/scidavisrc.py INPUT scidavisrc.py )
+    add_custom_command( OUTPUT scidavisrc.pyc
+      COMMAND ${Python3_EXECUTABLE} -m compileall -b scidavisrc.py
+      WORKING_DIRECTORY $<CONFIG>
+      COMMENT "Compiling python files"
+      )
+    add_custom_target( generate_pyc_files
+      DEPENDS $<CONFIG>/scidavisrc.pyc
+      )
+  else()
+    file( COPY scidavisrc.py DESTINATION ${CMAKE_CURRENT_BINARY_DIR} )
+    add_custom_command( OUTPUT scidavisrc.pyc
+      COMMAND ${Python3_EXECUTABLE} -m compileall -b scidavisrc.py
+      COMMENT "Compiling python files"
+      )
+    add_custom_target( generate_pyc_files
+      DEPENDS scidavisrc.pyc
+      )
+  endif()
+
   add_dependencies( scidavis generate_pyc_files )
+
 endif()
 	
 if( WIN32 )
@@ -93,7 +108,11 @@ if( UNIX )
   install( FILES x-sciprj.desktop DESTINATION share/mimelnk/application )
 endif()
 
-if( ENABLE_Python3 )
-  install( FILES scidavisrc.py ${CMAKE_CURRENT_BINARY_DIR}/scidavisrc.pyc DESTINATION etc )
+if( SCRIPTING_PYTHON )
+  if( MULTI_CONFIG )
+    install( FILES scidavisrc.py ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/scidavisrc.pyc DESTINATION etc )
+  else()
+    install( FILES scidavisrc.py ${CMAKE_CURRENT_BINARY_DIR}/scidavisrc.pyc DESTINATION etc )
+  endif()
   install( FILES scidavisUtil.py DESTINATION share/scidavis )
 endif()

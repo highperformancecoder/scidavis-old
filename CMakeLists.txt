@@ -77,30 +77,17 @@ endif()
 
 option( SCRIPTING_MUPARSER "Enable muParser Scripting" ON )
 
+option( SCRIPTING_PYTHON "Enable Python Scripting" OFF )
+
 option( ENABLE_Testing "Enable testing" ON )
 
-if( MSVC )
-  option( ENABLE_Python3 "Enable Python3 support" OFF )
-else()
-  option( ENABLE_Python3 "Enable Python3 support" ON )
-endif()
-
-if( ENABLE_Python3 )
+if( SCRIPTING_PYTHON )
   if( MINGW )
     set( Python3_FIND_REGISTRY LAST )
   endif()
-  find_package(Python3 COMPONENTS Interpreter Development)
-  if(NOT Python3_FOUND)
-    message(STATUS "WARNING:  "
-      "Python3 Interpreter or Development not found. Disabling Python3 support")
-    set(ENABLE_Python3 OFF CACHE BOOL "Enable Python3 support" FORCE)
-    return()
-  else()
-    find_package( SIP REQUIRED )
-    find_package( PyQt REQUIRED )
-  endif()
-else()
-  message(STATUS "Python3 Support Disabled" )
+  find_package( Python3 COMPONENTS Interpreter Development REQUIRED )
+  find_package( SIP REQUIRED )
+  find_package( PyQt REQUIRED )
 endif()
 
 if( ENABLE_Testing )
