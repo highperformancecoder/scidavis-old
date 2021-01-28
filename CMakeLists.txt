@@ -6,6 +6,8 @@ if( CMAKE_GENERATOR STREQUAL "Visual Studio 15 2017" OR
   set(CMAKE_SYSTEM_VERSION 10.0)
 endif()
 
+cmake_policy(SET CMP0091 NEW)
+
 project( scidavis
   VERSION 2.3.0
   DESCRIPTION "SciDAVis is a free application for Scientific Data Analysis and Visualization."
