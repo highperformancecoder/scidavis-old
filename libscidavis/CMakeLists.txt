@@ -316,7 +316,7 @@ if( ORIGIN_IMPORT )
   list( APPEND SRCS "src/importOPJ.cpp" )
 endif()
 
-add_library( libscidavis
+add_library( libscidavis STATIC
   ${SRCS}
   ${HEADERS}
   ${FORMS}
