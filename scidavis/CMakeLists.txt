@@ -70,13 +70,39 @@ if( SCRIPTING_PYTHON )
   add_dependencies( scidavis generate_pyc_files )
 
 endif()
-	
+
 if( WIN32 )
   install( TARGETS scidavis RUNTIME DESTINATION . )
   install( FILES ${QM_FILES} DESTINATION translations )
 else()
   install( TARGETS scidavis RUNTIME DESTINATION bin )
   install( FILES ${QM_FILES}  DESTINATION share/scidavis/translations )
+endif()
+
+if( RUNTIME_DIR )
+  set( EXCLUDE_DLL "system32/*" "shell32*" "kernel32*" )
+  install( CODE "
+    file( GET_RUNTIME_DEPENDENCIES
+      RESOLVED_DEPENDENCIES_VAR RESOLVED_DEPENDENCIES
+      UNRESOLVED_DEPENDENCIES_VAR UNRESOLVED_DEPENDENCIES
+      CONFLICTING_DEPENDENCIES_PREFIX CONFLICTING_DEPENDENCIES
+      EXECUTABLES \"\${CMAKE_INSTALL_PREFIX}/scidavis.exe\"
+      DIRECTORIES \"${RUNTIME_DIR}\"
+      POST_EXCLUDE_REGEXES ${EXCLUDE_DLL}
+      )
+    foreach( lib \${RESOLVED_DEPENDENCIES} )
+      execute_process(
+        COMMAND \"${CMAKE_COMMAND}\" -E
+        copy \${lib} \"\${CMAKE_INSTALL_PREFIX}\"
+        )
+    endforeach()
+    ")
+endif()
+
+if( WIN32 )
+  set( CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION . )
+  include(Windeployqt)
+  windeployqt( scidavis . )
 endif()
 
 # Icons
