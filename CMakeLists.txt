@@ -6,6 +6,8 @@ if( CMAKE_GENERATOR STREQUAL "Visual Studio 15 2017" OR
   set(CMAKE_SYSTEM_VERSION 10.0)
 endif()
 
+cmake_policy(SET CMP0091 NEW)
+
 project( scidavis
   VERSION 2.3.0
   DESCRIPTION "SciDAVis is a free application for Scientific Data Analysis and Visualization."
@@ -139,21 +141,16 @@ add_subdirectory( test )
 
 # Documentation
 set( DOC_FILES
-  scidavis-logo.png
-  scidavis.css
   ChangeLog.md
   README.md
-  INSTALL.md
   gpl.txt
   license.rtf
   )
 
 if( WIN32 )
   install( FILES ${DOC_FILES} DESTINATION . )
-  install( FILES manual/index.html DESTINATION ./manual )
 else()
   install( FILES ${DOC_FILES} DESTINATION share/doc/scidavis )
-  install( FILES manual/index.html DESTINATION share/doc/scidavis/manual )
 endif()
 
 if( MSVC )

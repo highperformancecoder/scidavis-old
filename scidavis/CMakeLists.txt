@@ -95,10 +95,6 @@ if( UNIX )
   endforeach()
 endif()
 
-if( WIN32 )
-  install( FILES icons/scidavis.ico DESTINATION . )
-endif()
-
 # Application Files
 if( UNIX )
   install( FILES scidavis.desktop DESTINATION share/applications )
