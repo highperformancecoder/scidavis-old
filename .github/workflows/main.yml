@@ -199,7 +199,7 @@ jobs:
       - name: Configuring
         run: |
           mkdir build && cd build
-          cmake .. -DPython3_ROOT_DIR=/Users/runner/hostedtoolcache/Python/3.9.1/x64
+          cmake .. -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=ON -DPython3_ROOT_DIR=$pythonLocation
 
       - name: Building
         run: |
