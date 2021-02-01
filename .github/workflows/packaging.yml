@@ -1,0 +1,111 @@
+name: Packaging
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+
+  Release:
+    name: Release
+    runs-on: windows-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body_path: ./NEWS.md
+          draft: false
+          prerelease: false
+
+  MSVC:
+    name: MSVC
+    runs-on: windows-latest
+    needs: Release
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: ${{ runner.os }}-QtCache
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: 5.15.2
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+
+      - uses: lukka/run-vcpkg@v6
+        with:
+          vcpkgGitCommitId: 50ea8c0ab7aca3bb9245bba7fc877ad2f2a4464c
+          setupOnly: true
+      - name: Install VCPKG packages
+        run: |
+          Add-Content ${{ env.VCPKG_ROOT }}\triplets\x64-windows.cmake "set(VCPKG_BUILD_TYPE release)"
+          ${{ env.VCPKG_ROOT }}\vcpkg install zlib gsl muparser opengl gl2ps boost-regex unittest-cpp `
+            --triplet x64-windows
+
+      - name: Configuring
+        run: |
+          mkdir build; cd build
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}\scripts\buildsystems\vcpkg.cmake `
+            -DORIGIN_IMPORT=ON -DRUNTIME_DIR=${{ env.VCPKG_ROOT }}/installed/x64-windows/bin `
+            -DCPACK_PACKAGE_FILE_NAME=scidavis
+
+      - name: Building
+        run: |
+          cmake --build build --config Release -- -maxCpuCount
+
+      - name: Testing
+        run: |
+          cd build
+          ctest -C Release --output-on-failure
+
+      - name: Packaging
+        id: packaging
+        continue-on-error: true
+        run: |
+          $Env:version = (git describe --tags)
+          $Env:version
+          echo "::set-output name=version::$Env:version"
+          cd build
+          cpack -G WIX
+          cpack -G NSIS
+
+      - name: Upload MSI installer
+        continue-on-error: true
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.Release.outputs.upload_url }}
+          asset_path: build/scidavis.msi
+          asset_name: scidavis-${{ steps.packaging.outputs.version }}-win64.msi
+          asset_content_type: application/zip
+
+      - name: Upload NSIS installer
+        continue-on-error: true
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.Release.outputs.upload_url }}
+          asset_path: build/scidavis.exe
+          asset_name: scidavis-${{ steps.packaging.outputs.version }}-win64.exe
+          asset_content_type: application/zip

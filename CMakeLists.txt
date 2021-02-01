@@ -156,3 +156,26 @@ endif()
 if( MSVC )
   set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "scidavis")
 endif()
+
+set( CPACK_PACKAGE_NAME "SciDAVis" )
+set( CPACK_PACKAGE_VENDOR "High Performance Coders" )
+set( CPACK_PACKAGE_DESCRIPTION "SciDAVis Installer" )
+set( CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/gpl.txt" )
+set( CPACK_PACKAGE_EXECUTABLES "scidavis;SciDAVis" )
+set( CPACK_CREATE_DESKTOP_LINKS "scidavis" )
+set( CPACK_STRIP_FILES ON )
+
+# Source packaging
+set( CPACK_SOURCE_IGNORE_FILES "/build/;CMakeLists\.txt\.user*;/\.git/" )
+
+# WIX
+set( CPACK_WIX_UPGRADE_GUID "d6f4ef98-3744-47a2-b581-d789db8a4d63" )
+set( CPACK_WIX_LICENSE_RTF "${CMAKE_SOURCE_DIR}/license.rtf" )
+set( CPACK_WIX_PRODUCT_ICON "${CMAKE_SOURCE_DIR}/scidavis/icons/scidavis.ico" )
+
+# NSIS
+set( CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/scidavis/icons/scidavis.ico" )
+set( CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON )
+set( CPACK_NSIS_EXECUTABLES_DIRECTORY . )
+
+include(CPack)
