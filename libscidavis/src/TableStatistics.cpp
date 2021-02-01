@@ -96,7 +96,7 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
         setColName(8, "N");
 
         for (int i = 0; i < 9; i++)
-            setColumnType(i, SciDAVis::Numeric);
+            setColumnType(i, SciDAVis::ColumnMode::Numeric);
 
         Double2StringFilter *pFilter =
                 qobject_cast<Double2StringFilter *>(column(0)->outputFilter());
@@ -131,10 +131,10 @@ TableStatistics::TableStatistics(ScriptingEnv *env, QWidget *parent, Table *base
         setColName(10, "N");
 
         for (int i = 0; i < 2; i++)
-            setColumnType(i, SciDAVis::Text);
+            setColumnType(i, SciDAVis::ColumnMode::Text);
 
         for (int i = 2; i < 11; i++)
-            setColumnType(i, SciDAVis::Numeric);
+            setColumnType(i, SciDAVis::ColumnMode::Numeric);
 
         Double2StringFilter *pFilter =
                 qobject_cast<Double2StringFilter *>(column(6)->outputFilter());
@@ -171,7 +171,7 @@ void TableStatistics::update(Table *t, const QString &colName)
                 QList<int> validCells;
                 for (int col = 0; col < columns; col++) {
                     if (d_base->column(col)->rowCount() > srcRow
-                        && d_base->column(col)->columnMode() == SciDAVis::Numeric
+                        && d_base->column(col)->columnMode() == SciDAVis::ColumnMode::Numeric
                         && !d_base->column(col)->isInvalid(srcRow))
                         validCells.append(col);
                 }
@@ -215,7 +215,7 @@ void TableStatistics::update(Table *t, const QString &colName)
                 int colIndex = d_base->colIndex(colName);
                 Column *col = d_base->column(colIndex);
 
-                if (col->columnMode() != SciDAVis::Numeric)
+                if (col->columnMode() != SciDAVis::ColumnMode::Numeric)
                     return;
 
                 int rows = col->rowCount();

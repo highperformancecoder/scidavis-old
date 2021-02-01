@@ -48,20 +48,21 @@ Column::Column(const QString &name, SciDAVis::ColumnMode mode) : AbstractColumn(
 template<>
 void Column::initPrivate(std::unique_ptr<QVector<qreal>> d, IntervalAttribute<bool> v)
 {
-    d_column_private = new Private(this, SciDAVis::TypeDouble, SciDAVis::Numeric, d.release(), v);
+    d_column_private = new Private(this, SciDAVis::TypeDouble, SciDAVis::ColumnMode::Numeric, d.release(), v);
 }
 
 template<>
 void Column::initPrivate(std::unique_ptr<QStringList> d, IntervalAttribute<bool> v)
 {
-    d_column_private = new Private(this, SciDAVis::TypeQString, SciDAVis::Text, d.release(), v);
+    d_column_private =
+            new Private(this, SciDAVis::TypeQString, SciDAVis::ColumnMode::Text, d.release(), v);
 }
 
 template<>
 void Column::initPrivate(std::unique_ptr<QList<QDateTime>> d, IntervalAttribute<bool> v)
 {
-    d_column_private =
-            new Private(this, SciDAVis::TypeQDateTime, SciDAVis::DateTime, d.release(), v);
+    d_column_private = new Private(this, SciDAVis::TypeQDateTime, SciDAVis::ColumnMode::DateTime,
+                                   d.release(), v);
 }
 
 void Column::init()
@@ -286,7 +287,7 @@ void Column::save(QXmlStreamWriter *writer) const
     writer->writeStartElement("column");
     writeBasicAttributes(writer);
     writer->writeAttribute("type", SciDAVis::enumValueToString(dataType(), "ColumnDataType"));
-    writer->writeAttribute("mode", SciDAVis::enumValueToString(columnMode(), "ColumnMode"));
+    writer->writeAttribute("mode", SciDAVis::enumValueToString(static_cast<int>(columnMode()), "ColumnMode"));
     writer->writeAttribute("plot_designation",
                            SciDAVis::enumValueToString(plotDesignation(), "PlotDesignation"));
     writeCommentElement(writer);
@@ -686,7 +687,7 @@ void ColumnStringIO::setTextAt(int row, const QString &value)
 
 bool ColumnStringIO::copy(const AbstractColumn *other)
 {
-    if (other->columnMode() != SciDAVis::Text)
+    if (other->columnMode() != SciDAVis::ColumnMode::Text)
         return false;
     d_owner->d_column_private->inputFilter()->input(0, other);
     d_owner->copy(d_owner->d_column_private->inputFilter()->output(0));
@@ -697,7 +698,7 @@ bool ColumnStringIO::copy(const AbstractColumn *other)
 bool ColumnStringIO::copy(const AbstractColumn *source, int source_start, int dest_start,
                           int num_rows)
 {
-    if (source->columnMode() != SciDAVis::Text)
+    if (source->columnMode() != SciDAVis::ColumnMode::Text)
         return false;
     d_owner->d_column_private->inputFilter()->input(0, source);
     d_owner->copy(d_owner->d_column_private->inputFilter()->output(0), source_start, dest_start,

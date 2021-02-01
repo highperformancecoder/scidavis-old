@@ -278,7 +278,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
             {
                 double datavalue;
                 bool setAsText = false;
-                table->column(j)->setColumnMode(SciDAVis::Numeric);
+                table->column(j)->setColumnMode(SciDAVis::ColumnMode::Numeric);
                 for (int i = 0; i < std::min((int)column.data.size(), maxrows); ++i) {
                     Origin::variant value(column.data[i]);
                     if (value.type() == Origin::variant::V_DOUBLE) {
@@ -292,7 +292,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
                         }
                     } else { // string
                         if (!setAsText && i == 0) {
-                            table->column(j)->setColumnMode(SciDAVis::Text);
+                            table->column(j)->setColumnMode(SciDAVis::ColumnMode::Text);
                             setAsText = true;
                         }
                         scidavis_column->setTextAt(i, column.data[i].as_string());
@@ -322,7 +322,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
                 break;
             }
         case Origin::Text:
-            table->column(j)->setColumnMode(SciDAVis::Text);
+            table->column(j)->setColumnMode(SciDAVis::ColumnMode::Text);
             for (int i = 0; i < min((int)column.data.size(), maxrows); ++i) {
                 scidavis_column->setTextAt(i, column.data[i].as_string());
             }
@@ -381,7 +381,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
             }
             for (int i = 0; i < min((int)column.data.size(), maxrows); ++i)
                 scidavis_column->setValueAt(i, column.data[i].as_double());
-            table->column(j)->setColumnMode(SciDAVis::DateTime);
+            table->column(j)->setColumnMode(SciDAVis::ColumnMode::DateTime);
             DateTime2StringFilter *filter =
                     static_cast<DateTime2StringFilter *>(scidavis_column->outputFilter());
             filter->setFormat(format);
@@ -425,7 +425,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
             }
             for (int i = 0; i < min((int)column.data.size(), maxrows); ++i)
                 scidavis_column->setValueAt(i, column.data[i].as_double());
-            table->column(j)->setColumnMode(SciDAVis::DateTime);
+            table->column(j)->setColumnMode(SciDAVis::ColumnMode::DateTime);
             DateTime2StringFilter *filter =
                     static_cast<DateTime2StringFilter *>(table->column(j)->outputFilter());
             filter->setFormat(format);
@@ -445,7 +445,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
             }
             for (int i = 0; i < min((int)column.data.size(), maxrows); ++i)
                 scidavis_column->setValueAt(i, column.data[i].as_double());
-            table->column(j)->setColumnMode(SciDAVis::Month);
+            table->column(j)->setColumnMode(SciDAVis::ColumnMode::Month);
             DateTime2StringFilter *filter =
                     static_cast<DateTime2StringFilter *>(table->column(j)->outputFilter());
             filter->setFormat(format);
@@ -465,7 +465,7 @@ bool ImportOPJ::importSpreadsheet(const OriginFile &opj, const Origin::SpreadShe
             }
             for (int i = 0; i < min((int)column.data.size(), maxrows); ++i)
                 scidavis_column->setValueAt(i, column.data[i].as_double());
-            table->column(j)->setColumnMode(SciDAVis::Day);
+            table->column(j)->setColumnMode(SciDAVis::ColumnMode::Day);
             DateTime2StringFilter *filter =
                     static_cast<DateTime2StringFilter *>(table->column(j)->outputFilter());
             filter->setFormat(format);
@@ -1026,11 +1026,11 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
 
                 QString formatInfo;
                 int format = 0;
-                int type;
+                Graph::AxisType type;
                 int prec = ticks[i].decimalPlaces;
                 switch (ticks[i].valueType) {
                 case Origin::Numeric:
-                    type = Graph::Numeric;
+                    type = Graph::AxisType::Numeric;
                     switch (ticks[i].valueTypeSpecification) {
                     case 0: // Decimal 1000
                         format = 1;
@@ -1047,24 +1047,24 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
                         prec = 2;
                     break;
                 case Origin::Text: // Text
-                    type = Graph::Txt;
+                    type = Graph::AxisType::Txt;
                     break;
                 case 2: // Date
-                    type = Graph::Date;
+                    type = Graph::AxisType::Date;
                     break;
                 case 3: // Time
-                    type = Graph::Time;
+                    type = Graph::AxisType::Time;
                     break;
                 case Origin::Month: // Month
-                    type = Graph::Month;
+                    type = Graph::AxisType::Month;
                     format = ticks[i].valueTypeSpecification;
                     break;
                 case Origin::Day: // Day
-                    type = Graph::Day;
+                    type = Graph::AxisType::Day;
                     format = ticks[i].valueTypeSpecification;
                     break;
                 case Origin::ColumnHeading:
-                    type = Graph::ColHeader;
+                    type = Graph::AxisType::ColHeader;
                     switch (ticks[i].valueTypeSpecification) {
                     case 0: // Decimal 1000
                         format = 1;
@@ -1080,7 +1080,7 @@ bool ImportOPJ::importGraphs(const OriginFile &opj)
                     prec = 2;
                     break;
                 default:
-                    type = Graph::Numeric;
+                    type = Graph::AxisType::Numeric;
                     format = 0;
                     prec = 2;
                 }

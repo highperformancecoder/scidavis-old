@@ -61,7 +61,7 @@ public:
     };
 
     //! The column mode (defines output and input filter for table columns)
-    enum ColumnMode {
+    enum class ColumnMode : int {
         Numeric = 0, //!< column contains doubles
         Text = 1, //!< column contains strings
         Month = 4, //!< column contains month names

@@ -350,7 +350,7 @@ public:
         : AbstractColumn(tr("as string")), d_owner(owner), d_setting(false)
     {
     }
-    virtual SciDAVis::ColumnMode columnMode() const { return SciDAVis::Text; }
+    virtual SciDAVis::ColumnMode columnMode() const { return SciDAVis::ColumnMode::Text; }
     virtual SciDAVis::ColumnDataType dataType() const { return SciDAVis::TypeQString; }
     virtual SciDAVis::PlotDesignation plotDesignation() const { return d_owner->plotDesignation(); }
     virtual int rowCount() const { return d_owner->rowCount(); }

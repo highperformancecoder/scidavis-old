@@ -36,6 +36,7 @@
 #include <QTextEdit>
 #include <QTabWidget>
 #include "SciDAVisObject.h"
+#include "Graph.h"
 
 class QListWidget;
 class QListWidgetItem;
@@ -51,7 +52,6 @@ class QTabWidget;
 class QWidget;
 class QStringList;
 class ColorButton;
-class Graph;
 class TextFormatButtons;
 
 //! General plot options dialog
@@ -74,7 +74,7 @@ public:
 
     void setGraph(Graph *g);
 
-    int currentSelectedAxisType();
+    Graph::AxisType currentSelectedAxisType();
 
 protected:
     //! generate UI for the axes page
@@ -192,12 +192,13 @@ private slots:
     void pageChanged(int);
 
 protected:
-    void showAxis(int, int, const QString &, bool, int, int, bool, const QColor &, int, int, int,
+    void showAxis(int, Graph::AxisType, const QString &, bool, int, int, bool, const QColor &, int, int, int,
                   int, const QString &, const QColor &);
 
     QStringList tickLabelsOn, formatInfo;
     QStringList tablesList;
-    QList<int> majTicks, minTicks, axesType, axesBaseline;
+    QList<int> majTicks, minTicks,  axesBaseline;
+    QList<Graph::AxisType> axesType;
     QFont xBottomFont, yLeftFont, xTopFont, yRightFont;
     bool xAxisOn, yAxisOn, topAxisOn, rightAxisOn;
     int xBottomLabelsRotation, xTopLabelsRotation;

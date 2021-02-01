@@ -89,6 +89,7 @@ class TableStatistics;
 class CurveRangeDialog;
 class Project;
 class AbstractAspect;
+class AxesDialog;
 
 #ifndef TS_PATH
 #define TS_PATH (qApp->applicationDirPath() + "/translations")

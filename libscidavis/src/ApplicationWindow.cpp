@@ -2848,7 +2848,7 @@ void ApplicationWindow::defineErrorBars(const QString &name, int type, const QSt
     if (xColName.isEmpty())
         return;
 
-    Column *errors = new Column("1", SciDAVis::Numeric);
+    Column *errors = new Column("1", SciDAVis::ColumnMode::Numeric);
     Column *data;
     if (direction == QwtErrorPlotCurve::Horizontal) {
         errors->setPlotDesignation(SciDAVis::xErr);
@@ -3261,7 +3261,7 @@ void ApplicationWindow::importASCII(const QStringList &files, int import_mode,
             || import_mode == ImportASCIIDialog::Overwrite) {
             if (local_convert_to_numeric) {
                 for (int col = 0; col < qMin(temp->columnCount(), table->columnCount()); col++)
-                    if (table->column(col)->columnMode() != SciDAVis::Numeric) {
+                    if (table->column(col)->columnMode() != SciDAVis::ColumnMode::Numeric) {
                         QMessageBox::critical(this, tr("ASCII Import Failed"),
                                               tr("Numeric data cannot be imported into non-numeric "
                                                  "column \"%1\".")
@@ -3271,7 +3271,7 @@ void ApplicationWindow::importASCII(const QStringList &files, int import_mode,
                     }
             } else {
                 for (int col = 0; col < qMin(temp->columnCount(), table->columnCount()); col++)
-                    if (table->column(col)->columnMode() != SciDAVis::Text) {
+                    if (table->column(col)->columnMode() != SciDAVis::ColumnMode::Text) {
                         QMessageBox::critical(this, tr("ASCII Import Failed"),
                                               tr("Non-numeric data cannot be imported into "
                                                  "non-text column \"%1\".")
@@ -3294,7 +3294,7 @@ void ApplicationWindow::importASCII(const QStringList &files, int import_mode,
             for (int col = 0; col < missing_columns; col++) {
                 Column *new_col =
                         new Column(tr("new_by_import") + QString::number(col + 1),
-                                   local_convert_to_numeric ? SciDAVis::Numeric : SciDAVis::Text);
+                                   local_convert_to_numeric ? SciDAVis::ColumnMode::Numeric : SciDAVis::ColumnMode::Text);
                 new_col->setPlotDesignation(SciDAVis::Y);
                 table->d_future_table->addChild(new_col);
             }
@@ -9117,9 +9117,9 @@ Table *ApplicationWindow::openTable(ApplicationWindow *app, QTextStream &stream)
                     if (cell.isEmpty())
                         continue;
 
-                    if (d_file_version < 90 && w->columnType(col) == SciDAVis::Numeric)
+                    if (d_file_version < 90 && w->columnType(col) == SciDAVis::ColumnMode::Numeric)
                         w->setCell(row, col, QLocale::c().toDouble(cell.replace(",", ".")));
-                    else if (d_file_version >= 0x000100 && w->columnType(col) == SciDAVis::Numeric)
+                    else if (d_file_version >= 0x000100 && w->columnType(col) == SciDAVis::ColumnMode::Numeric)
                         w->setCell(row, col, QLocale().toDouble(cell));
                     else
                         w->setText(row, col, cell);
@@ -9779,23 +9779,23 @@ Graph *ApplicationWindow::openGraph(ApplicationWindow *app, MultiLayer *plot,
 #endif
                     if (lst.size() < 2)
                         continue;
-                    int format = lst[0].toInt();
+                    Graph::AxisType format = static_cast<Graph::AxisType>(lst[0].toInt());
                     switch (format) {
-                    case Graph::Day:
+                    case Graph::AxisType::Day:
                         ag->setLabelsDayFormat(i, lst[1].toInt());
                         break;
-                    case Graph::Month:
+                    case Graph::AxisType::Month:
                         ag->setLabelsMonthFormat(i, lst[1].toInt());
                         break;
-                    case Graph::Time:
-                    case Graph::Date:
-                    case Graph::DateTime:
+                    case Graph::AxisType::Time:
+                    case Graph::AxisType::Date:
+                    case Graph::AxisType::DateTime:
                         ag->setLabelsDateTimeFormat(i, format, lst[1] + ";" + lst[2]);
                         break;
-                    case Graph::Txt:
+                    case Graph::AxisType::Txt:
                         ag->setLabelsTextFormat(i, app->table(lst[1]), lst[1]);
                         break;
-                    case Graph::ColHeader:
+                    case Graph::AxisType::ColHeader:
                         ag->setLabelsColHeaderFormat(i, app->table(lst[1]));
                         break;
                     }
@@ -9803,13 +9803,13 @@ Graph *ApplicationWindow::openGraph(ApplicationWindow *app, MultiLayer *plot,
         } else if (d_file_version < 69 && s.contains("AxesTickLabelsCol")) {
             QStringList fList = s.split("\t");
             if (fList.size() >= 5) {
-                QList<int> axesTypes = ag->axesType();
+                const QList<Graph::AxisType> &axesTypes = ag->axesType();
                 for (int i = 0; i < 4; i++) {
                     switch (axesTypes[i]) {
-                    case Graph::Txt:
+                    case Graph::AxisType::Txt:
                         ag->setLabelsTextFormat(i, app->table(fList[i + 1]), fList[i + 1]);
                         break;
-                    case Graph::ColHeader:
+                    case Graph::AxisType::ColHeader:
                         ag->setLabelsColHeaderFormat(i, app->table(fList[i + 1]));
                         break;
                     }

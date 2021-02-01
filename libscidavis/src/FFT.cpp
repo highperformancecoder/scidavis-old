@@ -88,10 +88,10 @@ QList<Column *> FFT::fftTable()
     double aMax = 0.0; // max amplitude
     QList<Column *> columns;
     if (!d_inverse) {
-        columns << new Column(tr("Frequency"), SciDAVis::Numeric);
+        columns << new Column(tr("Frequency"), SciDAVis::ColumnMode::Numeric);
         gsl_fft_complex_forward(d_y, 1, d_n, wavetable, workspace);
     } else {
-        columns << new Column(tr("Time"), SciDAVis::Numeric);
+        columns << new Column(tr("Time"), SciDAVis::ColumnMode::Numeric);
         gsl_fft_complex_inverse(d_y, 1, d_n, wavetable, workspace);
     }
 
@@ -120,10 +120,10 @@ QList<Column *> FFT::fftTable()
             aMax = a;
     }
 
-    columns << new Column(tr("Real"), SciDAVis::Numeric);
-    columns << new Column(tr("Imaginary"), SciDAVis::Numeric);
-    columns << new Column(tr("Amplitude"), SciDAVis::Numeric);
-    columns << new Column(tr("Angle"), SciDAVis::Numeric);
+    columns << new Column(tr("Real"), SciDAVis::ColumnMode::Numeric);
+    columns << new Column(tr("Imaginary"), SciDAVis::ColumnMode::Numeric);
+    columns << new Column(tr("Amplitude"), SciDAVis::ColumnMode::Numeric);
+    columns << new Column(tr("Angle"), SciDAVis::ColumnMode::Numeric);
     for (int i = 0; i < static_cast<int>(d_n); i++) {
         int i2 = 2 * i;
         columns.at(0)->setValueAt(i, d_x[i]);

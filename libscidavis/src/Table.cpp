@@ -359,21 +359,21 @@ void Table::setColumnTypes(const QStringList &ctl)
         //	old enum: enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day =
         // 5};
         case 0:
-            column(i)->setColumnMode(SciDAVis::Numeric);
+            column(i)->setColumnMode(SciDAVis::ColumnMode::Numeric);
             break;
         case 1:
-            column(i)->setColumnMode(SciDAVis::Text);
+            column(i)->setColumnMode(SciDAVis::ColumnMode::Text);
             break;
         case 2:
         case 3:
         case 6:
-            column(i)->setColumnMode(SciDAVis::DateTime);
+            column(i)->setColumnMode(SciDAVis::ColumnMode::DateTime);
             break;
         case 4:
-            column(i)->setColumnMode(SciDAVis::Month);
+            column(i)->setColumnMode(SciDAVis::ColumnMode::Month);
             break;
         case 5:
-            column(i)->setColumnMode(SciDAVis::Day);
+            column(i)->setColumnMode(SciDAVis::ColumnMode::Day);
             break;
         }
     }
@@ -394,7 +394,7 @@ QString Table::saveColumnTypes()
     // TODO: obsolete, remove in 0.3.0
     QString s = "ColType";
     for (int i = 0; i < numCols(); i++)
-        s += "\t" + QString::number(column(i)->columnMode()) + ";0/6";
+        s += "\t" + QString::number(static_cast<int>(column(i)->columnMode())) + ";0/6";
     return s + "\n";
 }
 
@@ -461,7 +461,7 @@ bool Table::recalculate(int col, bool only_selected_rows)
         int start_row = interval.start();
         int end_row = interval.end();
         switch (col_ptr->columnMode()) {
-        case SciDAVis::Numeric: {
+        case SciDAVis::ColumnMode::Numeric: {
             QVector<qreal> results(end_row - start_row + 1);
             for (int i = start_row; i <= end_row; i++) {
                 colscript->setInt(i + 1, "i");
@@ -757,7 +757,7 @@ void Table::insertCols(int start, int count)
 
         QList<Column *> cols;
         for (int i = 0; i < count; i++)
-            cols << new Column(QString::number(i + 1), SciDAVis::Numeric);
+            cols << new Column(QString::number(i + 1), SciDAVis::ColumnMode::Numeric);
         d_future_table->insertColumns(start, cols);
     }
 }
@@ -779,7 +779,7 @@ void Table::addCol(SciDAVis::PlotDesignation pd)
     if (d_future_table) {
         d_future_table->addColumn();
         column(d_future_table->columnCount() - 1)
-                ->setColumnMode(SciDAVis::Numeric); // in case we ever change the default
+                ->setColumnMode(SciDAVis::ColumnMode::Numeric); // in case we ever change the default
         column(d_future_table->columnCount() - 1)->setPlotDesignation(pd);
     }
 }
@@ -789,7 +789,7 @@ void Table::addColumns(int c)
     if (d_future_table) {
         QList<Column *> cols;
         for (int i = 0; i < c; i++)
-            cols << new Column(QString::number(i + 1), SciDAVis::Numeric);
+            cols << new Column(QString::number(i + 1), SciDAVis::ColumnMode::Numeric);
         d_future_table->appendColumns(cols);
     }
 }
@@ -888,7 +888,7 @@ double Table::cell(int row, int col)
     if (!colPtr)
         return 0.0;
     if (!colPtr->isInvalid(row)) {
-        if (colPtr->columnMode() == SciDAVis::Text) {
+        if (colPtr->columnMode() == SciDAVis::ColumnMode::Text) {
             QString yval = colPtr->textAt(row);
             bool valid_data = true;
             double dbval = QLocale().toDouble(yval, &valid_data);
@@ -1247,48 +1247,27 @@ QList<int> Table::plotDesignations()
     return list;
 }
 
-QList<int> Table::columnTypes()
+QList<SciDAVis::ColumnMode> Table::columnTypes()
 {
-    QList<int> list;
+    QList<SciDAVis::ColumnMode> list;
     if (d_future_table)
         for (int i = 0; i < d_future_table->columnCount(); i++)
             list << column(i)->columnMode();
     return list;
 }
 
-int Table::columnType(int col)
+SciDAVis::ColumnMode Table::columnType(int col)
 {
     return column(col)->columnMode();
 }
 
-void Table::setColumnTypes(QList<int> ctl)
+void Table::setColumnTypes(QList<SciDAVis::ColumnMode> ctl)
 {
     if (!d_future_table)
         return;
     Q_ASSERT(ctl.size() == d_future_table->columnCount());
-    for (int i = 0; i < d_future_table->columnCount(); i++) {
-        switch (ctl.at(i)) {
-            //	old enum: enum ColType{Numeric = 0, Text = 1, Date = 2, Time = 3, Month = 4, Day =
-            // 5};
-        case 0:
-            column(i)->setColumnMode(SciDAVis::Numeric);
-            break;
-        case 1:
-            column(i)->setColumnMode(SciDAVis::Text);
-            break;
-        case 2:
-        case 3:
-        case 6:
-            column(i)->setColumnMode(SciDAVis::DateTime);
-            break;
-        case 4:
-            column(i)->setColumnMode(SciDAVis::Month);
-            break;
-        case 5:
-            column(i)->setColumnMode(SciDAVis::Day);
-            break;
-        }
-    }
+    for (int i = 0; i < d_future_table->columnCount(); i++)
+        column(i)->setColumnMode(ctl.at(i));
 }
 
 void Table::setColumnType(int col, SciDAVis::ColumnMode mode)
@@ -1300,8 +1279,8 @@ QString Table::columnFormat(int col)
 {
     // TODO: obsolete, remove in 0.3.0
     Column *col_ptr = column(col);
-    if (col_ptr->columnMode() != SciDAVis::DateTime && col_ptr->columnMode() != SciDAVis::Month
-        && col_ptr->columnMode() != SciDAVis::Day)
+    if (col_ptr->columnMode() != SciDAVis::ColumnMode::DateTime && col_ptr->columnMode() != SciDAVis::ColumnMode::Month
+        && col_ptr->columnMode() != SciDAVis::ColumnMode::Day)
         return QString();
 
     DateTime2StringFilter *filter = static_cast<DateTime2StringFilter *>(col_ptr->outputFilter());
@@ -1442,7 +1421,7 @@ void Table::importASCII(const QString &fname, const QString &sep, int ignoredLin
         String2DoubleFilter *filter = new String2DoubleFilter;
         for (int i = overwritten_cols; i < temp->columnCount(); i++) {
             filter->input(0, temp->column(i));
-            Column *new_col = new Column(temp->column(i)->name(), SciDAVis::Numeric);
+            Column *new_col = new Column(temp->column(i)->name(), SciDAVis::ColumnMode::Numeric);
             new_col->setPlotDesignation(SciDAVis::Y);
             new_col->copy(filter->output(0));
             d_future_table->addChild(new_col);

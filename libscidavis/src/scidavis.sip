@@ -145,7 +145,7 @@ class Column: AbstractAspect
 */
 		SIP_PYOBJECT columnMode() const;
 %MethodCode
-		int mode = sipCpp->columnMode();
+		int mode = static_cast<int>(sipCpp->columnMode());
 		sipRes = PYUNICODE_FromString(SciDAVis::enumValueToString(mode, "ColumnMode").toUtf8().constData());
 %End
 		void setColumnMode(QString mode);

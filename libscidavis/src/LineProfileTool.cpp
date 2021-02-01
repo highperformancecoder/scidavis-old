@@ -87,10 +87,10 @@ void LineProfileTool::calculateLineProfile(const QPoint &start, const QPoint &en
         y2 = int(y2 * ratioY);
     }
 
-    Column *pixelCol = new Column(tr("pixel"), SciDAVis::Numeric);
-    Column *xCol = new Column(tr("x"), SciDAVis::Numeric);
-    Column *yCol = new Column(tr("y"), SciDAVis::Numeric);
-    Column *intCol = new Column(tr("intensity"), SciDAVis::Numeric);
+    Column *pixelCol = new Column(tr("pixel"), SciDAVis::ColumnMode::Numeric);
+    Column *xCol = new Column(tr("x"), SciDAVis::ColumnMode::Numeric);
+    Column *yCol = new Column(tr("y"), SciDAVis::ColumnMode::Numeric);
+    Column *intCol = new Column(tr("intensity"), SciDAVis::ColumnMode::Numeric);
     pixelCol->setPlotDesignation(SciDAVis::X);
     xCol->setPlotDesignation(SciDAVis::Y);
     yCol->setPlotDesignation(SciDAVis::Y);
