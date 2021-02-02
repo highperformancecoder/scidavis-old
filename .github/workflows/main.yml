@@ -34,7 +34,6 @@ jobs:
             libmuparser-dev \
             libgsl-dev \
             libqwt5-qt5-dev \
-            libqwtplot3d-qt5-dev \
             pyqt5-dev \
             python3-pyqt5 \
             libunittest++-dev \

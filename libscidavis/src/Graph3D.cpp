@@ -761,7 +761,7 @@ void Graph3D::update()
     resetAxesLabels();
 
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 }
 
 void Graph3D::adjustLabels(int val)
@@ -770,7 +770,7 @@ void Graph3D::adjustLabels(int val)
         labelsDist = val;
         sp->coordinates()->adjustLabels(val);
         sp->makeCurrent();
-        sp->updateGL();
+        sp->update();
     }
     emit modified();
 }
@@ -784,7 +784,7 @@ void Graph3D::setNumbersFont(const QFont &font)
 {
     sp->coordinates()->setNumberFont(font);
     sp->makeCurrent();
-    sp->updateGL();
+    sp->update();
 }
 
 void Graph3D::setNumbersFont(const QStringList &lst)
@@ -927,7 +927,7 @@ void Graph3D::updateTickLength(int axis, double majorLength, double minorLength)
         }
         break;
     }
-    sp->updateGL();
+    sp->update();
 }
 
 void Graph3D::rotationChanged(double, double, double)
@@ -1045,7 +1045,7 @@ void Graph3D::updateLabel(int axis, const QString &label, const QFont &f)
     }
 
     sp->makeCurrent();
-    sp->updateGL();
+    sp->update();
     emit modified();
 }
 
@@ -1599,7 +1599,7 @@ void Graph3D::updateColors(const QColor &meshColor, const QColor &axesColor, con
     }
 
     sp->updateData();
-    sp->updateGL();
+    sp->update();
     emit modified();
 }
 
@@ -1635,7 +1635,7 @@ void Graph3D::resizeEvent(QResizeEvent *e)
         scaleFonts(ratio);
     }
 
-    sp->updateGL();
+    sp->update();
     emit resizedWindow(this);
     emit modified();
     QMdiSubWindow::resizeEvent(e);
@@ -1686,7 +1686,7 @@ void Graph3D::setNoGrid()
     sp->makeCurrent();
     sp->setPlotStyle(FILLED);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 
     style_ = FILLED;
     pointStyle = None;
@@ -1700,7 +1700,7 @@ void Graph3D::setFilledMesh()
     sp->makeCurrent();
     sp->setPlotStyle(FILLEDMESH);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 
     style_ = FILLEDMESH;
     pointStyle = None;
@@ -1715,7 +1715,7 @@ void Graph3D::setHiddenLineGrid()
     sp->setPlotStyle(HIDDENLINE);
     sp->showColorLegend(false);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 
     style_ = HIDDENLINE;
     pointStyle = None;
@@ -1731,7 +1731,7 @@ void Graph3D::setLineGrid()
     sp->setPlotStyle(WIREFRAME);
     sp->showColorLegend(false);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 
     pointStyle = None;
     style_ = WIREFRAME;
@@ -1749,7 +1749,7 @@ void Graph3D::setPointsMesh()
     sp->makeCurrent();
     sp->setPlotStyle(Dot(pointSize, smooth));
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 }
 
 void Graph3D::setConesMesh()
@@ -1765,7 +1765,7 @@ void Graph3D::setConesMesh()
     sp->makeCurrent();
     sp->setPlotStyle(Cone3D(conesRad, conesQuality));
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 
     QApplication::restoreOverrideCursor();
 }
@@ -1781,7 +1781,7 @@ void Graph3D::setCrossMesh()
     sp->makeCurrent();
     sp->setPlotStyle(CrossHair(crossHairRad, crossHairLineWidth, crossHairSmooth, crossHairBoxed));
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 }
 
 void Graph3D::clearData()
@@ -1799,7 +1799,7 @@ void Graph3D::clearData()
     sp->makeCurrent();
     sp->loadFromData(0, 0, 0, false, false);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 }
 
 void Graph3D::setBarsPlot()
@@ -1815,7 +1815,7 @@ void Graph3D::setBarsPlot()
     sp->makeCurrent();
     sp->setPlotStyle(Bar(barsRad));
     sp->updateData();
-    sp->updateGL();
+    sp->update();
     QApplication::restoreOverrideCursor();
 }
 
@@ -1827,7 +1827,7 @@ void Graph3D::setFloorData()
     sp->makeCurrent();
     sp->setFloorStyle(FLOORDATA);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 }
 
 void Graph3D::setFloorIsolines()
@@ -1838,7 +1838,7 @@ void Graph3D::setFloorIsolines()
     sp->makeCurrent();
     sp->setFloorStyle(FLOORISO);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 }
 
 void Graph3D::setEmptyFloor()
@@ -1849,7 +1849,7 @@ void Graph3D::setEmptyFloor()
     sp->makeCurrent();
     sp->setFloorStyle(NOFLOOR);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 }
 
 void Graph3D::setMeshLineWidth(int lw)
@@ -1860,7 +1860,7 @@ void Graph3D::setMeshLineWidth(int lw)
     sp->makeCurrent();
     sp->setMeshLineWidth((double)lw);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 }
 
 int Graph3D::grids()
@@ -1881,7 +1881,7 @@ void Graph3D::setGrid(Qwt3D::SIDE s, bool b)
         sum &= ~s;
 
     sp->coordinates()->setGridLines(sum != Qwt3D::NOSIDEGRID, false, sum);
-    sp->updateGL();
+    sp->update();
     emit modified();
 }
 
@@ -1945,14 +1945,15 @@ void Graph3D::print()
 
 void Graph3D::copyImage()
 {
-    QApplication::clipboard()->setPixmap(sp->renderPixmap(), QClipboard::Clipboard);
+    QApplication::clipboard()->setPixmap(QPixmap::fromImage(sp->grabFramebuffer()),
+                                          QClipboard::Clipboard);
     sp->updateData();
 }
 
 void Graph3D::exportImage(const QString &fileName, int quality, bool transparent)
 {
     if (transparent) {
-        QPixmap pic = sp->renderPixmap();
+        QPixmap pic = QPixmap::fromImage(sp->grabFramebuffer());
         sp->updateData();
 
         QBitmap mask(pic.size());
@@ -1975,7 +1976,7 @@ void Graph3D::exportImage(const QString &fileName, int quality, bool transparent
         pic.setMask(mask);
         pic.save(fileName, 0, quality);
     } else {
-        QImage im = sp->grabFrameBuffer(true);
+        QImage im = sp->grabFramebuffer();
         QImageWriter iw(fileName);
         iw.setQuality(quality);
         iw.write(im);
@@ -2194,7 +2195,7 @@ void Graph3D::customPlotStyle(int style)
     }
 
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 }
 
 void Graph3D::setStyle(const QStringList &st)
@@ -2290,7 +2291,7 @@ void Graph3D::updateZoom(double val)
     sp->makeCurrent();
     sp->setZoom(val);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 
     QApplication::restoreOverrideCursor();
 }
@@ -2304,7 +2305,7 @@ void Graph3D::updateScaling(double xVal, double yVal, double zVal)
 
     sp->setScale(xVal, yVal, zVal);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 
     QApplication::restoreOverrideCursor();
 }
@@ -2522,7 +2523,7 @@ void Graph3D::showColorLegend(bool show)
     sp->showColorLegend(show);
 
     legendOn = show;
-    sp->updateGL();
+    sp->update();
     emit modified();
 }
 
@@ -2534,7 +2535,7 @@ void Graph3D::setResolution(int r)
     sp->makeCurrent();
     sp->setResolution(r);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
     emit modified();
 }
 
@@ -2582,7 +2583,7 @@ void Graph3D::updateTitle(const QString &s, const QColor &color, const QFont &fo
     }
 
     sp->makeCurrent();
-    sp->updateGL();
+    sp->update();
     emit modified();
 }
 
@@ -2700,7 +2701,7 @@ void Graph3D::changeTransparency(double t)
 
     sp->showColorLegend(legendOn);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
     emit modified();
 }
 
@@ -2732,7 +2733,7 @@ void Graph3D::setSmoothMesh(bool smooth)
     sp->setSmoothMesh(smoothMesh);
     sp->coordinates()->setLineSmooth(smoothMesh);
     sp->updateData();
-    sp->updateGL();
+    sp->update();
 }
 
 QString Graph3D::saveAsTemplate(const QString &geometryInfo)
@@ -2786,7 +2787,7 @@ void Graph3D::setDataColorMap(const QString &fileName)
     sp->setDataColor(col_);
     sp->updateData();
     sp->showColorLegend(legendOn);
-    sp->updateGL();
+    sp->update();
 }
 
 bool Graph3D::openColorMap(ColorVector &cv, QString fname)
