@@ -321,6 +321,35 @@ add_library( libscidavis STATIC
   ${HEADERS}
   ${FORMS}
   )
+  
+if( MSVC )
+	foreach(_source IN ITEMS ${SRCS})
+		get_filename_component(_source_path "${_source}" PATH)
+		string(REGEX REPLACE "^src/?([^/]*)" "\\1" _source_path ${_source_path})
+		if (NOT ${_source_path} STREQUAL "")
+			source_group("Source Files/${_source_path}" FILES "${_source}")
+		endif()
+	endforeach()
+
+	foreach(_source IN ITEMS ${HEADERS})
+		get_filename_component(_source_path "${_source}" PATH)
+		string(REGEX REPLACE "^src/?([^/]*)" "\\1" _source_path ${_source_path})
+		if (NOT ${_source_path} STREQUAL "")
+			source_group("Header Files/${_source_path}" FILES "${_source}")
+		endif()
+	endforeach()
+
+	foreach(_source IN ITEMS ${FORMS})
+		get_filename_component(_source_path "${_source}" PATH)
+		string(REGEX REPLACE "^src/?([^/]*)" "\\1" _source_path ${_source_path})
+		if (NOT ${_source_path} STREQUAL "")
+			source_group("Forms/${_source_path}" FILES "${_source}")
+		else()
+			source_group("Forms" FILES "${_source}")
+		endif()
+		
+	endforeach()
+endif()
 
 set_target_properties(libscidavis PROPERTIES OUTPUT_NAME scidavis)
 
