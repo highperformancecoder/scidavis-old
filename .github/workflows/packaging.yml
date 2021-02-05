@@ -58,8 +58,7 @@ jobs:
       - name: Install VCPKG packages
         run: |
           Add-Content ${{ env.VCPKG_ROOT }}\triplets\x64-windows.cmake "set(VCPKG_BUILD_TYPE release)"
-          ${{ env.VCPKG_ROOT }}\vcpkg install zlib gsl muparser opengl gl2ps boost-regex unittest-cpp `
-            --triplet x64-windows
+          ${{ env.VCPKG_ROOT }}\vcpkg install zlib gsl muparser opengl gl2ps gtest --triplet x64-windows
 
       - name: Configuring
         run: |

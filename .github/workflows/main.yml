@@ -37,10 +37,17 @@ jobs:
             libqwtplot3d-qt5-dev \
             pyqt5-dev \
             python3-pyqt5 \
-            libunittest++-dev \
-            libboost-regex-dev \
+            libgtest-dev \
             python3-numpy \
             xvfb
+
+      - name: Build and Install GTest
+        if: matrix.ubuntu_ver == 18.04
+        run: |
+          mkdir gtest && cd gtest
+          cmake /usr/src/googletest
+          make -j$(nproc)
+          sudo make install
 
       - name: Configuring
         run: |
@@ -49,7 +56,7 @@ jobs:
 
       - name: Building
         run: |
-          make -j$(nproc) -C build
+          xvfb-run make -j$(nproc) -C build
 
       - name: Testing
         run: |
@@ -97,8 +104,7 @@ jobs:
       - name: Install VCPKG packages
         run: |
           Add-Content ${{ env.VCPKG_ROOT }}\triplets\x64-windows.cmake "set(VCPKG_BUILD_TYPE release)" 
-          ${{ env.VCPKG_ROOT }}\vcpkg install zlib gsl muparser opengl gl2ps boost-regex unittest-cpp `
-            --triplet x64-windows
+          ${{ env.VCPKG_ROOT }}\vcpkg install zlib gsl muparser opengl gl2ps gtest --triplet x64-windows
 
       - name: Install Python packages
         if: ${{ matrix.qt_ver == '5.15.2' }}
@@ -147,8 +153,7 @@ jobs:
             mingw-w64-x86_64-muparser
             mingw-w64-x86_64-gsl
             mingw-w64-x86_64-gl2ps
-            mingw-w64-x86_64-boost
-            mingw-w64-x86_64-unittest-cpp
+            mingw-w64-x86_64-gtest
             mingw-w64-x86_64-sip5
             mingw-w64-x86_64-python-pyqt5
             mingw-w64-x86_64-python-numpy
@@ -193,7 +198,7 @@ jobs:
 
       - name: Install prerequisties
         run: |
-          brew install muparser gsl gl2ps boost unittest-cpp sip
+          brew install muparser gsl gl2ps googletest sip
           pip install pyqt5 numpy
 
       - name: Configuring
