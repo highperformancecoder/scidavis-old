@@ -4697,7 +4697,7 @@ void ApplicationWindow::exportGraph()
     if (selected_filter.contains(".eps") || selected_filter.contains(".pdf")
         || selected_filter.contains(".ps")) {
         if (plot3D)
-            plot3D->exportVector(file_name, selected_filter.remove("*."));
+            plot3D->exportVector(file_name, selected_filter.remove(QRegularExpression("\\.")));
         else if (plot2D)
             plot2D->exportVector(file_name, ied->resolution(), ied->color(), ied->keepAspect(),
                                  ied->pageSize(), ied->pageOrientation());
@@ -4705,7 +4705,7 @@ void ApplicationWindow::exportGraph()
         if (plot2D)
             plot2D->exportSVG(file_name);
         else
-            plot3D->exportVector(file_name, ".svg");
+            plot3D->exportVector(file_name, "svg");
     } else {
         QList<QByteArray> list = QImageWriter::supportedImageFormats();
         for (int i = 0; i < (int)list.count(); i++) {
