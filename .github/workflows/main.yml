@@ -51,7 +51,8 @@ jobs:
       - name: Configuring
         run: |
           mkdir build && cd build
-          cmake .. -DSEARCH_FOR_UPDATES=OFF -DDOWNLOAD_LINKS=OFF -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=ON
+          cmake .. -DSEARCH_FOR_UPDATES=OFF -DDOWNLOAD_LINKS=OFF -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=ON \
+            -DBUILD_TESTS=ON
 
       - name: Building
         run: |
@@ -113,7 +114,7 @@ jobs:
         run: |
           mkdir build; cd build
           cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}\scripts\buildsystems\vcpkg.cmake `
-            -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=${{ matrix.python }}
+            -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=${{ matrix.python }} -DBUILD_TESTS=ON
 
       - name: Building
         run: |
@@ -160,7 +161,7 @@ jobs:
       - name: Configuring
         run: |
           mkdir build && cd build
-          cmake .. -G"MSYS Makefiles" -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=ON
+          cmake .. -G"MSYS Makefiles" -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=ON -DBUILD_TESTS=ON
 
       - name: Building
         run: |
@@ -203,7 +204,8 @@ jobs:
       - name: Configuring
         run: |
           mkdir build && cd build
-          cmake .. -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=ON -DPython3_ROOT_DIR=$pythonLocation
+          cmake .. -DORIGIN_IMPORT=ON -DSCRIPTING_PYTHON=ON -DPython3_ROOT_DIR=$pythonLocation \
+            -DBUILD_TESTS=ON
 
       - name: Building
         run: |
