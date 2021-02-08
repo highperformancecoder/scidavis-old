@@ -92,7 +92,7 @@ option( SCRIPTING_MUPARSER "Enable muParser Scripting" ON )
 
 option( SCRIPTING_PYTHON "Enable Python Scripting" OFF )
 
-option( ENABLE_Testing "Enable testing" ON )
+option( BUILD_TESTS "Build tests" OFF )
 
 if( SCRIPTING_PYTHON )
   if( MINGW )
@@ -101,10 +101,6 @@ if( SCRIPTING_PYTHON )
   find_package( Python3 COMPONENTS Interpreter Development REQUIRED )
   find_package( SIP REQUIRED )
   find_package( PyQt REQUIRED )
-endif()
-
-if( ENABLE_Testing )
-  enable_testing()
 endif()
 
 option( ORIGIN_IMPORT "Enable importing OriginLab project files" OFF )
@@ -137,7 +133,10 @@ add_subdirectory( scidavis )
 
 add_subdirectory( fitPlugins )
 
-add_subdirectory( test )
+if( BUILD_TESTS )
+  enable_testing()
+  add_subdirectory( test )
+endif()
 
 # Documentation
 set( DOC_FILES
