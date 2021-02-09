@@ -71,70 +71,72 @@ if( SCRIPTING_PYTHON )
 
 endif()
 
-if( WIN32 )
-  install( TARGETS scidavis RUNTIME DESTINATION . )
-  install( FILES ${QM_FILES} DESTINATION translations )
-else()
-  install( TARGETS scidavis RUNTIME DESTINATION bin )
-  install( FILES ${QM_FILES}  DESTINATION share/scidavis/translations )
-endif()
-
-if( RUNTIME_DIR )
-  set( EXCLUDE_DLL "system32/*" "shell32*" "kernel32*" )
-  install( CODE "
-    file( GET_RUNTIME_DEPENDENCIES
-      RESOLVED_DEPENDENCIES_VAR RESOLVED_DEPENDENCIES
-      UNRESOLVED_DEPENDENCIES_VAR UNRESOLVED_DEPENDENCIES
-      CONFLICTING_DEPENDENCIES_PREFIX CONFLICTING_DEPENDENCIES
-      EXECUTABLES \"\${CMAKE_INSTALL_PREFIX}/scidavis.exe\"
-      DIRECTORIES \"${RUNTIME_DIR}\"
-      POST_EXCLUDE_REGEXES ${EXCLUDE_DLL}
-      )
-    foreach( lib \${RESOLVED_DEPENDENCIES} )
-      execute_process(
-        COMMAND \"${CMAKE_COMMAND}\" -E
-        copy \${lib} \"\${CMAKE_INSTALL_PREFIX}\"
-        )
-    endforeach()
-    ")
-endif()
-
-if( WIN32 )
-  set( CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION . )
-  include(Windeployqt)
-  windeployqt( scidavis . )
-endif()
-
-# Icons
-
-if( UNIX )
-  install( FILES icons/scidavis.svg DESTINATION share/icons/hicolor/scalable/apps )
-
-  foreach( res IN ITEMS 16 22 32 48 64 128 )
-    install( FILES icons/hicolor-${res}/scidavis.png
-      DESTINATION share/icons/hicolor/${res}x${res}/apps )
-  endforeach()
-
-  foreach( res IN ITEMS 16 22 32 )
-    install( FILES icons/locolor-${res}/scidavis.png
-      DESTINATION share/icons/locolor/${res}x${res}/apps )
-  endforeach()
-endif()
-
-# Application Files
-if( UNIX )
-  install( FILES scidavis.desktop DESTINATION share/applications )
-  install( FILES scidavis.xml DESTINATION share/mime/packages )
-  install( FILES scidavis.1 DESTINATION share/man/man1 )
-  install( FILES scidavis.appdata.xml DESTINATION share/appdata )
-  install( FILES x-sciprj.desktop DESTINATION share/mimelnk/application )
-endif()
-
-if( SCRIPTING_PYTHON )
-  if( MULTI_CONFIG )
-    install( FILES scidavisrc.py ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/scidavisrc.pyc DESTINATION etc )
-  else()
-    install( FILES scidavisrc.py ${CMAKE_CURRENT_BINARY_DIR}/scidavisrc.pyc DESTINATION etc )
-  endif()
-  install( FILES scidavisUtil.py DESTINATION share/scidavis )
+if (NOT CMAKE_CROSS_COMPILING)
+    if( WIN32 )
+      install( TARGETS scidavis RUNTIME DESTINATION . )
+      install( FILES ${QM_FILES} DESTINATION translations )
+    else()
+      install( TARGETS scidavis RUNTIME DESTINATION bin )
+      install( FILES ${QM_FILES}  DESTINATION share/scidavis/translations )
+    endif()
+    
+    if( RUNTIME_DIR )
+      set( EXCLUDE_DLL "system32/*" "shell32*" "kernel32*" )
+      install( CODE "
+        file( GET_RUNTIME_DEPENDENCIES
+          RESOLVED_DEPENDENCIES_VAR RESOLVED_DEPENDENCIES
+          UNRESOLVED_DEPENDENCIES_VAR UNRESOLVED_DEPENDENCIES
+          CONFLICTING_DEPENDENCIES_PREFIX CONFLICTING_DEPENDENCIES
+          EXECUTABLES \"\${CMAKE_INSTALL_PREFIX}/scidavis.exe\"
+          DIRECTORIES \"${RUNTIME_DIR}\"
+          POST_EXCLUDE_REGEXES ${EXCLUDE_DLL}
+          )
+        foreach( lib \${RESOLVED_DEPENDENCIES} )
+          execute_process(
+            COMMAND \"${CMAKE_COMMAND}\" -E
+            copy \${lib} \"\${CMAKE_INSTALL_PREFIX}\"
+            )
+        endforeach()
+        ")
+    endif()
+    
+    if( WIN32 )
+      set( CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION . )
+      include(Windeployqt)
+      windeployqt( scidavis . )
+    endif()
+    
+    # Icons
+    
+    if( UNIX )
+      install( FILES icons/scidavis.svg DESTINATION share/icons/hicolor/scalable/apps )
+    
+      foreach( res IN ITEMS 16 22 32 48 64 128 )
+        install( FILES icons/hicolor-${res}/scidavis.png
+          DESTINATION share/icons/hicolor/${res}x${res}/apps )
+      endforeach()
+    
+      foreach( res IN ITEMS 16 22 32 )
+        install( FILES icons/locolor-${res}/scidavis.png
+          DESTINATION share/icons/locolor/${res}x${res}/apps )
+      endforeach()
+    endif()
+    
+    # Application Files
+    if( UNIX )
+      install( FILES scidavis.desktop DESTINATION share/applications )
+      install( FILES scidavis.xml DESTINATION share/mime/packages )
+      install( FILES scidavis.1 DESTINATION share/man/man1 )
+      install( FILES scidavis.appdata.xml DESTINATION share/appdata )
+      install( FILES x-sciprj.desktop DESTINATION share/mimelnk/application )
+    endif()
+    
+    if( SCRIPTING_PYTHON )
+      if( MULTI_CONFIG )
+        install( FILES scidavisrc.py ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/scidavisrc.pyc DESTINATION etc )
+      else()
+        install( FILES scidavisrc.py ${CMAKE_CURRENT_BINARY_DIR}/scidavisrc.pyc DESTINATION etc )
+      endif()
+      install( FILES scidavisUtil.py DESTINATION share/scidavis )
+    endif()
 endif()
