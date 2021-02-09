@@ -38,6 +38,7 @@ if( NOT BUILD_QWT )
 else()
   # Build Qwt5
   message( STATUS "Qwt5: using own code" )
+  set(QWT_DESIGNER off)
   add_subdirectory( qwt5-qt5 )
 endif()
 
