@@ -12,7 +12,7 @@ project( scidavis
   VERSION 2.3.0
   DESCRIPTION "SciDAVis is a free application for Scientific Data Analysis and Visualization."
   HOMEPAGE_URL "https://scidavis.sourceforge.net"
-  LANGUAGES CXX C )
+  LANGUAGES CXX C)
 
 set( CMAKE_CXX_STANDARD 17)
 set( CMAKE_CXX_STANDARD_REQUIRED TRUE )

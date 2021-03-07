@@ -1,8 +1,10 @@
 #!/bin/bash
 # Create a distributable installable package
 
-MAC_DIST_DIR=scidavis/scidavis.app/Contents/MacOS
-RES_DIR=scidavis/scidavis.app/Contents/Resources
+BUNDLE=$1
+
+MAC_DIST_DIR=$BUNDLE/Contents/MacOS
+RES_DIR=$BUNDLE/Contents/Resources
 version=`grep scidavis_version libscidavis/src/version.cpp|tail -1|cut -f5 -d' '|tr -d '";'`
 if [ $version = '"unknown"' ]; then
     version=0.0.0.0
@@ -33,16 +35,17 @@ rewrite_dylibs()
     done
 }
 
+cp scidavis/scidavis $MAC_DIST_DIR
 rewrite_dylibs $MAC_DIST_DIR/scidavis
 
 chmod u+w $MAC_DIST_DIR/*
 
 # Generic resources required for Qt
-cp -rf /opt/local/libexec/qt4/Library/Frameworks/QtGui.framework/Resources/qt_menu.nib $RES_DIR
+#cp -rf /opt/local/libexec/qt4/Library/Frameworks/QtGui.framework/Resources/qt_menu.nib $RES_DIR
 
 # python resources
 mkdir -p $RES_DIR/lib
-cp -rf /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7 $RES_DIR/lib
+cp -rf /opt/local/Library/Frameworks/Python.framework/Versions/Current/lib/python* $RES_DIR/lib
 
 # python resources contain some dynamic libraries that need rewriting
 find $RES_DIR/lib -name "*.so" -print | while read soname; do
@@ -85,17 +88,21 @@ cat >scidavis/scidavis.app/Contents/Info.plist <<EOF
 </plist>
 EOF
 
-codesign -s "Developer ID Application" --deep --force scidavis/scidavis.app
+codesign -s "Developer ID Application" --deep --force $BUNDLE
 if [ $? -ne 0 ]; then
     echo "try running this script on the Mac GUI desktop, not ssh shell"
-    exit
+    exit 1
 fi
 
 rm -f scidavis-$version-mac-dist.dmg
-hdiutil create -srcfolder scidavis/scidavis.app -volname SciDAVis -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDRW -size 200M temp.dmg
+hdiutil create -srcfolder $BUNDLE -volname SciDAVis -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDRW -size 500M temp.dmg
 hdiutil convert -format UDZO -imagekey zlib-level=9 -o scidavis-$version-mac-dist.dmg temp.dmg 
 rm -f temp.dmg
 codesign -s "Developer ID Application" scidavis-$version-mac-dist.dmg
 xcrun altool --notarize-app --primary-bundle-id SciDAVis --username apple@hpcoders.com.au --password "@keychain:Minsky" --file scidavis-$version-mac-dist.dmg
 # check using xcrun altool --notarization-history 0 -u apple@hpcoders.com.au -p "@keychain:Minsky"
 xcrun stapler staple scidavis-$version-mac-dist.dmg
+if [ $? -ne 0 ]; then
+    echo "Manually staple with:"
+    echo "xcrun stapler staple scidavis-$version-mac-dist.dmg"
+fi

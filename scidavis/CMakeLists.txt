@@ -25,8 +25,12 @@ set( TS_FILES
   )
 qt5_create_translation( QM_FILES "${CMAKE_SOURCE_DIR}/libscidavis" ${TS_FILES} )
 
+set( MACOSX_BUNDLE_PLIST scidavis/scidavis.app/Contents/Info.plist )
+set( MACOSX_BUNDLE_ICON scidavis/scidavis.app/Contents/Resources/scidavis.icns )
+
 add_executable( scidavis
   WIN32
+  MACOSX_BUNDLE
   "src/main.cpp"
   "${RESOURCES}"
   "${QM_FILES}"
@@ -76,9 +80,11 @@ if (NOT CMAKE_CROSS_COMPILING)
       install( TARGETS scidavis RUNTIME DESTINATION . )
       install( FILES ${QM_FILES} DESTINATION translations )
     else()
-      install( TARGETS scidavis RUNTIME DESTINATION bin )
+      install( TARGETS scidavis RUNTIME DESTINATION bin  BUNDLE DESTINATION .)
       install( FILES ${QM_FILES}  DESTINATION share/scidavis/translations )
-    endif()
+      install( SCRIPT bundle.cmake)
+      
+endif()
     
     if( RUNTIME_DIR )
       set( EXCLUDE_DLL "system32/*" "shell32*" "kernel32*" )

@@ -164,7 +164,8 @@ int main(int argc, char **argv)
     QCoreApplication::setApplicationName("SciDAVis");
 
     Application app(argc, argv);
-
+    ApplicationWindow::getSettings();
+    
     QStringList args = app.arguments();
     args.removeFirst(); // remove application name
 
