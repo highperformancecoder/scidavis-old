@@ -561,7 +561,7 @@ void FitDialog::saveUserFunction()
     }
     if (editBox->toPlainText().contains(boxName->text())) {
         QMessageBox::critical(this, tr("Input function error"),
-                              tr("You can't define functions recursevely!"));
+                              tr("You can't define functions recursively!"));
         editBox->setFocus();
         return;
     }

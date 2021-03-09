@@ -99,29 +99,17 @@ QStringList PolynomialFit::generateParameterList(int order)
     return lst;
 }
 
-void PolynomialFit::calculateFitCurveData(const vector<double> &par, double *X, double *Y)
+bool PolynomialFit::calculateFitCurveData(const vector<double> &par, std::vector<double> &X,
+                                          std::vector<double> &Y)
 {
-    if (d_gen_function) {
-        double X0 = d_x[0];
-        double step = (d_x[d_n - 1] - X0) / (d_points - 1);
-        for (int i = 0; i < d_points; i++) {
-            X[i] = X0 + i * step;
-            double yi = 0.0;
-            for (unsigned j = 0; j < d_p; j++)
-                yi += par[j] * pow(X[i], j);
-
-            Y[i] = yi;
-        }
-    } else {
-        for (int i = 0; i < d_points; i++) {
-            X[i] = d_x[i];
-            double yi = 0.0;
-            for (unsigned j = 0; j < d_p; j++)
-                yi += par[j] * pow(X[i], j);
-
-            Y[i] = yi;
-        }
+    generateX(X);
+    for (int i = 0; i < d_points; i++) {
+        double yi = 0.0;
+        for (unsigned j = 0; j < d_p; j++)
+            yi += par[j] * pow(X[i], j);
+        Y[i] = yi;
     }
+    return true;
 }
 
 void PolynomialFit::fit()
@@ -290,19 +278,11 @@ void LinearFit::fit()
     generateFitCurve(d_results);
 }
 
-void LinearFit::calculateFitCurveData(const vector<double> &par, double *X, double *Y)
+bool LinearFit::calculateFitCurveData(const vector<double> &par, std::vector<double> &X,
+                                      std::vector<double> &Y)
 {
-    if (d_gen_function) {
-        double X0 = d_x[0];
-        double step = (d_x[d_n - 1] - X0) / (d_points - 1);
-        for (int i = 0; i < d_points; i++) {
-            X[i] = X0 + i * step;
-            Y[i] = par[0] + par[1] * X[i];
-        }
-    } else {
-        for (int i = 0; i < d_points; i++) {
-            X[i] = d_x[i];
-            Y[i] = par[0] + par[1] * X[i];
-        }
-    }
+    generateX(X);
+    for (int i = 0; i < d_points; i++)
+        Y[i] = par[0] + par[1] * X[i];
+    return true;
 }

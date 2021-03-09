@@ -77,21 +77,13 @@ void SigmoidalFit::init()
     d_formula = "(A1-A2)/(1+exp((x-x0)/dx))+A2";
 }
 
-void SigmoidalFit::calculateFitCurveData(const vector<double> &par, double *X, double *Y)
+bool SigmoidalFit::calculateFitCurveData(const vector<double> &par, std::vector<double> &X,
+                                         std::vector<double> &Y)
 {
-    if (d_gen_function) {
-        double X0 = d_x[0];
-        double step = (d_x[d_n - 1] - X0) / (d_points - 1);
-        for (int i = 0; i < d_points; i++) {
-            X[i] = X0 + i * step;
-            Y[i] = (par[0] - par[1]) / (1 + exp((X[i] - par[2]) / par[3])) + par[1];
-        }
-    } else {
-        for (int i = 0; i < d_points; i++) {
-            X[i] = d_x[i];
-            Y[i] = (par[0] - par[1]) / (1 + exp((X[i] - par[2]) / par[3])) + par[1];
-        }
-    }
+    generateX(X);
+    for (int i = 0; i < d_points; i++)
+        Y[i] = (par[0] - par[1]) / (1 + exp((X[i] - par[2]) / par[3])) + par[1];
+    return true;
 }
 
 void SigmoidalFit::guessInitialValues()
