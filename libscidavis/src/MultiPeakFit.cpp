@@ -197,7 +197,7 @@ void MultiPeakFit::storeCustomFitResults(const vector<double> &par)
     }
 }
 
-void MultiPeakFit::insertPeakFunctionCurve(double *x, double *y, int peak)
+void MultiPeakFit::insertPeakFunctionCurve(std::vector<double> &x, std::vector<double> &y, int peak)
 {
     QStringList curves = d_graph->curvesList();
     int index = 0;
@@ -210,7 +210,8 @@ void MultiPeakFit::insertPeakFunctionCurve(double *x, double *y, int peak)
     FunctionCurve *c =
             new FunctionCurve((ApplicationWindow *)parent(), FunctionCurve::Normal, title);
     c->setPen(QPen(d_peaks_color, 1));
-    c->setData(x, y, d_points);
+    //"Set data by copying x- and y-values from specified memory blocks."
+    c->setData(x.data(), y.data(), d_points);
     c->setRange(d_x[0], d_x[d_n - 1]);
 
     QString formula;
@@ -240,8 +241,8 @@ void MultiPeakFit::generateFitCurve(const vector<double> &par)
         return;
     }
 
-    double *X = new double[d_points];
-    double *Y = new double[d_points];
+    std::vector<double> X(d_points);
+    std::vector<double> Y(d_points);
     int i, j;
     int peaks_aux = d_peaks;
     if (d_peaks == 1)
@@ -322,7 +323,8 @@ void MultiPeakFit::generateFitCurve(const vector<double> &par)
             c->setPen(QPen(d_curveColor, 2));
         else
             c->setPen(QPen(d_curveColor, 1));
-        c->setData(X, Y, d_points);
+        //"Set data by copying x- and y-values from specified memory blocks."
+        c->setData(X.data(), Y.data(), d_points);
         d_graph->insertPlotItem(c, Graph::Line);
         d_graph->addFitCurve(c);
 
@@ -334,7 +336,8 @@ void MultiPeakFit::generateFitCurve(const vector<double> &par)
                 label = tableName + "_" + tr("peak") + QString::number(i + 1);
                 c = new DataCurve(t, tableName + "_" + columns.at(0)->name(), label);
                 c->setPen(QPen(d_peaks_color, 1));
-                c->setData(X, Y, d_points);
+                //"Set data by copying x- and y-values from specified memory blocks."
+                c->setData(X.data(), Y.data(), d_points);
                 d_graph->insertPlotItem(c, Graph::Line);
                 d_graph->addFitCurve(c);
             }
@@ -342,8 +345,6 @@ void MultiPeakFit::generateFitCurve(const vector<double> &par)
     }
     d_graph->replot();
 
-    delete[] X;
-    delete[] Y;
     gsl_matrix_free(m);
 }
 
@@ -493,22 +494,14 @@ void GaussAmpFit::init()
     d_formula = "y0+A*exp(-(x-xc)^2/(2*w^2))";
 }
 
-void GaussAmpFit::calculateFitCurveData(const vector<double> &par, double *X, double *Y)
+bool GaussAmpFit::calculateFitCurveData(const vector<double> &par, std::vector<double> &X,
+                                        std::vector<double> &Y)
 {
+    generateX(X);
     double w2 = par[3] * par[3];
-    if (d_gen_function) {
-        double X0 = d_x[0];
-        double step = (d_x[d_n - 1] - X0) / (d_points - 1);
-        for (int i = 0; i < d_points; i++) {
-            X[i] = X0 + i * step;
-            double diff = X[i] - par[2];
-            Y[i] = par[1] * exp(-0.5 * diff * diff / w2) + par[0];
-        }
-    } else {
-        for (int i = 0; i < d_points; i++) {
-            X[i] = d_x[i];
-            double diff = X[i] - par[2];
-            Y[i] = par[1] * exp(-0.5 * diff * diff / w2) + par[0];
-        }
+    for (int i = 0; i < d_points; i++) {
+        double diff = X[i] - par[2];
+        Y[i] = par[1] * exp(-0.5 * diff * diff / w2) + par[0];
     }
+    return true;
 }

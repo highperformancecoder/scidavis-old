@@ -99,7 +99,9 @@ vector<double> Fit::fitGslMultifit(int &iterations, int &status)
         break;
     }
     gsl_multifit_fdfsolver *s = gsl_multifit_fdfsolver_alloc(T, d_n, d_p);
-    gsl_multifit_fdfsolver_set(s, &f, d_param_init);
+    status = gsl_multifit_fdfsolver_set(s, &f, d_param_init);
+    if (status)
+        return result;
 
     // iterate solver algorithm
     for (iterations = 0; iterations < d_max_iterations; iterations++) {
@@ -496,7 +498,8 @@ void Fit::fit()
     ApplicationWindow *app = (ApplicationWindow *)parent();
     if (app->writeFitResultsToLog)
         app->updateLog(logFitInfo(d_results, iterations, status, d_graph->parentPlotName()));
-
+    disconnect(d_script.get(), SIGNAL(error(const QString &, const QString &, int)), this,
+               SLOT(scriptError(const QString &, const QString &, int)));
     QApplication::restoreOverrideCursor();
 }
 
@@ -512,9 +515,13 @@ int Fit::evaluate_f(const gsl_vector *x, gsl_vector *f)
         d_script->setDouble(gsl_vector_get(x, i), d_param_names[i].toUtf8());
     }
     for (unsigned j = 0; j < d_n; j++) {
-        d_script->setDouble(d_x[j], "x");
+        if (!d_script->setDouble(d_x[j], "x"))
+            return GSL_EINVAL;
         bool success;
-        gsl_vector_set(f, j, (d_script->eval().toDouble(&success) - d_y[j]) / d_y_errors[j]);
+        auto y = d_script->eval();
+        if (y.isNull())
+            return GSL_EINVAL;
+        gsl_vector_set(f, j, (y.toDouble(&success) - d_y[j]) / d_y_errors[j]);
         if (!success)
             return GSL_EINVAL;
     }
@@ -585,27 +592,36 @@ void Fit::generateFitCurve(const vector<double> &par)
     if (!d_gen_function)
         d_points = d_n;
 
-    double *X = new double[d_points];
-    double *Y = new double[d_points];
+    std::vector<double> X(d_points);
+    std::vector<double> Y(d_points);
 
-    calculateFitCurveData(par, X, Y);
+    if (!calculateFitCurveData(par, X, Y)) {
+        QMessageBox::critical(0, tr("Fit failed"), tr("An error occurred during fit!"));
+        return;
+    }
 
     if (d_gen_function) {
         insertFitFunctionCurve(objectName() + tr("Fit"), X, Y);
         d_graph->replot();
-        delete[] X;
-        delete[] Y;
-    } else
-        d_graph->addFitCurve(addResultCurve(X, Y));
+    } else {
+        auto x = new double[d_points];
+        std::copy(X.cbegin(), X.cend(), x);
+        auto y = new double[d_points];
+        std::copy(Y.cbegin(), Y.cend(), y);
+        // according to addFitCurve docstring "..and frees the input data from memory."
+        d_graph->addFitCurve(addResultCurve(x, y));
+    }
 }
 
-void Fit::insertFitFunctionCurve(const QString &name, double *x, double *y, int penWidth)
+void Fit::insertFitFunctionCurve(const QString &name, std::vector<double> &x,
+                                 std::vector<double> &y, int penWidth)
 {
     QString title = d_graph->generateFunctionName(name);
     FunctionCurve *c =
             new FunctionCurve((ApplicationWindow *)parent(), FunctionCurve::Normal, title);
     c->setPen(QPen(d_curveColor, penWidth));
-    c->setData(x, y, d_points);
+    // "Set data by copying x- and y-values from specified memory blocks."
+    c->setData(x.data(), y.data(), d_points);
     c->setRange(d_x[0], d_x[d_n - 1]);
 
     QString formula;
@@ -627,4 +643,16 @@ Fit::~Fit()
         gsl_vector_free(d_param_init);
 
     gsl_matrix_free(covar);
+}
+
+void Fit::generateX(std::vector<double> &X) const
+{
+    if (d_gen_function) {
+        double X0 = d_x[0];
+        double step = (d_x[d_n - 1] - X0) / (d_points - 1);
+        for (int i = 0; i < d_points; i++)
+            X[i] = X0 + i * step;
+    } else
+        for (int i = 0; i < d_points; i++)
+            X[i] = d_x[i];
 }
