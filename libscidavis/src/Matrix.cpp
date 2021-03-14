@@ -413,6 +413,10 @@ bool Matrix::recalculate()
     saveCellsToMemory();
     double dx = fabs(xEnd() - xStart()) / (double)(numRows() - 1);
     double dy = fabs(yEnd() - yStart()) / (double)(numCols() - 1);
+    std::pair<double, bool> invalidValue(std::numeric_limits<double>::quiet_NaN(), false);
+    std::vector<std::vector<std::pair<double, bool>>> calculatedValues(
+            endRow - startRow + 1,
+            std::vector<std::pair<double, bool>>(endCol - startCol + 1, invalidValue));
     for (int row = startRow; row <= endRow; row++)
         for (int col = startCol; col <= endCol; col++) {
             if (!isCellSelected(row, col))
@@ -431,8 +435,9 @@ bool Matrix::recalculate()
                 QApplication::restoreOverrideCursor();
                 return false;
             }
-            setCell(row, col, ret.toDouble());
+            calculatedValues[row - startRow][col - startCol] = std::pair(ret.toDouble(), true);
         }
+    d_future_matrix->setCells(startRow, startCol, calculatedValues);
     forgetSavedCells();
 
     blockSignals(false);
