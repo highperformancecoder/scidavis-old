@@ -416,7 +416,7 @@ void Table::copySelection()
     RESET_CURSOR;
 }
 
-void Table::pasteIntoSelection()
+void Table::pasteIntoSelection(const bool isTransposed)
 {
     if (!d_view)
         return;
@@ -441,20 +441,27 @@ void Table::pasteIntoSelection()
         QString input_str = clipboard->text().trimmed();
         QList<QStringList> cell_texts;
         QStringList input_rows(input_str.split(QRegExp("\\n|\\r\\n|\\r")));
-        input_row_count = input_rows.count();
-        input_col_count = 0;
-        for (int i = 0; i < input_row_count; i++) {
+        for (int i = 0; i < input_rows.count(); i++) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-            cell_texts.append(
-                    input_rows.at(i).trimmed().split(QRegExp("( +|\\s)"), Qt::KeepEmptyParts));
+            auto cells = input_rows.at(i).trimmed().split(QRegExp("( +|\\s)"), Qt::KeepEmptyParts);
 #else
-            cell_texts.append(
-                    input_rows.at(i).trimmed().split(QRegExp("( +|\\s)"), QString::KeepEmptyParts));
+            auto cells = input_rows.at(i).trimmed().split(QRegExp("( +|\\s)"), QString::KeepEmptyParts);
 #endif
-            if (cell_texts.at(i).count() > input_col_count)
-                input_col_count = cell_texts.at(i).count();
+            if (isTransposed) {
+                for (; cells.count() > cell_texts.count();)
+                    cell_texts.append(QStringList());
+                auto jj = 0;
+                for (const auto &cell : cells)
+                    cell_texts[jj++].append(cell);
+            } else
+                cell_texts.append(cells);
         }
-
+        input_row_count = cell_texts.count();
+        input_col_count = std::max_element(cell_texts.cbegin(), cell_texts.cend(),
+                                           [](const QStringList &a, const QStringList &b) {
+                                               return a.count() > b.count();
+                                           })
+                                  ->count();
         if ((first_col == -1 || first_row == -1)
             || (last_row == first_row && last_col == first_col))
         // if the is no selection or only one cell selected, the
@@ -538,6 +545,11 @@ void Table::pasteIntoSelection()
     }
     endMacro();
     RESET_CURSOR;
+}
+
+void Table::pasteIntoSelectionTransposed()
+{
+    return pasteIntoSelection(true);
 }
 
 #ifndef LEGACY_CODE_0_2_x
@@ -1142,6 +1154,9 @@ void Table::createActions()
     action_paste_into_selection = new QAction(QIcon(QPixmap(":/paste.xpm")), tr("Past&e"), this);
     actionManager()->addAction(action_paste_into_selection, "paste_into_selection");
 
+	action_paste_into_selection_transposed =
+            new QAction(QIcon(QPixmap(":/paste.xpm")), tr("Paste transposed"), this);
+    actionManager()->addAction(action_paste_into_selection_transposed, "paste_into_selection_transposed");
 #ifndef LEGACY_CODE_0_2_x
     action_mask_selection =
             new QAction(QIcon(QPixmap(":/mask.xpm")), tr("&Mask", "mask selection"), this);
@@ -1395,6 +1410,7 @@ void Table::connectActions()
     connect(action_cut_selection, SIGNAL(triggered()), this, SLOT(cutSelection()));
     connect(action_copy_selection, SIGNAL(triggered()), this, SLOT(copySelection()));
     connect(action_paste_into_selection, SIGNAL(triggered()), this, SLOT(pasteIntoSelection()));
+    connect(action_paste_into_selection_transposed, SIGNAL(triggered()), this, SLOT(pasteIntoSelectionTransposed()));
 #ifndef LEGACY_CODE_0_2_x
     connect(action_mask_selection, SIGNAL(triggered()), this, SLOT(maskSelection()));
     connect(action_unmask_selection, SIGNAL(triggered()), this, SLOT(unmaskSelection()));
@@ -1454,6 +1470,7 @@ void Table::addActionsToView()
     d_view->addAction(action_cut_selection);
     d_view->addAction(action_copy_selection);
     d_view->addAction(action_paste_into_selection);
+    d_view->addAction(action_paste_into_selection_transposed);
 #ifndef LEGACY_CODE_0_2_x
     d_view->addAction(action_mask_selection);
     d_view->addAction(action_unmask_selection);
@@ -1504,6 +1521,7 @@ void Table::translateActionsStrings()
     action_cut_selection->setText(tr("Cu&t"));
     action_copy_selection->setText(tr("&Copy"));
     action_paste_into_selection->setText(tr("Past&e"));
+    action_paste_into_selection_transposed->setText(tr("Paste transposed"));
 #ifndef LEGACY_CODE_0_2_x
     action_mask_selection->setText(tr("&Mask", "mask selection"));
     action_unmask_selection->setText(tr("&Unmask", "unmask selection"));
@@ -1734,6 +1752,7 @@ QMenu *Table::createSelectionMenu(QMenu *append_to)
     menu->addAction(action_cut_selection);
     menu->addAction(action_copy_selection);
     menu->addAction(action_paste_into_selection);
+    menu->addAction(action_paste_into_selection_transposed);
     menu->addAction(action_clear_selection);
     menu->addSeparator();
 #ifndef LEGACY_CODE_0_2_x
