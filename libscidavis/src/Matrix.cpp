@@ -435,7 +435,7 @@ bool Matrix::recalculate()
                 QApplication::restoreOverrideCursor();
                 return false;
             }
-            calculatedValues[row - startRow][col - startCol] = std::pair(ret.toDouble(), true);
+            calculatedValues[row - startRow][col - startCol] = std::make_pair(ret.toDouble(), true);
         }
     d_future_matrix->setCells(startRow, startCol, calculatedValues);
     forgetSavedCells();

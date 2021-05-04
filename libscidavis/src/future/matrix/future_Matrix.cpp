@@ -1820,7 +1820,7 @@ std::vector<std::vector<std::pair<double, bool>>> Matrix::Private::getCells(cons
             std::vector<std::pair<double, bool>>(endCol - startCol + 1, invalidValue));
     for (int row = startRow; row <= endRow; row++)
         for (int col = startCol; col <= endCol; col++)
-            values[row - startRow][col - startCol] = std::pair(cell(row, col), true);
+            values[row - startRow][col - startCol] = std::make_pair(cell(row, col), true);
     return values;
 }
 

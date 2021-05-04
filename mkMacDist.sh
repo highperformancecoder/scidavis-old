@@ -33,16 +33,17 @@ rewrite_dylibs()
     done
 }
 
+cp scidavis/scidavis $MAC_DIST_DIR
 rewrite_dylibs $MAC_DIST_DIR/scidavis
 
 chmod u+w $MAC_DIST_DIR/*
 
 # Generic resources required for Qt
-cp -rf /opt/local/libexec/qt4/Library/Frameworks/QtGui.framework/Resources/qt_menu.nib $RES_DIR
+cp -rf /opt/local/libexec/qt5/Library/Frameworks/QtGui.framework/Resources/qt_menu.nib $RES_DIR
 
 # python resources
 mkdir -p $RES_DIR/lib
-cp -rf /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7 $RES_DIR/lib
+cp -rf /opt/local/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9 $RES_DIR/lib
 
 # python resources contain some dynamic libraries that need rewriting
 find $RES_DIR/lib -name "*.so" -print | while read soname; do
@@ -99,3 +100,7 @@ codesign -s "Developer ID Application" scidavis-$version-mac-dist.dmg
 xcrun altool --notarize-app --primary-bundle-id SciDAVis --username apple@hpcoders.com.au --password "@keychain:Minsky" --file scidavis-$version-mac-dist.dmg
 # check using xcrun altool --notarization-history 0 -u apple@hpcoders.com.au -p "@keychain:Minsky"
 xcrun stapler staple scidavis-$version-mac-dist.dmg
+if [ $? -ne 0 ]; then
+    echo "Manually staple with:"
+    echo "xcrun stapler staple scidavis-$version-mac-dist.dmg"
+fi
