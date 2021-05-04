@@ -38,7 +38,7 @@ echo "$version" >doc/version.tex
 
 # update scidavis.appdata.xml
 date=`date +%Y-%m-%d`
-sed -i "s/<release version=.*$/<release version=$version date=$date>/" scidavis/scidavis.appdata.xml
+sed -i "s/<release version=.*$/<release version=\"$version\" date=\"$date\">/" scidavis/scidavis.appdata.xml
 
 git commit -a -m "Release $fullversion"
 git tag -a -m "" $fullversion
