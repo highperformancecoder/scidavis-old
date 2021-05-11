@@ -1945,7 +1945,7 @@ void Graph3D::print()
 
 void Graph3D::copyImage()
 {
-    QApplication::clipboard()->setPixmap(QPixmap::fromImage(sp->grabFramebuffer()),
+    QApplication::clipboard()->setPixmap(QPixmap::fromImage(sp->grabFrameBuffer()),
                                           QClipboard::Clipboard);
     sp->updateData();
 }
@@ -1953,7 +1953,7 @@ void Graph3D::copyImage()
 void Graph3D::exportImage(const QString &fileName, int quality, bool transparent)
 {
     if (transparent) {
-        QPixmap pic = QPixmap::fromImage(sp->grabFramebuffer());
+        QPixmap pic = QPixmap::fromImage(sp->grabFrameBuffer());
         sp->updateData();
 
         QBitmap mask(pic.size());
@@ -1976,7 +1976,7 @@ void Graph3D::exportImage(const QString &fileName, int quality, bool transparent
         pic.setMask(mask);
         pic.save(fileName, 0, quality);
     } else {
-        QImage im = sp->grabFramebuffer();
+        QImage im = sp->grabFrameBuffer();
         QImageWriter iw(fileName);
         iw.setQuality(quality);
         iw.write(im);
